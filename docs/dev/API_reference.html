@@ -1,0 +1,619 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>REST API Reference &mdash; FreeDiscovery 0.5.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="FreeDiscovery 0.5.0 documentation" href="index.html"/>
+        <link rel="next" title="Python API reference" href="freediscovery.html"/>
+        <link rel="prev" title="Installation instructions" href="installation_instructions.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> FreeDiscovery
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.5.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="readme.html">FreeDiscovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation_instructions.html">Installation instructions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">REST API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#feature-extraction">1. Feature extraction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#a-load-a-dataset-and-initialize-feature-extraction">1.a Load a dataset and initialize feature extraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#b-run-feature-extraction-on-a-dataset">1.b Run feature extraction on a dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c-load-extracted-features-and-obtain-the-processing-status">1.c Load extracted features (and obtain the processing status).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#d-list-processed-datasets">1.d List processed datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#e-delete-a-processed-dataset">1.e Delete a processed dataset</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#latent-semantic-indexing-lsi">2. Latent Semantic Indexing (LSI)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#a-build-the-lsi-model">2.a Build the LSI model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#b-predict-categorization-with-lsi">2.b Predict categorization with LSI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c-test-categorization-with-lsi">2.c Test categorization with LSI</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#document-categorization">3. Document categorization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#a-build-the-categorization-model">3.a Build the categorization model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#b-categorize-documents">3.b Categorize documents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c-test-prediction-accuracy">3.c Test prediction accuracy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#d-load-categorization-model-parameters">3.d Load categorization model parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#e-delete-the-categorization-model">3.e Delete the categorization model</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#document-clustering">4. Document clustering</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#a-compute-clustering-k-mean">4.a Compute clustering (K-mean)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#b-compute-clustering-birch">4.b Compute clustering (Birch)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c-compute-clustering-ward-hierarchical">4.c Compute clustering (Ward hierarchical)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#d-load-results">4.d Load results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#e-delete-a-clustering-model">4.e Delete a clustering model</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="freediscovery.html">Python API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">FreeDiscovery</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>REST API Reference</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/API_reference.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="rest-api-reference">
+<span id="rest-api-reference"></span><h1>REST API Reference<a class="headerlink" href="#rest-api-reference" title="Permalink to this headline">¶</a></h1>
+<p>This REST API allows to use FreeDiscovery from any supported programming language.</p>
+<p>Following resources are defined,</p>
+<div class="section" id="feature-extraction">
+<span id="feature-extraction"></span><h2>1. Feature extraction<a class="headerlink" href="#feature-extraction" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="a-load-a-dataset-and-initialize-feature-extraction">
+<span id="a-load-a-dataset-and-initialize-feature-extraction"></span><h3>1.a Load a dataset and initialize feature extraction<a class="headerlink" href="#a-load-a-dataset-and-initialize-feature-extraction" title="Permalink to this headline">¶</a></h3>
+<p>Initialize the feature extraction on a document collection.</p>
+<ul class="simple">
+<li><strong>URL</strong>: <code class="docutils literal"><span class="pre">/api/v0/feature-extraction/</span></code></li>
+<li><strong>Method</strong>: <code class="docutils literal"><span class="pre">POST</span></code>,                <strong>URL Params</strong>: None</li>
+<li><strong>Data Params</strong>: (following the <a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.HashingVectorizer.html">sklearn.feature_extraction.text.HashingVectorizer</a> API)<ul>
+<li><code class="docutils literal"><span class="pre">data_dir</span></code>: [required] relative path to the directory with the input files</li>
+<li><code class="docutils literal"><span class="pre">n_features</span></code>: [optional] number of features (overlapping character/word n-grams that are hashed).
+n_features refers to the number of buckets in the hash.  The larger the number, the fewer collisions.   (default: 1100000)</li>
+<li><code class="docutils literal"><span class="pre">analyzer</span></code>: &#8216;word&#8217;, &#8216;char&#8217;, &#8216;char_wb&#8217;
+Whether the feature should be made of word or character n-grams.
+Option ‘char_wb’ creates character n-grams only from text inside word boundaries.  ( default: &#8216;word&#8217;)</li>
+<li><code class="docutils literal"><span class="pre">ngram_range</span></code> : tuple (min_n, max_n), default=(1, 1)
+The lower and upper boundary of the range of n-values for different n-grams to be extracted. All values of n such that min_n &lt;= n &lt;= max_n will be used.</li>
+<li><code class="docutils literal"><span class="pre">stop_words</span></code>: &#8220;english&#8221; or &#8220;None&#8221;
+Remove stop words from the resulting tokens. Only applies for the &#8220;word&#8221; analyzer.
+If &#8220;english&#8221;, a built-in stop word list for English is used. ( default: &#8220;None&#8221;)</li>
+<li><code class="docutils literal"><span class="pre">n_jobs</span></code>: The maximum number of concurrently running jobs (default: 1)</li>
+<li><code class="docutils literal"><span class="pre">norm</span></code>: The normalization to use after the feature weighting (&#8216;None&#8217;, &#8216;l1&#8217;, &#8216;l2&#8217;) (default: &#8216;None&#8217;)</li>
+<li><code class="docutils literal"><span class="pre">chuck_size</span></code>: The number of documents simultaneously processed by a running job (default: 5000)</li>
+<li><code class="docutils literal"><span class="pre">binary</span></code>: If set to 1, all non zero counts are set to 1. (default: True)</li>
+<li><code class="docutils literal"><span class="pre">use_idf</span></code>: Enable inverse-document-frequency reweighting (default: False).</li>
+<li><code class="docutils literal"><span class="pre">sublinear_tf</span></code>: Apply sublinear tf scaling, i.e. replace tf with log(1 + tf) (default: False).</li>
+<li><code class="docutils literal"><span class="pre">use_hashing</span></code>: Enable hashing. This option must be set to True for classification and set to False for clustering. (default: True)</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
+<div class="highlight-python"><div class="highlight"><pre> {&quot;id&quot;: &lt;str&gt;, &quot;filenames&quot;: &lt;list[str]&gt;  }
+</pre></div>
+</div>
+</li>
+<li><p class="first"><strong>Error Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">422</span></code></p>
+<div class="highlight-python"><div class="highlight"><pre> {&quot;error&quot;: &quot;Some error message&quot;}`
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="b-run-feature-extraction-on-a-dataset">
+<span id="b-run-feature-extraction-on-a-dataset"></span><h3>1.b Run feature extraction on a dataset<a class="headerlink" href="#b-run-feature-extraction-on-a-dataset" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>URL</strong>: <code class="docutils literal"><span class="pre">/api/v0/feature-extraction/&lt;dataset-id&gt;</span></code></p>
+</li>
+<li><p class="first"><strong>Method</strong>: <code class="docutils literal"><span class="pre">POST</span></code>,  <strong>URL Params</strong>: None</p>
+</li>
+<li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
+<div class="highlight-python"><div class="highlight"><pre>  {&quot;id&quot;: &lt;str&gt; }
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="c-load-extracted-features-and-obtain-the-processing-status">
+<span id="c-load-extracted-features-and-obtain-the-processing-status"></span><h3>1.c Load extracted features (and obtain the processing status).<a class="headerlink" href="#c-load-extracted-features-and-obtain-the-processing-status" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>URL</strong>: <code class="docutils literal"><span class="pre">/api/v0/feature-extraction/&lt;dataset-id&gt;</span></code></p>
+</li>
+<li><p class="first"><strong>Method</strong>: <code class="docutils literal"><span class="pre">GET</span></code>,  <strong>URL Params</strong>: None</p>
+</li>
+<li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">202</span></code> (processing in progress) or <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code> (processing done)</p>
+<div class="highlight-python"><div class="highlight"><pre>  {&quot;id&quot;: &lt;str&gt;, &quot;data_dir&quot;: &lt;str&gt;, &quot;n_samples&quot;: &lt;int&gt;,
+   &quot;n_features&quot;: &lt;int&gt;, &quot;analyzer&quot;: &lt;str&gt;, &quot;stop_words&quot;: &lt;str&gt;,
+   &quot;ngram_range&quot;: &lt;list[int]&gt;, &quot;n_jobs&quot;: &lt;int&gt;, &quot;chunk_size&quot;: &lt;int&gt;,
+   &quot;n_samples_processed&quot;: &lt;int&gt;,
+   &quot;filenames&quot;: [] or &lt;list[str&gt;&gt;}
+</pre></div>
+</div>
+</li>
+<li><p class="first"><strong>Error Response (processing failed)</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">520</span></code></p>
+<div class="highlight-python"><div class="highlight"><pre> <span class="p">{</span><span class="s">&quot;message&quot;</span><span class="p">:</span> <span class="s">&quot;Processing failed, see server logs!&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="d-list-processed-datasets">
+<span id="d-list-processed-datasets"></span><h3>1.d List processed datasets<a class="headerlink" href="#d-list-processed-datasets" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>URL</strong>: <code class="docutils literal"><span class="pre">/api/v0/feature-extraction/</span></code></p>
+</li>
+<li><p class="first"><strong>Method</strong>: <code class="docutils literal"><span class="pre">GET</span></code>,  <strong>URL Params</strong>: None</p>
+</li>
+<li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
+<div class="highlight-python"><div class="highlight"><pre> [
+   {&quot;id&quot;: &lt;str&gt;, &quot;data_dir&quot;: &lt;str&gt;, &quot;n_samples&quot;: &lt;int&gt;,
+    &quot;n_features&quot;: &lt;int&gt;, &quot;n_jobs&quot;: &lt;int&gt;, &quot;chunk_size&quot;: &lt;int&gt;,
+    &quot;analyzer&quot;: &lt;str&gt;, &quot;stop_words&quot;: &lt;str&gt;,
+    &quot;ngram_range&quot;: &lt;list[int]&gt; }, 
+     ...
+ ]
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="e-delete-a-processed-dataset">
+<span id="e-delete-a-processed-dataset"></span><h3>1.e Delete a processed dataset<a class="headerlink" href="#e-delete-a-processed-dataset" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>URL</strong>: <code class="docutils literal"><span class="pre">/api/v0/feature-extraction/&lt;dataset-id&gt;</span></code></li>
+<li><strong>Method</strong>: <code class="docutils literal"><span class="pre">DELETE</span></code>,  <strong>URL Params</strong>: None</li>
+<li><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></li>
+</ul>
+</div>
+</div>
+<div class="section" id="latent-semantic-indexing-lsi">
+<span id="latent-semantic-indexing-lsi"></span><h2>2. Latent Semantic Indexing (LSI)<a class="headerlink" href="#latent-semantic-indexing-lsi" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="a-build-the-lsi-model">
+<span id="a-build-the-lsi-model"></span><h3>2.a Build the LSI model<a class="headerlink" href="#a-build-the-lsi-model" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>URL</strong>: <code class="docutils literal"><span class="pre">/api/v0/lsi/</span></code></p>
+</li>
+<li><p class="first"><strong>Method</strong>: <code class="docutils literal"><span class="pre">POST</span></code> <strong>URL Params</strong>: None</p>
+</li>
+<li><p class="first"><strong>Data Params</strong>:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">n_components</span></code>: Desired dimensionality of the output data. Must be strictly less than the number of features.</li>
+<li><code class="docutils literal"><span class="pre">dataset_id</span></code>: dataset id</li>
+</ul>
+</li>
+<li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
+<div class="highlight-python"><div class="highlight"><pre> {&quot;id&quot;: &lt;str&gt;, &quot;explained_variance&quot;: &lt;float&gt; }
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="b-predict-categorization-with-lsi">
+<span id="b-predict-categorization-with-lsi"></span><h3>2.b Predict categorization with LSI<a class="headerlink" href="#b-predict-categorization-with-lsi" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>URL</strong>: <code class="docutils literal"><span class="pre">/api/v0/lsi/&lt;lsi-id&gt;/predict</span></code></li>
+<li><strong>Method</strong>: <code class="docutils literal"><span class="pre">POST</span></code> <strong>URL Params</strong>: None</li>
+<li><strong>Data Params</strong>:<ul>
+<li><code class="docutils literal"><span class="pre">relevant_filenames</span></code>: [required] list of relevant filenames</li>
+<li><code class="docutils literal"><span class="pre">non_relevant_filenames</span></code>: [required] list of not relevant filenames</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
+<div class="highlight-python"><div class="highlight"><pre> {&quot;id&quot;: &lt;str&gt;, &quot;recall&quot;: &lt;float&gt;, &quot;precision&quot;: &lt;float&gt; , 
+  &quot;F1&quot;: &lt;float&gt;,  &quot;roc_auc&quot;: &lt;float&gt;, &quot;average_precision&quot;: &lt;float&gt;,
+  &quot;prediction&quot;: &lt;list[float]&gt; ,
+  &quot;prediction_rel&quot;: &lt;list[float]&gt; ,
+  &quot;prediction_nrel&quot;: &lt;list[float]&gt; ,
+  &quot;nearest_rel_doc&quot;: &lt;list[int]&gt; ,
+  &quot;nearest_nrel_doc&quot;: &lt;list[int]&gt; }
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="c-test-categorization-with-lsi">
+<span id="c-test-categorization-with-lsi"></span><h3>2.c Test categorization with LSI<a class="headerlink" href="#c-test-categorization-with-lsi" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>URL</strong>: <code class="docutils literal"><span class="pre">/api/v0/lsi/&lt;lsi-id&gt;/test</span></code></li>
+<li><strong>Method</strong>: <code class="docutils literal"><span class="pre">POST</span></code> <strong>URL Params</strong>: None</li>
+<li><strong>Data Params</strong>:<ul>
+<li><code class="docutils literal"><span class="pre">relevant_filenames</span></code>: [required] list of relevant filenames</li>
+<li><code class="docutils literal"><span class="pre">non_relevant_filenames</span></code>: [required] list of not relevant filenames</li>
+<li><code class="docutils literal"><span class="pre">ground_truth_filename</span></code>: [required] tab-delimited file name with a unique document ID followed by a 1 for relevant or 0 for non-relevant document</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
+<div class="highlight-python"><div class="highlight"><pre> {&quot;id&quot;: &lt;str&gt;, &quot;recall_score&quot;: &lt;float&gt;, &quot;precision_score&quot;: &lt;float&gt; ,
+  &quot;F1_score&quot;: &lt;float&gt;}
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="document-categorization">
+<span id="document-categorization"></span><h2>3. Document categorization<a class="headerlink" href="#document-categorization" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="a-build-the-categorization-model">
+<span id="a-build-the-categorization-model"></span><h3>3.a Build the categorization model<a class="headerlink" href="#a-build-the-categorization-model" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>URL</strong>: <code class="docutils literal"><span class="pre">/api/v0/categorization/</span></code></p>
+</li>
+<li><p class="first"><strong>Method</strong>: <code class="docutils literal"><span class="pre">POST</span></code> <strong>URL Params</strong>: None</p>
+</li>
+<li><p class="first"><strong>Data Params</strong>:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">dataset_id</span></code>: dataset id</li>
+<li><code class="docutils literal"><span class="pre">relevant_filenames</span></code>: [required] list of relevant filenames</li>
+<li><code class="docutils literal"><span class="pre">non_relevant_filenames</span></code>: [required] list of not relevant filenames</li>
+<li><code class="docutils literal"><span class="pre">method</span></code>: classification algorithm to use (default: LogisticRegression),
+* &#8220;LogisticRegression&#8221;: <a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression">LogisticRegression</a>
+* &#8220;LinearSVC&#8221;: <a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html">Linear SVM</a>,
+* &#8220;xgboost&#8221;: <a class="reference external" href="https://xgboost.readthedocs.io/en/latest/model.html">Gradient Boosting</a>
+(<em>Warning:</em> for the moment xgboost is not istalled for a direct install on Windows)</li>
+<li><code class="docutils literal"><span class="pre">cv</span></code>: binary, if true optimal parameters of the ML model are determined by cross-validation over 5 stratified K-folds (default True).</li>
+<li><code class="docutils literal"><span class="pre">training_scores</span></code>: binary, compute the efficiency scores on the training dataset (default True).</li>
+</ul>
+</li>
+<li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
+<div class="highlight-python"><div class="highlight"><pre> {&quot;id&quot;: &lt;str&gt;, &quot;recall&quot;: &lt;float&gt;, &quot;precision&quot;: &lt;float&gt;,
+  &quot;f1&quot;: &lt;float&gt;, &quot;roc_auc&quot;: &lt;float&gt;, &quot;average_precision&quot;: &lt;float&gt;}
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="b-categorize-documents">
+<span id="b-categorize-documents"></span><h3>3.b Categorize documents<a class="headerlink" href="#b-categorize-documents" title="Permalink to this headline">¶</a></h3>
+<p>Predict document categorization with a previously trained model</p>
+<ul>
+<li><p class="first"><strong>URL</strong>: <code class="docutils literal"><span class="pre">/api/v0/categorization/&lt;model-id&gt;/predict</span></code></p>
+</li>
+<li><p class="first"><strong>Method</strong>: <code class="docutils literal"><span class="pre">GET</span></code>,  <strong>URL Params</strong>: None</p>
+</li>
+<li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
+<div class="highlight-python"><div class="highlight"><pre> {&quot;prediction&quot;: &lt;list[int]&gt;}
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="c-test-prediction-accuracy">
+<span id="c-test-prediction-accuracy"></span><h3>3.c Test prediction accuracy<a class="headerlink" href="#c-test-prediction-accuracy" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>URL</strong>: <code class="docutils literal"><span class="pre">/api/v0/categorization/&lt;model-id&gt;/test</span></code></li>
+<li><strong>Method</strong>: <code class="docutils literal"><span class="pre">POST</span></code> <strong>URL Params</strong>: None</li>
+<li><strong>Data Params</strong>:<ul>
+<li><code class="docutils literal"><span class="pre">ground_truth_filename</span></code>: [required] tab-delimited file name with a unique document ID followed by a 1 for relevant or 0 for non-relevant document</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
+<p>Returns precision, recall, f1, average precision and ROC AUC scores as <a class="reference external" href="http://scikit-learn.org/stable/modules/classes.html#sklearn-metrics-metrics">defined in scikit learn</a>.</p>
+<div class="highlight-python"><div class="highlight"><pre> {&quot;recall&quot;: &lt;float&gt;, &quot;precision&quot;: &lt;float&gt;,
+  &quot;f1&quot;: &lt;float&gt;, &quot;roc_auc&quot;: &lt;float&gt;, &quot;average_precision&quot;: &lt;float&gt;}
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="d-load-categorization-model-parameters">
+<span id="d-load-categorization-model-parameters"></span><h3>3.d Load categorization model parameters<a class="headerlink" href="#d-load-categorization-model-parameters" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>URL</strong>: <code class="docutils literal"><span class="pre">/api/v0/categorization/&lt;model-id&gt;</span></code></p>
+</li>
+<li><p class="first"><strong>Method</strong>: <code class="docutils literal"><span class="pre">GET</span></code>,  <strong>URL Params</strong>: None</p>
+</li>
+<li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
+<div class="highlight-python"><div class="highlight"><pre> {&quot;relevant_filenames&quot;: &lt;list&gt;,
+  &quot;non_relevant_filenames&quot;: &lt;list&gt;,
+  &quot;method&quot;: &lt;str&gt;, &quot;options&quot;: &lt;dict&gt; }
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="e-delete-the-categorization-model">
+<span id="e-delete-the-categorization-model"></span><h3>3.e Delete the categorization model<a class="headerlink" href="#e-delete-the-categorization-model" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>URL</strong>: <code class="docutils literal"><span class="pre">/api/v0/categorization/&lt;model-id&gt;</span></code></li>
+<li><strong>Method</strong>: <code class="docutils literal"><span class="pre">DELETE</span></code>,  <strong>URL Params</strong>: None</li>
+<li><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></li>
+</ul>
+</div>
+</div>
+<div class="section" id="document-clustering">
+<span id="document-clustering"></span><h2>4. Document clustering<a class="headerlink" href="#document-clustering" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="a-compute-clustering-k-mean">
+<span id="a-compute-clustering-k-mean"></span><h3>4.a Compute clustering (K-mean)<a class="headerlink" href="#a-compute-clustering-k-mean" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>URL</strong>: <code class="docutils literal"><span class="pre">/api/v0/clustering/k-mean</span></code></p>
+</li>
+<li><p class="first"><strong>Method</strong>: <code class="docutils literal"><span class="pre">POST</span></code> <strong>URL Params</strong>: None</p>
+</li>
+<li><p class="first"><strong>Data Params</strong>:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">dataset_id</span></code>: dataset id</li>
+<li><code class="docutils literal"><span class="pre">n_clusters</span></code>: the number of clusters</li>
+<li><code class="docutils literal"><span class="pre">lsi_components</span></code>: (optional) apply LSI with <code class="docutils literal"><span class="pre">lsi_components</span></code> before clustering (default None)
+Only k-means can function without the dimentionality reduction provided by LSI,
+both &#8220;birch&#8221; and &#8220;ward_hc&#8221; require this option to be a positive integer.</li>
+</ul>
+</li>
+<li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
+<div class="highlight-python"><div class="highlight"><pre> {&quot;id&quot;: &lt;str&gt;}
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="b-compute-clustering-birch">
+<span id="b-compute-clustering-birch"></span><h3>4.b Compute clustering (Birch)<a class="headerlink" href="#b-compute-clustering-birch" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>URL</strong>: <code class="docutils literal"><span class="pre">/api/v0/clustering/birch</span></code></p>
+</li>
+<li><p class="first"><strong>Method</strong>: <code class="docutils literal"><span class="pre">POST</span></code> <strong>URL Params</strong>: None</p>
+</li>
+<li><p class="first"><strong>Data Params</strong>:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">dataset_id</span></code>: dataset id</li>
+<li><code class="docutils literal"><span class="pre">n_clusters</span></code>: the number of clusters</li>
+<li><code class="docutils literal"><span class="pre">lsi_components</span></code>: (optional) apply LSI with <code class="docutils literal"><span class="pre">lsi_components</span></code> before clustering (default None)
+Only k-means can function without the dimentionality reduction provided by LSI,
+both &#8220;birch&#8221; and &#8220;ward_hc&#8221; require this option to be a positive integer.</li>
+<li><code class="docutils literal"><span class="pre">threshold</span></code>: The radius of the subcluster obtained by merging a new sample and the closest subcluster
+should be lesser than the threshold. Otherwise a new subcluster is started. See <a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.Birch.html">sklearn.cluster.Birch</a></li>
+</ul>
+</li>
+<li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
+<div class="highlight-python"><div class="highlight"><pre> {&quot;id&quot;: &lt;str&gt;}
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="c-compute-clustering-ward-hierarchical">
+<span id="c-compute-clustering-ward-hierarchical"></span><h3>4.c Compute clustering (Ward hierarchical)<a class="headerlink" href="#c-compute-clustering-ward-hierarchical" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>URL</strong>: <code class="docutils literal"><span class="pre">/api/v0/clustering/ward_hc</span></code></p>
+</li>
+<li><p class="first"><strong>Method</strong>: <code class="docutils literal"><span class="pre">POST</span></code> <strong>URL Params</strong>: None</p>
+</li>
+<li><p class="first"><strong>Data Params</strong>:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">dataset_id</span></code>: dataset id</li>
+<li><code class="docutils literal"><span class="pre">n_clusters</span></code>: the number of clusters</li>
+<li><code class="docutils literal"><span class="pre">lsi_components</span></code>: (optional) apply LSI with <code class="docutils literal"><span class="pre">lsi_components</span></code> before clustering (default None)
+Only k-means can function without the dimentionality reduction provided by LSI,
+both &#8220;birch&#8221; and &#8220;ward_hc&#8221; require this option to be a positive integer.</li>
+<li><code class="docutils literal"><span class="pre">n_neighbors</span></code> Number of neighbors for each sample, used to compute the connectivity matrix (see <a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.AgglomerativeClustering.html">AgglomerativeClustering</a> and <a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.kneighbors_graph.html">kneighbors_graph</a></li>
+</ul>
+</li>
+<li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
+<div class="highlight-python"><div class="highlight"><pre> {&quot;id&quot;: &lt;str&gt;}
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="d-load-results">
+<span id="d-load-results"></span><h3>4.d Load results<a class="headerlink" href="#d-load-results" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>URL</strong>: <code class="docutils literal"><span class="pre">/api/v0/clustering/&lt;model-name&gt;/&lt;model-id&gt;</span></code></p>
+</li>
+<li><p class="first"><strong>Method</strong>: <code class="docutils literal"><span class="pre">GET</span></code> <strong>URL Params</strong>: None</p>
+</li>
+<li><p class="first"><strong>Data Params</strong>:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">n_top_words</span></code>: keep only most relevant <code class="docutils literal"><span class="pre">n_top_words</span></code> words</li>
+<li><code class="docutils literal"><span class="pre">label_method</span></code>: str, default=&#8217;centroid-frequency&#8217;
+the method used for computing the cluster labels</li>
+</ul>
+</li>
+<li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
+<div class="highlight-python"><div class="highlight"><pre> {&quot;labels&quot;: &lt;list[int]&gt;, &quot;cluster_terms&quot;: &lt;list[str]&gt;,
+  &quot;htree&quot;: {&quot;n_leaves&quot;: &lt;int&gt;, &quot;n_components&quot;: &lt;int&gt;,
+            &quot;children&quot;: &lt;list[int[:,2]]&gt;}   # only for ward HC
+ }
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="e-delete-a-clustering-model">
+<span id="e-delete-a-clustering-model"></span><h3>4.e Delete a clustering model<a class="headerlink" href="#e-delete-a-clustering-model" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>URL</strong>: <code class="docutils literal"><span class="pre">/api/v0/clustering/&lt;model-name&gt;/&lt;model-id&gt;</span></code></li>
+<li><strong>Method</strong>: <code class="docutils literal"><span class="pre">DELETE</span></code> <strong>URL Params</strong>: None</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="freediscovery.html" class="btn btn-neutral float-right" title="Python API reference" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="installation_instructions.html" class="btn btn-neutral" title="Installation instructions" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Grossman Labs LLC.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.5.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
