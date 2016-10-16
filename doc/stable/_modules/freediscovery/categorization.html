@@ -151,7 +151,7 @@
 
 <span class="kn">from</span> <span class="nn">.text</span> <span class="kn">import</span> <span class="n">FeatureVectorizer</span>
 <span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">BaseEstimator</span>
-<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">filter_rel_nrel</span><span class="p">,</span> <span class="n">setup_model</span><span class="p">,</span> <span class="n">_rename_main_thread</span>
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">filter_rel_nrel</span><span class="p">,</span> <span class="n">setup_model</span>
 <span class="kn">from</span> <span class="nn">.exceptions</span> <span class="kn">import</span> <span class="p">(</span><span class="n">DatasetNotFound</span><span class="p">,</span> <span class="n">ModelNotFound</span><span class="p">,</span> <span class="n">InitException</span><span class="p">,</span>
                             <span class="n">WrongParameter</span><span class="p">,</span> <span class="n">NotImplementedFD</span><span class="p">,</span> <span class="n">OptionalDependencyMissing</span><span class="p">)</span>
 
@@ -257,7 +257,6 @@
             <span class="c">#from sklearn.cross_validation import StratifiedKFold</span>
             <span class="c">#cv_obj = StratifiedKFold(n_splits=cv_n_folds, shuffle=False)</span>
             <span class="n">cv_obj</span> <span class="o">=</span> <span class="n">cv_n_folds</span> <span class="c"># temporary hack (due to piclking issues otherwise, this needs to be fixed)</span>
-        <span class="n">_rename_main_thread</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s">&#39;LinearSVC&#39;</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">LinearSVC</span>

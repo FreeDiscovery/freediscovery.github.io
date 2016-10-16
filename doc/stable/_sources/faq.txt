@@ -1,0 +1,39 @@
+# Frequently Asked Questions
+
+
+## 1. Deployement
+
+### 1.a Parallel processing
+
+The options used to start the FreeDiscovery server are defined in `scripts/run_api.py`. By default, the options `processes=1, threaded=True` are used, which allows to run on all platforms, but disables parallel processing in FreeDiscovery.
+
+On Linux, Mac or when running in a Docker container (including on Windows), a more efficient approach is to set `processes=4, threaded=False` (e.g. to run on 4 CPU cores), before starting the server (or before building the Docker container), which would allow parallel hashed feature extraction and cross validations.
+
+
+## 2. Categrorization (ML or LSI)
+### 2.a Feature extraction
+
+The option `use_hashing=True` must be set for the feature extraction. Recommended options also include, `use_idf=1, sublinear_tf=0, binary=0`.
+
+### 2.b Machine learning categorization methods
+
+The cross validated logistic regression (with `cv=1`) is the advised method for use in production. 
+
+The `xgboost-0.4` library cannot currently be easily installed on Windows, and the corresponding categorization method are disabled on this OS.
+
+### 2.c LSI categorization methods
+
+The recommended value for the `n_components` (dimensions of the SVD decompositions) is in the [100, 200] range.
+
+## 3. Clustering 
+
+### 3.a Feature extraction
+
+The option `use_hashing=False` must be set for the feature extraction. Recommended options also include, `use_idf=1, sublinear_tf=0, binary=0`.
+
+### 3. Hierarchical clustering
+
+The Ward Hierarchical clustering is generally slower that K-mean, however the run time can be reduced by decreasing the following parameters,
+
+   - `lsi_components`: the number of dimensions used for the Latent Semantic Indexing decomposition (e.g. from 150 to 50)
+   - `n_neighbors`:  the number of neighbors used to construct the connectivity (e.g. from 10 to 5)

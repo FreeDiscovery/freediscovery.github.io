@@ -149,10 +149,9 @@
 <span class="kn">from</span> <span class="nn">sklearn.externals.joblib</span> <span class="kn">import</span> <span class="n">Parallel</span><span class="p">,</span> <span class="n">delayed</span>
 <span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfTransformer</span><span class="p">,</span> <span class="n">TfidfVectorizer</span>
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">normalize</span>
-<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">generate_uuid</span><span class="p">,</span> <span class="n">_rename_main_thread</span>
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">generate_uuid</span>
 <span class="kn">from</span> <span class="nn">.exceptions</span> <span class="kn">import</span> <span class="p">(</span><span class="n">DatasetNotFound</span><span class="p">,</span> <span class="n">ModelNotFound</span><span class="p">,</span> <span class="n">InitException</span><span class="p">,</span> <span class="n">NotFound</span><span class="p">,</span>
                             <span class="n">WrongParameter</span><span class="p">)</span>
-
 
 <span class="k">def</span> <span class="nf">_touch</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
     <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">&#39;ab&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
@@ -333,7 +332,6 @@
         <span class="k">try</span><span class="p">:</span>
 
             <span class="k">if</span> <span class="n">use_hashing</span><span class="p">:</span>
-                <span class="n">_rename_main_thread</span><span class="p">()</span>
                 <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">)(</span><span class="n">delayed</span><span class="p">(</span><span class="n">_vectorize_chunk</span><span class="p">)(</span><span class="n">dsid_dir</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">pars</span><span class="p">)</span>\
                             <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_samples</span><span class="o">//</span><span class="n">chunk_size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
 

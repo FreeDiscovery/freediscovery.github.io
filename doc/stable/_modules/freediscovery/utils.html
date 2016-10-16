@@ -227,20 +227,6 @@
     <span class="k">return</span> <span class="n">fset_all</span><span class="p">,</span> <span class="n">idx_rel</span><span class="p">,</span> <span class="n">idx_nrel</span><span class="p">,</span> <span class="n">d_rel</span><span class="p">,</span> <span class="n">d_nrel</span></div>
 
 
-<span class="k">def</span> <span class="nf">_rename_main_thread</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This aims to address the fact that joblib wrongly detects uWSGI workers</span>
-<span class="sd">    as running in the non main thread even when they are not</span>
-<span class="sd">    see https://github.com/joblib/joblib/issues/180</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">threading</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">current_thread</span><span class="p">(),</span> <span class="n">threading</span><span class="o">.</span><span class="n">_MainThread</span><span class="p">)</span> <span class="ow">and</span> \
-                    <span class="n">threading</span><span class="o">.</span><span class="n">current_thread</span><span class="p">()</span><span class="o">.</span><span class="n">name</span> <span class="o">!=</span> <span class="s">&#39;MainThread&#39;</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">&#39;Warning: joblib: renaming current thread {} to &quot;MainThread&quot;.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">current_thread</span><span class="p">()</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
-
-        <span class="n">threading</span><span class="o">.</span><span class="n">current_thread</span><span class="p">()</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">&#39;MainThread&#39;</span>
-
-
 <div class="viewcode-block" id="generate_uuid"><a class="viewcode-back" href="../../freediscovery.html#freediscovery.utils.generate_uuid">[docs]</a><span class="k">def</span> <span class="nf">generate_uuid</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generate a unique id for the model</span>
