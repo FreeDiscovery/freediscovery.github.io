@@ -1,0 +1,836 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Python API reference &mdash; FreeDiscovery 0.5.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="FreeDiscovery 0.5.0 documentation" href="index.html"/>
+        <link rel="next" title="Examples" href="examples.html"/>
+        <link rel="prev" title="REST API Reference" href="API_reference.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> FreeDiscovery
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.5.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="readme.html">FreeDiscovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation_instructions.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API_reference.html">REST API Reference</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Python API reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-freediscovery.text">1. Feature extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-freediscovery.categorization">2. Document categorization (ML)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-freediscovery.lsi">3. Document categorization (LSI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-freediscovery.clustering">4. Document clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-freediscovery.base">5. Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-freediscovery.exceptions">6. Exceptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">FreeDiscovery</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Python API reference</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/freediscovery.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="python-api-reference">
+<h1>Python API reference<a class="headerlink" href="#python-api-reference" title="Permalink to this headline">¶</a></h1>
+<p><strong>Note:</strong> the Python API reference will change in future releases (i.e. it is not considered stable until v1.0).</p>
+<div class="section" id="module-freediscovery.text">
+<span id="feature-extraction"></span><h2>1. Feature extraction<a class="headerlink" href="#module-freediscovery.text" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="freediscovery.text.FeatureVectorizer">
+<em class="property">class </em><code class="descclassname">freediscovery.text.</code><code class="descname">FeatureVectorizer</code><span class="sig-paren">(</span><em>cache_dir='/tmp/'</em>, <em>dsid=None</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/text.html#FeatureVectorizer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.text.FeatureVectorizer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="freediscovery.text.FeatureVectorizer.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>cache_dir='/tmp/'</em>, <em>dsid=None</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/text.html#FeatureVectorizer.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.text.FeatureVectorizer.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>cache_dir</strong> (<em>str, default='/tmp/'</em>) &#8211; directory where to save temporary and regression files</li>
+<li><strong>dsid</strong> (<em>str</em>) &#8211; load an exising dataset</li>
+<li><strong>verbose</strong> (<em>bool</em>) &#8211; pring progress messages</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.text.FeatureVectorizer.delete">
+<code class="descname">delete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/text.html#FeatureVectorizer.delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.text.FeatureVectorizer.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete the current dataset</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.text.FeatureVectorizer.get_params">
+<code class="descname">get_params</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/text.html#FeatureVectorizer.get_params"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.text.FeatureVectorizer.get_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the vectorizer parameters</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.text.FeatureVectorizer.list_datasets">
+<code class="descname">list_datasets</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/text.html#FeatureVectorizer.list_datasets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.text.FeatureVectorizer.list_datasets" title="Permalink to this definition">¶</a></dt>
+<dd><p>List all datasets in the working directory</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.text.FeatureVectorizer.load">
+<code class="descname">load</code><span class="sig-paren">(</span><em>dsid</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/text.html#FeatureVectorizer.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.text.FeatureVectorizer.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load a computed features from disk</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.text.FeatureVectorizer.preprocess">
+<code class="descname">preprocess</code><span class="sig-paren">(</span><em>data_dir</em>, <em>file_pattern='.*'</em>, <em>dir_pattern='.*'</em>, <em>n_features=11000000</em>, <em>chunk_size=5000</em>, <em>analyzer='word'</em>, <em>ngram_range=(1</em>, <em>1)</em>, <em>stop_words='None'</em>, <em>n_jobs=1</em>, <em>use_idf=False</em>, <em>sublinear_tf=False</em>, <em>binary=True</em>, <em>use_hashing=True</em>, <em>norm=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/text.html#FeatureVectorizer.preprocess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.text.FeatureVectorizer.preprocess" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initalize the features extraction. See sklearn.feature_extraction.text for a
+detailed description of the input parameters</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.text.FeatureVectorizer.search">
+<code class="descname">search</code><span class="sig-paren">(</span><em>filenames</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/text.html#FeatureVectorizer.search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.text.FeatureVectorizer.search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a dsid return the features that correspond to the provided filenames</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.text.FeatureVectorizer.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/text.html#FeatureVectorizer.transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.text.FeatureVectorizer.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run the feature extraction</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-freediscovery.categorization">
+<span id="document-categorization-ml"></span><h2>2. Document categorization (ML)<a class="headerlink" href="#module-freediscovery.categorization" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="freediscovery.categorization.Categorizer">
+<em class="property">class </em><code class="descclassname">freediscovery.categorization.</code><code class="descname">Categorizer</code><span class="sig-paren">(</span><em>cache_dir='/tmp/'</em>, <em>dsid=None</em>, <em>mid=None</em>, <em>cv_scoring='roc_auc'</em>, <em>cv_n_folds=3</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/categorization.html#Categorizer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.categorization.Categorizer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#freediscovery.base.BaseEstimator" title="freediscovery.base.BaseEstimator"><code class="xref py py-class docutils literal"><span class="pre">freediscovery.base.BaseEstimator</span></code></a></p>
+<dl class="method">
+<dt id="freediscovery.categorization.Categorizer.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>cache_dir='/tmp/'</em>, <em>dsid=None</em>, <em>mid=None</em>, <em>cv_scoring='roc_auc'</em>, <em>cv_n_folds=3</em><span class="sig-paren">)</span><a class="headerlink" href="#freediscovery.categorization.Categorizer.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Document categrorization model</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>cache_dir</strong> (<em>str</em>) &#8211; folder where the model will be saved</li>
+<li><strong>dsid</strong> (<em>str, optional</em>) &#8211; dataset id</li>
+<li><strong>mid</strong> (<em>str, optional</em>) &#8211; model id</li>
+<li><strong>cv_scoring</strong> (<em>str, optional, default='roc_auc'</em>) &#8211; score that is used for Cross Validation, cf. sklearn</li>
+<li><strong>cv_n_folds</strong> (<em>str, optional</em>) &#8211; number of K-folds used for Cross Validation</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.categorization.Categorizer.get_params">
+<code class="descname">get_params</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#freediscovery.categorization.Categorizer.get_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get model parameters</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.categorization.Categorizer.predict">
+<code class="descname">predict</code><span class="sig-paren">(</span><em>chunk_size=5000</em><span class="sig-paren">)</span><a class="headerlink" href="#freediscovery.categorization.Categorizer.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Predict the relevance using a previously trained model</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>chunck_size</strong> (<em>int</em>) &#8211; chunck size</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.categorization.Categorizer.train">
+<code class="descname">train</code><span class="sig-paren">(</span><em>relevant_filenames</em>, <em>non_relevant_filenames</em>, <em>method='LinearSVC'</em>, <em>cv=None</em>, <em>**options</em><span class="sig-paren">)</span><a class="headerlink" href="#freediscovery.categorization.Categorizer.train" title="Permalink to this definition">¶</a></dt>
+<dd><p>Train the categorization model</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>relevant_filenames</strong> (<em>list</em>) &#8211; a list of relevant documents filenames</li>
+<li><strong>non_relevant_filenames</strong> (<em>list</em>) &#8211; a list of not relevant documents filenames</li>
+<li><strong>method</strong> (<em>str</em>) &#8211; the ML algorithm to use (one of &#8220;LogisticRegression&#8221;, &#8220;LinearSVC&#8221;, &#8216;xgboost&#8217;)</li>
+<li><strong>cv</strong> (<em>str</em>) &#8211; use cross-validation</li>
+<li><strong>options</strong> (<em>dict</em>) &#8211; method specific ML agorithm options</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a dictionary with the results</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dict</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-freediscovery.lsi">
+<span id="document-categorization-lsi"></span><h2>3. Document categorization (LSI)<a class="headerlink" href="#module-freediscovery.lsi" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="freediscovery.lsi.LSI">
+<em class="property">class </em><code class="descclassname">freediscovery.lsi.</code><code class="descname">LSI</code><span class="sig-paren">(</span><em>cache_dir='/tmp/'</em>, <em>dsid=None</em>, <em>mid=None</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/lsi.html#LSI"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.lsi.LSI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#freediscovery.base.BaseEstimator" title="freediscovery.base.BaseEstimator"><code class="xref py py-class docutils literal"><span class="pre">freediscovery.base.BaseEstimator</span></code></a></p>
+<dl class="method">
+<dt id="freediscovery.lsi.LSI.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>cache_dir='/tmp/'</em>, <em>dsid=None</em>, <em>mid=None</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#freediscovery.lsi.LSI.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Document categorization using Latent Semantic Indexing (LSI)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>cache_dir</strong> &#8211; folder where the model will be saved</li>
+<li><strong>dsid</strong> (<em>str</em>) &#8211; dataset id</li>
+<li><strong>mid</strong> (<em>str</em>) &#8211; LSI model id (the dataset id will be inferred)</li>
+<li><strong>verbose</strong> (<em>bool, optional</em>) &#8211; print progress messages</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.lsi.LSI.list_models">
+<code class="descname">list_models</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#freediscovery.lsi.LSI.list_models" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.lsi.LSI.load">
+<code class="descname">load</code><span class="sig-paren">(</span><em>mid</em><span class="sig-paren">)</span><a class="headerlink" href="#freediscovery.lsi.LSI.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load the computed features from cache specified by mid</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.lsi.LSI.predict">
+<code class="descname">predict</code><span class="sig-paren">(</span><em>relevant_filenames</em>, <em>non_relevant_filenames</em>, <em>accumulate='nearest-max'</em>, <em>chunk_size=100</em><span class="sig-paren">)</span><a class="headerlink" href="#freediscovery.lsi.LSI.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Predict the document relevance using a previously trained LSI model</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>relevant_filenames</strong> (<em>list</em>) &#8211; a list of relevant documents filenames</li>
+<li><strong>non_relevant_filenames</strong> (<em>list</em>) &#8211; a list of not relevant documents filenames</li>
+<li><strong>accumulate</strong> (<em>str, optional, default='centroid-max'</em>) &#8211; if <cite>accumulate==&#8221;nearest-max&#8221;</cite> the cosine distance to the closest relevant/non relevant document is used as classification score,
+otherwise if <cite>accumulate==&#8221;centroid-max&#8221;</cite> the centroid of relevant documents is used as the query vector.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.lsi.LSI.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>n_components</em>, <em>n_iter=5</em><span class="sig-paren">)</span><a class="headerlink" href="#freediscovery.lsi.LSI.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform the SVD decomposition</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>n_components</strong> (<em>-</em>) &#8211; number of selected singular values (number of LSI dimensions)</li>
+<li><strong>n_iter</strong> (<em>-</em>) &#8211; number of iterations for the stochastic SVD algorithm</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
+<li><strong>- mid</strong> (<em>str</em>) &#8211; model id</li>
+<li><strong>- lsi</strong> (<em>BaseEstimator</em>) &#8211; the TruncatedSVD object</li>
+<li><strong>- exp_var</strong> (<em>float</em>) &#8211; the explained variance of the SVD decomposition</li>
+</ul>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="freediscovery.lsi.TruncatedSVD_LSI">
+<em class="property">class </em><code class="descclassname">freediscovery.lsi.</code><code class="descname">TruncatedSVD_LSI</code><span class="sig-paren">(</span><em>n_components=2</em>, <em>algorithm='randomized'</em>, <em>n_iter=5</em>, <em>random_state=None</em>, <em>tol=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/lsi.html#TruncatedSVD_LSI"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.lsi.TruncatedSVD_LSI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.decomposition.truncated_svd.TruncatedSVD</span></code></p>
+<dl class="method">
+<dt id="freediscovery.lsi.TruncatedSVD_LSI.fit_transform">
+<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/lsi.html#TruncatedSVD_LSI.fit_transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.lsi.TruncatedSVD_LSI.fit_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit LSI model to X and perform dimensionality reduction on X.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>X</strong> (<em>{array-like, sparse matrix}, shape (n_samples, n_features)</em>) &#8211; Training data.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>X_new</strong> &#8211; Reduced version of X. This will always be a dense array.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array, shape (n_samples, n_components)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.lsi.TruncatedSVD_LSI.transform_lsi">
+<code class="descname">transform_lsi</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/lsi.html#TruncatedSVD_LSI.transform_lsi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.lsi.TruncatedSVD_LSI.transform_lsi" title="Permalink to this definition">¶</a></dt>
+<dd><p>LSI transform, normalized by the inverse of the eigen values</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.lsi.TruncatedSVD_LSI.transform_lsi_norm">
+<code class="descname">transform_lsi_norm</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/lsi.html#TruncatedSVD_LSI.transform_lsi_norm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.lsi.TruncatedSVD_LSI.transform_lsi_norm" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-freediscovery.clustering">
+<span id="document-clustering"></span><h2>4. Document clustering<a class="headerlink" href="#module-freediscovery.clustering" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="freediscovery.clustering.ClusterLabels">
+<em class="property">class </em><code class="descclassname">freediscovery.clustering.</code><code class="descname">ClusterLabels</code><span class="sig-paren">(</span><em>vect</em>, <em>model</em>, <em>pars</em>, <em>lsi=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/clustering.html#ClusterLabels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.clustering.ClusterLabels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="freediscovery.clustering.ClusterLabels.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>vect</em>, <em>model</em>, <em>pars</em>, <em>lsi=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/clustering.html#ClusterLabels.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.clustering.ClusterLabels.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the cluster labels.</p>
+<p>This is an internal class that is called by Clustering</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.clustering.ClusterLabels.predict">
+<code class="descname">predict</code><span class="sig-paren">(</span><em>method='centroid-frequency'</em>, <em>n_top_words=6</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/clustering.html#ClusterLabels.predict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.clustering.ClusterLabels.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the cluster labels</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>method</strong> (<em>str, optional, default='centroid-frequency'</em>) &#8211; the method used to compute the centroid labels
+Must be one of &#8216;centroid-frequency&#8217;,</li>
+<li><strong>n_top_words</strong> (<em>int, default=10</em>) &#8211; keep only most relevant n_top_words words</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>cluster_labels</strong></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">array [n_samples]</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="freediscovery.clustering.Clustering">
+<em class="property">class </em><code class="descclassname">freediscovery.clustering.</code><code class="descname">Clustering</code><span class="sig-paren">(</span><em>cache_dir='/tmp/'</em>, <em>dsid=None</em>, <em>mid=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/clustering.html#Clustering"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.clustering.Clustering" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#freediscovery.base.BaseEstimator" title="freediscovery.base.BaseEstimator"><code class="xref py py-class docutils literal"><span class="pre">freediscovery.base.BaseEstimator</span></code></a></p>
+<dl class="method">
+<dt id="freediscovery.clustering.Clustering.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>cache_dir='/tmp/'</em>, <em>dsid=None</em>, <em>mid=None</em><span class="sig-paren">)</span><a class="headerlink" href="#freediscovery.clustering.Clustering.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Document clustering</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>cache_dir</strong> (<em>str</em>) &#8211; directory where to save temporary and regression files</li>
+<li><strong>dsid</strong> (<em>str, optional</em>) &#8211; dataset id</li>
+<li><strong>mid</strong> (<em>str, optional</em>) &#8211; model id</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.clustering.Clustering.birch">
+<code class="descname">birch</code><span class="sig-paren">(</span><em>n_clusters</em>, <em>threshold=0.5</em>, <em>lsi_components=None</em><span class="sig-paren">)</span><a class="headerlink" href="#freediscovery.clustering.Clustering.birch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform Birch clustering</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>n_clusters</strong> (<em>int</em>) &#8211; number of clusters</li>
+<li><strong>lsi_components</strong> (<em>int</em>) &#8211; apply LSA before the clustering algorithm</li>
+<li><strong>threshold</strong> (<em>float</em>) &#8211; birch threshold</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.clustering.Clustering.compute_labels">
+<code class="descname">compute_labels</code><span class="sig-paren">(</span><em>label_method='centroid-frequency'</em>, <em>n_top_words=6</em><span class="sig-paren">)</span><a class="headerlink" href="#freediscovery.clustering.Clustering.compute_labels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the cluster labels</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>label_method</strong> (<em>str, default='centroid-frequency'</em>) &#8211; the method used for computing the cluster labels</li>
+<li><strong>n_top_words</strong> (<em>int, default=10</em>) &#8211; keep only most relevant n_top_words words</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>cluster_labels</strong></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">array [n_samples]</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.clustering.Clustering.k_means">
+<code class="descname">k_means</code><span class="sig-paren">(</span><em>n_clusters</em>, <em>lsi_components=None</em>, <em>batch_size=1000</em><span class="sig-paren">)</span><a class="headerlink" href="#freediscovery.clustering.Clustering.k_means" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform K-mean clustering</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>n_clusters</strong> (<em>int</em>) &#8211; number of clusters</li>
+<li><strong>lsi_components</strong> (<em>int</em>) &#8211; apply LSA before the clustering algorithm</li>
+<li><strong>batch_size</strong> (<em>int</em>) &#8211; the bath size for the MiniBatchKMeans algorithm</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.clustering.Clustering.load">
+<code class="descname">load</code><span class="sig-paren">(</span><em>mid</em><span class="sig-paren">)</span><a class="headerlink" href="#freediscovery.clustering.Clustering.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load results from cache specified by a mid</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.clustering.Clustering.scores">
+<code class="descname">scores</code><span class="sig-paren">(</span><em>ref_labels</em>, <em>labels</em><span class="sig-paren">)</span><a class="headerlink" href="#freediscovery.clustering.Clustering.scores" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>ref_labels</strong> (<em>list,</em>) &#8211; reference labels</li>
+<li><strong>labels</strong> (<em>list,</em>) &#8211; computed labels</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.clustering.Clustering.ward_hc">
+<code class="descname">ward_hc</code><span class="sig-paren">(</span><em>n_clusters</em>, <em>lsi_components=None</em>, <em>n_neighbors=10</em><span class="sig-paren">)</span><a class="headerlink" href="#freediscovery.clustering.Clustering.ward_hc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform Ward hierarchical clustering</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>n_clusters</strong> (<em>int</em>) &#8211; number of clusters</li>
+<li><strong>lsi_components</strong> (<em>int</em>) &#8211; apply LSA before the clustering algorithm</li>
+<li><strong>n_neighbors</strong> (<em>int</em>) &#8211; N nearest neighbors used for computing the connectivity matrix</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="freediscovery.clustering.select_top_words">
+<code class="descclassname">freediscovery.clustering.</code><code class="descname">select_top_words</code><span class="sig-paren">(</span><em>word_list</em>, <em>n=10</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/clustering.html#select_top_words"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.clustering.select_top_words" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter out cluster term names</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-freediscovery.base">
+<span id="tools"></span><h2>5. Tools<a class="headerlink" href="#module-freediscovery.base" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="freediscovery.base.BaseEstimator">
+<em class="property">class </em><code class="descclassname">freediscovery.base.</code><code class="descname">BaseEstimator</code><a class="reference internal" href="_modules/freediscovery/base.html#BaseEstimator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.base.BaseEstimator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="freediscovery.base.BaseEstimator.delete">
+<code class="descname">delete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/base.html#BaseEstimator.delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.base.BaseEstimator.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete a trained model</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.base.BaseEstimator.get_dsid">
+<code class="descname">get_dsid</code><span class="sig-paren">(</span><em>cache_dir</em>, <em>mid</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/base.html#BaseEstimator.get_dsid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.base.BaseEstimator.get_dsid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.base.BaseEstimator.get_path">
+<code class="descname">get_path</code><span class="sig-paren">(</span><em>mid</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/base.html#BaseEstimator.get_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.base.BaseEstimator.get_path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.base.BaseEstimator.list_models">
+<code class="descname">list_models</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/base.html#BaseEstimator.list_models"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.base.BaseEstimator.list_models" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-freediscovery.io"></span><dl class="function">
+<dt id="freediscovery.io.parse_ground_truth_file">
+<code class="descclassname">freediscovery.io.</code><code class="descname">parse_ground_truth_file</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/io.html#parse_ground_truth_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.io.parse_ground_truth_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse a ground truth file specified by a filename</p>
+</dd></dl>
+
+<span class="target" id="module-freediscovery.utils"></span><dl class="function">
+<dt id="freediscovery.utils.classification_score">
+<code class="descclassname">freediscovery.utils.</code><code class="descname">classification_score</code><span class="sig-paren">(</span><em>X_ref</em>, <em>Y_ref</em>, <em>X</em>, <em>Y</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/utils.html#classification_score"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.utils.classification_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the efficiency scores</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="freediscovery.utils.filter_rel_nrel">
+<code class="descclassname">freediscovery.utils.</code><code class="descname">filter_rel_nrel</code><span class="sig-paren">(</span><em>self</em>, <em>relevant_filenames</em>, <em>non_relevant_filenames</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/utils.html#filter_rel_nrel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.utils.filter_rel_nrel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="freediscovery.utils.generate_uuid">
+<code class="descclassname">freediscovery.utils.</code><code class="descname">generate_uuid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/utils.html#generate_uuid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.utils.generate_uuid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a unique id for the model</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="freediscovery.utils.setup_model">
+<code class="descclassname">freediscovery.utils.</code><code class="descname">setup_model</code><span class="sig-paren">(</span><em>base_path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/utils.html#setup_model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.utils.setup_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a unique model id and create the corresponding folder for storing results</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-freediscovery.exceptions">
+<span id="exceptions"></span><h2>6. Exceptions<a class="headerlink" href="#module-freediscovery.exceptions" title="Permalink to this headline">¶</a></h2>
+<dl class="exception">
+<dt id="freediscovery.exceptions.DatasetNotFound">
+<em class="property">exception </em><code class="descclassname">freediscovery.exceptions.</code><code class="descname">DatasetNotFound</code><span class="sig-paren">(</span><em>message=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/exceptions.html#DatasetNotFound"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.exceptions.DatasetNotFound" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#freediscovery.exceptions.NotFound" title="freediscovery.exceptions.NotFound"><code class="xref py py-class docutils literal"><span class="pre">freediscovery.exceptions.NotFound</span></code></a></p>
+<dl class="attribute">
+<dt id="freediscovery.exceptions.DatasetNotFound.message">
+<code class="descname">message</code><em class="property"> = 'Dataset Not Found'</em><a class="headerlink" href="#freediscovery.exceptions.DatasetNotFound.message" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="freediscovery.exceptions.DatasetNotFound.status_code">
+<code class="descname">status_code</code><em class="property"> = 500</em><a class="headerlink" href="#freediscovery.exceptions.DatasetNotFound.status_code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="freediscovery.exceptions.InitException">
+<em class="property">exception </em><code class="descclassname">freediscovery.exceptions.</code><code class="descname">InitException</code><span class="sig-paren">(</span><em>message=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/exceptions.html#InitException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.exceptions.InitException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">freediscovery.exceptions._BaseException</span></code></p>
+<dl class="attribute">
+<dt id="freediscovery.exceptions.InitException.message">
+<code class="descname">message</code><em class="property"> = 'Model Not Found'</em><a class="headerlink" href="#freediscovery.exceptions.InitException.message" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="freediscovery.exceptions.InitException.status_code">
+<code class="descname">status_code</code><em class="property"> = 500</em><a class="headerlink" href="#freediscovery.exceptions.InitException.status_code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="freediscovery.exceptions.ModelNotFound">
+<em class="property">exception </em><code class="descclassname">freediscovery.exceptions.</code><code class="descname">ModelNotFound</code><span class="sig-paren">(</span><em>message=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/exceptions.html#ModelNotFound"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.exceptions.ModelNotFound" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#freediscovery.exceptions.NotFound" title="freediscovery.exceptions.NotFound"><code class="xref py py-class docutils literal"><span class="pre">freediscovery.exceptions.NotFound</span></code></a></p>
+<dl class="attribute">
+<dt id="freediscovery.exceptions.ModelNotFound.message">
+<code class="descname">message</code><em class="property"> = 'Model Not Found'</em><a class="headerlink" href="#freediscovery.exceptions.ModelNotFound.message" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="freediscovery.exceptions.ModelNotFound.status_code">
+<code class="descname">status_code</code><em class="property"> = 500</em><a class="headerlink" href="#freediscovery.exceptions.ModelNotFound.status_code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="freediscovery.exceptions.NotFound">
+<em class="property">exception </em><code class="descclassname">freediscovery.exceptions.</code><code class="descname">NotFound</code><span class="sig-paren">(</span><em>message=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/exceptions.html#NotFound"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.exceptions.NotFound" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">freediscovery.exceptions._BaseException</span></code></p>
+<dl class="attribute">
+<dt id="freediscovery.exceptions.NotFound.message">
+<code class="descname">message</code><em class="property"> = 'Not Found'</em><a class="headerlink" href="#freediscovery.exceptions.NotFound.message" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="freediscovery.exceptions.NotFound.status_code">
+<code class="descname">status_code</code><em class="property"> = 404</em><a class="headerlink" href="#freediscovery.exceptions.NotFound.status_code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="freediscovery.exceptions.NotImplementedFD">
+<em class="property">exception </em><code class="descclassname">freediscovery.exceptions.</code><code class="descname">NotImplementedFD</code><span class="sig-paren">(</span><em>message=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/exceptions.html#NotImplementedFD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.exceptions.NotImplementedFD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">freediscovery.exceptions._BaseException</span></code></p>
+<dl class="attribute">
+<dt id="freediscovery.exceptions.NotImplementedFD.message">
+<code class="descname">message</code><em class="property"> = 'Not implemented'</em><a class="headerlink" href="#freediscovery.exceptions.NotImplementedFD.message" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="freediscovery.exceptions.NotImplementedFD.status_code">
+<code class="descname">status_code</code><em class="property"> = 500</em><a class="headerlink" href="#freediscovery.exceptions.NotImplementedFD.status_code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="freediscovery.exceptions.OptionalDependencyMissing">
+<em class="property">exception </em><code class="descclassname">freediscovery.exceptions.</code><code class="descname">OptionalDependencyMissing</code><span class="sig-paren">(</span><em>message=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/exceptions.html#OptionalDependencyMissing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.exceptions.OptionalDependencyMissing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">freediscovery.exceptions._BaseException</span></code></p>
+<dl class="attribute">
+<dt id="freediscovery.exceptions.OptionalDependencyMissing.message">
+<code class="descname">message</code><em class="property"> = 'Not Found'</em><a class="headerlink" href="#freediscovery.exceptions.OptionalDependencyMissing.message" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="freediscovery.exceptions.OptionalDependencyMissing.status_code">
+<code class="descname">status_code</code><em class="property"> = 500</em><a class="headerlink" href="#freediscovery.exceptions.OptionalDependencyMissing.status_code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="freediscovery.exceptions.WrongParameter">
+<em class="property">exception </em><code class="descclassname">freediscovery.exceptions.</code><code class="descname">WrongParameter</code><span class="sig-paren">(</span><em>message=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/exceptions.html#WrongParameter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.exceptions.WrongParameter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">freediscovery.exceptions._BaseException</span></code></p>
+<dl class="attribute">
+<dt id="freediscovery.exceptions.WrongParameter.message">
+<code class="descname">message</code><em class="property"> = 'Model Not Found'</em><a class="headerlink" href="#freediscovery.exceptions.WrongParameter.message" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="freediscovery.exceptions.WrongParameter.status_code">
+<code class="descname">status_code</code><em class="property"> = 500</em><a class="headerlink" href="#freediscovery.exceptions.WrongParameter.status_code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="examples.html" class="btn btn-neutral float-right" title="Examples" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="API_reference.html" class="btn btn-neutral" title="REST API Reference" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Grossman Labs LLC.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.5.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
