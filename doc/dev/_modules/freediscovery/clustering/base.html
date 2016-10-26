@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>freediscovery.clustering &mdash; FreeDiscovery 0.6.0-dev documentation</title>
+  <title>freediscovery.clustering.base &mdash; FreeDiscovery 0.6.0-dev documentation</title>
   
 
   
@@ -24,17 +24,17 @@
 
   
   
-    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   
 
   
 
   
-    <link rel="top" title="FreeDiscovery 0.6.0-dev documentation" href="../../index.html"/>
-        <link rel="up" title="Module code" href="../index.html"/> 
+    <link rel="top" title="FreeDiscovery 0.6.0-dev documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
 
   
-  <script src="../../_static/js/modernizr.min.js"></script>
+  <script src="../../../_static/js/modernizr.min.js"></script>
 
 </head>
 
@@ -49,7 +49,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home"> FreeDiscovery
+            <a href="../../../index.html" class="icon icon-home"> FreeDiscovery
           
 
           
@@ -66,7 +66,7 @@
 
           
 <div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -81,14 +81,14 @@
             
             
                 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../readme.html">FreeDiscovery</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../installation_instructions.html">Installation instructions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../API_reference.html">REST API Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../freediscovery.html">Python API reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">Deployment options</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently Asked Questions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme.html">FreeDiscovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation_instructions.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../API_reference.html">REST API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../freediscovery.html">Python API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../deployment.html">Deployment options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
 </ul>
 
             
@@ -102,7 +102,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../../index.html">FreeDiscovery</a>
+        <a href="../../../index.html">FreeDiscovery</a>
       </nav>
 
 
@@ -117,11 +117,11 @@
 
 <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href="../../index.html">Docs</a> &raquo;</li>
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
       
-          <li><a href="../index.html">Module code</a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
       
-    <li>freediscovery.clustering</li>
+    <li>freediscovery.clustering.base</li>
       <li class="wy-breadcrumbs-aside">
         
           
@@ -133,7 +133,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Source code for freediscovery.clustering</h1><div class="highlight"><pre>
+  <h1>Source code for freediscovery.clustering.base</h1><div class="highlight"><pre>
 <span class="c"># -*- coding: utf-8 -*-</span>
 
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
@@ -147,11 +147,11 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">sklearn.externals</span> <span class="kn">import</span> <span class="n">joblib</span>
 
-<span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">BaseEstimator</span>
-<span class="kn">from</span> <span class="nn">.text</span> <span class="kn">import</span> <span class="n">FeatureVectorizer</span>
-<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">setup_model</span><span class="p">,</span> <span class="n">_rename_main_thread</span>
-<span class="kn">from</span> <span class="nn">.stop_words</span> <span class="kn">import</span> <span class="n">COMMON_FIRST_NAMES</span><span class="p">,</span> <span class="n">CUSTOM_STOP_WORDS</span>
-<span class="kn">from</span> <span class="nn">.exceptions</span> <span class="kn">import</span> <span class="p">(</span><span class="n">DatasetNotFound</span><span class="p">,</span> <span class="n">ModelNotFound</span><span class="p">,</span> <span class="n">InitException</span><span class="p">,</span>
+<span class="kn">from</span> <span class="nn">..base</span> <span class="kn">import</span> <span class="n">BaseEstimator</span>
+<span class="kn">from</span> <span class="nn">..text</span> <span class="kn">import</span> <span class="n">FeatureVectorizer</span>
+<span class="kn">from</span> <span class="nn">..utils</span> <span class="kn">import</span> <span class="n">setup_model</span><span class="p">,</span> <span class="n">_rename_main_thread</span>
+<span class="kn">from</span> <span class="nn">..stop_words</span> <span class="kn">import</span> <span class="n">COMMON_FIRST_NAMES</span><span class="p">,</span> <span class="n">CUSTOM_STOP_WORDS</span>
+<span class="kn">from</span> <span class="nn">..exceptions</span> <span class="kn">import</span> <span class="p">(</span><span class="n">DatasetNotFound</span><span class="p">,</span> <span class="n">ModelNotFound</span><span class="p">,</span> <span class="n">InitException</span><span class="p">,</span>
                             <span class="n">WrongParameter</span><span class="p">)</span>
 
 
@@ -161,7 +161,7 @@
 
 <span class="n">MAX_N_TOP_WORDS</span> <span class="o">=</span> <span class="mi">1000</span>
 
-<div class="viewcode-block" id="select_top_words"><a class="viewcode-back" href="../../freediscovery.html#freediscovery.clustering.select_top_words">[docs]</a><span class="k">def</span> <span class="nf">select_top_words</span><span class="p">(</span><span class="n">word_list</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<div class="viewcode-block" id="select_top_words"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.clustering.base.select_top_words">[docs]</a><span class="k">def</span> <span class="nf">select_top_words</span><span class="p">(</span><span class="n">word_list</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Filter out cluster term names&quot;&quot;&quot;</span>
     <span class="kn">import</span> <span class="nn">re</span>
     <span class="kn">from</span> <span class="nn">nltk.stem.porter</span> <span class="kn">import</span> <span class="n">PorterStemmer</span>
@@ -202,28 +202,38 @@
 
     <span class="k">return</span> <span class="n">lsi</span>
 
-<div class="viewcode-block" id="ClusterLabels"><a class="viewcode-back" href="../../freediscovery.html#freediscovery.clustering.ClusterLabels">[docs]</a><span class="k">class</span> <span class="nc">ClusterLabels</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<div class="viewcode-block" id="ClusterLabels.__init__"><a class="viewcode-back" href="../../freediscovery.html#freediscovery.clustering.ClusterLabels.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vect</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">pars</span><span class="p">,</span> <span class="n">lsi</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ClusterLabels"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.clustering.base.ClusterLabels">[docs]</a><span class="k">class</span> <span class="nc">ClusterLabels</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="ClusterLabels.__init__"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.clustering.base.ClusterLabels.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vect</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">pars</span><span class="p">,</span> <span class="n">lsi</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">cluster_indices</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Calculate the cluster labels.</span>
 
 <span class="sd">        This is an internal class that is called by Clustering</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        cluster_indices: list, default=None</span>
+<span class="sd">           if not None, ignore clustering given by the clustering model and compute</span>
+<span class="sd">           terms for the cluster provided by the given indices</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">vect</span> <span class="o">=</span> <span class="n">vect</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n_clusters</span> <span class="o">=</span> <span class="n">pars</span><span class="p">[</span><span class="s">&#39;n_clusters&#39;</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lsi</span> <span class="o">=</span> <span class="n">lsi</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_compute_centroids</span><span class="p">()</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_compute_centroids</span><span class="p">(</span><span class="n">cluster_indices</span><span class="p">)</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_compute_centroids</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_compute_centroids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cluster_indices</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span>
         <span class="n">lsi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lsi</span>
-        <span class="n">method_name</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="n">__name__</span>
-        <span class="k">if</span> <span class="n">method_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;MiniBatchKMeans&#39;</span><span class="p">,</span> <span class="s">&#39;AgglomerativeClustering&#39;</span><span class="p">,</span>
-                                    <span class="s">&#39;Birch&#39;</span><span class="p">]:</span>
-            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s">&#39;Method name: {} not implented!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">method_name</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">cluster_indices</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">method_name</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="n">__name__</span>
+            <span class="k">if</span> <span class="n">method_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;MiniBatchKMeans&#39;</span><span class="p">,</span> <span class="s">&#39;AgglomerativeClustering&#39;</span><span class="p">,</span>
+                                        <span class="s">&#39;Birch&#39;</span><span class="p">]:</span>
+                <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s">&#39;Method name: {} not implented!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">method_name</span><span class="p">))</span>
 
-        <span class="n">centroids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">cluster_centers_</span> <span class="c"># centroids were previously computed</span>
+            <span class="n">centroids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">cluster_centers_</span> <span class="c"># centroids were previously computed</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">centroids</span> <span class="o">=</span> <span class="n">cluster_indices</span><span class="p">[</span><span class="s">&#39;centroids&#39;</span><span class="p">]</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">n_clusters</span> <span class="o">=</span> <span class="n">centroids</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c"># might happen that a cluster has 0 data points points</span>
                                          <span class="c"># in which case n_clusters = centroids.shape[0]</span>
@@ -236,7 +246,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_order_centroids</span> <span class="o">=</span> <span class="n">order_centroids</span>
 
 
-<div class="viewcode-block" id="ClusterLabels.predict"><a class="viewcode-back" href="../../freediscovery.html#freediscovery.clustering.ClusterLabels.predict">[docs]</a>    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s">&#39;centroid-frequency&#39;</span><span class="p">,</span> <span class="n">n_top_words</span><span class="o">=</span><span class="mi">6</span><span class="p">):</span>
+<div class="viewcode-block" id="ClusterLabels.predict"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.clustering.base.ClusterLabels.predict">[docs]</a>    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s">&#39;centroid-frequency&#39;</span><span class="p">,</span> <span class="n">n_top_words</span><span class="o">=</span><span class="mi">6</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Compute the cluster labels</span>
 
 <span class="sd">        Parameters</span>
@@ -260,6 +270,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span></div>
 
+
     <span class="k">def</span> <span class="nf">_predict_centroid_freq</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Return cluster labels based on the most frequent words (tfidf) at cluster centroids &quot;&quot;&quot;</span>
         <span class="n">terms</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vect</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">()</span>
@@ -278,7 +289,7 @@
 
 
 
-<div class="viewcode-block" id="Clustering"><a class="viewcode-back" href="../../freediscovery.html#freediscovery.clustering.Clustering">[docs]</a><span class="k">class</span> <span class="nc">Clustering</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Clustering"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.clustering.base.Clustering">[docs]</a><span class="k">class</span> <span class="nc">Clustering</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">):</span></div>
 
     <span class="n">_DIRREF</span> <span class="o">=</span> <span class="s">&quot;clustering&quot;</span>
 
@@ -376,7 +387,8 @@
         <span class="k">return</span> <span class="n">htree</span>
 
 
-    <span class="k">def</span> <span class="nf">compute_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label_method</span><span class="o">=</span><span class="s">&#39;centroid-frequency&#39;</span><span class="p">,</span> <span class="n">n_top_words</span><span class="o">=</span><span class="mi">6</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">compute_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label_method</span><span class="o">=</span><span class="s">&#39;centroid-frequency&#39;</span><span class="p">,</span> <span class="n">n_top_words</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+            <span class="n">cluster_indices</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Compute the cluster labels</span>
 
 <span class="sd">        Parameters</span>
@@ -385,6 +397,9 @@
 <span class="sd">            the method used for computing the cluster labels</span>
 <span class="sd">        n_top_words: int, default=10</span>
 <span class="sd">           keep only most relevant n_top_words words</span>
+<span class="sd">        cluster_indices: list, default=None</span>
+<span class="sd">           if not None, ignore clustering given by the clustering model and compute</span>
+<span class="sd">           terms for the cluster provided by the given indices</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -392,8 +407,25 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">vect</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fe</span><span class="o">.</span><span class="n">dsid_dir</span><span class="p">,</span> <span class="s">&#39;vectorizer&#39;</span><span class="p">))</span>
-        <span class="n">lb</span> <span class="o">=</span> <span class="n">ClusterLabels</span><span class="p">(</span><span class="n">vect</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">km</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pars</span><span class="p">,</span> <span class="n">lsi</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_pars</span><span class="p">[</span><span class="s">&#39;lsi&#39;</span><span class="p">])</span>
-        <span class="n">terms</span> <span class="o">=</span> <span class="n">lb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="n">label_method</span><span class="p">)</span>
+        <span class="n">lsi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pars</span><span class="p">[</span><span class="s">&#39;lsi&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">cluster_indices</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">args</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;indices&#39;</span><span class="p">:</span> <span class="n">cluster_indices</span><span class="p">}</span>
+            <span class="n">X</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fe</span><span class="o">.</span><span class="n">dsid_dir</span><span class="p">,</span> <span class="s">&#39;features&#39;</span><span class="p">))</span>
+            <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">cluster_indices</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">lsi</span><span class="p">:</span>
+                <span class="n">X</span> <span class="o">=</span> <span class="n">lsi</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s">&#39;This case should work, &#39;</span>
+                        <span class="s">&#39;but it was not tested so far, disabling it&#39;</span><span class="p">)</span>
+            <span class="n">centroids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+            <span class="n">args</span><span class="p">[</span><span class="s">&#39;centroids&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">centroids</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">args</span> <span class="o">=</span> <span class="bp">None</span>
+
+        <span class="n">lb</span> <span class="o">=</span> <span class="n">ClusterLabels</span><span class="p">(</span><span class="n">vect</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">km</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pars</span><span class="p">,</span> <span class="n">lsi</span><span class="o">=</span><span class="n">lsi</span><span class="p">,</span>
+                <span class="n">cluster_indices</span><span class="o">=</span><span class="n">args</span><span class="p">)</span>
+        <span class="n">terms</span> <span class="o">=</span> <span class="n">lb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="n">label_method</span><span class="p">,</span> <span class="n">n_top_words</span><span class="o">=</span><span class="n">n_top_words</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">terms</span>
 
 
@@ -522,6 +554,8 @@
 
         <span class="n">km</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">mid_dir</span><span class="p">,</span> <span class="s">&#39;model&#39;</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">km</span>
+
+
 </pre></div>
 
            </div>
@@ -554,23 +588,23 @@
 
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../../',
+            URL_ROOT:'../../../',
             VERSION:'0.6.0-dev',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
         };
     </script>
-      <script type="text/javascript" src="../../_static/jquery.js"></script>
-      <script type="text/javascript" src="../../_static/underscore.js"></script>
-      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
       <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
   
   
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
   
 
   

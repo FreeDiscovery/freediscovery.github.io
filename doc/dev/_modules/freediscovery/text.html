@@ -344,6 +344,7 @@
                     <span class="n">tfidf</span> <span class="o">=</span> <span class="n">TfidfTransformer</span><span class="p">(</span><span class="n">norm</span><span class="o">=</span><span class="n">pars</span><span class="p">[</span><span class="s">&#39;norm&#39;</span><span class="p">],</span> <span class="n">use_idf</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
                                               <span class="n">sublinear_tf</span><span class="o">=</span><span class="n">pars</span><span class="p">[</span><span class="s">&#39;sublinear_tf&#39;</span><span class="p">])</span>
                     <span class="n">res</span> <span class="o">=</span> <span class="n">tfidf</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">vect</span> <span class="o">=</span> <span class="bp">None</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">opts_tfidf</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">val</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">pars</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> \
                         <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;stop_words&#39;</span><span class="p">,</span> <span class="s">&#39;use_idf&#39;</span><span class="p">,</span> <span class="s">&#39;ngram_range&#39;</span><span class="p">,</span> <span class="s">&#39;analyzer&#39;</span><span class="p">]}</span>
@@ -358,6 +359,7 @@
                             <span class="n">decode_error</span><span class="o">=</span><span class="s">&#39;ignore&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">opts_tfidf</span><span class="p">)</span>
                 <span class="n">res</span> <span class="o">=</span> <span class="n">tfidf</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">pars</span><span class="p">[</span><span class="s">&#39;filenames&#39;</span><span class="p">])</span>
                 <span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">tfidf</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dsid_dir</span><span class="p">,</span> <span class="s">&#39;vectorizer&#39;</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">vect</span> <span class="o">=</span> <span class="n">tfidf</span>
 
 
             <span class="k">if</span> <span class="n">pars</span><span class="p">[</span><span class="s">&#39;norm&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
@@ -387,6 +389,26 @@
         <span class="k">return</span> <span class="n">dsid</span><span class="p">,</span> <span class="n">filenames_base</span></div>
 
 
+<div class="viewcode-block" id="FeatureVectorizer.query_features"><a class="viewcode-back" href="../../freediscovery.html#freediscovery.text.FeatureVectorizer.query_features">[docs]</a>    <span class="k">def</span> <span class="nf">query_features</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">n_top_words</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Query the features with most weight&quot;&quot;&quot;</span>
+
+        <span class="c"># this should raise a warning when used with wrong weights</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dsid_dir</span><span class="p">,</span> <span class="s">&#39;features&#39;</span><span class="p">))</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span>
+
+        <span class="n">centroid</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
+        <span class="n">order_centroid</span> <span class="o">=</span> <span class="n">centroid</span><span class="o">.</span><span class="n">argsort</span><span class="p">()[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">terms</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vect</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">()</span>
+
+        <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">ridx</span><span class="p">,</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">order_centroid</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">ridx</span> <span class="o">&gt;=</span> <span class="n">n_top_words</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">terms</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">out</span></div>
+
+
+
 <div class="viewcode-block" id="FeatureVectorizer.delete"><a class="viewcode-back" href="../../freediscovery.html#freediscovery.text.FeatureVectorizer.delete">[docs]</a>    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Delete the current dataset &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">shutil</span>
@@ -395,7 +417,7 @@
 
     <span class="k">def</span> <span class="nf">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dsid</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; This is a somewhat non standard call that checks if a dsid</span>
-<span class="sd">        exist on disk (in degeneral)&quot;&quot;&quot;</span>
+<span class="sd">        exist on disk (in general)&quot;&quot;&quot;</span>
         <span class="n">dsid_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cache_dir</span><span class="p">,</span> <span class="n">dsid</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">dsid_dir</span><span class="p">)</span>
 

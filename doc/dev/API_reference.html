@@ -115,6 +115,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#e-delete-a-clustering-model">4.e Delete a clustering model</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#duplicate-detection">5. Duplicate detection</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#a-compute-duplicates-simhash">5.a Compute duplicates (simhash)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#b-query-duplicates">5.b Query duplicates</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="freediscovery.html">Python API reference</a></li>
@@ -542,6 +547,50 @@ the method used for computing the cluster labels</li>
 <ul class="simple">
 <li><strong>URL</strong>: <code class="docutils literal"><span class="pre">/api/v0/clustering/&lt;model-name&gt;/&lt;model-id&gt;</span></code></li>
 <li><strong>Method</strong>: <code class="docutils literal"><span class="pre">DELETE</span></code> <strong>URL Params</strong>: None</li>
+</ul>
+</div>
+</div>
+<div class="section" id="duplicate-detection">
+<span id="duplicate-detection"></span><h2>5. Duplicate detection<a class="headerlink" href="#duplicate-detection" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="a-compute-duplicates-simhash">
+<span id="a-compute-duplicates-simhash"></span><h3>5.a Compute duplicates (simhash)<a class="headerlink" href="#a-compute-duplicates-simhash" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>URL</strong>: <code class="docutils literal"><span class="pre">/api/v0/duplicate-detection/simhash</span></code></p>
+</li>
+<li><p class="first"><strong>Method</strong>: <code class="docutils literal"><span class="pre">POST</span></code> <strong>URL Params</strong>: None</p>
+</li>
+<li><p class="first"><strong>Data Params</strong>:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">dataset_id</span></code>: dataset id</li>
+</ul>
+</li>
+<li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
+<div class="highlight-python"><div class="highlight"><pre> {&quot;id&quot;: &lt;str&gt;}
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="b-query-duplicates">
+<span id="b-query-duplicates"></span><h3>5.b Query duplicates<a class="headerlink" href="#b-query-duplicates" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>URL</strong>: <code class="docutils literal"><span class="pre">/api/v0/duplicate-detection/simhash/&lt;model-id&gt;</span></code></li>
+<li><strong>Method</strong>: <code class="docutils literal"><span class="pre">GET</span></code> <strong>URL Params</strong>: None</li>
+<li><strong>Data Params</strong>:<ul>
+<li>distance : int, default=2
+Maximum number of differnet bits in the simhash</li>
+<li>blocks : int or &#8216;auto&#8217;, default=&#8217;auto&#8217;
+number of blocks into which the simhash is split
+when searching for duplicates, see  https://github.com/seomoz/simhash-py</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
+<div class="highlight-python"><div class="highlight"><pre> {&quot;simhash&quot;: &lt;list[int]&gt;, &quot;cluster_id&quot;: &lt;list[int]&gt;, &quot;dup_pairs&quot;: &lt;list[list[int]]&gt; }
+</pre></div>
+</div>
+</li>
 </ul>
 </div>
 </div>

@@ -157,47 +157,6 @@
                             <span class="n">WrongParameter</span><span class="p">,</span> <span class="n">NotImplementedFD</span><span class="p">,</span> <span class="n">OptionalDependencyMissing</span><span class="p">)</span>
 
 
-<span class="k">class</span> <span class="nc">_EnsembleStacking</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">estimators</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; A helper class for Ensemble stacking</span>
-<span class="sd">            Temproary solution until https://github.com/scikit-learn/scikit-learn/issues/4816</span>
-<span class="sd">            is implemented</span>
-<span class="sd">            This is not extensively used and should not be used in production</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">FeatureUnion</span>
-        <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">estimators</span> <span class="o">=</span> <span class="n">estimators</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">fu</span> <span class="o">=</span> <span class="n">FeatureUnion</span><span class="p">(</span><span class="n">estimators</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">acc</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span>
-
-
-    <span class="k">def</span> <span class="nf">_fu_predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
-        <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">cmod_name</span><span class="p">,</span> <span class="n">cmod</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fu</span><span class="o">.</span><span class="n">transformer_list</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">cmod</span><span class="p">,</span> <span class="s">&#39;decision_function&#39;</span><span class="p">):</span>
-                <span class="n">res</span> <span class="o">=</span> <span class="n">cmod</span><span class="o">.</span><span class="n">decision_function</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span> <span class="c"># gradient boosting define the decision function by analogy</span>
-                <span class="n">tmp</span> <span class="o">=</span> <span class="n">cmod</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
-                <span class="n">res</span> <span class="o">=</span> <span class="n">logit</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
-            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
-
-    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fu</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
-
-        <span class="n">X_intm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fu_predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">acc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_intm</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span> 
-
-    <span class="k">def</span> <span class="nf">predict_proba</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
-        <span class="n">X_intm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fu_predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">acc</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_intm</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">get_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">{}</span>
-
-
 
 <div class="viewcode-block" id="Categorizer"><a class="viewcode-back" href="../../freediscovery.html#freediscovery.categorization.Categorizer">[docs]</a><span class="k">class</span> <span class="nc">Categorizer</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">):</span></div>
 
@@ -258,59 +217,50 @@
             <span class="c">#from sklearn.cross_validation import StratifiedKFold</span>
             <span class="c">#cv_obj = StratifiedKFold(n_splits=cv_n_folds, shuffle=False)</span>
             <span class="n">cv_obj</span> <span class="o">=</span> <span class="n">cv_n_folds</span> <span class="c"># temporary hack (due to piclking issues otherwise, this needs to be fixed)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cv_obj</span> <span class="o">=</span> <span class="bp">None</span>
+
         <span class="n">_rename_main_thread</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s">&#39;LinearSVC&#39;</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">LinearSVC</span>
-            <span class="kn">from</span> <span class="nn">sklearn.grid_search</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
             <span class="k">if</span> <span class="n">cv</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
                 <span class="n">cmod</span> <span class="o">=</span> <span class="n">LinearSVC</span><span class="p">(</span><span class="o">**</span><span class="n">options</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">param_grid</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;C&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
-                              <span class="s">&#39;dual&#39;</span><span class="p">:</span> <span class="p">[</span><span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">],</span>
-                              <span class="s">&#39;class_weight&#39;</span><span class="p">:</span> <span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="s">&#39;balanced&#39;</span><span class="p">]</span>
-                              <span class="p">}</span>
-                <span class="n">cmod_int</span> <span class="o">=</span> <span class="n">LinearSVC</span><span class="p">(</span><span class="o">**</span><span class="n">options</span><span class="p">)</span>
-                <span class="n">cmod</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">cmod_int</span><span class="p">,</span> <span class="n">param_grid</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="n">cv_scoring</span><span class="p">,</span>
-                        <span class="n">cv</span><span class="o">=</span><span class="n">cv_obj</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="kn">from</span> <span class="nn">freediscovery_extra</span> <span class="kn">import</span> <span class="n">make_linearsvc_cv_model</span>
+                <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">OptionalDependencyMissing</span><span class="p">(</span><span class="s">&#39;freediscovery_extra&#39;</span><span class="p">)</span>
+                <span class="n">cmod</span> <span class="o">=</span> <span class="n">make_linearsvc_cv_model</span><span class="p">(</span><span class="n">cv_obj</span><span class="p">,</span> <span class="n">cv_scoring</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s">&#39;LogisticRegression&#39;</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span><span class="p">,</span> <span class="n">LogisticRegressionCV</span>
+            <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
             <span class="k">if</span> <span class="n">cv</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
                 <span class="n">cmod</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="o">**</span><span class="n">options</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">cmod</span> <span class="o">=</span> <span class="n">LogisticRegressionCV</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="n">cv_scoring</span><span class="p">,</span>
-                         <span class="n">cv</span><span class="o">=</span><span class="n">cv_obj</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="kn">from</span> <span class="nn">freediscovery_extra</span> <span class="kn">import</span> <span class="n">make_logregr_cv_model</span>
+                <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">OptionalDependencyMissing</span><span class="p">(</span><span class="s">&#39;freediscovery_extra&#39;</span><span class="p">)</span>
+                <span class="n">cmod</span> <span class="o">=</span> <span class="n">make_logregr_cv_model</span><span class="p">(</span><span class="n">cv_obj</span><span class="p">,</span> <span class="n">cv_scoring</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s">&#39;xgboost&#39;</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="kn">import</span> <span class="nn">xgboost</span> <span class="kn">as</span> <span class="nn">xgb</span>
             <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">OptionalDependencyMissing</span><span class="p">(</span><span class="s">&#39;xgboost&#39;</span><span class="p">)</span>
 
-            <span class="kn">from</span> <span class="nn">sklearn.grid_search</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
-            <span class="kn">import</span> <span class="nn">warnings</span>
-
-            <span class="n">gbm</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">XGBClassifier</span><span class="p">(</span><span class="n">objective</span><span class="o">=</span><span class="s">&#39;binary:logistic&#39;</span><span class="p">,</span> <span class="n">nthread</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
-                                <span class="n">max_depth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-                                <span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-                                <span class="n">silent</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-            <span class="c">#gbm.set_params(eval_metric=&#39;auc&#39;)</span>
             <span class="k">if</span> <span class="n">cv</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-                <span class="n">cmod</span> <span class="o">=</span> <span class="n">gbm</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="kn">from</span> <span class="nn">freediscovery_extra</span> <span class="kn">import</span> <span class="n">make_xgboost_model</span>
+                <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">OptionalDependencyMissing</span><span class="p">(</span><span class="s">&#39;freediscovery_extra&#39;</span><span class="p">)</span>
+                <span class="n">cmod</span> <span class="o">=</span> <span class="n">make_xgboost_model</span><span class="p">(</span><span class="n">cv_obj</span><span class="p">,</span> <span class="n">cv_scoring</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">gbm_params</span> <span class="o">=</span> <span class="p">{</span>
-                    <span class="s">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">],</span>
-                    <span class="s">&#39;n_estimators&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span>
-                    <span class="s">&#39;max_depth&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
-                <span class="p">}</span>
-                <span class="k">if</span> <span class="n">cv</span> <span class="o">==</span> <span class="s">&#39;full&#39;</span><span class="p">:</span>
-                    <span class="n">gbm_params</span><span class="p">[</span><span class="s">&#39;gamma&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">]</span>
-                    <span class="n">gbm_params</span><span class="p">[</span><span class="s">&#39;subsample&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="kn">from</span> <span class="nn">freediscovery_extra</span> <span class="kn">import</span> <span class="n">make_xgboost_cv_model</span>
+                <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">OptionalDependencyMissing</span><span class="p">(</span><span class="s">&#39;freediscovery_extra&#39;</span><span class="p">)</span>
+                <span class="n">cmod</span> <span class="o">=</span> <span class="n">make_xgboost_cv_model</span><span class="p">(</span><span class="n">cv</span><span class="p">,</span> <span class="n">cv_obj</span><span class="p">,</span> <span class="n">cv_scoring</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
 
-
-                <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
-                    <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s">&quot;ignore&quot;</span><span class="p">)</span>
-                    <span class="n">cmod</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">gbm_params</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="n">cv_scoring</span><span class="p">,</span>
-                            <span class="n">cv</span><span class="o">=</span><span class="n">cv_obj</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s">&#39;MLPClassifier&#39;</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">cv</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">NotImplementedFD</span><span class="p">(</span><span class="s">&#39;CV not supported with MLPClassifier&#39;</span><span class="p">)</span>
@@ -373,6 +323,7 @@
         <span class="k">if</span> <span class="n">method</span> <span class="o">!=</span> <span class="s">&#39;ensemble-stacking&#39;</span><span class="p">:</span>
             <span class="n">cmod</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_estimator</span><span class="p">(</span><span class="n">Y_train</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">cv</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cv_scoring</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cv_n_folds</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">freediscovery.private</span> <span class="kn">import</span> <span class="n">_EnsembleStacking</span>
 
             <span class="n">cmod_logregr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_estimator</span><span class="p">(</span><span class="n">Y_train</span><span class="p">,</span> <span class="s">&#39;LogisticRegression&#39;</span><span class="p">,</span> <span class="s">&#39;full&#39;</span><span class="p">,</span>
                                              <span class="bp">self</span><span class="o">.</span><span class="n">cv_scoring</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cv_n_folds</span><span class="p">)</span>
@@ -434,7 +385,6 @@
         <span class="n">n_samples</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
         <span class="k">def</span> <span class="nf">_predict_chunk</span><span class="p">(</span><span class="n">cmod</span><span class="p">,</span> <span class="n">ds</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">):</span>
-            <span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">logit</span>
             <span class="n">n_samples</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
             <span class="n">mslice</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="n">chunk_size</span><span class="p">,</span> <span class="nb">min</span><span class="p">((</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">chunk_size</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">))</span>
