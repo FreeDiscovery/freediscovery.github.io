@@ -30,6 +30,9 @@
   
 
   
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="FreeDiscovery 0.6.0-dev documentation" href="index.html"/>
         <link rel="next" title="Python API reference" href="freediscovery.html"/>
         <link rel="prev" title="Installation instructions" href="installation_instructions.html"/> 
@@ -84,7 +87,7 @@
                 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="readme.html">FreeDiscovery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation_instructions.html">Installation instructions</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">REST API Reference</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">REST API Reference</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#feature-extraction">1. Feature extraction</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#a-load-a-dataset-and-initialize-feature-extraction">1.a Load a dataset and initialize feature extraction</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#b-run-feature-extraction-on-a-dataset">1.b Run feature extraction on a dataset</a></li>
@@ -149,7 +152,7 @@
         <div class="rst-content">
           
 
-
+ 
 
 
 
@@ -207,12 +210,12 @@ If &#8220;english&#8221;, a built-in stop word list for English is used. ( defau
 </ul>
 <ul>
 <li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
-<div class="highlight-python"><div class="highlight"><pre> {&quot;id&quot;: &lt;str&gt;, &quot;filenames&quot;: &lt;list[str]&gt;  }
+<div class="highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">str</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;filenames&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">&gt;</span>  <span class="p">}</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first"><strong>Error Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">422</span></code></p>
-<div class="highlight-python"><div class="highlight"><pre> {&quot;error&quot;: &quot;Some error message&quot;}`
+<div class="highlight-default"><div class="highlight"><pre><span></span> {&quot;error&quot;: &quot;Some error message&quot;}`
 </pre></div>
 </div>
 </li>
@@ -226,7 +229,7 @@ If &#8220;english&#8221;, a built-in stop word list for English is used. ( defau
 <li><p class="first"><strong>Method</strong>: <code class="docutils literal"><span class="pre">POST</span></code>,  <strong>URL Params</strong>: None</p>
 </li>
 <li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
-<div class="highlight-python"><div class="highlight"><pre>  {&quot;id&quot;: &lt;str&gt; }
+<div class="highlight-default"><div class="highlight"><pre><span></span>  <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">str</span><span class="o">&gt;</span> <span class="p">}</span>
 </pre></div>
 </div>
 </li>
@@ -240,16 +243,16 @@ If &#8220;english&#8221;, a built-in stop word list for English is used. ( defau
 <li><p class="first"><strong>Method</strong>: <code class="docutils literal"><span class="pre">GET</span></code>,  <strong>URL Params</strong>: None</p>
 </li>
 <li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">202</span></code> (processing in progress) or <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code> (processing done)</p>
-<div class="highlight-python"><div class="highlight"><pre>  {&quot;id&quot;: &lt;str&gt;, &quot;data_dir&quot;: &lt;str&gt;, &quot;n_samples&quot;: &lt;int&gt;,
-   &quot;n_features&quot;: &lt;int&gt;, &quot;analyzer&quot;: &lt;str&gt;, &quot;stop_words&quot;: &lt;str&gt;,
-   &quot;ngram_range&quot;: &lt;list[int]&gt;, &quot;n_jobs&quot;: &lt;int&gt;, &quot;chunk_size&quot;: &lt;int&gt;,
-   &quot;n_samples_processed&quot;: &lt;int&gt;,
-   &quot;filenames&quot;: [] or &lt;list[str&gt;&gt;}
+<div class="highlight-default"><div class="highlight"><pre><span></span>  <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">str</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;data_dir&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">str</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;n_samples&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">,</span>
+   <span class="s2">&quot;n_features&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;analyzer&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">str</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;stop_words&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">str</span><span class="o">&gt;</span><span class="p">,</span>
+   <span class="s2">&quot;ngram_range&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;n_jobs&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;chunk_size&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">,</span>
+   <span class="s2">&quot;n_samples_processed&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">,</span>
+   <span class="s2">&quot;filenames&quot;</span><span class="p">:</span> <span class="p">[]</span> <span class="ow">or</span> <span class="o">&lt;</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="o">&gt;&gt;</span><span class="p">}</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first"><strong>Error Response (processing failed)</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">520</span></code></p>
-<div class="highlight-python"><div class="highlight"><pre> <span class="p">{</span><span class="s">&quot;message&quot;</span><span class="p">:</span> <span class="s">&quot;Processing failed, see server logs!&quot;</span><span class="p">}</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Processing failed, see server logs!&quot;</span><span class="p">}</span>
 </pre></div>
 </div>
 </li>
@@ -263,13 +266,13 @@ If &#8220;english&#8221;, a built-in stop word list for English is used. ( defau
 <li><p class="first"><strong>Method</strong>: <code class="docutils literal"><span class="pre">GET</span></code>,  <strong>URL Params</strong>: None</p>
 </li>
 <li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
-<div class="highlight-python"><div class="highlight"><pre> [
-   {&quot;id&quot;: &lt;str&gt;, &quot;data_dir&quot;: &lt;str&gt;, &quot;n_samples&quot;: &lt;int&gt;,
-    &quot;n_features&quot;: &lt;int&gt;, &quot;n_jobs&quot;: &lt;int&gt;, &quot;chunk_size&quot;: &lt;int&gt;,
-    &quot;analyzer&quot;: &lt;str&gt;, &quot;stop_words&quot;: &lt;str&gt;,
-    &quot;ngram_range&quot;: &lt;list[int]&gt; }, 
-     ...
- ]
+<div class="highlight-default"><div class="highlight"><pre><span></span> <span class="p">[</span>
+   <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">str</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;data_dir&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">str</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;n_samples&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="s2">&quot;n_features&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;n_jobs&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;chunk_size&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="s2">&quot;analyzer&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">str</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;stop_words&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">str</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="s2">&quot;ngram_range&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">&gt;</span> <span class="p">},</span> 
+     <span class="o">...</span>
+ <span class="p">]</span>
 </pre></div>
 </div>
 </li>
@@ -300,7 +303,7 @@ If &#8220;english&#8221;, a built-in stop word list for English is used. ( defau
 </ul>
 </li>
 <li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
-<div class="highlight-python"><div class="highlight"><pre> {&quot;id&quot;: &lt;str&gt;, &quot;explained_variance&quot;: &lt;float&gt; }
+<div class="highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">str</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;explained_variance&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span> <span class="p">}</span>
 </pre></div>
 </div>
 </li>
@@ -319,13 +322,13 @@ If &#8220;english&#8221;, a built-in stop word list for English is used. ( defau
 </ul>
 <ul>
 <li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
-<div class="highlight-python"><div class="highlight"><pre> {&quot;id&quot;: &lt;str&gt;, &quot;recall&quot;: &lt;float&gt;, &quot;precision&quot;: &lt;float&gt; , 
-  &quot;F1&quot;: &lt;float&gt;,  &quot;roc_auc&quot;: &lt;float&gt;, &quot;average_precision&quot;: &lt;float&gt;,
-  &quot;prediction&quot;: &lt;list[float]&gt; ,
-  &quot;prediction_rel&quot;: &lt;list[float]&gt; ,
-  &quot;prediction_nrel&quot;: &lt;list[float]&gt; ,
-  &quot;nearest_rel_doc&quot;: &lt;list[int]&gt; ,
-  &quot;nearest_nrel_doc&quot;: &lt;list[int]&gt; }
+<div class="highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">str</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;recall&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;precision&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span> <span class="p">,</span> 
+  <span class="s2">&quot;F1&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span><span class="p">,</span>  <span class="s2">&quot;roc_auc&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;average_precision&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="s2">&quot;prediction&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span><span class="o">&gt;</span> <span class="p">,</span>
+  <span class="s2">&quot;prediction_rel&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span><span class="o">&gt;</span> <span class="p">,</span>
+  <span class="s2">&quot;prediction_nrel&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span><span class="o">&gt;</span> <span class="p">,</span>
+  <span class="s2">&quot;nearest_rel_doc&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">&gt;</span> <span class="p">,</span>
+  <span class="s2">&quot;nearest_nrel_doc&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">&gt;</span> <span class="p">}</span>
 </pre></div>
 </div>
 </li>
@@ -345,8 +348,8 @@ If &#8220;english&#8221;, a built-in stop word list for English is used. ( defau
 </ul>
 <ul>
 <li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
-<div class="highlight-python"><div class="highlight"><pre> {&quot;id&quot;: &lt;str&gt;, &quot;recall_score&quot;: &lt;float&gt;, &quot;precision_score&quot;: &lt;float&gt; ,
-  &quot;F1_score&quot;: &lt;float&gt;}
+<div class="highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">str</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;recall_score&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;precision_score&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span> <span class="p">,</span>
+  <span class="s2">&quot;F1_score&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span><span class="p">}</span>
 </pre></div>
 </div>
 </li>
@@ -377,8 +380,8 @@ If &#8220;english&#8221;, a built-in stop word list for English is used. ( defau
 </ul>
 </li>
 <li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
-<div class="highlight-python"><div class="highlight"><pre> {&quot;id&quot;: &lt;str&gt;, &quot;recall&quot;: &lt;float&gt;, &quot;precision&quot;: &lt;float&gt;,
-  &quot;f1&quot;: &lt;float&gt;, &quot;roc_auc&quot;: &lt;float&gt;, &quot;average_precision&quot;: &lt;float&gt;}
+<div class="highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">str</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;recall&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;precision&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="s2">&quot;f1&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;roc_auc&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;average_precision&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span><span class="p">}</span>
 </pre></div>
 </div>
 </li>
@@ -393,7 +396,7 @@ If &#8220;english&#8221;, a built-in stop word list for English is used. ( defau
 <li><p class="first"><strong>Method</strong>: <code class="docutils literal"><span class="pre">GET</span></code>,  <strong>URL Params</strong>: None</p>
 </li>
 <li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
-<div class="highlight-python"><div class="highlight"><pre> {&quot;prediction&quot;: &lt;list[int]&gt;}
+<div class="highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="s2">&quot;prediction&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">&gt;</span><span class="p">}</span>
 </pre></div>
 </div>
 </li>
@@ -412,8 +415,8 @@ If &#8220;english&#8221;, a built-in stop word list for English is used. ( defau
 <ul>
 <li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
 <p>Returns precision, recall, f1, average precision and ROC AUC scores as <a class="reference external" href="http://scikit-learn.org/stable/modules/classes.html#sklearn-metrics-metrics">defined in scikit learn</a>.</p>
-<div class="highlight-python"><div class="highlight"><pre> {&quot;recall&quot;: &lt;float&gt;, &quot;precision&quot;: &lt;float&gt;,
-  &quot;f1&quot;: &lt;float&gt;, &quot;roc_auc&quot;: &lt;float&gt;, &quot;average_precision&quot;: &lt;float&gt;}
+<div class="highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="s2">&quot;recall&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;precision&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="s2">&quot;f1&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;roc_auc&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;average_precision&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span><span class="p">}</span>
 </pre></div>
 </div>
 </li>
@@ -427,9 +430,9 @@ If &#8220;english&#8221;, a built-in stop word list for English is used. ( defau
 <li><p class="first"><strong>Method</strong>: <code class="docutils literal"><span class="pre">GET</span></code>,  <strong>URL Params</strong>: None</p>
 </li>
 <li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
-<div class="highlight-python"><div class="highlight"><pre> {&quot;relevant_filenames&quot;: &lt;list&gt;,
-  &quot;non_relevant_filenames&quot;: &lt;list&gt;,
-  &quot;method&quot;: &lt;str&gt;, &quot;options&quot;: &lt;dict&gt; }
+<div class="highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="s2">&quot;relevant_filenames&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">list</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="s2">&quot;non_relevant_filenames&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">list</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">str</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;options&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">dict</span><span class="o">&gt;</span> <span class="p">}</span>
 </pre></div>
 </div>
 </li>
@@ -463,7 +466,7 @@ both &#8220;birch&#8221; and &#8220;ward_hc&#8221; require this option to be a p
 </ul>
 </li>
 <li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
-<div class="highlight-python"><div class="highlight"><pre> {&quot;id&quot;: &lt;str&gt;}
+<div class="highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">str</span><span class="o">&gt;</span><span class="p">}</span>
 </pre></div>
 </div>
 </li>
@@ -488,7 +491,7 @@ should be lesser than the threshold. Otherwise a new subcluster is started. See 
 </ul>
 </li>
 <li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
-<div class="highlight-python"><div class="highlight"><pre> {&quot;id&quot;: &lt;str&gt;}
+<div class="highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">str</span><span class="o">&gt;</span><span class="p">}</span>
 </pre></div>
 </div>
 </li>
@@ -512,7 +515,7 @@ both &#8220;birch&#8221; and &#8220;ward_hc&#8221; require this option to be a p
 </ul>
 </li>
 <li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
-<div class="highlight-python"><div class="highlight"><pre> {&quot;id&quot;: &lt;str&gt;}
+<div class="highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">str</span><span class="o">&gt;</span><span class="p">}</span>
 </pre></div>
 </div>
 </li>
@@ -533,10 +536,10 @@ the method used for computing the cluster labels</li>
 </ul>
 </li>
 <li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
-<div class="highlight-python"><div class="highlight"><pre> {&quot;labels&quot;: &lt;list[int]&gt;, &quot;cluster_terms&quot;: &lt;list[str]&gt;,
-  &quot;htree&quot;: {&quot;n_leaves&quot;: &lt;int&gt;, &quot;n_components&quot;: &lt;int&gt;,
-            &quot;children&quot;: &lt;list[int[:,2]]&gt;}   # only for ward HC
- }
+<div class="highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;cluster_terms&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="s2">&quot;htree&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;n_leaves&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;n_components&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">,</span>
+            <span class="s2">&quot;children&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]]</span><span class="o">&gt;</span><span class="p">}</span>   <span class="c1"># only for ward HC</span>
+ <span class="p">}</span>
 </pre></div>
 </div>
 </li>
@@ -565,7 +568,7 @@ the method used for computing the cluster labels</li>
 </ul>
 </li>
 <li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
-<div class="highlight-python"><div class="highlight"><pre> {&quot;id&quot;: &lt;str&gt;}
+<div class="highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">str</span><span class="o">&gt;</span><span class="p">}</span>
 </pre></div>
 </div>
 </li>
@@ -587,7 +590,7 @@ when searching for duplicates, see  https://github.com/seomoz/simhash-py</li>
 </ul>
 <ul>
 <li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
-<div class="highlight-python"><div class="highlight"><pre> {&quot;simhash&quot;: &lt;list[int]&gt;, &quot;cluster_id&quot;: &lt;list[int]&gt;, &quot;dup_pairs&quot;: &lt;list[list[int]]&gt; }
+<div class="highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="s2">&quot;simhash&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;cluster_id&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;dup_pairs&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span><span class="o">&gt;</span> <span class="p">}</span>
 </pre></div>
 </div>
 </li>

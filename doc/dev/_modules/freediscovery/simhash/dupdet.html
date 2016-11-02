@@ -30,6 +30,9 @@
   
 
   
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
     <link rel="top" title="FreeDiscovery 0.6.0-dev documentation" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
@@ -134,29 +137,29 @@
            <div itemprop="articleBody">
             
   <h1>Source code for freediscovery.simhash.dupdet</h1><div class="highlight"><pre>
-<span class="c"># -*- coding: utf-8 -*-</span>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">unicode_literals</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">sklearn.externals</span> <span class="kn">import</span> <span class="n">joblib</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.externals</span> <span class="k">import</span> <span class="n">joblib</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="kn">from</span> <span class="nn">..base</span> <span class="kn">import</span> <span class="n">BaseEstimator</span>
-<span class="kn">from</span> <span class="nn">..text</span> <span class="kn">import</span> <span class="n">FeatureVectorizer</span>
-<span class="kn">from</span> <span class="nn">..utils</span> <span class="kn">import</span> <span class="n">setup_model</span><span class="p">,</span> <span class="n">_rename_main_thread</span>
-<span class="kn">from</span> <span class="nn">..exceptions</span> <span class="kn">import</span> <span class="p">(</span><span class="n">DatasetNotFound</span><span class="p">,</span> <span class="n">ModelNotFound</span><span class="p">,</span> <span class="n">InitException</span><span class="p">,</span>
+<span class="kn">from</span> <span class="nn">..base</span> <span class="k">import</span> <span class="n">BaseEstimator</span>
+<span class="kn">from</span> <span class="nn">..text</span> <span class="k">import</span> <span class="n">FeatureVectorizer</span>
+<span class="kn">from</span> <span class="nn">..utils</span> <span class="k">import</span> <span class="n">setup_model</span><span class="p">,</span> <span class="n">_rename_main_thread</span>
+<span class="kn">from</span> <span class="nn">..exceptions</span> <span class="k">import</span> <span class="p">(</span><span class="n">DatasetNotFound</span><span class="p">,</span> <span class="n">ModelNotFound</span><span class="p">,</span> <span class="n">InitException</span><span class="p">,</span>
                             <span class="n">WrongParameter</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">SimhashDuplicates</span>
+<span class="kn">from</span> <span class="nn">.base</span> <span class="k">import</span> <span class="n">SimhashDuplicates</span>
 
-<div class="viewcode-block" id="DuplicateDetection"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.simhash.dupdet.DuplicateDetection">[docs]</a><span class="k">class</span> <span class="nc">DuplicateDetection</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">):</span></div>
+<div class="viewcode-block" id="DuplicateDetection"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.simhash.dupdet.DuplicateDetection">[docs]</a><span class="k">class</span> <span class="nc">DuplicateDetection</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">):</span>
 
-    <span class="n">_DIRREF</span> <span class="o">=</span> <span class="s">&quot;dupdet&quot;</span>
+    <span class="n">_DIRREF</span> <span class="o">=</span> <span class="s2">&quot;dupdet&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cache_dir</span><span class="o">=</span><span class="s">&#39;/tmp/&#39;</span><span class="p">,</span> <span class="n">dsid</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">mid</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="DuplicateDetection.__init__"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.simhash.dupdet.DuplicateDetection.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cache_dir</span><span class="o">=</span><span class="s1">&#39;/tmp/&#39;</span><span class="p">,</span> <span class="n">dsid</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mid</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Find near duplicates in a document collection.</span>
 
@@ -173,40 +176,39 @@
 <span class="sd">             model id</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">if</span> <span class="n">dsid</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">mid</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">dsid</span> <span class="o">=</span> <span class="n">dsid</span> <span class="o">=</span>  <span class="n">DuplicateDetection</span><span class="o">.</span><span class="n">get_dsid</span><span class="p">(</span>
-                                      <span class="n">DuplicateDetection</span><span class="p">,</span> <span class="n">cache_dir</span><span class="p">,</span> <span class="n">mid</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">dsid</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">mid</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dsid</span> <span class="o">=</span> <span class="n">dsid</span> <span class="o">=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">get_dsid</span><span class="p">(</span><span class="n">cache_dir</span><span class="p">,</span> <span class="n">mid</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">mid</span> <span class="o">=</span> <span class="n">mid</span>
-        <span class="k">elif</span> <span class="n">dsid</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">dsid</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">dsid</span>  <span class="o">=</span> <span class="n">dsid</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">mid</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="k">elif</span> <span class="n">dsid</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">mid</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mid</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">elif</span> <span class="n">dsid</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">mid</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">fe</span> <span class="o">=</span> <span class="n">FeatureVectorizer</span><span class="p">(</span><span class="n">cache_dir</span><span class="o">=</span><span class="n">cache_dir</span><span class="p">,</span> <span class="n">dsid</span><span class="o">=</span><span class="n">dsid</span><span class="p">)</span>
-        <span class="c">#if self.fe._pars[&#39;use_hashing&#39;]:</span>
-        <span class="c">#    raise NotImplementedError(&#39;Using dup detection with non-hashed features is not supported by FreeDiscovery!&#39;)</span>
+        <span class="c1">#if self.fe._pars[&#39;use_hashing&#39;]:</span>
+        <span class="c1">#    raise NotImplementedError(&#39;Using dup detection with non-hashed features is not supported by FreeDiscovery!&#39;)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">model_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fe</span><span class="o">.</span><span class="n">cache_dir</span><span class="p">,</span> <span class="n">dsid</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_DIRREF</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_dir</span><span class="p">):</span>
             <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_dir</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">mid</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">mid</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">mid</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_pars</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_load_pars</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="bp">None</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_pars</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_pars</span> <span class="o">=</span> <span class="kc">None</span></div>
 
-    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s">&#39;simhash&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="DuplicateDetection.fit"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.simhash.dupdet.DuplicateDetection.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;simhash&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Precompute all the required values for duplicate detection</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="n">pars</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;method&#39;</span><span class="p">:</span> <span class="n">method</span><span class="p">}</span>
-        <span class="k">if</span> <span class="n">method</span> <span class="o">!=</span> <span class="s">&#39;simhash&#39;</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">WrongParameter</span><span class="p">(</span><span class="s">&#39;Dup. detection method {} not implemented!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">method</span><span class="p">))</span>
+        <span class="n">pars</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="n">method</span><span class="p">}</span>
+        <span class="k">if</span> <span class="n">method</span> <span class="o">!=</span> <span class="s1">&#39;simhash&#39;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">WrongParameter</span><span class="p">(</span><span class="s1">&#39;Dup. detection method </span><span class="si">{}</span><span class="s1"> not implemented!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">method</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">shash</span> <span class="o">=</span> <span class="n">SimhashDuplicates</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_pars</span> <span class="o">=</span> <span class="n">pars</span>
         <span class="n">mid</span><span class="p">,</span> <span class="n">mid_dir</span> <span class="o">=</span> <span class="n">setup_model</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_dir</span><span class="p">)</span>
@@ -214,13 +216,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">mid</span> <span class="o">=</span> <span class="n">mid</span>
 
 
-        <span class="n">X</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fe</span><span class="o">.</span><span class="n">dsid_dir</span><span class="p">,</span> <span class="s">&#39;features&#39;</span><span class="p">))</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fe</span><span class="o">.</span><span class="n">dsid_dir</span><span class="p">,</span> <span class="s1">&#39;features&#39;</span><span class="p">))</span>
         <span class="n">shash</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
         
-        <span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">shash</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_dir</span><span class="p">,</span> <span class="n">mid</span><span class="p">,</span>  <span class="s">&#39;model&#39;</span><span class="p">),</span> <span class="n">compress</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
-        <span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">pars</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_dir</span><span class="p">,</span> <span class="n">mid</span><span class="p">,</span>  <span class="s">&#39;pars&#39;</span><span class="p">),</span> <span class="n">compress</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+        <span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">shash</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_dir</span><span class="p">,</span> <span class="n">mid</span><span class="p">,</span>  <span class="s1">&#39;model&#39;</span><span class="p">),</span> <span class="n">compress</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+        <span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">pars</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_dir</span><span class="p">,</span> <span class="n">mid</span><span class="p">,</span>  <span class="s1">&#39;pars&#39;</span><span class="p">),</span> <span class="n">compress</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">blocks</span><span class="o">=</span><span class="s">&#39;auto&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="DuplicateDetection.query"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.simhash.dupdet.DuplicateDetection.query">[docs]</a>    <span class="k">def</span> <span class="nf">query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">blocks</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Find all the nearests neighbours for the dataset</span>
 
 <span class="sd">        Parameters</span>
@@ -247,7 +249,7 @@
 
         <span class="n">_fit_shash</span><span class="p">,</span> <span class="n">cluster_id</span><span class="p">,</span> <span class="n">matches</span> <span class="o">=</span> <span class="n">shash</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">distance</span><span class="o">=</span><span class="n">distance</span><span class="p">,</span>
                                           <span class="n">blocks</span><span class="o">=</span><span class="n">blocks</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">_fit_shash</span><span class="p">,</span> <span class="n">cluster_id</span><span class="p">,</span> <span class="n">matches</span>
+        <span class="k">return</span> <span class="n">_fit_shash</span><span class="p">,</span> <span class="n">cluster_id</span><span class="p">,</span> <span class="n">matches</span></div>
 
 
     <span class="k">def</span> <span class="nf">_load_pars</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -257,22 +259,22 @@
 
         <span class="n">mid_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_dir</span><span class="p">,</span> <span class="n">mid</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">mid_dir</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Model id {} not found in the cache!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mid</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Model id </span><span class="si">{}</span><span class="s1"> not found in the cache!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mid</span><span class="p">))</span>
 
-        <span class="n">pars</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">mid_dir</span><span class="p">,</span> <span class="s">&#39;pars&#39;</span><span class="p">))</span>
+        <span class="n">pars</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">mid_dir</span><span class="p">,</span> <span class="s1">&#39;pars&#39;</span><span class="p">))</span>
 
         <span class="k">return</span> <span class="n">pars</span>
 
 
-    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mid</span><span class="p">):</span>
+<div class="viewcode-block" id="DuplicateDetection.load"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.simhash.dupdet.DuplicateDetection.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mid</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Load results from cache specified by a mid &quot;&quot;&quot;</span>
 
         <span class="n">mid_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_dir</span><span class="p">,</span> <span class="n">mid</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">mid_dir</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Model id {} not found in the cache!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mid</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Model id </span><span class="si">{}</span><span class="s1"> not found in the cache!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mid</span><span class="p">))</span>
 
-        <span class="n">shash</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">mid_dir</span><span class="p">,</span> <span class="s">&#39;model&#39;</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">shash</span>
+        <span class="n">shash</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">mid_dir</span><span class="p">,</span> <span class="s1">&#39;model&#39;</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">shash</span></div></div>
 </pre></div>
 
            </div>

@@ -30,6 +30,9 @@
   
 
   
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
     <link rel="top" title="FreeDiscovery 0.6.0-dev documentation" href="../../index.html"/>
         <link rel="up" title="Module code" href="../index.html"/> 
 
@@ -134,16 +137,16 @@
            <div itemprop="articleBody">
             
   <h1>Source code for freediscovery.base</h1><div class="highlight"><pre>
-<span class="c"># -*- coding: utf-8 -*-</span>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">unicode_literals</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
 
-<span class="kn">from</span> <span class="nn">.exceptions</span> <span class="kn">import</span> <span class="p">(</span><span class="n">DatasetNotFound</span><span class="p">,</span> <span class="n">ModelNotFound</span><span class="p">,</span> <span class="n">InitException</span><span class="p">,</span>
+<span class="kn">from</span> <span class="nn">.exceptions</span> <span class="k">import</span> <span class="p">(</span><span class="n">DatasetNotFound</span><span class="p">,</span> <span class="n">ModelNotFound</span><span class="p">,</span> <span class="n">InitException</span><span class="p">,</span>
                             <span class="n">WrongParameter</span><span class="p">)</span>
 
 
@@ -153,8 +156,8 @@
         <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fe</span><span class="o">.</span><span class="n">cache_dir</span><span class="p">,</span> <span class="n">dsid</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_DIRREF</span><span class="p">,</span> <span class="n">mid</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="BaseEstimator.get_dsid"><a class="viewcode-back" href="../../freediscovery.html#freediscovery.base.BaseEstimator.get_dsid">[docs]</a>    <span class="k">def</span> <span class="nf">get_dsid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cache_dir</span><span class="p">,</span> <span class="n">mid</span><span class="p">):</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="s">&#39;ediscovery_cache&#39;</span> <span class="ow">in</span> <span class="n">cache_dir</span><span class="p">:</span> <span class="c"># not very pretty</span>
-            <span class="n">cache_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cache_dir</span><span class="p">,</span> <span class="s">&quot;ediscovery_cache&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="s1">&#39;ediscovery_cache&#39;</span> <span class="ow">in</span> <span class="n">cache_dir</span><span class="p">:</span> <span class="c1"># not very pretty</span>
+            <span class="n">cache_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cache_dir</span><span class="p">,</span> <span class="s2">&quot;ediscovery_cache&quot;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">dsid</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">cache_dir</span><span class="p">):</span>
             <span class="n">mid_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cache_dir</span><span class="p">,</span> <span class="n">dsid</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_DIRREF</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">mid_path</span><span class="p">):</span>
@@ -162,14 +165,14 @@
             <span class="k">for</span> <span class="n">mid_el</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">mid_path</span><span class="p">):</span>
                 <span class="k">if</span> <span class="n">mid_el</span> <span class="o">==</span> <span class="n">mid</span><span class="p">:</span>
                     <span class="k">return</span> <span class="n">dsid</span>
-        <span class="k">raise</span> <span class="n">ModelNotFound</span><span class="p">(</span><span class="s">&#39;Model id {} not found in {}/*/{}!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mid</span><span class="p">,</span>
+        <span class="k">raise</span> <span class="n">ModelNotFound</span><span class="p">(</span><span class="s1">&#39;Model id </span><span class="si">{}</span><span class="s1"> not found in </span><span class="si">{}</span><span class="s1">/*/</span><span class="si">{}</span><span class="s1">!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mid</span><span class="p">,</span>
                                     <span class="n">cache_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_DIRREF</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="BaseEstimator.delete"><a class="viewcode-back" href="../../freediscovery.html#freediscovery.base.BaseEstimator.delete">[docs]</a>    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Delete a trained model&quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">shutil</span>
         <span class="n">mid_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mid</span><span class="p">)</span>
-        <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">mid_dir</span><span class="p">,</span> <span class="n">ignore_errors</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span></div>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">mid_dir</span><span class="p">,</span> <span class="n">ignore_errors</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 
     <span class="k">def</span> <span class="nf">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mid</span><span class="p">):</span>
@@ -182,7 +185,7 @@
         <span class="k">for</span> <span class="n">mid</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_dir</span><span class="p">):</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">pars</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_pars</span><span class="p">(</span><span class="n">mid</span><span class="p">)</span>
-                <span class="n">pars</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="n">mid</span>
+                <span class="n">pars</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="n">mid</span>
                 <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pars</span><span class="p">)</span>
             <span class="k">except</span><span class="p">:</span>
                 <span class="k">pass</span>

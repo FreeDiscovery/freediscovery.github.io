@@ -30,6 +30,9 @@
   
 
   
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
     <link rel="top" title="FreeDiscovery 0.6.0-dev documentation" href="../../index.html"/>
         <link rel="up" title="Module code" href="../index.html"/> 
 
@@ -134,12 +137,12 @@
            <div itemprop="articleBody">
             
   <h1>Source code for freediscovery.lsi</h1><div class="highlight"><pre>
-<span class="c"># -*- coding: utf-8 -*-</span>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
-<span class="c">#from __future__ import unicode_literals</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
+<span class="c1">#from __future__ import unicode_literals</span>
 
 <span class="kn">import</span> <span class="nn">os.path</span>
 <span class="kn">import</span> <span class="nn">re</span>
@@ -147,34 +150,34 @@
 
 
 <span class="kn">import</span> <span class="nn">scipy</span>
-<span class="kn">from</span> <span class="nn">sklearn.externals</span> <span class="kn">import</span> <span class="n">joblib</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.externals</span> <span class="k">import</span> <span class="n">joblib</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="kn">from</span> <span class="nn">sklearn.metrics.pairwise</span> <span class="kn">import</span> <span class="n">cosine_similarity</span>
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">normalize</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics.pairwise</span> <span class="k">import</span> <span class="n">cosine_similarity</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">normalize</span>
 
-<span class="kn">import</span> <span class="nn">scipy.sparse</span> <span class="kn">as</span> <span class="nn">sp</span>
-<span class="kn">from</span> <span class="nn">sklearn.utils</span> <span class="kn">import</span> <span class="n">check_array</span><span class="p">,</span> <span class="n">as_float_array</span><span class="p">,</span> <span class="n">check_random_state</span>
-<span class="kn">from</span> <span class="nn">sklearn.utils.extmath</span> <span class="kn">import</span> <span class="n">randomized_svd</span><span class="p">,</span> <span class="n">safe_sparse_dot</span><span class="p">,</span> <span class="n">svd_flip</span>
-<span class="kn">from</span> <span class="nn">sklearn.utils.sparsefuncs</span> <span class="kn">import</span> <span class="n">mean_variance_axis</span>
-<span class="kn">from</span> <span class="nn">scipy.sparse.linalg</span> <span class="kn">import</span> <span class="n">svds</span>
-<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">TruncatedSVD</span>
+<span class="kn">import</span> <span class="nn">scipy.sparse</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">from</span> <span class="nn">sklearn.utils</span> <span class="k">import</span> <span class="n">check_array</span><span class="p">,</span> <span class="n">as_float_array</span><span class="p">,</span> <span class="n">check_random_state</span>
+<span class="kn">from</span> <span class="nn">sklearn.utils.extmath</span> <span class="k">import</span> <span class="n">randomized_svd</span><span class="p">,</span> <span class="n">safe_sparse_dot</span><span class="p">,</span> <span class="n">svd_flip</span>
+<span class="kn">from</span> <span class="nn">sklearn.utils.sparsefuncs</span> <span class="k">import</span> <span class="n">mean_variance_axis</span>
+<span class="kn">from</span> <span class="nn">scipy.sparse.linalg</span> <span class="k">import</span> <span class="n">svds</span>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="k">import</span> <span class="n">TruncatedSVD</span>
 
-<span class="kn">from</span> <span class="nn">.text</span> <span class="kn">import</span> <span class="n">FeatureVectorizer</span>
-<span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">BaseEstimator</span>
-<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="p">(</span><span class="n">filter_rel_nrel</span><span class="p">,</span> <span class="n">classification_score</span><span class="p">,</span> <span class="n">setup_model</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">.exceptions</span> <span class="kn">import</span> <span class="p">(</span><span class="n">DatasetNotFound</span><span class="p">,</span> <span class="n">ModelNotFound</span><span class="p">,</span> <span class="n">InitException</span><span class="p">,</span>
+<span class="kn">from</span> <span class="nn">.text</span> <span class="k">import</span> <span class="n">FeatureVectorizer</span>
+<span class="kn">from</span> <span class="nn">.base</span> <span class="k">import</span> <span class="n">BaseEstimator</span>
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="k">import</span> <span class="p">(</span><span class="n">filter_rel_nrel</span><span class="p">,</span> <span class="n">classification_score</span><span class="p">,</span> <span class="n">setup_model</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">.exceptions</span> <span class="k">import</span> <span class="p">(</span><span class="n">DatasetNotFound</span><span class="p">,</span> <span class="n">ModelNotFound</span><span class="p">,</span> <span class="n">InitException</span><span class="p">,</span>
                             <span class="n">WrongParameter</span><span class="p">,</span> <span class="n">NotImplementedFD</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">_touch</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
-    <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">&#39;ab&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;ab&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
 
-<div class="viewcode-block" id="LSI"><a class="viewcode-back" href="../../freediscovery.html#freediscovery.lsi.LSI">[docs]</a><span class="k">class</span> <span class="nc">LSI</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">):</span></div>
+<div class="viewcode-block" id="LSI"><a class="viewcode-back" href="../../freediscovery.html#freediscovery.lsi.LSI">[docs]</a><span class="k">class</span> <span class="nc">LSI</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">):</span>
 
-    <span class="n">_DIRREF</span> <span class="o">=</span> <span class="s">&quot;lsi&quot;</span>
+    <span class="n">_DIRREF</span> <span class="o">=</span> <span class="s2">&quot;lsi&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cache_dir</span><span class="o">=</span><span class="s">&#39;/tmp/&#39;</span><span class="p">,</span> <span class="n">dsid</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">mid</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="LSI.__init__"><a class="viewcode-back" href="../../freediscovery.html#freediscovery.lsi.LSI.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cache_dir</span><span class="o">=</span><span class="s1">&#39;/tmp/&#39;</span><span class="p">,</span> <span class="n">dsid</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mid</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; </span>
 <span class="sd">        Document categorization using Latent Semantic Indexing (LSI)</span>
 
@@ -189,16 +192,16 @@
 <span class="sd">	  verbose: bool, optional</span>
 <span class="sd">             print progress messages</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">dsid</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">mid</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">dsid</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">mid</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">dsid</span> <span class="o">=</span> <span class="n">dsid</span> <span class="o">=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">get_dsid</span><span class="p">(</span><span class="n">cache_dir</span><span class="p">,</span> <span class="n">mid</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">mid</span> <span class="o">=</span> <span class="n">mid</span>
-        <span class="k">elif</span> <span class="n">dsid</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">dsid</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">dsid</span>  <span class="o">=</span> <span class="n">dsid</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">mid</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="k">elif</span> <span class="n">dsid</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">mid</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mid</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">elif</span> <span class="n">dsid</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">mid</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">data_dir</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_dir</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">fe</span> <span class="o">=</span> <span class="n">FeatureVectorizer</span><span class="p">(</span><span class="n">cache_dir</span><span class="o">=</span><span class="n">cache_dir</span><span class="p">,</span> <span class="n">dsid</span><span class="o">=</span><span class="n">dsid</span><span class="p">)</span>
@@ -209,14 +212,14 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_dir</span><span class="p">):</span>
             <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_dir</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mid</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mid</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">pars</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_load_pars</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mid</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">pars</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_pars</span> <span class="o">=</span> <span class="n">pars</span>
+            <span class="n">pars</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pars</span> <span class="o">=</span> <span class="n">pars</span></div>
 
 
-    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_components</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+<div class="viewcode-block" id="LSI.transform"><a class="viewcode-back" href="../../freediscovery.html#freediscovery.lsi.LSI.transform">[docs]</a>    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_components</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Perform the SVD decomposition</span>
 <span class="sd">        </span>
@@ -244,33 +247,33 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">dsid_dir</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">IOError</span>
 
-        <span class="n">pars</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;dsid&#39;</span><span class="p">:</span> <span class="n">dsid</span><span class="p">,</span> <span class="s">&#39;n_components&#39;</span><span class="p">:</span> <span class="n">n_components</span><span class="p">}</span>
+        <span class="n">pars</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;dsid&#39;</span><span class="p">:</span> <span class="n">dsid</span><span class="p">,</span> <span class="s1">&#39;n_components&#39;</span><span class="p">:</span> <span class="n">n_components</span><span class="p">}</span>
 
-        <span class="n">mid_dir_base</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dsid_dir</span><span class="p">,</span> <span class="s">&quot;lsi&quot;</span><span class="p">)</span>
+        <span class="n">mid_dir_base</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dsid_dir</span><span class="p">,</span> <span class="s2">&quot;lsi&quot;</span><span class="p">)</span>
     
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">mid_dir_base</span><span class="p">):</span>
             <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">mid_dir_base</span><span class="p">)</span>
         <span class="n">mid</span><span class="p">,</span> <span class="n">mid_dir</span> <span class="o">=</span> <span class="n">setup_model</span><span class="p">(</span><span class="n">mid_dir_base</span><span class="p">)</span>
 
-        <span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">pars</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">mid_dir</span><span class="p">,</span> <span class="s">&#39;pars&#39;</span><span class="p">),</span> <span class="n">compress</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
-        <span class="n">ds</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dsid_dir</span><span class="p">,</span> <span class="s">&#39;features&#39;</span><span class="p">))</span>
+        <span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">pars</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">mid_dir</span><span class="p">,</span> <span class="s1">&#39;pars&#39;</span><span class="p">),</span> <span class="n">compress</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+        <span class="n">ds</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dsid_dir</span><span class="p">,</span> <span class="s1">&#39;features&#39;</span><span class="p">))</span>
 
         <span class="n">svd</span> <span class="o">=</span> <span class="n">TruncatedSVD_LSI</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">n_components</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="n">n_iter</span><span class="p">,</span>
-                <span class="c"># algorithm=&#39;arpack&#39;</span>
+                <span class="c1"># algorithm=&#39;arpack&#39;</span>
                 <span class="p">)</span>
         <span class="n">lsi</span> <span class="o">=</span> <span class="n">svd</span>
         <span class="n">lsi</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
 
-        <span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">lsi</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">mid_dir</span><span class="p">,</span> <span class="s">&#39;lsi_decomposition&#39;</span><span class="p">))</span>
+        <span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">lsi</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">mid_dir</span><span class="p">,</span> <span class="s1">&#39;lsi_decomposition&#39;</span><span class="p">))</span>
 
         <span class="n">exp_var</span> <span class="o">=</span>  <span class="n">lsi</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mid</span> <span class="o">=</span> <span class="n">mid</span>
 
-        <span class="k">return</span> <span class="n">lsi</span><span class="p">,</span> <span class="n">exp_var</span>
+        <span class="k">return</span> <span class="n">lsi</span><span class="p">,</span> <span class="n">exp_var</span></div>
 
 
-    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relevant_filenames</span><span class="p">,</span> <span class="n">non_relevant_filenames</span><span class="p">,</span>
-                    <span class="n">accumulate</span><span class="o">=</span><span class="s">&#39;nearest-max&#39;</span><span class="p">,</span> <span class="n">chunk_size</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<div class="viewcode-block" id="LSI.predict"><a class="viewcode-back" href="../../freediscovery.html#freediscovery.lsi.LSI.predict">[docs]</a>    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relevant_filenames</span><span class="p">,</span> <span class="n">non_relevant_filenames</span><span class="p">,</span>
+                    <span class="n">accumulate</span><span class="o">=</span><span class="s1">&#39;nearest-max&#39;</span><span class="p">,</span> <span class="n">chunk_size</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Predict the document relevance using a previously trained LSI model</span>
 
@@ -285,12 +288,12 @@
 <span class="sd">             otherwise if `accumulate==&quot;centroid-max&quot;` the centroid of relevant documents is used as the query vector.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">accumulate</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;centroid-max&#39;</span><span class="p">,</span> <span class="s">&#39;nearest-max&#39;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">accumulate</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;centroid-max&#39;</span><span class="p">,</span> <span class="s1">&#39;nearest-max&#39;</span><span class="p">]:</span>
             <span class="k">pass</span>
 
-        <span class="k">elif</span> <span class="n">accumulate</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;nearest-diff&#39;</span><span class="p">,</span> <span class="s">&#39;nearest-combine&#39;</span><span class="p">,</span>
-                              <span class="s">&#39;stacking&#39;</span><span class="p">]:</span>
-            <span class="k">raise</span> <span class="n">WrongParameter</span><span class="p">(</span><span class="s">&#39;accumulate = {} is implemented but is not production ready and was disabled for v0.5 release&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">accumulate</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">accumulate</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;nearest-diff&#39;</span><span class="p">,</span> <span class="s1">&#39;nearest-combine&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;stacking&#39;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="n">WrongParameter</span><span class="p">(</span><span class="s1">&#39;accumulate = </span><span class="si">{}</span><span class="s1"> is implemented but is not production ready and was disabled for v0.5 release&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">accumulate</span><span class="p">))</span>
 
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">NotImplementedFD</span><span class="p">()</span> 
@@ -302,16 +305,16 @@
         <span class="n">Y_train_ref</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">d_p</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])),</span>
                                 <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">d_n</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
-        <span class="n">lsi</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mid</span><span class="p">,</span> <span class="s">&#39;lsi_decomposition&#39;</span><span class="p">))</span>
+        <span class="n">lsi</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mid</span><span class="p">,</span> <span class="s1">&#39;lsi_decomposition&#39;</span><span class="p">))</span>
 
         <span class="n">d_p_p</span> <span class="o">=</span> <span class="n">lsi</span><span class="o">.</span><span class="n">transform_lsi_norm</span><span class="p">(</span><span class="n">d_p</span><span class="p">)</span>
         <span class="n">d_n_p</span> <span class="o">=</span> <span class="n">lsi</span><span class="o">.</span><span class="n">transform_lsi_norm</span><span class="p">(</span><span class="n">d_n</span><span class="p">)</span>
 
-        <span class="n">centr_p_p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">d_p_p</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)[</span><span class="bp">None</span><span class="p">,</span> <span class="p">:]</span>
-        <span class="n">centr_n_p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">d_n_p</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)[</span><span class="bp">None</span><span class="p">,</span> <span class="p">:]</span>
+        <span class="n">centr_p_p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">d_p_p</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
+        <span class="n">centr_n_p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">d_n_p</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
 
-        <span class="n">querry</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;d_p&#39;</span><span class="p">:</span> <span class="n">d_p_p</span><span class="p">,</span> <span class="s">&#39;d_n&#39;</span><span class="p">:</span> <span class="n">d_n_p</span><span class="p">,</span>
-                            <span class="s">&#39;centr_p&#39;</span><span class="p">:</span> <span class="n">centr_p_p</span><span class="p">,</span> <span class="s">&#39;centr_n&#39;</span><span class="p">:</span> <span class="n">centr_n_p</span><span class="p">}</span> 
+        <span class="n">querry</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;d_p&#39;</span><span class="p">:</span> <span class="n">d_p_p</span><span class="p">,</span> <span class="s1">&#39;d_n&#39;</span><span class="p">:</span> <span class="n">d_n_p</span><span class="p">,</span>
+                            <span class="s1">&#39;centr_p&#39;</span><span class="p">:</span> <span class="n">centr_p_p</span><span class="p">,</span> <span class="s1">&#39;centr_n&#39;</span><span class="p">:</span> <span class="n">centr_n_p</span><span class="p">}</span> 
 
         <span class="n">n_samples</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
@@ -324,13 +327,13 @@
             <span class="n">out</span> <span class="o">=</span> <span class="p">{}</span>
             <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">querry</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                 <span class="n">D_tmp</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">ds_p</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
-                <span class="n">out</span><span class="p">[</span><span class="s">&#39;idx_&#39;</span><span class="o">+</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">D_tmp</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-                <span class="n">out</span><span class="p">[</span><span class="s">&#39;D_&#39;</span><span class="o">+</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">D_tmp</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">out</span><span class="p">[</span><span class="s1">&#39;idx_&#39;</span><span class="o">+</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">D_tmp</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">out</span><span class="p">[</span><span class="s1">&#39;D_&#39;</span><span class="o">+</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">D_tmp</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">out</span>
 
         <span class="n">res</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">querry</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">prefix</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;idx_&#39;</span><span class="p">,</span> <span class="s">&#39;D_&#39;</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">prefix</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;idx_&#39;</span><span class="p">,</span> <span class="s1">&#39;D_&#39;</span><span class="p">]:</span>
                 <span class="n">res</span><span class="p">[</span><span class="n">prefix</span><span class="o">+</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_samples</span><span class="o">//</span><span class="n">chunk_size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
             <span class="n">res_el</span>  <span class="o">=</span> <span class="n">_predict_chunk</span><span class="p">(</span><span class="n">lsi</span><span class="p">,</span> <span class="n">ds</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">querry</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">)</span>
@@ -340,35 +343,35 @@
         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">res</span><span class="p">:</span>
             <span class="n">res</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
-        <span class="n">X_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fe</span><span class="o">.</span><span class="n">_pars</span><span class="p">[</span><span class="s">&#39;filenames&#39;</span><span class="p">])</span>
+        <span class="n">X_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fe</span><span class="o">.</span><span class="n">_pars</span><span class="p">[</span><span class="s1">&#39;filenames&#39;</span><span class="p">])</span>
 
-        <span class="n">D_rel</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s">&#39;D_d_p&#39;</span><span class="p">]</span>
-        <span class="n">D_nrel</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s">&#39;D_d_n&#39;</span><span class="p">]</span>
+        <span class="n">D_rel</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;D_d_p&#39;</span><span class="p">]</span>
+        <span class="n">D_nrel</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;D_d_n&#39;</span><span class="p">]</span>
 
         <span class="n">D_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">D_rel</span> <span class="o">&gt;</span> <span class="n">D_nrel</span><span class="p">,</span> <span class="n">D_rel</span><span class="p">,</span> <span class="o">-</span> <span class="n">D_nrel</span><span class="p">)</span>
         <span class="n">D_diff</span> <span class="o">=</span> <span class="n">D_rel</span> <span class="o">-</span> <span class="n">D_nrel</span>
-        <span class="k">if</span> <span class="n">accumulate</span> <span class="o">==</span> <span class="s">&#39;nearest-max&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">accumulate</span> <span class="o">==</span> <span class="s1">&#39;nearest-max&#39;</span><span class="p">:</span>
             <span class="n">D</span> <span class="o">=</span> <span class="n">D_max</span>
-        <span class="k">elif</span> <span class="n">accumulate</span> <span class="o">==</span> <span class="s">&#39;nearest-diff&#39;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">accumulate</span> <span class="o">==</span> <span class="s1">&#39;nearest-diff&#39;</span><span class="p">:</span>
             <span class="n">D</span> <span class="o">=</span> <span class="n">D_diff</span>
-        <span class="k">elif</span> <span class="n">accumulate</span> <span class="o">==</span> <span class="s">&quot;nearest-combine&quot;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">accumulate</span> <span class="o">==</span> <span class="s2">&quot;nearest-combine&quot;</span><span class="p">:</span>
             <span class="n">D</span> <span class="o">=</span> <span class="n">D_max</span><span class="o">*</span><span class="nb">abs</span><span class="p">(</span><span class="n">D_diff</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">accumulate</span> <span class="o">==</span> <span class="s">&#39;centroid-max&#39;</span><span class="p">:</span>
-            <span class="n">D</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s">&#39;D_centr_p&#39;</span><span class="p">]</span>
-        <span class="k">elif</span> <span class="n">accumulate</span> <span class="o">==</span> <span class="s">&#39;stacking&#39;</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">.private</span> <span class="kn">import</span> <span class="n">lsi_stacking</span>
+        <span class="k">elif</span> <span class="n">accumulate</span> <span class="o">==</span> <span class="s1">&#39;centroid-max&#39;</span><span class="p">:</span>
+            <span class="n">D</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;D_centr_p&#39;</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">accumulate</span> <span class="o">==</span> <span class="s1">&#39;stacking&#39;</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">.private</span> <span class="k">import</span> <span class="n">lsi_stacking</span>
             <span class="n">D</span> <span class="o">=</span> <span class="n">lsi_stacking</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">Y_train_ref</span><span class="p">,</span> <span class="n">idx_train</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">NotImplementedFD</span><span class="p">(</span><span class="s">&#39;accumulate={} not supported!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">accumulate</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="n">NotImplementedFD</span><span class="p">(</span><span class="s1">&#39;accumulate=</span><span class="si">{}</span><span class="s1"> not supported!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">accumulate</span><span class="p">))</span>
 
         <span class="n">Y_train</span> <span class="o">=</span> <span class="n">D</span><span class="p">[</span><span class="n">idx_train</span><span class="p">]</span>
         <span class="n">Y_test</span> <span class="o">=</span>  <span class="n">D</span><span class="p">[:]</span>
 
-        <span class="k">return</span> <span class="n">lsi</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train_ref</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">Y_test</span><span class="p">,</span> <span class="n">res</span>
+        <span class="k">return</span> <span class="n">lsi</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train_ref</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">Y_test</span><span class="p">,</span> <span class="n">res</span></div>
 
 
-    <span class="k">def</span> <span class="nf">list_models</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">lsi_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fe</span><span class="o">.</span><span class="n">dsid_dir</span><span class="p">,</span> <span class="s">&#39;lsi&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="LSI.list_models"><a class="viewcode-back" href="../../freediscovery.html#freediscovery.lsi.LSI.list_models">[docs]</a>    <span class="k">def</span> <span class="nf">list_models</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">lsi_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fe</span><span class="o">.</span><span class="n">dsid_dir</span><span class="p">,</span> <span class="s1">&#39;lsi&#39;</span><span class="p">)</span>
         <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">lsi_path</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">out</span>
@@ -378,7 +381,7 @@
                 <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pars</span><span class="p">)</span>
             <span class="k">except</span><span class="p">:</span>
                 <span class="k">raise</span>
-        <span class="k">return</span> <span class="n">out</span>
+        <span class="k">return</span> <span class="n">out</span></div>
 
 
     <span class="k">def</span> <span class="nf">_load_pars</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mid</span><span class="p">):</span>
@@ -386,41 +389,41 @@
 
         <span class="n">lsi_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_dir</span><span class="p">,</span> <span class="n">mid</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">lsi_path</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Model id {} not found in the cache {}!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mid</span><span class="p">,</span> <span class="n">lsi_path</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Model id </span><span class="si">{}</span><span class="s1"> not found in the cache </span><span class="si">{}</span><span class="s1">!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mid</span><span class="p">,</span> <span class="n">lsi_path</span><span class="p">))</span>
 
-        <span class="n">pars</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lsi_path</span><span class="p">,</span> <span class="s">&#39;pars&#39;</span><span class="p">))</span>
-        <span class="n">pars</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mid</span>
+        <span class="n">pars</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lsi_path</span><span class="p">,</span> <span class="s1">&#39;pars&#39;</span><span class="p">))</span>
+        <span class="n">pars</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mid</span>
 
         <span class="k">return</span> <span class="n">pars</span>
 
 
-    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mid</span><span class="p">):</span>
+<div class="viewcode-block" id="LSI.load"><a class="viewcode-back" href="../../freediscovery.html#freediscovery.lsi.LSI.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mid</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Load the computed features from cache specified by mid &quot;&quot;&quot;</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">fe</span><span class="o">.</span><span class="n">cache_dir</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;cache_dir is None: cannot load from cache!&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">fe</span><span class="o">.</span><span class="n">cache_dir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;cache_dir is None: cannot load from cache!&#39;</span><span class="p">)</span>
         <span class="n">mid_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_path</span><span class="p">(</span><span class="n">mid</span><span class="p">)</span>
-        <span class="n">model</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">mid_dir</span><span class="p">,</span> <span class="s">&#39;lsi_decomposition&#39;</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">model</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">mid_dir</span><span class="p">,</span> <span class="s1">&#39;lsi_decomposition&#39;</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">model</span></div></div>
 
 
-<span class="c"># The below class is identical to TruncatedSVD,</span>
-<span class="c"># https://github.com/scikit-learn/scikit-learn/blob/51a765a/sklearn/decomposition/truncated_svd.py#L25</span>
-<span class="c"># the only reason is the we need to save the Sigma matrix when performing this transform!</span>
+<span class="c1"># The below class is identical to TruncatedSVD,</span>
+<span class="c1"># https://github.com/scikit-learn/scikit-learn/blob/51a765a/sklearn/decomposition/truncated_svd.py#L25</span>
+<span class="c1"># the only reason is the we need to save the Sigma matrix when performing this transform!</span>
 
 <div class="viewcode-block" id="TruncatedSVD_LSI"><a class="viewcode-back" href="../../freediscovery.html#freediscovery.lsi.TruncatedSVD_LSI">[docs]</a><span class="k">class</span> <span class="nc">TruncatedSVD_LSI</span><span class="p">(</span><span class="n">TruncatedSVD</span><span class="p">):</span>
 <div class="viewcode-block" id="TruncatedSVD_LSI.transform_lsi"><a class="viewcode-back" href="../../freediscovery.html#freediscovery.lsi.TruncatedSVD_LSI.transform_lsi">[docs]</a>     <span class="k">def</span> <span class="nf">transform_lsi</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; LSI transform, normalized by the inverse of the eigen values&quot;&quot;&quot;</span>
-        <span class="n">X</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">accept_sparse</span><span class="o">=</span><span class="s">&#39;csr&#39;</span><span class="p">)</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">accept_sparse</span><span class="o">=</span><span class="s1">&#39;csr&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">safe_sparse_dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">components_</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="mf">1.</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="TruncatedSVD_LSI.transform_lsi_norm"><a class="viewcode-back" href="../../freediscovery.html#freediscovery.lsi.TruncatedSVD_LSI.transform_lsi_norm">[docs]</a>     <span class="k">def</span> <span class="nf">transform_lsi_norm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
          <span class="n">Y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transform_lsi</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-         <span class="n">normalize</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+         <span class="n">normalize</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
          <span class="k">return</span> <span class="n">Y</span></div>
 
 
-<div class="viewcode-block" id="TruncatedSVD_LSI.fit_transform"><a class="viewcode-back" href="../../freediscovery.html#freediscovery.lsi.TruncatedSVD_LSI.fit_transform">[docs]</a>     <span class="k">def</span> <span class="nf">fit_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="TruncatedSVD_LSI.fit_transform"><a class="viewcode-back" href="../../freediscovery.html#freediscovery.lsi.TruncatedSVD_LSI.fit_transform">[docs]</a>     <span class="k">def</span> <span class="nf">fit_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
             <span class="sd">&quot;&quot;&quot; Fit LSI model to X and perform dimensionality reduction on X.</span>
 
 <span class="sd">            Parameters</span>
@@ -435,36 +438,36 @@
 <span class="sd">            X_new : array, shape (n_samples, n_components)</span>
 <span class="sd">                Reduced version of X. This will always be a dense array.</span>
 <span class="sd">            &quot;&quot;&quot;</span>
-            <span class="n">X</span> <span class="o">=</span> <span class="n">as_float_array</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+            <span class="n">X</span> <span class="o">=</span> <span class="n">as_float_array</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
             <span class="n">random_state</span> <span class="o">=</span> <span class="n">check_random_state</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">random_state</span><span class="p">)</span>
 
-            <span class="c"># If sparse and not csr or csc, convert to csr</span>
-            <span class="k">if</span> <span class="n">sp</span><span class="o">.</span><span class="n">issparse</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="ow">and</span> <span class="n">X</span><span class="o">.</span><span class="n">getformat</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&quot;csr&quot;</span><span class="p">,</span> <span class="s">&quot;csc&quot;</span><span class="p">]:</span>
+            <span class="c1"># If sparse and not csr or csc, convert to csr</span>
+            <span class="k">if</span> <span class="n">sp</span><span class="o">.</span><span class="n">issparse</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="ow">and</span> <span class="n">X</span><span class="o">.</span><span class="n">getformat</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;csr&quot;</span><span class="p">,</span> <span class="s2">&quot;csc&quot;</span><span class="p">]:</span>
                 <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span>
 
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">algorithm</span> <span class="o">==</span> <span class="s">&quot;arpack&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">algorithm</span> <span class="o">==</span> <span class="s2">&quot;arpack&quot;</span><span class="p">:</span>
                 <span class="n">U</span><span class="p">,</span> <span class="n">Sigma</span><span class="p">,</span> <span class="n">VT</span> <span class="o">=</span> <span class="n">svds</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_components</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tol</span><span class="p">)</span>
-                <span class="c"># svds doesn&#39;t abide by scipy.linalg.svd/randomized_svd</span>
-                <span class="c"># conventions, so reverse its outputs.</span>
+                <span class="c1"># svds doesn&#39;t abide by scipy.linalg.svd/randomized_svd</span>
+                <span class="c1"># conventions, so reverse its outputs.</span>
                 <span class="n">Sigma</span> <span class="o">=</span> <span class="n">Sigma</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
                 <span class="n">U</span><span class="p">,</span> <span class="n">VT</span> <span class="o">=</span> <span class="n">svd_flip</span><span class="p">(</span><span class="n">U</span><span class="p">[:,</span> <span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">VT</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 
-            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">algorithm</span> <span class="o">==</span> <span class="s">&quot;randomized&quot;</span><span class="p">:</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">algorithm</span> <span class="o">==</span> <span class="s2">&quot;randomized&quot;</span><span class="p">:</span>
                 <span class="n">k</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_components</span>
                 <span class="n">n_features</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
                 <span class="k">if</span> <span class="n">k</span> <span class="o">&gt;=</span> <span class="n">n_features</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;n_components must be &lt; n_features;&quot;</span>
-                                     <span class="s">&quot; got </span><span class="si">%d</span><span class="s"> &gt;= </span><span class="si">%d</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">n_features</span><span class="p">))</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;n_components must be &lt; n_features;&quot;</span>
+                                     <span class="s2">&quot; got </span><span class="si">%d</span><span class="s2"> &gt;= </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">n_features</span><span class="p">))</span>
                 <span class="n">U</span><span class="p">,</span> <span class="n">Sigma</span><span class="p">,</span> <span class="n">VT</span> <span class="o">=</span> <span class="n">randomized_svd</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_components</span><span class="p">,</span>
                                               <span class="n">n_iter</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_iter</span><span class="p">,</span>
                                               <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;unknown algorithm </span><span class="si">%r</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">algorithm</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;unknown algorithm </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">algorithm</span><span class="p">)</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">components_</span> <span class="o">=</span> <span class="n">VT</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Sigma</span> <span class="o">=</span> <span class="n">Sigma</span><span class="p">[:</span><span class="bp">self</span><span class="o">.</span><span class="n">n_components</span><span class="p">]</span>
 
-            <span class="c"># Calculate explained variance &amp; explained variance ratio</span>
+            <span class="c1"># Calculate explained variance &amp; explained variance ratio</span>
             <span class="n">X_transformed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">Sigma</span><span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">explained_variance_</span> <span class="o">=</span> <span class="n">exp_var</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">X_transformed</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">sp</span><span class="o">.</span><span class="n">issparse</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
