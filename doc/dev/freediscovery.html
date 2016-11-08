@@ -480,6 +480,7 @@ Must be one of &#8216;centroid-frequency&#8217;,</li>
 <dt id="freediscovery.clustering.base.Clustering.__init__">
 <code class="descname">__init__</code><span class="sig-paren">(</span><em>cache_dir=u'/tmp/'</em>, <em>dsid=None</em>, <em>mid=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/clustering/base.html#Clustering.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.clustering.base.Clustering.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Document clustering</p>
+<p>The algorithms are adapted from scikit learn</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -534,6 +535,32 @@ terms for the cluster provided by the given indices</li>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">array [n_samples]</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.clustering.base.Clustering.dbscan">
+<code class="descname">dbscan</code><span class="sig-paren">(</span><em>n_clusters=None</em>, <em>eps=0.5</em>, <em>min_samples=10</em>, <em>algorithm=u'auto'</em>, <em>leaf_size=30</em>, <em>lsi_components=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/clustering/base.html#Clustering.dbscan"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.clustering.base.Clustering.dbscan" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform DBSCAN clustering</p>
+<p>This can also be used for Duplicate Detection (when ep</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>n_clusters</strong> (<em>int</em>) &#8211; number of clusters # not used just present for compatibility</li>
+<li><strong>lsi_components</strong> (<em>int</em>) &#8211; apply LSA before the clustering algorithm</li>
+<li><strong>eps</strong> (<em>float</em>) &#8211; <dl class="docutils">
+<dt>The maximum distance between two samples for them to be considered</dt>
+<dd>as in the same neighborhood.</dd>
+</dl>
+</li>
+<li><strong>min_samples</strong> (<em>int</em>) &#8211; The number of samples (or total weight) in a neighborhood for a point
+to be considered as a core point. This includes the point itself.</li>
+</ul>
 </td>
 </tr>
 </tbody>

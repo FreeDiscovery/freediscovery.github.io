@@ -203,6 +203,21 @@
     <span class="k">return</span> <span class="n">lsi</span>
 
 
+<span class="k">def</span> <span class="nf">_dbscan_noisy2unique</span><span class="p">(</span><span class="n">labels_</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Take labels_ given by DBSCAN and replace each &quot;noisy&quot;</span>
+<span class="sd">    point specified by -1, to a unique cluster id</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">labels_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">labels_</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">labels_</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">mask</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">)</span>
+    <span class="n">indices</span> <span class="o">+=</span> <span class="n">labels_</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">+</span><span class="mi">1</span>
+    <span class="n">labels_</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">indices</span>
+    <span class="k">return</span> <span class="n">labels_</span>
+
+
+
+
 <div class="viewcode-block" id="ClusterLabels"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.clustering.base.ClusterLabels">[docs]</a><span class="k">class</span> <span class="nc">ClusterLabels</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <div class="viewcode-block" id="ClusterLabels.__init__"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.clustering.base.ClusterLabels.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vect</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">pars</span><span class="p">,</span> <span class="n">lsi</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cluster_indices</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Calculate the cluster labels.</span>
@@ -227,7 +242,7 @@
         <span class="k">if</span> <span class="n">cluster_indices</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">method_name</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="n">__name__</span>
             <span class="k">if</span> <span class="n">method_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;MiniBatchKMeans&#39;</span><span class="p">,</span> <span class="s1">&#39;AgglomerativeClustering&#39;</span><span class="p">,</span>
-                                        <span class="s1">&#39;Birch&#39;</span><span class="p">]:</span>
+                                        <span class="s1">&#39;Birch&#39;</span><span class="p">,</span> <span class="s1">&#39;DBSCAN&#39;</span><span class="p">]:</span>
                 <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Method name: </span><span class="si">{}</span><span class="s1"> not implented!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">method_name</span><span class="p">))</span>
 
             <span class="n">centroids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">cluster_centers_</span> <span class="c1"># centroids were previously computed</span>
@@ -292,6 +307,8 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Document clustering</span>
 
+<span class="sd">        The algorithms are adapted from scikit learn</span>
+
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">          cache_dir : str</span>
@@ -336,7 +353,6 @@
         <span class="k">if</span> <span class="n">pars</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">pars</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">pars</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">km</span><span class="o">.</span><span class="n">get_params</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
-        <span class="n">pars</span><span class="p">[</span><span class="s1">&#39;n_clusters&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">n_clusters</span>
         <span class="n">X</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fe</span><span class="o">.</span><span class="n">dsid_dir</span><span class="p">,</span> <span class="s1">&#39;features&#39;</span><span class="p">))</span>
 
         <span class="n">mid</span><span class="p">,</span> <span class="n">mid_dir</span> <span class="o">=</span> <span class="n">setup_model</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_dir</span><span class="p">)</span>
@@ -347,15 +363,24 @@
             <span class="n">pars</span><span class="p">[</span><span class="s1">&#39;lsi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lsi</span>
 
         <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">km</span><span class="p">)</span><span class="o">.</span><span class="n">__name__</span> <span class="o">!=</span> <span class="s2">&quot;DBSCAN&quot;</span><span class="p">:</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span>
             <span class="n">km</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
         <span class="n">pars</span><span class="p">[</span><span class="s1">&#39;lsi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lsi</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mid</span> <span class="o">=</span> <span class="n">mid</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mid_dir</span> <span class="o">=</span> <span class="n">mid_dir</span>
 
+        <span class="n">labels_</span> <span class="o">=</span> <span class="n">km</span><span class="o">.</span><span class="n">labels_</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">km</span><span class="p">)</span><span class="o">.</span><span class="n">__name__</span> <span class="o">!=</span> <span class="s2">&quot;DBSCAN&quot;</span><span class="p">:</span>
+            <span class="n">labels_</span> <span class="o">=</span> <span class="n">_dbscan_noisy2unique</span><span class="p">(</span><span class="n">labels_</span><span class="p">)</span>
+            <span class="n">n_clusters</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">labels_</span><span class="p">))</span>
+
+
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">km</span><span class="p">,</span> <span class="s1">&#39;cluster_centers_&#39;</span><span class="p">):</span>
             <span class="c1"># i.e. model is not MiniBatchKMeans =&gt; compute centroids</span>
             <span class="n">km</span><span class="o">.</span><span class="n">cluster_centers_</span> <span class="o">=</span> <span class="n">NearestCentroid</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">km</span><span class="o">.</span><span class="n">labels_</span><span class="p">)</span><span class="o">.</span><span class="n">centroids_</span>
+
+        <span class="n">pars</span><span class="p">[</span><span class="s1">&#39;n_clusters&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">n_clusters</span>
 
         <span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">km</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_dir</span><span class="p">,</span> <span class="n">mid</span><span class="p">,</span>  <span class="s1">&#39;model&#39;</span><span class="p">),</span> <span class="n">compress</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
         <span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">pars</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_dir</span><span class="p">,</span> <span class="n">mid</span><span class="p">,</span>  <span class="s1">&#39;pars&#39;</span><span class="p">),</span> <span class="n">compress</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
@@ -456,7 +481,7 @@
 <span class="sd">            birch threshold</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="k">import</span> <span class="n">Birch</span>
-        <span class="n">pars</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">pars</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;threshold&#39;</span><span class="p">:</span> <span class="n">threshold</span><span class="p">}</span>
         <span class="k">if</span> <span class="n">lsi_components</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;lsi_components=None detected. You must use LSI with Birch </span><span class="se">\</span>
 <span class="s2">                    clustering for scaling reasons.&quot;</span><span class="p">)</span>
@@ -483,7 +508,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="k">import</span> <span class="n">AgglomerativeClustering</span>
         <span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="k">import</span> <span class="n">kneighbors_graph</span>
-        <span class="n">pars</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">pars</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;n_neighbors&#39;</span><span class="p">:</span> <span class="n">n_neighbors</span><span class="p">}</span>
         <span class="k">if</span> <span class="n">lsi_components</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;lsi_components=None detected. You must use LSI with Birch </span><span class="se">\</span>
 <span class="s2">                    clustering for scaling reasons.&quot;</span><span class="p">)</span>
@@ -498,6 +523,36 @@
 
         <span class="n">km</span> <span class="o">=</span> <span class="n">AgglomerativeClustering</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">n_clusters</span><span class="p">,</span> <span class="n">linkage</span><span class="o">=</span><span class="s1">&#39;ward&#39;</span><span class="p">,</span>
                                      <span class="n">connectivity</span><span class="o">=</span><span class="n">connectivity</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cluster_func</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">,</span> <span class="n">km</span><span class="p">,</span> <span class="n">pars</span><span class="p">,</span> <span class="n">lsi</span><span class="o">=</span><span class="n">lsi</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Clustering.dbscan"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.clustering.base.Clustering.dbscan">[docs]</a>    <span class="k">def</span> <span class="nf">dbscan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_clusters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">min_samples</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span>
+               <span class="n">leaf_size</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">lsi_components</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Perform DBSCAN clustering</span>
+
+<span class="sd">        This can also be used for Duplicate Detection (when ep</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        n_clusters: int</span>
+<span class="sd">            number of clusters # not used just present for compatibility</span>
+<span class="sd">        lsi_components: int</span>
+<span class="sd">            apply LSA before the clustering algorithm</span>
+<span class="sd">        eps: float</span>
+<span class="sd">            The maximum distance between two samples for them to be considered</span>
+<span class="sd">             as in the same neighborhood.</span>
+<span class="sd">        min_samples: int</span>
+<span class="sd">            The number of samples (or total weight) in a neighborhood for a point</span>
+<span class="sd">            to be considered as a core point. This includes the point itself.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="k">import</span> <span class="n">DBSCAN</span>
+        <span class="n">pars</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="n">lsi</span> <span class="o">=</span> <span class="n">_generate_lsi</span><span class="p">(</span><span class="n">lsi_components</span><span class="p">)</span>
+
+        <span class="n">km</span> <span class="o">=</span> <span class="n">DBSCAN</span><span class="p">(</span><span class="n">eps</span><span class="o">=</span><span class="n">eps</span><span class="p">,</span> <span class="n">min_samples</span><span class="o">=</span><span class="n">min_samples</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="n">algorithm</span><span class="p">,</span>
+                    <span class="n">leaf_size</span><span class="o">=</span><span class="n">leaf_size</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cluster_func</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">,</span> <span class="n">km</span><span class="p">,</span> <span class="n">pars</span><span class="p">,</span> <span class="n">lsi</span><span class="o">=</span><span class="n">lsi</span><span class="p">)</span></div>
 
