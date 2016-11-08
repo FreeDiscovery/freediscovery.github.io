@@ -162,15 +162,16 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>cache_dir</strong> (<em>str, default='/tmp/'</em>) &#8211; directory where to save temporary and regression files</li>
-<li><strong>dsid</strong> (<em>str</em>) &#8211; load an exising dataset</li>
-<li><strong>verbose</strong> (<em>bool</em>) &#8211; pring progress messages</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cache_dir</strong> (<em>str, default='/tmp/'</em>) &#8211; directory where to save temporary and regression files</td>
 </tr>
 </tbody>
 </table>
+<dl class="docutils">
+<dt>dsid: str</dt>
+<dd>load an exising dataset</dd>
+<dt>verbose: bool</dt>
+<dd>pring progress messages</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -274,7 +275,7 @@ detailed description of the input parameters</p>
 
 <dl class="method">
 <dt id="freediscovery.categorization.Categorizer.train">
-<code class="descname">train</code><span class="sig-paren">(</span><em>relevant_filenames</em>, <em>non_relevant_filenames</em>, <em>method=u'LinearSVC'</em>, <em>cv=None</em>, <em>**options</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/categorization.html#Categorizer.train"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.categorization.Categorizer.train" title="Permalink to this definition">¶</a></dt>
+<code class="descname">train</code><span class="sig-paren">(</span><em>relevant_filenames</em>, <em>non_relevant_filenames</em>, <em>method=u'LinearSVC'</em>, <em>cv=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/categorization.html#Categorizer.train"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.categorization.Categorizer.train" title="Permalink to this definition">¶</a></dt>
 <dd><p>Train the categorization model</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -285,7 +286,6 @@ detailed description of the input parameters</p>
 <li><strong>non_relevant_filenames</strong> (<em>list</em>) &#8211; a list of not relevant documents filenames</li>
 <li><strong>method</strong> (<em>str</em>) &#8211; the ML algorithm to use (one of &#8220;LogisticRegression&#8221;, &#8220;LinearSVC&#8221;, &#8216;xgboost&#8217;)</li>
 <li><strong>cv</strong> (<em>str</em>) &#8211; use cross-validation</li>
-<li><strong>options</strong> (<em>dict</em>) &#8211; method specific ML agorithm options</li>
 </ul>
 </td>
 </tr>
