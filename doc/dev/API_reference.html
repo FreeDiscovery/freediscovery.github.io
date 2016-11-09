@@ -28,6 +28,8 @@
   
 
   
+    <link rel="stylesheet" href="_static/gallery.css" type="text/css" />
+  
 
   
         <link rel="index" title="Index"
@@ -127,9 +129,8 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="freediscovery.html">Python API reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment options</a></li>
-<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
 </ul>
 
@@ -294,6 +295,8 @@ If &#8220;english&#8221;, a built-in stop word list for English is used. ( defau
 <span id="latent-semantic-indexing-lsi"></span><h2>2. Latent Semantic Indexing (LSI)<a class="headerlink" href="#latent-semantic-indexing-lsi" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="a-build-the-lsi-model">
 <span id="a-build-the-lsi-model"></span><h3>2.a Build the LSI model<a class="headerlink" href="#a-build-the-lsi-model" title="Permalink to this headline">¶</a></h3>
+<p>The option <code class="docutils literal"><span class="pre">use_hashing=True</span></code> must be set for the feature extraction. Recommended options also include, <code class="docutils literal"><span class="pre">use_idf=1,</span> <span class="pre">sublinear_tf=0,</span> <span class="pre">binary=0</span></code>.</p>
+<p>The recommended value for the <code class="docutils literal"><span class="pre">n_components</span></code> (dimensions of the SVD decompositions) is in the [100, 200] range.</p>
 <ul>
 <li><p class="first"><strong>URL</strong>: <code class="docutils literal"><span class="pre">/api/v0/lsi/</span></code></p>
 </li>
@@ -363,6 +366,7 @@ If &#8220;english&#8221;, a built-in stop word list for English is used. ( defau
 <span id="document-categorization"></span><h2>3. Document categorization<a class="headerlink" href="#document-categorization" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="a-build-the-categorization-model">
 <span id="a-build-the-categorization-model"></span><h3>3.a Build the categorization model<a class="headerlink" href="#a-build-the-categorization-model" title="Permalink to this headline">¶</a></h3>
+<p>The option <code class="docutils literal"><span class="pre">use_hashing=True</span></code> must be set for the feature extraction. Recommended options also include, <code class="docutils literal"><span class="pre">use_idf=1,</span> <span class="pre">sublinear_tf=0,</span> <span class="pre">binary=0</span></code>.</p>
 <ul>
 <li><p class="first"><strong>URL</strong>: <code class="docutils literal"><span class="pre">/api/v0/categorization/</span></code></p>
 </li>
@@ -454,6 +458,7 @@ If &#8220;english&#8221;, a built-in stop word list for English is used. ( defau
 <span id="document-clustering"></span><h2>4. Document clustering<a class="headerlink" href="#document-clustering" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="a-compute-clustering-k-mean">
 <span id="a-compute-clustering-k-mean"></span><h3>4.a Compute clustering (K-mean)<a class="headerlink" href="#a-compute-clustering-k-mean" title="Permalink to this headline">¶</a></h3>
+<p>The option <code class="docutils literal"><span class="pre">use_hashing=False</span></code> must be set for the feature extraction. Recommended options also include, <code class="docutils literal"><span class="pre">use_idf=1,</span> <span class="pre">sublinear_tf=0,</span> <span class="pre">binary=0</span></code>.</p>
 <ul>
 <li><p class="first"><strong>URL</strong>: <code class="docutils literal"><span class="pre">/api/v0/clustering/k-mean</span></code></p>
 </li>
@@ -477,6 +482,7 @@ both &#8220;birch&#8221; and &#8220;ward_hc&#8221; require this option to be a p
 </div>
 <div class="section" id="b-compute-clustering-birch">
 <span id="b-compute-clustering-birch"></span><h3>4.b Compute clustering (Birch)<a class="headerlink" href="#b-compute-clustering-birch" title="Permalink to this headline">¶</a></h3>
+<p>The option <code class="docutils literal"><span class="pre">use_hashing=False</span></code> must be set for the feature extraction. Recommended options also include, <code class="docutils literal"><span class="pre">use_idf=1,</span> <span class="pre">sublinear_tf=0,</span> <span class="pre">binary=0</span></code>.</p>
 <ul>
 <li><p class="first"><strong>URL</strong>: <code class="docutils literal"><span class="pre">/api/v0/clustering/birch</span></code></p>
 </li>
@@ -502,6 +508,12 @@ should be lesser than the threshold. Otherwise a new subcluster is started. See 
 </div>
 <div class="section" id="c-compute-clustering-ward-hierarchical">
 <span id="c-compute-clustering-ward-hierarchical"></span><h3>4.c Compute clustering (Ward hierarchical)<a class="headerlink" href="#c-compute-clustering-ward-hierarchical" title="Permalink to this headline">¶</a></h3>
+<p>The option <code class="docutils literal"><span class="pre">use_hashing=False</span></code> must be set for the feature extraction. Recommended options also include, <code class="docutils literal"><span class="pre">use_idf=1,</span> <span class="pre">sublinear_tf=0,</span> <span class="pre">binary=0</span></code>.</p>
+<p>The Ward Hierarchical clustering is generally slower that K-mean, however the run time can be reduced by decreasing the following parameters,</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">lsi_components</span></code>: the number of dimensions used for the Latent Semantic Indexing decomposition (e.g. from 150 to 50)</li>
+<li><code class="docutils literal"><span class="pre">n_neighbors</span></code>:  the number of neighbors used to construct the connectivity (e.g. from 10 to 5)</li>
+</ul>
 <ul>
 <li><p class="first"><strong>URL</strong>: <code class="docutils literal"><span class="pre">/api/v0/clustering/ward_hc</span></code></p>
 </li>
@@ -526,6 +538,7 @@ both &#8220;birch&#8221; and &#8220;ward_hc&#8221; require this option to be a p
 </div>
 <div class="section" id="c-compute-clustering-dbscan">
 <span id="c-compute-clustering-dbscan"></span><h3>4.c Compute clustering (DBSCAN)<a class="headerlink" href="#c-compute-clustering-dbscan" title="Permalink to this headline">¶</a></h3>
+<p>The option <code class="docutils literal"><span class="pre">use_hashing=False</span></code> must be set for the feature extraction. Recommended options also include, <code class="docutils literal"><span class="pre">use_idf=1,</span> <span class="pre">sublinear_tf=0,</span> <span class="pre">binary=0</span></code>.</p>
 <ul>
 <li><p class="first"><strong>URL</strong>: <code class="docutils literal"><span class="pre">/api/v0/clustering/dbscan</span></code></p>
 </li>
@@ -586,6 +599,7 @@ the method used for computing the cluster labels</li>
 <span id="duplicate-detection"></span><h2>5. Duplicate detection<a class="headerlink" href="#duplicate-detection" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="a-compute-duplicates">
 <span id="a-compute-duplicates"></span><h3>5.a Compute duplicates<a class="headerlink" href="#a-compute-duplicates" title="Permalink to this headline">¶</a></h3>
+<p>The option <code class="docutils literal"><span class="pre">use_hashing=False</span></code> must be set for the feature extraction. Recommended options also include, <code class="docutils literal"><span class="pre">use_idf=1,</span> <span class="pre">sublinear_tf=0,</span> <span class="pre">binary=0</span></code>.</p>
 <ul>
 <li><p class="first"><strong>URL</strong>: <code class="docutils literal"><span class="pre">/api/v0/duplicate-detection/simhash</span></code></p>
 </li>

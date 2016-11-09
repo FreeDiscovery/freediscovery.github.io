@@ -28,13 +28,15 @@
   
 
   
+    <link rel="stylesheet" href="_static/gallery.css" type="text/css" />
+  
 
   
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="FreeDiscovery 0.6.0-dev documentation" href="index.html"/>
-        <link rel="next" title="Examples" href="examples.html"/>
+        <link rel="next" title="Examples" href="examples/index.html"/>
         <link rel="prev" title="REST API Reference" href="API_reference.html"/> 
 
   
@@ -98,9 +100,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#module-freediscovery.exceptions">6. Exceptions</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment options</a></li>
-<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
 </ul>
 
@@ -236,6 +237,8 @@ detailed description of the input parameters</p>
 <dt id="freediscovery.categorization.Categorizer.__init__">
 <code class="descname">__init__</code><span class="sig-paren">(</span><em>cache_dir=u'/tmp/'</em>, <em>dsid=None</em>, <em>mid=None</em>, <em>cv_scoring=u'roc_auc'</em>, <em>cv_n_folds=3</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/categorization.html#Categorizer.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.categorization.Categorizer.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Document categrorization model</p>
+<p>The option <cite>use_hashing=True</cite> must be set for the feature extraction.
+Recommended options also include, <cite>use_idf=1, sublinear_tf=0, binary=0</cite>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -480,7 +483,9 @@ Must be one of &#8216;centroid-frequency&#8217;,</li>
 <dt id="freediscovery.cluster.base.Clustering.__init__">
 <code class="descname">__init__</code><span class="sig-paren">(</span><em>cache_dir=u'/tmp/'</em>, <em>dsid=None</em>, <em>mid=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/cluster/base.html#Clustering.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.base.Clustering.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Document clustering</p>
-<p>The algorithms are adapted from scikit learn</p>
+<p>The algorithms are adapted from scikit learn.</p>
+<p>The option <cite>use_hashing=False</cite> must be set for the feature extraction.
+Recommended options also include, <cite>use_idf=1, sublinear_tf=0, binary=0</cite>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -655,6 +660,8 @@ to be considered as a core point. This includes the point itself.</li>
 </ul>
 </dd>
 </dl>
+<p>The option <cite>use_hashing=False</cite> must be set for the feature extraction.
+Recommended options also include, <cite>use_idf=1, sublinear_tf=0, binary=0</cite>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1028,7 +1035,7 @@ Replace &#8216;/&#8217; by &#8216;&#8217; when running in Windows</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="examples.html" class="btn btn-neutral float-right" title="Examples" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="examples/index.html" class="btn btn-neutral float-right" title="Examples" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="API_reference.html" class="btn btn-neutral" title="REST API Reference" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>

@@ -1,0 +1,247 @@
+
+
+.. _sphx_glr_examples_clustering_example.py:
+
+
+Document Clustering Example
+---------------------------
+
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    1.a Load dataset and initalize feature extraction
+      POST http://localhost:5001/api/v0/feature-extraction
+       => received [u'id', u'filenames']
+       => dsid = d3545332e14c45d99b1c95af6a22fadb
+
+    1.b Run feature extraction
+      POST http://localhost:5001/api/v0/feature-extraction/d3545332e14c45d99b1c95af6a22fadb
+
+    1.d. check the parameters of the extracted features
+      GET http://localhost:5001/api/v0/feature-extraction/d3545332e14c45d99b1c95af6a22fadb
+         - binary: False
+         - n_jobs: -1
+         - stop_words: english
+         - use_hashing: False
+         - min_df: 0.0
+         - n_samples: 2465
+         - analyzer: word
+         - ngram_range: [1, 1]
+         - max_df: 1.0
+         - chunk_size: 2000
+         - use_idf: True
+         - data_dir: ../freediscovery_shared/treclegal09_2k_subset/data
+         - sublinear_tf: True
+         - n_samples_processed: 2465
+         - n_features: 30001
+         - norm: l2
+
+    2.a. Document clustering (LSI + K-means)
+      POST http://localhost:5001/api/v0/clustering/k-mean/
+         => model id = 84cf6c3c78de43f6aaf111b5a75df3a9
+
+    2.b. Computing cluster labels
+      POST http://localhost:5001/api/v0/clustering/k-mean/84cf6c3c78de43f6aaf111b5a75df3a9
+        .. computed in 4.2s
+       N_documents                                      cluster_names
+    3          498  [u'recipients', u'administrative', u'group', u...
+    0          483  [u'ect', u'enron', u'hou', u'tana', u'jones', ...
+    1          468  [u'normal', u'tenet', u'test', u'gmt', u'sensi...
+    4          315  [u'enron', u'energy', u'services', u'trade', u...
+    2          265  [u'shackleton', u'ect', u'test', u'normal', u'...
+    7          124  [u'shall', u'party', u'agreement', u'transacti...
+    5           99  [u'sanders', u'normal', u'nov', u'sensitivity'...
+    6           92  [u'enron_development', u'ect', u'shackleton', ...
+    8           64  [u'migration', u'outlook', u'team', u'normal',...
+    9           57  [u'rewrite', u'server', u'address', u'smtp', u...
+
+    2.a. Document clustering (LSI + Ward HC)
+      POST http://localhost:5001/api/v0/clustering/ward_hc/
+         => model id = 50432764495d4f49875712333c8520d7
+
+    2.b. Computing cluster labels
+      POST http://localhost:5001/api/v0/clustering/ward_hc/50432764495d4f49875712333c8520d7
+        .. computed in 4.0s
+       N_documents                                      cluster_names
+    9          444  [u'normal', u'tenet', u'test', u'gmt', u'sensi...
+    2          443  [u'shackleton', u'enron_development', u'ect', ...
+    1          427  [u'recipients', u'administrative', u'group', u...
+    6          347  [u'enron', u'energy', u'trade', u'power', u'ma...
+    0          312  [u'ect', u'tana', u'jones', u'hou', u'enron', ...
+    4          147  [u'shall', u'party', u'agreement', u'transacti...
+    3          131  [u'nemec', u'ect', u'normal', u'test', u'doc',...
+    8           95  [u'sanders', u'normal', u'nov', u'sensitivity'...
+    5           63  [u'migration', u'outlook', u'team', u'normal',...
+    7           56  [u'rewrite', u'server', u'address', u'smtp', u...
+
+
+
+
+|
+
+
+.. code-block:: python
+
+
+    import os
+    import numpy as np
+    import pandas as pd
+    from time import time
+    import requests
+
+    pd.options.display.float_format = '{:,.3f}'.format
+
+
+    def _parent_dir(path, n=0):
+        path = os.path.abspath(path)
+        if n == 0:
+            return path
+        else:
+            return os.path.dirname(_parent_dir(path, n=n-1))
+
+
+    def _print_url(op, url):
+        print(' '*1, op, url) 
+    
+
+    def repr_clustering(labels, terms):
+        out = []
+        for ridx, row in enumerate(terms):
+            out.append({'cluster_names': row, 'N_documents': (labels == ridx).sum()})
+        out = pd.DataFrame(out).sort_values('N_documents', ascending=False)
+        return out
+
+    use_docker = False
+
+    dataset_name = "treclegal09_2k_subset"
+    
+    if use_docker:
+        data_dir = "/freediscovery_shared/{}".format(dataset_name)
+    else:
+        data_dir = "../freediscovery_shared/{}".format(dataset_name)
+    rel_data_dir = os.path.abspath("../../freediscovery_shared/{}".format(dataset_name)) # relative path between this file and the FreeDiscovery source folder
+
+    BASE_URL = "http://localhost:5001/api/v0"  # FreeDiscovery server URL
+
+
+    # # 1. Feature extraction (non hashed)
+
+    print("\n1.a Load dataset and initalize feature extraction")
+    url = BASE_URL + '/feature-extraction'
+    _print_url("POST", url)
+    fe_opts = {'data_dir': os.path.join(data_dir, 'data'),
+               'stop_words': 'english', 'chunk_size': 2000, 'n_jobs': -1,
+               'use_idf': 1, 'sublinear_tf': 1, 'binary': 0, 'n_features': 30001,
+               'analyzer': 'word', 'ngram_range': (1, 1), "norm": "l2",
+               'use_hashing': False  # hashing should be disabled for clustering
+               }
+    res = requests.post(url, json=fe_opts)
+
+    dsid = res.json()['id']
+    print("   => received {}".format(list(res.json().keys())))
+    print("   => dsid = {}".format(dsid))
+
+
+    print("\n1.b Run feature extraction")
+    # progress status is available for the hashed version only
+    url = BASE_URL+'/feature-extraction/{}'.format(dsid)
+    _print_url("POST", url)
+    res = requests.post(url)
+
+    print("\n1.d. check the parameters of the extracted features")
+    url = BASE_URL + '/feature-extraction/{}'.format(dsid)
+    _print_url('GET', url)
+    res = requests.get(url)
+
+    data = res.json()
+    for key, val in data.items():
+        if key!='filenames':
+               print('     - {}: {}'.format(key, val))
+
+
+    # # 2. Document Clustering (LSI + K-Means)
+
+    print("\n2.a. Document clustering (LSI + K-means)")
+
+    url = BASE_URL + '/clustering/k-mean/'
+    _print_url("POST", url)
+    t0 = time()
+    res = requests.post(url,
+                        json={'dataset_id': dsid,
+                              'n_clusters': 10,
+                              'lsi_components': 50
+                              })
+
+    data = res.json()
+    mid = data['id']
+    print("     => model id = {}".format(mid))
+
+    print("\n2.b. Computing cluster labels")
+    url = BASE_URL + '/clustering/k-mean/{}'.format(mid)
+    _print_url("POST", url)
+    res = requests.get(url,
+                       json={'n_top_words': 6
+                             })
+    data = res.json()
+    t1 = time()
+
+    print('    .. computed in {:.1f}s'.format(t1 - t0))
+    print(repr_clustering(np.array(data['labels']), data['cluster_terms']))
+
+
+    # # 3. Document Clustering (LSI + Ward Hierarchical Clustering)
+
+    print("\n2.a. Document clustering (LSI + Ward HC)")
+
+    url = BASE_URL + '/clustering/ward_hc/'
+    _print_url("POST", url)
+    t0 = time()
+    res = requests.post(url,
+                        json={'dataset_id': dsid,
+                              'n_clusters': 10,
+                              'lsi_components': 50,
+                              'n_neighbors': 5  # this is the connectivity constraint
+                              })
+
+    data = res.json()
+    mid = data['id']
+    print("     => model id = {}".format(mid))
+
+    print("\n2.b. Computing cluster labels")
+    url = BASE_URL + '/clustering/ward_hc/{}'.format(mid)
+    _print_url("POST", url)
+    res = requests.get(url,
+                       json={'n_top_words': 6
+                             })
+    data = res.json()
+    t1 = time()
+
+    print('    .. computed in {:.1f}s'.format(t1 - t0))
+    print(repr_clustering(np.array(data['labels']), data['cluster_terms']))
+
+**Total running time of the script:** ( 0 minutes  10.766 seconds)
+
+
+
+.. container:: sphx-glr-footer
+
+
+  .. container:: sphx-glr-download
+
+     :download:`Download Python source code: clustering_example.py <clustering_example.py>`
+
+
+
+  .. container:: sphx-glr-download
+
+     :download:`Download Jupyter notebook: clustering_example.ipynb <clustering_example.ipynb>`
+
+.. rst-class:: sphx-glr-signature
+
+    `Generated by Sphinx-Gallery <http://sphinx-gallery.readthedocs.io>`_

@@ -1,0 +1,512 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Binary Categorization Example &mdash; FreeDiscovery 0.6.0-dev documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="FreeDiscovery 0.6.0-dev documentation" href="../index.html"/>
+        <link rel="up" title="Examples" href="index.html"/>
+        <link rel="next" title="Deployment options" href="../deployment.html"/>
+        <link rel="prev" title="Document Clustering example" href="duplicate_detection_example.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> FreeDiscovery
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.6.0-dev
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../readme.html">FreeDiscovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation_instructions.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../API_reference.html">REST API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../freediscovery.html">Python API reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="clustering_example_python.html">Document Clustering example (Python)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clustering_example.html">Document Clustering Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="duplicate_detection_example.html">Document Clustering example</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Binary Categorization Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">Deployment options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">FreeDiscovery</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Examples</a> &raquo;</li>
+      
+    <li>Binary Categorization Example</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/examples/categorization_example.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="binary-categorization-example">
+<span id="sphx-glr-examples-categorization-example-py"></span><h1>Binary Categorization Example<a class="headerlink" href="#binary-categorization-example" title="Permalink to this headline">¶</a></h1>
+<p>This example should be run in a Jupyter Notebook (cf. &#8220;Examples&#8221; section in FreeDiscovery Documentation for more detailed information)</p>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="mf">1.</span><span class="n">a</span> <span class="n">Load</span> <span class="n">dataset</span> <span class="ow">and</span> <span class="n">initalize</span> <span class="n">feature</span> <span class="n">extraction</span>
+  <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span>
+   <span class="o">=&gt;</span> <span class="n">received</span> <span class="p">[</span><span class="s1">u&#39;id&#39;</span><span class="p">,</span> <span class="s1">u&#39;filenames&#39;</span><span class="p">]</span>
+   <span class="o">=&gt;</span> <span class="n">dsid</span> <span class="o">=</span> <span class="mi">7900</span><span class="n">f12eaa004efbaf1613658a1b35f0</span>
+
+<span class="mf">1.</span><span class="n">b</span> <span class="n">Start</span> <span class="n">feature</span> <span class="n">extraction</span> <span class="p">(</span><span class="ow">in</span> <span class="n">the</span> <span class="n">background</span><span class="p">)</span>
+  <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="mi">7900</span><span class="n">f12eaa004efbaf1613658a1b35f0</span>
+
+<span class="mf">1.</span><span class="n">c</span> <span class="n">Monitor</span> <span class="n">feature</span> <span class="n">extraction</span> <span class="n">progress</span>
+  <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="mi">7900</span><span class="n">f12eaa004efbaf1613658a1b35f0</span>
+
+<span class="mf">1.</span><span class="n">d</span><span class="o">.</span> <span class="n">check</span> <span class="n">the</span> <span class="n">parameters</span> <span class="n">of</span> <span class="n">the</span> <span class="n">extracted</span> <span class="n">features</span>
+  <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="mi">7900</span><span class="n">f12eaa004efbaf1613658a1b35f0</span>
+     <span class="o">-</span> <span class="n">binary</span><span class="p">:</span> <span class="kc">False</span>
+     <span class="o">-</span> <span class="n">n_jobs</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span>
+     <span class="o">-</span> <span class="n">stop_words</span><span class="p">:</span> <span class="kc">None</span>
+     <span class="o">-</span> <span class="n">use_hashing</span><span class="p">:</span> <span class="kc">True</span>
+     <span class="o">-</span> <span class="n">min_df</span><span class="p">:</span> <span class="mf">0.0</span>
+     <span class="o">-</span> <span class="n">n_samples</span><span class="p">:</span> <span class="mi">2465</span>
+     <span class="o">-</span> <span class="n">analyzer</span><span class="p">:</span> <span class="n">word</span>
+     <span class="o">-</span> <span class="n">ngram_range</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+     <span class="o">-</span> <span class="n">max_df</span><span class="p">:</span> <span class="mf">1.0</span>
+     <span class="o">-</span> <span class="n">chunk_size</span><span class="p">:</span> <span class="mi">2000</span>
+     <span class="o">-</span> <span class="n">use_idf</span><span class="p">:</span> <span class="kc">True</span>
+     <span class="o">-</span> <span class="n">data_dir</span><span class="p">:</span> <span class="o">../</span><span class="n">freediscovery_shared</span><span class="o">/</span><span class="n">treclegal09_2k_subset</span><span class="o">/</span><span class="n">data</span>
+     <span class="o">-</span> <span class="n">sublinear_tf</span><span class="p">:</span> <span class="kc">True</span>
+     <span class="o">-</span> <span class="n">n_samples_processed</span><span class="p">:</span> <span class="mi">2465</span>
+     <span class="o">-</span> <span class="n">n_features</span><span class="p">:</span> <span class="mi">50001</span>
+     <span class="o">-</span> <span class="n">norm</span><span class="p">:</span> <span class="n">l2</span>
+
+<span class="mf">2.</span><span class="n">a</span><span class="o">.</span> <span class="n">Train</span> <span class="n">the</span> <span class="n">ML</span> <span class="n">categorization</span> <span class="n">model</span>
+       <span class="mi">5</span> <span class="n">relevant</span><span class="p">,</span> <span class="mi">63</span> <span class="n">non</span><span class="o">-</span><span class="n">relevant</span> <span class="n">files</span>
+  <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">categorization</span><span class="o">/</span>
+     <span class="o">=&gt;</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="mi">72</span><span class="n">f3b367aad34e8f9ce1ad9e6d3ad5a3</span>
+    <span class="o">=&gt;</span> <span class="n">Training</span> <span class="n">scores</span><span class="p">:</span> <span class="n">MAP</span> <span class="o">=</span> <span class="mf">1.00</span><span class="p">,</span> <span class="n">ROC</span><span class="o">-</span><span class="n">AUC</span> <span class="o">=</span> <span class="mf">1.00</span>
+
+<span class="mf">2.</span><span class="n">b</span><span class="o">.</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">parameters</span> <span class="n">used</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">categorization</span> <span class="n">model</span>
+  <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">categorization</span><span class="o">/</span><span class="mi">72</span><span class="n">f3b367aad34e8f9ce1ad9e6d3ad5a3</span>
+     <span class="o">-</span> <span class="n">method</span><span class="p">:</span> <span class="n">LogisticRegression</span>
+     <span class="o">-</span> <span class="n">options</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;warm_start&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;n_jobs&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;verbose&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;intercept_scaling&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;fit_intercept&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;max_iter&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="s1">&#39;penalty&#39;</span><span class="p">:</span> <span class="s1">&#39;l2&#39;</span><span class="p">,</span> <span class="s1">&#39;multi_class&#39;</span><span class="p">:</span> <span class="s1">&#39;ovr&#39;</span><span class="p">,</span> <span class="s1">&#39;random_state&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;dual&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;tol&#39;</span><span class="p">:</span> <span class="mf">0.0001</span><span class="p">,</span> <span class="s1">&#39;solver&#39;</span><span class="p">:</span> <span class="s1">&#39;liblinear&#39;</span><span class="p">,</span> <span class="s1">&#39;class_weight&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
+
+<span class="mf">2.</span><span class="n">c</span> <span class="n">Categorize</span> <span class="n">the</span> <span class="n">complete</span> <span class="n">dataset</span> <span class="k">with</span> <span class="n">this</span> <span class="n">model</span>
+  <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">categorization</span><span class="o">/</span><span class="mi">72</span><span class="n">f3b367aad34e8f9ce1ad9e6d3ad5a3</span><span class="o">/</span><span class="n">predict</span>
+    <span class="o">=&gt;</span> <span class="n">Predicting</span> <span class="mi">0</span> <span class="n">relevant</span> <span class="ow">and</span> <span class="mi">2465</span> <span class="n">non</span> <span class="n">relevant</span> <span class="n">documents</span>
+
+<span class="mf">2.</span><span class="n">d</span> <span class="n">Test</span> <span class="n">categorization</span> <span class="n">accuracy</span>
+         <span class="n">using</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">ubuntu</span><span class="o">/</span><span class="n">freediscovery_shared</span><span class="o">/</span><span class="n">treclegal09_2k_subset</span><span class="o">/</span><span class="n">ground_truth_file</span><span class="o">.</span><span class="n">txt</span>
+  <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">categorization</span><span class="o">/</span><span class="mi">72</span><span class="n">f3b367aad34e8f9ce1ad9e6d3ad5a3</span><span class="o">/</span><span class="n">test</span>
+    <span class="o">=&gt;</span> <span class="n">Test</span> <span class="n">scores</span><span class="p">:</span> <span class="n">MAP</span> <span class="o">=</span> <span class="mf">1.00</span><span class="p">,</span> <span class="n">ROC</span><span class="o">-</span><span class="n">AUC</span> <span class="o">=</span> <span class="mf">1.00</span>
+
+<span class="mf">3.</span><span class="n">a</span><span class="o">.</span> <span class="n">Calculate</span> <span class="n">LSI</span>
+  <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">lsi</span><span class="o">/</span>
+  <span class="o">=&gt;</span> <span class="n">LSI</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="mi">03230</span><span class="n">ad1b26f4d28b37ccc0631ce102a</span>
+  <span class="o">=&gt;</span> <span class="n">SVD</span> <span class="n">decomposition</span> <span class="k">with</span> <span class="mi">100</span> <span class="n">dimensions</span> <span class="n">explaining</span> <span class="mf">44.35</span> <span class="o">%</span> <span class="n">variabilty</span> <span class="n">of</span> <span class="n">the</span> <span class="n">data</span>
+
+<span class="mf">3.</span><span class="n">b</span><span class="o">.</span> <span class="n">Predict</span> <span class="n">categorization</span> <span class="k">with</span> <span class="n">LSI</span>
+  <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">lsi</span><span class="o">/</span><span class="mi">03230</span><span class="n">ad1b26f4d28b37ccc0631ce102a</span><span class="o">/</span><span class="n">predict</span>
+    <span class="o">=&gt;</span> <span class="n">Training</span> <span class="n">scores</span><span class="p">:</span> <span class="n">MAP</span> <span class="o">=</span> <span class="mf">1.00</span><span class="p">,</span> <span class="n">ROC</span><span class="o">-</span><span class="n">AUC</span> <span class="o">=</span> <span class="mf">1.00</span>
+
+<span class="mf">3.</span><span class="n">c</span><span class="o">.</span> <span class="n">Test</span> <span class="n">categorization</span> <span class="k">with</span> <span class="n">LSI</span>
+  <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">lsi</span><span class="o">/</span><span class="mi">03230</span><span class="n">ad1b26f4d28b37ccc0631ce102a</span><span class="o">/</span><span class="n">test</span>
+    <span class="o">=&gt;</span> <span class="n">Test</span> <span class="n">scores</span><span class="p">:</span> <span class="n">MAP</span> <span class="o">=</span> <span class="mf">0.82</span><span class="p">,</span> <span class="n">ROC</span><span class="o">-</span><span class="n">AUC</span> <span class="o">=</span> <span class="mf">0.93</span>
+
+<span class="mf">4.</span><span class="n">a</span> <span class="n">Delete</span> <span class="n">the</span> <span class="n">extracted</span> <span class="n">features</span>
+  <span class="n">DELETE</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="mi">7900</span><span class="n">f12eaa004efbaf1613658a1b35f0</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span><span class="p">,</span> <span class="n">sleep</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Process</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+
+<span class="k">def</span> <span class="nf">_parent_dir</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">path</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">_parent_dir</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">_print_url</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="n">url</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">*</span><span class="mi">1</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+
+<span class="n">use_docker</span> <span class="o">=</span> <span class="bp">False</span>
+
+<span class="n">dataset_name</span> <span class="o">=</span> <span class="s2">&quot;treclegal09_2k_subset&quot;</span>
+
+<span class="k">if</span> <span class="n">use_docker</span><span class="p">:</span>
+    <span class="n">data_dir</span> <span class="o">=</span> <span class="s2">&quot;/freediscovery_shared/{}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dataset_name</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">data_dir</span> <span class="o">=</span> <span class="s2">&quot;../freediscovery_shared/{}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dataset_name</span><span class="p">)</span>
+<span class="n">rel_data_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">&quot;../../freediscovery_shared/{}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dataset_name</span><span class="p">))</span> <span class="c1"># relative path between this file and the FreeDiscovery source folder</span>
+
+<span class="n">BASE_URL</span> <span class="o">=</span> <span class="s2">&quot;http://localhost:5001/api/v0&quot;</span>  <span class="c1"># FreeDiscovery server URL</span>
+
+<span class="c1"># 0. Load relevant and non relevant seed file list</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">rel_data_dir</span><span class="p">,</span><span class="s1">&#39;seed_relevant.txt&#39;</span><span class="p">),</span> <span class="s1">&#39;rt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+    <span class="n">relevant_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">fh</span><span class="o">.</span><span class="n">readlines</span><span class="p">()]</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">rel_data_dir</span><span class="p">,</span><span class="s1">&#39;seed_non_relevant.txt&#39;</span><span class="p">),</span> <span class="s1">&#39;rt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+    <span class="n">non_relevant_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">fh</span><span class="o">.</span><span class="n">readlines</span><span class="p">()]</span>
+
+<span class="c1"># Load ground truth file</span>
+<span class="k">if</span> <span class="n">use_docker</span><span class="p">:</span>
+    <span class="n">gtfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s2">&quot;ground_truth_file.txt&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">gtfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">rel_data_dir</span><span class="p">,</span> <span class="s2">&quot;ground_truth_file.txt&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># 1. Feature extraction</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">1.a Load dataset and initalize feature extraction&quot;</span><span class="p">)</span>
+<span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/feature-extraction&#39;</span>
+<span class="n">_print_url</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+<span class="n">fe_opts</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;data_dir&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">),</span>
+           <span class="s1">&#39;stop_words&#39;</span><span class="p">:</span> <span class="s1">&#39;None&#39;</span><span class="p">,</span> <span class="s1">&#39;chunk_size&#39;</span><span class="p">:</span> <span class="mi">2000</span><span class="p">,</span> <span class="s1">&#39;n_jobs&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+           <span class="s1">&#39;use_idf&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;sublinear_tf&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;binary&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;n_features&#39;</span><span class="p">:</span> <span class="mi">50001</span><span class="p">,</span>
+           <span class="s1">&#39;analyzer&#39;</span><span class="p">:</span> <span class="s1">&#39;word&#39;</span><span class="p">,</span> <span class="s1">&#39;ngram_range&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;norm&quot;</span><span class="p">:</span> <span class="s2">&quot;l2&quot;</span>
+          <span class="p">}</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">fe_opts</span><span class="p">)</span>
+
+<span class="n">dsid</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;   =&gt; received {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">())))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;   =&gt; dsid = {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dsid</span><span class="p">))</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">1.b Start feature extraction (in the background)&quot;</span><span class="p">)</span>
+
+<span class="c1"># Make this call in a background process (there should be a better way of doing it)</span>
+<span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span><span class="o">+</span><span class="s1">&#39;/feature-extraction/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dsid</span><span class="p">)</span>
+<span class="n">_print_url</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">url</span><span class="p">,))</span>
+<span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">sleep</span><span class="p">(</span><span class="mf">5.0</span><span class="p">)</span> <span class="c1"># wait a bit for the processing to start</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">1.c Monitor feature extraction progress&#39;</span><span class="p">)</span>
+<span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span><span class="o">+</span><span class="s1">&#39;/feature-extraction/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dsid</span><span class="p">)</span>
+<span class="n">_print_url</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">520</span><span class="p">:</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Processing did not start&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+        <span class="k">break</span> <span class="c1"># processing finished</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;     ... {}k/{}k files processed in {:.1f} min&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">data</span><span class="p">[</span><span class="s1">&#39;n_samples_processed&#39;</span><span class="p">]</span><span class="o">//</span><span class="mi">1000</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;n_samples&#39;</span><span class="p">]</span><span class="o">//</span><span class="mi">1000</span><span class="p">,</span> <span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span><span class="o">/</span><span class="mf">60.</span><span class="p">))</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="mf">15.0</span><span class="p">)</span>
+
+<span class="n">p</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span>  <span class="c1"># just in case, should not be necessary</span>
+
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">1.d. check the parameters of the extracted features&quot;</span><span class="p">)</span>
+<span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/feature-extraction/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dsid</span><span class="p">)</span>
+<span class="n">_print_url</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">key</span><span class="o">!=</span><span class="s1">&#39;filenames&#39;</span><span class="p">:</span>
+           <span class="k">print</span><span class="p">(</span><span class="s1">&#39;     - {}: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">))</span>
+
+
+<span class="c1"># 2. Document categorization with ML algorithms</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">2.a. Train the ML categorization model&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;       {} relevant, {} non-relevant files&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+    <span class="nb">len</span><span class="p">(</span><span class="n">relevant_files</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">non_relevant_files</span><span class="p">)))</span>
+<span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/categorization/&#39;</span>
+<span class="n">_print_url</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span>
+                    <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;relevant_filenames&#39;</span><span class="p">:</span> <span class="n">relevant_files</span><span class="p">,</span>
+                          <span class="s1">&#39;non_relevant_filenames&#39;</span><span class="p">:</span> <span class="n">non_relevant_files</span><span class="p">,</span>
+                          <span class="s1">&#39;dataset_id&#39;</span><span class="p">:</span> <span class="n">dsid</span><span class="p">,</span>
+                          <span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="s1">&#39;LogisticRegression&#39;</span><span class="p">,</span>  <span class="c1"># one of &quot;LinearSVC&quot;, &quot;LogisticRegression&quot;, &#39;xgboost&#39;</span>
+                          <span class="s1">&#39;cv&#39;</span><span class="p">:</span> <span class="mi">0</span>  <span class="c1"># use cross validation (recommended)</span>
+                          <span class="p">})</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="n">mid</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;     =&gt; model id = {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mid</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;    =&gt; Training scores: MAP = {average_precision:.2f}, ROC-AUC = {roc_auc:.2f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">))</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">2.b. Check the parameters used in the categorization model&quot;</span><span class="p">)</span>
+<span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/categorization/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mid</span><span class="p">)</span>
+<span class="n">_print_url</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">if</span> <span class="s2">&quot;filenames&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">key</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;     - {}: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">))</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">2.c Categorize the complete dataset with this model&quot;</span><span class="p">)</span>
+<span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/categorization/{}/predict&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mid</span><span class="p">)</span>
+<span class="n">_print_url</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">prediction</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">&#39;prediction&#39;</span><span class="p">]</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;    =&gt; Predicting {} relevant and {} non relevant documents&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+    <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">,</span> <span class="n">prediction</span><span class="p">))),</span>
+    <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">,</span> <span class="n">prediction</span><span class="p">)))))</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">2.d Test categorization accuracy&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;         using {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">gtfile</span><span class="p">))</span>
+<span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/categorization/{}/test&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mid</span><span class="p">)</span>
+<span class="n">_print_url</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span>
+                    <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;ground_truth_filename&#39;</span><span class="p">:</span> <span class="n">gtfile</span><span class="p">})</span>
+
+<span class="n">data2</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;    =&gt; Test scores: MAP = {average_precision:.2f}, ROC-AUC = {roc_auc:.2f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">data2</span><span class="p">))</span>
+
+
+<span class="c1"># 3. Document categorization with LSI</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">3.a. Calculate LSI&quot;</span><span class="p">)</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/lsi/&#39;</span>
+<span class="n">_print_url</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+
+<span class="n">n_components</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span>
+                    <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;n_components&#39;</span><span class="p">:</span> <span class="n">n_components</span><span class="p">,</span>
+                          <span class="s1">&#39;dataset_id&#39;</span><span class="p">:</span> <span class="n">dsid</span>
+                          <span class="p">})</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="n">lid</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;  =&gt; LSI model id = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">lid</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;  =&gt; SVD decomposition with {} dimensions explaining {:.2f} % variabilty of the data&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                        <span class="n">n_components</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;explained_variance&#39;</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">3.b. Predict categorization with LSI&quot;</span><span class="p">)</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/lsi/{}/predict&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">lid</span><span class="p">)</span>
+<span class="n">_print_url</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span>
+                    <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;relevant_filenames&#39;</span><span class="p">:</span> <span class="n">relevant_files</span><span class="p">,</span>
+                          <span class="s1">&#39;non_relevant_filenames&#39;</span><span class="p">:</span> <span class="n">non_relevant_files</span>
+                          <span class="p">})</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+<span class="n">prediction</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;prediction&#39;</span><span class="p">]</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;    =&gt; Training scores: MAP = {average_precision:.2f}, ROC-AUC = {roc_auc:.2f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">))</span>
+
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">3.c. Test categorization with LSI&quot;</span><span class="p">)</span>
+<span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/lsi/{}/test&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">lid</span><span class="p">)</span>
+<span class="n">_print_url</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span>
+                    <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;relevant_filenames&#39;</span><span class="p">:</span> <span class="n">relevant_files</span><span class="p">,</span>
+                          <span class="s1">&#39;non_relevant_filenames&#39;</span><span class="p">:</span> <span class="n">non_relevant_files</span><span class="p">,</span>
+                          <span class="s1">&#39;ground_truth_filename&#39;</span><span class="p">:</span> <span class="n">gtfile</span>
+                          <span class="p">})</span>
+<span class="n">data2</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;    =&gt; Test scores: MAP = {average_precision:.2f}, ROC-AUC = {roc_auc:.2f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">data2</span><span class="p">))</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="n">key</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">data</span> <span class="k">if</span> <span class="s1">&#39;prediction&#39;</span> <span class="ow">in</span> <span class="n">key</span> <span class="ow">or</span> <span class="s1">&#39;nearest&#39;</span> <span class="ow">in</span> <span class="n">key</span><span class="p">})</span>
+
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">4.a Delete the extracted features&quot;</span><span class="p">)</span>
+<span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/feature-extraction/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dsid</span><span class="p">)</span>
+<span class="n">_print_url</span><span class="p">(</span><span class="s2">&quot;DELETE&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  23.773 seconds)</p>
+<div class="sphx-glr-footer container">
+<div class="sphx-glr-download container">
+<a class="reference download internal" href="../_downloads/categorization_example.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">categorization_example.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<a class="reference download internal" href="../_downloads/categorization_example.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">categorization_example.ipynb</span></code></a></div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="http://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../deployment.html" class="btn btn-neutral float-right" title="Deployment options" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="duplicate_detection_example.html" class="btn btn-neutral" title="Document Clustering example" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Grossman Labs LLC.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.6.0-dev',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
