@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>freediscovery.clustering.base &mdash; FreeDiscovery 0.6.0-dev documentation</title>
+  <title>freediscovery.cluster.base &mdash; FreeDiscovery 0.6.0-dev documentation</title>
   
 
   
@@ -124,7 +124,7 @@
       
           <li><a href="../../index.html">Module code</a> &raquo;</li>
       
-    <li>freediscovery.clustering.base</li>
+    <li>freediscovery.cluster.base</li>
       <li class="wy-breadcrumbs-aside">
         
           
@@ -136,7 +136,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Source code for freediscovery.clustering.base</h1><div class="highlight"><pre>
+  <h1>Source code for freediscovery.cluster.base</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span>
@@ -154,6 +154,7 @@
 <span class="kn">from</span> <span class="nn">..text</span> <span class="k">import</span> <span class="n">FeatureVectorizer</span>
 <span class="kn">from</span> <span class="nn">..utils</span> <span class="k">import</span> <span class="n">setup_model</span>
 <span class="kn">from</span> <span class="nn">..stop_words</span> <span class="k">import</span> <span class="n">COMMON_FIRST_NAMES</span><span class="p">,</span> <span class="n">CUSTOM_STOP_WORDS</span>
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="k">import</span> <span class="n">_dbscan_noisy2unique</span>
 
 
 <span class="c1">### Clustering methods for FreeDiscovery</span>
@@ -162,7 +163,7 @@
 <span class="n">MAX_N_TOP_WORDS</span> <span class="o">=</span> <span class="mi">1000</span>
 
 
-<div class="viewcode-block" id="select_top_words"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.clustering.base.select_top_words">[docs]</a><span class="k">def</span> <span class="nf">select_top_words</span><span class="p">(</span><span class="n">word_list</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<div class="viewcode-block" id="select_top_words"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.cluster.base.select_top_words">[docs]</a><span class="k">def</span> <span class="nf">select_top_words</span><span class="p">(</span><span class="n">word_list</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Filter out cluster term names&quot;&quot;&quot;</span>
     <span class="kn">import</span> <span class="nn">re</span>
     <span class="kn">from</span> <span class="nn">nltk.stem.porter</span> <span class="k">import</span> <span class="n">PorterStemmer</span>
@@ -203,23 +204,12 @@
     <span class="k">return</span> <span class="n">lsi</span>
 
 
-<span class="k">def</span> <span class="nf">_dbscan_noisy2unique</span><span class="p">(</span><span class="n">labels_</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Take labels_ given by DBSCAN and replace each &quot;noisy&quot;</span>
-<span class="sd">    point specified by -1, to a unique cluster id</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">labels_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">labels_</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-    <span class="n">mask</span> <span class="o">=</span> <span class="n">labels_</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
-    <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">mask</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">)</span>
-    <span class="n">indices</span> <span class="o">+=</span> <span class="n">labels_</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">+</span><span class="mi">1</span>
-    <span class="n">labels_</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">indices</span>
-    <span class="k">return</span> <span class="n">labels_</span>
 
 
 
 
-<div class="viewcode-block" id="ClusterLabels"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.clustering.base.ClusterLabels">[docs]</a><span class="k">class</span> <span class="nc">ClusterLabels</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<div class="viewcode-block" id="ClusterLabels.__init__"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.clustering.base.ClusterLabels.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vect</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">pars</span><span class="p">,</span> <span class="n">lsi</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cluster_indices</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="ClusterLabels"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.cluster.base.ClusterLabels">[docs]</a><span class="k">class</span> <span class="nc">ClusterLabels</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="ClusterLabels.__init__"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.cluster.base.ClusterLabels.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vect</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">pars</span><span class="p">,</span> <span class="n">lsi</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cluster_indices</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Calculate the cluster labels.</span>
 
 <span class="sd">        This is an internal class that is called by Clustering</span>
@@ -259,7 +249,7 @@
             <span class="n">order_centroids</span> <span class="o">=</span> <span class="n">original_space_centroids</span><span class="o">.</span><span class="n">argsort</span><span class="p">()[:,</span> <span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_order_centroids</span> <span class="o">=</span> <span class="n">order_centroids</span>
 
-<div class="viewcode-block" id="ClusterLabels.predict"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.clustering.base.ClusterLabels.predict">[docs]</a>    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;centroid-frequency&#39;</span><span class="p">,</span> <span class="n">n_top_words</span><span class="o">=</span><span class="mi">6</span><span class="p">):</span>
+<div class="viewcode-block" id="ClusterLabels.predict"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.cluster.base.ClusterLabels.predict">[docs]</a>    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;centroid-frequency&#39;</span><span class="p">,</span> <span class="n">n_top_words</span><span class="o">=</span><span class="mi">6</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Compute the cluster labels</span>
 
 <span class="sd">        Parameters</span>
@@ -299,11 +289,11 @@
         <span class="c1">#&quot;    silhouette_score_res = np.nan # this takes too much memory to compute with the raw matrix</span>
 
 
-<div class="viewcode-block" id="Clustering"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.clustering.base.Clustering">[docs]</a><span class="k">class</span> <span class="nc">Clustering</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">):</span>
+<div class="viewcode-block" id="Clustering"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.cluster.base.Clustering">[docs]</a><span class="k">class</span> <span class="nc">Clustering</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">):</span>
 
     <span class="n">_DIRREF</span> <span class="o">=</span> <span class="s2">&quot;clustering&quot;</span>
 
-<div class="viewcode-block" id="Clustering.__init__"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.clustering.base.Clustering.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cache_dir</span><span class="o">=</span><span class="s1">&#39;/tmp/&#39;</span><span class="p">,</span> <span class="n">dsid</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mid</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Clustering.__init__"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.cluster.base.Clustering.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cache_dir</span><span class="o">=</span><span class="s1">&#39;/tmp/&#39;</span><span class="p">,</span> <span class="n">dsid</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mid</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Document clustering</span>
 
@@ -371,14 +361,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">mid_dir</span> <span class="o">=</span> <span class="n">mid_dir</span>
 
         <span class="n">labels_</span> <span class="o">=</span> <span class="n">km</span><span class="o">.</span><span class="n">labels_</span>
-        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">km</span><span class="p">)</span><span class="o">.</span><span class="n">__name__</span> <span class="o">!=</span> <span class="s2">&quot;DBSCAN&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">km</span><span class="p">)</span><span class="o">.</span><span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;DBSCAN&quot;</span><span class="p">:</span>
             <span class="n">labels_</span> <span class="o">=</span> <span class="n">_dbscan_noisy2unique</span><span class="p">(</span><span class="n">labels_</span><span class="p">)</span>
             <span class="n">n_clusters</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">labels_</span><span class="p">))</span>
-
+            <span class="n">km</span><span class="o">.</span><span class="n">labels_</span> <span class="o">=</span> <span class="n">labels_</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">km</span><span class="p">,</span> <span class="s1">&#39;cluster_centers_&#39;</span><span class="p">):</span>
             <span class="c1"># i.e. model is not MiniBatchKMeans =&gt; compute centroids</span>
-            <span class="n">km</span><span class="o">.</span><span class="n">cluster_centers_</span> <span class="o">=</span> <span class="n">NearestCentroid</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">km</span><span class="o">.</span><span class="n">labels_</span><span class="p">)</span><span class="o">.</span><span class="n">centroids_</span>
+            <span class="n">km</span><span class="o">.</span><span class="n">cluster_centers_</span> <span class="o">=</span> <span class="n">NearestCentroid</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">labels_</span><span class="p">)</span><span class="o">.</span><span class="n">centroids_</span>
 
         <span class="n">pars</span><span class="p">[</span><span class="s1">&#39;n_clusters&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">n_clusters</span>
 
@@ -390,7 +380,7 @@
 
         <span class="n">htree</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_htree</span><span class="p">(</span><span class="n">km</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">km</span><span class="o">.</span><span class="n">labels_</span><span class="p">,</span> <span class="n">htree</span>
+        <span class="k">return</span> <span class="n">labels_</span><span class="p">,</span> <span class="n">htree</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">_get_htree</span><span class="p">(</span><span class="n">km</span><span class="p">):</span>
@@ -404,7 +394,7 @@
         <span class="k">return</span> <span class="n">htree</span>
 
 
-<div class="viewcode-block" id="Clustering.compute_labels"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.clustering.base.Clustering.compute_labels">[docs]</a>    <span class="k">def</span> <span class="nf">compute_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label_method</span><span class="o">=</span><span class="s1">&#39;centroid-frequency&#39;</span><span class="p">,</span> <span class="n">n_top_words</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+<div class="viewcode-block" id="Clustering.compute_labels"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.cluster.base.Clustering.compute_labels">[docs]</a>    <span class="k">def</span> <span class="nf">compute_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label_method</span><span class="o">=</span><span class="s1">&#39;centroid-frequency&#39;</span><span class="p">,</span> <span class="n">n_top_words</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
             <span class="n">cluster_indices</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Compute the cluster labels</span>
 
@@ -446,7 +436,7 @@
         <span class="k">return</span> <span class="n">terms</span></div>
 
 
-<div class="viewcode-block" id="Clustering.k_means"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.clustering.base.Clustering.k_means">[docs]</a>    <span class="k">def</span> <span class="nf">k_means</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_clusters</span><span class="p">,</span> <span class="n">lsi_components</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+<div class="viewcode-block" id="Clustering.k_means"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.cluster.base.Clustering.k_means">[docs]</a>    <span class="k">def</span> <span class="nf">k_means</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_clusters</span><span class="p">,</span> <span class="n">lsi_components</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Perform K-mean clustering</span>
 
@@ -467,7 +457,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cluster_func</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">,</span> <span class="n">km</span><span class="p">,</span> <span class="n">pars</span><span class="p">,</span> <span class="n">lsi</span><span class="o">=</span><span class="n">lsi</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="Clustering.birch"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.clustering.base.Clustering.birch">[docs]</a>    <span class="k">def</span> <span class="nf">birch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_clusters</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">lsi_components</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Clustering.birch"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.cluster.base.Clustering.birch">[docs]</a>    <span class="k">def</span> <span class="nf">birch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_clusters</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">lsi_components</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Perform Birch clustering</span>
 
@@ -493,7 +483,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cluster_func</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">,</span> <span class="n">km</span><span class="p">,</span> <span class="n">pars</span><span class="p">,</span> <span class="n">lsi</span><span class="o">=</span><span class="n">lsi</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="Clustering.ward_hc"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.clustering.base.Clustering.ward_hc">[docs]</a>    <span class="k">def</span> <span class="nf">ward_hc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_clusters</span><span class="p">,</span> <span class="n">lsi_components</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<div class="viewcode-block" id="Clustering.ward_hc"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.cluster.base.Clustering.ward_hc">[docs]</a>    <span class="k">def</span> <span class="nf">ward_hc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_clusters</span><span class="p">,</span> <span class="n">lsi_components</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Perform Ward hierarchical clustering</span>
 
@@ -526,7 +516,7 @@
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cluster_func</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">,</span> <span class="n">km</span><span class="p">,</span> <span class="n">pars</span><span class="p">,</span> <span class="n">lsi</span><span class="o">=</span><span class="n">lsi</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Clustering.dbscan"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.clustering.base.Clustering.dbscan">[docs]</a>    <span class="k">def</span> <span class="nf">dbscan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_clusters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">min_samples</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span>
+<div class="viewcode-block" id="Clustering.dbscan"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.cluster.base.Clustering.dbscan">[docs]</a>    <span class="k">def</span> <span class="nf">dbscan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_clusters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">min_samples</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span>
                <span class="n">leaf_size</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">lsi_components</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Perform DBSCAN clustering</span>
@@ -557,7 +547,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cluster_func</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">,</span> <span class="n">km</span><span class="p">,</span> <span class="n">pars</span><span class="p">,</span> <span class="n">lsi</span><span class="o">=</span><span class="n">lsi</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="Clustering.scores"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.clustering.base.Clustering.scores">[docs]</a>    <span class="k">def</span> <span class="nf">scores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ref_labels</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
+<div class="viewcode-block" id="Clustering.scores"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.cluster.base.Clustering.scores">[docs]</a>    <span class="k">def</span> <span class="nf">scores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ref_labels</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -590,7 +580,7 @@
         <span class="k">return</span> <span class="n">pars</span>
 
 
-<div class="viewcode-block" id="Clustering.load"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.clustering.base.Clustering.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mid</span><span class="p">):</span>
+<div class="viewcode-block" id="Clustering.load"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.cluster.base.Clustering.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mid</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Load results from cache specified by a mid &quot;&quot;&quot;</span>
 
         <span class="n">mid_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_dir</span><span class="p">,</span> <span class="n">mid</span><span class="p">)</span>

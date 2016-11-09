@@ -114,12 +114,13 @@
 <li class="toctree-l3"><a class="reference internal" href="#a-compute-clustering-k-mean">4.a Compute clustering (K-mean)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#b-compute-clustering-birch">4.b Compute clustering (Birch)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c-compute-clustering-ward-hierarchical">4.c Compute clustering (Ward hierarchical)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c-compute-clustering-dbscan">4.c Compute clustering (DBSCAN)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#d-load-results">4.d Load results</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#e-delete-a-clustering-model">4.e Delete a clustering model</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#duplicate-detection">5. Duplicate detection</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#a-compute-duplicates-simhash">5.a Compute duplicates (simhash)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#a-compute-duplicates">5.a Compute duplicates</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#b-query-duplicates">5.b Query duplicates</a></li>
 </ul>
 </li>
@@ -205,6 +206,8 @@ If &#8220;english&#8221;, a built-in stop word list for English is used. ( defau
 <li><code class="docutils literal"><span class="pre">use_idf</span></code>: Enable inverse-document-frequency reweighting (default: False).</li>
 <li><code class="docutils literal"><span class="pre">sublinear_tf</span></code>: Apply sublinear tf scaling, i.e. replace tf with log(1 + tf) (default: False).</li>
 <li><code class="docutils literal"><span class="pre">use_hashing</span></code>: Enable hashing. This option must be set to True for classification and set to False for clustering. (default: True)</li>
+<li><code class="docutils literal"><span class="pre">min_df</span></code>: When building the vocabulary ignore terms that have a document frequency strictly lower than the given threshold. This value is ignored when hashing is used.</li>
+<li><code class="docutils literal"><span class="pre">max_df</span></code>: When building the vocabulary ignore terms that have a document frequency strictly higher than the given threshold. This value is ignored when hashing is used.</li>
 </ul>
 </li>
 </ul>
@@ -521,6 +524,32 @@ both &#8220;birch&#8221; and &#8220;ward_hc&#8221; require this option to be a p
 </li>
 </ul>
 </div>
+<div class="section" id="c-compute-clustering-dbscan">
+<span id="c-compute-clustering-dbscan"></span><h3>4.c Compute clustering (DBSCAN)<a class="headerlink" href="#c-compute-clustering-dbscan" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>URL</strong>: <code class="docutils literal"><span class="pre">/api/v0/clustering/dbscan</span></code></p>
+</li>
+<li><p class="first"><strong>Method</strong>: <code class="docutils literal"><span class="pre">POST</span></code> <strong>URL Params</strong>: None</p>
+</li>
+<li><p class="first"><strong>Data Params</strong>:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">dataset_id</span></code>: dataset id</li>
+<li><code class="docutils literal"><span class="pre">lsi_components</span></code>: (optional) apply LSI with <code class="docutils literal"><span class="pre">lsi_components</span></code> before clustering (default None)</li>
+<li><code class="docutils literal"><span class="pre">eps</span></code>: (optional) float
+The maximum distance between two samples for them to be considered
+as in the same neighborhood.</li>
+<li><code class="docutils literal"><span class="pre">min_samples</span></code>: (optional) int
+The number of samples (or total weight) in a neighborhood for a point
+to be considered as a core point. This includes the point itself.</li>
+</ul>
+</li>
+<li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">str</span><span class="o">&gt;</span><span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
 <div class="section" id="d-load-results">
 <span id="d-load-results"></span><h3>4.d Load results<a class="headerlink" href="#d-load-results" title="Permalink to this headline">¶</a></h3>
 <ul>
@@ -555,8 +584,8 @@ the method used for computing the cluster labels</li>
 </div>
 <div class="section" id="duplicate-detection">
 <span id="duplicate-detection"></span><h2>5. Duplicate detection<a class="headerlink" href="#duplicate-detection" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="a-compute-duplicates-simhash">
-<span id="a-compute-duplicates-simhash"></span><h3>5.a Compute duplicates (simhash)<a class="headerlink" href="#a-compute-duplicates-simhash" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="a-compute-duplicates">
+<span id="a-compute-duplicates"></span><h3>5.a Compute duplicates<a class="headerlink" href="#a-compute-duplicates" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p class="first"><strong>URL</strong>: <code class="docutils literal"><span class="pre">/api/v0/duplicate-detection/simhash</span></code></p>
 </li>
@@ -565,6 +594,8 @@ the method used for computing the cluster labels</li>
 <li><p class="first"><strong>Data Params</strong>:</p>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">dataset_id</span></code>: dataset id</li>
+<li><code class="docutils literal"><span class="pre">method</span></code>: str, default=&#8217;simhash&#8217;
+Method used for duplicate detection. One of &#8220;simhash&#8221;, &#8220;i-match&#8221;</li>
 </ul>
 </li>
 <li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
@@ -577,14 +608,15 @@ the method used for computing the cluster labels</li>
 <div class="section" id="b-query-duplicates">
 <span id="b-query-duplicates"></span><h3>5.b Query duplicates<a class="headerlink" href="#b-query-duplicates" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><strong>URL</strong>: <code class="docutils literal"><span class="pre">/api/v0/duplicate-detection/simhash/&lt;model-id&gt;</span></code></li>
+<li><strong>URL</strong>: <code class="docutils literal"><span class="pre">/api/v0/duplicate-detection/&lt;model-id&gt;</span></code></li>
 <li><strong>Method</strong>: <code class="docutils literal"><span class="pre">GET</span></code> <strong>URL Params</strong>: None</li>
 <li><strong>Data Params</strong>:<ul>
 <li>distance : int, default=2
-Maximum number of differnet bits in the simhash</li>
-<li>blocks : int or &#8216;auto&#8217;, default=&#8217;auto&#8217;
-number of blocks into which the simhash is split
-when searching for duplicates, see  https://github.com/seomoz/simhash-py</li>
+Maximum number of differnet bits in the simhash (Simhash method only)</li>
+<li>n_rand_lexicons : int, default=1
+number of random lexicons used for duplicate detection (I-Match method only)</li>
+<li>rand_lexicon_ratio: float, default=0.7
+ratio of the vocabulary used in random lexicons (I-Match method only)</li>
 </ul>
 </li>
 </ul>

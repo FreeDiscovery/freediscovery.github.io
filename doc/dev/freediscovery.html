@@ -92,8 +92,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#module-freediscovery.text">1. Feature extraction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-freediscovery.categorization">2. Document categorization (ML)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-freediscovery.lsi">3. Document categorization (LSI)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-freediscovery.clustering.base">4. Document clustering</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-freediscovery.simhash.base">5. Duplicates detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-freediscovery.cluster.base">4. Document clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-freediscovery.dupdet.base">5. Duplicates detection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-freediscovery.base">5. Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-freediscovery.exceptions">6. Exceptions</a></li>
 </ul>
@@ -200,7 +200,7 @@
 
 <dl class="method">
 <dt id="freediscovery.text.FeatureVectorizer.preprocess">
-<code class="descname">preprocess</code><span class="sig-paren">(</span><em>data_dir</em>, <em>file_pattern='.*'</em>, <em>dir_pattern='.*'</em>, <em>n_features=11000000</em>, <em>chunk_size=5000</em>, <em>analyzer='word'</em>, <em>ngram_range=(1</em>, <em>1)</em>, <em>stop_words='None'</em>, <em>n_jobs=1</em>, <em>use_idf=False</em>, <em>sublinear_tf=False</em>, <em>binary=True</em>, <em>use_hashing=True</em>, <em>norm=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/text.html#FeatureVectorizer.preprocess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.text.FeatureVectorizer.preprocess" title="Permalink to this definition">¶</a></dt>
+<code class="descname">preprocess</code><span class="sig-paren">(</span><em>data_dir</em>, <em>file_pattern='.*'</em>, <em>dir_pattern='.*'</em>, <em>n_features=11000000</em>, <em>chunk_size=5000</em>, <em>analyzer='word'</em>, <em>ngram_range=(1</em>, <em>1)</em>, <em>stop_words='None'</em>, <em>n_jobs=1</em>, <em>use_idf=False</em>, <em>sublinear_tf=False</em>, <em>binary=True</em>, <em>use_hashing=True</em>, <em>norm=None</em>, <em>min_df=0.0</em>, <em>max_df=1.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/text.html#FeatureVectorizer.preprocess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.text.FeatureVectorizer.preprocess" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initalize the features extraction. See sklearn.feature_extraction.text for a
 detailed description of the input parameters</p>
 </dd></dl>
@@ -423,15 +423,15 @@ otherwise if <cite>accumulate==&#8221;centroid-max&#8221;</cite> the centroid of
 </dd></dl>
 
 </div>
-<div class="section" id="module-freediscovery.clustering.base">
-<span id="document-clustering"></span><h2>4. Document clustering<a class="headerlink" href="#module-freediscovery.clustering.base" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-freediscovery.cluster.base">
+<span id="document-clustering"></span><h2>4. Document clustering<a class="headerlink" href="#module-freediscovery.cluster.base" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="freediscovery.clustering.base.ClusterLabels">
-<em class="property">class </em><code class="descclassname">freediscovery.clustering.base.</code><code class="descname">ClusterLabels</code><span class="sig-paren">(</span><em>vect</em>, <em>model</em>, <em>pars</em>, <em>lsi=None</em>, <em>cluster_indices=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/clustering/base.html#ClusterLabels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.clustering.base.ClusterLabels" title="Permalink to this definition">¶</a></dt>
+<dt id="freediscovery.cluster.base.ClusterLabels">
+<em class="property">class </em><code class="descclassname">freediscovery.cluster.base.</code><code class="descname">ClusterLabels</code><span class="sig-paren">(</span><em>vect</em>, <em>model</em>, <em>pars</em>, <em>lsi=None</em>, <em>cluster_indices=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/cluster/base.html#ClusterLabels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.base.ClusterLabels" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <dl class="method">
-<dt id="freediscovery.clustering.base.ClusterLabels.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>vect</em>, <em>model</em>, <em>pars</em>, <em>lsi=None</em>, <em>cluster_indices=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/clustering/base.html#ClusterLabels.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.clustering.base.ClusterLabels.__init__" title="Permalink to this definition">¶</a></dt>
+<dt id="freediscovery.cluster.base.ClusterLabels.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>vect</em>, <em>model</em>, <em>pars</em>, <em>lsi=None</em>, <em>cluster_indices=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/cluster/base.html#ClusterLabels.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.base.ClusterLabels.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the cluster labels.</p>
 <p>This is an internal class that is called by Clustering</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -446,8 +446,8 @@ terms for the cluster provided by the given indices</td>
 </dd></dl>
 
 <dl class="method">
-<dt id="freediscovery.clustering.base.ClusterLabels.predict">
-<code class="descname">predict</code><span class="sig-paren">(</span><em>method=u'centroid-frequency'</em>, <em>n_top_words=6</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/clustering/base.html#ClusterLabels.predict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.clustering.base.ClusterLabels.predict" title="Permalink to this definition">¶</a></dt>
+<dt id="freediscovery.cluster.base.ClusterLabels.predict">
+<code class="descname">predict</code><span class="sig-paren">(</span><em>method=u'centroid-frequency'</em>, <em>n_top_words=6</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/cluster/base.html#ClusterLabels.predict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.base.ClusterLabels.predict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the cluster labels</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -473,12 +473,12 @@ Must be one of &#8216;centroid-frequency&#8217;,</li>
 </dd></dl>
 
 <dl class="class">
-<dt id="freediscovery.clustering.base.Clustering">
-<em class="property">class </em><code class="descclassname">freediscovery.clustering.base.</code><code class="descname">Clustering</code><span class="sig-paren">(</span><em>cache_dir=u'/tmp/'</em>, <em>dsid=None</em>, <em>mid=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/clustering/base.html#Clustering"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.clustering.base.Clustering" title="Permalink to this definition">¶</a></dt>
+<dt id="freediscovery.cluster.base.Clustering">
+<em class="property">class </em><code class="descclassname">freediscovery.cluster.base.</code><code class="descname">Clustering</code><span class="sig-paren">(</span><em>cache_dir=u'/tmp/'</em>, <em>dsid=None</em>, <em>mid=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/cluster/base.html#Clustering"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.base.Clustering" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#freediscovery.base.BaseEstimator" title="freediscovery.base.BaseEstimator"><code class="xref py py-class docutils literal"><span class="pre">freediscovery.base.BaseEstimator</span></code></a></p>
 <dl class="method">
-<dt id="freediscovery.clustering.base.Clustering.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>cache_dir=u'/tmp/'</em>, <em>dsid=None</em>, <em>mid=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/clustering/base.html#Clustering.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.clustering.base.Clustering.__init__" title="Permalink to this definition">¶</a></dt>
+<dt id="freediscovery.cluster.base.Clustering.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>cache_dir=u'/tmp/'</em>, <em>dsid=None</em>, <em>mid=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/cluster/base.html#Clustering.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.base.Clustering.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Document clustering</p>
 <p>The algorithms are adapted from scikit learn</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -497,8 +497,8 @@ Must be one of &#8216;centroid-frequency&#8217;,</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="freediscovery.clustering.base.Clustering.birch">
-<code class="descname">birch</code><span class="sig-paren">(</span><em>n_clusters</em>, <em>threshold=0.5</em>, <em>lsi_components=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/clustering/base.html#Clustering.birch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.clustering.base.Clustering.birch" title="Permalink to this definition">¶</a></dt>
+<dt id="freediscovery.cluster.base.Clustering.birch">
+<code class="descname">birch</code><span class="sig-paren">(</span><em>n_clusters</em>, <em>threshold=0.5</em>, <em>lsi_components=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/cluster/base.html#Clustering.birch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.base.Clustering.birch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform Birch clustering</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -516,8 +516,8 @@ Must be one of &#8216;centroid-frequency&#8217;,</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="freediscovery.clustering.base.Clustering.compute_labels">
-<code class="descname">compute_labels</code><span class="sig-paren">(</span><em>label_method=u'centroid-frequency'</em>, <em>n_top_words=6</em>, <em>cluster_indices=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/clustering/base.html#Clustering.compute_labels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.clustering.base.Clustering.compute_labels" title="Permalink to this definition">¶</a></dt>
+<dt id="freediscovery.cluster.base.Clustering.compute_labels">
+<code class="descname">compute_labels</code><span class="sig-paren">(</span><em>label_method=u'centroid-frequency'</em>, <em>n_top_words=6</em>, <em>cluster_indices=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/cluster/base.html#Clustering.compute_labels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.base.Clustering.compute_labels" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the cluster labels</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -542,8 +542,8 @@ terms for the cluster provided by the given indices</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="freediscovery.clustering.base.Clustering.dbscan">
-<code class="descname">dbscan</code><span class="sig-paren">(</span><em>n_clusters=None</em>, <em>eps=0.5</em>, <em>min_samples=10</em>, <em>algorithm=u'auto'</em>, <em>leaf_size=30</em>, <em>lsi_components=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/clustering/base.html#Clustering.dbscan"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.clustering.base.Clustering.dbscan" title="Permalink to this definition">¶</a></dt>
+<dt id="freediscovery.cluster.base.Clustering.dbscan">
+<code class="descname">dbscan</code><span class="sig-paren">(</span><em>n_clusters=None</em>, <em>eps=0.5</em>, <em>min_samples=10</em>, <em>algorithm=u'auto'</em>, <em>leaf_size=30</em>, <em>lsi_components=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/cluster/base.html#Clustering.dbscan"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.base.Clustering.dbscan" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform DBSCAN clustering</p>
 <p>This can also be used for Duplicate Detection (when ep</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -568,8 +568,8 @@ to be considered as a core point. This includes the point itself.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="freediscovery.clustering.base.Clustering.k_means">
-<code class="descname">k_means</code><span class="sig-paren">(</span><em>n_clusters</em>, <em>lsi_components=None</em>, <em>batch_size=1000</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/clustering/base.html#Clustering.k_means"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.clustering.base.Clustering.k_means" title="Permalink to this definition">¶</a></dt>
+<dt id="freediscovery.cluster.base.Clustering.k_means">
+<code class="descname">k_means</code><span class="sig-paren">(</span><em>n_clusters</em>, <em>lsi_components=None</em>, <em>batch_size=1000</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/cluster/base.html#Clustering.k_means"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.base.Clustering.k_means" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform K-mean clustering</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -587,14 +587,14 @@ to be considered as a core point. This includes the point itself.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="freediscovery.clustering.base.Clustering.load">
-<code class="descname">load</code><span class="sig-paren">(</span><em>mid</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/clustering/base.html#Clustering.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.clustering.base.Clustering.load" title="Permalink to this definition">¶</a></dt>
+<dt id="freediscovery.cluster.base.Clustering.load">
+<code class="descname">load</code><span class="sig-paren">(</span><em>mid</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/cluster/base.html#Clustering.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.base.Clustering.load" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load results from cache specified by a mid</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="freediscovery.clustering.base.Clustering.scores">
-<code class="descname">scores</code><span class="sig-paren">(</span><em>ref_labels</em>, <em>labels</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/clustering/base.html#Clustering.scores"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.clustering.base.Clustering.scores" title="Permalink to this definition">¶</a></dt>
+<dt id="freediscovery.cluster.base.Clustering.scores">
+<code class="descname">scores</code><span class="sig-paren">(</span><em>ref_labels</em>, <em>labels</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/cluster/base.html#Clustering.scores"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.base.Clustering.scores" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -610,8 +610,8 @@ to be considered as a core point. This includes the point itself.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="freediscovery.clustering.base.Clustering.ward_hc">
-<code class="descname">ward_hc</code><span class="sig-paren">(</span><em>n_clusters</em>, <em>lsi_components=None</em>, <em>n_neighbors=10</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/clustering/base.html#Clustering.ward_hc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.clustering.base.Clustering.ward_hc" title="Permalink to this definition">¶</a></dt>
+<dt id="freediscovery.cluster.base.Clustering.ward_hc">
+<code class="descname">ward_hc</code><span class="sig-paren">(</span><em>n_clusters</em>, <em>lsi_components=None</em>, <em>n_neighbors=10</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/cluster/base.html#Clustering.ward_hc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.base.Clustering.ward_hc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform Ward hierarchical clustering</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -631,99 +631,27 @@ to be considered as a core point. This includes the point itself.</li>
 </dd></dl>
 
 <dl class="function">
-<dt id="freediscovery.clustering.base.select_top_words">
-<code class="descclassname">freediscovery.clustering.base.</code><code class="descname">select_top_words</code><span class="sig-paren">(</span><em>word_list</em>, <em>n=10</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/clustering/base.html#select_top_words"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.clustering.base.select_top_words" title="Permalink to this definition">¶</a></dt>
+<dt id="freediscovery.cluster.base.select_top_words">
+<code class="descclassname">freediscovery.cluster.base.</code><code class="descname">select_top_words</code><span class="sig-paren">(</span><em>word_list</em>, <em>n=10</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/cluster/base.html#select_top_words"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.base.select_top_words" title="Permalink to this definition">¶</a></dt>
 <dd><p>Filter out cluster term names</p>
 </dd></dl>
 
-<span class="target" id="module-freediscovery.clustering.dendogram"></span></div>
-<div class="section" id="module-freediscovery.simhash.base">
-<span id="duplicates-detection"></span><h2>5. Duplicates detection<a class="headerlink" href="#module-freediscovery.simhash.base" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-freediscovery.cluster.dendrogram"></span><span class="target" id="module-freediscovery.cluster.utils"></span></div>
+<div class="section" id="module-freediscovery.dupdet.base">
+<span id="duplicates-detection"></span><h2>5. Duplicates detection<a class="headerlink" href="#module-freediscovery.dupdet.base" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="freediscovery.simhash.base.SimhashDuplicates">
-<em class="property">class </em><code class="descclassname">freediscovery.simhash.base.</code><code class="descname">SimhashDuplicates</code><a class="reference internal" href="_modules/freediscovery/simhash/base.html#SimhashDuplicates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.simhash.base.SimhashDuplicates" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code></p>
-<p>Find near duplicates using the simhash-py backend</p>
-<p>This class aims to expose a scikit-learn compatible API.</p>
-<dl class="method">
-<dt id="freediscovery.simhash.base.SimhashDuplicates.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/simhash/base.html#SimhashDuplicates.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.simhash.base.SimhashDuplicates.fit" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>X</strong> (<em>array_like or sparse (CSR) matrix, shape (n_samples, n_features)</em>) &#8211; List of n_features-dimensional data points. Each row
-corresponds to a single data point.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>self</strong> &#8211; Returns self.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">object</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="freediscovery.simhash.base.SimhashDuplicates.get_index_by_hash">
-<code class="descname">get_index_by_hash</code><span class="sig-paren">(</span><em>shash</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/simhash/base.html#SimhashDuplicates.get_index_by_hash"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.simhash.base.SimhashDuplicates.get_index_by_hash" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get document index by hash</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>shash</strong> (<em>uint64</em>) &#8211; a simhash value</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>index</strong> &#8211; a document index</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">int</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="freediscovery.simhash.base.SimhashDuplicates.query">
-<code class="descname">query</code><span class="sig-paren">(</span><em>distance=2</em>, <em>blocks=u'auto'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/simhash/base.html#SimhashDuplicates.query"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.simhash.base.SimhashDuplicates.query" title="Permalink to this definition">¶</a></dt>
-<dd><p>Find all the nearests neighbours for the dataset</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>distance</strong> (<em>int, default=2</em>) &#8211; Maximum number of differnet bits in the simhash</li>
-<li><strong>blocks</strong> (<em>int or 'auto', default='auto'</em>) &#8211; number of blocks into which the simhash is split
-when searching for duplicates,
-see  <a class="reference external" href="https://github.com/seomoz/simhash-py">https://github.com/seomoz/simhash-py</a></li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
-<li><strong>simhash</strong> (<em>array</em>) &#8211; the simhash value for all documents in the collection</li>
-<li><strong>cluster_id</strong> (<em>array</em>) &#8211; the exact duplicates (documents with the same simhash)
-are grouped by in cluster_id</li>
-<li><strong>dup_pairs</strong> (<em>list</em>) &#8211; list of tuples for the near-duplicates</li>
-</ul>
-</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</dd></dl>
-
-<span class="target" id="module-freediscovery.simhash.dupdet"></span><dl class="class">
-<dt id="freediscovery.simhash.dupdet.DuplicateDetection">
-<em class="property">class </em><code class="descclassname">freediscovery.simhash.dupdet.</code><code class="descname">DuplicateDetection</code><span class="sig-paren">(</span><em>cache_dir=u'/tmp/'</em>, <em>dsid=None</em>, <em>mid=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/simhash/dupdet.html#DuplicateDetection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.simhash.dupdet.DuplicateDetection" title="Permalink to this definition">¶</a></dt>
+<dt id="freediscovery.dupdet.base.DuplicateDetection">
+<em class="property">class </em><code class="descclassname">freediscovery.dupdet.base.</code><code class="descname">DuplicateDetection</code><span class="sig-paren">(</span><em>cache_dir=u'/tmp/'</em>, <em>dsid=None</em>, <em>mid=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/dupdet/base.html#DuplicateDetection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.dupdet.base.DuplicateDetection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#freediscovery.base.BaseEstimator" title="freediscovery.base.BaseEstimator"><code class="xref py py-class docutils literal"><span class="pre">freediscovery.base.BaseEstimator</span></code></a></p>
 <dl class="method">
-<dt id="freediscovery.simhash.dupdet.DuplicateDetection.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>cache_dir=u'/tmp/'</em>, <em>dsid=None</em>, <em>mid=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/simhash/dupdet.html#DuplicateDetection.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.simhash.dupdet.DuplicateDetection.__init__" title="Permalink to this definition">¶</a></dt>
+<dt id="freediscovery.dupdet.base.DuplicateDetection.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>cache_dir=u'/tmp/'</em>, <em>dsid=None</em>, <em>mid=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/dupdet/base.html#DuplicateDetection.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.dupdet.base.DuplicateDetection.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find near duplicates in a document collection.</p>
 <dl class="docutils">
 <dt>Currently supported backends are:</dt>
 <dd><ul class="first last simple">
 <li>simhash-py</li>
+<li>i-match</li>
 </ul>
 </dd>
 </dl>
@@ -743,20 +671,104 @@ are grouped by in cluster_id</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="freediscovery.simhash.dupdet.DuplicateDetection.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>method=u'simhash'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/simhash/dupdet.html#DuplicateDetection.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.simhash.dupdet.DuplicateDetection.fit" title="Permalink to this definition">¶</a></dt>
+<dt id="freediscovery.dupdet.base.DuplicateDetection.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>method=u'simhash'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/dupdet/base.html#DuplicateDetection.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.dupdet.base.DuplicateDetection.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Precompute all the required values for duplicate detection</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="freediscovery.simhash.dupdet.DuplicateDetection.load">
-<code class="descname">load</code><span class="sig-paren">(</span><em>mid</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/simhash/dupdet.html#DuplicateDetection.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.simhash.dupdet.DuplicateDetection.load" title="Permalink to this definition">¶</a></dt>
+<dt id="freediscovery.dupdet.base.DuplicateDetection.load">
+<code class="descname">load</code><span class="sig-paren">(</span><em>mid</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/dupdet/base.html#DuplicateDetection.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.dupdet.base.DuplicateDetection.load" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load results from cache specified by a mid</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="freediscovery.simhash.dupdet.DuplicateDetection.query">
-<code class="descname">query</code><span class="sig-paren">(</span><em>distance=2</em>, <em>blocks=u'auto'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/simhash/dupdet.html#DuplicateDetection.query"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.simhash.dupdet.DuplicateDetection.query" title="Permalink to this definition">¶</a></dt>
+<dt id="freediscovery.dupdet.base.DuplicateDetection.query">
+<code class="descname">query</code><span class="sig-paren">(</span><em>**args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/dupdet/base.html#DuplicateDetection.query"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.dupdet.base.DuplicateDetection.query" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find all the nearests neighbours for the dataset</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>distance</strong> (<em>int, default=2</em>) &#8211; Maximum number of differnet bits in the simhash</li>
+<li><strong>blocks</strong> (<em>int or 'auto', default='auto'</em>) &#8211; number of blocks into which the simhash is split
+when searching for duplicates,
+see  <a class="reference external" href="https://github.com/seomoz/simhash-py">https://github.com/seomoz/simhash-py</a></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>cluster_id</strong> &#8211; the exact duplicates (documents with the same simhash)
+are grouped by in cluster_id</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">array</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-freediscovery.dupdet.simhash"></span><dl class="class">
+<dt id="freediscovery.dupdet.simhash.SimhashDuplicates">
+<em class="property">class </em><code class="descclassname">freediscovery.dupdet.simhash.</code><code class="descname">SimhashDuplicates</code><span class="sig-paren">(</span><em>hash_func=u'murmurhash3_int_u32'</em>, <em>hash_func_nbytes=32</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/dupdet/simhash.html#SimhashDuplicates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.dupdet.simhash.SimhashDuplicates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code></p>
+<p>Find near duplicates using simhash-py</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>hash_func</strong> (<em>str or function, default='murmurhash3_int_u32'</em>) &#8211; the hashing function used to hash documents.
+Possibles values are &#8220;murmurhash3_int_u32&#8221; or a custom function.</li>
+<li><strong>hash_func_nbytes</strong> (<em>int, default=64</em>) &#8211; expected size of the hash produced by hash_func</li>
+<li><strong>class aims to expose a scikit-learn compatible API.</strong> (<em>This</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="freediscovery.dupdet.simhash.SimhashDuplicates.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/dupdet/simhash.html#SimhashDuplicates.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.dupdet.simhash.SimhashDuplicates.fit" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>X</strong> (<em>array_like or sparse (CSR) matrix, shape (n_samples, n_features)</em>) &#8211; List of n_features-dimensional data points. Each row
+corresponds to a single data point.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>self</strong> &#8211; Returns self.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.dupdet.simhash.SimhashDuplicates.get_index_by_hash">
+<code class="descname">get_index_by_hash</code><span class="sig-paren">(</span><em>shash</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/dupdet/simhash.html#SimhashDuplicates.get_index_by_hash"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.dupdet.simhash.SimhashDuplicates.get_index_by_hash" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get document index by hash</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>shash</strong> (<em>uint64</em>) &#8211; a simhash value</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>index</strong> &#8211; a document index</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.dupdet.simhash.SimhashDuplicates.query">
+<code class="descname">query</code><span class="sig-paren">(</span><em>distance=2</em>, <em>blocks=u'auto'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/dupdet/simhash.html#SimhashDuplicates.query"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.dupdet.simhash.SimhashDuplicates.query" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find all the nearests neighbours for the dataset</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -778,6 +790,52 @@ are grouped by in cluster_id</li>
 </ul>
 </p>
 </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-freediscovery.dupdet.imatch"></span><dl class="class">
+<dt id="freediscovery.dupdet.imatch.IMatchDuplicates">
+<em class="property">class </em><code class="descclassname">freediscovery.dupdet.imatch.</code><code class="descname">IMatchDuplicates</code><span class="sig-paren">(</span><em>n_rand_lexicons=1</em>, <em>rand_lexicon_ratio=0.7</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/dupdet/imatch.html#IMatchDuplicates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.dupdet.imatch.IMatchDuplicates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code></p>
+<p>Find near duplicates using the randomized I-match backend</p>
+<p>This class aims to expose a scikit-learn compatible API.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>n_rand_lexicons</strong> (<em>-</em>) &#8211; number of random lexicons used for duplicate detection
+If equal to 1 no lexicon randomization is used which is equivalent
+to the original I-Match implementation by Chowdhury &amp; Grossman (2002)</li>
+<li><strong>rand_lexicon_ratio</strong> (<em>-</em>) &#8211; ratio of the vocabulary used in random lexicons</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<ul class="simple">
+<li>Kołcz &amp; Chowdhury (2008) - Lexicon randomization for
+near-duplicate detection with I-Match</li>
+<li>Chowdhury et al. (2002) -</li>
+</ul>
+<dl class="method">
+<dt id="freediscovery.dupdet.imatch.IMatchDuplicates.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/freediscovery/dupdet/imatch.html#IMatchDuplicates.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.dupdet.imatch.IMatchDuplicates.fit" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>X</strong> (<em>array_like or sparse (CSR) matrix, shape (n_samples, n_features)</em>) &#8211; List of n_features-dimensional data points. Each row
+corresponds to a single data point.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>self</strong> &#8211; Returns self.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">object</td>
 </tr>
 </tbody>
 </table>

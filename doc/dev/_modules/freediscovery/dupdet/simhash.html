@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>freediscovery.simhash.base &mdash; FreeDiscovery 0.6.0-dev documentation</title>
+  <title>freediscovery.dupdet.simhash &mdash; FreeDiscovery 0.6.0-dev documentation</title>
   
 
   
@@ -124,7 +124,7 @@
       
           <li><a href="../../index.html">Module code</a> &raquo;</li>
       
-    <li>freediscovery.simhash.base</li>
+    <li>freediscovery.dupdet.simhash</li>
       <li class="wy-breadcrumbs-aside">
         
           
@@ -136,7 +136,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Source code for freediscovery.simhash.base</h1><div class="highlight"><pre>
+  <h1>Source code for freediscovery.dupdet.simhash</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span>
@@ -144,22 +144,48 @@
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">unicode_literals</span>
 
+
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">six</span>
 <span class="kn">from</span> <span class="nn">sklearn.base</span> <span class="k">import</span> <span class="n">BaseEstimator</span>
 <span class="kn">from</span> <span class="nn">sklearn.utils.validation</span> <span class="k">import</span> <span class="n">check_array</span>
 
 
-<div class="viewcode-block" id="SimhashDuplicates"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.simhash.base.SimhashDuplicates">[docs]</a><span class="k">class</span> <span class="nc">SimhashDuplicates</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">):</span>
+<div class="viewcode-block" id="SimhashDuplicates"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.dupdet.simhash.SimhashDuplicates">[docs]</a><span class="k">class</span> <span class="nc">SimhashDuplicates</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Find near duplicates using the simhash-py backend</span>
+<span class="sd">    Find near duplicates using simhash-py</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    hash_func : str or function, default=&#39;murmurhash3_int_u32&#39;</span>
+<span class="sd">        the hashing function used to hash documents.</span>
+<span class="sd">        Possibles values are &quot;murmurhash3_int_u32&quot; or a custom function.</span>
+<span class="sd">    hash_func_nbytes : int, default=64</span>
+<span class="sd">        expected size of the hash produced by hash_func</span>
 
 <span class="sd">    This class aims to expose a scikit-learn compatible API.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hash_func</span><span class="o">=</span><span class="s1">&#39;murmurhash3_int_u32&#39;</span><span class="p">,</span> <span class="n">hash_func_nbytes</span><span class="o">=</span><span class="mi">32</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_fit_X</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_fit_shash_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">hash_func</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">string_types</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">hash_func</span> <span class="o">==</span> <span class="s1">&#39;murmurhash3_int_u32&#39;</span><span class="p">:</span>
+                <span class="kn">from</span> <span class="nn">sklearn.utils.murmurhash</span> <span class="k">import</span> <span class="n">murmurhash3_int_u32</span>
+                <span class="n">hash_func</span> <span class="o">=</span> <span class="n">murmurhash3_int_u32</span>
+                <span class="n">hash_func_nbytes</span> <span class="o">=</span> <span class="mi">32</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">hash_func</span><span class="p">,</span> <span class="s1">&#39;__call__&#39;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
 
-<div class="viewcode-block" id="SimhashDuplicates.fit"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.simhash.base.SimhashDuplicates.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>  <span class="c1"># TODO parameter &#39;y&#39; is unused</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hash_func</span> <span class="o">=</span> <span class="n">hash_func</span>
+        <span class="k">if</span> <span class="n">hash_func_nbytes</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Hashing function other than 64bit or 32bit are not supported!&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">hash_func_nbytes</span> <span class="o">=</span> <span class="n">hash_func_nbytes</span>
+
+
+<div class="viewcode-block" id="SimhashDuplicates.fit"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.dupdet.simhash.SimhashDuplicates.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -171,22 +197,33 @@
 <span class="sd">        self : object</span>
 <span class="sd">            Returns self.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">simhash</span> <span class="k">import</span> <span class="n">compute</span>  <span class="c1"># TODO resolve reference</span>
+        <span class="kn">from</span> <span class="nn">simhash</span> <span class="k">import</span> <span class="n">compute</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_fit_X</span> <span class="o">=</span> <span class="n">X</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">accept_sparse</span><span class="o">=</span><span class="s1">&#39;csr&#39;</span><span class="p">)</span>
 
         <span class="n">n_features</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
-        <span class="k">def</span> <span class="nf">_scale_hash_64bit</span><span class="p">(</span><span class="n">indices</span><span class="p">,</span> <span class="n">n_features</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">indices</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;uint64&#39;</span><span class="p">)</span><span class="o">*</span><span class="p">((</span><span class="mi">2</span><span class="o">**</span><span class="mi">64</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">//</span><span class="n">n_features</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">_scale_hash_32_64bit</span><span class="p">(</span><span class="n">indices</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">indices</span><span class="o">*</span><span class="p">((</span><span class="mi">2</span><span class="o">**</span><span class="mi">64</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="o">**</span><span class="mi">32</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">hash_func</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hash_func</span>
+
+        <span class="n">hashing_table</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+                <span class="p">[</span><span class="n">hash_func</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_features</span><span class="p">)],</span>
+                <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;uint64&#39;</span><span class="p">)</span>
 
         <span class="n">shash</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-            <span class="n">mhash</span> <span class="o">=</span> <span class="n">_scale_hash_64bit</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">indices</span><span class="p">,</span> <span class="n">n_features</span><span class="p">)</span>
+            <span class="c1"># get hashes of indices</span>
+            <span class="n">mhash</span> <span class="o">=</span> <span class="n">hashing_table</span><span class="p">[</span><span class="n">X</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">indices</span><span class="p">]</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hash_func_nbytes</span> <span class="o">==</span> <span class="mi">32</span><span class="p">:</span>
+                <span class="n">mhash</span> <span class="o">=</span> <span class="n">_scale_hash_32_64bit</span><span class="p">(</span><span class="n">mhash</span><span class="p">)</span>
             <span class="n">shash</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">compute</span><span class="p">(</span><span class="n">mhash</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_fit_shash</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">shash</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;uint64&#39;</span><span class="p">)</span>
+        <span class="n">_fit_shash</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">shash</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;uint64&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fit_shash</span> <span class="o">=</span> <span class="n">_fit_shash</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_fit_shash_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">val</span><span class="p">:</span> <span class="n">key</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fit_shash</span><span class="p">)}</span></div>
 
-<div class="viewcode-block" id="SimhashDuplicates.get_index_by_hash"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.simhash.base.SimhashDuplicates.get_index_by_hash">[docs]</a>    <span class="k">def</span> <span class="nf">get_index_by_hash</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shash</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SimhashDuplicates.get_index_by_hash"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.dupdet.simhash.SimhashDuplicates.get_index_by_hash">[docs]</a>    <span class="k">def</span> <span class="nf">get_index_by_hash</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shash</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Get document index by hash</span>
 
 <span class="sd">        Parameters</span>
@@ -201,7 +238,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fit_shash_dict</span><span class="p">[</span><span class="n">shash</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="SimhashDuplicates.query"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.simhash.base.SimhashDuplicates.query">[docs]</a>    <span class="k">def</span> <span class="nf">query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">blocks</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SimhashDuplicates.query"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.dupdet.simhash.SimhashDuplicates.query">[docs]</a>    <span class="k">def</span> <span class="nf">query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">blocks</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Find all the nearests neighbours for the dataset</span>
 
 <span class="sd">        Parameters</span>
@@ -223,17 +261,18 @@
 <span class="sd">        dup_pairs : list</span>
 <span class="sd">            list of tuples for the near-duplicates</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">simhash</span> <span class="k">import</span> <span class="n">find_all</span>  <span class="c1"># TODO resolve reference</span>
+        <span class="kn">from</span> <span class="nn">simhash</span> <span class="k">import</span> <span class="n">find_all</span>
 
         <span class="k">if</span> <span class="n">distance</span> <span class="o">&gt;=</span> <span class="mi">64</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Wrong input parameter for distance = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">distance</span><span class="p">)</span>
-                            <span class="o">+</span> <span class="s1">&#39;Must be less than 64!&#39;</span><span class="p">)</span>
+                            <span class="o">+</span><span class="s1">&#39;Must be less than 64!&#39;</span><span class="p">)</span>
 
         <span class="n">_</span><span class="p">,</span> <span class="n">cluster_id</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fit_shash</span><span class="p">,</span> <span class="n">return_inverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">blocks</span> <span class="o">==</span> <span class="s1">&#39;auto&#39;</span><span class="p">:</span>
             <span class="n">blocks</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">distance</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span>
         <span class="n">matches</span> <span class="o">=</span> <span class="n">find_all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fit_shash</span><span class="p">,</span> <span class="n">blocks</span><span class="p">,</span> <span class="n">distance</span><span class="p">)</span>
+        <span class="n">matches</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">matches</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;uint64&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fit_shash</span><span class="p">,</span> <span class="n">cluster_id</span><span class="p">,</span> <span class="n">matches</span></div></div>
 
 

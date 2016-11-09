@@ -156,6 +156,9 @@
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>  <span class="c1"># v0.18</span>
     <span class="kn">from</span> <span class="nn">sklearn.metrics.base</span> <span class="k">import</span> <span class="n">UndefinedMetricWarning</span>
 
+<span class="kn">from</span> <span class="nn">.exceptions</span> <span class="k">import</span> <span class="p">(</span><span class="n">DatasetNotFound</span><span class="p">,</span> <span class="n">ModelNotFound</span><span class="p">,</span> <span class="n">InitException</span><span class="p">,</span>
+                            <span class="n">WrongParameter</span><span class="p">)</span>
+
 <span class="nd">@contextmanager</span>
 <span class="k">def</span> <span class="nf">_silent</span><span class="p">(</span><span class="n">stream</span><span class="o">=</span><span class="s1">&#39;stderr&#39;</span><span class="p">):</span>
     <span class="n">stderr</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="n">stream</span><span class="p">)</span>
@@ -176,7 +179,11 @@
     <span class="n">X_ref</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">X_ref</span><span class="p">)</span>
     <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 
-    <span class="n">d_pred</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;is_relevant_p&#39;</span><span class="p">:</span> <span class="n">Y</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">,</span> <span class="s1">&#39;is_relevant_score&#39;</span><span class="p">:</span> <span class="n">Y</span><span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="n">X</span><span class="p">)</span>
+    <span class="c1"># this merge operation should not be necessary anymore once we move to the</span>
+    <span class="c1"># numeric indexing (issue #4)</span>
+
+    <span class="n">d_pred</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;is_relevant_p&#39;</span><span class="p">:</span> <span class="n">Y</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">,</span>
+                           <span class="s1">&#39;is_relevant_score&#39;</span><span class="p">:</span> <span class="n">Y</span><span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="n">X</span><span class="p">)</span>
     <span class="n">d_ref</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;is_relevant&#39;</span><span class="p">:</span> <span class="n">Y_ref</span><span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="n">X_ref</span><span class="p">)</span>
     <span class="n">d_out</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">d_ref</span><span class="p">,</span> <span class="n">d_pred</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span> <span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">d_out</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
