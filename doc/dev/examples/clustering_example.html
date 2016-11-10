@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Document Clustering Example &mdash; FreeDiscovery 0.6.0-dev documentation</title>
+  <title>Clustering Example [REST API] &mdash; FreeDiscovery 0.6.0-dev documentation</title>
   
 
   
@@ -37,8 +37,8 @@
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="FreeDiscovery 0.6.0-dev documentation" href="../index.html"/>
         <link rel="up" title="Examples" href="index.html"/>
-        <link rel="next" title="Document Clustering example" href="duplicate_detection_example.html"/>
-        <link rel="prev" title="Document Clustering example (Python)" href="clustering_example_python.html"/> 
+        <link rel="next" title="Duplicate Detection Example [REST API]" href="duplicate_detection_example.html"/>
+        <link rel="prev" title="Clustering Example [Python API]" href="clustering_example_python.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -93,10 +93,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../API_reference.html">REST API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../freediscovery.html">Python API reference</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="clustering_example_python.html">Document Clustering example (Python)</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Document Clustering Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="duplicate_detection_example.html">Document Clustering example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="categorization_example.html">Binary Categorization Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clustering_example_python.html">Clustering Example [Python API]</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Clustering Example [REST API]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="duplicate_detection_example.html">Duplicate Detection Example [REST API]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="categorization_example.html">Categorization Example [REST API]</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../deployment.html">Deployment options</a></li>
@@ -133,7 +133,7 @@
       
           <li><a href="index.html">Examples</a> &raquo;</li>
       
-    <li>Document Clustering Example</li>
+    <li>Clustering Example [REST API]</li>
       <li class="wy-breadcrumbs-aside">
         
           
@@ -147,19 +147,23 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="document-clustering-example">
-<span id="sphx-glr-examples-clustering-example-py"></span><h1>Document Clustering Example<a class="headerlink" href="#document-clustering-example" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="clustering-example-rest-api">
+<span id="sphx-glr-examples-clustering-example-py"></span><h1>Clustering Example [REST API]<a class="headerlink" href="#clustering-example-rest-api" title="Permalink to this headline">¶</a></h1>
+<p>Cluster documents into clusters</p>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="mf">1.</span><span class="n">a</span> <span class="n">Load</span> <span class="n">dataset</span> <span class="ow">and</span> <span class="n">initalize</span> <span class="n">feature</span> <span class="n">extraction</span>
-  <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="mf">0.</span> <span class="n">Load</span> <span class="n">the</span> <span class="n">test</span> <span class="n">dataset</span>
+ <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">datasets</span><span class="o">/</span><span class="n">treclegal09_2k_subset</span>
+
+<span class="mf">1.</span><span class="n">a</span> <span class="n">Load</span> <span class="n">dataset</span> <span class="ow">and</span> <span class="n">initalize</span> <span class="n">feature</span> <span class="n">extraction</span>
+ <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span>
    <span class="o">=&gt;</span> <span class="n">received</span> <span class="p">[</span><span class="s1">u&#39;id&#39;</span><span class="p">,</span> <span class="s1">u&#39;filenames&#39;</span><span class="p">]</span>
-   <span class="o">=&gt;</span> <span class="n">dsid</span> <span class="o">=</span> <span class="n">d3545332e14c45d99b1c95af6a22fadb</span>
+   <span class="o">=&gt;</span> <span class="n">dsid</span> <span class="o">=</span> <span class="mi">8</span><span class="n">f1cb4b87865442ebb5f3a6b9f4b0e52</span>
 
 <span class="mf">1.</span><span class="n">b</span> <span class="n">Run</span> <span class="n">feature</span> <span class="n">extraction</span>
-  <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="n">d3545332e14c45d99b1c95af6a22fadb</span>
+ <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="mi">8</span><span class="n">f1cb4b87865442ebb5f3a6b9f4b0e52</span>
 
 <span class="mf">1.</span><span class="n">d</span><span class="o">.</span> <span class="n">check</span> <span class="n">the</span> <span class="n">parameters</span> <span class="n">of</span> <span class="n">the</span> <span class="n">extracted</span> <span class="n">features</span>
-  <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="n">d3545332e14c45d99b1c95af6a22fadb</span>
+ <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="mi">8</span><span class="n">f1cb4b87865442ebb5f3a6b9f4b0e52</span>
      <span class="o">-</span> <span class="n">binary</span><span class="p">:</span> <span class="kc">False</span>
      <span class="o">-</span> <span class="n">n_jobs</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span>
      <span class="o">-</span> <span class="n">stop_words</span><span class="p">:</span> <span class="n">english</span>
@@ -178,66 +182,53 @@
      <span class="o">-</span> <span class="n">norm</span><span class="p">:</span> <span class="n">l2</span>
 
 <span class="mf">2.</span><span class="n">a</span><span class="o">.</span> <span class="n">Document</span> <span class="n">clustering</span> <span class="p">(</span><span class="n">LSI</span> <span class="o">+</span> <span class="n">K</span><span class="o">-</span><span class="n">means</span><span class="p">)</span>
-  <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">clustering</span><span class="o">/</span><span class="n">k</span><span class="o">-</span><span class="n">mean</span><span class="o">/</span>
-     <span class="o">=&gt;</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="mi">84</span><span class="n">cf6c3c78de43f6aaf111b5a75df3a9</span>
+ <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">clustering</span><span class="o">/</span><span class="n">k</span><span class="o">-</span><span class="n">mean</span><span class="o">/</span>
+     <span class="o">=&gt;</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="mi">4</span><span class="n">be4294c7c1b4049808050ad80b4e1aa</span>
 
 <span class="mf">2.</span><span class="n">b</span><span class="o">.</span> <span class="n">Computing</span> <span class="n">cluster</span> <span class="n">labels</span>
-  <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">clustering</span><span class="o">/</span><span class="n">k</span><span class="o">-</span><span class="n">mean</span><span class="o">/</span><span class="mi">84</span><span class="n">cf6c3c78de43f6aaf111b5a75df3a9</span>
-    <span class="o">..</span> <span class="n">computed</span> <span class="ow">in</span> <span class="mf">4.2</span><span class="n">s</span>
+ <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">clustering</span><span class="o">/</span><span class="n">k</span><span class="o">-</span><span class="n">mean</span><span class="o">/</span><span class="mi">4</span><span class="n">be4294c7c1b4049808050ad80b4e1aa</span>
+    <span class="o">..</span> <span class="n">computed</span> <span class="ow">in</span> <span class="mf">4.4</span><span class="n">s</span>
    <span class="n">N_documents</span>                                      <span class="n">cluster_names</span>
-<span class="mi">3</span>          <span class="mi">498</span>  <span class="p">[</span><span class="s1">u&#39;recipients&#39;</span><span class="p">,</span> <span class="s1">u&#39;administrative&#39;</span><span class="p">,</span> <span class="s1">u&#39;group&#39;</span><span class="p">,</span> <span class="n">u</span><span class="o">...</span>
-<span class="mi">0</span>          <span class="mi">483</span>  <span class="p">[</span><span class="s1">u&#39;ect&#39;</span><span class="p">,</span> <span class="s1">u&#39;enron&#39;</span><span class="p">,</span> <span class="s1">u&#39;hou&#39;</span><span class="p">,</span> <span class="s1">u&#39;tana&#39;</span><span class="p">,</span> <span class="s1">u&#39;jones&#39;</span><span class="p">,</span> <span class="o">...</span>
-<span class="mi">1</span>          <span class="mi">468</span>  <span class="p">[</span><span class="s1">u&#39;normal&#39;</span><span class="p">,</span> <span class="s1">u&#39;tenet&#39;</span><span class="p">,</span> <span class="s1">u&#39;test&#39;</span><span class="p">,</span> <span class="s1">u&#39;gmt&#39;</span><span class="p">,</span> <span class="s1">u&#39;sensi...</span>
-<span class="mi">4</span>          <span class="mi">315</span>  <span class="p">[</span><span class="s1">u&#39;enron&#39;</span><span class="p">,</span> <span class="s1">u&#39;energy&#39;</span><span class="p">,</span> <span class="s1">u&#39;services&#39;</span><span class="p">,</span> <span class="s1">u&#39;trade&#39;</span><span class="p">,</span> <span class="n">u</span><span class="o">...</span>
-<span class="mi">2</span>          <span class="mi">265</span>  <span class="p">[</span><span class="s1">u&#39;shackleton&#39;</span><span class="p">,</span> <span class="s1">u&#39;ect&#39;</span><span class="p">,</span> <span class="s1">u&#39;test&#39;</span><span class="p">,</span> <span class="s1">u&#39;normal&#39;</span><span class="p">,</span> <span class="s1">u&#39;...</span>
-<span class="mi">7</span>          <span class="mi">124</span>  <span class="p">[</span><span class="s1">u&#39;shall&#39;</span><span class="p">,</span> <span class="s1">u&#39;party&#39;</span><span class="p">,</span> <span class="s1">u&#39;agreement&#39;</span><span class="p">,</span> <span class="s1">u&#39;transacti...</span>
-<span class="mi">5</span>           <span class="mi">99</span>  <span class="p">[</span><span class="s1">u&#39;sanders&#39;</span><span class="p">,</span> <span class="s1">u&#39;normal&#39;</span><span class="p">,</span> <span class="s1">u&#39;nov&#39;</span><span class="p">,</span> <span class="s1">u&#39;sensitivity&#39;</span><span class="o">...</span>
-<span class="mi">6</span>           <span class="mi">92</span>  <span class="p">[</span><span class="s1">u&#39;enron_development&#39;</span><span class="p">,</span> <span class="s1">u&#39;ect&#39;</span><span class="p">,</span> <span class="s1">u&#39;shackleton&#39;</span><span class="p">,</span> <span class="o">...</span>
-<span class="mi">8</span>           <span class="mi">64</span>  <span class="p">[</span><span class="s1">u&#39;migration&#39;</span><span class="p">,</span> <span class="s1">u&#39;outlook&#39;</span><span class="p">,</span> <span class="s1">u&#39;team&#39;</span><span class="p">,</span> <span class="s1">u&#39;normal&#39;</span><span class="p">,</span><span class="o">...</span>
-<span class="mi">9</span>           <span class="mi">57</span>  <span class="p">[</span><span class="s1">u&#39;rewrite&#39;</span><span class="p">,</span> <span class="s1">u&#39;server&#39;</span><span class="p">,</span> <span class="s1">u&#39;address&#39;</span><span class="p">,</span> <span class="s1">u&#39;smtp&#39;</span><span class="p">,</span> <span class="n">u</span><span class="o">...</span>
+<span class="mi">2</span>          <span class="mi">470</span>  <span class="p">[</span><span class="s1">u&#39;normal&#39;</span><span class="p">,</span> <span class="s1">u&#39;tenet&#39;</span><span class="p">,</span> <span class="s1">u&#39;test&#39;</span><span class="p">,</span> <span class="s1">u&#39;gmt&#39;</span><span class="p">,</span> <span class="s1">u&#39;sensi...</span>
+<span class="mi">1</span>          <span class="mi">457</span>  <span class="p">[</span><span class="s1">u&#39;recipients&#39;</span><span class="p">,</span> <span class="s1">u&#39;administrative&#39;</span><span class="p">,</span> <span class="s1">u&#39;group&#39;</span><span class="p">,</span> <span class="n">u</span><span class="o">...</span>
+<span class="mi">5</span>          <span class="mi">381</span>  <span class="p">[</span><span class="s1">u&#39;enron&#39;</span><span class="p">,</span> <span class="s1">u&#39;rewrite&#39;</span><span class="p">,</span> <span class="s1">u&#39;address&#39;</span><span class="p">,</span> <span class="s1">u&#39;energy&#39;</span><span class="p">,</span> <span class="o">...</span>
+<span class="mi">4</span>          <span class="mi">252</span>  <span class="p">[</span><span class="s1">u&#39;ect&#39;</span><span class="p">,</span> <span class="s1">u&#39;hou&#39;</span><span class="p">,</span> <span class="s1">u&#39;nemec&#39;</span><span class="p">,</span> <span class="s1">u&#39;enron&#39;</span><span class="p">,</span> <span class="s1">u&#39;subject...</span>
+<span class="mi">6</span>          <span class="mi">232</span>  <span class="p">[</span><span class="s1">u&#39;shackleton&#39;</span><span class="p">,</span> <span class="s1">u&#39;normal&#39;</span><span class="p">,</span> <span class="s1">u&#39;test&#39;</span><span class="p">,</span> <span class="s1">u&#39;load&#39;</span><span class="p">,</span> <span class="n">u</span><span class="o">...</span>
+<span class="mi">7</span>          <span class="mi">180</span>  <span class="p">[</span><span class="s1">u&#39;ect&#39;</span><span class="p">,</span> <span class="s1">u&#39;hou&#39;</span><span class="p">,</span> <span class="s1">u&#39;group&#39;</span><span class="p">,</span> <span class="s1">u&#39;recipients&#39;</span><span class="p">,</span> <span class="s1">u&#39;ad...</span>
+<span class="mi">8</span>          <span class="mi">152</span>  <span class="p">[</span><span class="s1">u&#39;sanders&#39;</span><span class="p">,</span> <span class="s1">u&#39;migration&#39;</span><span class="p">,</span> <span class="s1">u&#39;outlook&#39;</span><span class="p">,</span> <span class="s1">u&#39;team&#39;</span><span class="o">...</span>
+<span class="mi">3</span>          <span class="mi">129</span>  <span class="p">[</span><span class="s1">u&#39;shall&#39;</span><span class="p">,</span> <span class="s1">u&#39;party&#39;</span><span class="p">,</span> <span class="s1">u&#39;agreement&#39;</span><span class="p">,</span> <span class="s1">u&#39;transacti...</span>
+<span class="mi">0</span>          <span class="mi">118</span>  <span class="p">[</span><span class="s1">u&#39;enron&#39;</span><span class="p">,</span> <span class="s1">u&#39;tana&#39;</span><span class="p">,</span> <span class="s1">u&#39;jones&#39;</span><span class="p">,</span> <span class="s1">u&#39;normal&#39;</span><span class="p">,</span> <span class="s1">u&#39;ect...</span>
+<span class="mi">9</span>           <span class="mi">94</span>  <span class="p">[</span><span class="s1">u&#39;enron_development&#39;</span><span class="p">,</span> <span class="s1">u&#39;ect&#39;</span><span class="p">,</span> <span class="s1">u&#39;shackleton&#39;</span><span class="p">,</span> <span class="o">...</span>
 
 <span class="mf">2.</span><span class="n">a</span><span class="o">.</span> <span class="n">Document</span> <span class="n">clustering</span> <span class="p">(</span><span class="n">LSI</span> <span class="o">+</span> <span class="n">Ward</span> <span class="n">HC</span><span class="p">)</span>
-  <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">clustering</span><span class="o">/</span><span class="n">ward_hc</span><span class="o">/</span>
-     <span class="o">=&gt;</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="mi">50432764495</span><span class="n">d4f49875712333c8520d7</span>
+ <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">clustering</span><span class="o">/</span><span class="n">ward_hc</span><span class="o">/</span>
+     <span class="o">=&gt;</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="mi">5976</span><span class="n">c99ee9244cbe8c24606c143f9a11</span>
 
 <span class="mf">2.</span><span class="n">b</span><span class="o">.</span> <span class="n">Computing</span> <span class="n">cluster</span> <span class="n">labels</span>
-  <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">clustering</span><span class="o">/</span><span class="n">ward_hc</span><span class="o">/</span><span class="mi">50432764495</span><span class="n">d4f49875712333c8520d7</span>
+<span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">clustering</span><span class="o">/</span><span class="n">ward_hc</span><span class="o">/</span><span class="mi">5976</span><span class="n">c99ee9244cbe8c24606c143f9a11</span>
     <span class="o">..</span> <span class="n">computed</span> <span class="ow">in</span> <span class="mf">4.0</span><span class="n">s</span>
    <span class="n">N_documents</span>                                      <span class="n">cluster_names</span>
-<span class="mi">9</span>          <span class="mi">444</span>  <span class="p">[</span><span class="s1">u&#39;normal&#39;</span><span class="p">,</span> <span class="s1">u&#39;tenet&#39;</span><span class="p">,</span> <span class="s1">u&#39;test&#39;</span><span class="p">,</span> <span class="s1">u&#39;gmt&#39;</span><span class="p">,</span> <span class="s1">u&#39;sensi...</span>
-<span class="mi">2</span>          <span class="mi">443</span>  <span class="p">[</span><span class="s1">u&#39;shackleton&#39;</span><span class="p">,</span> <span class="s1">u&#39;enron_development&#39;</span><span class="p">,</span> <span class="s1">u&#39;ect&#39;</span><span class="p">,</span> <span class="o">...</span>
-<span class="mi">1</span>          <span class="mi">427</span>  <span class="p">[</span><span class="s1">u&#39;recipients&#39;</span><span class="p">,</span> <span class="s1">u&#39;administrative&#39;</span><span class="p">,</span> <span class="s1">u&#39;group&#39;</span><span class="p">,</span> <span class="n">u</span><span class="o">...</span>
-<span class="mi">6</span>          <span class="mi">347</span>  <span class="p">[</span><span class="s1">u&#39;enron&#39;</span><span class="p">,</span> <span class="s1">u&#39;energy&#39;</span><span class="p">,</span> <span class="s1">u&#39;trade&#39;</span><span class="p">,</span> <span class="s1">u&#39;power&#39;</span><span class="p">,</span> <span class="s1">u&#39;ma...</span>
-<span class="mi">0</span>          <span class="mi">312</span>  <span class="p">[</span><span class="s1">u&#39;ect&#39;</span><span class="p">,</span> <span class="s1">u&#39;tana&#39;</span><span class="p">,</span> <span class="s1">u&#39;jones&#39;</span><span class="p">,</span> <span class="s1">u&#39;hou&#39;</span><span class="p">,</span> <span class="s1">u&#39;enron&#39;</span><span class="p">,</span> <span class="o">...</span>
-<span class="mi">4</span>          <span class="mi">147</span>  <span class="p">[</span><span class="s1">u&#39;shall&#39;</span><span class="p">,</span> <span class="s1">u&#39;party&#39;</span><span class="p">,</span> <span class="s1">u&#39;agreement&#39;</span><span class="p">,</span> <span class="s1">u&#39;transacti...</span>
-<span class="mi">3</span>          <span class="mi">131</span>  <span class="p">[</span><span class="s1">u&#39;nemec&#39;</span><span class="p">,</span> <span class="s1">u&#39;ect&#39;</span><span class="p">,</span> <span class="s1">u&#39;normal&#39;</span><span class="p">,</span> <span class="s1">u&#39;test&#39;</span><span class="p">,</span> <span class="s1">u&#39;doc&#39;</span><span class="p">,</span><span class="o">...</span>
-<span class="mi">8</span>           <span class="mi">95</span>  <span class="p">[</span><span class="s1">u&#39;sanders&#39;</span><span class="p">,</span> <span class="s1">u&#39;normal&#39;</span><span class="p">,</span> <span class="s1">u&#39;nov&#39;</span><span class="p">,</span> <span class="s1">u&#39;sensitivity&#39;</span><span class="o">...</span>
+<span class="mi">2</span>          <span class="mi">449</span>  <span class="p">[</span><span class="s1">u&#39;normal&#39;</span><span class="p">,</span> <span class="s1">u&#39;tenet&#39;</span><span class="p">,</span> <span class="s1">u&#39;test&#39;</span><span class="p">,</span> <span class="s1">u&#39;gmt&#39;</span><span class="p">,</span> <span class="s1">u&#39;sensi...</span>
+<span class="mi">1</span>          <span class="mi">422</span>  <span class="p">[</span><span class="s1">u&#39;recipients&#39;</span><span class="p">,</span> <span class="s1">u&#39;administrative&#39;</span><span class="p">,</span> <span class="s1">u&#39;group&#39;</span><span class="p">,</span> <span class="n">u</span><span class="o">...</span>
+<span class="mi">3</span>          <span class="mi">417</span>  <span class="p">[</span><span class="s1">u&#39;ect&#39;</span><span class="p">,</span> <span class="s1">u&#39;tana&#39;</span><span class="p">,</span> <span class="s1">u&#39;jones&#39;</span><span class="p">,</span> <span class="s1">u&#39;hou&#39;</span><span class="p">,</span> <span class="s1">u&#39;enron&#39;</span><span class="p">,</span> <span class="o">...</span>
+<span class="mi">0</span>          <span class="mi">403</span>  <span class="p">[</span><span class="s1">u&#39;shackleton&#39;</span><span class="p">,</span> <span class="s1">u&#39;enron_development&#39;</span><span class="p">,</span> <span class="s1">u&#39;ect&#39;</span><span class="p">,</span> <span class="o">...</span>
+<span class="mi">4</span>          <span class="mi">323</span>  <span class="p">[</span><span class="s1">u&#39;enron&#39;</span><span class="p">,</span> <span class="s1">u&#39;energy&#39;</span><span class="p">,</span> <span class="s1">u&#39;power&#39;</span><span class="p">,</span> <span class="s1">u&#39;market&#39;</span><span class="p">,</span> <span class="s1">u&#39;s...</span>
+<span class="mi">8</span>          <span class="mi">134</span>  <span class="p">[</span><span class="s1">u&#39;shall&#39;</span><span class="p">,</span> <span class="s1">u&#39;party&#39;</span><span class="p">,</span> <span class="s1">u&#39;agreement&#39;</span><span class="p">,</span> <span class="s1">u&#39;transacti...</span>
+<span class="mi">9</span>          <span class="mi">103</span>  <span class="p">[</span><span class="s1">u&#39;nemec&#39;</span><span class="p">,</span> <span class="s1">u&#39;ect&#39;</span><span class="p">,</span> <span class="s1">u&#39;ruppert&#39;</span><span class="p">,</span> <span class="s1">u&#39;enron&#39;</span><span class="p">,</span> <span class="s1">u&#39;hou...</span>
+<span class="mi">7</span>           <span class="mi">95</span>  <span class="p">[</span><span class="s1">u&#39;sanders&#39;</span><span class="p">,</span> <span class="s1">u&#39;normal&#39;</span><span class="p">,</span> <span class="s1">u&#39;nov&#39;</span><span class="p">,</span> <span class="s1">u&#39;sensitivity&#39;</span><span class="o">...</span>
 <span class="mi">5</span>           <span class="mi">63</span>  <span class="p">[</span><span class="s1">u&#39;migration&#39;</span><span class="p">,</span> <span class="s1">u&#39;outlook&#39;</span><span class="p">,</span> <span class="s1">u&#39;team&#39;</span><span class="p">,</span> <span class="s1">u&#39;normal&#39;</span><span class="p">,</span><span class="o">...</span>
-<span class="mi">7</span>           <span class="mi">56</span>  <span class="p">[</span><span class="s1">u&#39;rewrite&#39;</span><span class="p">,</span> <span class="s1">u&#39;server&#39;</span><span class="p">,</span> <span class="s1">u&#39;address&#39;</span><span class="p">,</span> <span class="s1">u&#39;smtp&#39;</span><span class="p">,</span> <span class="n">u</span><span class="o">...</span>
+<span class="mi">6</span>           <span class="mi">56</span>  <span class="p">[</span><span class="s1">u&#39;rewrite&#39;</span><span class="p">,</span> <span class="s1">u&#39;server&#39;</span><span class="p">,</span> <span class="s1">u&#39;address&#39;</span><span class="p">,</span> <span class="s1">u&#39;smtp&#39;</span><span class="p">,</span> <span class="n">u</span><span class="o">...</span>
 </pre></div>
 </div>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
 <span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;{:,.3f}&#39;</span><span class="o">.</span><span class="n">format</span>
-
-
-<span class="k">def</span> <span class="nf">_parent_dir</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">path</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">_parent_dir</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
-
-
-<span class="k">def</span> <span class="nf">_print_url</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="n">url</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">*</span><span class="mi">1</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">repr_clustering</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">terms</span><span class="p">):</span>
@@ -247,25 +238,25 @@
     <span class="n">out</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;N_documents&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">out</span>
 
-<span class="n">use_docker</span> <span class="o">=</span> <span class="bp">False</span>
-
-<span class="n">dataset_name</span> <span class="o">=</span> <span class="s2">&quot;treclegal09_2k_subset&quot;</span>
-
-<span class="k">if</span> <span class="n">use_docker</span><span class="p">:</span>
-    <span class="n">data_dir</span> <span class="o">=</span> <span class="s2">&quot;/freediscovery_shared/{}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dataset_name</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="n">data_dir</span> <span class="o">=</span> <span class="s2">&quot;../freediscovery_shared/{}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dataset_name</span><span class="p">)</span>
-<span class="n">rel_data_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">&quot;../../freediscovery_shared/{}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dataset_name</span><span class="p">))</span> <span class="c1"># relative path between this file and the FreeDiscovery source folder</span>
+<span class="n">dataset_name</span> <span class="o">=</span> <span class="s2">&quot;treclegal09_2k_subset&quot;</span>     <span class="c1"># see list of available datasets</span>
 
 <span class="n">BASE_URL</span> <span class="o">=</span> <span class="s2">&quot;http://localhost:5001/api/v0&quot;</span>  <span class="c1"># FreeDiscovery server URL</span>
 
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; 0. Load the test dataset&quot;</span><span class="p">)</span>
+<span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/datasets/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dataset_name</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+<span class="c1"># To use a custom dataset, simply specify the following variables</span>
+<span class="n">data_dir</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;data_dir&#39;</span><span class="p">]</span>
 
 <span class="c1"># # 1. Feature extraction (non hashed)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">1.a Load dataset and initalize feature extraction&quot;</span><span class="p">)</span>
 <span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/feature-extraction&#39;</span>
-<span class="n">_print_url</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
-<span class="n">fe_opts</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;data_dir&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">),</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+<span class="n">fe_opts</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;data_dir&#39;</span><span class="p">:</span> <span class="n">data_dir</span><span class="p">,</span>
            <span class="s1">&#39;stop_words&#39;</span><span class="p">:</span> <span class="s1">&#39;english&#39;</span><span class="p">,</span> <span class="s1">&#39;chunk_size&#39;</span><span class="p">:</span> <span class="mi">2000</span><span class="p">,</span> <span class="s1">&#39;n_jobs&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
            <span class="s1">&#39;use_idf&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;sublinear_tf&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;binary&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;n_features&#39;</span><span class="p">:</span> <span class="mi">30001</span><span class="p">,</span>
            <span class="s1">&#39;analyzer&#39;</span><span class="p">:</span> <span class="s1">&#39;word&#39;</span><span class="p">,</span> <span class="s1">&#39;ngram_range&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;norm&quot;</span><span class="p">:</span> <span class="s2">&quot;l2&quot;</span><span class="p">,</span>
@@ -281,18 +272,17 @@
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">1.b Run feature extraction&quot;</span><span class="p">)</span>
 <span class="c1"># progress status is available for the hashed version only</span>
 <span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span><span class="o">+</span><span class="s1">&#39;/feature-extraction/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dsid</span><span class="p">)</span>
-<span class="n">_print_url</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
 <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">1.d. check the parameters of the extracted features&quot;</span><span class="p">)</span>
 <span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/feature-extraction/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dsid</span><span class="p">)</span>
-<span class="n">_print_url</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39; GET&#39;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
 <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 
 <span class="n">data</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="k">if</span> <span class="n">key</span><span class="o">!=</span><span class="s1">&#39;filenames&#39;</span><span class="p">:</span>
-           <span class="k">print</span><span class="p">(</span><span class="s1">&#39;     - {}: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;     - {}: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> \
+                                                  <span class="k">if</span> <span class="s2">&quot;filenames&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">key</span><span class="p">]))</span>
 
 
 <span class="c1"># # 2. Document Clustering (LSI + K-Means)</span>
@@ -300,7 +290,7 @@
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">2.a. Document clustering (LSI + K-means)&quot;</span><span class="p">)</span>
 
 <span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/clustering/k-mean/&#39;</span>
-<span class="n">_print_url</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
 <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
 <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span>
                     <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;dataset_id&#39;</span><span class="p">:</span> <span class="n">dsid</span><span class="p">,</span>
@@ -314,7 +304,7 @@
 
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">2.b. Computing cluster labels&quot;</span><span class="p">)</span>
 <span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/clustering/k-mean/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mid</span><span class="p">)</span>
-<span class="n">_print_url</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
 <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span>
                    <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;n_top_words&#39;</span><span class="p">:</span> <span class="mi">6</span>
                          <span class="p">})</span>
@@ -330,7 +320,7 @@
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">2.a. Document clustering (LSI + Ward HC)&quot;</span><span class="p">)</span>
 
 <span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/clustering/ward_hc/&#39;</span>
-<span class="n">_print_url</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
 <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
 <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span>
                     <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;dataset_id&#39;</span><span class="p">:</span> <span class="n">dsid</span><span class="p">,</span>
@@ -345,7 +335,7 @@
 
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">2.b. Computing cluster labels&quot;</span><span class="p">)</span>
 <span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/clustering/ward_hc/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mid</span><span class="p">)</span>
-<span class="n">_print_url</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
 <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span>
                    <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;n_top_words&#39;</span><span class="p">:</span> <span class="mi">6</span>
                          <span class="p">})</span>
@@ -356,7 +346,7 @@
 <span class="k">print</span><span class="p">(</span><span class="n">repr_clustering</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;labels&#39;</span><span class="p">]),</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;cluster_terms&#39;</span><span class="p">]))</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  10.766 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  10.950 seconds)</p>
 <div class="sphx-glr-footer container">
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../_downloads/clustering_example.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">clustering_example.py</span></code></a></div>
@@ -373,10 +363,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="duplicate_detection_example.html" class="btn btn-neutral float-right" title="Document Clustering example" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="duplicate_detection_example.html" class="btn btn-neutral float-right" title="Duplicate Detection Example [REST API]" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="clustering_example_python.html" class="btn btn-neutral" title="Document Clustering example (Python)" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="clustering_example_python.html" class="btn btn-neutral" title="Clustering Example [Python API]" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

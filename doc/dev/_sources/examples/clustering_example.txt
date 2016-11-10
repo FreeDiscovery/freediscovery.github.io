@@ -3,9 +3,10 @@
 .. _sphx_glr_examples_clustering_example.py:
 
 
-Document Clustering Example
----------------------------
+Clustering Example [REST API]
+-----------------------------
 
+Cluster documents into clusters
 
 
 
@@ -15,16 +16,19 @@ Document Clustering Example
 
  Out::
 
+    0. Load the test dataset
+     POST http://localhost:5001/api/v0/datasets/treclegal09_2k_subset
+
     1.a Load dataset and initalize feature extraction
-      POST http://localhost:5001/api/v0/feature-extraction
+     POST http://localhost:5001/api/v0/feature-extraction
        => received [u'id', u'filenames']
-       => dsid = d3545332e14c45d99b1c95af6a22fadb
+       => dsid = 8f1cb4b87865442ebb5f3a6b9f4b0e52
 
     1.b Run feature extraction
-      POST http://localhost:5001/api/v0/feature-extraction/d3545332e14c45d99b1c95af6a22fadb
+     POST http://localhost:5001/api/v0/feature-extraction/8f1cb4b87865442ebb5f3a6b9f4b0e52
 
     1.d. check the parameters of the extracted features
-      GET http://localhost:5001/api/v0/feature-extraction/d3545332e14c45d99b1c95af6a22fadb
+     GET http://localhost:5001/api/v0/feature-extraction/8f1cb4b87865442ebb5f3a6b9f4b0e52
          - binary: False
          - n_jobs: -1
          - stop_words: english
@@ -43,42 +47,42 @@ Document Clustering Example
          - norm: l2
 
     2.a. Document clustering (LSI + K-means)
-      POST http://localhost:5001/api/v0/clustering/k-mean/
-         => model id = 84cf6c3c78de43f6aaf111b5a75df3a9
+     POST http://localhost:5001/api/v0/clustering/k-mean/
+         => model id = 4be4294c7c1b4049808050ad80b4e1aa
 
     2.b. Computing cluster labels
-      POST http://localhost:5001/api/v0/clustering/k-mean/84cf6c3c78de43f6aaf111b5a75df3a9
-        .. computed in 4.2s
+     POST http://localhost:5001/api/v0/clustering/k-mean/4be4294c7c1b4049808050ad80b4e1aa
+        .. computed in 4.4s
        N_documents                                      cluster_names
-    3          498  [u'recipients', u'administrative', u'group', u...
-    0          483  [u'ect', u'enron', u'hou', u'tana', u'jones', ...
-    1          468  [u'normal', u'tenet', u'test', u'gmt', u'sensi...
-    4          315  [u'enron', u'energy', u'services', u'trade', u...
-    2          265  [u'shackleton', u'ect', u'test', u'normal', u'...
-    7          124  [u'shall', u'party', u'agreement', u'transacti...
-    5           99  [u'sanders', u'normal', u'nov', u'sensitivity'...
-    6           92  [u'enron_development', u'ect', u'shackleton', ...
-    8           64  [u'migration', u'outlook', u'team', u'normal',...
-    9           57  [u'rewrite', u'server', u'address', u'smtp', u...
+    2          470  [u'normal', u'tenet', u'test', u'gmt', u'sensi...
+    1          457  [u'recipients', u'administrative', u'group', u...
+    5          381  [u'enron', u'rewrite', u'address', u'energy', ...
+    4          252  [u'ect', u'hou', u'nemec', u'enron', u'subject...
+    6          232  [u'shackleton', u'normal', u'test', u'load', u...
+    7          180  [u'ect', u'hou', u'group', u'recipients', u'ad...
+    8          152  [u'sanders', u'migration', u'outlook', u'team'...
+    3          129  [u'shall', u'party', u'agreement', u'transacti...
+    0          118  [u'enron', u'tana', u'jones', u'normal', u'ect...
+    9           94  [u'enron_development', u'ect', u'shackleton', ...
 
     2.a. Document clustering (LSI + Ward HC)
-      POST http://localhost:5001/api/v0/clustering/ward_hc/
-         => model id = 50432764495d4f49875712333c8520d7
+     POST http://localhost:5001/api/v0/clustering/ward_hc/
+         => model id = 5976c99ee9244cbe8c24606c143f9a11
 
     2.b. Computing cluster labels
-      POST http://localhost:5001/api/v0/clustering/ward_hc/50432764495d4f49875712333c8520d7
+    POST http://localhost:5001/api/v0/clustering/ward_hc/5976c99ee9244cbe8c24606c143f9a11
         .. computed in 4.0s
        N_documents                                      cluster_names
-    9          444  [u'normal', u'tenet', u'test', u'gmt', u'sensi...
-    2          443  [u'shackleton', u'enron_development', u'ect', ...
-    1          427  [u'recipients', u'administrative', u'group', u...
-    6          347  [u'enron', u'energy', u'trade', u'power', u'ma...
-    0          312  [u'ect', u'tana', u'jones', u'hou', u'enron', ...
-    4          147  [u'shall', u'party', u'agreement', u'transacti...
-    3          131  [u'nemec', u'ect', u'normal', u'test', u'doc',...
-    8           95  [u'sanders', u'normal', u'nov', u'sensitivity'...
+    2          449  [u'normal', u'tenet', u'test', u'gmt', u'sensi...
+    1          422  [u'recipients', u'administrative', u'group', u...
+    3          417  [u'ect', u'tana', u'jones', u'hou', u'enron', ...
+    0          403  [u'shackleton', u'enron_development', u'ect', ...
+    4          323  [u'enron', u'energy', u'power', u'market', u's...
+    8          134  [u'shall', u'party', u'agreement', u'transacti...
+    9          103  [u'nemec', u'ect', u'ruppert', u'enron', u'hou...
+    7           95  [u'sanders', u'normal', u'nov', u'sensitivity'...
     5           63  [u'migration', u'outlook', u'team', u'normal',...
-    7           56  [u'rewrite', u'server', u'address', u'smtp', u...
+    6           56  [u'rewrite', u'server', u'address', u'smtp', u...
 
 
 
@@ -89,7 +93,6 @@ Document Clustering Example
 .. code-block:: python
 
 
-    import os
     import numpy as np
     import pandas as pd
     from time import time
@@ -98,18 +101,6 @@ Document Clustering Example
     pd.options.display.float_format = '{:,.3f}'.format
 
 
-    def _parent_dir(path, n=0):
-        path = os.path.abspath(path)
-        if n == 0:
-            return path
-        else:
-            return os.path.dirname(_parent_dir(path, n=n-1))
-
-
-    def _print_url(op, url):
-        print(' '*1, op, url) 
-    
-
     def repr_clustering(labels, terms):
         out = []
         for ridx, row in enumerate(terms):
@@ -117,25 +108,25 @@ Document Clustering Example
         out = pd.DataFrame(out).sort_values('N_documents', ascending=False)
         return out
 
-    use_docker = False
-
-    dataset_name = "treclegal09_2k_subset"
-    
-    if use_docker:
-        data_dir = "/freediscovery_shared/{}".format(dataset_name)
-    else:
-        data_dir = "../freediscovery_shared/{}".format(dataset_name)
-    rel_data_dir = os.path.abspath("../../freediscovery_shared/{}".format(dataset_name)) # relative path between this file and the FreeDiscovery source folder
+    dataset_name = "treclegal09_2k_subset"     # see list of available datasets
 
     BASE_URL = "http://localhost:5001/api/v0"  # FreeDiscovery server URL
 
+    print(" 0. Load the test dataset")
+    url = BASE_URL + '/datasets/{}'.format(dataset_name)
+    print(" POST", url)
+    res = requests.get(url)
+    res = res.json()
+
+    # To use a custom dataset, simply specify the following variables
+    data_dir = res['data_dir']
 
     # # 1. Feature extraction (non hashed)
 
     print("\n1.a Load dataset and initalize feature extraction")
     url = BASE_URL + '/feature-extraction'
-    _print_url("POST", url)
-    fe_opts = {'data_dir': os.path.join(data_dir, 'data'),
+    print(" POST", url)
+    fe_opts = {'data_dir': data_dir,
                'stop_words': 'english', 'chunk_size': 2000, 'n_jobs': -1,
                'use_idf': 1, 'sublinear_tf': 1, 'binary': 0, 'n_features': 30001,
                'analyzer': 'word', 'ngram_range': (1, 1), "norm": "l2",
@@ -151,18 +142,17 @@ Document Clustering Example
     print("\n1.b Run feature extraction")
     # progress status is available for the hashed version only
     url = BASE_URL+'/feature-extraction/{}'.format(dsid)
-    _print_url("POST", url)
+    print(" POST", url)
     res = requests.post(url)
 
     print("\n1.d. check the parameters of the extracted features")
     url = BASE_URL + '/feature-extraction/{}'.format(dsid)
-    _print_url('GET', url)
+    print(' GET', url)
     res = requests.get(url)
 
     data = res.json()
-    for key, val in data.items():
-        if key!='filenames':
-               print('     - {}: {}'.format(key, val))
+    print('\n'.join(['     - {}: {}'.format(key, val) for key, val in data.items() \
+                                                      if "filenames" not in key]))
 
 
     # # 2. Document Clustering (LSI + K-Means)
@@ -170,7 +160,7 @@ Document Clustering Example
     print("\n2.a. Document clustering (LSI + K-means)")
 
     url = BASE_URL + '/clustering/k-mean/'
-    _print_url("POST", url)
+    print(" POST", url)
     t0 = time()
     res = requests.post(url,
                         json={'dataset_id': dsid,
@@ -184,7 +174,7 @@ Document Clustering Example
 
     print("\n2.b. Computing cluster labels")
     url = BASE_URL + '/clustering/k-mean/{}'.format(mid)
-    _print_url("POST", url)
+    print(" POST", url)
     res = requests.get(url,
                        json={'n_top_words': 6
                              })
@@ -200,7 +190,7 @@ Document Clustering Example
     print("\n2.a. Document clustering (LSI + Ward HC)")
 
     url = BASE_URL + '/clustering/ward_hc/'
-    _print_url("POST", url)
+    print(" POST", url)
     t0 = time()
     res = requests.post(url,
                         json={'dataset_id': dsid,
@@ -215,7 +205,7 @@ Document Clustering Example
 
     print("\n2.b. Computing cluster labels")
     url = BASE_URL + '/clustering/ward_hc/{}'.format(mid)
-    _print_url("POST", url)
+    print("POST", url)
     res = requests.get(url,
                        json={'n_top_words': 6
                              })
@@ -225,7 +215,7 @@ Document Clustering Example
     print('    .. computed in {:.1f}s'.format(t1 - t0))
     print(repr_clustering(np.array(data['labels']), data['cluster_terms']))
 
-**Total running time of the script:** ( 0 minutes  10.766 seconds)
+**Total running time of the script:** ( 0 minutes  10.950 seconds)
 
 
 

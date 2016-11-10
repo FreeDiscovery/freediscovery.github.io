@@ -3,10 +3,10 @@
 .. _sphx_glr_examples_clustering_example_python.py:
 
 
-Document Clustering example (Python)
-------------------------------------
+Clustering Example [Python API]
+-------------------------------
 
-An example of clustering using Python API
+An example of clustering using the Python API
 
 
 
@@ -16,30 +16,45 @@ An example of clustering using Python API
 
  Out::
 
-    .. computed in 3.9s
+    0. Load Dataset
+
+    Warning: downloading dataset treclegal09_2k_subset (2.8 MB) !
+
+    File ./treclegal09_2k_subset.tar.gz downloaded!
+    Archive extracted!
+
+    1. Feature extraction (non hashed)
+
+
+    2. Document Clustering (LSI + K-Means)
+
+        .. computed in 5.3s
        N_documents                                      cluster_names
-    2          583  [ect, enron_development, recipients, administr...
-    1          561  [recipients, group, administrative, test, tene...
-    4          330  [ect, enron_development, hou, supply, group, t...
-    3          260  [ect, group, recipients, administrative, enron...
-    8          199  [energy, enron, enrononline, shall, trading, m...
-    7          179  [enron, ect, enrononline, trading, enron_devel...
-    5          138  [shall, party, transaction, agreement, price, ...
-    0          102  [ect, enrononline, enron_development, group, h...
-    6           63    [rewrite, server, address, smtp, mail, virtual]
+    1          582  [ect, group, hou, recipients, enron_developmen...
+    3          576  [recipients, group, administrative, test, ect,...
+    2          303  [ect, hou, enron_development, changed, group, ...
+    4          297  [ect, group, recipients, administrative, hou, ...
+    0          197  [enron, ect, hou, enron_development, enrononli...
+    6          190  [shall, ect, enrononline, enron, transaction, ...
+    5          128  [shall, party, transaction, agreement, default...
+    7           79    [energy, power, services, ect, trading, market]
+    8           63    [rewrite, server, address, smtp, mail, virtual]
     9           50           [berkeley, edu, haas, alias, ect, group]
-        .. computed in 3.9s
+
+    3. Document Clustering (LSI + Ward Hierarchical Clustering)
+
+        .. computed in 3.7s
        N_documents                                      cluster_names
-    6          615  [recipients, administrative, group, test, ect,...
-    0          562  [ect, enron_development, recipients, hou, admi...
-    1          368  [ect, enron_development, recipients, administr...
-    3          301  [ect, enron_development, hou, ena, products, e...
-    2          200  [enron, energy, enrononline, company, ect, mar...
-    5          156  [enron, ect, corp, enron_development, hou, north]
-    7           87  [shall, agreement, party, customer, lessee, op...
-    4           82  [shall, party, transaction, price, floating, d...
+    3          544  [ect, enron_development, hou, group, recipient...
+    2          476  [recipients, administrative, group, test, ect,...
+    0          390  [ect, recipients, administrative, group, test,...
+    7          376  [ect, enron_development, hou, ena, recipients,...
+    1          291  [ect, enron, trading, enrononline, energy, shall]
+    5          159  [enron, ect, enron_development, corp, hou, tra...
+    4           72  [shall, party, agreement, lessee, operator, co...
+    6           66  [transaction, shall, party, floating, price, d...
     9           63    [rewrite, server, address, smtp, mail, virtual]
-    8           31     [berkeley, edu, haas, alias, enrononline, ect]
+    8           28     [berkeley, edu, haas, alias, ect, enrononline]
 
 
 
@@ -51,35 +66,34 @@ An example of clustering using Python API
 
 
     import pandas as pd
-    from IPython.display import display
     from freediscovery.text import FeatureVectorizer
     from freediscovery.cluster import Clustering
     from freediscovery.utils import _silent
+    from freediscovery.datasets import load_dataset
     from time import time
 
     pd.options.display.float_format = '{:,.3f}'.format
 
     dataset_name = "treclegal09_2k_subset"
-
-    data_dir = "../freediscovery_shared/{}".format(dataset_name)
-    examples_to_server_path = "../" # relative path between this file and the FreeDiscovery source folder
-
-    BASE_URL = "http://localhost:5001/api/v0"  # FreeDiscovery server URL
+    cache_dir = '.'
 
 
-    # # 1. Feature extraction (non hashed)
+    print("0. Load Dataset")
+
+    ds = load_dataset(dataset_name, cache_dir=cache_dir)
+
+
+    print("\n1. Feature extraction (non hashed)\n")
 
     n_features = 30000
-    cache_dir = '/tmp/'
-
     fe = FeatureVectorizer(cache_dir=cache_dir)
-    uuid = fe.preprocess("../"+data_dir+'/data',
+    uuid = fe.preprocess(ds['data_dir'],
                          n_features=n_features, use_hashing=False,
                          use_idf=True, stop_words='english')
     uuid, filenames = fe.transform()
 
 
-    # # 2. Document Clustering (LSI + K-Means)
+    print("\n2. Document Clustering (LSI + K-Means)\n")
 
     cat = Clustering(cache_dir=cache_dir, dsid=uuid)
 
@@ -103,10 +117,10 @@ An example of clustering using Python API
     t1 = time()
 
     print('    .. computed in {:.1f}s'.format(t1 - t0))
-    display(repr_clustering(labels, terms))
+    print(repr_clustering(labels, terms))
 
 
-    # # 3. Document Clustering (LSI + Ward Hierarchical Clustering)
+    print('\n3. Document Clustering (LSI + Ward Hierarchical Clustering)\n')
 
     t0 = time()
     with _silent('stderr'): # ignore some deprecation warnings
@@ -118,9 +132,9 @@ An example of clustering using Python API
     t1 = time()
 
     print('    .. computed in {:.1f}s'.format(t1 - t0))
-    display(repr_clustering(labels, terms))
+    print(repr_clustering(labels, terms))
 
-**Total running time of the script:** ( 0 minutes  10.700 seconds)
+**Total running time of the script:** ( 0 minutes  13.525 seconds)
 
 
 
