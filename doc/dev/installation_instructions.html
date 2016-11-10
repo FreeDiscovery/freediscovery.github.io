@@ -91,7 +91,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installation instructions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#downloading-freediscovery">1. Downloading FreeDiscovery</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#installing-the-dependencies">2. Installing the dependencies</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#a-direct-install">2.a. Direct install</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#a-python-install">2.a. Python install</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#b-docker-container">2.b. Docker container</a></li>
 </ul>
 </li>
@@ -155,17 +155,21 @@
 <span id="installation-instructions"></span><h1>Installation instructions<a class="headerlink" href="#installation-instructions" title="Permalink to this headline">¶</a></h1>
 <p>There are two ways of installing FreeDiscovery,</p>
 <ol class="simple">
-<li>A direct installation into a Python virtual environment (recommended for development and testing)</li>
-<li>In a docker container (recommended in production)</li>
+<li>An installation into a Python virtual environment (recommended for development and testing)</li>
+<li>Using a Docker container (recommended in production)</li>
 </ol>
 <div class="section" id="downloading-freediscovery">
 <span id="downloading-freediscovery"></span><h2>1. Downloading FreeDiscovery<a class="headerlink" href="#downloading-freediscovery" title="Permalink to this headline">¶</a></h2>
-<p>The source code of FreeDiscovery should be downloaded and extracted into a folder named <code class="docutils literal"><span class="pre">FreeDiscovery</span></code>.</p>
+<p>The latest development version of FreeDiscovery can be obtained from <a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery">Github</a> with,</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">FreeDiscovery</span><span class="o">/</span><span class="n">FreeDiscovery</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<p>or by downloading the latest stable version from the <a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/releases">Github releases page</a>.</p>
 </div>
 <div class="section" id="installing-the-dependencies">
 <span id="installing-the-dependencies"></span><h2>2. Installing the dependencies<a class="headerlink" href="#installing-the-dependencies" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="a-direct-install">
-<span id="a-direct-install"></span><h3>2.a. Direct install<a class="headerlink" href="#a-direct-install" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="a-python-install">
+<span id="a-python-install"></span><h3>2.a. Python install<a class="headerlink" href="#a-python-install" title="Permalink to this headline">¶</a></h3>
 <ol>
 <li><p class="first">Download and install <a class="reference external" href="http://conda.pydata.org/miniconda.html">Miniconda</a> 64 bit for Python 3.5 (a cross-platform package manager for Python &amp; R)</p>
 </li>
@@ -195,12 +199,11 @@
 </pre></div>
 </div>
 </li>
-<li><p class="first">on Windows:</p>
+<li><p class="first">on Windows by double-clicking on <code class="docutils literal"><span class="pre">build_tools/conda_setup.bat</span></code> in files explorer, or running,</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">cd</span> <span class="n">build_tools</span>
     <span class="n">conda_setup</span><span class="o">.</span><span class="n">bat</span>
 </pre></div>
 </div>
-<p>or by double-clicking conda_setup.bat in files explorer</p>
 </li>
 </ul>
 </div>
@@ -211,7 +214,7 @@
 </li>
 <li><p class="first">Build the container locally (from the <code class="docutils literal"><span class="pre">FreeDiscovery</span></code> folder),</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span> <span class="n">cd</span> <span class="n">FreeDiscovery</span>
- <span class="n">docker</span> <span class="n">build</span> <span class="o">-</span><span class="n">t</span> <span class="s2">&quot;freediscovery:latest&quot;</span> <span class="o">.</span>     
+ <span class="n">docker</span> <span class="n">build</span> <span class="o">-</span><span class="n">t</span> <span class="s2">&quot;freediscovery/freediscovery:latest&quot;</span> <span class="o">.</span>     
 </pre></div>
 </div>
 </li>
@@ -226,8 +229,8 @@
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">bash</span> <span class="n">conda_run</span><span class="o">.</span><span class="n">sh</span>
 </pre></div>
 </div>
-<p>for the direct install, or with</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">bash</span> <span class="n">docker_run</span><span class="o">.</span><span class="n">sh</span>
+<p>for the Python install, or with</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">bash</span> <span class="n">docker_run</span><span class="o">.</span><span class="n">sh</span> <span class="n">freediscovery</span><span class="o">/</span><span class="n">freediscovery</span><span class="p">:</span><span class="n">latest</span>
 </pre></div>
 </div>
 <p>for the docker container, respectively.</p>
@@ -238,14 +241,12 @@
 <ol>
 <li><p class="first">[only once] Create a <code class="docutils literal"><span class="pre">FreeDiscovery\..\freediscovery_shared</span></code> folder</p>
 </li>
-<li><p class="first">[only once] <a class="reference external" href="http://r0h.eu/d/tar_fd_benchmark.tar.gz">Download the test dataset</a> and extract it into the <code class="docutils literal"><span class="pre">freediscovery_shared</span></code> folder, where files should appear under <code class="docutils literal"><span class="pre">freediscovery_shared\tar_fd_benchmark\</span></code></p>
-</li>
 <li><p class="first">The server can then be started with,</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span> <span class="n">python</span> <span class="n">scripts</span>\<span class="n">run_api</span><span class="o">.</span><span class="n">py</span> <span class="o">..</span>\<span class="n">freediscovery_shared</span> 
 </pre></div>
 </div>
-<p>for the direct install, or with,</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span> <span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">t</span> <span class="o">-</span><span class="n">i</span> <span class="o">-</span><span class="n">v</span> <span class="o">../</span><span class="n">tar_fd_benchmark</span><span class="p">:</span><span class="o">/</span><span class="n">freediscovery_shared</span> <span class="o">-</span><span class="n">p</span> <span class="mi">5001</span><span class="p">:</span><span class="mi">5001</span> <span class="n">freediscovery</span>
+<p>for the Python install, or with,</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span> <span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">t</span> <span class="o">-</span><span class="n">i</span> <span class="o">-</span><span class="n">v</span> <span class="o">../</span><span class="n">tar_fd_benchmark</span><span class="p">:</span><span class="o">/</span><span class="n">freediscovery_shared</span> <span class="o">-</span><span class="n">p</span> <span class="mi">5001</span><span class="p">:</span><span class="mi">5001</span> <span class="n">freediscovery</span><span class="o">/</span><span class="n">freediscovery</span><span class="p">:</span><span class="n">latest</span>
 </pre></div>
 </div>
 <p>for the docker install.</p>

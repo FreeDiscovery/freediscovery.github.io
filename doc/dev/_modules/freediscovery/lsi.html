@@ -175,7 +175,7 @@
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">          cache_dir: </span>
+<span class="sd">          cache_dir: str</span>
 <span class="sd">             folder where the model will be saved</span>
 <span class="sd">          dsid: str</span>
 <span class="sd">             dataset id</span>
@@ -269,7 +269,7 @@
 <span class="sd">             a list of relevant documents filenames</span>
 <span class="sd">          non_relevant_filenames: list</span>
 <span class="sd">             a list of not relevant documents filenames</span>
-<span class="sd">          accumulate: str, optional, default=&#39;centroid-max&#39;</span>
+<span class="sd">          accumulate: str, optional, default=&#39;nearest-max&#39;</span>
 <span class="sd">             if `accumulate==&quot;nearest-max&quot;` the cosine distance to the closest relevant/non relevant document is used as classification score,</span>
 <span class="sd">             otherwise if `accumulate==&quot;centroid-max&quot;` the centroid of relevant documents is used as the query vector.</span>
 
@@ -379,6 +379,9 @@
 <span class="c1"># the only reason is the we need to save the Sigma matrix when performing this transform!</span>
 
 <div class="viewcode-block" id="TruncatedSVD_LSI"><a class="viewcode-back" href="../../freediscovery.html#freediscovery.lsi.TruncatedSVD_LSI">[docs]</a><span class="k">class</span> <span class="nc">TruncatedSVD_LSI</span><span class="p">(</span><span class="n">TruncatedSVD</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A patch of `sklearn.decomposition.TruncatedSVD` to include whitening (`scikit-learn/scikit-learn#7832)`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="TruncatedSVD_LSI.transform_lsi"><a class="viewcode-back" href="../../freediscovery.html#freediscovery.lsi.TruncatedSVD_LSI.transform_lsi">[docs]</a>    <span class="k">def</span> <span class="nf">transform_lsi</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; LSI transform, normalized by the inverse of the eigen values&quot;&quot;&quot;</span>

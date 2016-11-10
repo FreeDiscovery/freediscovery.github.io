@@ -147,7 +147,7 @@
 <p>This section aims to regroup useful information for contributing to FreeDiscovery.</p>
 <div class="section" id="installation">
 <span id="installation"></span><h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
-<p>The direct install using Anaconda Python distribution is recommended for development (particularly on Windows), as described in the corresponding <a class="reference external" href="./installation_instructions.html">documentation section</a>. However, it is also possible to use e.g. system Python, and install the list of dependencies (split between <code class="docutils literal"><span class="pre">script/requirements_conda.txt</span></code> and <code class="docutils literal"><span class="pre">scripts/requirements_pip_*.txt</span></code> under <code class="docutils literal"><span class="pre">build_tools/</span></code>) with <code class="docutils literal"><span class="pre">pip</span></code>.</p>
+<p>A Python installation using Anaconda distribution is recommended for development (particularly on Windows), as described in the corresponding <a class="reference external" href="./installation_instructions.html">documentation section</a>. However, it is also possible to use e.g. system Python, and install the list of dependencies (split between <code class="docutils literal"><span class="pre">script/requirements_conda.txt</span></code> and <code class="docutils literal"><span class="pre">scripts/requirements_pip_*.txt</span></code> under <code class="docutils literal"><span class="pre">build_tools/</span></code>) with <code class="docutils literal"><span class="pre">pip</span></code>.</p>
 <p>The issue tracker is located at: <a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery">https://github.com/FreeDiscovery/FreeDiscovery</a>.</p>
 <p>The <a class="reference external" href="http://scikit-learn.org/stable/developers/index.html">scikit learn&#8217;s developper guide</a> is also worth reading.</p>
 </div>
@@ -167,11 +167,13 @@
 <div class="section" id="building-documentation">
 <span id="building-documentation"></span><h2>Building documentation<a class="headerlink" href="#building-documentation" title="Permalink to this headline">¶</a></h2>
 <p>This html documentation can be built from sources with,</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">FreeDiscovery</span><span class="o">/</span><span class="n">doc</span><span class="o">/</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># starting the FreeDiscovery server at localhost</span>
+<span class="n">cd</span> <span class="n">FreeDiscovery</span><span class="o">/</span><span class="n">doc</span><span class="o">/</span>
 <span class="n">make</span> <span class="n">html</span>
 </pre></div>
 </div>
-<p>which requires to install <code class="docutils literal"><span class="pre">sphinx</span></code> and <code class="docutils literal"><span class="pre">recommonmark</span></code>. Alternatively  <code class="docutils literal"><span class="pre">make</span> <span class="pre">latexpdf</span></code> generates documentation in .pdf format (requires <code class="docutils literal"><span class="pre">pdflatex</span></code>).</p>
+<p>which requires to install dependencies in <code class="docutils literal"><span class="pre">build_tools/requirements_extra_pip.txt</span></code>. This would also run and include examples using <code class="docutils literal"><span class="pre">sphinx-gallery</span></code>.</p>
+<p>Alternatively  <code class="docutils literal"><span class="pre">make</span> <span class="pre">latexpdf</span></code> generates documentation in .pdf format (requires <code class="docutils literal"><span class="pre">pdflatex</span></code>).</p>
 </div>
 </div>
 

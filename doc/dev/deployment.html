@@ -144,6 +144,7 @@
             
   <div class="section" id="deployment-options">
 <span id="deployment-options"></span><h1>Deployment options<a class="headerlink" href="#deployment-options" title="Permalink to this headline">¶</a></h1>
+<p><img alt="FreeDiscovery deployment" src="_images/FreeDiscovery_infra.png" /></p>
 <div class="section" id="development-server">
 <span id="development-server"></span><h2>1. Development server<a class="headerlink" href="#development-server" title="Permalink to this headline">¶</a></h2>
 <p>The options used to start the FreeDiscovery server are defined in <code class="docutils literal"><span class="pre">scripts/run_api.py</span></code>. By default, the options <code class="docutils literal"><span class="pre">processes=1,</span> <span class="pre">threaded=True</span></code> are used, which allows to run on all platforms, but disables parallel processing in FreeDiscovery.</p>
@@ -164,7 +165,7 @@
 <ul class="simple">
 <li>[only once] <code class="docutils literal"><span class="pre">docker</span> <span class="pre">login</span></code>  # using your <a class="reference external" href="https://hub.docker.com">hub.docker.com</a> credentials</li>
 <li>[only once, optional] requesting permission to access the <code class="docutils literal"><span class="pre">freediscovery/freediscovery</span></code> image for your <code class="docutils literal"><span class="pre">userid</span></code></li>
-<li><code class="docutils literal"><span class="pre">docker</span> <span class="pre">pull</span> <span class="pre">freediscovery/freediscovery</span></code></li>
+<li><code class="docutils literal"><span class="pre">docker</span> <span class="pre">pull</span> <span class="pre">freediscovery/freediscovery:&lt;tag&gt;</span></code> # where <tag> is one of the stable tags on http://github.com/FreeDiscovery/FreeDiscovery</li>
 </ul>
 </li>
 <li><p class="first">Create or choose a folder where the data to process will be copied and that can be used to store temporary files.</p>
@@ -175,7 +176,6 @@
 </div>
 </li>
 </ol>
-<p>For instance to run the examples, included with the 0.5.0 release, the variable <code class="docutils literal"><span class="pre">docker=True</span></code> must be set in the first cell of jupyter notebooks (this just changes the absolute path scheme), and the test dataset, available from <a class="reference external" href="http://r0h.eu/d/tar_fd_benchmark.tar.gz">this link</a> must be downloaded and extracted in the shared directory, so that when the volume is mounted <code class="docutils literal"><span class="pre">/freediscovery_shared/tar_fd_benchmark/</span></code> is a valid path.</p>
 </div>
 </div>
 

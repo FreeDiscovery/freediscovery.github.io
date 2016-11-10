@@ -171,10 +171,12 @@
 
 <div class="viewcode-block" id="classification_score"><a class="viewcode-back" href="../../freediscovery.html#freediscovery.utils.classification_score">[docs]</a><span class="k">def</span> <span class="nf">classification_score</span><span class="p">(</span><span class="n">X_ref</span><span class="p">,</span> <span class="n">Y_ref</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Calculate the efficiency scores &quot;&quot;&quot;</span>
+    <span class="c1"># This function should be deprecated</span>
+    <span class="c1"># An equivalent functionally should be achieved with a</span>
+    <span class="c1"># more general freediscovery.metrics module</span>
     <span class="kn">import</span> <span class="nn">warnings</span>
     <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="p">(</span><span class="n">precision_score</span><span class="p">,</span> <span class="n">recall_score</span><span class="p">,</span> <span class="n">f1_score</span><span class="p">,</span>
             <span class="n">roc_auc_score</span><span class="p">,</span> <span class="n">average_precision_score</span><span class="p">)</span>
-    <span class="kn">from</span> <span class="nn">sklearn.metrics.base</span> <span class="k">import</span> <span class="n">UndefinedMetricWarning</span>
     <span class="n">threshold</span> <span class="o">=</span> <span class="mf">0.0</span>
 
     <span class="n">X_ref</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">X_ref</span><span class="p">)</span>
@@ -216,6 +218,8 @@
 
 
 <div class="viewcode-block" id="filter_rel_nrel"><a class="viewcode-back" href="../../freediscovery.html#freediscovery.utils.filter_rel_nrel">[docs]</a><span class="k">def</span> <span class="nf">filter_rel_nrel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relevant_filenames</span><span class="p">,</span> <span class="n">non_relevant_filenames</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Load features corresponding to a list of relevant / non relevant filenames</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">filenames_all</span><span class="p">,</span> <span class="n">fset_all</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fe</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dsid</span><span class="p">)</span>  <span class="c1">#, mmap_mode=&#39;r&#39;)</span>
     <span class="n">idx_rel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fe</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">relevant_filenames</span><span class="p">)</span>
     <span class="n">idx_nrel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fe</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">non_relevant_filenames</span><span class="p">)</span>

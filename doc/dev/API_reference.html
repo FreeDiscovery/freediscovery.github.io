@@ -126,6 +126,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#b-query-duplicates">5.b Query duplicates</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#load-benchmark-dataset">6. Load benchmark dataset</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="freediscovery.html">Python API reference</a></li>
@@ -329,7 +330,7 @@ If &#8220;english&#8221;, a built-in stop word list for English is used. ( defau
 <ul>
 <li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
 <div class="highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">str</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;recall&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;precision&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span> <span class="p">,</span> 
-  <span class="s2">&quot;F1&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span><span class="p">,</span>  <span class="s2">&quot;roc_auc&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;average_precision&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="s2">&quot;f1&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span><span class="p">,</span>  <span class="s2">&quot;roc_auc&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;average_precision&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span><span class="p">,</span>
   <span class="s2">&quot;prediction&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span><span class="o">&gt;</span> <span class="p">,</span>
   <span class="s2">&quot;prediction_rel&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span><span class="o">&gt;</span> <span class="p">,</span>
   <span class="s2">&quot;prediction_nrel&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span><span class="o">&gt;</span> <span class="p">,</span>
@@ -354,8 +355,8 @@ If &#8220;english&#8221;, a built-in stop word list for English is used. ( defau
 </ul>
 <ul>
 <li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">str</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;recall_score&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;precision_score&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span> <span class="p">,</span>
-  <span class="s2">&quot;F1_score&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span><span class="p">}</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">str</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;recall&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;precision&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span> <span class="p">,</span>
+  <span class="s2">&quot;f1&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span><span class="p">}</span>
 </pre></div>
 </div>
 </li>
@@ -642,6 +643,37 @@ ratio of the vocabulary used in random lexicons (I-Match method only)</li>
 </li>
 </ul>
 </div>
+</div>
+<div class="section" id="load-benchmark-dataset">
+<span id="load-benchmark-dataset"></span><h2>6. Load benchmark dataset<a class="headerlink" href="#load-benchmark-dataset" title="Permalink to this headline">¶</a></h2>
+<p>Currently the following datasets based on TREC 2009 legal collection
+are supported:</p>
+<ul class="simple">
+<li>treclegal09_2k_subset  :   2 400 documents,   2 MB</li>
+<li>treclegal09_20k_subset :  20 000 documents,  30 MB</li>
+<li>treclegal09_37k_subset :  37 000 documents,  55 MB</li>
+<li>treclegal09            : 700 000 documents, 1.2 GB
+The ground truth files for categorization are adapted from TAR Toolkit.</li>
+</ul>
+<p>If you encounter any issues for downloads with this function,
+you can also manually download and extract the required dataset to <code class="docutils literal"><span class="pre">cache_dir</span></code> (the
+download url is <code class="docutils literal"><span class="pre">http://r0h.eu/d/&lt;name&gt;.tar.gz</span></code>), then re-run this function to get
+the required metadata.</p>
+<ul>
+<li><p class="first"><strong>URL</strong>: <code class="docutils literal"><span class="pre">/api/v0/dataset/&lt;dataset-name&gt;</span></code></p>
+</li>
+<li><p class="first"><strong>Method</strong>: <code class="docutils literal"><span class="pre">GET</span></code> <strong>URL Params</strong>: None</p>
+</li>
+<li><p class="first"><strong>Data Params</strong>: None</p>
+</li>
+<li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="s2">&quot;data_dir&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">str</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;base_dir&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">str</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="s2">&quot;seed_non_relevant_files&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;seed_relevant_files&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="s2">&quot;ground_truth_file&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">str</span><span class="o">&gt;</span><span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
 </div>
 </div>
 

@@ -163,21 +163,19 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Find near duplicates in a document collection.</span>
 
-<span class="sd">        Currently supported backends are:</span>
-<span class="sd">          - simhash-py</span>
-<span class="sd">          - i-match</span>
+<span class="sd">        Currently supported backends are simhash-py and i-match.</span>
 
 <span class="sd">        The option `use_hashing=False` must be set for the feature extraction.</span>
 <span class="sd">        Recommended options also include, `use_idf=1, sublinear_tf=0, binary=0`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">          cache_dir : str</span>
-<span class="sd">             directory where to save temporary and regression files</span>
-<span class="sd">          dsid : str, optional</span>
-<span class="sd">             dataset id</span>
-<span class="sd">          mid : str, optional</span>
-<span class="sd">             model id</span>
+<span class="sd">        cache_dir : str</span>
+<span class="sd">           directory where to save temporary and regression files</span>
+<span class="sd">        dsid : str, optional</span>
+<span class="sd">           dataset id</span>
+<span class="sd">        mid : str, optional</span>
+<span class="sd">           model id</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="n">dsid</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">mid</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -242,9 +240,9 @@
 <span class="sd">        distance : int, default=2</span>
 <span class="sd">            Maximum number of differnet bits in the simhash</span>
 <span class="sd">        blocks : int or &#39;auto&#39;, default=&#39;auto&#39;</span>
-<span class="sd">                number of blocks into which the simhash is split</span>
-<span class="sd">                when searching for duplicates,</span>
-<span class="sd">                see  https://github.com/seomoz/simhash-py</span>
+<span class="sd">            number of blocks into which the simhash is split</span>
+<span class="sd">            when searching for duplicates,</span>
+<span class="sd">            see  https://github.com/seomoz/simhash-py</span>
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        cluster_id : array</span>
