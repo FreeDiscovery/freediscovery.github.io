@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>freediscovery.datasets &mdash; FreeDiscovery 0.6.0-dev documentation</title>
+  <title>freediscovery.datasets &mdash; FreeDiscovery 0.6.0-beta documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="FreeDiscovery 0.6.0-dev documentation" href="../../index.html"/>
+    <link rel="top" title="FreeDiscovery 0.6.0-beta documentation" href="../../index.html"/>
         <link rel="up" title="Module code" href="../index.html"/> 
 
   
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                0.6.0-dev
+                0.6.0-beta
               </div>
             
           
@@ -91,6 +91,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../API_reference.html">REST API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../freediscovery.html">Python API reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scaling_benchmarks.html">Scaling benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../deployment.html">Deployment options</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
 </ul>
@@ -202,11 +203,15 @@
 
     <span class="n">VALID_MD5SUM</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;treclegal09_2k_subset&#39;</span> <span class="p">:</span> <span class="s1">&#39;8090cc55ac18fe5c4d5d53d82fc767a2&#39;</span><span class="p">,</span>
                     <span class="s1">&#39;treclegal09_20k_subset&#39;</span><span class="p">:</span> <span class="s1">&#39;43a711897ce724e873bdbc47a374a57e&#39;</span><span class="p">,</span>
-                    <span class="s1">&#39;treclegal09_37k_subset&#39;</span><span class="p">:</span> <span class="s1">&#39;9fb6b7505871bbaee5a438de3b0f497c&#39;</span><span class="p">}</span>
+                    <span class="s1">&#39;treclegal09_37k_subset&#39;</span><span class="p">:</span> <span class="s1">&#39;9fb6b7505871bbaee5a438de3b0f497c&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;legal09int&#39;</span><span class="p">:</span> <span class="s1">&#39;None&#39;</span><span class="p">,</span>
+                    <span class="p">}</span>
 
     <span class="n">DATASET_SIZE</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;treclegal09_2k_subset&#39;</span> <span class="p">:</span> <span class="mf">2.8</span><span class="p">,</span>
                     <span class="s1">&#39;treclegal09_20k_subset&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
-                    <span class="s1">&#39;treclegal09_37k_subset&#39;</span><span class="p">:</span> <span class="mi">55</span><span class="p">}</span>
+                    <span class="s1">&#39;treclegal09_37k_subset&#39;</span><span class="p">:</span> <span class="mi">55</span><span class="p">,</span>
+                    <span class="s1">&#39;legal09int&#39;</span><span class="p">:</span> <span class="mi">1500</span><span class="p">,</span>
+                    <span class="p">}</span>
 
     <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">VALID_MD5SUM</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Dataset name </span><span class="si">{}</span><span class="s1"> not known!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
@@ -259,9 +264,11 @@
 
 
     <span class="n">results</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;base_dir&#39;</span><span class="p">:</span> <span class="n">outdir</span><span class="p">,</span> <span class="s1">&#39;data_dir&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">outdir</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">)}</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;legal09int&#39;</span><span class="p">:</span>
+        <span class="n">results</span><span class="p">[</span><span class="s1">&#39;data_dir&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;base_dir&#39;</span><span class="p">]</span>
 
 
-    <span class="k">if</span> <span class="n">load_ground_truth</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">load_ground_truth</span> <span class="ow">and</span> <span class="n">name</span> <span class="o">!=</span> <span class="s1">&#39;legal09int&#39;</span><span class="p">:</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">outdir</span><span class="p">,</span><span class="s1">&#39;seed_relevant.txt&#39;</span><span class="p">),</span> <span class="s1">&#39;rt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
             <span class="n">relevant_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">fh</span><span class="o">.</span><span class="n">readlines</span><span class="p">()]</span>
 
@@ -317,7 +324,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'0.6.0-dev',
+            VERSION:'0.6.0-beta',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

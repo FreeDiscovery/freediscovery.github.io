@@ -22,16 +22,16 @@ An example to illustrate binary categorizaiton with FreeDiscovery
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received [u'id', u'filenames']
-       => dsid = 484ad5aa007348dd99152738c0be83ed
+       => dsid = 63c50d05b2de4dba818f61ee4a2c3713
 
     1.b Start feature extraction (in the background)
-     POST http://localhost:5001/api/v0/feature-extraction/484ad5aa007348dd99152738c0be83ed
+     POST http://localhost:5001/api/v0/feature-extraction/63c50d05b2de4dba818f61ee4a2c3713
 
     1.c Monitor feature extraction progress
-     GET http://localhost:5001/api/v0/feature-extraction/484ad5aa007348dd99152738c0be83ed
+     GET http://localhost:5001/api/v0/feature-extraction/63c50d05b2de4dba818f61ee4a2c3713
 
     1.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/484ad5aa007348dd99152738c0be83ed
+     GET http://localhost:5001/api/v0/feature-extraction/63c50d05b2de4dba818f61ee4a2c3713
          - binary: False
          - n_jobs: -1
          - stop_words: None
@@ -55,38 +55,38 @@ An example to illustrate binary categorizaiton with FreeDiscovery
      Training...
     [u'f1', u'recall', u'precision', u'id', u'average_precision', u'roc_auc']
     Failed!!!
-         => model id = 2e3af7a6b6f44843a793b4a331985555
+         => model id = 901c1613c42a4ef8a8a8dba9b450d014
         => Training scores: MAP = 1.00, ROC-AUC = 1.00
 
     2.b. Check the parameters used in the categorization model
-     GET http://localhost:5001/api/v0/categorization/2e3af7a6b6f44843a793b4a331985555
+     GET http://localhost:5001/api/v0/categorization/901c1613c42a4ef8a8a8dba9b450d014
          - method: LogisticRegression
          - options: {'warm_start': False, 'C': 1.0, 'n_jobs': 1, 'verbose': 0, 'intercept_scaling': 1, 'fit_intercept': True, 'max_iter': 100, 'penalty': 'l2', 'multi_class': 'ovr', 'random_state': None, 'dual': False, 'tol': 0.0001, 'solver': 'liblinear', 'class_weight': None}
 
     2.c Categorize the complete dataset with this model
-     GET http://localhost:5001/api/v0/categorization/2e3af7a6b6f44843a793b4a331985555/predict
+     GET http://localhost:5001/api/v0/categorization/901c1613c42a4ef8a8a8dba9b450d014/predict
         => Predicting 0 relevant and 2465 non relevant documents
 
     2.d Test categorization accuracy
              using ../freediscovery_shared/treclegal09_2k_subset/ground_truth_file.txt
-    POST http://localhost:5001/api/v0/categorization/2e3af7a6b6f44843a793b4a331985555/test
+    POST http://localhost:5001/api/v0/categorization/901c1613c42a4ef8a8a8dba9b450d014/test
         => Test scores: MAP = 1.00, ROC-AUC = 1.00
 
     3.a. Calculate LSI
     POST http://localhost:5001/api/v0/lsi/
-      => LSI model id = 97ab9887e4cb4704b9daa77d778daf71
+      => LSI model id = 53501cf96d6a4f55b605c6fad5166575
       => SVD decomposition with 100 dimensions explaining 44.36 % variabilty of the data
 
     3.b. Predict categorization with LSI
-    POST http://localhost:5001/api/v0/lsi/97ab9887e4cb4704b9daa77d778daf71/predict
+    POST http://localhost:5001/api/v0/lsi/53501cf96d6a4f55b605c6fad5166575/predict
         => Training scores: MAP = 1.00, ROC-AUC = 1.00
 
     3.c. Test categorization with LSI
-     POST http://localhost:5001/api/v0/lsi/97ab9887e4cb4704b9daa77d778daf71/test
-        => Test scores: MAP = 0.71, ROC-AUC = 0.81
+     POST http://localhost:5001/api/v0/lsi/53501cf96d6a4f55b605c6fad5166575/test
+        => Test scores: MAP = 0.75, ROC-AUC = 0.87
 
     4.a Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/484ad5aa007348dd99152738c0be83ed
+     DELETE http://localhost:5001/api/v0/feature-extraction/63c50d05b2de4dba818f61ee4a2c3713
 
 
 
@@ -283,7 +283,7 @@ An example to illustrate binary categorizaiton with FreeDiscovery
         url = BASE_URL + '/feature-extraction/{}'.format(dsid)
         print(" DELETE", url)
 
-**Total running time of the script:** ( 0 minutes  26.710 seconds)
+**Total running time of the script:** ( 0 minutes  26.260 seconds)
 
 
 

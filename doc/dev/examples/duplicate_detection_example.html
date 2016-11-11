@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Duplicate Detection Example [REST API] &mdash; FreeDiscovery 0.6.0-dev documentation</title>
+  <title>Duplicate Detection Example [REST API] &mdash; FreeDiscovery 0.6.0-beta documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="FreeDiscovery 0.6.0-dev documentation" href="../index.html"/>
+    <link rel="top" title="FreeDiscovery 0.6.0-beta documentation" href="../index.html"/>
         <link rel="up" title="Examples" href="index.html"/>
         <link rel="next" title="Categorization Example [REST API]" href="categorization_example.html"/>
         <link rel="prev" title="Clustering Example [REST API]" href="clustering_example.html"/> 
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                0.6.0-dev
+                0.6.0-beta
               </div>
             
           
@@ -99,6 +99,7 @@
 <li class="toctree-l2"><a class="reference internal" href="categorization_example.html">Categorization Example [REST API]</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../scaling_benchmarks.html">Scaling benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deployment.html">Deployment options</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
 </ul>
@@ -157,13 +158,13 @@
 <span class="mf">1.</span><span class="n">a</span> <span class="n">Load</span> <span class="n">dataset</span> <span class="ow">and</span> <span class="n">initalize</span> <span class="n">feature</span> <span class="n">extraction</span>
  <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span>
    <span class="o">=&gt;</span> <span class="n">received</span> <span class="p">[</span><span class="s1">u&#39;id&#39;</span><span class="p">,</span> <span class="s1">u&#39;filenames&#39;</span><span class="p">]</span>
-   <span class="o">=&gt;</span> <span class="n">dsid</span> <span class="o">=</span> <span class="mi">945</span><span class="n">e2f55e90b4424a57d60574a3aea45</span>
+   <span class="o">=&gt;</span> <span class="n">dsid</span> <span class="o">=</span> <span class="mi">46419943</span><span class="n">b46044d7a6e6240fc52b3bd4</span>
 
 <span class="mf">1.</span><span class="n">b</span> <span class="n">Run</span> <span class="n">feature</span> <span class="n">extraction</span>
- <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="mi">945</span><span class="n">e2f55e90b4424a57d60574a3aea45</span>
+ <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="mi">46419943</span><span class="n">b46044d7a6e6240fc52b3bd4</span>
 
 <span class="mf">1.</span><span class="n">d</span><span class="o">.</span> <span class="n">check</span> <span class="n">the</span> <span class="n">parameters</span> <span class="n">of</span> <span class="n">the</span> <span class="n">extracted</span> <span class="n">features</span>
- <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="mi">945</span><span class="n">e2f55e90b4424a57d60574a3aea45</span>
+ <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="mi">46419943</span><span class="n">b46044d7a6e6240fc52b3bd4</span>
      <span class="o">-</span> <span class="n">binary</span><span class="p">:</span> <span class="kc">False</span>
      <span class="o">-</span> <span class="n">n_jobs</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span>
      <span class="o">-</span> <span class="n">stop_words</span><span class="p">:</span> <span class="n">english</span>
@@ -183,24 +184,24 @@
 
 <span class="mf">2.</span> <span class="n">Duplicate</span> <span class="n">detection</span> <span class="n">by</span> <span class="n">cosine</span> <span class="n">similarity</span> <span class="p">(</span><span class="n">DBSCAN</span><span class="p">)</span>
  <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">clustering</span><span class="o">/</span><span class="n">dbscan</span><span class="o">/</span>
-     <span class="o">=&gt;</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="n">f69fb9d113a34779815bc26db8ed5d6e</span>
- <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">clustering</span><span class="o">/</span><span class="n">k</span><span class="o">-</span><span class="n">mean</span><span class="o">/</span><span class="n">f69fb9d113a34779815bc26db8ed5d6e</span>
-    <span class="o">..</span> <span class="n">computed</span> <span class="ow">in</span> <span class="mf">4.2</span><span class="n">s</span>
+     <span class="o">=&gt;</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="mi">7</span><span class="n">bcd763609044695baaf932d165dde6d</span>
+ <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">clustering</span><span class="o">/</span><span class="n">dbscan</span><span class="o">/</span><span class="mi">7</span><span class="n">bcd763609044695baaf932d165dde6d</span>
+    <span class="o">..</span> <span class="n">computed</span> <span class="ow">in</span> <span class="mf">4.8</span><span class="n">s</span>
 <span class="n">Found</span> <span class="mi">91</span> <span class="n">duplicates</span> <span class="o">/</span> <span class="mi">2465</span>
 
 <span class="mf">3.</span> <span class="n">Duplicate</span> <span class="n">detection</span> <span class="n">by</span> <span class="n">I</span><span class="o">-</span><span class="n">Match</span>
  <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">duplicate</span><span class="o">-</span><span class="n">detection</span><span class="o">/</span>
-     <span class="o">=&gt;</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="n">bc0cbdfc608a443db98949868a8b435a</span>
+     <span class="o">=&gt;</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="n">caa17ca9be6646f5aaa4346ece34dbae</span>
     <span class="o">..</span> <span class="n">computed</span> <span class="ow">in</span> <span class="mf">0.0</span><span class="n">s</span>
-<span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">duplicate</span><span class="o">-</span><span class="n">detection</span><span class="o">/</span><span class="n">bc0cbdfc608a443db98949868a8b435a</span>
-    <span class="o">..</span> <span class="n">computed</span> <span class="ow">in</span> <span class="mf">2.5</span><span class="n">s</span>
-<span class="n">Found</span> <span class="mi">332</span> <span class="n">duplicates</span> <span class="o">/</span> <span class="mi">2465</span>
+<span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">duplicate</span><span class="o">-</span><span class="n">detection</span><span class="o">/</span><span class="n">caa17ca9be6646f5aaa4346ece34dbae</span>
+    <span class="o">..</span> <span class="n">computed</span> <span class="ow">in</span> <span class="mf">2.6</span><span class="n">s</span>
+<span class="n">Found</span> <span class="mi">334</span> <span class="n">duplicates</span> <span class="o">/</span> <span class="mi">2465</span>
 
 <span class="mf">3.</span> <span class="n">Duplicate</span> <span class="n">detection</span> <span class="n">by</span> <span class="n">Simhash</span>
  <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">duplicate</span><span class="o">-</span><span class="n">detection</span><span class="o">/</span>
-     <span class="o">=&gt;</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="mi">8</span><span class="n">f2b1af1b6994dd5a9f2d0fa094cf26c</span>
-    <span class="o">..</span> <span class="n">computed</span> <span class="ow">in</span> <span class="mf">0.8</span><span class="n">s</span>
- <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">duplicate</span><span class="o">-</span><span class="n">detection</span><span class="o">/</span><span class="mi">8</span><span class="n">f2b1af1b6994dd5a9f2d0fa094cf26c</span>
+     <span class="o">=&gt;</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="n">c868738a26034893b068d2433fb88dfc</span>
+    <span class="o">..</span> <span class="n">computed</span> <span class="ow">in</span> <span class="mf">0.9</span><span class="n">s</span>
+ <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">duplicate</span><span class="o">-</span><span class="n">detection</span><span class="o">/</span><span class="n">c868738a26034893b068d2433fb88dfc</span>
     <span class="o">..</span> <span class="n">computed</span> <span class="ow">in</span> <span class="mf">0.1</span><span class="n">s</span>
 <span class="n">Found</span> <span class="mi">301</span> <span class="n">duplicates</span> <span class="o">/</span> <span class="mi">2465</span>
 </pre></div>
@@ -286,7 +287,7 @@
 <span class="n">mid</span>  <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;     =&gt; model id = {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mid</span><span class="p">))</span>
 
-<span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/clustering/k-mean/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mid</span><span class="p">)</span>
+<span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/clustering/dbscan/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mid</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot; POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
 <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span>
         <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;n_top_words&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="c1"># don&#39;t compute cluster labels</span>
@@ -367,7 +368,7 @@
 <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Found {} duplicates / {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">labels_</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">labels_</span><span class="p">)),</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels_</span><span class="p">)))</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  9.939 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  10.719 seconds)</p>
 <div class="sphx-glr-footer container">
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../_downloads/duplicate_detection_example.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">duplicate_detection_example.py</span></code></a></div>
@@ -418,7 +419,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.6.0-dev',
+            VERSION:'0.6.0-beta',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

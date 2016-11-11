@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Clustering Example [REST API] &mdash; FreeDiscovery 0.6.0-dev documentation</title>
+  <title>Clustering Example [REST API] &mdash; FreeDiscovery 0.6.0-beta documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="FreeDiscovery 0.6.0-dev documentation" href="../index.html"/>
+    <link rel="top" title="FreeDiscovery 0.6.0-beta documentation" href="../index.html"/>
         <link rel="up" title="Examples" href="index.html"/>
         <link rel="next" title="Duplicate Detection Example [REST API]" href="duplicate_detection_example.html"/>
         <link rel="prev" title="Clustering Example [Python API]" href="clustering_example_python.html"/> 
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                0.6.0-dev
+                0.6.0-beta
               </div>
             
           
@@ -99,6 +99,7 @@
 <li class="toctree-l2"><a class="reference internal" href="categorization_example.html">Categorization Example [REST API]</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../scaling_benchmarks.html">Scaling benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deployment.html">Deployment options</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
 </ul>
@@ -157,13 +158,13 @@
 <span class="mf">1.</span><span class="n">a</span> <span class="n">Load</span> <span class="n">dataset</span> <span class="ow">and</span> <span class="n">initalize</span> <span class="n">feature</span> <span class="n">extraction</span>
  <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span>
    <span class="o">=&gt;</span> <span class="n">received</span> <span class="p">[</span><span class="s1">u&#39;id&#39;</span><span class="p">,</span> <span class="s1">u&#39;filenames&#39;</span><span class="p">]</span>
-   <span class="o">=&gt;</span> <span class="n">dsid</span> <span class="o">=</span> <span class="n">d81df52c50634e8c8102fd98d57cb0c0</span>
+   <span class="o">=&gt;</span> <span class="n">dsid</span> <span class="o">=</span> <span class="mi">0284887</span><span class="n">d7e30489a89b809adcc86c161</span>
 
 <span class="mf">1.</span><span class="n">b</span> <span class="n">Run</span> <span class="n">feature</span> <span class="n">extraction</span>
- <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="n">d81df52c50634e8c8102fd98d57cb0c0</span>
+ <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="mi">0284887</span><span class="n">d7e30489a89b809adcc86c161</span>
 
 <span class="mf">1.</span><span class="n">d</span><span class="o">.</span> <span class="n">check</span> <span class="n">the</span> <span class="n">parameters</span> <span class="n">of</span> <span class="n">the</span> <span class="n">extracted</span> <span class="n">features</span>
- <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="n">d81df52c50634e8c8102fd98d57cb0c0</span>
+ <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="mi">0284887</span><span class="n">d7e30489a89b809adcc86c161</span>
      <span class="o">-</span> <span class="n">binary</span><span class="p">:</span> <span class="kc">False</span>
      <span class="o">-</span> <span class="n">n_jobs</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span>
      <span class="o">-</span> <span class="n">stop_words</span><span class="p">:</span> <span class="n">english</span>
@@ -183,39 +184,39 @@
 
 <span class="mf">2.</span><span class="n">a</span><span class="o">.</span> <span class="n">Document</span> <span class="n">clustering</span> <span class="p">(</span><span class="n">LSI</span> <span class="o">+</span> <span class="n">K</span><span class="o">-</span><span class="n">means</span><span class="p">)</span>
  <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">clustering</span><span class="o">/</span><span class="n">k</span><span class="o">-</span><span class="n">mean</span><span class="o">/</span>
-     <span class="o">=&gt;</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="mi">9</span><span class="n">af3feacec0a41b1aac00e915822e669</span>
+     <span class="o">=&gt;</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="mi">0</span><span class="n">a5cf63b617247bea9b56b9abfde1a67</span>
 
 <span class="mf">2.</span><span class="n">b</span><span class="o">.</span> <span class="n">Computing</span> <span class="n">cluster</span> <span class="n">labels</span>
- <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">clustering</span><span class="o">/</span><span class="n">k</span><span class="o">-</span><span class="n">mean</span><span class="o">/</span><span class="mi">9</span><span class="n">af3feacec0a41b1aac00e915822e669</span>
-    <span class="o">..</span> <span class="n">computed</span> <span class="ow">in</span> <span class="mf">3.7</span><span class="n">s</span>
+ <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">clustering</span><span class="o">/</span><span class="n">k</span><span class="o">-</span><span class="n">mean</span><span class="o">/</span><span class="mi">0</span><span class="n">a5cf63b617247bea9b56b9abfde1a67</span>
+    <span class="o">..</span> <span class="n">computed</span> <span class="ow">in</span> <span class="mf">3.8</span><span class="n">s</span>
    <span class="n">N_documents</span>                                      <span class="n">cluster_names</span>
-<span class="mi">0</span>          <span class="mi">473</span>  <span class="p">[</span><span class="s1">u&#39;recipients&#39;</span><span class="p">,</span> <span class="s1">u&#39;administrative&#39;</span><span class="p">,</span> <span class="s1">u&#39;group&#39;</span><span class="p">,</span> <span class="n">u</span><span class="o">...</span>
-<span class="mi">2</span>          <span class="mi">467</span>  <span class="p">[</span><span class="s1">u&#39;normal&#39;</span><span class="p">,</span> <span class="s1">u&#39;tenet&#39;</span><span class="p">,</span> <span class="s1">u&#39;test&#39;</span><span class="p">,</span> <span class="s1">u&#39;gmt&#39;</span><span class="p">,</span> <span class="s1">u&#39;sensi...</span>
-<span class="mi">1</span>          <span class="mi">412</span>  <span class="p">[</span><span class="s1">u&#39;ect&#39;</span><span class="p">,</span> <span class="s1">u&#39;hou&#39;</span><span class="p">,</span> <span class="s1">u&#39;enron&#39;</span><span class="p">,</span> <span class="s1">u&#39;tana&#39;</span><span class="p">,</span> <span class="s1">u&#39;jones&#39;</span><span class="p">,</span> <span class="o">...</span>
-<span class="mi">7</span>          <span class="mi">307</span>  <span class="p">[</span><span class="s1">u&#39;shackleton&#39;</span><span class="p">,</span> <span class="s1">u&#39;enron_development&#39;</span><span class="p">,</span> <span class="s1">u&#39;ect&#39;</span><span class="p">,</span> <span class="o">...</span>
-<span class="mi">4</span>          <span class="mi">238</span>  <span class="p">[</span><span class="s1">u&#39;energy&#39;</span><span class="p">,</span> <span class="s1">u&#39;enron&#39;</span><span class="p">,</span> <span class="s1">u&#39;berkeley&#39;</span><span class="p">,</span> <span class="s1">u&#39;services&#39;</span><span class="o">...</span>
-<span class="mi">8</span>          <span class="mi">174</span>  <span class="p">[</span><span class="s1">u&#39;shall&#39;</span><span class="p">,</span> <span class="s1">u&#39;party&#39;</span><span class="p">,</span> <span class="s1">u&#39;rewrite&#39;</span><span class="p">,</span> <span class="s1">u&#39;agreement&#39;</span><span class="p">,</span><span class="o">...</span>
-<span class="mi">3</span>          <span class="mi">170</span>  <span class="p">[</span><span class="s1">u&#39;enron&#39;</span><span class="p">,</span> <span class="s1">u&#39;master&#39;</span><span class="p">,</span> <span class="s1">u&#39;trading&#39;</span><span class="p">,</span> <span class="s1">u&#39;ena&#39;</span><span class="p">,</span> <span class="s1">u&#39;tr...</span>
-<span class="mi">5</span>          <span class="mi">102</span>  <span class="p">[</span><span class="s1">u&#39;sanders&#39;</span><span class="p">,</span> <span class="s1">u&#39;normal&#39;</span><span class="p">,</span> <span class="s1">u&#39;nov&#39;</span><span class="p">,</span> <span class="s1">u&#39;ect&#39;</span><span class="p">,</span> <span class="s1">u&#39;subj...</span>
-<span class="mi">6</span>           <span class="mi">64</span>  <span class="p">[</span><span class="s1">u&#39;migration&#39;</span><span class="p">,</span> <span class="s1">u&#39;outlook&#39;</span><span class="p">,</span> <span class="s1">u&#39;team&#39;</span><span class="p">,</span> <span class="s1">u&#39;normal&#39;</span><span class="p">,</span><span class="o">...</span>
-<span class="mi">9</span>           <span class="mi">58</span>  <span class="p">[</span><span class="s1">u&#39;haedicke&#39;</span><span class="p">,</span> <span class="s1">u&#39;normal&#39;</span><span class="p">,</span> <span class="s1">u&#39;test&#39;</span><span class="p">,</span> <span class="s1">u&#39;load&#39;</span><span class="p">,</span> <span class="s1">u&#39;r...</span>
+<span class="mi">2</span>          <span class="mi">580</span>  <span class="p">[</span><span class="s1">u&#39;recipients&#39;</span><span class="p">,</span> <span class="s1">u&#39;administrative&#39;</span><span class="p">,</span> <span class="s1">u&#39;group&#39;</span><span class="p">,</span> <span class="n">u</span><span class="o">...</span>
+<span class="mi">1</span>          <span class="mi">496</span>  <span class="p">[</span><span class="s1">u&#39;normal&#39;</span><span class="p">,</span> <span class="s1">u&#39;tenet&#39;</span><span class="p">,</span> <span class="s1">u&#39;test&#39;</span><span class="p">,</span> <span class="s1">u&#39;gmt&#39;</span><span class="p">,</span> <span class="s1">u&#39;sensi...</span>
+<span class="mi">3</span>          <span class="mi">393</span>  <span class="p">[</span><span class="s1">u&#39;ect&#39;</span><span class="p">,</span> <span class="s1">u&#39;hou&#39;</span><span class="p">,</span> <span class="s1">u&#39;shackleton&#39;</span><span class="p">,</span> <span class="s1">u&#39;test&#39;</span><span class="p">,</span> <span class="s1">u&#39;nem...</span>
+<span class="mi">7</span>          <span class="mi">303</span>  <span class="p">[</span><span class="s1">u&#39;enron&#39;</span><span class="p">,</span> <span class="s1">u&#39;energy&#39;</span><span class="p">,</span> <span class="s1">u&#39;trade&#39;</span><span class="p">,</span> <span class="s1">u&#39;power&#39;</span><span class="p">,</span> <span class="s1">u&#39;se...</span>
+<span class="mi">5</span>          <span class="mi">234</span>  <span class="p">[</span><span class="s1">u&#39;enron&#39;</span><span class="p">,</span> <span class="s1">u&#39;dasovich&#39;</span><span class="p">,</span> <span class="s1">u&#39;normal&#39;</span><span class="p">,</span> <span class="s1">u&#39;alias&#39;</span><span class="p">,</span> <span class="n">u</span><span class="o">...</span>
+<span class="mi">4</span>          <span class="mi">124</span>  <span class="p">[</span><span class="s1">u&#39;shall&#39;</span><span class="p">,</span> <span class="s1">u&#39;party&#39;</span><span class="p">,</span> <span class="s1">u&#39;agreement&#39;</span><span class="p">,</span> <span class="s1">u&#39;transacti...</span>
+<span class="mi">6</span>          <span class="mi">111</span>  <span class="p">[</span><span class="s1">u&#39;enron_development&#39;</span><span class="p">,</span> <span class="s1">u&#39;ect&#39;</span><span class="p">,</span> <span class="s1">u&#39;shackleton&#39;</span><span class="p">,</span> <span class="o">...</span>
+<span class="mi">8</span>          <span class="mi">103</span>  <span class="p">[</span><span class="s1">u&#39;sanders&#39;</span><span class="p">,</span> <span class="s1">u&#39;normal&#39;</span><span class="p">,</span> <span class="s1">u&#39;nov&#39;</span><span class="p">,</span> <span class="s1">u&#39;ect&#39;</span><span class="p">,</span> <span class="s1">u&#39;subj...</span>
+<span class="mi">0</span>           <span class="mi">64</span>  <span class="p">[</span><span class="s1">u&#39;migration&#39;</span><span class="p">,</span> <span class="s1">u&#39;outlook&#39;</span><span class="p">,</span> <span class="s1">u&#39;team&#39;</span><span class="p">,</span> <span class="s1">u&#39;normal&#39;</span><span class="p">,</span><span class="o">...</span>
+<span class="mi">9</span>           <span class="mi">57</span>  <span class="p">[</span><span class="s1">u&#39;rewrite&#39;</span><span class="p">,</span> <span class="s1">u&#39;server&#39;</span><span class="p">,</span> <span class="s1">u&#39;address&#39;</span><span class="p">,</span> <span class="s1">u&#39;smtp&#39;</span><span class="p">,</span> <span class="n">u</span><span class="o">...</span>
 
 <span class="mf">2.</span><span class="n">a</span><span class="o">.</span> <span class="n">Document</span> <span class="n">clustering</span> <span class="p">(</span><span class="n">LSI</span> <span class="o">+</span> <span class="n">Ward</span> <span class="n">HC</span><span class="p">)</span>
  <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">clustering</span><span class="o">/</span><span class="n">ward_hc</span><span class="o">/</span>
-     <span class="o">=&gt;</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="mi">41</span><span class="n">f2a995ccb44520aca6f49530d0d210</span>
+     <span class="o">=&gt;</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="mi">44</span><span class="n">a57159b4c64a59b1c330d1ae40f753</span>
 
 <span class="mf">2.</span><span class="n">b</span><span class="o">.</span> <span class="n">Computing</span> <span class="n">cluster</span> <span class="n">labels</span>
-<span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">clustering</span><span class="o">/</span><span class="n">ward_hc</span><span class="o">/</span><span class="mi">41</span><span class="n">f2a995ccb44520aca6f49530d0d210</span>
-    <span class="o">..</span> <span class="n">computed</span> <span class="ow">in</span> <span class="mf">3.8</span><span class="n">s</span>
+<span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">clustering</span><span class="o">/</span><span class="n">ward_hc</span><span class="o">/</span><span class="mi">44</span><span class="n">a57159b4c64a59b1c330d1ae40f753</span>
+    <span class="o">..</span> <span class="n">computed</span> <span class="ow">in</span> <span class="mf">4.4</span><span class="n">s</span>
    <span class="n">N_documents</span>                                      <span class="n">cluster_names</span>
-<span class="mi">4</span>          <span class="mi">457</span>  <span class="p">[</span><span class="s1">u&#39;recipients&#39;</span><span class="p">,</span> <span class="s1">u&#39;administrative&#39;</span><span class="p">,</span> <span class="s1">u&#39;group&#39;</span><span class="p">,</span> <span class="n">u</span><span class="o">...</span>
-<span class="mi">2</span>          <span class="mi">448</span>  <span class="p">[</span><span class="s1">u&#39;normal&#39;</span><span class="p">,</span> <span class="s1">u&#39;tenet&#39;</span><span class="p">,</span> <span class="s1">u&#39;test&#39;</span><span class="p">,</span> <span class="s1">u&#39;gmt&#39;</span><span class="p">,</span> <span class="s1">u&#39;sensi...</span>
-<span class="mi">0</span>          <span class="mi">416</span>  <span class="p">[</span><span class="s1">u&#39;shackleton&#39;</span><span class="p">,</span> <span class="s1">u&#39;enron_development&#39;</span><span class="p">,</span> <span class="s1">u&#39;ect&#39;</span><span class="p">,</span> <span class="o">...</span>
-<span class="mi">3</span>          <span class="mi">401</span>  <span class="p">[</span><span class="s1">u&#39;enron&#39;</span><span class="p">,</span> <span class="s1">u&#39;energy&#39;</span><span class="p">,</span> <span class="s1">u&#39;power&#39;</span><span class="p">,</span> <span class="s1">u&#39;trading&#39;</span><span class="p">,</span> <span class="s1">u&#39;...</span>
-<span class="mi">1</span>          <span class="mi">253</span>  <span class="p">[</span><span class="s1">u&#39;enron&#39;</span><span class="p">,</span> <span class="s1">u&#39;tana&#39;</span><span class="p">,</span> <span class="s1">u&#39;jones&#39;</span><span class="p">,</span> <span class="s1">u&#39;ect&#39;</span><span class="p">,</span> <span class="s1">u&#39;nemec&#39;</span><span class="o">...</span>
-<span class="mi">9</span>          <span class="mi">147</span>  <span class="p">[</span><span class="s1">u&#39;ect&#39;</span><span class="p">,</span> <span class="s1">u&#39;hou&#39;</span><span class="p">,</span> <span class="s1">u&#39;lon&#39;</span><span class="p">,</span> <span class="s1">u&#39;group&#39;</span><span class="p">,</span> <span class="s1">u&#39;recipient...</span>
-<span class="mi">8</span>          <span class="mi">129</span>  <span class="p">[</span><span class="s1">u&#39;shall&#39;</span><span class="p">,</span> <span class="s1">u&#39;party&#39;</span><span class="p">,</span> <span class="s1">u&#39;agreement&#39;</span><span class="p">,</span> <span class="s1">u&#39;transacti...</span>
-<span class="mi">7</span>           <span class="mi">95</span>  <span class="p">[</span><span class="s1">u&#39;sanders&#39;</span><span class="p">,</span> <span class="s1">u&#39;normal&#39;</span><span class="p">,</span> <span class="s1">u&#39;nov&#39;</span><span class="p">,</span> <span class="s1">u&#39;gmt&#39;</span><span class="p">,</span> <span class="s1">u&#39;sens...</span>
+<span class="mi">0</span>          <span class="mi">511</span>  <span class="p">[</span><span class="s1">u&#39;enron&#39;</span><span class="p">,</span> <span class="s1">u&#39;nemec&#39;</span><span class="p">,</span> <span class="s1">u&#39;ect&#39;</span><span class="p">,</span> <span class="s1">u&#39;energy&#39;</span><span class="p">,</span> <span class="s1">u&#39;trad...</span>
+<span class="mi">2</span>          <span class="mi">447</span>  <span class="p">[</span><span class="s1">u&#39;normal&#39;</span><span class="p">,</span> <span class="s1">u&#39;tenet&#39;</span><span class="p">,</span> <span class="s1">u&#39;test&#39;</span><span class="p">,</span> <span class="s1">u&#39;gmt&#39;</span><span class="p">,</span> <span class="s1">u&#39;sensi...</span>
+<span class="mi">4</span>          <span class="mi">437</span>  <span class="p">[</span><span class="s1">u&#39;recipients&#39;</span><span class="p">,</span> <span class="s1">u&#39;administrative&#39;</span><span class="p">,</span> <span class="s1">u&#39;group&#39;</span><span class="p">,</span> <span class="n">u</span><span class="o">...</span>
+<span class="mi">1</span>          <span class="mi">421</span>  <span class="p">[</span><span class="s1">u&#39;shackleton&#39;</span><span class="p">,</span> <span class="s1">u&#39;enron_development&#39;</span><span class="p">,</span> <span class="s1">u&#39;ect&#39;</span><span class="p">,</span> <span class="o">...</span>
+<span class="mi">8</span>          <span class="mi">168</span>  <span class="p">[</span><span class="s1">u&#39;ect&#39;</span><span class="p">,</span> <span class="s1">u&#39;hou&#39;</span><span class="p">,</span> <span class="s1">u&#39;group&#39;</span><span class="p">,</span> <span class="s1">u&#39;recipients&#39;</span><span class="p">,</span> <span class="s1">u&#39;ad...</span>
+<span class="mi">3</span>          <span class="mi">142</span>  <span class="p">[</span><span class="s1">u&#39;shall&#39;</span><span class="p">,</span> <span class="s1">u&#39;party&#39;</span><span class="p">,</span> <span class="s1">u&#39;agreement&#39;</span><span class="p">,</span> <span class="s1">u&#39;transacti...</span>
+<span class="mi">9</span>          <span class="mi">125</span>  <span class="p">[</span><span class="s1">u&#39;tana&#39;</span><span class="p">,</span> <span class="s1">u&#39;jones&#39;</span><span class="p">,</span> <span class="s1">u&#39;enron&#39;</span><span class="p">,</span> <span class="s1">u&#39;normal&#39;</span><span class="p">,</span> <span class="s1">u&#39;tra...</span>
+<span class="mi">7</span>           <span class="mi">95</span>  <span class="p">[</span><span class="s1">u&#39;sanders&#39;</span><span class="p">,</span> <span class="s1">u&#39;normal&#39;</span><span class="p">,</span> <span class="s1">u&#39;nov&#39;</span><span class="p">,</span> <span class="s1">u&#39;sensitivity&#39;</span><span class="o">...</span>
 <span class="mi">5</span>           <span class="mi">63</span>  <span class="p">[</span><span class="s1">u&#39;migration&#39;</span><span class="p">,</span> <span class="s1">u&#39;outlook&#39;</span><span class="p">,</span> <span class="s1">u&#39;team&#39;</span><span class="p">,</span> <span class="s1">u&#39;normal&#39;</span><span class="p">,</span><span class="o">...</span>
 <span class="mi">6</span>           <span class="mi">56</span>  <span class="p">[</span><span class="s1">u&#39;rewrite&#39;</span><span class="p">,</span> <span class="s1">u&#39;server&#39;</span><span class="p">,</span> <span class="s1">u&#39;address&#39;</span><span class="p">,</span> <span class="s1">u&#39;smtp&#39;</span><span class="p">,</span> <span class="n">u</span><span class="o">...</span>
 </pre></div>
@@ -346,7 +347,7 @@
 <span class="k">print</span><span class="p">(</span><span class="n">repr_clustering</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;labels&#39;</span><span class="p">]),</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;cluster_terms&#39;</span><span class="p">]))</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  9.833 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  10.719 seconds)</p>
 <div class="sphx-glr-footer container">
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../_downloads/clustering_example.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">clustering_example.py</span></code></a></div>
@@ -397,7 +398,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.6.0-dev',
+            VERSION:'0.6.0-beta',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

@@ -22,13 +22,13 @@ Find near-duplicates in a text collection
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received [u'id', u'filenames']
-       => dsid = 945e2f55e90b4424a57d60574a3aea45
+       => dsid = 46419943b46044d7a6e6240fc52b3bd4
 
     1.b Run feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/945e2f55e90b4424a57d60574a3aea45
+     POST http://localhost:5001/api/v0/feature-extraction/46419943b46044d7a6e6240fc52b3bd4
 
     1.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/945e2f55e90b4424a57d60574a3aea45
+     GET http://localhost:5001/api/v0/feature-extraction/46419943b46044d7a6e6240fc52b3bd4
          - binary: False
          - n_jobs: -1
          - stop_words: english
@@ -48,24 +48,24 @@ Find near-duplicates in a text collection
 
     2. Duplicate detection by cosine similarity (DBSCAN)
      POST http://localhost:5001/api/v0/clustering/dbscan/
-         => model id = f69fb9d113a34779815bc26db8ed5d6e
-     POST http://localhost:5001/api/v0/clustering/k-mean/f69fb9d113a34779815bc26db8ed5d6e
-        .. computed in 4.2s
+         => model id = 7bcd763609044695baaf932d165dde6d
+     POST http://localhost:5001/api/v0/clustering/dbscan/7bcd763609044695baaf932d165dde6d
+        .. computed in 4.8s
     Found 91 duplicates / 2465
 
     3. Duplicate detection by I-Match
      POST http://localhost:5001/api/v0/duplicate-detection/
-         => model id = bc0cbdfc608a443db98949868a8b435a
+         => model id = caa17ca9be6646f5aaa4346ece34dbae
         .. computed in 0.0s
-    GET http://localhost:5001/api/v0/duplicate-detection/bc0cbdfc608a443db98949868a8b435a
-        .. computed in 2.5s
-    Found 332 duplicates / 2465
+    GET http://localhost:5001/api/v0/duplicate-detection/caa17ca9be6646f5aaa4346ece34dbae
+        .. computed in 2.6s
+    Found 334 duplicates / 2465
 
     3. Duplicate detection by Simhash
      POST http://localhost:5001/api/v0/duplicate-detection/
-         => model id = 8f2b1af1b6994dd5a9f2d0fa094cf26c
-        .. computed in 0.8s
-     GET http://localhost:5001/api/v0/duplicate-detection/8f2b1af1b6994dd5a9f2d0fa094cf26c
+         => model id = c868738a26034893b068d2433fb88dfc
+        .. computed in 0.9s
+     GET http://localhost:5001/api/v0/duplicate-detection/c868738a26034893b068d2433fb88dfc
         .. computed in 0.1s
     Found 301 duplicates / 2465
 
@@ -155,7 +155,7 @@ Find near-duplicates in a text collection
     mid  = data['id']
     print("     => model id = {}".format(mid))
 
-    url = BASE_URL + '/clustering/k-mean/{}'.format(mid)
+    url = BASE_URL + '/clustering/dbscan/{}'.format(mid)
     print(" POST", url)
     res = requests.get(url,
             json={'n_top_words': 0, # don't compute cluster labels
@@ -238,7 +238,7 @@ Find near-duplicates in a text collection
 
 
 
-**Total running time of the script:** ( 0 minutes  9.939 seconds)
+**Total running time of the script:** ( 0 minutes  10.719 seconds)
 
 
 

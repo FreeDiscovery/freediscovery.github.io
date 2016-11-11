@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Categorization Example [REST API] &mdash; FreeDiscovery 0.6.0-dev documentation</title>
+  <title>Categorization Example [REST API] &mdash; FreeDiscovery 0.6.0-beta documentation</title>
   
 
   
@@ -35,9 +35,9 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="FreeDiscovery 0.6.0-dev documentation" href="../index.html"/>
+    <link rel="top" title="FreeDiscovery 0.6.0-beta documentation" href="../index.html"/>
         <link rel="up" title="Examples" href="index.html"/>
-        <link rel="next" title="Deployment options" href="../deployment.html"/>
+        <link rel="next" title="Scaling benchmarks" href="../scaling_benchmarks.html"/>
         <link rel="prev" title="Duplicate Detection Example [REST API]" href="duplicate_detection_example.html"/> 
 
   
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                0.6.0-dev
+                0.6.0-beta
               </div>
             
           
@@ -99,6 +99,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Categorization Example [REST API]</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../scaling_benchmarks.html">Scaling benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deployment.html">Deployment options</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
 </ul>
@@ -157,16 +158,16 @@
 1.a Load dataset and initalize feature extraction
  POST http://localhost:5001/api/v0/feature-extraction
    =&gt; received [u&#39;id&#39;, u&#39;filenames&#39;]
-   =&gt; dsid = 484ad5aa007348dd99152738c0be83ed
+   =&gt; dsid = 63c50d05b2de4dba818f61ee4a2c3713
 
 1.b Start feature extraction (in the background)
- POST http://localhost:5001/api/v0/feature-extraction/484ad5aa007348dd99152738c0be83ed
+ POST http://localhost:5001/api/v0/feature-extraction/63c50d05b2de4dba818f61ee4a2c3713
 
 1.c Monitor feature extraction progress
- GET http://localhost:5001/api/v0/feature-extraction/484ad5aa007348dd99152738c0be83ed
+ GET http://localhost:5001/api/v0/feature-extraction/63c50d05b2de4dba818f61ee4a2c3713
 
 1.d. check the parameters of the extracted features
- GET http://localhost:5001/api/v0/feature-extraction/484ad5aa007348dd99152738c0be83ed
+ GET http://localhost:5001/api/v0/feature-extraction/63c50d05b2de4dba818f61ee4a2c3713
      - binary: False
      - n_jobs: -1
      - stop_words: None
@@ -190,38 +191,38 @@
  Training...
 [u&#39;f1&#39;, u&#39;recall&#39;, u&#39;precision&#39;, u&#39;id&#39;, u&#39;average_precision&#39;, u&#39;roc_auc&#39;]
 Failed!!!
-     =&gt; model id = 2e3af7a6b6f44843a793b4a331985555
+     =&gt; model id = 901c1613c42a4ef8a8a8dba9b450d014
     =&gt; Training scores: MAP = 1.00, ROC-AUC = 1.00
 
 2.b. Check the parameters used in the categorization model
- GET http://localhost:5001/api/v0/categorization/2e3af7a6b6f44843a793b4a331985555
+ GET http://localhost:5001/api/v0/categorization/901c1613c42a4ef8a8a8dba9b450d014
      - method: LogisticRegression
      - options: {&#39;warm_start&#39;: False, &#39;C&#39;: 1.0, &#39;n_jobs&#39;: 1, &#39;verbose&#39;: 0, &#39;intercept_scaling&#39;: 1, &#39;fit_intercept&#39;: True, &#39;max_iter&#39;: 100, &#39;penalty&#39;: &#39;l2&#39;, &#39;multi_class&#39;: &#39;ovr&#39;, &#39;random_state&#39;: None, &#39;dual&#39;: False, &#39;tol&#39;: 0.0001, &#39;solver&#39;: &#39;liblinear&#39;, &#39;class_weight&#39;: None}
 
 2.c Categorize the complete dataset with this model
- GET http://localhost:5001/api/v0/categorization/2e3af7a6b6f44843a793b4a331985555/predict
+ GET http://localhost:5001/api/v0/categorization/901c1613c42a4ef8a8a8dba9b450d014/predict
     =&gt; Predicting 0 relevant and 2465 non relevant documents
 
 2.d Test categorization accuracy
          using ../freediscovery_shared/treclegal09_2k_subset/ground_truth_file.txt
-POST http://localhost:5001/api/v0/categorization/2e3af7a6b6f44843a793b4a331985555/test
+POST http://localhost:5001/api/v0/categorization/901c1613c42a4ef8a8a8dba9b450d014/test
     =&gt; Test scores: MAP = 1.00, ROC-AUC = 1.00
 
 3.a. Calculate LSI
 POST http://localhost:5001/api/v0/lsi/
-  =&gt; LSI model id = 97ab9887e4cb4704b9daa77d778daf71
+  =&gt; LSI model id = 53501cf96d6a4f55b605c6fad5166575
   =&gt; SVD decomposition with 100 dimensions explaining 44.36 % variabilty of the data
 
 3.b. Predict categorization with LSI
-POST http://localhost:5001/api/v0/lsi/97ab9887e4cb4704b9daa77d778daf71/predict
+POST http://localhost:5001/api/v0/lsi/53501cf96d6a4f55b605c6fad5166575/predict
     =&gt; Training scores: MAP = 1.00, ROC-AUC = 1.00
 
 3.c. Test categorization with LSI
- POST http://localhost:5001/api/v0/lsi/97ab9887e4cb4704b9daa77d778daf71/test
-    =&gt; Test scores: MAP = 0.71, ROC-AUC = 0.81
+ POST http://localhost:5001/api/v0/lsi/53501cf96d6a4f55b605c6fad5166575/test
+    =&gt; Test scores: MAP = 0.75, ROC-AUC = 0.87
 
 4.a Delete the extracted features
- DELETE http://localhost:5001/api/v0/feature-extraction/484ad5aa007348dd99152738c0be83ed
+ DELETE http://localhost:5001/api/v0/feature-extraction/63c50d05b2de4dba818f61ee4a2c3713
 </pre></div>
 </div>
 <div class="line-block">
@@ -414,7 +415,7 @@ POST http://localhost:5001/api/v0/lsi/97ab9887e4cb4704b9daa77d778daf71/predict
     <span class="k">print</span><span class="p">(</span><span class="s2">&quot; DELETE&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  26.710 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  26.260 seconds)</p>
 <div class="sphx-glr-footer container">
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../_downloads/categorization_example.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">categorization_example.py</span></code></a></div>
@@ -431,7 +432,7 @@ POST http://localhost:5001/api/v0/lsi/97ab9887e4cb4704b9daa77d778daf71/predict
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../deployment.html" class="btn btn-neutral float-right" title="Deployment options" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../scaling_benchmarks.html" class="btn btn-neutral float-right" title="Scaling benchmarks" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="duplicate_detection_example.html" class="btn btn-neutral" title="Duplicate Detection Example [REST API]" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -465,7 +466,7 @@ POST http://localhost:5001/api/v0/lsi/97ab9887e4cb4704b9daa77d778daf71/predict
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.6.0-dev',
+            VERSION:'0.6.0-beta',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
