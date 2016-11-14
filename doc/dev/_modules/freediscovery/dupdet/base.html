@@ -87,10 +87,9 @@
             
             
                 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../readme.html">FreeDiscovery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../installation_instructions.html">Installation instructions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../API_reference.html">REST API Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../freediscovery.html">Python API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rest_api/index.html">REST API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../python_api.html">Python API reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../scaling_benchmarks.html">Scaling benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../deployment.html">Deployment options</a></li>
@@ -161,28 +160,27 @@
 <span class="kn">from</span> <span class="nn">..exceptions</span> <span class="k">import</span> <span class="p">(</span><span class="n">DatasetNotFound</span><span class="p">,</span> <span class="n">ModelNotFound</span><span class="p">,</span> <span class="n">InitException</span><span class="p">,</span>
                             <span class="n">WrongParameter</span><span class="p">)</span>
 
-<div class="viewcode-block" id="DuplicateDetection"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.dupdet.base.DuplicateDetection">[docs]</a><span class="k">class</span> <span class="nc">DuplicateDetection</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">):</span>
+<div class="viewcode-block" id="DuplicateDetection"><a class="viewcode-back" href="../../../generated/freediscovery.dupdet.DuplicateDetection.html#freediscovery.dupdet.DuplicateDetection">[docs]</a><span class="k">class</span> <span class="nc">DuplicateDetection</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Find near duplicates in a document collection.</span>
+
+<span class="sd">    Currently supported backends are simhash-py and i-match.</span>
+
+<span class="sd">    The option `use_hashing=False` must be set for the feature extraction.</span>
+<span class="sd">    Recommended options also include, `use_idf=1, sublinear_tf=0, binary=0`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    cache_dir : str</span>
+<span class="sd">       directory where to save temporary and regression files</span>
+<span class="sd">    dsid : str, optional</span>
+<span class="sd">       dataset id</span>
+<span class="sd">    mid : str, optional</span>
+<span class="sd">       model id</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">_DIRREF</span> <span class="o">=</span> <span class="s2">&quot;dupdet&quot;</span>
 
-<div class="viewcode-block" id="DuplicateDetection.__init__"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.dupdet.base.DuplicateDetection.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cache_dir</span><span class="o">=</span><span class="s1">&#39;/tmp/&#39;</span><span class="p">,</span> <span class="n">dsid</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mid</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Find near duplicates in a document collection.</span>
-
-<span class="sd">        Currently supported backends are simhash-py and i-match.</span>
-
-<span class="sd">        The option `use_hashing=False` must be set for the feature extraction.</span>
-<span class="sd">        Recommended options also include, `use_idf=1, sublinear_tf=0, binary=0`.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        cache_dir : str</span>
-<span class="sd">           directory where to save temporary and regression files</span>
-<span class="sd">        dsid : str, optional</span>
-<span class="sd">           dataset id</span>
-<span class="sd">        mid : str, optional</span>
-<span class="sd">           model id</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="DuplicateDetection.__init__"><a class="viewcode-back" href="../../../generated/freediscovery.dupdet.DuplicateDetection.html#freediscovery.dupdet.DuplicateDetection.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cache_dir</span><span class="o">=</span><span class="s1">&#39;/tmp/&#39;</span><span class="p">,</span> <span class="n">dsid</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mid</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
         <span class="k">if</span> <span class="n">dsid</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">mid</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">dsid</span> <span class="o">=</span> <span class="n">dsid</span> <span class="o">=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">get_dsid</span><span class="p">(</span><span class="n">cache_dir</span><span class="p">,</span> <span class="n">mid</span><span class="p">)</span>
@@ -209,7 +207,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_pars</span> <span class="o">=</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="DuplicateDetection.fit"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.dupdet.base.DuplicateDetection.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;simhash&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="DuplicateDetection.fit"><a class="viewcode-back" href="../../../generated/freediscovery.dupdet.DuplicateDetection.html#freediscovery.dupdet.DuplicateDetection.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;simhash&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Precompute all the required values for duplicate detection</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -238,7 +236,7 @@
         <span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">pars</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_dir</span><span class="p">,</span> <span class="n">mid</span><span class="p">,</span>  <span class="s1">&#39;pars&#39;</span><span class="p">),</span> <span class="n">compress</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="DuplicateDetection.query"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.dupdet.base.DuplicateDetection.query">[docs]</a>    <span class="k">def</span> <span class="nf">query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">):</span>
+<div class="viewcode-block" id="DuplicateDetection.query"><a class="viewcode-back" href="../../../generated/freediscovery.dupdet.DuplicateDetection.html#freediscovery.dupdet.DuplicateDetection.query">[docs]</a>    <span class="k">def</span> <span class="nf">query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Find all the nearests neighbours for the dataset</span>
 
 <span class="sd">        Parameters</span>
@@ -310,7 +308,7 @@
         <span class="k">return</span> <span class="n">pars</span>
 
 
-<div class="viewcode-block" id="DuplicateDetection.load"><a class="viewcode-back" href="../../../freediscovery.html#freediscovery.dupdet.base.DuplicateDetection.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mid</span><span class="p">):</span>
+<div class="viewcode-block" id="DuplicateDetection.load"><a class="viewcode-back" href="../../../generated/freediscovery.dupdet.DuplicateDetection.html#freediscovery.dupdet.DuplicateDetection.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mid</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Load results from cache specified by a mid &quot;&quot;&quot;</span>
 
         <span class="n">mid_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_dir</span><span class="p">,</span> <span class="n">mid</span><span class="p">)</span>

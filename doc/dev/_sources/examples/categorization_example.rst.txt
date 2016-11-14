@@ -22,16 +22,16 @@ An example to illustrate binary categorizaiton with FreeDiscovery
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received [u'id', u'filenames']
-       => dsid = c9fa4e73fe79449395213495f1bae4bb
+       => dsid = 93a5d7bb8ead408399a2b6fb0cfb2a30
 
     1.b Start feature extraction (in the background)
-     POST http://localhost:5001/api/v0/feature-extraction/c9fa4e73fe79449395213495f1bae4bb
+     POST http://localhost:5001/api/v0/feature-extraction/93a5d7bb8ead408399a2b6fb0cfb2a30
 
     1.c Monitor feature extraction progress
-     GET http://localhost:5001/api/v0/feature-extraction/c9fa4e73fe79449395213495f1bae4bb
+     GET http://localhost:5001/api/v0/feature-extraction/93a5d7bb8ead408399a2b6fb0cfb2a30
 
     1.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/c9fa4e73fe79449395213495f1bae4bb
+     GET http://localhost:5001/api/v0/feature-extraction/93a5d7bb8ead408399a2b6fb0cfb2a30
          - binary: False
          - n_jobs: -1
          - stop_words: None
@@ -53,38 +53,38 @@ An example to illustrate binary categorizaiton with FreeDiscovery
            5 relevant, 63 non-relevant files
      POST http://localhost:5001/api/v0/categorization/
      Training...
-         => model id = 139c7df00b1848b787ec47360ae4e171
+         => model id = b2cd10edb74d40498b9fb5a56d8c292a
         => Training scores: MAP = 1.00, ROC-AUC = 1.00
 
     2.b. Check the parameters used in the categorization model
-     GET http://localhost:5001/api/v0/categorization/139c7df00b1848b787ec47360ae4e171
+     GET http://localhost:5001/api/v0/categorization/b2cd10edb74d40498b9fb5a56d8c292a
          - method: LogisticRegression
          - options: {'warm_start': False, 'C': 1.0, 'n_jobs': 1, 'verbose': 0, 'intercept_scaling': 1, 'fit_intercept': True, 'max_iter': 100, 'penalty': 'l2', 'multi_class': 'ovr', 'random_state': None, 'dual': False, 'tol': 0.0001, 'solver': 'liblinear', 'class_weight': None}
 
     2.c Categorize the complete dataset with this model
-     GET http://localhost:5001/api/v0/categorization/139c7df00b1848b787ec47360ae4e171/predict
+     GET http://localhost:5001/api/v0/categorization/b2cd10edb74d40498b9fb5a56d8c292a/predict
         => Predicting 0 relevant and 2465 non relevant documents
 
     2.d Test categorization accuracy
              using ../freediscovery_shared/treclegal09_2k_subset/ground_truth_file.txt
-    POST http://localhost:5001/api/v0/categorization/139c7df00b1848b787ec47360ae4e171/test
+    POST http://localhost:5001/api/v0/categorization/b2cd10edb74d40498b9fb5a56d8c292a/test
         => Test scores: MAP = 1.00, ROC-AUC = 1.00
 
     3.a. Calculate LSI
     POST http://localhost:5001/api/v0/lsi/
-      => LSI model id = b3f3035aef884423852653913a606063
-      => SVD decomposition with 100 dimensions explaining 44.33 % variabilty of the data
+      => LSI model id = c2cdbdc8f0144fe89887b2e07f491e4c
+      => SVD decomposition with 100 dimensions explaining 44.34 % variabilty of the data
 
     3.b. Predict categorization with LSI
-    POST http://localhost:5001/api/v0/lsi/b3f3035aef884423852653913a606063/predict
+    POST http://localhost:5001/api/v0/lsi/c2cdbdc8f0144fe89887b2e07f491e4c/predict
         => Training scores: MAP = 1.00, ROC-AUC = 1.00
 
     3.c. Test categorization with LSI
-     POST http://localhost:5001/api/v0/lsi/b3f3035aef884423852653913a606063/test
-        => Test scores: MAP = 0.71, ROC-AUC = 0.81
+     POST http://localhost:5001/api/v0/lsi/c2cdbdc8f0144fe89887b2e07f491e4c/test
+        => Test scores: MAP = 0.75, ROC-AUC = 0.87
 
     4.a Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/c9fa4e73fe79449395213495f1bae4bb
+     DELETE http://localhost:5001/api/v0/feature-extraction/93a5d7bb8ead408399a2b6fb0cfb2a30
 
 
 
@@ -279,7 +279,7 @@ An example to illustrate binary categorizaiton with FreeDiscovery
         url = BASE_URL + '/feature-extraction/{}'.format(dsid)
         print(" DELETE", url)
 
-**Total running time of the script:** ( 1 minutes  15.887 seconds)
+**Total running time of the script:** ( 1 minutes  6.332 seconds)
 
 
 

@@ -87,10 +87,9 @@
             
             
                 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../readme.html">FreeDiscovery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../installation_instructions.html">Installation instructions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../API_reference.html">REST API Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../freediscovery.html">Python API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../rest_api/index.html">REST API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api.html">Python API reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/index.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../scaling_benchmarks.html">Scaling benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../deployment.html">Deployment options</a></li>
@@ -175,7 +174,7 @@
     <span class="nb">setattr</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="n">stream</span><span class="p">,</span> <span class="n">stderr</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="classification_score"><a class="viewcode-back" href="../../freediscovery.html#freediscovery.utils.classification_score">[docs]</a><span class="k">def</span> <span class="nf">classification_score</span><span class="p">(</span><span class="n">X_ref</span><span class="p">,</span> <span class="n">Y_ref</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">classification_score</span><span class="p">(</span><span class="n">X_ref</span><span class="p">,</span> <span class="n">Y_ref</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Calculate the efficiency scores &quot;&quot;&quot;</span>
     <span class="c1"># This function should be deprecated</span>
     <span class="c1"># An equivalent functionally should be achieved with a</span>
@@ -220,10 +219,10 @@
 
     <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;recall&quot;</span><span class="p">:</span> <span class="n">m_recall_score</span><span class="p">,</span> <span class="s2">&quot;precision&quot;</span><span class="p">:</span> <span class="n">m_precision_score</span><span class="p">,</span>
             <span class="s2">&quot;f1&quot;</span><span class="p">:</span> <span class="n">m_f1_score</span><span class="p">,</span> <span class="s1">&#39;roc_auc&#39;</span><span class="p">:</span> <span class="n">m_roc_auc</span><span class="p">,</span>
-            <span class="s1">&#39;average_precision&#39;</span><span class="p">:</span> <span class="n">m_average_precision</span> <span class="p">}</span></div>
+            <span class="s1">&#39;average_precision&#39;</span><span class="p">:</span> <span class="n">m_average_precision</span> <span class="p">}</span>
 
 
-<div class="viewcode-block" id="filter_rel_nrel"><a class="viewcode-back" href="../../freediscovery.html#freediscovery.utils.filter_rel_nrel">[docs]</a><span class="k">def</span> <span class="nf">filter_rel_nrel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relevant_filenames</span><span class="p">,</span> <span class="n">non_relevant_filenames</span><span class="p">):</span>
+<div class="viewcode-block" id="filter_rel_nrel"><a class="viewcode-back" href="../../generated/freediscovery.utils.filter_rel_nrel.html#freediscovery.utils.filter_rel_nrel">[docs]</a><span class="k">def</span> <span class="nf">filter_rel_nrel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relevant_filenames</span><span class="p">,</span> <span class="n">non_relevant_filenames</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Load features corresponding to a list of relevant / non relevant filenames</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">filenames_all</span><span class="p">,</span> <span class="n">fset_all</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fe</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dsid</span><span class="p">)</span>  <span class="c1">#, mmap_mode=&#39;r&#39;)</span>
@@ -253,14 +252,14 @@
         <span class="n">threading</span><span class="o">.</span><span class="n">current_thread</span><span class="p">()</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;MainThread&#39;</span>
 
 
-<div class="viewcode-block" id="generate_uuid"><a class="viewcode-back" href="../../freediscovery.html#freediscovery.utils.generate_uuid">[docs]</a><span class="k">def</span> <span class="nf">generate_uuid</span><span class="p">():</span>
+<div class="viewcode-block" id="generate_uuid"><a class="viewcode-back" href="../../generated/freediscovery.utils.generate_uuid.html#freediscovery.utils.generate_uuid">[docs]</a><span class="k">def</span> <span class="nf">generate_uuid</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generate a unique id for the model</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="o">.</span><span class="n">hex</span> <span class="c1"># a new random id</span></div>
 
 
-<div class="viewcode-block" id="setup_model"><a class="viewcode-back" href="../../freediscovery.html#freediscovery.utils.setup_model">[docs]</a><span class="k">def</span> <span class="nf">setup_model</span><span class="p">(</span><span class="n">base_path</span><span class="p">):</span>
+<div class="viewcode-block" id="setup_model"><a class="viewcode-back" href="../../generated/freediscovery.utils.setup_model.html#freediscovery.utils.setup_model">[docs]</a><span class="k">def</span> <span class="nf">setup_model</span><span class="p">(</span><span class="n">base_path</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generate a unique model id and create the corresponding folder for storing results</span>
 <span class="sd">    &quot;&quot;&quot;</span>

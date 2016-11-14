@@ -87,10 +87,9 @@
             
             
                 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../readme.html">FreeDiscovery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../installation_instructions.html">Installation instructions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../API_reference.html">REST API Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../freediscovery.html">Python API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../rest_api/index.html">REST API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api.html">Python API reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/index.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../scaling_benchmarks.html">Scaling benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../deployment.html">Deployment options</a></li>
@@ -156,12 +155,12 @@
 <span class="kn">from</span> <span class="nn">.exceptions</span> <span class="k">import</span> <span class="n">ModelNotFound</span>
 
 
-<div class="viewcode-block" id="BaseEstimator"><a class="viewcode-back" href="../../freediscovery.html#freediscovery.base.BaseEstimator">[docs]</a><span class="k">class</span> <span class="nc">BaseEstimator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<div class="viewcode-block" id="BaseEstimator.get_path"><a class="viewcode-back" href="../../freediscovery.html#freediscovery.base.BaseEstimator.get_path">[docs]</a>    <span class="k">def</span> <span class="nf">get_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mid</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseEstimator"><a class="viewcode-back" href="../../generated/freediscovery.base.BaseEstimator.html#freediscovery.base.BaseEstimator">[docs]</a><span class="k">class</span> <span class="nc">BaseEstimator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mid</span><span class="p">):</span>
         <span class="n">dsid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_dsid</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fe</span><span class="o">.</span><span class="n">cache_dir</span><span class="p">,</span> <span class="n">mid</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fe</span><span class="o">.</span><span class="n">cache_dir</span><span class="p">,</span> <span class="n">dsid</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_DIRREF</span><span class="p">,</span> <span class="n">mid</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fe</span><span class="o">.</span><span class="n">cache_dir</span><span class="p">,</span> <span class="n">dsid</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_DIRREF</span><span class="p">,</span> <span class="n">mid</span><span class="p">)</span>
 
-<div class="viewcode-block" id="BaseEstimator.get_dsid"><a class="viewcode-back" href="../../freediscovery.html#freediscovery.base.BaseEstimator.get_dsid">[docs]</a>    <span class="k">def</span> <span class="nf">get_dsid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cache_dir</span><span class="p">,</span> <span class="n">mid</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_dsid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cache_dir</span><span class="p">,</span> <span class="n">mid</span><span class="p">):</span>
         <span class="k">if</span> <span class="s1">&#39;ediscovery_cache&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cache_dir</span><span class="p">:</span>  <span class="c1"># not very pretty</span>
             <span class="n">cache_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cache_dir</span><span class="p">,</span> <span class="s2">&quot;ediscovery_cache&quot;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">dsid</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">cache_dir</span><span class="p">):</span>
@@ -171,9 +170,9 @@
             <span class="k">for</span> <span class="n">mid_el</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">mid_path</span><span class="p">):</span>
                 <span class="k">if</span> <span class="n">mid_el</span> <span class="o">==</span> <span class="n">mid</span><span class="p">:</span>
                     <span class="k">return</span> <span class="n">dsid</span>
-        <span class="k">raise</span> <span class="n">ModelNotFound</span><span class="p">(</span><span class="s1">&#39;Model id </span><span class="si">{}</span><span class="s1"> not found in </span><span class="si">{}</span><span class="s1">/*/</span><span class="si">{}</span><span class="s1">!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mid</span><span class="p">,</span> <span class="n">cache_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_DIRREF</span><span class="p">))</span></div>
+        <span class="k">raise</span> <span class="n">ModelNotFound</span><span class="p">(</span><span class="s1">&#39;Model id </span><span class="si">{}</span><span class="s1"> not found in </span><span class="si">{}</span><span class="s1">/*/</span><span class="si">{}</span><span class="s1">!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mid</span><span class="p">,</span> <span class="n">cache_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_DIRREF</span><span class="p">))</span>
 
-<div class="viewcode-block" id="BaseEstimator.delete"><a class="viewcode-back" href="../../freediscovery.html#freediscovery.base.BaseEstimator.delete">[docs]</a>    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseEstimator.delete"><a class="viewcode-back" href="../../generated/freediscovery.base.BaseEstimator.html#freediscovery.base.BaseEstimator.delete">[docs]</a>    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Delete a trained model&quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">shutil</span>
         <span class="n">mid_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mid</span><span class="p">)</span>
@@ -183,7 +182,7 @@
         <span class="n">mid_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_dir</span><span class="p">,</span> <span class="n">mid</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">mid_dir</span><span class="p">)</span>
 
-<div class="viewcode-block" id="BaseEstimator.list_models"><a class="viewcode-back" href="../../freediscovery.html#freediscovery.base.BaseEstimator.list_models">[docs]</a>    <span class="k">def</span> <span class="nf">list_models</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">list_models</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">mid</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_dir</span><span class="p">):</span>
             <span class="k">try</span><span class="p">:</span>
@@ -192,7 +191,7 @@
                 <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pars</span><span class="p">)</span>
             <span class="k">except</span><span class="p">:</span>
                 <span class="k">pass</span>
-        <span class="k">return</span> <span class="n">out</span></div></div>
+        <span class="k">return</span> <span class="n">out</span></div>
 </pre></div>
 
            </div>
