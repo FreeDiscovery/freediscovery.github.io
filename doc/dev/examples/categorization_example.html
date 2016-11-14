@@ -47,6 +47,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -128,20 +129,24 @@
 
 
 
+
+
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
       
-          <li><a href="index.html">Examples</a> &raquo;</li>
+        <li><a href="index.html">Examples</a> &raquo;</li>
       
     <li>Categorization Example [REST API]</li>
-      <li class="wy-breadcrumbs-aside">
-        
+    <li class="wy-breadcrumbs-aside">
+      
           
-            <a href="../_sources/examples/categorization_example.txt" rel="nofollow"> View page source</a>
-          
+          <a href="../_sources/examples/categorization_example.rst.txt" rel="nofollow"> View page source</a>
         
-      </li>
+      
+    </li>
   </ul>
   <hr/>
 </div>
@@ -152,77 +157,75 @@
 <span id="sphx-glr-examples-categorization-example-py"></span><h1>Categorization Example [REST API]<a class="headerlink" href="#categorization-example-rest-api" title="Permalink to this headline">¶</a></h1>
 <p>An example to illustrate binary categorizaiton with FreeDiscovery</p>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span>0. Load the test dataset
- POST http://localhost:5001/api/v0/datasets/treclegal09_2k_subset
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="mf">0.</span> <span class="n">Load</span> <span class="n">the</span> <span class="n">test</span> <span class="n">dataset</span>
+ <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">datasets</span><span class="o">/</span><span class="n">treclegal09_2k_subset</span>
 
-1.a Load dataset and initalize feature extraction
- POST http://localhost:5001/api/v0/feature-extraction
-   =&gt; received [u&#39;id&#39;, u&#39;filenames&#39;]
-   =&gt; dsid = 63c50d05b2de4dba818f61ee4a2c3713
+<span class="mf">1.</span><span class="n">a</span> <span class="n">Load</span> <span class="n">dataset</span> <span class="ow">and</span> <span class="n">initalize</span> <span class="n">feature</span> <span class="n">extraction</span>
+ <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span>
+   <span class="o">=&gt;</span> <span class="n">received</span> <span class="p">[</span><span class="s1">u&#39;id&#39;</span><span class="p">,</span> <span class="s1">u&#39;filenames&#39;</span><span class="p">]</span>
+   <span class="o">=&gt;</span> <span class="n">dsid</span> <span class="o">=</span> <span class="n">c9fa4e73fe79449395213495f1bae4bb</span>
 
-1.b Start feature extraction (in the background)
- POST http://localhost:5001/api/v0/feature-extraction/63c50d05b2de4dba818f61ee4a2c3713
+<span class="mf">1.</span><span class="n">b</span> <span class="n">Start</span> <span class="n">feature</span> <span class="n">extraction</span> <span class="p">(</span><span class="ow">in</span> <span class="n">the</span> <span class="n">background</span><span class="p">)</span>
+ <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="n">c9fa4e73fe79449395213495f1bae4bb</span>
 
-1.c Monitor feature extraction progress
- GET http://localhost:5001/api/v0/feature-extraction/63c50d05b2de4dba818f61ee4a2c3713
+<span class="mf">1.</span><span class="n">c</span> <span class="n">Monitor</span> <span class="n">feature</span> <span class="n">extraction</span> <span class="n">progress</span>
+ <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="n">c9fa4e73fe79449395213495f1bae4bb</span>
 
-1.d. check the parameters of the extracted features
- GET http://localhost:5001/api/v0/feature-extraction/63c50d05b2de4dba818f61ee4a2c3713
-     - binary: False
-     - n_jobs: -1
-     - stop_words: None
-     - use_hashing: True
-     - min_df: 0.0
-     - n_samples: 2465
-     - analyzer: word
-     - ngram_range: [1, 1]
-     - max_df: 1.0
-     - chunk_size: 2000
-     - use_idf: True
-     - data_dir: ../freediscovery_shared/treclegal09_2k_subset/data
-     - sublinear_tf: True
-     - n_samples_processed: 2465
-     - n_features: 50001
-     - norm: l2
+<span class="mf">1.</span><span class="n">d</span><span class="o">.</span> <span class="n">check</span> <span class="n">the</span> <span class="n">parameters</span> <span class="n">of</span> <span class="n">the</span> <span class="n">extracted</span> <span class="n">features</span>
+ <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="n">c9fa4e73fe79449395213495f1bae4bb</span>
+     <span class="o">-</span> <span class="n">binary</span><span class="p">:</span> <span class="kc">False</span>
+     <span class="o">-</span> <span class="n">n_jobs</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span>
+     <span class="o">-</span> <span class="n">stop_words</span><span class="p">:</span> <span class="kc">None</span>
+     <span class="o">-</span> <span class="n">use_hashing</span><span class="p">:</span> <span class="kc">True</span>
+     <span class="o">-</span> <span class="n">min_df</span><span class="p">:</span> <span class="mf">0.0</span>
+     <span class="o">-</span> <span class="n">n_samples</span><span class="p">:</span> <span class="mi">2465</span>
+     <span class="o">-</span> <span class="n">analyzer</span><span class="p">:</span> <span class="n">word</span>
+     <span class="o">-</span> <span class="n">ngram_range</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+     <span class="o">-</span> <span class="n">max_df</span><span class="p">:</span> <span class="mf">1.0</span>
+     <span class="o">-</span> <span class="n">chunk_size</span><span class="p">:</span> <span class="mi">2000</span>
+     <span class="o">-</span> <span class="n">use_idf</span><span class="p">:</span> <span class="kc">True</span>
+     <span class="o">-</span> <span class="n">data_dir</span><span class="p">:</span> <span class="o">../</span><span class="n">freediscovery_shared</span><span class="o">/</span><span class="n">treclegal09_2k_subset</span><span class="o">/</span><span class="n">data</span>
+     <span class="o">-</span> <span class="n">sublinear_tf</span><span class="p">:</span> <span class="kc">True</span>
+     <span class="o">-</span> <span class="n">n_samples_processed</span><span class="p">:</span> <span class="mi">2465</span>
+     <span class="o">-</span> <span class="n">n_features</span><span class="p">:</span> <span class="mi">50001</span>
+     <span class="o">-</span> <span class="n">norm</span><span class="p">:</span> <span class="n">l2</span>
 
-2.a. Train the ML categorization model
-       5 relevant, 63 non-relevant files
- POST http://localhost:5001/api/v0/categorization/
- Training...
-[u&#39;f1&#39;, u&#39;recall&#39;, u&#39;precision&#39;, u&#39;id&#39;, u&#39;average_precision&#39;, u&#39;roc_auc&#39;]
-Failed!!!
-     =&gt; model id = 901c1613c42a4ef8a8a8dba9b450d014
-    =&gt; Training scores: MAP = 1.00, ROC-AUC = 1.00
+<span class="mf">2.</span><span class="n">a</span><span class="o">.</span> <span class="n">Train</span> <span class="n">the</span> <span class="n">ML</span> <span class="n">categorization</span> <span class="n">model</span>
+       <span class="mi">5</span> <span class="n">relevant</span><span class="p">,</span> <span class="mi">63</span> <span class="n">non</span><span class="o">-</span><span class="n">relevant</span> <span class="n">files</span>
+ <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">categorization</span><span class="o">/</span>
+ <span class="n">Training</span><span class="o">...</span>
+     <span class="o">=&gt;</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="mi">139</span><span class="n">c7df00b1848b787ec47360ae4e171</span>
+    <span class="o">=&gt;</span> <span class="n">Training</span> <span class="n">scores</span><span class="p">:</span> <span class="n">MAP</span> <span class="o">=</span> <span class="mf">1.00</span><span class="p">,</span> <span class="n">ROC</span><span class="o">-</span><span class="n">AUC</span> <span class="o">=</span> <span class="mf">1.00</span>
 
-2.b. Check the parameters used in the categorization model
- GET http://localhost:5001/api/v0/categorization/901c1613c42a4ef8a8a8dba9b450d014
-     - method: LogisticRegression
-     - options: {&#39;warm_start&#39;: False, &#39;C&#39;: 1.0, &#39;n_jobs&#39;: 1, &#39;verbose&#39;: 0, &#39;intercept_scaling&#39;: 1, &#39;fit_intercept&#39;: True, &#39;max_iter&#39;: 100, &#39;penalty&#39;: &#39;l2&#39;, &#39;multi_class&#39;: &#39;ovr&#39;, &#39;random_state&#39;: None, &#39;dual&#39;: False, &#39;tol&#39;: 0.0001, &#39;solver&#39;: &#39;liblinear&#39;, &#39;class_weight&#39;: None}
+<span class="mf">2.</span><span class="n">b</span><span class="o">.</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">parameters</span> <span class="n">used</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">categorization</span> <span class="n">model</span>
+ <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">categorization</span><span class="o">/</span><span class="mi">139</span><span class="n">c7df00b1848b787ec47360ae4e171</span>
+     <span class="o">-</span> <span class="n">method</span><span class="p">:</span> <span class="n">LogisticRegression</span>
+     <span class="o">-</span> <span class="n">options</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;warm_start&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;n_jobs&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;verbose&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;intercept_scaling&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;fit_intercept&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;max_iter&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="s1">&#39;penalty&#39;</span><span class="p">:</span> <span class="s1">&#39;l2&#39;</span><span class="p">,</span> <span class="s1">&#39;multi_class&#39;</span><span class="p">:</span> <span class="s1">&#39;ovr&#39;</span><span class="p">,</span> <span class="s1">&#39;random_state&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;dual&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;tol&#39;</span><span class="p">:</span> <span class="mf">0.0001</span><span class="p">,</span> <span class="s1">&#39;solver&#39;</span><span class="p">:</span> <span class="s1">&#39;liblinear&#39;</span><span class="p">,</span> <span class="s1">&#39;class_weight&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
 
-2.c Categorize the complete dataset with this model
- GET http://localhost:5001/api/v0/categorization/901c1613c42a4ef8a8a8dba9b450d014/predict
-    =&gt; Predicting 0 relevant and 2465 non relevant documents
+<span class="mf">2.</span><span class="n">c</span> <span class="n">Categorize</span> <span class="n">the</span> <span class="n">complete</span> <span class="n">dataset</span> <span class="k">with</span> <span class="n">this</span> <span class="n">model</span>
+ <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">categorization</span><span class="o">/</span><span class="mi">139</span><span class="n">c7df00b1848b787ec47360ae4e171</span><span class="o">/</span><span class="n">predict</span>
+    <span class="o">=&gt;</span> <span class="n">Predicting</span> <span class="mi">0</span> <span class="n">relevant</span> <span class="ow">and</span> <span class="mi">2465</span> <span class="n">non</span> <span class="n">relevant</span> <span class="n">documents</span>
 
-2.d Test categorization accuracy
-         using ../freediscovery_shared/treclegal09_2k_subset/ground_truth_file.txt
-POST http://localhost:5001/api/v0/categorization/901c1613c42a4ef8a8a8dba9b450d014/test
-    =&gt; Test scores: MAP = 1.00, ROC-AUC = 1.00
+<span class="mf">2.</span><span class="n">d</span> <span class="n">Test</span> <span class="n">categorization</span> <span class="n">accuracy</span>
+         <span class="n">using</span> <span class="o">../</span><span class="n">freediscovery_shared</span><span class="o">/</span><span class="n">treclegal09_2k_subset</span><span class="o">/</span><span class="n">ground_truth_file</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">categorization</span><span class="o">/</span><span class="mi">139</span><span class="n">c7df00b1848b787ec47360ae4e171</span><span class="o">/</span><span class="n">test</span>
+    <span class="o">=&gt;</span> <span class="n">Test</span> <span class="n">scores</span><span class="p">:</span> <span class="n">MAP</span> <span class="o">=</span> <span class="mf">1.00</span><span class="p">,</span> <span class="n">ROC</span><span class="o">-</span><span class="n">AUC</span> <span class="o">=</span> <span class="mf">1.00</span>
 
-3.a. Calculate LSI
-POST http://localhost:5001/api/v0/lsi/
-  =&gt; LSI model id = 53501cf96d6a4f55b605c6fad5166575
-  =&gt; SVD decomposition with 100 dimensions explaining 44.36 % variabilty of the data
+<span class="mf">3.</span><span class="n">a</span><span class="o">.</span> <span class="n">Calculate</span> <span class="n">LSI</span>
+<span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">lsi</span><span class="o">/</span>
+  <span class="o">=&gt;</span> <span class="n">LSI</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="n">b3f3035aef884423852653913a606063</span>
+  <span class="o">=&gt;</span> <span class="n">SVD</span> <span class="n">decomposition</span> <span class="k">with</span> <span class="mi">100</span> <span class="n">dimensions</span> <span class="n">explaining</span> <span class="mf">44.33</span> <span class="o">%</span> <span class="n">variabilty</span> <span class="n">of</span> <span class="n">the</span> <span class="n">data</span>
 
-3.b. Predict categorization with LSI
-POST http://localhost:5001/api/v0/lsi/53501cf96d6a4f55b605c6fad5166575/predict
-    =&gt; Training scores: MAP = 1.00, ROC-AUC = 1.00
+<span class="mf">3.</span><span class="n">b</span><span class="o">.</span> <span class="n">Predict</span> <span class="n">categorization</span> <span class="k">with</span> <span class="n">LSI</span>
+<span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">lsi</span><span class="o">/</span><span class="n">b3f3035aef884423852653913a606063</span><span class="o">/</span><span class="n">predict</span>
+    <span class="o">=&gt;</span> <span class="n">Training</span> <span class="n">scores</span><span class="p">:</span> <span class="n">MAP</span> <span class="o">=</span> <span class="mf">1.00</span><span class="p">,</span> <span class="n">ROC</span><span class="o">-</span><span class="n">AUC</span> <span class="o">=</span> <span class="mf">1.00</span>
 
-3.c. Test categorization with LSI
- POST http://localhost:5001/api/v0/lsi/53501cf96d6a4f55b605c6fad5166575/test
-    =&gt; Test scores: MAP = 0.75, ROC-AUC = 0.87
+<span class="mf">3.</span><span class="n">c</span><span class="o">.</span> <span class="n">Test</span> <span class="n">categorization</span> <span class="k">with</span> <span class="n">LSI</span>
+ <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">lsi</span><span class="o">/</span><span class="n">b3f3035aef884423852653913a606063</span><span class="o">/</span><span class="n">test</span>
+    <span class="o">=&gt;</span> <span class="n">Test</span> <span class="n">scores</span><span class="p">:</span> <span class="n">MAP</span> <span class="o">=</span> <span class="mf">0.71</span><span class="p">,</span> <span class="n">ROC</span><span class="o">-</span><span class="n">AUC</span> <span class="o">=</span> <span class="mf">0.81</span>
 
-4.a Delete the extracted features
- DELETE http://localhost:5001/api/v0/feature-extraction/63c50d05b2de4dba818f61ee4a2c3713
+<span class="mf">4.</span><span class="n">a</span> <span class="n">Delete</span> <span class="n">the</span> <span class="n">extracted</span> <span class="n">features</span>
+ <span class="n">DELETE</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="n">c9fa4e73fe79449395213495f1bae4bb</span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -328,8 +331,6 @@ POST http://localhost:5001/api/v0/lsi/53501cf96d6a4f55b605c6fad5166575/predict
 
     <span class="n">data</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
     <span class="n">mid</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Failed!!!&#39;</span><span class="p">)</span>
     <span class="k">print</span><span class="p">(</span><span class="s2">&quot;     =&gt; model id = {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mid</span><span class="p">))</span>
     <span class="k">print</span><span class="p">(</span><span class="s1">&#39;    =&gt; Training scores: MAP = {average_precision:.2f}, ROC-AUC = {roc_auc:.2f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">))</span>
 
@@ -415,7 +416,7 @@ POST http://localhost:5001/api/v0/lsi/53501cf96d6a4f55b605c6fad5166575/predict
     <span class="k">print</span><span class="p">(</span><span class="s2">&quot; DELETE&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  26.260 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 1 minutes  15.887 seconds)</p>
 <div class="sphx-glr-footer container">
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../_downloads/categorization_example.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">categorization_example.py</span></code></a></div>
