@@ -22,22 +22,22 @@ Cluster documents into clusters
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received [u'id', u'filenames']
-       => dsid = 396554c239d041cf8207aa41b91c5e0a
+       => dsid = 5d46ba91d8894142b90a1d49874ee38c
 
     1.b Run feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/396554c239d041cf8207aa41b91c5e0a
+     POST http://localhost:5001/api/v0/feature-extraction/5d46ba91d8894142b90a1d49874ee38c
 
     1.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/396554c239d041cf8207aa41b91c5e0a
+     GET http://localhost:5001/api/v0/feature-extraction/5d46ba91d8894142b90a1d49874ee38c
          - binary: False
          - n_jobs: -1
          - stop_words: english
          - use_hashing: False
-         - min_df: 0.0
+         - min_df: 4.0
          - n_samples: 2465
          - analyzer: word
          - ngram_range: [1, 1]
-         - max_df: 1.0
+         - max_df: 0.75
          - chunk_size: 2000
          - use_idf: True
          - data_dir: ../freediscovery_shared/treclegal09_2k_subset/data
@@ -48,41 +48,41 @@ Cluster documents into clusters
 
     2.a. Document clustering (LSI + K-means)
      POST http://localhost:5001/api/v0/clustering/k-mean/
-         => model id = d51862cec3d3422690bbd6836e229de1
+         => model id = f51c0b44ab9a427f9f0d561c36ab09c7
 
     2.b. Computing cluster labels
-     POST http://localhost:5001/api/v0/clustering/k-mean/d51862cec3d3422690bbd6836e229de1
-        .. computed in 21.1s
+     POST http://localhost:5001/api/v0/clustering/k-mean/f51c0b44ab9a427f9f0d561c36ab09c7
+        .. computed in 21.5s
        N_documents                                      cluster_names
-    6          504  [u'enron', u'energy', u'trade', u'new', u'mark...
-    0          452  [u'recipients', u'administrative', u'group', u...
-    3          407  [u'normal', u'tenet', u'test', u'gmt', u'sensi...
-    5          308  [u'shackleton', u'enron_development', u'ect', ...
-    1          292  [u'ect', u'hou', u'group', u'recipients', u'ad...
-    2          148  [u'normal', u'eb3325', u'meet', u'ricafrente',...
-    7          130  [u'shall', u'party', u'agreement', u'transacti...
-    9          103  [u'sanders', u'normal', u'nov', u'ect', u'subj...
-    8           64  [u'migration', u'outlook', u'team', u'normal',...
-    4           57  [u'rewrite', u'server', u'address', u'smtp', u...
+    6          473  [u'recipients', u'administrative', u'group', u...
+    7          423  [u'enron', u'energy', u'services', u'trade', u...
+    4          421  [u'tenet', u'test', u'oct', u'nov', u'tue', u'...
+    1          384  [u'ect', u'hou', u'sanders', u'nemec', u'test'...
+    2          278  [u'shackleton', u'test', u'load', u'recipients...
+    9          144  [u'enron', u'tana', u'jones', u'ect', u'tradin...
+    8          123  [u'shall', u'party', u'agreement', u'transacti...
+    3           98  [u'enron_development', u'ect', u'shackleton', ...
+    0           64  [u'migration', u'outlook', u'team', u'mtg', u'...
+    5           57  [u'rewrite', u'server', u'address', u'smtp', u...
 
     2.a. Document clustering (LSI + Ward HC)
      POST http://localhost:5001/api/v0/clustering/ward_hc/
-         => model id = febd2fc88c474c478338a8fbbe76452e
+         => model id = e5008069fdbf48d8bd5cb189df739410
 
     2.b. Computing cluster labels
-    POST http://localhost:5001/api/v0/clustering/ward_hc/febd2fc88c474c478338a8fbbe76452e
-        .. computed in 37.6s
+    POST http://localhost:5001/api/v0/clustering/ward_hc/e5008069fdbf48d8bd5cb189df739410
+        .. computed in 35.6s
        N_documents                                      cluster_names
-    2          447  [u'normal', u'tenet', u'test', u'gmt', u'sensi...
-    1          404  [u'shackleton', u'enron_development', u'ect', ...
-    0          361  [u'shall', u'enron', u'agreement', u'party', u...
-    3          360  [u'enron', u'nemec', u'test', u'ect', u'normal...
-    8          334  [u'teneo', u'recipients', u'administrative', u...
-    4          189  [u'tana', u'jones', u'enron', u'ect', u'master...
-    9          155  [u'ect', u'hou', u'group', u'lon', u'recipient...
-    7           95  [u'sanders', u'normal', u'nov', u'sensitivity'...
-    5           64  [u'migration', u'outlook', u'team', u'normal',...
-    6           56  [u'rewrite', u'server', u'address', u'smtp', u...
+    0          467  [u'ect', u'hou', u'tana', u'jones', u'enron', ...
+    1          447  [u'recipients', u'administrative', u'group', u...
+    8          442  [u'tenet', u'test', u'oct', u'nov', u'tue', u'...
+    2          331  [u'enron', u'energy', u'power', u'market', u's...
+    6          316  [u'shackleton', u'ect', u'test', u'hou', u'loa...
+    3          148  [u'shall', u'party', u'agreement', u'transacti...
+    9           99  [u'sanders', u'nov', u'ect', u'test', u'lunch'...
+    4           95  [u'enron_development', u'ect', u'shackleton', ...
+    5           64  [u'migration', u'outlook', u'team', u'mtg', u'...
+    7           56  [u'rewrite', u'server', u'address', u'smtp', u...
 
 
 
@@ -115,8 +115,7 @@ Cluster documents into clusters
     print(" 0. Load the test dataset")
     url = BASE_URL + '/datasets/{}'.format(dataset_name)
     print(" POST", url)
-    res = requests.get(url)
-    res = res.json()
+    res = requests.get(url).json()
 
     # To use a custom dataset, simply specify the following variables
     data_dir = res['data_dir']
@@ -130,12 +129,13 @@ Cluster documents into clusters
                'stop_words': 'english', 'chunk_size': 2000, 'n_jobs': -1,
                'use_idf': 1, 'sublinear_tf': 1, 'binary': 0, 'n_features': 30001,
                'analyzer': 'word', 'ngram_range': (1, 1), "norm": "l2",
-               'use_hashing': False  # hashing should be disabled for clustering
+               'use_hashing': False,  # hashing should be disabled for clustering
+               'min_df': 4, 'max_df': 0.75
                }
-    res = requests.post(url, json=fe_opts)
+    res = requests.post(url, json=fe_opts).json()
 
-    dsid = res.json()['id']
-    print("   => received {}".format(list(res.json().keys())))
+    dsid = res['id']
+    print("   => received {}".format(list(res.keys())))
     print("   => dsid = {}".format(dsid))
 
 
@@ -148,10 +148,9 @@ Cluster documents into clusters
     print("\n1.d. check the parameters of the extracted features")
     url = BASE_URL + '/feature-extraction/{}'.format(dsid)
     print(' GET', url)
-    res = requests.get(url)
+    res = requests.get(url).json()
 
-    data = res.json()
-    print('\n'.join(['     - {}: {}'.format(key, val) for key, val in data.items() \
+    print('\n'.join(['     - {}: {}'.format(key, val) for key, val in res.items() \
                                                       if "filenames" not in key]))
 
 
@@ -166,10 +165,9 @@ Cluster documents into clusters
                         json={'dataset_id': dsid,
                               'n_clusters': 10,
                               'lsi_components': 50
-                              })
+                              }).json()
 
-    data = res.json()
-    mid = data['id']
+    mid = res['id']
     print("     => model id = {}".format(mid))
 
     print("\n2.b. Computing cluster labels")
@@ -177,12 +175,11 @@ Cluster documents into clusters
     print(" POST", url)
     res = requests.get(url,
                        json={'n_top_words': 6
-                             })
-    data = res.json()
+                             }).json()
     t1 = time()
 
     print('    .. computed in {:.1f}s'.format(t1 - t0))
-    print(repr_clustering(np.array(data['labels']), data['cluster_terms']))
+    print(repr_clustering(np.array(res['labels']), res['cluster_terms']))
 
 
     # # 3. Document Clustering (LSI + Ward Hierarchical Clustering)
@@ -197,10 +194,9 @@ Cluster documents into clusters
                               'n_clusters': 10,
                               'lsi_components': 50,
                               'n_neighbors': 5  # this is the connectivity constraint
-                              })
+                              }).json()
 
-    data = res.json()
-    mid = data['id']
+    mid = res['id']
     print("     => model id = {}".format(mid))
 
     print("\n2.b. Computing cluster labels")
@@ -208,14 +204,13 @@ Cluster documents into clusters
     print("POST", url)
     res = requests.get(url,
                        json={'n_top_words': 6
-                             })
-    data = res.json()
+                             }).json()
     t1 = time()
 
     print('    .. computed in {:.1f}s'.format(t1 - t0))
-    print(repr_clustering(np.array(data['labels']), data['cluster_terms']))
+    print(repr_clustering(np.array(res['labels']), res['cluster_terms']))
 
-**Total running time of the script:** ( 1 minutes  1.057 seconds)
+**Total running time of the script:** ( 0 minutes  59.174 seconds)
 
 
 
