@@ -251,6 +251,11 @@
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Warning: joblib: renaming current thread </span><span class="si">{}</span><span class="s1"> to &quot;MainThread&quot;.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">current_thread</span><span class="p">()</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
         <span class="n">threading</span><span class="o">.</span><span class="n">current_thread</span><span class="p">()</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;MainThread&#39;</span>
 
+<span class="k">def</span> <span class="nf">_count_duplicates</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return y an array of the same shape as x with the number of</span>
+<span class="sd">    duplicates for each element&quot;&quot;&quot;</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_inverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">counts</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span>
 
 <div class="viewcode-block" id="generate_uuid"><a class="viewcode-back" href="../../generated/freediscovery.utils.generate_uuid.html#freediscovery.utils.generate_uuid">[docs]</a><span class="k">def</span> <span class="nf">generate_uuid</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;</span>
