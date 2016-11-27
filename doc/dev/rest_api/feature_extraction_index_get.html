@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>freediscovery.utils.filter_rel_nrel &mdash; FreeDiscovery 0.6.0-beta documentation</title>
+  <title>Query document index for filenames &mdash; FreeDiscovery 0.6.0-beta documentation</title>
   
 
   
@@ -35,10 +35,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="FreeDiscovery 0.6.0-beta documentation" href="../index.html"/>
-        <link rel="up" title="Python API Reference" href="../python_api.html"/>
-        <link rel="next" title="freediscovery.utils.generate_uuid" href="freediscovery.utils.generate_uuid.html"/>
-        <link rel="prev" title="freediscovery.io.parse_ground_truth_file" href="freediscovery.io.parse_ground_truth_file.html"/> 
+    <link rel="top" title="FreeDiscovery 0.6.0-beta documentation" href="../index.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -88,27 +85,10 @@
           
             
             
-                <ul class="current">
+                <ul>
 <li class="toctree-l1"><a class="reference internal" href="../installation_instructions.html">Installation Instructions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../rest_api/index.html">REST API Reference</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../python_api.html">Python API Reference</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../python_api.html#datasets">Datasets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../python_api.html#feature-extraction">Feature extraction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../python_api.html#document-categorization">Document categorization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../python_api.html#document-clustering">Document clustering</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../python_api.html#duplicates-detection">Duplicates detection</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../python_api.html#tools">Tools</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="freediscovery.base.BaseEstimator.html">freediscovery.base.BaseEstimator</a></li>
-<li class="toctree-l3"><a class="reference internal" href="freediscovery.io.parse_ground_truth_file.html">freediscovery.io.parse_ground_truth_file</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">freediscovery.utils.filter_rel_nrel</a></li>
-<li class="toctree-l3"><a class="reference internal" href="freediscovery.utils.generate_uuid.html">freediscovery.utils.generate_uuid</a></li>
-<li class="toctree-l3"><a class="reference internal" href="freediscovery.utils.setup_model.html">freediscovery.utils.setup_model</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../python_api.html#metrics">Metrics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../python_api.html#exceptions">Exceptions</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">REST API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python_api.html">Python API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../scaling_benchmarks.html">Scaling Benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deployment.html">Deployment options</a></li>
@@ -147,13 +127,11 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
       
-        <li><a href="../python_api.html">Python API Reference</a> &raquo;</li>
-      
-    <li>freediscovery.utils.filter_rel_nrel</li>
+    <li>Query document index for filenames</li>
     <li class="wy-breadcrumbs-aside">
       
           
-          <a href="../_sources/generated/freediscovery.utils.filter_rel_nrel.rst.txt" rel="nofollow"> View page source</a>
+          <a href="../_sources/rest_api/feature_extraction_index_get.md.txt" rel="nofollow"> View page source</a>
         
       
     </li>
@@ -163,29 +141,30 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="freediscovery-utils-filter-rel-nrel">
-<h1>freediscovery.utils.filter_rel_nrel<a class="headerlink" href="#freediscovery-utils-filter-rel-nrel" title="Permalink to this headline">¶</a></h1>
-<dl class="function">
-<dt id="freediscovery.utils.filter_rel_nrel">
-<code class="descclassname">freediscovery.utils.</code><code class="descname">filter_rel_nrel</code><span class="sig-paren">(</span><em>self</em>, <em>relevant_filenames</em>, <em>non_relevant_filenames</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/freediscovery/utils.html#filter_rel_nrel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.utils.filter_rel_nrel" title="Permalink to this definition">¶</a></dt>
-<dd><p>Load features corresponding to a list of relevant / non relevant filenames</p>
-</dd></dl>
-
+  <div class="section" id="query-document-index-for-filenames">
+<span id="query-document-index-for-filenames"></span><h1>Query document index for filenames<a class="headerlink" href="#query-document-index-for-filenames" title="Permalink to this headline">¶</a></h1>
+<ul>
+<li><p class="first"><strong>URL</strong>: <code class="docutils literal"><span class="pre">/api/v0/feature-extraction/&lt;dataset-id&gt;/index</span></code></p>
+</li>
+<li><p class="first"><strong>Method</strong>: <code class="docutils literal"><span class="pre">GET</span></code>,  <strong>URL Params</strong>: None</p>
+</li>
+<li><p class="first"><strong>Data Params</strong>:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">filenames</span></code>: [required] list of filenames</li>
+</ul>
+</li>
+<li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>  <span class="p">{</span><span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">list</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;&gt;</span> <span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
 </div>
 
 
            </div>
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="freediscovery.utils.generate_uuid.html" class="btn btn-neutral float-right" title="freediscovery.utils.generate_uuid" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="freediscovery.io.parse_ground_truth_file.html" class="btn btn-neutral" title="freediscovery.io.parse_ground_truth_file" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>

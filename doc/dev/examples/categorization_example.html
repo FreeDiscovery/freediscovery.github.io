@@ -162,16 +162,16 @@
 <span class="mf">1.</span><span class="n">a</span> <span class="n">Load</span> <span class="n">dataset</span> <span class="ow">and</span> <span class="n">initalize</span> <span class="n">feature</span> <span class="n">extraction</span>
  <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span>
    <span class="o">=&gt;</span> <span class="n">received</span> <span class="p">[</span><span class="s1">u&#39;id&#39;</span><span class="p">,</span> <span class="s1">u&#39;filenames&#39;</span><span class="p">]</span>
-   <span class="o">=&gt;</span> <span class="n">dsid</span> <span class="o">=</span> <span class="mi">18</span><span class="n">ee6e56af244f989bf2f0a8f0c3128f</span>
+   <span class="o">=&gt;</span> <span class="n">dsid</span> <span class="o">=</span> <span class="n">b3441299fe5d45628d4fe3ebfc6a74bf</span>
 
 <span class="mf">1.</span><span class="n">b</span> <span class="n">Start</span> <span class="n">feature</span> <span class="n">extraction</span> <span class="p">(</span><span class="ow">in</span> <span class="n">the</span> <span class="n">background</span><span class="p">)</span>
- <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="mi">18</span><span class="n">ee6e56af244f989bf2f0a8f0c3128f</span>
+ <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="n">b3441299fe5d45628d4fe3ebfc6a74bf</span>
 
 <span class="mf">1.</span><span class="n">c</span> <span class="n">Monitor</span> <span class="n">feature</span> <span class="n">extraction</span> <span class="n">progress</span>
- <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="mi">18</span><span class="n">ee6e56af244f989bf2f0a8f0c3128f</span>
+ <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="n">b3441299fe5d45628d4fe3ebfc6a74bf</span>
 
 <span class="mf">1.</span><span class="n">d</span><span class="o">.</span> <span class="n">check</span> <span class="n">the</span> <span class="n">parameters</span> <span class="n">of</span> <span class="n">the</span> <span class="n">extracted</span> <span class="n">features</span>
- <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="mi">18</span><span class="n">ee6e56af244f989bf2f0a8f0c3128f</span>
+ <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="n">b3441299fe5d45628d4fe3ebfc6a74bf</span>
      <span class="o">-</span> <span class="n">binary</span><span class="p">:</span> <span class="kc">False</span>
      <span class="o">-</span> <span class="n">n_jobs</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span>
      <span class="o">-</span> <span class="n">stop_words</span><span class="p">:</span> <span class="n">english</span>
@@ -190,106 +190,107 @@
      <span class="o">-</span> <span class="n">norm</span><span class="p">:</span> <span class="n">l2</span>
 
 <span class="mf">2.</span><span class="n">a</span><span class="o">.</span> <span class="n">Train</span> <span class="n">the</span> <span class="n">ML</span> <span class="n">categorization</span> <span class="n">model</span>
-       <span class="mi">5</span> <span class="n">relevant</span><span class="p">,</span> <span class="mi">63</span> <span class="n">non</span><span class="o">-</span><span class="n">relevant</span> <span class="n">files</span>
+   <span class="mi">5</span> <span class="n">relevant</span><span class="p">,</span> <span class="mi">63</span> <span class="n">non</span><span class="o">-</span><span class="n">relevant</span> <span class="n">files</span>
  <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">categorization</span><span class="o">/</span>
  <span class="n">Training</span><span class="o">...</span>
-     <span class="o">=&gt;</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="mi">01</span><span class="n">e12efc9c134b6ca5f9a7621759aeb5</span>
+     <span class="o">=&gt;</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="mi">1</span><span class="n">dc2c58700754d96904970564185ef2d</span>
     <span class="o">=&gt;</span> <span class="n">Training</span> <span class="n">scores</span><span class="p">:</span> <span class="n">MAP</span> <span class="o">=</span> <span class="mf">1.000</span><span class="p">,</span> <span class="n">ROC</span><span class="o">-</span><span class="n">AUC</span> <span class="o">=</span> <span class="mf">1.000</span>
 
 <span class="mf">2.</span><span class="n">b</span><span class="o">.</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">parameters</span> <span class="n">used</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">categorization</span> <span class="n">model</span>
- <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">categorization</span><span class="o">/</span><span class="mi">01</span><span class="n">e12efc9c134b6ca5f9a7621759aeb5</span>
+ <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">categorization</span><span class="o">/</span><span class="mi">1</span><span class="n">dc2c58700754d96904970564185ef2d</span>
      <span class="o">-</span> <span class="n">method</span><span class="p">:</span> <span class="n">LinearSVC</span>
      <span class="o">-</span> <span class="n">options</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;loss&#39;</span><span class="p">:</span> <span class="s1">&#39;squared_hinge&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;verbose&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;intercept_scaling&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;fit_intercept&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;max_iter&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="s1">&#39;penalty&#39;</span><span class="p">:</span> <span class="s1">&#39;l2&#39;</span><span class="p">,</span> <span class="s1">&#39;multi_class&#39;</span><span class="p">:</span> <span class="s1">&#39;ovr&#39;</span><span class="p">,</span> <span class="s1">&#39;random_state&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;dual&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;tol&#39;</span><span class="p">:</span> <span class="mf">0.0001</span><span class="p">,</span> <span class="s1">&#39;class_weight&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
 
 <span class="mf">2.</span><span class="n">c</span> <span class="n">Categorize</span> <span class="n">the</span> <span class="n">complete</span> <span class="n">dataset</span> <span class="k">with</span> <span class="n">this</span> <span class="n">model</span>
- <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">categorization</span><span class="o">/</span><span class="mi">01</span><span class="n">e12efc9c134b6ca5f9a7621759aeb5</span><span class="o">/</span><span class="n">predict</span>
+ <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">categorization</span><span class="o">/</span><span class="mi">1</span><span class="n">dc2c58700754d96904970564185ef2d</span><span class="o">/</span><span class="n">predict</span>
     <span class="o">=&gt;</span> <span class="n">Predicting</span> <span class="mi">11</span> <span class="n">relevant</span> <span class="ow">and</span> <span class="mi">2454</span> <span class="n">non</span> <span class="n">relevant</span> <span class="n">documents</span>
 
 <span class="mf">2.</span><span class="n">d</span> <span class="n">Test</span> <span class="n">categorization</span> <span class="n">accuracy</span>
          <span class="n">using</span> <span class="o">../</span><span class="n">freediscovery_shared</span><span class="o">/</span><span class="n">treclegal09_2k_subset</span><span class="o">/</span><span class="n">ground_truth_file</span><span class="o">.</span><span class="n">txt</span>
-<span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">categorization</span><span class="o">/</span><span class="mi">01</span><span class="n">e12efc9c134b6ca5f9a7621759aeb5</span><span class="o">/</span><span class="n">test</span>
-    <span class="o">=&gt;</span> <span class="n">Test</span> <span class="n">scores</span><span class="p">:</span> <span class="n">MAP</span> <span class="o">=</span> <span class="mf">1.000</span><span class="p">,</span> <span class="n">ROC</span><span class="o">-</span><span class="n">AUC</span> <span class="o">=</span> <span class="mf">1.000</span>
+<span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">categorization</span><span class="o">/</span><span class="mi">1</span><span class="n">dc2c58700754d96904970564185ef2d</span><span class="o">/</span><span class="n">test</span>
+    <span class="o">=&gt;</span> <span class="n">Test</span> <span class="n">scores</span><span class="p">:</span> <span class="n">MAP</span> <span class="o">=</span> <span class="mf">0.959</span><span class="p">,</span> <span class="n">ROC</span><span class="o">-</span><span class="n">AUC</span> <span class="o">=</span> <span class="mf">0.958</span>
 
 <span class="mf">3.</span><span class="n">a</span><span class="o">.</span> <span class="n">Calculate</span> <span class="n">LSI</span>
 <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">lsi</span><span class="o">/</span>
-  <span class="o">=&gt;</span> <span class="n">LSI</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="mi">38</span><span class="n">e7f1945be047928279f47642c0cd33</span>
-  <span class="o">=&gt;</span> <span class="n">SVD</span> <span class="n">decomposition</span> <span class="k">with</span> <span class="mi">100</span> <span class="n">dimensions</span> <span class="n">explaining</span> <span class="mf">48.41</span> <span class="o">%</span> <span class="n">variabilty</span> <span class="n">of</span> <span class="n">the</span> <span class="n">data</span>
+  <span class="o">=&gt;</span> <span class="n">LSI</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="mi">3</span><span class="n">d915d8818924759b826170f55392ed3</span>
+  <span class="o">=&gt;</span> <span class="n">SVD</span> <span class="n">decomposition</span> <span class="k">with</span> <span class="mi">100</span> <span class="n">dimensions</span> <span class="n">explaining</span> <span class="mf">48.39</span> <span class="o">%</span> <span class="n">variabilty</span> <span class="n">of</span> <span class="n">the</span> <span class="n">data</span>
 
 <span class="mf">3.</span><span class="n">b</span><span class="o">.</span> <span class="n">Predict</span> <span class="n">categorization</span> <span class="k">with</span> <span class="n">LSI</span>
-<span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">lsi</span><span class="o">/</span><span class="mi">38</span><span class="n">e7f1945be047928279f47642c0cd33</span><span class="o">/</span><span class="n">predict</span>
+<span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">lsi</span><span class="o">/</span><span class="mi">3</span><span class="n">d915d8818924759b826170f55392ed3</span><span class="o">/</span><span class="n">predict</span>
     <span class="o">=&gt;</span> <span class="n">Training</span> <span class="n">scores</span><span class="p">:</span> <span class="n">MAP</span> <span class="o">=</span> <span class="mf">1.000</span><span class="p">,</span> <span class="n">ROC</span><span class="o">-</span><span class="n">AUC</span> <span class="o">=</span> <span class="mf">1.000</span>
 
 <span class="mf">3.</span><span class="n">c</span><span class="o">.</span> <span class="n">Test</span> <span class="n">categorization</span> <span class="k">with</span> <span class="n">LSI</span>
- <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">lsi</span><span class="o">/</span><span class="mi">38</span><span class="n">e7f1945be047928279f47642c0cd33</span><span class="o">/</span><span class="n">test</span>
-    <span class="o">=&gt;</span> <span class="n">Test</span> <span class="n">scores</span><span class="p">:</span> <span class="n">MAP</span> <span class="o">=</span> <span class="mf">0.801</span><span class="p">,</span> <span class="n">ROC</span><span class="o">-</span><span class="n">AUC</span> <span class="o">=</span> <span class="mf">0.929</span>
+ <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">lsi</span><span class="o">/</span><span class="mi">3</span><span class="n">d915d8818924759b826170f55392ed3</span><span class="o">/</span><span class="n">test</span>
+<span class="p">{</span><span class="s1">u&#39;recall&#39;</span><span class="p">:</span> <span class="mf">0.8333333333333334</span><span class="p">,</span> <span class="s1">u&#39;f1&#39;</span><span class="p">:</span> <span class="mf">0.1092896174863388</span><span class="p">,</span> <span class="s1">u&#39;roc_auc&#39;</span><span class="p">:</span> <span class="mf">0.8838497078407392</span><span class="p">,</span> <span class="s1">u&#39;average_precision&#39;</span><span class="p">:</span> <span class="mf">0.44631211226172257</span><span class="p">,</span> <span class="s1">u&#39;precision&#39;</span><span class="p">:</span> <span class="mf">0.05847953216374269</span><span class="p">}</span>
+    <span class="o">=&gt;</span> <span class="n">Test</span> <span class="n">scores</span><span class="p">:</span> <span class="n">MAP</span> <span class="o">=</span> <span class="mf">0.446</span><span class="p">,</span> <span class="n">ROC</span><span class="o">-</span><span class="n">AUC</span> <span class="o">=</span> <span class="mf">0.884</span>
 
        <span class="n">nearest_nrel_doc</span>  <span class="n">nearest_rel_doc</span>  <span class="n">prediction</span>
-<span class="mi">0</span>                   <span class="mi">37</span>                <span class="mi">0</span>      <span class="o">-</span><span class="mf">0.298</span>
-<span class="mi">1</span>                    <span class="mi">5</span>                <span class="mi">3</span>      <span class="o">-</span><span class="mf">0.409</span>
-<span class="mi">2</span>                   <span class="mi">27</span>                <span class="mi">1</span>      <span class="o">-</span><span class="mf">0.249</span>
-<span class="mi">3</span>                   <span class="mi">32</span>                <span class="mi">2</span>      <span class="o">-</span><span class="mf">0.247</span>
-<span class="mi">4</span>                   <span class="mi">54</span>                <span class="mi">4</span>      <span class="o">-</span><span class="mf">0.494</span>
-<span class="mi">5</span>                   <span class="mi">16</span>                <span class="mi">3</span>      <span class="o">-</span><span class="mf">0.255</span>
-<span class="mi">6</span>                   <span class="mi">27</span>                <span class="mi">3</span>      <span class="o">-</span><span class="mf">0.471</span>
-<span class="mi">7</span>                   <span class="mi">28</span>                <span class="mi">2</span>      <span class="o">-</span><span class="mf">0.597</span>
-<span class="mi">8</span>                   <span class="mi">35</span>                <span class="mi">3</span>      <span class="o">-</span><span class="mf">0.600</span>
-<span class="mi">9</span>                   <span class="mi">58</span>                <span class="mi">2</span>      <span class="o">-</span><span class="mf">0.225</span>
-<span class="mi">10</span>                   <span class="mi">4</span>                <span class="mi">3</span>      <span class="o">-</span><span class="mf">0.159</span>
-<span class="mi">11</span>                  <span class="mi">42</span>                <span class="mi">0</span>      <span class="o">-</span><span class="mf">1.000</span>
-<span class="mi">12</span>                  <span class="mi">41</span>                <span class="mi">4</span>      <span class="o">-</span><span class="mf">0.175</span>
-<span class="mi">13</span>                   <span class="mi">9</span>                <span class="mi">3</span>      <span class="o">-</span><span class="mf">0.805</span>
-<span class="mi">14</span>                  <span class="mi">47</span>                <span class="mi">4</span>      <span class="o">-</span><span class="mf">0.398</span>
-<span class="mi">15</span>                  <span class="mi">14</span>                <span class="mi">1</span>      <span class="o">-</span><span class="mf">0.609</span>
-<span class="mi">16</span>                   <span class="mi">3</span>                <span class="mi">4</span>      <span class="o">-</span><span class="mf">1.000</span>
-<span class="mi">17</span>                  <span class="mi">48</span>                <span class="mi">3</span>      <span class="o">-</span><span class="mf">0.453</span>
-<span class="mi">18</span>                   <span class="mi">7</span>                <span class="mi">4</span>      <span class="o">-</span><span class="mf">0.998</span>
-<span class="mi">19</span>                  <span class="mi">57</span>                <span class="mi">1</span>      <span class="o">-</span><span class="mf">1.000</span>
-<span class="mi">20</span>                  <span class="mi">30</span>                <span class="mi">0</span>      <span class="o">-</span><span class="mf">0.147</span>
-<span class="mi">21</span>                  <span class="mi">16</span>                <span class="mi">3</span>       <span class="mf">0.714</span>
-<span class="mi">22</span>                  <span class="mi">22</span>                <span class="mi">2</span>      <span class="o">-</span><span class="mf">0.827</span>
-<span class="mi">23</span>                  <span class="mi">28</span>                <span class="mi">1</span>      <span class="o">-</span><span class="mf">0.842</span>
-<span class="mi">24</span>                  <span class="mi">42</span>                <span class="mi">4</span>      <span class="o">-</span><span class="mf">0.373</span>
-<span class="mi">25</span>                   <span class="mi">3</span>                <span class="mi">4</span>      <span class="o">-</span><span class="mf">1.000</span>
-<span class="mi">26</span>                  <span class="mi">39</span>                <span class="mi">0</span>      <span class="o">-</span><span class="mf">0.607</span>
-<span class="mi">27</span>                  <span class="mi">29</span>                <span class="mi">4</span>      <span class="o">-</span><span class="mf">0.392</span>
-<span class="mi">28</span>                  <span class="mi">30</span>                <span class="mi">4</span>       <span class="mf">0.333</span>
-<span class="mi">29</span>                  <span class="mi">31</span>                <span class="mi">3</span>      <span class="o">-</span><span class="mf">0.575</span>
+<span class="mi">0</span>                    <span class="mi">9</span>             <span class="mi">1791</span>      <span class="o">-</span><span class="mf">0.402</span>
+<span class="mi">1</span>                 <span class="mi">1444</span>             <span class="mi">1791</span>      <span class="o">-</span><span class="mf">0.457</span>
+<span class="mi">2</span>                 <span class="mi">2314</span>                <span class="mi">3</span>      <span class="o">-</span><span class="mf">0.541</span>
+<span class="mi">3</span>                 <span class="mi">2451</span>                <span class="mi">3</span>       <span class="mf">1.000</span>
+<span class="mi">4</span>                 <span class="mi">2314</span>                <span class="mi">3</span>      <span class="o">-</span><span class="mf">0.591</span>
+<span class="mi">5</span>                 <span class="mi">1337</span>              <span class="mi">919</span>      <span class="o">-</span><span class="mf">0.486</span>
+<span class="mi">6</span>                 <span class="mi">1600</span>                <span class="mi">3</span>      <span class="o">-</span><span class="mf">0.686</span>
+<span class="mi">7</span>                 <span class="mi">2314</span>              <span class="mi">919</span>      <span class="o">-</span><span class="mf">0.411</span>
+<span class="mi">8</span>                 <span class="mi">1337</span>                <span class="mi">3</span>      <span class="o">-</span><span class="mf">0.454</span>
+<span class="mi">9</span>                    <span class="mi">9</span>             <span class="mi">1791</span>      <span class="o">-</span><span class="mf">1.000</span>
+<span class="mi">10</span>                <span class="mi">2451</span>                <span class="mi">3</span>      <span class="o">-</span><span class="mf">0.549</span>
+<span class="mi">11</span>                  <span class="mi">32</span>              <span class="mi">906</span>      <span class="o">-</span><span class="mf">0.430</span>
+<span class="mi">12</span>                  <span class="mi">32</span>              <span class="mi">906</span>      <span class="o">-</span><span class="mf">0.410</span>
+<span class="mi">13</span>                <span class="mi">2039</span>             <span class="mi">1047</span>      <span class="o">-</span><span class="mf">0.789</span>
+<span class="mi">14</span>                <span class="mi">2039</span>             <span class="mi">1047</span>      <span class="o">-</span><span class="mf">0.995</span>
+<span class="mi">15</span>                <span class="mi">1563</span>              <span class="mi">906</span>      <span class="o">-</span><span class="mf">0.296</span>
+<span class="mi">16</span>                  <span class="mi">32</span>                <span class="mi">3</span>      <span class="o">-</span><span class="mf">0.430</span>
+<span class="mi">17</span>                  <span class="mi">32</span>              <span class="mi">906</span>      <span class="o">-</span><span class="mf">0.315</span>
+<span class="mi">18</span>                  <span class="mi">99</span>              <span class="mi">919</span>      <span class="o">-</span><span class="mf">0.224</span>
+<span class="mi">19</span>                <span class="mi">1104</span>              <span class="mi">906</span>      <span class="o">-</span><span class="mf">0.490</span>
+<span class="mi">20</span>                <span class="mi">1337</span>              <span class="mi">919</span>      <span class="o">-</span><span class="mf">0.353</span>
+<span class="mi">21</span>                <span class="mi">2275</span>             <span class="mi">1791</span>      <span class="o">-</span><span class="mf">0.891</span>
+<span class="mi">22</span>                <span class="mi">1337</span>              <span class="mi">919</span>      <span class="o">-</span><span class="mf">0.134</span>
+<span class="mi">23</span>                <span class="mi">1337</span>              <span class="mi">919</span>      <span class="o">-</span><span class="mf">0.125</span>
+<span class="mi">24</span>                <span class="mi">2121</span>             <span class="mi">1047</span>      <span class="o">-</span><span class="mf">0.601</span>
+<span class="mi">25</span>                <span class="mi">2275</span>                <span class="mi">3</span>      <span class="o">-</span><span class="mf">0.604</span>
+<span class="mi">26</span>                  <span class="mi">32</span>              <span class="mi">906</span>      <span class="o">-</span><span class="mf">0.318</span>
+<span class="mi">27</span>                 <span class="mi">362</span>             <span class="mi">1047</span>      <span class="o">-</span><span class="mf">0.234</span>
+<span class="mi">28</span>                  <span class="mi">32</span>                <span class="mi">3</span>      <span class="o">-</span><span class="mf">0.416</span>
+<span class="mi">29</span>                  <span class="mi">32</span>              <span class="mi">906</span>      <span class="o">-</span><span class="mf">0.303</span>
 <span class="o">...</span>                <span class="o">...</span>              <span class="o">...</span>         <span class="o">...</span>
-<span class="mi">2435</span>                <span class="mi">52</span>                <span class="mi">2</span>      <span class="o">-</span><span class="mf">0.263</span>
-<span class="mi">2436</span>                <span class="mi">10</span>                <span class="mi">1</span>       <span class="mf">0.472</span>
-<span class="mi">2437</span>                <span class="mi">52</span>                <span class="mi">4</span>      <span class="o">-</span><span class="mf">0.778</span>
-<span class="mi">2438</span>                <span class="mi">50</span>                <span class="mi">4</span>      <span class="o">-</span><span class="mf">0.192</span>
-<span class="mi">2439</span>                <span class="mi">15</span>                <span class="mi">1</span>      <span class="o">-</span><span class="mf">0.118</span>
-<span class="mi">2440</span>                <span class="mi">36</span>                <span class="mi">4</span>      <span class="o">-</span><span class="mf">0.288</span>
-<span class="mi">2441</span>                <span class="mi">27</span>                <span class="mi">1</span>      <span class="o">-</span><span class="mf">0.182</span>
-<span class="mi">2442</span>                <span class="mi">36</span>                <span class="mi">0</span>      <span class="o">-</span><span class="mf">0.157</span>
-<span class="mi">2443</span>                <span class="mi">11</span>                <span class="mi">4</span>      <span class="o">-</span><span class="mf">0.178</span>
-<span class="mi">2444</span>                <span class="mi">19</span>                <span class="mi">3</span>       <span class="mf">0.294</span>
-<span class="mi">2445</span>                <span class="mi">47</span>                <span class="mi">0</span>      <span class="o">-</span><span class="mf">0.458</span>
-<span class="mi">2446</span>                <span class="mi">57</span>                <span class="mi">1</span>       <span class="mf">0.626</span>
-<span class="mi">2447</span>                <span class="mi">38</span>                <span class="mi">2</span>      <span class="o">-</span><span class="mf">0.379</span>
-<span class="mi">2448</span>                <span class="mi">37</span>                <span class="mi">2</span>      <span class="o">-</span><span class="mf">0.317</span>
-<span class="mi">2449</span>                <span class="mi">42</span>                <span class="mi">4</span>      <span class="o">-</span><span class="mf">0.358</span>
-<span class="mi">2450</span>                <span class="mi">27</span>                <span class="mi">1</span>      <span class="o">-</span><span class="mf">0.271</span>
-<span class="mi">2451</span>                <span class="mi">43</span>                <span class="mi">1</span>      <span class="o">-</span><span class="mf">0.862</span>
-<span class="mi">2452</span>                <span class="mi">26</span>                <span class="mi">1</span>      <span class="o">-</span><span class="mf">0.555</span>
-<span class="mi">2453</span>                <span class="mi">38</span>                <span class="mi">4</span>      <span class="o">-</span><span class="mf">0.560</span>
-<span class="mi">2454</span>                <span class="mi">54</span>                <span class="mi">4</span>      <span class="o">-</span><span class="mf">0.808</span>
-<span class="mi">2455</span>                 <span class="mi">4</span>                <span class="mi">3</span>      <span class="o">-</span><span class="mf">0.177</span>
-<span class="mi">2456</span>                <span class="mi">50</span>                <span class="mi">0</span>      <span class="o">-</span><span class="mf">0.194</span>
-<span class="mi">2457</span>                <span class="mi">30</span>                <span class="mi">0</span>      <span class="o">-</span><span class="mf">0.147</span>
-<span class="mi">2458</span>                <span class="mi">27</span>                <span class="mi">1</span>      <span class="o">-</span><span class="mf">0.185</span>
-<span class="mi">2459</span>                <span class="mi">55</span>                <span class="mi">0</span>      <span class="o">-</span><span class="mf">0.192</span>
-<span class="mi">2460</span>                <span class="mi">14</span>                <span class="mi">1</span>      <span class="o">-</span><span class="mf">0.211</span>
-<span class="mi">2461</span>                <span class="mi">21</span>                <span class="mi">3</span>      <span class="o">-</span><span class="mf">0.707</span>
-<span class="mi">2462</span>                <span class="mi">47</span>                <span class="mi">2</span>      <span class="o">-</span><span class="mf">0.805</span>
-<span class="mi">2463</span>                 <span class="mi">2</span>                <span class="mi">4</span>      <span class="o">-</span><span class="mf">0.997</span>
-<span class="mi">2464</span>                <span class="mi">51</span>                <span class="mi">0</span>      <span class="o">-</span><span class="mf">0.364</span>
+<span class="mi">2435</span>               <span class="mi">706</span>             <span class="mi">1791</span>      <span class="o">-</span><span class="mf">0.153</span>
+<span class="mi">2436</span>               <span class="mi">615</span>              <span class="mi">919</span>      <span class="o">-</span><span class="mf">0.723</span>
+<span class="mi">2437</span>               <span class="mi">615</span>              <span class="mi">919</span>      <span class="o">-</span><span class="mf">0.451</span>
+<span class="mi">2438</span>              <span class="mi">1337</span>             <span class="mi">1047</span>      <span class="o">-</span><span class="mf">0.215</span>
+<span class="mi">2439</span>              <span class="mi">1503</span>             <span class="mi">1047</span>      <span class="o">-</span><span class="mf">0.405</span>
+<span class="mi">2440</span>              <span class="mi">1117</span>             <span class="mi">1047</span>      <span class="o">-</span><span class="mf">0.207</span>
+<span class="mi">2441</span>              <span class="mi">1503</span>                <span class="mi">3</span>      <span class="o">-</span><span class="mf">0.463</span>
+<span class="mi">2442</span>               <span class="mi">539</span>             <span class="mi">1047</span>      <span class="o">-</span><span class="mf">0.220</span>
+<span class="mi">2443</span>                 <span class="mi">9</span>              <span class="mi">919</span>      <span class="o">-</span><span class="mf">0.413</span>
+<span class="mi">2444</span>                 <span class="mi">9</span>             <span class="mi">1047</span>      <span class="o">-</span><span class="mf">0.206</span>
+<span class="mi">2445</span>                 <span class="mi">9</span>             <span class="mi">1791</span>      <span class="o">-</span><span class="mf">0.379</span>
+<span class="mi">2446</span>                 <span class="mi">9</span>             <span class="mi">1047</span>      <span class="o">-</span><span class="mf">0.191</span>
+<span class="mi">2447</span>              <span class="mi">2314</span>             <span class="mi">1047</span>      <span class="o">-</span><span class="mf">0.504</span>
+<span class="mi">2448</span>              <span class="mi">2314</span>             <span class="mi">1047</span>      <span class="o">-</span><span class="mf">0.167</span>
+<span class="mi">2449</span>              <span class="mi">1337</span>                <span class="mi">3</span>      <span class="o">-</span><span class="mf">0.593</span>
+<span class="mi">2450</span>              <span class="mi">2387</span>                <span class="mi">3</span>      <span class="o">-</span><span class="mf">0.841</span>
+<span class="mi">2451</span>              <span class="mi">2451</span>                <span class="mi">3</span>      <span class="o">-</span><span class="mf">1.000</span>
+<span class="mi">2452</span>              <span class="mi">2451</span>                <span class="mi">3</span>      <span class="o">-</span><span class="mf">0.629</span>
+<span class="mi">2453</span>              <span class="mi">2451</span>                <span class="mi">3</span>      <span class="o">-</span><span class="mf">0.574</span>
+<span class="mi">2454</span>              <span class="mi">2451</span>                <span class="mi">3</span>      <span class="o">-</span><span class="mf">0.376</span>
+<span class="mi">2455</span>              <span class="mi">1561</span>                <span class="mi">3</span>      <span class="o">-</span><span class="mf">0.432</span>
+<span class="mi">2456</span>              <span class="mi">1432</span>                <span class="mi">3</span>       <span class="mf">0.697</span>
+<span class="mi">2457</span>              <span class="mi">1563</span>             <span class="mi">1047</span>      <span class="o">-</span><span class="mf">0.534</span>
+<span class="mi">2458</span>              <span class="mi">1117</span>              <span class="mi">919</span>      <span class="o">-</span><span class="mf">0.240</span>
+<span class="mi">2459</span>              <span class="mi">1441</span>             <span class="mi">1047</span>      <span class="o">-</span><span class="mf">0.725</span>
+<span class="mi">2460</span>                <span class="mi">81</span>             <span class="mi">1047</span>      <span class="o">-</span><span class="mf">0.200</span>
+<span class="mi">2461</span>                <span class="mi">81</span>             <span class="mi">1047</span>      <span class="o">-</span><span class="mf">0.189</span>
+<span class="mi">2462</span>              <span class="mi">1441</span>             <span class="mi">1047</span>      <span class="o">-</span><span class="mf">0.208</span>
+<span class="mi">2463</span>                <span class="mi">81</span>             <span class="mi">1047</span>      <span class="o">-</span><span class="mf">0.200</span>
+<span class="mi">2464</span>              <span class="mi">1441</span>             <span class="mi">1047</span>      <span class="o">-</span><span class="mf">0.497</span>
 
 <span class="p">[</span><span class="mi">2465</span> <span class="n">rows</span> <span class="n">x</span> <span class="mi">3</span> <span class="n">columns</span><span class="p">]</span>
 
 <span class="mf">4.</span><span class="n">a</span> <span class="n">Delete</span> <span class="n">the</span> <span class="n">extracted</span> <span class="n">features</span>
- <span class="n">DELETE</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="mi">18</span><span class="n">ee6e56af244f989bf2f0a8f0c3128f</span>
+ <span class="n">DELETE</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="n">b3441299fe5d45628d4fe3ebfc6a74bf</span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -318,8 +319,8 @@
 
     <span class="c1"># To use a custom dataset, simply specify the following variables</span>
     <span class="n">data_dir</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;data_dir&#39;</span><span class="p">]</span>
-    <span class="n">relevant_files</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;seed_relevant_files&#39;</span><span class="p">]</span>
-    <span class="n">non_relevant_files</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;seed_non_relevant_files&#39;</span><span class="p">]</span>
+    <span class="n">seed_filenames</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;seed_filenames&#39;</span><span class="p">]</span>
+    <span class="n">seed_y</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;seed_y&#39;</span><span class="p">]</span>
     <span class="n">ground_truth_file</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;ground_truth_file&#39;</span><span class="p">]</span>  <span class="c1"># (optional)</span>
 
 
@@ -376,19 +377,21 @@
     <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;     - {}: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">res</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> \
                                                       <span class="k">if</span> <span class="s2">&quot;filenames&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">key</span><span class="p">]))</span>
 
+    <span class="n">method</span> <span class="o">=</span> <span class="n">BASE_URL</span> <span class="o">+</span> <span class="s2">&quot;/feature-extraction/{}/index&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dsid</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;filenames&#39;</span><span class="p">:</span> <span class="n">seed_filenames</span><span class="p">})</span>
+    <span class="n">seed_index</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">&#39;index&#39;</span><span class="p">]</span>
 
     <span class="c1"># 2. Document categorization with ML algorithms</span>
 
     <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">2.a. Train the ML categorization model&quot;</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;       {} relevant, {} non-relevant files&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-        <span class="nb">len</span><span class="p">(</span><span class="n">relevant_files</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">non_relevant_files</span><span class="p">)))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;   {} relevant, {} non-relevant files&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">seed_y</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">seed_y</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">0</span><span class="p">)))</span>
     <span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/categorization/&#39;</span>
     <span class="k">print</span><span class="p">(</span><span class="s2">&quot; POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
     <span class="k">print</span><span class="p">(</span><span class="s1">&#39; Training...&#39;</span><span class="p">)</span>
 
     <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span>
-                        <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;relevant_filenames&#39;</span><span class="p">:</span> <span class="n">relevant_files</span><span class="p">,</span>
-                              <span class="s1">&#39;non_relevant_filenames&#39;</span><span class="p">:</span> <span class="n">non_relevant_files</span><span class="p">,</span>
+                        <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;index&#39;</span><span class="p">:</span> <span class="n">seed_index</span><span class="p">,</span>
+                              <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">seed_y</span><span class="p">,</span>
                               <span class="s1">&#39;dataset_id&#39;</span><span class="p">:</span> <span class="n">dsid</span><span class="p">,</span>
                               <span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="s1">&#39;LinearSVC&#39;</span><span class="p">,</span>  <span class="c1"># one of &quot;LinearSVC&quot;, &quot;LogisticRegression&quot;, &#39;xgboost&#39;</span>
                               <span class="s1">&#39;cv&#39;</span><span class="p">:</span> <span class="mi">0</span>                          <span class="c1"># Cross Validation</span>
@@ -404,7 +407,7 @@
     <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 
     <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;     - {}: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">res</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> \
-                                                      <span class="k">if</span> <span class="s2">&quot;filenames&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">key</span><span class="p">]))</span>
+                                                      <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">]]))</span>
 
     <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">2.c Categorize the complete dataset with this model&quot;</span><span class="p">)</span>
     <span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/categorization/{}/predict&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mid</span><span class="p">)</span>
@@ -447,8 +450,8 @@
     <span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/lsi/{}/predict&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">lid</span><span class="p">)</span>
     <span class="k">print</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span>
-                        <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;relevant_filenames&#39;</span><span class="p">:</span> <span class="n">relevant_files</span><span class="p">,</span>
-                              <span class="s1">&#39;non_relevant_filenames&#39;</span><span class="p">:</span> <span class="n">non_relevant_files</span>
+                        <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;index&#39;</span><span class="p">:</span> <span class="n">seed_index</span><span class="p">,</span>
+                              <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">seed_y</span>
                               <span class="p">})</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
     <span class="n">prediction</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;prediction&#39;</span><span class="p">]</span>
 
@@ -461,10 +464,11 @@
     <span class="k">print</span><span class="p">(</span><span class="s2">&quot; POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
 
     <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span>
-                        <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;relevant_filenames&#39;</span><span class="p">:</span> <span class="n">relevant_files</span><span class="p">,</span>
-                              <span class="s1">&#39;non_relevant_filenames&#39;</span><span class="p">:</span> <span class="n">non_relevant_files</span><span class="p">,</span>
+                        <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;index&#39;</span><span class="p">:</span> <span class="n">seed_index</span><span class="p">,</span>
+                              <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">seed_y</span><span class="p">,</span>
                               <span class="s1">&#39;ground_truth_filename&#39;</span><span class="p">:</span> <span class="n">ground_truth_file</span>
                               <span class="p">})</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
     <span class="k">print</span><span class="p">(</span><span class="s1">&#39;    =&gt; Test scores: MAP = {average_precision:.3f}, ROC-AUC = {roc_auc:.3f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">res</span><span class="p">))</span>
 
     <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
@@ -475,7 +479,7 @@
     <span class="k">print</span><span class="p">(</span><span class="s2">&quot; DELETE&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 1 minutes  16.233 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 1 minutes  3.275 seconds)</p>
 <div class="sphx-glr-footer container">
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../_downloads/categorization_example.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">categorization_example.py</span></code></a></div>

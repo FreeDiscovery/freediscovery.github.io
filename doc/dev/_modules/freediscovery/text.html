@@ -172,7 +172,7 @@
     <span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="k">import</span> <span class="n">HashingVectorizer</span>
     <span class="kn">from</span> <span class="nn">sklearn.externals</span> <span class="k">import</span> <span class="n">joblib</span>
 
-    <span class="n">filenames</span> <span class="o">=</span> <span class="n">pars</span><span class="p">[</span><span class="s1">&#39;filenames&#39;</span><span class="p">]</span>
+    <span class="n">filenames</span> <span class="o">=</span> <span class="n">pars</span><span class="p">[</span><span class="s1">&#39;filenames_abs&#39;</span><span class="p">]</span>
     <span class="n">chunk_size</span> <span class="o">=</span> <span class="n">pars</span><span class="p">[</span><span class="s1">&#39;chunk_size&#39;</span><span class="p">]</span>
     <span class="n">n_samples</span> <span class="o">=</span> <span class="n">pars</span><span class="p">[</span><span class="s1">&#39;n_samples&#39;</span><span class="p">]</span>
 
@@ -251,6 +251,9 @@
                     <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">file_pattern</span><span class="p">,</span> <span class="n">fname</span><span class="p">):</span>
                         <span class="n">filenames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">fname</span><span class="p">)))</span>
 
+        <span class="c1"># make sure that sorting order is deterministic</span>
+        <span class="n">filenames</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">filenames</span><span class="p">)</span>
+
         <span class="k">if</span> <span class="ow">not</span> <span class="n">filenames</span><span class="p">:</span> <span class="c1"># no files were found</span>
             <span class="k">raise</span> <span class="n">WrongParameter</span><span class="p">(</span><span class="s1">&#39;No files to process were found!&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">analyzer</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;word&#39;</span><span class="p">,</span> <span class="s1">&#39;char&#39;</span><span class="p">,</span> <span class="s1">&#39;char_wb&#39;</span><span class="p">]:</span>
@@ -314,7 +317,7 @@
         <span class="n">pars</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pars</span>
         <span class="n">filenames_base</span> <span class="o">=</span> <span class="n">pars</span><span class="p">[</span><span class="s1">&#39;filenames&#39;</span><span class="p">]</span>
         <span class="n">data_dir</span> <span class="o">=</span> <span class="n">pars</span><span class="p">[</span><span class="s1">&#39;data_dir&#39;</span><span class="p">]</span>
-        <span class="n">pars</span><span class="p">[</span><span class="s1">&#39;filenames&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">el</span><span class="p">)</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">filenames_base</span><span class="p">]</span>
+        <span class="n">pars</span><span class="p">[</span><span class="s1">&#39;filenames_abs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">el</span><span class="p">)</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">filenames_base</span><span class="p">]</span>
         <span class="n">chunk_size</span> <span class="o">=</span> <span class="n">pars</span><span class="p">[</span><span class="s1">&#39;chunk_size&#39;</span><span class="p">]</span>
         <span class="n">n_samples</span> <span class="o">=</span> <span class="n">pars</span><span class="p">[</span><span class="s1">&#39;n_samples&#39;</span><span class="p">]</span>
         <span class="n">n_jobs</span> <span class="o">=</span> <span class="n">pars</span><span class="p">[</span><span class="s1">&#39;n_jobs&#39;</span><span class="p">]</span>
@@ -351,7 +354,7 @@
                             <span class="n">max_features</span><span class="o">=</span><span class="n">pars</span><span class="p">[</span><span class="s1">&#39;n_features&#39;</span><span class="p">],</span>
                             <span class="n">norm</span><span class="o">=</span><span class="n">pars</span><span class="p">[</span><span class="s1">&#39;norm&#39;</span><span class="p">],</span>
                             <span class="n">decode_error</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">opts_tfidf</span><span class="p">)</span>
-                <span class="n">res</span> <span class="o">=</span> <span class="n">tfidf</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">pars</span><span class="p">[</span><span class="s1">&#39;filenames&#39;</span><span class="p">])</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="n">tfidf</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">pars</span><span class="p">[</span><span class="s1">&#39;filenames_abs&#39;</span><span class="p">])</span>
                 <span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">tfidf</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dsid_dir</span><span class="p">,</span> <span class="s1">&#39;vectorizer&#39;</span><span class="p">))</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">vect</span> <span class="o">=</span> <span class="n">tfidf</span>
 
@@ -406,6 +409,9 @@
 <span class="sd">        exist on disk (in general)&quot;&quot;&quot;</span>
         <span class="n">dsid_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cache_dir</span><span class="p">,</span> <span class="n">dsid</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">dsid_dir</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pars</span><span class="p">[</span><span class="s1">&#39;filenames&#39;</span><span class="p">])[</span><span class="n">index</span><span class="p">]</span>
 
 <div class="viewcode-block" id="FeatureVectorizer.list_datasets"><a class="viewcode-back" href="../../generated/freediscovery.text.FeatureVectorizer.html#freediscovery.text.FeatureVectorizer.list_datasets">[docs]</a>    <span class="k">def</span> <span class="nf">list_datasets</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; List all datasets in the working directory &quot;&quot;&quot;</span>
@@ -463,20 +469,29 @@
         <span class="k">return</span> <span class="n">pars</span>
 
 <div class="viewcode-block" id="FeatureVectorizer.search"><a class="viewcode-back" href="../../generated/freediscovery.text.FeatureVectorizer.html#freediscovery.text.FeatureVectorizer.search">[docs]</a>    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filenames</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Given a dsid return the features that correspond to the provided filenames &quot;&quot;&quot;</span>
-        <span class="n">pars</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pars</span>
-        <span class="n">filenames_all</span> <span class="o">=</span> <span class="n">pars</span><span class="p">[</span><span class="s1">&#39;filenames&#39;</span><span class="p">]</span>
+        <span class="sd">&quot;&quot;&quot; Return the document ids that correspond to the provided filenames,</span>
+<span class="sd">        without preserving order.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filenames : list[str]</span>
+<span class="sd">            list of filenames (relatives to the data_dir)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        indices : array[int]</span>
+<span class="sd">            corresponding list of document id (order is not preserved)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">filenames_all</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pars</span><span class="p">[</span><span class="s1">&#39;filenames&#39;</span><span class="p">]</span>
         <span class="c1"># calculate the indices of the intersection of filenames with filenames_all</span>
         <span class="n">ind_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">((</span><span class="n">k</span><span class="p">,</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">k</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">filenames_all</span><span class="p">))</span>
-        <span class="n">inter</span> <span class="o">=</span>  <span class="nb">set</span><span class="p">(</span><span class="n">ind_dict</span><span class="p">)</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">filenames</span><span class="p">)</span>
-        <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span> <span class="n">ind_dict</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">inter</span><span class="p">])</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">filenames</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">indices</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">indices</span>
-        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">None</span>  <span class="c1"># np.zeros(len(filenames)).astype(bool)</span>
-        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">filenames</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">indices</span><span class="p">):</span>
-            <span class="c1"># this is not supposed to happen, we should do something</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;unconsistant indices, the results may be wrong!&quot;</span><span class="p">)</span></div></div>
+        <span class="n">indices</span> <span class="o">=</span> <span class="p">[</span> <span class="n">ind_dict</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">n_samples_</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Number of documents in the dataset &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pars</span><span class="p">[</span><span class="s1">&#39;filenames&#39;</span><span class="p">])</span></div>
 </pre></div>
 
            </div>

@@ -212,10 +212,22 @@
 <td>Query the features with most weight</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#freediscovery.text.FeatureVectorizer.search" title="freediscovery.text.FeatureVectorizer.search"><code class="xref py py-obj docutils literal"><span class="pre">search</span></code></a>(filenames)</td>
-<td>Given a dsid return the features that correspond to the provided filenames</td>
+<td>Return the document ids that correspond to the provided filenames, without preserving order.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#freediscovery.text.FeatureVectorizer.transform" title="freediscovery.text.FeatureVectorizer.transform"><code class="xref py py-obj docutils literal"><span class="pre">transform</span></code></a>()</td>
 <td>Run the feature extraction</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.text.FeatureVectorizer.n_samples_" title="freediscovery.text.FeatureVectorizer.n_samples_"><code class="xref py py-obj docutils literal"><span class="pre">n_samples_</span></code></a></td>
+<td>Number of documents in the dataset</td>
 </tr>
 </tbody>
 </table>
@@ -243,6 +255,12 @@
 <dd><p>Load a computed features from disk</p>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="freediscovery.text.FeatureVectorizer.n_samples_">
+<code class="descname">n_samples_</code><a class="headerlink" href="#freediscovery.text.FeatureVectorizer.n_samples_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of documents in the dataset</p>
+</dd></dl>
+
 <dl class="method">
 <dt id="freediscovery.text.FeatureVectorizer.preprocess">
 <code class="descname">preprocess</code><span class="sig-paren">(</span><em>data_dir</em>, <em>file_pattern='.*'</em>, <em>dir_pattern='.*'</em>, <em>n_features=11000000</em>, <em>chunk_size=5000</em>, <em>analyzer='word'</em>, <em>ngram_range=(1</em>, <em>1)</em>, <em>stop_words='None'</em>, <em>n_jobs=1</em>, <em>use_idf=False</em>, <em>sublinear_tf=False</em>, <em>binary=True</em>, <em>use_hashing=True</em>, <em>norm=None</em>, <em>min_df=0.0</em>, <em>max_df=1.0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/freediscovery/text.html#FeatureVectorizer.preprocess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.text.FeatureVectorizer.preprocess" title="Permalink to this definition">¶</a></dt>
@@ -259,7 +277,20 @@ detailed description of the input parameters</p>
 <dl class="method">
 <dt id="freediscovery.text.FeatureVectorizer.search">
 <code class="descname">search</code><span class="sig-paren">(</span><em>filenames</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/freediscovery/text.html#FeatureVectorizer.search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.text.FeatureVectorizer.search" title="Permalink to this definition">¶</a></dt>
-<dd><p>Given a dsid return the features that correspond to the provided filenames</p>
+<dd><p>Return the document ids that correspond to the provided filenames,
+without preserving order.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filenames</strong> (<em>list</em><em>[</em><em>str</em><em>]</em><em></em>) &#8211; list of filenames (relatives to the data_dir)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>indices</strong> &#8211; corresponding list of document id (order is not preserved)</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array[int]</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">

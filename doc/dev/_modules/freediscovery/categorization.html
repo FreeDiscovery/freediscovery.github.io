@@ -158,8 +158,25 @@
 
 <span class="kn">from</span> <span class="nn">.text</span> <span class="k">import</span> <span class="n">FeatureVectorizer</span>
 <span class="kn">from</span> <span class="nn">.base</span> <span class="k">import</span> <span class="n">BaseEstimator</span>
-<span class="kn">from</span> <span class="nn">.utils</span> <span class="k">import</span> <span class="n">filter_rel_nrel</span><span class="p">,</span> <span class="n">setup_model</span><span class="p">,</span> <span class="n">_rename_main_thread</span>
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="k">import</span> <span class="n">setup_model</span><span class="p">,</span> <span class="n">_rename_main_thread</span>
 <span class="kn">from</span> <span class="nn">.exceptions</span> <span class="k">import</span> <span class="p">(</span><span class="n">ModelNotFound</span><span class="p">,</span> <span class="n">WrongParameter</span><span class="p">,</span> <span class="n">NotImplementedFD</span><span class="p">,</span> <span class="n">OptionalDependencyMissing</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_zip_relevant</span><span class="p">(</span><span class="n">relevant_id</span><span class="p">,</span> <span class="n">non_relevant_id</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Take a list of relevant and non relevant documents id and return</span>
+<span class="sd">    an array of indices and prediction values &quot;&quot;&quot;</span>
+    <span class="n">idx_id</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">relevant_id</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">non_relevant_id</span><span class="p">)))</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">relevant_id</span><span class="p">))),</span>
+                        <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">non_relevant_id</span><span class="p">)))))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">idx_id</span><span class="p">,</span> <span class="n">y</span>
+
+<span class="k">def</span> <span class="nf">_unzip_relevant</span><span class="p">(</span><span class="n">idx_id</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Take an array of indices and prediction values and return</span>
+<span class="sd">    a list of relevant and non relevant documents id</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
+    <span class="n">idx_id</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">idx_id</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">idx_id</span><span class="p">[</span><span class="n">mask</span><span class="p">],</span> <span class="n">idx_id</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="Categorizer"><a class="viewcode-back" href="../../generated/freediscovery.categorization.Categorizer.html#freediscovery.categorization.Categorizer">[docs]</a><span class="k">class</span> <span class="nc">Categorizer</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">):</span>
@@ -275,23 +292,26 @@
             <span class="k">raise</span> <span class="n">WrongParameter</span><span class="p">(</span><span class="s1">&#39;Method </span><span class="si">{}</span><span class="s1"> not implemented!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">method</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">cmod</span>
 
-<div class="viewcode-block" id="Categorizer.train"><a class="viewcode-back" href="../../generated/freediscovery.categorization.Categorizer.html#freediscovery.categorization.Categorizer.train">[docs]</a>    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relevant_filenames</span><span class="p">,</span> <span class="n">non_relevant_filenames</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;LinearSVC&#39;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Categorizer.train"><a class="viewcode-back" href="../../generated/freediscovery.categorization.Categorizer.html#freediscovery.categorization.Categorizer.train">[docs]</a>    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;LinearSVC&#39;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Train the categorization model</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        relevant_filenames : list</span>
-<span class="sd">           a list of relevant documents filenames</span>
-<span class="sd">        non_relevant_filenames : list</span>
-<span class="sd">           a list of not relevant documents filenames</span>
+<span class="sd">        index : array-like, shape (n_samples)</span>
+<span class="sd">           document indices of the training set</span>
+<span class="sd">        y : array-like, shape (n_samples)</span>
+<span class="sd">           target binary class relative to index</span>
 <span class="sd">        method : str</span>
 <span class="sd">           the ML algorithm to use (one of &quot;LogisticRegression&quot;, &quot;LinearSVC&quot;, &#39;xgboost&#39;)</span>
 <span class="sd">        cv : str</span>
 <span class="sd">           use cross-validation</span>
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">           a dictionary with the results</span>
+<span class="sd">        cmod : sklearn.BaseEstimator</span>
+<span class="sd">           the scikit learn classifier object</span>
+<span class="sd">        Y_train : array-like, shape (n_samples)</span>
+<span class="sd">           training predictions</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">valid_methods</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;LinearSVC&quot;</span><span class="p">,</span> <span class="s2">&quot;LogisticRegression&quot;</span><span class="p">,</span> <span class="s2">&quot;xgboost&quot;</span><span class="p">]</span>
@@ -310,11 +330,11 @@
             <span class="k">if</span> <span class="n">cv</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">WrongParameter</span><span class="p">(</span><span class="s1">&#39;CV with ensemble stacking is not supported!&#39;</span><span class="p">)</span>
 
-        <span class="n">d_all</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">d_rel</span><span class="p">,</span> <span class="n">d_nrel</span> <span class="o">=</span> <span class="n">filter_rel_nrel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relevant_filenames</span><span class="p">,</span> <span class="n">non_relevant_filenames</span><span class="p">)</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">d_all</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fe</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dsid</span><span class="p">)</span>  <span class="c1">#, mmap_mode=&#39;r&#39;)</span>
 
-        <span class="n">X_train</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">d_rel</span><span class="p">,</span> <span class="n">d_nrel</span><span class="p">))</span>
-        <span class="n">X_train_str</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">relevant_filenames</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">non_relevant_filenames</span><span class="p">)))</span>
-        <span class="n">Y_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">d_rel</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">d_nrel</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">)</span>
+        <span class="n">X_train</span> <span class="o">=</span> <span class="n">d_all</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="p">:]</span>
+
+        <span class="n">Y_train</span> <span class="o">=</span> <span class="n">y</span>
 
         <span class="k">if</span> <span class="n">method</span> <span class="o">!=</span> <span class="s1">&#39;ensemble-stacking&#39;</span><span class="p">:</span>
             <span class="n">cmod</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_estimator</span><span class="p">(</span><span class="n">Y_train</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">cv</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cv_scoring</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cv_n_folds</span><span class="p">)</span>
@@ -344,8 +364,8 @@
 
         <span class="n">pars</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="n">method</span><span class="p">,</span>
-            <span class="s1">&#39;relevant_filenames&#39;</span><span class="p">:</span> <span class="n">relevant_filenames</span><span class="p">,</span>
-            <span class="s1">&#39;non_relevant_filenames&#39;</span><span class="p">:</span> <span class="n">non_relevant_filenames</span>
+            <span class="s1">&#39;index&#39;</span><span class="p">:</span> <span class="n">index</span><span class="p">,</span>
+            <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y</span>
         <span class="p">}</span>
         <span class="n">pars</span><span class="p">[</span><span class="s1">&#39;options&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cmod</span><span class="o">.</span><span class="n">get_params</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_pars</span> <span class="o">=</span> <span class="n">pars</span>
@@ -353,7 +373,7 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">mid</span> <span class="o">=</span> <span class="n">mid</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cmod</span> <span class="o">=</span> <span class="n">cmod</span>
-        <span class="k">return</span> <span class="n">cmod</span><span class="p">,</span> <span class="n">X_train_str</span><span class="p">,</span> <span class="n">Y_train</span></div>
+        <span class="k">return</span> <span class="n">cmod</span><span class="p">,</span> <span class="n">Y_train</span></div>
 
 <div class="viewcode-block" id="Categorizer.predict"><a class="viewcode-back" href="../../generated/freediscovery.categorization.Categorizer.html#freediscovery.categorization.Categorizer.predict">[docs]</a>    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chunk_size</span><span class="o">=</span><span class="mi">5000</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>

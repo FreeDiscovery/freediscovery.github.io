@@ -216,7 +216,7 @@ Recommended options also include, <cite>use_idf=1, sublinear_tf=0, binary=0</cit
 <tr class="row-odd"><td><a class="reference internal" href="#freediscovery.categorization.Categorizer.predict" title="freediscovery.categorization.Categorizer.predict"><code class="xref py py-obj docutils literal"><span class="pre">predict</span></code></a>([chunk_size])</td>
 <td>Predict the relevance using a previously trained model</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#freediscovery.categorization.Categorizer.train" title="freediscovery.categorization.Categorizer.train"><code class="xref py py-obj docutils literal"><span class="pre">train</span></code></a>(relevant_filenames,&nbsp;non_relevant_filenames)</td>
+<tr class="row-even"><td><a class="reference internal" href="#freediscovery.categorization.Categorizer.train" title="freediscovery.categorization.Categorizer.train"><code class="xref py py-obj docutils literal"><span class="pre">train</span></code></a>(index,&nbsp;y[,&nbsp;method,&nbsp;cv])</td>
 <td>Train the categorization model</td>
 </tr>
 </tbody>
@@ -249,24 +249,25 @@ Recommended options also include, <cite>use_idf=1, sublinear_tf=0, binary=0</cit
 
 <dl class="method">
 <dt id="freediscovery.categorization.Categorizer.train">
-<code class="descname">train</code><span class="sig-paren">(</span><em>relevant_filenames</em>, <em>non_relevant_filenames</em>, <em>method=u'LinearSVC'</em>, <em>cv=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/freediscovery/categorization.html#Categorizer.train"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.categorization.Categorizer.train" title="Permalink to this definition">¶</a></dt>
+<code class="descname">train</code><span class="sig-paren">(</span><em>index</em>, <em>y</em>, <em>method=u'LinearSVC'</em>, <em>cv=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/freediscovery/categorization.html#Categorizer.train"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.categorization.Categorizer.train" title="Permalink to this definition">¶</a></dt>
 <dd><p>Train the categorization model</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>relevant_filenames</strong> (<em>list</em>) &#8211; a list of relevant documents filenames</li>
-<li><strong>non_relevant_filenames</strong> (<em>list</em>) &#8211; a list of not relevant documents filenames</li>
+<li><strong>index</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>)</em><em></em>) &#8211; document indices of the training set</li>
+<li><strong>y</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>)</em><em></em>) &#8211; target binary class relative to index</li>
 <li><strong>method</strong> (<em>str</em>) &#8211; the ML algorithm to use (one of &#8220;LogisticRegression&#8221;, &#8220;LinearSVC&#8221;, &#8216;xgboost&#8217;)</li>
 <li><strong>cv</strong> (<em>str</em>) &#8211; use cross-validation</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">a dictionary with the results</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
+<li><strong>cmod</strong> (<em>sklearn.BaseEstimator</em>) &#8211; the scikit learn classifier object</li>
+<li><strong>Y_train</strong> (<em>array-like, shape (n_samples)</em>) &#8211; training predictions</li>
+</ul>
+</p>
 </td>
 </tr>
 </tbody>

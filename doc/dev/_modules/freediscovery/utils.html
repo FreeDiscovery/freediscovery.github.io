@@ -174,7 +174,7 @@
     <span class="nb">setattr</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="n">stream</span><span class="p">,</span> <span class="n">stderr</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">classification_score</span><span class="p">(</span><span class="n">X_ref</span><span class="p">,</span> <span class="n">Y_ref</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">categorization_score</span><span class="p">(</span><span class="n">idx_ref</span><span class="p">,</span> <span class="n">Y_ref</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">Y</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Calculate the efficiency scores &quot;&quot;&quot;</span>
     <span class="c1"># This function should be deprecated</span>
     <span class="c1"># An equivalent functionally should be achieved with a</span>
@@ -184,60 +184,47 @@
             <span class="n">roc_auc_score</span><span class="p">,</span> <span class="n">average_precision_score</span><span class="p">)</span>
     <span class="n">threshold</span> <span class="o">=</span> <span class="mf">0.0</span>
 
-    <span class="n">X_ref</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">X_ref</span><span class="p">)</span>
-    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+    <span class="n">idx_ref</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">idx_ref</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+    <span class="n">Y_ref</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Y_ref</span><span class="p">)</span>
 
-    <span class="c1"># this merge operation should not be necessary anymore once we move to the</span>
-    <span class="c1"># numeric indexing (issue #4)</span>
-
-    <span class="n">d_pred</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;is_relevant_p&#39;</span><span class="p">:</span> <span class="n">Y</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">,</span>
-                           <span class="s1">&#39;is_relevant_score&#39;</span><span class="p">:</span> <span class="n">Y</span><span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="n">X</span><span class="p">)</span>
-    <span class="n">d_ref</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;is_relevant&#39;</span><span class="p">:</span> <span class="n">Y_ref</span><span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="n">X_ref</span><span class="p">)</span>
-    <span class="n">d_out</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">d_ref</span><span class="p">,</span> <span class="n">d_pred</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span> <span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">d_out</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">idx_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">intersect1d</span><span class="p">(</span><span class="n">idx_ref</span><span class="p">,</span> <span class="n">idx</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">idx_out</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;recall_score&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;precision_score&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;f1&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;auc_roc&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
                 <span class="s1">&#39;average_precision&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">}</span>
 
-    <span class="n">is_relevant</span> <span class="o">=</span> <span class="n">d_out</span><span class="o">.</span><span class="n">is_relevant</span><span class="o">.</span><span class="n">values</span>
+    <span class="c1"># sort values by index </span>
+    <span class="n">order_ref</span> <span class="o">=</span> <span class="n">idx_ref</span><span class="o">.</span><span class="n">argsort</span><span class="p">()</span>
+    <span class="n">idx_ref</span> <span class="o">=</span> <span class="n">idx_ref</span><span class="p">[</span><span class="n">order_ref</span><span class="p">]</span>
+    <span class="n">Y_ref</span> <span class="o">=</span> <span class="n">Y_ref</span><span class="p">[</span><span class="n">order_ref</span><span class="p">]</span>
+
+    <span class="n">order</span> <span class="o">=</span> <span class="n">idx</span><span class="o">.</span><span class="n">argsort</span><span class="p">()</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">idx</span><span class="p">[</span><span class="n">order</span><span class="p">]</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="n">Y</span><span class="p">[</span><span class="n">order</span><span class="p">]</span>
+
+    <span class="c1"># find indices that are in both the reference and the test dataset</span>
+    <span class="n">mask_ref</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">in1d</span><span class="p">(</span><span class="n">idx_ref</span><span class="p">,</span> <span class="n">idx_out</span><span class="p">)</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">in1d</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">idx_out</span><span class="p">)</span>
+
+    <span class="n">Y_ref</span> <span class="o">=</span> <span class="n">Y_ref</span><span class="p">[</span><span class="n">mask_ref</span><span class="p">]</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="p">(</span><span class="n">Y</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">)[</span><span class="n">mask</span><span class="p">]</span>
+
     <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
         <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="n">UndefinedMetricWarning</span><span class="p">)</span>
 
-        <span class="n">m_recall_score</span> <span class="o">=</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">is_relevant</span><span class="p">,</span>
-                                      <span class="n">d_out</span><span class="o">.</span><span class="n">is_relevant_p</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
-        <span class="n">m_precision_score</span> <span class="o">=</span> <span class="n">precision_score</span><span class="p">(</span><span class="n">d_out</span><span class="o">.</span><span class="n">is_relevant</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
-                                            <span class="n">d_out</span><span class="o">.</span><span class="n">is_relevant_p</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
-        <span class="n">m_f1_score</span> <span class="o">=</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">is_relevant</span><span class="p">,</span>
-                              <span class="n">d_out</span><span class="o">.</span><span class="n">is_relevant_p</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">is_relevant</span><span class="p">))</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="n">m_roc_auc</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">is_relevant</span><span class="p">,</span>
-                                  <span class="n">d_out</span><span class="o">.</span><span class="n">is_relevant_score</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+        <span class="n">m_recall_score</span> <span class="o">=</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">Y_ref</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+        <span class="n">m_precision_score</span> <span class="o">=</span> <span class="n">precision_score</span><span class="p">(</span><span class="n">Y_ref</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+        <span class="n">m_f1_score</span> <span class="o">=</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">Y_ref</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">m_roc_auc</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">Y_ref</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">m_roc_auc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span> <span class="c1"># ROC not defined in this case</span>
-    <span class="n">m_average_precision</span> <span class="o">=</span> <span class="n">average_precision_score</span><span class="p">(</span>
-                              <span class="n">is_relevant</span><span class="p">,</span>
-                              <span class="n">d_out</span><span class="o">.</span><span class="n">is_relevant_score</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+    <span class="n">m_average_precision</span> <span class="o">=</span> <span class="n">average_precision_score</span><span class="p">(</span><span class="n">Y_ref</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;recall&quot;</span><span class="p">:</span> <span class="n">m_recall_score</span><span class="p">,</span> <span class="s2">&quot;precision&quot;</span><span class="p">:</span> <span class="n">m_precision_score</span><span class="p">,</span>
             <span class="s2">&quot;f1&quot;</span><span class="p">:</span> <span class="n">m_f1_score</span><span class="p">,</span> <span class="s1">&#39;roc_auc&#39;</span><span class="p">:</span> <span class="n">m_roc_auc</span><span class="p">,</span>
             <span class="s1">&#39;average_precision&#39;</span><span class="p">:</span> <span class="n">m_average_precision</span> <span class="p">}</span>
-
-
-<div class="viewcode-block" id="filter_rel_nrel"><a class="viewcode-back" href="../../generated/freediscovery.utils.filter_rel_nrel.html#freediscovery.utils.filter_rel_nrel">[docs]</a><span class="k">def</span> <span class="nf">filter_rel_nrel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relevant_filenames</span><span class="p">,</span> <span class="n">non_relevant_filenames</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Load features corresponding to a list of relevant / non relevant filenames</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">filenames_all</span><span class="p">,</span> <span class="n">fset_all</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fe</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dsid</span><span class="p">)</span>  <span class="c1">#, mmap_mode=&#39;r&#39;)</span>
-    <span class="n">idx_rel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fe</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">relevant_filenames</span><span class="p">)</span>
-    <span class="n">idx_nrel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fe</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">non_relevant_filenames</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">idx_rel</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;No relevant files found with the input provided: </span><span class="si">{}</span><span class="s1"> ...!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">relevant_filenames</span><span class="p">[:</span><span class="mi">20</span><span class="p">]))</span>
-    <span class="k">if</span> <span class="n">idx_nrel</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;No not-relevant files found with the input provided!&#39;</span><span class="p">)</span>
-    <span class="n">d_rel</span> <span class="o">=</span> <span class="n">fset_all</span><span class="p">[</span><span class="n">idx_rel</span><span class="p">,:]</span>
-    <span class="c1">#print(idx_rel)</span>
-    <span class="c1">#print(type(fset_all.shape))</span>
-    <span class="n">d_nrel</span> <span class="o">=</span> <span class="n">fset_all</span><span class="p">[</span><span class="n">idx_nrel</span><span class="p">,:]</span>
-    <span class="k">return</span> <span class="n">fset_all</span><span class="p">,</span> <span class="n">idx_rel</span><span class="p">,</span> <span class="n">idx_nrel</span><span class="p">,</span> <span class="n">d_rel</span><span class="p">,</span> <span class="n">d_nrel</span></div>
-
 
 <span class="k">def</span> <span class="nf">_rename_main_thread</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;</span>

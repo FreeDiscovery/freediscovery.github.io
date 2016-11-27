@@ -210,7 +210,7 @@
 <tr class="row-even"><td><a class="reference internal" href="#freediscovery.lsi.LSI.load" title="freediscovery.lsi.LSI.load"><code class="xref py py-obj docutils literal"><span class="pre">load</span></code></a>(mid)</td>
 <td>Load the computed features from cache specified by mid</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.lsi.LSI.predict" title="freediscovery.lsi.LSI.predict"><code class="xref py py-obj docutils literal"><span class="pre">predict</span></code></a>(relevant_filenames,&nbsp;...[,&nbsp;...])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.lsi.LSI.predict" title="freediscovery.lsi.LSI.predict"><code class="xref py py-obj docutils literal"><span class="pre">predict</span></code></a>(index,&nbsp;y[,&nbsp;accumulate,&nbsp;chunk_size])</td>
 <td>Predict the document relevance using a previously trained LSI model</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#freediscovery.lsi.LSI.transform" title="freediscovery.lsi.LSI.transform"><code class="xref py py-obj docutils literal"><span class="pre">transform</span></code></a>(n_components[,&nbsp;n_iter])</td>
@@ -232,15 +232,15 @@
 
 <dl class="method">
 <dt id="freediscovery.lsi.LSI.predict">
-<code class="descname">predict</code><span class="sig-paren">(</span><em>relevant_filenames</em>, <em>non_relevant_filenames</em>, <em>accumulate='nearest-max'</em>, <em>chunk_size=100</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/freediscovery/lsi.html#LSI.predict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.lsi.LSI.predict" title="Permalink to this definition">¶</a></dt>
+<code class="descname">predict</code><span class="sig-paren">(</span><em>index</em>, <em>y</em>, <em>accumulate='nearest-max'</em>, <em>chunk_size=100</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/freediscovery/lsi.html#LSI.predict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.lsi.LSI.predict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Predict the document relevance using a previously trained LSI model</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>relevant_filenames</strong> (<em>list</em>) &#8211; a list of relevant documents filenames</li>
-<li><strong>non_relevant_filenames</strong> (<em>list</em>) &#8211; a list of not relevant documents filenames</li>
+<li><strong>index</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>)</em><em></em>) &#8211; document indices of the training set</li>
+<li><strong>y</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>)</em><em></em>) &#8211; target binary class relative to index</li>
 <li><strong>accumulate</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default='nearest-max'</em>) &#8211; if <cite>accumulate==&#8221;nearest-max&#8221;</cite> the cosine distance to the closest relevant/non relevant document is used as classification score,
 otherwise if <cite>accumulate==&#8221;centroid-max&#8221;</cite> the centroid of relevant documents is used as the query vector.</li>
 </ul>

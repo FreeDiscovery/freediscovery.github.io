@@ -157,6 +157,8 @@
 <span class="kn">import</span> <span class="nn">hashlib</span>
 <span class="kn">import</span> <span class="nn">platform</span>
 
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
 
 <div class="viewcode-block" id="load_dataset"><a class="viewcode-back" href="../../generated/freediscovery.datasets.load_dataset.html#freediscovery.datasets.load_dataset">[docs]</a><span class="k">def</span> <span class="nf">load_dataset</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;treclegal09_2k_subset&#39;</span><span class="p">,</span> <span class="n">cache_dir</span><span class="o">=</span><span class="s1">&#39;/tmp&#39;</span><span class="p">,</span>
                  <span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -283,8 +285,9 @@
             <span class="n">relevant_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">relevant_files</span><span class="p">]</span>
             <span class="n">non_relevant_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">non_relevant_files</span><span class="p">]</span>
 
-        <span class="n">results</span><span class="p">[</span><span class="s1">&#39;seed_non_relevant_files&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">non_relevant_files</span>
-        <span class="n">results</span><span class="p">[</span><span class="s1">&#39;seed_relevant_files&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">relevant_files</span>
+        <span class="n">results</span><span class="p">[</span><span class="s1">&#39;seed_filenames&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">relevant_files</span> <span class="o">+</span> <span class="n">non_relevant_files</span> 
+        <span class="n">results</span><span class="p">[</span><span class="s1">&#39;seed_y&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">relevant_files</span><span class="p">)),</span>
+                                            <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">non_relevant_files</span><span class="p">))))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int&#39;</span><span class="p">))</span>
         <span class="n">results</span><span class="p">[</span><span class="s1">&#39;ground_truth_file&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ground_truth_file</span>
 
     <span class="k">return</span> <span class="n">results</span></div>
