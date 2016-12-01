@@ -17,18 +17,18 @@ Find near-duplicates in a text collection
  Out::
 
     0. Load the test dataset
-     POST http://localhost:5001/api/v0/datasets/treclegal09_2k_subset
+     GET http://localhost:5001/api/v0/datasets/treclegal09_2k_subset
 
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received [u'id', u'filenames']
-       => dsid = 538e80b7654c4cdb959420feec3e669d
+       => dsid = 5bff96712de744d4bcfa92527a6f0f15
 
     1.b Run feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/538e80b7654c4cdb959420feec3e669d
+     POST http://localhost:5001/api/v0/feature-extraction/5bff96712de744d4bcfa92527a6f0f15
 
     1.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/538e80b7654c4cdb959420feec3e669d
+     GET http://localhost:5001/api/v0/feature-extraction/5bff96712de744d4bcfa92527a6f0f15
          - binary: False
          - n_jobs: -1
          - stop_words: english
@@ -48,18 +48,21 @@ Find near-duplicates in a text collection
 
     2. Near Duplicates detection by cosine similarity (DBSCAN)
      POST http://localhost:5001/api/v0/clustering/dbscan/
-         => model id = e2801eaa72814a4888405f791f58a1c4
-     POST http://localhost:5001/api/v0/clustering/dbscan/e2801eaa72814a4888405f791f58a1c4
-        .. computed in 44.8s
+         => model id = 4133fb3668cf41c79cf1592eca04798d
+     GET http://localhost:5001/api/v0/clustering/dbscan/4133fb3668cf41c79cf1592eca04798d
+        .. computed in 44.6s
     Found 91 duplicates / 2465
 
     3. Near Duplicates Detection using I-Match
      POST http://localhost:5001/api/v0/duplicate-detection/
-         => model id = bcdaf5467b4e4f3baa87e897a7d6c30f
+         => model id = 3f4b11a84b064c5599fb75fbde2bd7ca
         .. computed in 0.0s
-    GET http://localhost:5001/api/v0/duplicate-detection/bcdaf5467b4e4f3baa87e897a7d6c30f
-        .. computed in 2.5s
-    Found 238 duplicates / 2465
+     GET http://localhost:5001/api/v0/duplicate-detection/3f4b11a84b064c5599fb75fbde2bd7ca
+        .. computed in 2.7s
+    Found 341 duplicates / 2465
+
+    4.a Delete the extracted features
+     DELETE http://localhost:5001/api/v0/feature-extraction/5bff96712de744d4bcfa92527a6f0f15
 
 
 
@@ -88,7 +91,7 @@ Find near-duplicates in a text collection
 
     print(" 0. Load the test dataset")
     url = BASE_URL + '/datasets/{}'.format(dataset_name)
-    print(" POST", url)
+    print(" GET", url)
     res = requests.get(url)
     res = res.json()
 
@@ -130,7 +133,6 @@ Find near-duplicates in a text collection
 
 
     # # 2. Near Duplicates detection by cosine similarity (DBSCAN)
-
     print("\n2. Near Duplicates detection by cosine similarity (DBSCAN)")
 
     url = BASE_URL + '/clustering/dbscan/'
@@ -147,7 +149,7 @@ Find near-duplicates in a text collection
     print("     => model id = {}".format(mid))
 
     url = BASE_URL + '/clustering/dbscan/{}'.format(mid)
-    print(" POST", url)
+    print(" GET", url)
     res = requests.get(url,
             json={'n_top_words': 0, # don't compute cluster labels
                   }).json()
@@ -159,6 +161,8 @@ Find near-duplicates in a text collection
 
     print('Found {} duplicates / {}'.format(len(labels_) - len(np.unique(labels_)), len(labels_)))
 
+
+    # # 3. Near Duplicates detection by cosine similarity (DBSCAN)
     print("\n3. Near Duplicates Detection using I-Match")
 
     url = BASE_URL + '/duplicate-detection/'
@@ -177,7 +181,7 @@ Find near-duplicates in a text collection
 
 
     url = BASE_URL + '/duplicate-detection/{}'.format(mid)
-    print("GET", url)
+    print(" GET", url)
     t0 = time()
     res = requests.get(url,
             json={'n_rand_lexicons': 10,
@@ -188,6 +192,14 @@ Find near-duplicates in a text collection
     labels_ = res['cluster_id']
 
     print('Found {} duplicates / {}'.format(len(labels_) - len(np.unique(labels_)), len(labels_)))
+
+
+    # 4. Cleaning
+    print("\n4.a Delete the extracted features")
+    url = BASE_URL + '/feature-extraction/{}'.format(dsid)
+    print(" DELETE", url)
+    requests.delete(url)
+
 
 
     # Commenting out simhash for the moment
@@ -229,7 +241,7 @@ Find near-duplicates in a text collection
 
 
 
-**Total running time of the script:** ( 0 minutes  49.277 seconds)
+**Total running time of the script:** ( 0 minutes  49.437 seconds)
 
 
 

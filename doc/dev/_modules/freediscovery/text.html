@@ -419,15 +419,16 @@
         <span class="k">for</span> <span class="n">dsid</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cache_dir</span><span class="p">):</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">row</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">dsid</span><span class="p">}</span>
-                <span class="n">pars</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_pars</span><span class="p">(</span><span class="n">dsid</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">dsid</span> <span class="o">=</span> <span class="n">dsid</span>
+                <span class="n">pars</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_load_pars</span><span class="p">()</span>
                 <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;data_dir&#39;</span><span class="p">,</span> <span class="s1">&#39;n_samples&#39;</span><span class="p">,</span> <span class="s1">&#39;n_features&#39;</span><span class="p">,</span>
                                     <span class="s1">&#39;n_jobs&#39;</span><span class="p">,</span> <span class="s1">&#39;chunk_size&#39;</span><span class="p">,</span> <span class="s1">&#39;norm&#39;</span><span class="p">,</span>
                                     <span class="s1">&#39;analyzer&#39;</span><span class="p">,</span> <span class="s1">&#39;ngram_range&#39;</span><span class="p">,</span> <span class="s1">&#39;stop_words&#39;</span><span class="p">,</span>
                                     <span class="s1">&#39;use_idf&#39;</span><span class="p">,</span> <span class="s1">&#39;sublinear_tf&#39;</span><span class="p">,</span> <span class="s1">&#39;binary&#39;</span><span class="p">,</span> <span class="s1">&#39;use_hashing&#39;</span><span class="p">]:</span>
                     <span class="n">row</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">pars</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
                 <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
-            <span class="k">except</span><span class="p">:</span>
-                <span class="k">pass</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error while loading parameters:</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">err</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">out</span></div>
 
     <span class="k">def</span> <span class="nf">_aggregate_features</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
