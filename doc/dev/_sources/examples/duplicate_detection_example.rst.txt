@@ -22,13 +22,13 @@ Find near-duplicates in a text collection
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received [u'id', u'filenames']
-       => dsid = ec5aaea2e7a641f98ed40e75c147275b
+       => dsid = 9724a633d2e24635a075ef2f06e87853
 
     1.b Run feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/ec5aaea2e7a641f98ed40e75c147275b
+     POST http://localhost:5001/api/v0/feature-extraction/9724a633d2e24635a075ef2f06e87853
 
     1.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/ec5aaea2e7a641f98ed40e75c147275b
+     GET http://localhost:5001/api/v0/feature-extraction/9724a633d2e24635a075ef2f06e87853
          - binary: False
          - n_jobs: -1
          - stop_words: english
@@ -48,21 +48,21 @@ Find near-duplicates in a text collection
 
     2. Near Duplicates detection by cosine similarity (DBSCAN)
      POST http://localhost:5001/api/v0/clustering/dbscan/
-         => model id = f883eacfffdd4dc384c2f0d8693e8151
-     GET http://localhost:5001/api/v0/clustering/dbscan/f883eacfffdd4dc384c2f0d8693e8151
-        .. computed in 52.9s
+         => model id = 59793292ca0f40cda45997ffa338c8f4
+     GET http://localhost:5001/api/v0/clustering/dbscan/59793292ca0f40cda45997ffa338c8f4
+        .. computed in 43.4s
     Found 91 duplicates / 2465
 
     3. Near Duplicates Detection using I-Match
      POST http://localhost:5001/api/v0/duplicate-detection/
-         => model id = 4609c19f4c4143c69ceb48ef28f1ae63
+         => model id = 62d4a7dbc2e44414afe73fc32e80e454
         .. computed in 0.0s
-     GET http://localhost:5001/api/v0/duplicate-detection/4609c19f4c4143c69ceb48ef28f1ae63
-        .. computed in 2.4s
-    Found 344 duplicates / 2465
+     GET http://localhost:5001/api/v0/duplicate-detection/62d4a7dbc2e44414afe73fc32e80e454
+        .. computed in 2.6s
+    Found 240 duplicates / 2465
 
     4.a Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/ec5aaea2e7a641f98ed40e75c147275b
+     DELETE http://localhost:5001/api/v0/feature-extraction/9724a633d2e24635a075ef2f06e87853
 
 
 
@@ -241,7 +241,7 @@ Find near-duplicates in a text collection
 
 
 
-**Total running time of the script:** ( 0 minutes  57.470 seconds)
+**Total running time of the script:** ( 0 minutes  48.260 seconds)
 
 
 
