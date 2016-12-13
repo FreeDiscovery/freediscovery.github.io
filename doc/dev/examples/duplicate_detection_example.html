@@ -95,7 +95,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="categorization_example_python.html">Categorization Example [Python API]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="clustering_example_python.html">Clustering Example [Python API]</a></li>
-<li class="toctree-l2"><a class="reference internal" href="email_threading_example.html">Duplicate Detection Example [REST API]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="email_threading_example.html">Email threading Example [REST API]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="clustering_example.html">Clustering Example [REST API]</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Duplicate Detection Example [REST API]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="categorization_example.html">Categorization Example [REST API]</a></li>
@@ -164,13 +164,13 @@
 <span class="mf">1.</span><span class="n">a</span> <span class="n">Load</span> <span class="n">dataset</span> <span class="ow">and</span> <span class="n">initalize</span> <span class="n">feature</span> <span class="n">extraction</span>
  <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span>
    <span class="o">=&gt;</span> <span class="n">received</span> <span class="p">[</span><span class="s1">u&#39;id&#39;</span><span class="p">,</span> <span class="s1">u&#39;filenames&#39;</span><span class="p">]</span>
-   <span class="o">=&gt;</span> <span class="n">dsid</span> <span class="o">=</span> <span class="mi">8755</span><span class="n">b445aa264784bd5512daed16d8ca</span>
+   <span class="o">=&gt;</span> <span class="n">dsid</span> <span class="o">=</span> <span class="n">f011b87d01fc489c91e9d07da1324a48</span>
 
 <span class="mf">1.</span><span class="n">b</span> <span class="n">Run</span> <span class="n">feature</span> <span class="n">extraction</span>
- <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="mi">8755</span><span class="n">b445aa264784bd5512daed16d8ca</span>
+ <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="n">f011b87d01fc489c91e9d07da1324a48</span>
 
 <span class="mf">1.</span><span class="n">d</span><span class="o">.</span> <span class="n">check</span> <span class="n">the</span> <span class="n">parameters</span> <span class="n">of</span> <span class="n">the</span> <span class="n">extracted</span> <span class="n">features</span>
- <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="mi">8755</span><span class="n">b445aa264784bd5512daed16d8ca</span>
+ <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="n">f011b87d01fc489c91e9d07da1324a48</span>
      <span class="o">-</span> <span class="n">binary</span><span class="p">:</span> <span class="kc">False</span>
      <span class="o">-</span> <span class="n">n_jobs</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span>
      <span class="o">-</span> <span class="n">stop_words</span><span class="p">:</span> <span class="n">english</span>
@@ -190,21 +190,21 @@
 
 <span class="mf">2.</span> <span class="n">Near</span> <span class="n">Duplicates</span> <span class="n">detection</span> <span class="n">by</span> <span class="n">cosine</span> <span class="n">similarity</span> <span class="p">(</span><span class="n">DBSCAN</span><span class="p">)</span>
  <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">clustering</span><span class="o">/</span><span class="n">dbscan</span><span class="o">/</span>
-     <span class="o">=&gt;</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="n">fbe6b5f2dfba4c2295aea0fb038cfce2</span>
- <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">clustering</span><span class="o">/</span><span class="n">dbscan</span><span class="o">/</span><span class="n">fbe6b5f2dfba4c2295aea0fb038cfce2</span>
-    <span class="o">..</span> <span class="n">computed</span> <span class="ow">in</span> <span class="mf">44.1</span><span class="n">s</span>
+     <span class="o">=&gt;</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="n">ca7e37b44e0d49fd9c28b7f65bc9d0ca</span>
+ <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">clustering</span><span class="o">/</span><span class="n">dbscan</span><span class="o">/</span><span class="n">ca7e37b44e0d49fd9c28b7f65bc9d0ca</span>
+    <span class="o">..</span> <span class="n">computed</span> <span class="ow">in</span> <span class="mf">41.9</span><span class="n">s</span>
 <span class="n">Found</span> <span class="mi">91</span> <span class="n">duplicates</span> <span class="o">/</span> <span class="mi">2465</span>
 
 <span class="mf">3.</span> <span class="n">Near</span> <span class="n">Duplicates</span> <span class="n">Detection</span> <span class="n">using</span> <span class="n">I</span><span class="o">-</span><span class="n">Match</span>
  <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">duplicate</span><span class="o">-</span><span class="n">detection</span><span class="o">/</span>
-     <span class="o">=&gt;</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="mi">6</span><span class="n">adaa1d1f8494183a4dc83e35b60a0cb</span>
+     <span class="o">=&gt;</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="mi">6</span><span class="n">bcc30a8aeed4eba874ff83923186c1d</span>
     <span class="o">..</span> <span class="n">computed</span> <span class="ow">in</span> <span class="mf">0.0</span><span class="n">s</span>
- <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">duplicate</span><span class="o">-</span><span class="n">detection</span><span class="o">/</span><span class="mi">6</span><span class="n">adaa1d1f8494183a4dc83e35b60a0cb</span>
-    <span class="o">..</span> <span class="n">computed</span> <span class="ow">in</span> <span class="mf">2.6</span><span class="n">s</span>
-<span class="n">Found</span> <span class="mi">337</span> <span class="n">duplicates</span> <span class="o">/</span> <span class="mi">2465</span>
+ <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">duplicate</span><span class="o">-</span><span class="n">detection</span><span class="o">/</span><span class="mi">6</span><span class="n">bcc30a8aeed4eba874ff83923186c1d</span>
+    <span class="o">..</span> <span class="n">computed</span> <span class="ow">in</span> <span class="mf">2.5</span><span class="n">s</span>
+<span class="n">Found</span> <span class="mi">237</span> <span class="n">duplicates</span> <span class="o">/</span> <span class="mi">2465</span>
 
 <span class="mf">4.</span><span class="n">a</span> <span class="n">Delete</span> <span class="n">the</span> <span class="n">extracted</span> <span class="n">features</span>
- <span class="n">DELETE</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="mi">8755</span><span class="n">b445aa264784bd5512daed16d8ca</span>
+ <span class="n">DELETE</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="n">f011b87d01fc489c91e9d07da1324a48</span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -377,7 +377,7 @@
 <span class="c1">#print(&#39;Found {} duplicates / {}&#39;.format(len(labels_) - len(np.unique(labels_)), len(labels_)))</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  48.963 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  46.445 seconds)</p>
 <div class="sphx-glr-footer container">
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../_downloads/duplicate_detection_example.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">duplicate_detection_example.py</span></code></a></div>
