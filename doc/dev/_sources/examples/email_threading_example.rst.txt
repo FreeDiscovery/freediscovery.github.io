@@ -22,10 +22,10 @@ Thread a email collection
     1.a Parse emails
      POST http://localhost:5001/api/v0/email-parser
        => received [u'id', u'filenames']
-       => dsid = eb5cc8358bb842dcac4bc590c0e27cbd
+       => dsid = 571746f791754eb4985f2cdb11f785c7
 
     1.b. check the parameters of the emails
-     GET http://localhost:5001/api/v0/email-parser/eb5cc8358bb842dcac4bc590c0e27cbd
+     GET http://localhost:5001/api/v0/email-parser/571746f791754eb4985f2cdb11f785c7
          - encoding: latin-1
          - type: EmailParser
          - data_dir: ../freediscovery_shared/fedora_ml_3k_subset/data
@@ -33,7 +33,7 @@ Thread a email collection
 
     2. Email threading
      POST http://localhost:5001/api/v0/email-threading/
-         => model id = 4b13865603c3430ea64b6b307b1e80cc
+         => model id = ec0eec50c98243068e74695334886d95
 
     Threading examples
     cf. https://www.redhat.com/archives/rhl-devel-list/2008-October/thread.htlm 
@@ -168,7 +168,7 @@ Thread a email collection
         print(' ')
         print_thread(res['data'][idx])
 
-**Total running time of the script:** ( 0 minutes  16.152 seconds)
+**Total running time of the script:** ( 0 minutes  17.298 seconds)
 
 
 
