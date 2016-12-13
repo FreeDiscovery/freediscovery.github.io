@@ -37,7 +37,7 @@
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="FreeDiscovery 0.7.dev0 documentation" href="../index.html"/>
         <link rel="up" title="Python API Reference" href="../python_api.html"/>
-        <link rel="next" title="freediscovery.base.BaseEstimator" href="freediscovery.base.BaseEstimator.html"/>
+        <link rel="next" title="freediscovery.threading.EmailThreading" href="freediscovery.threading.EmailThreading.html"/>
         <link rel="prev" title="freediscovery.dupdet.SimhashDuplicates" href="freediscovery.dupdet.SimhashDuplicates.html"/> 
 
   
@@ -93,6 +93,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../rest_api/index.html">REST API Reference</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../python_api.html">Python API Reference</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../python_api.html#datasets">Datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#parsers">Parsers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python_api.html#feature-extraction">Feature extraction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python_api.html#document-categorization">Document categorization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python_api.html#document-clustering">Document clustering</a></li>
@@ -102,6 +103,7 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">freediscovery.dupdet.IMatchDuplicates</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#email-threading">Email threading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python_api.html#tools">Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python_api.html#metrics">Metrics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python_api.html#exceptions">Exceptions</a></li>
@@ -165,7 +167,7 @@
 <h1>freediscovery.dupdet.IMatchDuplicates<a class="headerlink" href="#freediscovery-dupdet-imatchduplicates" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="freediscovery.dupdet.IMatchDuplicates">
-<em class="property">class </em><code class="descclassname">freediscovery.dupdet.</code><code class="descname">IMatchDuplicates</code><span class="sig-paren">(</span><em>n_rand_lexicons=1</em>, <em>rand_lexicon_ratio=0.7</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/freediscovery/dupdet/imatch.html#IMatchDuplicates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.dupdet.IMatchDuplicates" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">freediscovery.dupdet.</code><code class="descname">IMatchDuplicates</code><span class="sig-paren">(</span><em>n_rand_lexicons=1</em>, <em>rand_lexicon_ratio=0.7</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/37b7e91/freediscovery/dupdet/imatch.py#L17"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.dupdet.IMatchDuplicates" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find near duplicates using the randomized I-match backend</p>
 <p>This class aims to expose a scikit-learn compatible API.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -191,7 +193,7 @@ duplicate document detection.</li>
 </ul>
 <dl class="method">
 <dt id="freediscovery.dupdet.IMatchDuplicates.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>n_rand_lexicons=1</em>, <em>rand_lexicon_ratio=0.7</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/freediscovery/dupdet/imatch.html#IMatchDuplicates.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.dupdet.IMatchDuplicates.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>n_rand_lexicons=1</em>, <em>rand_lexicon_ratio=0.7</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/37b7e91/freediscovery/dupdet/imatch.py#L41"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.dupdet.IMatchDuplicates.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods</p>
@@ -225,7 +227,7 @@ duplicate document detection.</li>
 </table>
 <dl class="method">
 <dt id="freediscovery.dupdet.IMatchDuplicates.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/freediscovery/dupdet/imatch.html#IMatchDuplicates.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.dupdet.IMatchDuplicates.fit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/37b7e91/freediscovery/dupdet/imatch.py#L51"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.dupdet.IMatchDuplicates.fit" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -243,7 +245,7 @@ corresponds to a single data point.</td>
 
 <dl class="method">
 <dt id="freediscovery.dupdet.IMatchDuplicates.get_params">
-<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="headerlink" href="#freediscovery.dupdet.IMatchDuplicates.get_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/37b7e91/freediscovery/../../virtualenvs/venv-system/lib/python2.7/site-packages/sklearn/base.py#L220"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.dupdet.IMatchDuplicates.get_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get parameters for this estimator.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -262,7 +264,7 @@ contained subobjects that are estimators.</td>
 
 <dl class="method">
 <dt id="freediscovery.dupdet.IMatchDuplicates.set_params">
-<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="headerlink" href="#freediscovery.dupdet.IMatchDuplicates.set_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/37b7e91/freediscovery/../../virtualenvs/venv-system/lib/python2.7/site-packages/sklearn/base.py#L257"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.dupdet.IMatchDuplicates.set_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the parameters of this estimator.</p>
 <p>The method works on simple estimators as well as on nested objects
 (such as pipelines). The latter have parameters of the form
@@ -291,7 +293,7 @@ component of a nested object.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="freediscovery.base.BaseEstimator.html" class="btn btn-neutral float-right" title="freediscovery.base.BaseEstimator" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="freediscovery.threading.EmailThreading.html" class="btn btn-neutral float-right" title="freediscovery.threading.EmailThreading" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="freediscovery.dupdet.SimhashDuplicates.html" class="btn btn-neutral" title="freediscovery.dupdet.SimhashDuplicates" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -304,6 +306,7 @@ component of a nested object.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, Grossman Labs LLC.
+      Last updated on Dec 13, 2016.
 
     </p>
   </div>

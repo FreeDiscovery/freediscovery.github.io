@@ -38,7 +38,7 @@
     <link rel="top" title="FreeDiscovery 0.7.dev0 documentation" href="../index.html"/>
         <link rel="up" title="Python API Reference" href="../python_api.html"/>
         <link rel="next" title="freediscovery.io.parse_ground_truth_file" href="freediscovery.io.parse_ground_truth_file.html"/>
-        <link rel="prev" title="freediscovery.dupdet.IMatchDuplicates" href="freediscovery.dupdet.IMatchDuplicates.html"/> 
+        <link rel="prev" title="freediscovery.threading.EmailThreading" href="freediscovery.threading.EmailThreading.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -93,10 +93,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../rest_api/index.html">REST API Reference</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../python_api.html">Python API Reference</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../python_api.html#datasets">Datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#parsers">Parsers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python_api.html#feature-extraction">Feature extraction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python_api.html#document-categorization">Document categorization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python_api.html#document-clustering">Document clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python_api.html#duplicates-detection">Duplicates detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#email-threading">Email threading</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../python_api.html#tools">Tools</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">freediscovery.base.BaseEstimator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="freediscovery.io.parse_ground_truth_file.html">freediscovery.io.parse_ground_truth_file</a></li>
@@ -166,7 +168,7 @@
 <h1>freediscovery.base.BaseEstimator<a class="headerlink" href="#freediscovery-base-baseestimator" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="freediscovery.base.BaseEstimator">
-<em class="property">class </em><code class="descclassname">freediscovery.base.</code><code class="descname">BaseEstimator</code><a class="reference internal" href="../_modules/freediscovery/base.html#BaseEstimator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.base.BaseEstimator" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">freediscovery.base.</code><code class="descname">BaseEstimator</code><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/37b7e91/freediscovery/base.py#L158"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.base.BaseEstimator" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="method">
 <dt id="freediscovery.base.BaseEstimator.__init__">
 <code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#freediscovery.base.BaseEstimator.__init__" title="Permalink to this definition">¶</a></dt>
@@ -186,18 +188,27 @@
 <tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">get_dsid</span></code>(cache_dir,&nbsp;mid)</td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">get_path</span></code>(mid)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.base.BaseEstimator.get_params" title="freediscovery.base.BaseEstimator.get_params"><code class="xref py py-obj docutils literal"><span class="pre">get_params</span></code></a>()</td>
+<td>Get model parameters</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">get_path</span></code>(mid)</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">list_models</span></code>()</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">list_models</span></code>()</td>
 <td></td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
 <dt id="freediscovery.base.BaseEstimator.delete">
-<code class="descname">delete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/freediscovery/base.html#BaseEstimator.delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.base.BaseEstimator.delete" title="Permalink to this definition">¶</a></dt>
+<code class="descname">delete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/37b7e91/freediscovery/base.py#L175"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.base.BaseEstimator.delete" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete a trained model</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.base.BaseEstimator.get_params">
+<code class="descname">get_params</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/37b7e91/freediscovery/base.py#L185"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.base.BaseEstimator.get_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get model parameters</p>
 </dd></dl>
 
 </dd></dl>
@@ -214,7 +225,7 @@
         <a href="freediscovery.io.parse_ground_truth_file.html" class="btn btn-neutral float-right" title="freediscovery.io.parse_ground_truth_file" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="freediscovery.dupdet.IMatchDuplicates.html" class="btn btn-neutral" title="freediscovery.dupdet.IMatchDuplicates" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="freediscovery.threading.EmailThreading.html" class="btn btn-neutral" title="freediscovery.threading.EmailThreading" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -224,6 +235,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, Grossman Labs LLC.
+      Last updated on Dec 13, 2016.
 
     </p>
   </div>

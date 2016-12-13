@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Overview: module code &mdash; FreeDiscovery 0.7.dev0 documentation</title>
+  <title>Load a dataset and parse emails &mdash; FreeDiscovery 0.7.dev0 documentation</title>
   
 
   
@@ -87,7 +87,7 @@
             
                 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../installation_instructions.html">Installation Instructions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../rest_api/index.html">REST API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">REST API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../python_api.html">Python API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../scaling_benchmarks.html">Scaling Benchmarks</a></li>
@@ -115,7 +115,7 @@
         <div class="rst-content">
           
 
-
+ 
 
 
 
@@ -127,10 +127,12 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
       
-    <li>Overview: module code</li>
+    <li>Load a dataset and parse emails</li>
     <li class="wy-breadcrumbs-aside">
       
           
+          <a href="../_sources/rest_api/email_parser_post.md.txt" rel="nofollow"> View page source</a>
+        
       
     </li>
   </ul>
@@ -139,24 +141,27 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>All modules for which code is available</h1>
-<ul><li><a href="freediscovery/base.html">freediscovery.base</a></li>
-<li><a href="freediscovery/categorization.html">freediscovery.categorization</a></li>
-<li><a href="freediscovery/cluster/base.html">freediscovery.cluster.base</a></li>
-<li><a href="freediscovery/cluster/dendrogram.html">freediscovery.cluster.dendrogram</a></li>
-<li><a href="freediscovery/cluster/utils.html">freediscovery.cluster.utils</a></li>
-<li><a href="freediscovery/datasets.html">freediscovery.datasets</a></li>
-<li><a href="freediscovery/dupdet/base.html">freediscovery.dupdet.base</a></li>
-<li><a href="freediscovery/dupdet/imatch.html">freediscovery.dupdet.imatch</a></li>
-<li><a href="freediscovery/dupdet/simhash.html">freediscovery.dupdet.simhash</a></li>
-<li><a href="freediscovery/exceptions.html">freediscovery.exceptions</a></li>
-<li><a href="freediscovery/io.html">freediscovery.io</a></li>
-<li><a href="freediscovery/lsi.html">freediscovery.lsi</a></li>
-<li><a href="freediscovery/metrics.html">freediscovery.metrics</a></li>
-<li><a href="freediscovery/text.html">freediscovery.text</a></li>
-<li><a href="freediscovery/utils.html">freediscovery.utils</a></li>
-<li><a href="sklearn/base.html">sklearn.base</a></li>
+  <div class="section" id="load-a-dataset-and-parse-emails">
+<span id="load-a-dataset-and-parse-emails"></span><h1>Load a dataset and parse emails<a class="headerlink" href="#load-a-dataset-and-parse-emails" title="Permalink to this headline">¶</a></h1>
+<p>Initialize the feature extraction on a document collection.</p>
+<ul>
+<li><p class="first"><strong>URL</strong>: <code class="docutils literal"><span class="pre">/api/v0/email-parser/</span></code></p>
+</li>
+<li><p class="first"><strong>Method</strong>: <code class="docutils literal"><span class="pre">POST</span></code>,                <strong>URL Params</strong>: None</p>
+</li>
+<li><p class="first"><strong>Data Params</strong>:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">data_dir</span></code>: [required] relative path to the directory with the input files</li>
 </ul>
+</li>
+<li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">str</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;filenames&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">&gt;</span>  <span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+
 
            </div>
           </div>
@@ -168,6 +173,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, Grossman Labs LLC.
+      Last updated on Dec 13, 2016.
 
     </p>
   </div>

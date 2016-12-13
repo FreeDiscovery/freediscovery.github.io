@@ -93,6 +93,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../rest_api/index.html">REST API Reference</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../python_api.html">Python API Reference</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../python_api.html#datasets">Datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#parsers">Parsers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python_api.html#feature-extraction">Feature extraction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python_api.html#document-categorization">Document categorization</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../python_api.html#document-clustering">Document clustering</a><ul class="current">
@@ -104,6 +105,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../python_api.html#duplicates-detection">Duplicates detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#email-threading">Email threading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python_api.html#tools">Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python_api.html#metrics">Metrics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python_api.html#exceptions">Exceptions</a></li>
@@ -167,7 +169,7 @@
 <h1>freediscovery.cluster.Clustering<a class="headerlink" href="#freediscovery-cluster-clustering" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="freediscovery.cluster.Clustering">
-<em class="property">class </em><code class="descclassname">freediscovery.cluster.</code><code class="descname">Clustering</code><span class="sig-paren">(</span><em>cache_dir=u'/tmp/'</em>, <em>dsid=None</em>, <em>mid=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/freediscovery/cluster/base.html#Clustering"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.Clustering" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">freediscovery.cluster.</code><code class="descname">Clustering</code><span class="sig-paren">(</span><em>cache_dir=u'/tmp/'</em>, <em>dsid=None</em>, <em>mid=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/37b7e91/freediscovery/cluster/base.py#L156"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.Clustering" title="Permalink to this definition">¶</a></dt>
 <dd><p>Document clustering</p>
 <p>The algorithms are adapted from scikit learn.</p>
 <p>The option <cite>use_hashing=False</cite> must be set for the feature extraction.
@@ -187,7 +189,7 @@ Recommended options also include, <cite>use_idf=1, sublinear_tf=0, binary=0</cit
 </table>
 <dl class="method">
 <dt id="freediscovery.cluster.Clustering.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>cache_dir=u'/tmp/'</em>, <em>dsid=None</em>, <em>mid=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/freediscovery/cluster/base.html#Clustering.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.Clustering.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>cache_dir=u'/tmp/'</em>, <em>dsid=None</em>, <em>mid=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/37b7e91/freediscovery/cluster/base.py#L176"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.Clustering.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods</p>
@@ -215,19 +217,22 @@ Recommended options also include, <cite>use_idf=1, sublinear_tf=0, binary=0</cit
 <tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">get_dsid</span></code>(cache_dir,&nbsp;mid)</td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">get_path</span></code>(mid)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.cluster.Clustering.get_params" title="freediscovery.cluster.Clustering.get_params"><code class="xref py py-obj docutils literal"><span class="pre">get_params</span></code></a>()</td>
+<td>Get model parameters</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">get_path</span></code>(mid)</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#freediscovery.cluster.Clustering.k_means" title="freediscovery.cluster.Clustering.k_means"><code class="xref py py-obj docutils literal"><span class="pre">k_means</span></code></a>(n_clusters[,&nbsp;lsi_components,&nbsp;batch_size])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.cluster.Clustering.k_means" title="freediscovery.cluster.Clustering.k_means"><code class="xref py py-obj docutils literal"><span class="pre">k_means</span></code></a>(n_clusters[,&nbsp;lsi_components,&nbsp;batch_size])</td>
 <td>Perform K-mean clustering</td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">list_models</span></code>()</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">list_models</span></code>()</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#freediscovery.cluster.Clustering.load" title="freediscovery.cluster.Clustering.load"><code class="xref py py-obj docutils literal"><span class="pre">load</span></code></a>(mid)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.cluster.Clustering.load" title="freediscovery.cluster.Clustering.load"><code class="xref py py-obj docutils literal"><span class="pre">load</span></code></a>(mid)</td>
 <td>Load results from cache specified by a mid</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.cluster.Clustering.scores" title="freediscovery.cluster.Clustering.scores"><code class="xref py py-obj docutils literal"><span class="pre">scores</span></code></a>(ref_labels,&nbsp;labels)</td>
+<tr class="row-even"><td><a class="reference internal" href="#freediscovery.cluster.Clustering.scores" title="freediscovery.cluster.Clustering.scores"><code class="xref py py-obj docutils literal"><span class="pre">scores</span></code></a>(ref_labels,&nbsp;labels)</td>
 <td><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -239,14 +244,14 @@ Recommended options also include, <cite>use_idf=1, sublinear_tf=0, binary=0</cit
 </table>
 </td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#freediscovery.cluster.Clustering.ward_hc" title="freediscovery.cluster.Clustering.ward_hc"><code class="xref py py-obj docutils literal"><span class="pre">ward_hc</span></code></a>(n_clusters[,&nbsp;lsi_components,&nbsp;...])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.cluster.Clustering.ward_hc" title="freediscovery.cluster.Clustering.ward_hc"><code class="xref py py-obj docutils literal"><span class="pre">ward_hc</span></code></a>(n_clusters[,&nbsp;lsi_components,&nbsp;...])</td>
 <td>Perform Ward hierarchical clustering</td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
 <dt id="freediscovery.cluster.Clustering.birch">
-<code class="descname">birch</code><span class="sig-paren">(</span><em>n_clusters</em>, <em>threshold=0.5</em>, <em>lsi_components=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/freediscovery/cluster/base.html#Clustering.birch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.Clustering.birch" title="Permalink to this definition">¶</a></dt>
+<code class="descname">birch</code><span class="sig-paren">(</span><em>n_clusters</em>, <em>threshold=0.5</em>, <em>lsi_components=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/37b7e91/freediscovery/cluster/base.py#L326"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.Clustering.birch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform Birch clustering</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -265,7 +270,7 @@ Recommended options also include, <cite>use_idf=1, sublinear_tf=0, binary=0</cit
 
 <dl class="method">
 <dt id="freediscovery.cluster.Clustering.compute_labels">
-<code class="descname">compute_labels</code><span class="sig-paren">(</span><em>label_method=u'centroid-frequency'</em>, <em>n_top_words=6</em>, <em>cluster_indices=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/freediscovery/cluster/base.html#Clustering.compute_labels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.Clustering.compute_labels" title="Permalink to this definition">¶</a></dt>
+<code class="descname">compute_labels</code><span class="sig-paren">(</span><em>label_method=u'centroid-frequency'</em>, <em>n_top_words=6</em>, <em>cluster_indices=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/37b7e91/freediscovery/cluster/base.py#L263"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.Clustering.compute_labels" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the cluster labels</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -291,7 +296,7 @@ terms for the cluster provided by the given indices</li>
 
 <dl class="method">
 <dt id="freediscovery.cluster.Clustering.dbscan">
-<code class="descname">dbscan</code><span class="sig-paren">(</span><em>n_clusters=None</em>, <em>eps=0.5</em>, <em>min_samples=10</em>, <em>algorithm=u'auto'</em>, <em>leaf_size=30</em>, <em>lsi_components=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/freediscovery/cluster/base.html#Clustering.dbscan"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.Clustering.dbscan" title="Permalink to this definition">¶</a></dt>
+<code class="descname">dbscan</code><span class="sig-paren">(</span><em>n_clusters=None</em>, <em>eps=0.5</em>, <em>min_samples=10</em>, <em>algorithm=u'auto'</em>, <em>leaf_size=30</em>, <em>lsi_components=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/37b7e91/freediscovery/cluster/base.py#L385"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.Clustering.dbscan" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform DBSCAN clustering</p>
 <p>This can also be used for Duplicate Detection (when ep</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -317,13 +322,19 @@ to be considered as a core point. This includes the point itself.</li>
 
 <dl class="method">
 <dt id="freediscovery.cluster.Clustering.delete">
-<code class="descname">delete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#freediscovery.cluster.Clustering.delete" title="Permalink to this definition">¶</a></dt>
+<code class="descname">delete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/37b7e91/freediscovery/base.py#L175"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.Clustering.delete" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete a trained model</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="freediscovery.cluster.Clustering.get_params">
+<code class="descname">get_params</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/37b7e91/freediscovery/base.py#L185"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.Clustering.get_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get model parameters</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="freediscovery.cluster.Clustering.k_means">
-<code class="descname">k_means</code><span class="sig-paren">(</span><em>n_clusters</em>, <em>lsi_components=None</em>, <em>batch_size=1000</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/freediscovery/cluster/base.html#Clustering.k_means"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.Clustering.k_means" title="Permalink to this definition">¶</a></dt>
+<code class="descname">k_means</code><span class="sig-paren">(</span><em>n_clusters</em>, <em>lsi_components=None</em>, <em>batch_size=1000</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/37b7e91/freediscovery/cluster/base.py#L305"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.Clustering.k_means" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform K-mean clustering</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -342,13 +353,13 @@ to be considered as a core point. This includes the point itself.</li>
 
 <dl class="method">
 <dt id="freediscovery.cluster.Clustering.load">
-<code class="descname">load</code><span class="sig-paren">(</span><em>mid</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/freediscovery/cluster/base.html#Clustering.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.Clustering.load" title="Permalink to this definition">¶</a></dt>
+<code class="descname">load</code><span class="sig-paren">(</span><em>mid</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/37b7e91/freediscovery/cluster/base.py#L449"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.Clustering.load" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load results from cache specified by a mid</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="freediscovery.cluster.Clustering.scores">
-<code class="descname">scores</code><span class="sig-paren">(</span><em>ref_labels</em>, <em>labels</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/freediscovery/cluster/base.html#Clustering.scores"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.Clustering.scores" title="Permalink to this definition">¶</a></dt>
+<code class="descname">scores</code><span class="sig-paren">(</span><em>ref_labels</em>, <em>labels</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/37b7e91/freediscovery/cluster/base.py#L416"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.Clustering.scores" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -365,7 +376,7 @@ to be considered as a core point. This includes the point itself.</li>
 
 <dl class="method">
 <dt id="freediscovery.cluster.Clustering.ward_hc">
-<code class="descname">ward_hc</code><span class="sig-paren">(</span><em>n_clusters</em>, <em>lsi_components=None</em>, <em>n_neighbors=10</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/freediscovery/cluster/base.html#Clustering.ward_hc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.Clustering.ward_hc" title="Permalink to this definition">¶</a></dt>
+<code class="descname">ward_hc</code><span class="sig-paren">(</span><em>n_clusters</em>, <em>lsi_components=None</em>, <em>n_neighbors=10</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/37b7e91/freediscovery/cluster/base.py#L352"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.Clustering.ward_hc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform Ward hierarchical clustering</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -406,6 +417,7 @@ to be considered as a core point. This includes the point itself.</li>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, Grossman Labs LLC.
+      Last updated on Dec 13, 2016.
 
     </p>
   </div>

@@ -1,0 +1,190 @@
+
+
+.. _sphx_glr_examples_email_threading_example.py:
+
+
+Duplicate Detection Example [REST API]
+--------------------------------------
+
+Find near-duplicates in a text collection
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    0. Load the test dataset
+     GET http://localhost:5001/api/v0/datasets/fedora_ml_3k_subset
+
+    1.a Parse emails
+     POST http://localhost:5001/api/v0/email-parser
+       => received [u'id', u'filenames']
+       => dsid = f31265d28560450c99b69268c7b5433e
+
+    1.b. check the parameters of the emails
+     GET http://localhost:5001/api/v0/email-parser/f31265d28560450c99b69268c7b5433e
+         - encoding: latin-1
+         - type: EmailParser
+         - data_dir: ../freediscovery_shared/fedora_ml_3k_subset/data
+         - n_samples: 3063
+
+    2. Email threading
+     POST http://localhost:5001/api/v0/email-threading/
+         => model id = a053c6d45dac40a6acd3a4027b0fb86f
+
+    Threading examples
+    cf. https://www.redhat.com/archives/rhl-devel-list/2008-October/thread.htlm 
+    for ground truth data (mailman has a maximum threading depth of 3, unlike FreeDiscovery)
+ 
+    Strange ext3 problem (id=3049)
+    > Re: Strange ext3 problem (id=3055)
+ 
+    Dia has .la files (id=3039)
+    > Re: Dia has .la files (id=3040)
+    > > Re: Dia has .la files (id=3048)
+    > > > Re: Dia has .la files (id=3047)
+    > > > > Re: Dia has .la files (id=3051)
+    > > > > > Re: Dia has .la files (id=3052)
+    > > > > > > Re: Dia has .la files (id=3057)
+    > > > > > > > Re: Dia has .la files (id=3060)
+    > > > > > > Re: Dia has .la files (id=3061)
+    > > > Re: Dia has .la files (id=3062)
+ 
+    PackageKit 0.3.10 into F9 (id=3032)
+    > Re: PackageKit 0.3.10 into F9 (id=3034)
+ 
+    rawhide report: 20081031 changes (id=3019)
+    > Re: rawhide report: 20081031 changes (id=3021)
+    > > Re: rawhide report: 20081031 changes (id=3023)
+    > > > Re: rawhide report: 20081031 changes (id=3025)
+    > > > > Re: rawhide report: 20081031 changes (id=3026)
+    > Re: rawhide report: 20081031 changes (id=3022)
+    > > Re: rawhide report: 20081031 changes (id=3027)
+    > > > Re: rawhide report: 20081031 changes (id=3028)
+    > > > Re: rawhide report: 20081031 changes (id=3029)
+    > > > > Re: rawhide report: 20081031 changes (id=3030)
+    > > > > > Re: rawhide report: 20081031 changes (id=3031)
+    > > > > > Re: rawhide report: 20081031 changes (id=3035)
+    > > > > > > Re: rawhide report: 20081031 changes (id=3037)
+    > > Re: rawhide report: 20081031 changes (id=3033)
+    > > Re: rawhide report: 20081031 changes (id=3036)
+ 
+    Seeking comaintainers (id=3002)
+    > Re: Seeking comaintainers (id=3004)
+    > > Re: Seeking comaintainers (id=3006)
+    > > > Re: Seeking comaintainers (id=3008)
+    > Re: Seeking comaintainers (id=3005)
+    > > Re: Seeking comaintainers (id=3009)
+    > Re: Seeking comaintainers (id=3007)
+    > Re: Seeking comaintainers (id=3010)
+    > > Re: Seeking comaintainers (id=3011)
+
+
+
+
+|
+
+
+.. code-block:: python
+
+    from __future__ import print_function
+
+    from time import time
+    import sys
+    import platform
+    from itertools import groupby
+
+    import numpy as np
+    import pandas as pd
+    import requests
+    import sys
+    import os
+
+    pd.options.display.float_format = '{:,.3f}'.format
+
+
+    dataset_name = "fedora_ml_3k_subset"     # see list of available datasets
+
+    BASE_URL = "http://localhost:5001/api/v0"  # FreeDiscovery server URL
+
+    print(" 0. Load the test dataset")
+    url = BASE_URL + '/datasets/{}'.format(dataset_name)
+    print(" GET", url)
+    res = requests.get(url)
+    res = res.json()
+
+    # To use a custom dataset, simply specify the following variables
+    data_dir = res['data_dir']
+
+    print("\n1.a Parse emails")
+    url = BASE_URL + '/email-parser'
+    print(" POST", url)
+    fe_opts = {'data_dir': data_dir }
+    res = requests.post(url, json=fe_opts)
+
+    dsid = res.json()['id']
+    print("   => received {}".format(list(res.json().keys())))
+    print("   => dsid = {}".format(dsid))
+
+
+
+    print("\n1.b. check the parameters of the emails")
+    url = BASE_URL + '/email-parser/{}'.format(dsid)
+    print(' GET', url)
+    res = requests.get(url)
+
+    data = res.json()
+    print('\n'.join(['     - {}: {}'.format(key, val) for key, val in data.items() \
+                                                            if key != 'filenames']))
+
+    print("\n2. Email threading")
+
+    url = BASE_URL + '/email-threading/'
+    print(" POST", url)
+    t0 = time()
+    res = requests.post(url,
+            json={'dataset_id': dsid }).json()
+
+    mid  = res['id']
+    print("     => model id = {}".format(mid))
+
+
+    def print_thread(container, depth=0):
+        print(''.join(['> ' * depth,  container['subject'],
+                       ' (id={})'.format(container['id'])]))
+
+        for child in container['children']:
+            print_thread(child, depth + 1)
+
+
+    print("\nThreading examples\n"
+          "cf. https://www.redhat.com/archives/rhl-devel-list/2008-October/thread.htlm \n"
+          "for ground truth data (mailman has a maximum threading depth of 3, unlike FreeDiscovery)"
+           )
+    for idx in [-1, -2, -3, -4, -5]: # get latest threads
+        print(' ')
+        print_thread(res['data'][idx])
+
+**Total running time of the script:** ( 0 minutes  15.451 seconds)
+
+
+
+.. container:: sphx-glr-footer
+
+
+  .. container:: sphx-glr-download
+
+     :download:`Download Python source code: email_threading_example.py <email_threading_example.py>`
+
+
+
+  .. container:: sphx-glr-download
+
+     :download:`Download Jupyter notebook: email_threading_example.ipynb <email_threading_example.ipynb>`
+
+.. rst-class:: sphx-glr-signature
+
+    `Generated by Sphinx-Gallery <http://sphinx-gallery.readthedocs.io>`_

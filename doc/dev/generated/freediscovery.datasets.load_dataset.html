@@ -37,7 +37,7 @@
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="FreeDiscovery 0.7.dev0 documentation" href="../index.html"/>
         <link rel="up" title="Python API Reference" href="../python_api.html"/>
-        <link rel="next" title="freediscovery.text.FeatureVectorizer" href="freediscovery.text.FeatureVectorizer.html"/>
+        <link rel="next" title="freediscovery.parsers.EmailParser" href="freediscovery.parsers.EmailParser.html"/>
         <link rel="prev" title="Python API Reference" href="../python_api.html"/> 
 
   
@@ -96,10 +96,12 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">freediscovery.datasets.load_dataset</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#parsers">Parsers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python_api.html#feature-extraction">Feature extraction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python_api.html#document-categorization">Document categorization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python_api.html#document-clustering">Document clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python_api.html#duplicates-detection">Duplicates detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#email-threading">Email threading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python_api.html#tools">Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python_api.html#metrics">Metrics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python_api.html#exceptions">Exceptions</a></li>
@@ -163,19 +165,23 @@
 <h1>freediscovery.datasets.load_dataset<a class="headerlink" href="#freediscovery-datasets-load-dataset" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="freediscovery.datasets.load_dataset">
-<code class="descclassname">freediscovery.datasets.</code><code class="descname">load_dataset</code><span class="sig-paren">(</span><em>name=u'treclegal09_2k_subset'</em>, <em>cache_dir=u'/tmp'</em>, <em>force=False</em>, <em>verbose=True</em>, <em>load_ground_truth=False</em>, <em>verify_checksum=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/freediscovery/datasets.html#load_dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.datasets.load_dataset" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">freediscovery.datasets.</code><code class="descname">load_dataset</code><span class="sig-paren">(</span><em>name=u'treclegal09_2k_subset'</em>, <em>cache_dir=u'/tmp'</em>, <em>force=False</em>, <em>verbose=True</em>, <em>load_ground_truth=False</em>, <em>verify_checksum=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/37b7e91/freediscovery/datasets.py#L18"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.datasets.load_dataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Download a benchmark dataset.</p>
-<p>Currently the following datasets based on TREC 2009 legal collection
-are supported:</p>
-<blockquote>
-<div><ul class="simple">
+<p>The currently supported datasets are listed below,</p>
+<ol class="arabic">
+<li><p class="first">TREC 2009 legal collection</p>
+<ul class="simple">
 <li>treclegal09_2k_subset  :   2 400 documents,   2 MB</li>
 <li>treclegal09_20k_subset :  20 000 documents,  30 MB</li>
 <li>treclegal09_37k_subset :  37 000 documents,  55 MB</li>
 <li>treclegal09            : 700 000 documents, 1.2 GB</li>
 </ul>
-</div></blockquote>
 <p>The ground truth files for categorization are adapted from TAR Toolkit.</p>
+</li>
+<li><p class="first">Fedora mailing list (2009-2009)
+- <a href="#id1"><span class="problematic" id="id2">fedora_ml_</span></a></p>
+</li>
+</ol>
 <p>If you encounter any issues for downloads with this function,
 you can also manually download and extract the required dataset to <cite>cache_dir</cite> (the
 download url is <cite>http://r0h.eu/d/&lt;name&gt;.tar.gz</cite>), then re-run this function to get
@@ -214,7 +220,7 @@ Warning: this will remove previously downloaded files!</li>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="freediscovery.text.FeatureVectorizer.html" class="btn btn-neutral float-right" title="freediscovery.text.FeatureVectorizer" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="freediscovery.parsers.EmailParser.html" class="btn btn-neutral float-right" title="freediscovery.parsers.EmailParser" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../python_api.html" class="btn btn-neutral" title="Python API Reference" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -227,6 +233,7 @@ Warning: this will remove previously downloaded files!</li>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, Grossman Labs LLC.
+      Last updated on Dec 13, 2016.
 
     </p>
   </div>

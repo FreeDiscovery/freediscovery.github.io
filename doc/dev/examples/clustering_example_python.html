@@ -37,8 +37,8 @@
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="FreeDiscovery 0.7.dev0 documentation" href="../index.html"/>
         <link rel="up" title="Examples" href="index.html"/>
-        <link rel="next" title="Clustering Example [REST API]" href="clustering_example.html"/>
-        <link rel="prev" title="Examples" href="index.html"/> 
+        <link rel="next" title="Duplicate Detection Example [REST API]" href="email_threading_example.html"/>
+        <link rel="prev" title="Categorization Example [Python API]" href="categorization_example_python.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -93,7 +93,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../rest_api/index.html">REST API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../python_api.html">Python API Reference</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="categorization_example_python.html">Categorization Example [Python API]</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Clustering Example [Python API]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="email_threading_example.html">Duplicate Detection Example [REST API]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="clustering_example.html">Clustering Example [REST API]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="duplicate_detection_example.html">Duplicate Detection Example [REST API]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="categorization_example.html">Categorization Example [REST API]</a></li>
@@ -168,33 +170,33 @@ Archive extracted!
 
 2. Document Clustering (LSI + K-Means)
 
-    .. computed in 20.8s
+    .. computed in 20.6s
    N_documents                                      cluster_names
-2          621           [alias, enron, norm, ect, calo, changed]
-5          426  [recipients, group, administrative, test, ect,...
-0          401  [ect, hou, enron, group, recipients, administr...
-4          331  [teneo, recipients, group, administrative, tes...
-9          249  [enron, energy, company, trading, master, serv...
-3          132  [shall, party, agreement, transaction, period,...
-7          110  [enron_development, ect, hou, enron, shackleto...
-1           99   [foreign, company, inflation, rate, market, tax]
-6           61    [rewrite, server, address, smtp, mail, virtual]
+2          525             [alias, enron, norm, ect, calo, group]
+3          411  [ect, hou, enron, group, recipients, administr...
+1          331  [teneo, recipients, group, administrative, tes...
+6          298  [recipients, group, administrative, test, ect,...
+5          290  [shall, party, agreement, transaction, enron, ...
+4          246        [enron, norm, ect, company, pcb, president]
+0          152             [alias, enron, ect, norm, test, group]
+7          116  [enron_development, ect, enron, trading, hou, ...
+9           61    [rewrite, server, address, smtp, mail, virtual]
 8           35     [berkeley, edu, haas, alias, inflation, enron]
 
 3. Document Clustering (LSI + Ward Hierarchical Clustering)
 
-    .. computed in 37.0s
+    .. computed in 36.7s
    N_documents                                      cluster_names
-1          492           [alias, enron, norm, ect, calo, changed]
-2          431  [ect, hou, enron, group, recipients, administr...
-0          392     [enron, energy, ect, company, services, alias]
-6          313  [teneo, recipients, group, administrative, tes...
-7          250  [recipients, group, administrative, test, ect,...
-4          167          [enron, alias, master, ect, ena, trading]
-8          139       [alias, ect, enron, test, group, recipients]
-9          117  [enron_development, ect, hou, enron, group, re...
-3          101  [shall, party, agreement, transaction, confirm...
+0          545           [alias, enron, norm, ect, calo, changed]
+2          448  [ect, hou, enron, group, recipients, administr...
+1          446       [enron, energy, ect, company, trading, norm]
+6          289  [teneo, recipients, group, administrative, tes...
+7          242  [recipients, administrative, group, test, ect,...
+4          141  [enron_development, ect, hou, group, recipient...
+8          141             [alias, ect, enron, test, norm, group]
+3          109  [shall, party, transaction, agreement, period,...
 5           63    [rewrite, server, address, smtp, mail, virtual]
+9           41    [berkeley, haas, edu, inflation, alias, growth]
 </pre></div>
 </div>
 <div class="line-block">
@@ -270,7 +272,7 @@ Archive extracted!
 <span class="k">print</span><span class="p">(</span><span class="n">repr_clustering</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">terms</span><span class="p">))</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 1 minutes  2.984 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 1 minutes  3.677 seconds)</p>
 <div class="sphx-glr-footer container">
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../_downloads/clustering_example_python.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">clustering_example_python.py</span></code></a></div>
@@ -287,10 +289,10 @@ Archive extracted!
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="clustering_example.html" class="btn btn-neutral float-right" title="Clustering Example [REST API]" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="email_threading_example.html" class="btn btn-neutral float-right" title="Duplicate Detection Example [REST API]" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral" title="Examples" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="categorization_example_python.html" class="btn btn-neutral" title="Categorization Example [Python API]" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -300,6 +302,7 @@ Archive extracted!
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, Grossman Labs LLC.
+      Last updated on Dec 13, 2016.
 
     </p>
   </div>

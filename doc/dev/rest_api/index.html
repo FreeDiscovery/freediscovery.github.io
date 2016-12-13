@@ -91,10 +91,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../installation_instructions.html">Installation Instructions</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">REST API Reference</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#load-benchmark-dataset">Load Benchmark Dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#parsers">Parsers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#feature-extraction">Feature Extraction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#document-categorizaiton">Document Categorizaiton</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#document-clustering">Document Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#near-duplicate-detection">Near Duplicate Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#email-threading">Email threading</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../python_api.html">Python API Reference</a></li>
@@ -170,6 +172,38 @@
 </tbody>
 </table>
 </div>
+<div class="section" id="parsers">
+<h2>Parsers<a class="headerlink" href="#parsers" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="57%" />
+<col width="4%" />
+<col width="39%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference external" href="./email_parser_post.html">/api/v0/email-parser/</a></td>
+<td>POST</td>
+<td>Load a dataset and parse emails</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="./email_parser_get.html">/api/v0/email-parser/</a></td>
+<td>GET</td>
+<td>List processed datasets</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="./email_parser_element_get.html">/api/v0/email-parser/&lt;dataset-id&gt;</a></td>
+<td>GET</td>
+<td>Load parsed emails</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="./email_parser_index_get.html">/api/v0/email-parser/&lt;dataset-id&gt;/index</a></td>
+<td>GET</td>
+<td>Query document index for a list of filenames</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="./email_parser_delete.html">/api/v0/email-parser/&lt;dataset-id&gt;</a></td>
+<td>DELETE</td>
+<td>Delete a processed dataset</td>
+</tr>
+</tbody>
+</table>
+</div>
 <div class="section" id="feature-extraction">
 <h2>Feature Extraction<a class="headerlink" href="#feature-extraction" title="Permalink to this headline">¶</a></h2>
 <table border="1" class="docutils">
@@ -197,7 +231,7 @@
 </tr>
 <tr class="row-odd"><td><a class="reference external" href="./feature_extraction_index_get.html">/api/v0/feature-extraction/&lt;dataset-id&gt;/index</a></td>
 <td>GET</td>
-<td>Query document index for filenames</td>
+<td>Query document index for a list of filenames</td>
 </tr>
 <tr class="row-even"><td><a class="reference external" href="./feature_extraction_delete.html">/api/v0/feature-extraction/&lt;dataset-id&gt;</a></td>
 <td>DELETE</td>
@@ -308,8 +342,28 @@
 <td>Compute near duplicates</td>
 </tr>
 <tr class="row-even"><td><a class="reference external" href="./duplicate_detection_element_get.html">/api/v0/duplicate-detection/&lt;model-id&gt;</a></td>
-<td>POST</td>
+<td>GET</td>
 <td>Query duplicates</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="email-threading">
+<h2>Email threading<a class="headerlink" href="#email-threading" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="57%" />
+<col width="4%" />
+<col width="39%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference external" href="./email_threading_post.html">/api/v0/email-threading/</a></td>
+<td>POST</td>
+<td>Thread emails</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="./email_threading_element_get.html">/api/v0/email-threading/&lt;model-id&gt;</a></td>
+<td>GET</td>
+<td>Get threading parameters</td>
 </tr>
 </tbody>
 </table>
@@ -336,6 +390,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, Grossman Labs LLC.
+      Last updated on Dec 13, 2016.
 
     </p>
   </div>
