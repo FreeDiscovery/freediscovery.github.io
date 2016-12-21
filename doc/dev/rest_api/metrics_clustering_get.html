@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Categorize documents &mdash; FreeDiscovery 0.7.dev0 documentation</title>
+  <title>Extract clustering metrics &mdash; FreeDiscovery 0.7.dev0 documentation</title>
   
 
   
@@ -127,11 +127,11 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
       
-    <li>Categorize documents</li>
+    <li>Extract clustering metrics</li>
     <li class="wy-breadcrumbs-aside">
       
           
-          <a href="../_sources/rest_api/categorization_predict_post.md.txt" rel="nofollow"> View page source</a>
+          <a href="../_sources/rest_api/metrics_clustering_get.md.txt" rel="nofollow"> View page source</a>
         
       
     </li>
@@ -141,20 +141,29 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="categorize-documents">
-<span id="categorize-documents"></span><h1>Categorize documents<a class="headerlink" href="#categorize-documents" title="Permalink to this headline">¶</a></h1>
-<p>Predict document categorization with a previously trained model</p>
+  <div class="section" id="extract-clustering-metrics">
+<span id="extract-clustering-metrics"></span><h1>Extract clustering metrics<a class="headerlink" href="#extract-clustering-metrics" title="Permalink to this headline">¶</a></h1>
+<p>Use metrics to assess the quality of clustering, comparing groud truth cluster labels with predicted ones.</p>
 <ul>
-<li><p class="first"><strong>URL</strong>: <code class="docutils literal"><span class="pre">/api/v0/categorization/&lt;model-id&gt;/predict</span></code></p>
+<li><p class="first"><strong>URL</strong>: <code class="docutils literal"><span class="pre">/api/v0/metrics/clustering</span></code></p>
 </li>
 <li><p class="first"><strong>Method</strong>: <code class="docutils literal"><span class="pre">GET</span></code>,  <strong>URL Params</strong>: None</p>
 </li>
+<li><p class="first"><strong>Data Params</strong>:</p>
+<ul class="simple">
+<li>labels_true: [required] list of int. Ground truth clustering labels</li>
+<li>labels_pred: [required] list of int. Predicted clustering labels</li>
+<li>metrics: [required] list of str. Metrics to compute, any combination of &#8220;adjusted_rand&#8221;, &#8220;adjusted_mutual_info&#8221;, &#8220;v_measure&#8221;</li>
+</ul>
+</li>
 <li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="s2">&quot;prediction&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">&gt;</span><span class="p">}</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="s1">&#39;adjusted_rand&#39;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="s1">&#39;adjusted_mutual_info&#39;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="s1">&#39;v_measure&#39;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span><span class="p">}</span>
 </pre></div>
 </div>
 </li>
 </ul>
+<p>Presence of keys depend on the value of <code class="docutils literal"><span class="pre">metrics</span></code> parameter.
+The most detailed response (all 3 metrics are called) is shown above.</p>
 </div>
 
 
