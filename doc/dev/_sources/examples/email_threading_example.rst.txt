@@ -22,10 +22,10 @@ Thread a email collection
     1.a Parse emails
      POST http://localhost:5001/api/v0/email-parser
        => received [u'id', u'filenames']
-       => dsid = 6a2a5c3e804a43b1a633488a6819c3ea
+       => dsid = 5e5c4a4fbe8d4d6d9324c82225ac3ccf
 
     1.b. check the parameters of the emails
-     GET http://localhost:5001/api/v0/email-parser/6a2a5c3e804a43b1a633488a6819c3ea
+     GET http://localhost:5001/api/v0/email-parser/5e5c4a4fbe8d4d6d9324c82225ac3ccf
          - encoding: latin-1
          - type: EmailParser
          - data_dir: ../freediscovery_shared/fedora_ml_3k_subset/data
@@ -33,7 +33,7 @@ Thread a email collection
 
     2. Email threading
      POST http://localhost:5001/api/v0/email-threading/
-         => model id = 480e6987c40a421ba1d898c543a0bbc4
+         => model id = a9267f06798d4fb7aebb18ecce525107
 
     Threading examples
     cf. https://www.redhat.com/archives/rhl-devel-list/2008-October/thread.htlm 
@@ -106,6 +106,11 @@ Thread a email collection
     pd.options.display.float_format = '{:,.3f}'.format
 
 
+    if platform.system() == 'Windows' and sys.version_info > (3, 0):
+       print('This example currently fails on Windows with PY3 (issue #')
+       sys.exit()
+
+
     dataset_name = "fedora_ml_3k_subset"     # see list of available datasets
 
     BASE_URL = "http://localhost:5001/api/v0"  # FreeDiscovery server URL
@@ -168,7 +173,7 @@ Thread a email collection
         print(' ')
         print_thread(res['data'][idx])
 
-**Total running time of the script:** ( 0 minutes  15.326 seconds)
+**Total running time of the script:** ( 0 minutes  15.028 seconds)
 
 
 

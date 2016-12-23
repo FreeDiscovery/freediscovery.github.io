@@ -22,13 +22,13 @@ Find near-duplicates in a text collection
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received [u'id', u'filenames']
-       => dsid = 30ded56ba7624fc68e31ec286a0f837b
+       => dsid = ff4adb10a3dd415586d9386989942cea
 
     1.b Run feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/30ded56ba7624fc68e31ec286a0f837b
+     POST http://localhost:5001/api/v0/feature-extraction/ff4adb10a3dd415586d9386989942cea
 
     1.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/30ded56ba7624fc68e31ec286a0f837b
+     GET http://localhost:5001/api/v0/feature-extraction/ff4adb10a3dd415586d9386989942cea
          - binary: False
          - n_jobs: -1
          - stop_words: english
@@ -48,21 +48,32 @@ Find near-duplicates in a text collection
 
     2. Near Duplicates detection by cosine similarity (DBSCAN)
      POST http://localhost:5001/api/v0/clustering/dbscan/
-         => model id = b1dfe517a5b24804a11747a0a127d2b6
-     GET http://localhost:5001/api/v0/clustering/dbscan/b1dfe517a5b24804a11747a0a127d2b6
-        .. computed in 51.4s
+         => model id = f9830e8373e442fe82e23583a756fd7f
+     GET http://localhost:5001/api/v0/clustering/dbscan/f9830e8373e442fe82e23583a756fd7f
+        .. computed in 52.0s
     Found 91 duplicates / 2465
 
     3. Near Duplicates Detection using I-Match
      POST http://localhost:5001/api/v0/duplicate-detection/
-         => model id = 8f68944e879742acb4b399889b7fc7e5
+         => model id = 142e20e7779549da90fcd2a2f5f245c3
         .. computed in 0.0s
-     GET http://localhost:5001/api/v0/duplicate-detection/8f68944e879742acb4b399889b7fc7e5
-        .. computed in 2.5s
-    Found 240 duplicates / 2465
+     GET http://localhost:5001/api/v0/duplicate-detection/142e20e7779549da90fcd2a2f5f245c3
+        .. computed in 2.7s
+    Found 374 duplicates / 2465
+
+    3. Duplicate detection by Simhash
+     POST http://localhost:5001/api/v0/duplicate-detection/
+         => model id = 205a3c5e33144a35bf4cd0ec7cc05d6a
+        .. computed in 0.8s
+     GET http://localhost:5001/api/v0/duplicate-detection/205a3c5e33144a35bf4cd0ec7cc05d6a
+        .. computed in 0.1s
+    Found 303 duplicates / 2465
+     GET http://localhost:5001/api/v0/duplicate-detection/205a3c5e33144a35bf4cd0ec7cc05d6a
+        .. computed in 0.1s
+    Found 303 duplicates / 2465
 
     4.a Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/30ded56ba7624fc68e31ec286a0f837b
+     DELETE http://localhost:5001/api/v0/feature-extraction/ff4adb10a3dd415586d9386989942cea
 
 
 
@@ -132,7 +143,6 @@ Find near-duplicates in a text collection
                                                       if "filenames" not in key]))
 
 
-    # # 2. Near Duplicates detection by cosine similarity (DBSCAN)
     print("\n2. Near Duplicates detection by cosine similarity (DBSCAN)")
 
     url = BASE_URL + '/clustering/dbscan/'
@@ -162,7 +172,6 @@ Find near-duplicates in a text collection
     print('Found {} duplicates / {}'.format(len(labels_) - len(np.unique(labels_)), len(labels_)))
 
 
-    # # 3. Near Duplicates detection by cosine similarity (DBSCAN)
     print("\n3. Near Duplicates Detection using I-Match")
 
     url = BASE_URL + '/duplicate-detection/'
@@ -194,54 +203,64 @@ Find near-duplicates in a text collection
     print('Found {} duplicates / {}'.format(len(labels_) - len(np.unique(labels_)), len(labels_)))
 
 
+
+    if platform.system() == 'Windows':
+        print('Simhash-py is currently not implemented for Windows.')
+        sys.exit()
+
+    print("\n3. Duplicate detection by Simhash")
+
+    url = BASE_URL + '/duplicate-detection/'
+    print(" POST", url)
+    t0 = time()
+    res = requests.post(url,
+            json={'dataset_id': dsid,
+                  'method': 'simhash',
+                  }) 
+
+    data = res.json()
+    mid  = data['id']
+    print("     => model id = {}".format(mid))
+
+    print('    .. computed in {:.1f}s'.format(time() - t0))
+
+
+
+    url = BASE_URL + '/duplicate-detection/{}'.format(mid)
+    print(" GET", url)
+    t0 = time()
+    res = requests.get(url,
+            json={'distance': 1 }) 
+    data = res.json()
+    print('    .. computed in {:.1f}s'.format(time() - t0))
+
+    labels_ = data['cluster_id']
+
+    print('Found {} duplicates / {}'.format(len(labels_) - len(np.unique(labels_)), len(labels_)))
+
+
+
+    url = BASE_URL + '/duplicate-detection/{}'.format(mid)
+    print(" GET", url)
+    t0 = time()
+    res = requests.get(url,
+            json={'distance': 1 }) 
+    data = res.json()
+    print('    .. computed in {:.1f}s'.format(time() - t0))
+
+    labels_ = data['cluster_id']
+
+    print('Found {} duplicates / {}'.format(len(labels_) - len(np.unique(labels_)), len(labels_)))
+
+
+
     # 4. Cleaning
     print("\n4.a Delete the extracted features")
     url = BASE_URL + '/feature-extraction/{}'.format(dsid)
     print(" DELETE", url)
     requests.delete(url)
 
-
-
-    # Commenting out simhash for the moment
-    # 
-    #if platform.system() == 'Windows':
-    #    print('Simhash-py is currently not installed on Windows')
-    #    sys.exit()
-    #
-    #print("\n3. Duplicate detection by Simhash")
-    #
-    #url = BASE_URL + '/duplicate-detection/'
-    #print(" POST", url)
-    #t0 = time()
-    #res = requests.post(url,
-    #        json={'dataset_id': dsid,
-    #              'method': 'simhash',
-    #              }) 
-    #
-    #data = res.json()
-    #mid  = data['id']
-    #print("     => model id = {}".format(mid))
-    #
-    #print('    .. computed in {:.1f}s'.format(time() - t0))
-    #
-    #
-    #
-    #url = BASE_URL + '/duplicate-detection/{}'.format(mid)
-    #print(" GET", url)
-    #t0 = time()
-    #res = requests.get(url,
-    #        json={'distance': 1 }) 
-    #data = res.json()
-    #print('    .. computed in {:.1f}s'.format(time() - t0))
-    #
-    #labels_ = data['cluster_id']
-    #
-    #print('Found {} duplicates / {}'.format(len(labels_) - len(np.unique(labels_)), len(labels_)))
-
-
-
-
-**Total running time of the script:** ( 0 minutes  56.134 seconds)
+**Total running time of the script:** ( 0 minutes  57.899 seconds)
 
 
 
