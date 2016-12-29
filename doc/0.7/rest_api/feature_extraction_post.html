@@ -1,0 +1,249 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Load a dataset and initialize feature extraction &mdash; FreeDiscovery 0.7.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="FreeDiscovery 0.7.0 documentation" href="../index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> FreeDiscovery
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation_instructions.html">Installation Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">REST API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python_api.html">Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scaling_benchmarks.html">Scaling Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">Deployment options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">FreeDiscovery</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>Load a dataset and initialize feature extraction</li>
+    <li class="wy-breadcrumbs-aside">
+      
+          
+          <a href="../_sources/rest_api/feature_extraction_post.md.txt" rel="nofollow"> View page source</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="load-a-dataset-and-initialize-feature-extraction">
+<span id="load-a-dataset-and-initialize-feature-extraction"></span><h1>Load a dataset and initialize feature extraction<a class="headerlink" href="#load-a-dataset-and-initialize-feature-extraction" title="Permalink to this headline">¶</a></h1>
+<p>Initialize the feature extraction on a document collection.</p>
+<ul class="simple">
+<li><strong>URL</strong>: <code class="docutils literal"><span class="pre">/api/v0/feature-extraction/</span></code></li>
+<li><strong>Method</strong>: <code class="docutils literal"><span class="pre">POST</span></code>,                <strong>URL Params</strong>: None</li>
+<li><strong>Data Params</strong>: (following the <a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.HashingVectorizer.html">sklearn.feature_extraction.text.HashingVectorizer</a> API)<ul>
+<li><code class="docutils literal"><span class="pre">data_dir</span></code>: [required] relative path to the directory with the input files</li>
+<li><code class="docutils literal"><span class="pre">n_features</span></code>: [optional] number of features (overlapping character/word n-grams that are hashed).
+n_features refers to the number of buckets in the hash.  The larger the number, the fewer collisions.   (default: 1100000)</li>
+<li><code class="docutils literal"><span class="pre">analyzer</span></code>: &#8216;word&#8217;, &#8216;char&#8217;, &#8216;char_wb&#8217;
+Whether the feature should be made of word or character n-grams.
+Option ‘char_wb’ creates character n-grams only from text inside word boundaries.  ( default: &#8216;word&#8217;)</li>
+<li><code class="docutils literal"><span class="pre">ngram_range</span></code> : tuple (min_n, max_n), default=(1, 1)
+The lower and upper boundary of the range of n-values for different n-grams to be extracted. All values of n such that min_n &lt;= n &lt;= max_n will be used.</li>
+<li><code class="docutils literal"><span class="pre">stop_words</span></code>: &#8220;english&#8221; or &#8220;None&#8221;
+Remove stop words from the resulting tokens. Only applies for the &#8220;word&#8221; analyzer.
+If &#8220;english&#8221;, a built-in stop word list for English is used. ( default: &#8220;None&#8221;)</li>
+<li><code class="docutils literal"><span class="pre">n_jobs</span></code>: The maximum number of concurrently running jobs (default: 1)</li>
+<li><code class="docutils literal"><span class="pre">norm</span></code>: The normalization to use after the feature weighting (&#8216;None&#8217;, &#8216;l1&#8217;, &#8216;l2&#8217;) (default: &#8216;None&#8217;)</li>
+<li><code class="docutils literal"><span class="pre">chuck_size</span></code>: The number of documents simultaneously processed by a running job (default: 5000)</li>
+<li><code class="docutils literal"><span class="pre">binary</span></code>: If set to 1, all non zero counts are set to 1. (default: True)</li>
+<li><code class="docutils literal"><span class="pre">use_idf</span></code>: Enable inverse-document-frequency reweighting (default: False).</li>
+<li><code class="docutils literal"><span class="pre">sublinear_tf</span></code>: Apply sublinear tf scaling, i.e. replace tf with log(1 + tf) (default: False).</li>
+<li><code class="docutils literal"><span class="pre">use_hashing</span></code>: Enable hashing. This option must be set to True for classification and set to False for clustering. (default: True)</li>
+<li><code class="docutils literal"><span class="pre">min_df</span></code>: When building the vocabulary ignore terms that have a document frequency strictly lower than the given threshold. This value is ignored when hashing is used.</li>
+<li><code class="docutils literal"><span class="pre">max_df</span></code>: When building the vocabulary ignore terms that have a document frequency strictly higher than the given threshold. This value is ignored when hashing is used.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">str</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;filenames&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">&gt;</span>  <span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><strong>Error Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">422</span></code></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span> {&quot;error&quot;: &quot;Some error message&quot;}`
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Grossman Labs LLC.
+      Last updated on Dec 29, 2016.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

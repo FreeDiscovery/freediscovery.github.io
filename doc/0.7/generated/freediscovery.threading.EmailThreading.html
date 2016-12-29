@@ -1,0 +1,331 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>freediscovery.threading.EmailThreading &mdash; FreeDiscovery 0.7.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="FreeDiscovery 0.7.0 documentation" href="../index.html"/>
+        <link rel="up" title="Python API Reference" href="../python_api.html"/>
+        <link rel="next" title="freediscovery.base.BaseEstimator" href="freediscovery.base.BaseEstimator.html"/>
+        <link rel="prev" title="freediscovery.dupdet.IMatchDuplicates" href="freediscovery.dupdet.IMatchDuplicates.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> FreeDiscovery
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation_instructions.html">Installation Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rest_api/index.html">REST API Reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../python_api.html">Python API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#datasets">Datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#parsers">Parsers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#feature-extraction">Feature extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#document-categorization">Document categorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#document-clustering">Document clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#duplicates-detection">Duplicates detection</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../python_api.html#email-threading">Email threading</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">freediscovery.threading.EmailThreading</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#tools">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#metrics">Metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#exceptions">Exceptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scaling_benchmarks.html">Scaling Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">Deployment options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">FreeDiscovery</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+        <li><a href="../python_api.html">Python API Reference</a> &raquo;</li>
+      
+    <li>freediscovery.threading.EmailThreading</li>
+    <li class="wy-breadcrumbs-aside">
+      
+          
+          <a href="../_sources/generated/freediscovery.threading.EmailThreading.rst.txt" rel="nofollow"> View page source</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="freediscovery-threading-emailthreading">
+<h1>freediscovery.threading.EmailThreading<a class="headerlink" href="#freediscovery-threading-emailthreading" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="freediscovery.threading.EmailThreading">
+<em class="property">class </em><code class="descclassname">freediscovery.threading.</code><code class="descname">EmailThreading</code><span class="sig-paren">(</span><em>cache_dir=u'/tmp/'</em>, <em>dsid=None</em>, <em>mid=None</em>, <em>decode_header=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/f074522/freediscovery/threading.py#L24"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.threading.EmailThreading" title="Permalink to this definition">¶</a></dt>
+<dd><p>JWZ Email threading class</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>cache_dir</strong> (<em>str</em>) &#8211; folder where the model will be saved</li>
+<li><strong>dsid</strong> (<em>str</em><em>, </em><em>optional</em>) &#8211; dataset id</li>
+<li><strong>mid</strong> (<em>str</em><em>, </em><em>optional</em>) &#8211; model id</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="freediscovery.threading.EmailThreading.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>cache_dir=u'/tmp/'</em>, <em>dsid=None</em>, <em>mid=None</em>, <em>decode_header=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/f074522/freediscovery/threading.py#L40"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.threading.EmailThreading.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.threading.EmailThreading.__init__" title="freediscovery.threading.EmailThreading.__init__"><code class="xref py py-obj docutils literal"><span class="pre">__init__</span></code></a>([cache_dir,&nbsp;dsid,&nbsp;mid,&nbsp;decode_header])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#freediscovery.threading.EmailThreading.delete" title="freediscovery.threading.EmailThreading.delete"><code class="xref py py-obj docutils literal"><span class="pre">delete</span></code></a>()</td>
+<td>Delete a trained model</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">get_dsid</span></code>(cache_dir,&nbsp;mid)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#freediscovery.threading.EmailThreading.get_params" title="freediscovery.threading.EmailThreading.get_params"><code class="xref py py-obj docutils literal"><span class="pre">get_params</span></code></a>()</td>
+<td>Get model parameters</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">get_path</span></code>(mid)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">list_models</span></code>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.threading.EmailThreading.thread" title="freediscovery.threading.EmailThreading.thread"><code class="xref py py-obj docutils literal"><span class="pre">thread</span></code></a>([index,&nbsp;group_by_subject,&nbsp;...])</td>
+<td>Thread the emails</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="freediscovery.threading.EmailThreading.delete">
+<code class="descname">delete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/f074522/freediscovery/base.py#L175"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.threading.EmailThreading.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete a trained model</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.threading.EmailThreading.get_params">
+<code class="descname">get_params</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/f074522/freediscovery/base.py#L185"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.threading.EmailThreading.get_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get model parameters</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.threading.EmailThreading.thread">
+<code class="descname">thread</code><span class="sig-paren">(</span><em>index=None</em>, <em>group_by_subject=False</em>, <em>sort_by_key=u'message_idx'</em>, <em>sort_missing=-1</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/f074522/freediscovery/threading.py#L68"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.threading.EmailThreading.thread" title="Permalink to this definition">¶</a></dt>
+<dd><p>Thread the emails</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>index</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>)</em><em></em>) &#8211; document indices of the training set</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
+<li><strong>cmod</strong> (<em>sklearn.BaseEstimator</em>) &#8211; the scikit learn classifier object</li>
+<li><strong>Y_train</strong> (<em>array-like, shape (n_samples)</em>) &#8211; training predictions</li>
+<li><strong>group_by_subject</strong> (<em>boolean, default=True</em>) &#8211; group emails by subject</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
+<li><strong>tree</strong> (<em>array (N_samples)</em>) &#8211; the id of the parent element in the tree</li>
+<li><strong>root_idx</strong> (<em>array (N_samples)</em>) &#8211; the id of the root element in the tree</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="freediscovery.base.BaseEstimator.html" class="btn btn-neutral float-right" title="freediscovery.base.BaseEstimator" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="freediscovery.dupdet.IMatchDuplicates.html" class="btn btn-neutral" title="freediscovery.dupdet.IMatchDuplicates" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Grossman Labs LLC.
+      Last updated on Dec 29, 2016.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

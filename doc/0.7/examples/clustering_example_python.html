@@ -1,0 +1,355 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Clustering Example [Python API] &mdash; FreeDiscovery 0.7.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="FreeDiscovery 0.7.0 documentation" href="../index.html"/>
+        <link rel="up" title="Examples" href="index.html"/>
+        <link rel="next" title="Email threading Example [REST API]" href="email_threading_example.html"/>
+        <link rel="prev" title="Categorization Example [Python API]" href="categorization_example_python.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> FreeDiscovery
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation_instructions.html">Installation Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rest_api/index.html">REST API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python_api.html">Python API Reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="categorization_example_python.html">Categorization Example [Python API]</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Clustering Example [Python API]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="email_threading_example.html">Email threading Example [REST API]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clustering_example.html">Clustering Example [REST API]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="duplicate_detection_example.html">Duplicate Detection Example [REST API]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="categorization_example.html">Categorization Example [REST API]</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../scaling_benchmarks.html">Scaling Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">Deployment options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">FreeDiscovery</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+        <li><a href="index.html">Examples</a> &raquo;</li>
+      
+    <li>Clustering Example [Python API]</li>
+    <li class="wy-breadcrumbs-aside">
+      
+          
+          <a href="../_sources/examples/clustering_example_python.rst.txt" rel="nofollow"> View page source</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="clustering-example-python-api">
+<span id="sphx-glr-examples-clustering-example-python-py"></span><h1>Clustering Example [Python API]<a class="headerlink" href="#clustering-example-python-api" title="Permalink to this headline">¶</a></h1>
+<p>An example of clustering using the Python API</p>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span>0. Load Dataset
+
+Warning: downloading dataset treclegal09_2k_subset (2.8 MB) !
+
+File ../treclegal09_2k_subset.tar.gz downloaded!
+Archive extracted!
+
+1. Feature extraction (non hashed)
+
+
+2. Document Clustering (LSI + K-Means)
+
+    .. computed in 20.2s
+   N_documents                                      cluster_names
+8          534           [alias, enron, norm, ect, changed, calo]
+9          382  [ect, hou, enron, group, recipients, administr...
+2          329  [teneo, recipients, group, administrative, tes...
+0          321  [recipients, group, administrative, test, ect,...
+1          229            [enron, ena, alias, company, norm, ect]
+5          202     [energy, berkeley, edu, haas, enron, services]
+4          150             [alias, enron, ect, norm, test, group]
+7          145  [shall, party, agreement, transaction, period,...
+6          112  [enron_development, ect, hou, enron, trading, ...
+3           61    [rewrite, server, address, smtp, mail, virtual]
+
+3. Document Clustering (LSI + Ward Hierarchical Clustering)
+
+    .. computed in 40.1s
+   N_documents                                      cluster_names
+1          444           [alias, enron, norm, ect, calo, changed]
+2          424  [ect, hou, enron, group, recipients, administr...
+0          361  [enron, energy, agreement, company, master, sh...
+7          320  [teneo, recipients, group, administrative, tes...
+3          277          [enron, alias, ect, norm, group, trading]
+6          244  [recipients, group, administrative, test, enro...
+8          141             [alias, ect, enron, norm, test, group]
+9          113  [enron_development, ect, hou, enron, shackleto...
+4           78  [shall, party, agreement, transaction, lessee,...
+5           63    [rewrite, server, address, smtp, mail, virtual]
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">freediscovery.text</span> <span class="kn">import</span> <span class="n">FeatureVectorizer</span>
+<span class="kn">from</span> <span class="nn">freediscovery.cluster</span> <span class="kn">import</span> <span class="n">Clustering</span>
+<span class="kn">from</span> <span class="nn">freediscovery.utils</span> <span class="kn">import</span> <span class="n">_silent</span>
+<span class="kn">from</span> <span class="nn">freediscovery.datasets</span> <span class="kn">import</span> <span class="n">load_dataset</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;{:,.3f}&#39;</span><span class="o">.</span><span class="n">format</span>
+
+<span class="n">dataset_name</span> <span class="o">=</span> <span class="s2">&quot;treclegal09_2k_subset&quot;</span>
+<span class="n">cache_dir</span> <span class="o">=</span> <span class="s1">&#39;..&#39;</span>
+
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;0. Load Dataset&quot;</span><span class="p">)</span>
+
+<span class="n">ds</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="n">dataset_name</span><span class="p">,</span> <span class="n">cache_dir</span><span class="o">=</span><span class="n">cache_dir</span><span class="p">)</span>
+
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">1. Feature extraction (non hashed)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">n_features</span> <span class="o">=</span> <span class="mi">30000</span>
+<span class="n">fe</span> <span class="o">=</span> <span class="n">FeatureVectorizer</span><span class="p">(</span><span class="n">cache_dir</span><span class="o">=</span><span class="n">cache_dir</span><span class="p">)</span>
+<span class="n">uuid</span> <span class="o">=</span> <span class="n">fe</span><span class="o">.</span><span class="n">preprocess</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="s1">&#39;data_dir&#39;</span><span class="p">],</span>
+                     <span class="n">n_features</span><span class="o">=</span><span class="n">n_features</span><span class="p">,</span> <span class="n">use_hashing</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                     <span class="n">use_idf</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">stop_words</span><span class="o">=</span><span class="s1">&#39;english&#39;</span><span class="p">)</span>
+<span class="n">uuid</span><span class="p">,</span> <span class="n">filenames</span> <span class="o">=</span> <span class="n">fe</span><span class="o">.</span><span class="n">transform</span><span class="p">()</span>
+
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">2. Document Clustering (LSI + K-Means)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">cat</span> <span class="o">=</span> <span class="n">Clustering</span><span class="p">(</span><span class="n">cache_dir</span><span class="o">=</span><span class="n">cache_dir</span><span class="p">,</span> <span class="n">dsid</span><span class="o">=</span><span class="n">uuid</span><span class="p">)</span>
+
+<span class="n">n_clusters</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">n_top_words</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">lsi_components</span> <span class="o">=</span> <span class="mi">50</span>
+
+
+<span class="k">def</span> <span class="nf">repr_clustering</span><span class="p">(</span><span class="n">_labels</span><span class="p">,</span> <span class="n">_terms</span><span class="p">):</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">ridx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">_terms</span><span class="p">):</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;cluster_names&#39;</span><span class="p">:</span> <span class="n">row</span><span class="p">,</span> <span class="s1">&#39;N_documents&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">_labels</span> <span class="o">==</span> <span class="n">ridx</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()})</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;N_documents&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">out</span>
+
+
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="k">with</span> <span class="n">_silent</span><span class="p">(</span><span class="s1">&#39;stderr&#39;</span><span class="p">):</span> <span class="c1"># ignore some deprecation warnings</span>
+    <span class="n">labels</span><span class="p">,</span> <span class="n">tree</span>  <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">k_means</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">,</span> <span class="n">lsi_components</span><span class="o">=</span><span class="n">lsi_components</span><span class="p">)</span>
+    <span class="n">terms</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">compute_labels</span><span class="p">(</span><span class="n">n_top_words</span><span class="o">=</span><span class="n">n_top_words</span><span class="p">)</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;    .. computed in {:.1f}s&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">repr_clustering</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">terms</span><span class="p">))</span>
+
+
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">3. Document Clustering (LSI + Ward Hierarchical Clustering)</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="k">with</span> <span class="n">_silent</span><span class="p">(</span><span class="s1">&#39;stderr&#39;</span><span class="p">):</span> <span class="c1"># ignore some deprecation warnings</span>
+    <span class="n">labels</span><span class="p">,</span> <span class="n">tree</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">ward_hc</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">,</span>
+                               <span class="n">lsi_components</span><span class="o">=</span><span class="n">lsi_components</span><span class="p">,</span>
+                               <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">5</span>   <span class="c1"># this is the connectivity constraint</span>
+                               <span class="p">)</span>
+    <span class="n">terms</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">compute_labels</span><span class="p">(</span><span class="n">n_top_words</span><span class="o">=</span><span class="n">n_top_words</span><span class="p">)</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;    .. computed in {:.1f}s&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">repr_clustering</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">terms</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><strong>Total running time of the script:</strong> ( 1 minutes  4.800 seconds)</p>
+<div class="sphx-glr-footer container">
+<div class="sphx-glr-download container">
+<a class="reference download internal" href="../_downloads/clustering_example_python.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">clustering_example_python.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<a class="reference download internal" href="../_downloads/clustering_example_python.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">clustering_example_python.ipynb</span></code></a></div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="http://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="email_threading_example.html" class="btn btn-neutral float-right" title="Email threading Example [REST API]" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="categorization_example_python.html" class="btn btn-neutral" title="Categorization Example [Python API]" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Grossman Labs LLC.
+      Last updated on Dec 29, 2016.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
