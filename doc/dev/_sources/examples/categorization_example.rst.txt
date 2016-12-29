@@ -22,16 +22,16 @@ An example to illustrate binary categorizaiton with FreeDiscovery
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received [u'id', u'filenames']
-       => dsid = 1f05fc498bc64744aa0d4b714f0c6e8e
+       => dsid = dedef860837b4145be8c5ab65495d882
 
     1.b Start feature extraction (in the background)
-     POST http://localhost:5001/api/v0/feature-extraction/1f05fc498bc64744aa0d4b714f0c6e8e
+     POST http://localhost:5001/api/v0/feature-extraction/dedef860837b4145be8c5ab65495d882
 
     1.c Monitor feature extraction progress
-     GET http://localhost:5001/api/v0/feature-extraction/1f05fc498bc64744aa0d4b714f0c6e8e
+     GET http://localhost:5001/api/v0/feature-extraction/dedef860837b4145be8c5ab65495d882
 
     1.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/1f05fc498bc64744aa0d4b714f0c6e8e
+     GET http://localhost:5001/api/v0/feature-extraction/dedef860837b4145be8c5ab65495d882
          - binary: False
          - n_jobs: -1
          - stop_words: english
@@ -53,104 +53,104 @@ An example to illustrate binary categorizaiton with FreeDiscovery
        5 relevant, 63 non-relevant files
      POST http://localhost:5001/api/v0/categorization/
      Training...
-         => model id = 226bacd7503646d78c56731bf9a6d1c9
+         => model id = 0da5430c8da84abb942ceea386515b0c
         => Training scores: MAP = 1.000, ROC-AUC = 1.000
 
     2.b. Check the parameters used in the categorization model
-     GET http://localhost:5001/api/v0/categorization/226bacd7503646d78c56731bf9a6d1c9
+     GET http://localhost:5001/api/v0/categorization/0da5430c8da84abb942ceea386515b0c
          - method: LinearSVC
          - options: {'loss': 'squared_hinge', 'C': 1.0, 'verbose': 0, 'intercept_scaling': 1, 'fit_intercept': True, 'max_iter': 1000, 'penalty': 'l2', 'multi_class': 'ovr', 'random_state': None, 'dual': True, 'tol': 0.0001, 'class_weight': None}
 
     2.c Categorize the complete dataset with this model
-     GET http://localhost:5001/api/v0/categorization/226bacd7503646d78c56731bf9a6d1c9/predict
+     GET http://localhost:5001/api/v0/categorization/0da5430c8da84abb942ceea386515b0c/predict
         => Predicting 11 relevant and 2454 non relevant documents
 
     2.d Test categorization accuracy
              using ../freediscovery_shared/treclegal09_2k_subset/ground_truth_file.txt
-    POST http://localhost:5001/api/v0/categorization/226bacd7503646d78c56731bf9a6d1c9/test
+    POST http://localhost:5001/api/v0/categorization/0da5430c8da84abb942ceea386515b0c/test
         => Test scores: MAP = 0.959, ROC-AUC = 0.958
 
     3.a. Calculate LSI
     POST http://localhost:5001/api/v0/lsi/
-      => LSI model id = c20c5639653e40e3b9f8a964e6f05f0e
+      => LSI model id = b790b2cb1a3d46fd92231c5d3b6d0be5
       => SVD decomposition with 100 dimensions explaining 48.41 % variabilty of the data
 
     3.b. Predict categorization with LSI
-    POST http://localhost:5001/api/v0/lsi/c20c5639653e40e3b9f8a964e6f05f0e/predict
+    POST http://localhost:5001/api/v0/lsi/b790b2cb1a3d46fd92231c5d3b6d0be5/predict
         => Training scores: MAP = 1.000, ROC-AUC = 1.000
 
     3.c. Test categorization with LSI
-     POST http://localhost:5001/api/v0/lsi/c20c5639653e40e3b9f8a964e6f05f0e/test
-    {u'recall': 0.9166666666666666, u'f1': 0.13664596273291924, u'roc_auc': 0.9302045114825384, u'average_precision': 0.49544892476777797, u'precision': 0.0738255033557047}
-        => Test scores: MAP = 0.495, ROC-AUC = 0.930
+     POST http://localhost:5001/api/v0/lsi/b790b2cb1a3d46fd92231c5d3b6d0be5/test
+    {u'recall': 0.8333333333333334, u'f1': 0.10416666666666666, u'roc_auc': 0.8820152194591657, u'average_precision': 0.444850123957629, u'precision': 0.05555555555555555}
+        => Test scores: MAP = 0.445, ROC-AUC = 0.882
 
            nearest_nrel_doc  nearest_rel_doc  prediction
-    0                    9             1791      -0.406
-    1                 1457             1791      -0.416
-    2                 2314                3      -0.565
+    0                    9             1791      -0.391
+    1                 1457             1791      -0.451
+    2                 2314                3      -0.536
     3                 2451                3       1.000
-    4                 2314                3      -0.610
-    5                 1337              919      -0.475
-    6                 1600                3      -0.691
-    7                 1503              919      -0.380
-    8                 1337                3      -0.480
+    4                 2314                3      -0.595
+    5                 1337                3      -0.457
+    6                 1600             1791      -0.704
+    7                 2314              919      -0.401
+    8                 1337                3      -0.466
     9                    9             1791      -1.000
-    10                2451                3      -0.601
-    11                  32              906      -0.378
-    12                  32              906      -0.358
-    13                2039             1047      -0.823
-    14                2039             1047      -0.996
-    15                1563              919      -0.349
-    16                  32              906      -0.374
-    17                  32              906      -0.248
-    18                  99             1047      -0.245
-    19                1104              906      -0.560
-    20                1337              919      -0.361
-    21                2275             1047      -0.887
-    22                 676             1047      -0.119
-    23                 676             1047      -0.121
-    24                2121              906      -0.573
-    25                2275             1791      -0.593
-    26                2121              906      -0.283
-    27                 362             1047      -0.300
-    28                  32             1791      -0.364
-    29                  32              906      -0.245
+    10                2451                3      -0.486
+    11                  32              906      -0.388
+    12                  32              906      -0.366
+    13                2039              919      -0.810
+    14                2039             1047      -0.995
+    15                1563              906      -0.365
+    16                  32              906      -0.390
+    17                  32              906      -0.267
+    18                   9              919      -0.222
+    19                1104              906      -0.502
+    20                1337              919      -0.374
+    21                2275              919      -0.888
+    22                 676             1047      -0.159
+    23                 676              919      -0.162
+    24                2121             1047      -0.573
+    25                2275              906      -0.580
+    26                  32              906      -0.271
+    27                 362             1047      -0.264
+    28                  32              906      -0.375
+    29                  32              906      -0.256
     ...                ...              ...         ...
-    2435               987              919      -0.138
-    2436               615             1047      -0.727
-    2437               615             1047      -0.454
-    2438               615             1047      -0.234
-    2439              1503             1047      -0.363
-    2440              1117             1047      -0.229
-    2441              1503                3      -0.450
-    2442               539             1047      -0.212
-    2443                 9              919      -0.410
-    2444                 9              919      -0.200
-    2445                 9             1047      -0.415
-    2446                 9              919      -0.208
-    2447              2314             1047      -0.547
-    2448              2314             1047      -0.231
-    2449              1337                3      -0.588
+    2435               987                3      -0.126
+    2436               615              919      -0.741
+    2437               615              919      -0.440
+    2438              1337             1047      -0.229
+    2439              1503             1047      -0.395
+    2440              1117             1047      -0.209
+    2441              1503                3      -0.423
+    2442               539             1047      -0.216
+    2443                 9              919      -0.416
+    2444                 9              919      -0.194
+    2445                 9                3      -0.388
+    2446                 9             1047      -0.183
+    2447              2314             1047      -0.489
+    2448              2314             1047      -0.169
+    2449              1337                3      -0.611
     2450              2387                3      -0.834
     2451              2451                3      -1.000
-    2452              2451                3      -0.626
-    2453              2451                3      -0.613
-    2454              2451                3      -0.407
+    2452              2451                3      -0.611
+    2453              2451                3      -0.554
+    2454              2451                3      -0.364
     2455              1561                3      -0.411
-    2456              2387                3       0.631
-    2457              1563             1047      -0.521
-    2458              1124              919      -0.264
-    2459              1441             1047      -0.715
-    2460                81             1047      -0.200
-    2461                81             1047      -0.198
-    2462              1503             1047      -0.265
-    2463                81             1047      -0.209
-    2464              1441             1047      -0.513
+    2456              2387                3       0.676
+    2457              1563              919      -0.564
+    2458              1124              919      -0.223
+    2459              1441             1047      -0.732
+    2460              1441             1047      -0.200
+    2461                81             1047      -0.181
+    2462              1503             1047      -0.237
+    2463                81             1047      -0.185
+    2464              1441             1047      -0.496
 
     [2465 rows x 3 columns]
 
     4.a Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/1f05fc498bc64744aa0d4b714f0c6e8e
+     DELETE http://localhost:5001/api/v0/feature-extraction/dedef860837b4145be8c5ab65495d882
 
 
 
@@ -344,7 +344,7 @@ An example to illustrate binary categorizaiton with FreeDiscovery
         print(" DELETE", url)
         requests.delete(url)
 
-**Total running time of the script:** ( 1 minutes  4.732 seconds)
+**Total running time of the script:** ( 1 minutes  11.587 seconds)
 
 
 
