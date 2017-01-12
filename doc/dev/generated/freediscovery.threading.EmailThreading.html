@@ -37,7 +37,7 @@
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="FreeDiscovery 0.8.dev0 documentation" href="../index.html"/>
         <link rel="up" title="Python API Reference" href="../python_api.html"/>
-        <link rel="next" title="freediscovery.base.BaseEstimator" href="freediscovery.base.BaseEstimator.html"/>
+        <link rel="next" title="freediscovery.base._BaseWrapper" href="freediscovery.base._BaseWrapper.html"/>
         <link rel="prev" title="freediscovery.dupdet.IMatchDuplicates" href="freediscovery.dupdet.IMatchDuplicates.html"/> 
 
   
@@ -165,7 +165,7 @@
 <h1>freediscovery.threading.EmailThreading<a class="headerlink" href="#freediscovery-threading-emailthreading" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="freediscovery.threading.EmailThreading">
-<em class="property">class </em><code class="descclassname">freediscovery.threading.</code><code class="descname">EmailThreading</code><span class="sig-paren">(</span><em>cache_dir=u'/tmp/'</em>, <em>dsid=None</em>, <em>mid=None</em>, <em>decode_header=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/9b530da/freediscovery/threading.py#L24"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.threading.EmailThreading" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">freediscovery.threading.</code><code class="descname">EmailThreading</code><span class="sig-paren">(</span><em>cache_dir=u'/tmp/'</em>, <em>dsid=None</em>, <em>mid=None</em>, <em>decode_header=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/61b9d57/freediscovery/threading.py#L24"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.threading.EmailThreading" title="Permalink to this definition">¶</a></dt>
 <dd><p>JWZ Email threading class</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -182,7 +182,7 @@
 </table>
 <dl class="method">
 <dt id="freediscovery.threading.EmailThreading.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>cache_dir=u'/tmp/'</em>, <em>dsid=None</em>, <em>mid=None</em>, <em>decode_header=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/9b530da/freediscovery/threading.py#L40"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.threading.EmailThreading.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>cache_dir=u'/tmp/'</em>, <em>dsid=None</em>, <em>mid=None</em>, <em>decode_header=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/61b9d57/freediscovery/threading.py#L40"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.threading.EmailThreading.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods</p>
@@ -207,8 +207,8 @@
 <tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">get_path</span></code>(mid)</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">list_models</span></code>()</td>
-<td></td>
+<tr class="row-even"><td><a class="reference internal" href="#freediscovery.threading.EmailThreading.list_models" title="freediscovery.threading.EmailThreading.list_models"><code class="xref py py-obj docutils literal"><span class="pre">list_models</span></code></a>()</td>
+<td>List existing models of this type</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#freediscovery.threading.EmailThreading.thread" title="freediscovery.threading.EmailThreading.thread"><code class="xref py py-obj docutils literal"><span class="pre">thread</span></code></a>([index,&nbsp;group_by_subject,&nbsp;...])</td>
 <td>Thread the emails</td>
@@ -217,19 +217,25 @@
 </table>
 <dl class="method">
 <dt id="freediscovery.threading.EmailThreading.delete">
-<code class="descname">delete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/9b530da/freediscovery/base.py#L202"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.threading.EmailThreading.delete" title="Permalink to this definition">¶</a></dt>
+<code class="descname">delete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/61b9d57/freediscovery/base.py#L110"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.threading.EmailThreading.delete" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete a trained model</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="freediscovery.threading.EmailThreading.get_params">
-<code class="descname">get_params</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/9b530da/freediscovery/base.py#L212"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.threading.EmailThreading.get_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_params</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/61b9d57/freediscovery/base.py#L120"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.threading.EmailThreading.get_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get model parameters</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="freediscovery.threading.EmailThreading.list_models">
+<code class="descname">list_models</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/61b9d57/freediscovery/base.py#L146"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.threading.EmailThreading.list_models" title="Permalink to this definition">¶</a></dt>
+<dd><p>List existing models of this type</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="freediscovery.threading.EmailThreading.thread">
-<code class="descname">thread</code><span class="sig-paren">(</span><em>index=None</em>, <em>group_by_subject=False</em>, <em>sort_by_key=u'message_idx'</em>, <em>sort_missing=-1</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/9b530da/freediscovery/threading.py#L68"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.threading.EmailThreading.thread" title="Permalink to this definition">¶</a></dt>
+<code class="descname">thread</code><span class="sig-paren">(</span><em>index=None</em>, <em>group_by_subject=False</em>, <em>sort_by_key=u'message_idx'</em>, <em>sort_missing=-1</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/61b9d57/freediscovery/threading.py#L48"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.threading.EmailThreading.thread" title="Permalink to this definition">¶</a></dt>
 <dd><p>Thread the emails</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -265,7 +271,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="freediscovery.base.BaseEstimator.html" class="btn btn-neutral float-right" title="freediscovery.base.BaseEstimator" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="freediscovery.base._BaseWrapper.html" class="btn btn-neutral float-right" title="freediscovery.base._BaseWrapper" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="freediscovery.dupdet.IMatchDuplicates.html" class="btn btn-neutral" title="freediscovery.dupdet.IMatchDuplicates" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>

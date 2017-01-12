@@ -38,7 +38,7 @@
     <link rel="top" title="FreeDiscovery 0.8.dev0 documentation" href="../index.html"/>
         <link rel="up" title="Python API Reference" href="../python_api.html"/>
         <link rel="next" title="freediscovery.cluster.Clustering" href="freediscovery.cluster.Clustering.html"/>
-        <link rel="prev" title="freediscovery.categorization.Categorizer" href="freediscovery.categorization.Categorizer.html"/> 
+        <link rel="prev" title="freediscovery.categorization.NearestNeighborRanker" href="freediscovery.categorization.NearestNeighborRanker.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -97,6 +97,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../python_api.html#feature-extraction">Feature extraction</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../python_api.html#document-categorization">Document categorization</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="freediscovery.categorization.Categorizer.html">freediscovery.categorization.Categorizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="freediscovery.categorization.NearestNeighborRanker.html">freediscovery.categorization.NearestNeighborRanker</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">freediscovery.lsi.LSI</a></li>
 </ul>
 </li>
@@ -166,7 +167,7 @@
 <h1>freediscovery.lsi.LSI<a class="headerlink" href="#freediscovery-lsi-lsi" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="freediscovery.lsi.LSI">
-<em class="property">class </em><code class="descclassname">freediscovery.lsi.</code><code class="descname">LSI</code><span class="sig-paren">(</span><em>cache_dir='/tmp/'</em>, <em>dsid=None</em>, <em>mid=None</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/9b530da/freediscovery/lsi.py#L29"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.lsi.LSI" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">freediscovery.lsi.</code><code class="descname">LSI</code><span class="sig-paren">(</span><em>cache_dir='/tmp/'</em>, <em>dsid=None</em>, <em>mid=None</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/61b9d57/freediscovery/lsi.py#L29"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.lsi.LSI" title="Permalink to this definition">¶</a></dt>
 <dd><p>Document categorization using Latent Semantic Indexing (LSI)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -184,7 +185,7 @@
 </table>
 <dl class="method">
 <dt id="freediscovery.lsi.LSI.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>cache_dir='/tmp/'</em>, <em>dsid=None</em>, <em>mid=None</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/9b530da/freediscovery/lsi.py#L46"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.lsi.LSI.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>cache_dir='/tmp/'</em>, <em>dsid=None</em>, <em>mid=None</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/61b9d57/freediscovery/lsi.py#L46"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.lsi.LSI.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods</p>
@@ -209,41 +210,38 @@
 <tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">get_path</span></code>(mid)</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">list_models</span></code>()</td>
-<td></td>
+<tr class="row-even"><td><a class="reference internal" href="#freediscovery.lsi.LSI.list_models" title="freediscovery.lsi.LSI.list_models"><code class="xref py py-obj docutils literal"><span class="pre">list_models</span></code></a>()</td>
+<td>List existing models of this type</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.lsi.LSI.load" title="freediscovery.lsi.LSI.load"><code class="xref py py-obj docutils literal"><span class="pre">load</span></code></a>(mid)</td>
-<td>Load the computed features from cache specified by mid</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#freediscovery.lsi.LSI.predict" title="freediscovery.lsi.LSI.predict"><code class="xref py py-obj docutils literal"><span class="pre">predict</span></code></a>(index,&nbsp;y[,&nbsp;method,&nbsp;chunk_size])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.lsi.LSI.predict" title="freediscovery.lsi.LSI.predict"><code class="xref py py-obj docutils literal"><span class="pre">predict</span></code></a>(index,&nbsp;y[,&nbsp;method,&nbsp;chunk_size])</td>
 <td>Predict the document relevance using a previously trained LSI model</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.lsi.LSI.transform" title="freediscovery.lsi.LSI.transform"><code class="xref py py-obj docutils literal"><span class="pre">transform</span></code></a>(n_components[,&nbsp;n_iter])</td>
+<tr class="row-even"><td><a class="reference internal" href="#freediscovery.lsi.LSI.transform" title="freediscovery.lsi.LSI.transform"><code class="xref py py-obj docutils literal"><span class="pre">transform</span></code></a>(n_components[,&nbsp;n_iter])</td>
 <td>Perform the SVD decomposition</td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
 <dt id="freediscovery.lsi.LSI.delete">
-<code class="descname">delete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/9b530da/freediscovery/base.py#L202"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.lsi.LSI.delete" title="Permalink to this definition">¶</a></dt>
+<code class="descname">delete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/61b9d57/freediscovery/base.py#L110"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.lsi.LSI.delete" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete a trained model</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="freediscovery.lsi.LSI.get_params">
-<code class="descname">get_params</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/9b530da/freediscovery/base.py#L212"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.lsi.LSI.get_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_params</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/61b9d57/freediscovery/base.py#L120"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.lsi.LSI.get_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get model parameters</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="freediscovery.lsi.LSI.load">
-<code class="descname">load</code><span class="sig-paren">(</span><em>mid</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/9b530da/freediscovery/lsi.py#L198"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.lsi.LSI.load" title="Permalink to this definition">¶</a></dt>
-<dd><p>Load the computed features from cache specified by mid</p>
+<dt id="freediscovery.lsi.LSI.list_models">
+<code class="descname">list_models</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/61b9d57/freediscovery/base.py#L146"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.lsi.LSI.list_models" title="Permalink to this definition">¶</a></dt>
+<dd><p>List existing models of this type</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="freediscovery.lsi.LSI.predict">
-<code class="descname">predict</code><span class="sig-paren">(</span><em>index</em>, <em>y</em>, <em>method='nearest-neighbor-1'</em>, <em>chunk_size=100</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/9b530da/freediscovery/lsi.py#L123"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.lsi.LSI.predict" title="Permalink to this definition">¶</a></dt>
+<code class="descname">predict</code><span class="sig-paren">(</span><em>index</em>, <em>y</em>, <em>method='nearest-neighbor-1'</em>, <em>chunk_size=100</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/61b9d57/freediscovery/lsi.py#L102"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.lsi.LSI.predict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Predict the document relevance using a previously trained LSI model</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -263,7 +261,7 @@ otherwise if <cite>method==&#8221;nearest-centroid&#8221;</cite> the centroid of
 
 <dl class="method">
 <dt id="freediscovery.lsi.LSI.transform">
-<code class="descname">transform</code><span class="sig-paren">(</span><em>n_components</em>, <em>n_iter=5</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/9b530da/freediscovery/lsi.py#L72"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.lsi.LSI.transform" title="Permalink to this definition">¶</a></dt>
+<code class="descname">transform</code><span class="sig-paren">(</span><em>n_components</em>, <em>n_iter=5</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/61b9d57/freediscovery/lsi.py#L51"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.lsi.LSI.transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform the SVD decomposition</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -301,7 +299,7 @@ otherwise if <cite>method==&#8221;nearest-centroid&#8221;</cite> the centroid of
         <a href="freediscovery.cluster.Clustering.html" class="btn btn-neutral float-right" title="freediscovery.cluster.Clustering" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="freediscovery.categorization.Categorizer.html" class="btn btn-neutral" title="freediscovery.categorization.Categorizer" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="freediscovery.categorization.NearestNeighborRanker.html" class="btn btn-neutral" title="freediscovery.categorization.NearestNeighborRanker" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

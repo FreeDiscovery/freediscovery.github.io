@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>freediscovery.base.BaseEstimator &mdash; FreeDiscovery 0.8.dev0 documentation</title>
+  <title>freediscovery.base._BaseWrapper &mdash; FreeDiscovery 0.8.dev0 documentation</title>
   
 
   
@@ -100,7 +100,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../python_api.html#duplicates-detection">Duplicates detection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python_api.html#email-threading">Email threading</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../python_api.html#tools">Tools</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">freediscovery.base.BaseEstimator</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">freediscovery.base._BaseWrapper</a></li>
 <li class="toctree-l3"><a class="reference internal" href="freediscovery.io.parse_ground_truth_file.html">freediscovery.io.parse_ground_truth_file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="freediscovery.utils.generate_uuid.html">freediscovery.utils.generate_uuid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="freediscovery.utils.setup_model.html">freediscovery.utils.setup_model</a></li>
@@ -150,11 +150,11 @@
       
         <li><a href="../python_api.html">Python API Reference</a> &raquo;</li>
       
-    <li>freediscovery.base.BaseEstimator</li>
+    <li>freediscovery.base._BaseWrapper</li>
     <li class="wy-breadcrumbs-aside">
       
           
-          <a href="../_sources/generated/freediscovery.base.BaseEstimator.rst.txt" rel="nofollow"> View page source</a>
+          <a href="../_sources/generated/freediscovery.base._BaseWrapper.rst.txt" rel="nofollow"> View page source</a>
         
       
     </li>
@@ -164,16 +164,32 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="freediscovery-base-baseestimator">
-<h1>freediscovery.base.BaseEstimator<a class="headerlink" href="#freediscovery-base-baseestimator" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="freediscovery-base-basewrapper">
+<h1>freediscovery.base._BaseWrapper<a class="headerlink" href="#freediscovery-base-basewrapper" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
-<dt id="freediscovery.base.BaseEstimator">
-<em class="property">class </em><code class="descclassname">freediscovery.base.</code><code class="descname">BaseEstimator</code><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/9b530da/freediscovery/base.py#L185"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.base.BaseEstimator" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="freediscovery.base.BaseEstimator.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#freediscovery.base.BaseEstimator.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__init__(...) initializes x; see help(type(x)) for signature</p>
-</dd></dl>
+<dt id="freediscovery.base._BaseWrapper">
+<em class="property">class </em><code class="descclassname">freediscovery.base.</code><code class="descname">_BaseWrapper</code><span class="sig-paren">(</span><em>cache_dir=u'/tmp/'</em>, <em>dsid=None</em>, <em>mid=None</em>, <em>dataset_definition=&lt;class 'freediscovery.text.FeatureVectorizer'&gt;</em>, <em>load_model=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/61b9d57/freediscovery/base.py#L45"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.base._BaseWrapper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for wrappers in FreeDiscovery</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>cache_dir</strong> (<em>str</em>) &#8211; folder where the model will be saved</li>
+<li><strong>dsid</strong> (<em>str</em><em>, </em><em>optional</em>) &#8211; dataset id</li>
+<li><strong>mid</strong> (<em>str</em><em>, </em><em>optional</em>) &#8211; model id</li>
+<li><strong>dataset_definition</strong> (<em>a dataset defintion class</em>) &#8211; one of FeatureVectorizer, EmailParser</li>
+<li><strong>load_model</strong> (<em>bool</em>) &#8211; whether the model should be loaded from disk on class
+initialization</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="freediscovery.base._BaseWrapper.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>cache_dir=u'/tmp/'</em>, <em>dsid=None</em>, <em>mid=None</em>, <em>dataset_definition=&lt;class 'freediscovery.text.FeatureVectorizer'&gt;</em>, <em>load_model=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/61b9d57/freediscovery/base.py#L62"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.base._BaseWrapper.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <p class="rubric">Methods</p>
 <table border="1" class="longtable docutils">
@@ -182,33 +198,42 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.base.BaseEstimator.delete" title="freediscovery.base.BaseEstimator.delete"><code class="xref py py-obj docutils literal"><span class="pre">delete</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.base._BaseWrapper.__init__" title="freediscovery.base._BaseWrapper.__init__"><code class="xref py py-obj docutils literal"><span class="pre">__init__</span></code></a>([cache_dir,&nbsp;dsid,&nbsp;mid,&nbsp;...])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#freediscovery.base._BaseWrapper.delete" title="freediscovery.base._BaseWrapper.delete"><code class="xref py py-obj docutils literal"><span class="pre">delete</span></code></a>()</td>
 <td>Delete a trained model</td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">get_dsid</span></code>(cache_dir,&nbsp;mid)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">get_dsid</span></code>(cache_dir,&nbsp;mid)</td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.base.BaseEstimator.get_params" title="freediscovery.base.BaseEstimator.get_params"><code class="xref py py-obj docutils literal"><span class="pre">get_params</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#freediscovery.base._BaseWrapper.get_params" title="freediscovery.base._BaseWrapper.get_params"><code class="xref py py-obj docutils literal"><span class="pre">get_params</span></code></a>()</td>
 <td>Get model parameters</td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">get_path</span></code>(mid)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">get_path</span></code>(mid)</td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">list_models</span></code>()</td>
-<td></td>
+<tr class="row-even"><td><a class="reference internal" href="#freediscovery.base._BaseWrapper.list_models" title="freediscovery.base._BaseWrapper.list_models"><code class="xref py py-obj docutils literal"><span class="pre">list_models</span></code></a>()</td>
+<td>List existing models of this type</td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
-<dt id="freediscovery.base.BaseEstimator.delete">
-<code class="descname">delete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/9b530da/freediscovery/base.py#L202"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.base.BaseEstimator.delete" title="Permalink to this definition">¶</a></dt>
+<dt id="freediscovery.base._BaseWrapper.delete">
+<code class="descname">delete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/61b9d57/freediscovery/base.py#L110"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.base._BaseWrapper.delete" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete a trained model</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="freediscovery.base.BaseEstimator.get_params">
-<code class="descname">get_params</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/9b530da/freediscovery/base.py#L212"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.base.BaseEstimator.get_params" title="Permalink to this definition">¶</a></dt>
+<dt id="freediscovery.base._BaseWrapper.get_params">
+<code class="descname">get_params</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/61b9d57/freediscovery/base.py#L120"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.base._BaseWrapper.get_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get model parameters</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.base._BaseWrapper.list_models">
+<code class="descname">list_models</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/61b9d57/freediscovery/base.py#L146"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.base._BaseWrapper.list_models" title="Permalink to this definition">¶</a></dt>
+<dd><p>List existing models of this type</p>
 </dd></dl>
 
 </dd></dl>
