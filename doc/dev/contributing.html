@@ -94,7 +94,8 @@
 <li class="toctree-l1"><a class="reference internal" href="scaling_benchmarks.html">Scaling Benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment options</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Contributing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#submitting-bugs">Submitting bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#contributing">Contributing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#test-suite">Test Suite</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#building-documentation">Building Documentation</a></li>
 </ul>
@@ -150,11 +151,24 @@
   <div class="section" id="contributing">
 <span id="contributing"></span><h1>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h1>
 <p>This section aims to regroup useful information for contributing to FreeDiscovery.</p>
-<div class="section" id="installation">
-<span id="installation"></span><h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
-<p>A Python installation using Anaconda distribution is recommended for development (particularly on Windows), as described in the corresponding <a class="reference external" href="./installation_instructions.html">documentation section</a>. However, it is also possible to use e.g. system Python, and install the list of dependencies (split between <code class="docutils literal"><span class="pre">script/requirements_conda.txt</span></code> and <code class="docutils literal"><span class="pre">scripts/requirements_pip_*.txt</span></code> under <code class="docutils literal"><span class="pre">build_tools/</span></code>) with <code class="docutils literal"><span class="pre">pip</span></code>.</p>
-<p>The issue tracker is located at: <a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery">https://github.com/FreeDiscovery/FreeDiscovery</a>.</p>
-<p>The <a class="reference external" href="http://scikit-learn.org/stable/developers/index.html">scikit learn developer guide</a> is also worth reading.</p>
+<div class="section" id="submitting-bugs">
+<span id="submitting-bugs"></span><h2>Submitting bugs<a class="headerlink" href="#submitting-bugs" title="Permalink to this headline">¶</a></h2>
+<p>Please feel free to open an issue in the GitHub issue tracker at <a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/issues">https://github.com/FreeDiscovery/FreeDiscovery</a> for any problem that you may encounter.</p>
+<p>Running the test suite (cf. below) may also help in diagnosing the source of the problem.</p>
+</div>
+<div class="section" id="contributing">
+<span id="id1"></span><h2>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h2>
+<p>This section describes the workflow for creating Pull Requests (PR). For more complex contributions, it may also be useful to create an associated issue.</p>
+<ol class="simple">
+<li>Fork the main FreeDiscovery repository</li>
+<li>Clone this fork on your computer and <a class="reference external" href="https://freediscovery.github.io/doc/dev/installation_instructions.html#a-python-install">install it</a></li>
+<li>Make the appropriate changes</li>
+<li>Make sure that the tests suite (cf. below) does not produce errors</li>
+<li>Commit and push the changes to GitHub</li>
+<li>Create a Pull Request from your branch to the <code class="docutils literal"><span class="pre">master</span></code> branch of the FreeDiscovery repository so it can be reviewed and merged.</li>
+<li>If any of the continuous integration services (Travis CI, Appveyor CI, Circle CI) produce an error, review the corresponding output and fix the code if appropriate.</li>
+<li>After the PR is merged, this branch can be safely deleted from your fork (and a new one may be created for subsequent contributions).</li>
+</ol>
 </div>
 <div class="section" id="test-suite">
 <span id="test-suite"></span><h2>Test Suite<a class="headerlink" href="#test-suite" title="Permalink to this headline">¶</a></h2>
