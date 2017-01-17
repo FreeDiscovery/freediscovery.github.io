@@ -151,12 +151,14 @@
 </li>
 <li><p class="first"><strong>Data Params</strong>:</p>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">dataset_id</span></code>: dataset id</li>
+<li><code class="docutils literal"><span class="pre">parent_id</span></code>: <code class="docutils literal"><span class="pre">dataset_id</span></code> or <code class="docutils literal"><span class="pre">lsi_id</span></code></li>
 <li><code class="docutils literal"><span class="pre">index</span></code>: [required] document indices of the training set</li>
 <li><code class="docutils literal"><span class="pre">y</span></code>: [required] target binary class relative to index</li>
 <li><code class="docutils literal"><span class="pre">method</span></code>: classification algorithm to use (default: LogisticRegression),
 * &#8220;LogisticRegression&#8221;: <a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression">LogisticRegression</a>
 * &#8220;LinearSVC&#8221;: <a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html">Linear SVM</a>,
+* &#8220;NearestNeighbor&#8221;: nearest neighbor classifier (requires LSI)
+* &#8220;NearestCentroid&#8221;: nearest centroid classifier (requires LSI)
 * &#8220;xgboost&#8221;: <a class="reference external" href="https://xgboost.readthedocs.io/en/latest/model.html">Gradient Boosting</a>
 (<em>Warning:</em> for the moment xgboost is not istalled for a direct install on Windows)</li>
 <li><code class="docutils literal"><span class="pre">cv</span></code>: binary, if true optimal parameters of the ML model are determined by cross-validation over 5 stratified K-folds (default True).</li>
