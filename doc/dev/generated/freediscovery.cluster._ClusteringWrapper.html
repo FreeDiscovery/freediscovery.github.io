@@ -1,0 +1,460 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>freediscovery.cluster._ClusteringWrapper &mdash; FreeDiscovery 0.8.dev0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="FreeDiscovery 0.8.dev0 documentation" href="../index.html"/>
+        <link rel="up" title="Python API Reference" href="../python_api.html"/>
+        <link rel="next" title="freediscovery.cluster.ClusterLabels" href="freediscovery.cluster.ClusterLabels.html"/>
+        <link rel="prev" title="freediscovery.lsi._LSIWrapper" href="freediscovery.lsi._LSIWrapper.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> FreeDiscovery
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.8.dev0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation_instructions.html">Installation Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rest_api/index.html">REST API Reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../python_api.html">Python API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#datasets">Datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#parsers">Parsers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#feature-extraction">Feature extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#document-categorization">Document categorization</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../python_api.html#document-clustering">Document clustering</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">freediscovery.cluster._ClusteringWrapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="freediscovery.cluster.ClusterLabels.html">freediscovery.cluster.ClusterLabels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="freediscovery.cluster._DendrogramChildren.html">freediscovery.cluster._DendrogramChildren</a></li>
+<li class="toctree-l3"><a class="reference internal" href="freediscovery.cluster.utils._binary_linkage2clusters.html">freediscovery.cluster.utils._binary_linkage2clusters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="freediscovery.cluster.utils._merge_clusters.html">freediscovery.cluster.utils._merge_clusters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#duplicates-detection">Duplicates detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#email-threading">Email threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#tools">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#metrics">Metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#exceptions">Exceptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scaling_benchmarks.html">Scaling Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">Deployment options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">FreeDiscovery</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+        <li><a href="../python_api.html">Python API Reference</a> &raquo;</li>
+      
+    <li>freediscovery.cluster._ClusteringWrapper</li>
+    <li class="wy-breadcrumbs-aside">
+      
+          
+          <a href="../_sources/generated/freediscovery.cluster._ClusteringWrapper.rst.txt" rel="nofollow"> View page source</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="freediscovery-cluster-clusteringwrapper">
+<h1>freediscovery.cluster._ClusteringWrapper<a class="headerlink" href="#freediscovery-cluster-clusteringwrapper" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="freediscovery.cluster._ClusteringWrapper">
+<em class="property">class </em><code class="descclassname">freediscovery.cluster.</code><code class="descname">_ClusteringWrapper</code><span class="sig-paren">(</span><em>cache_dir=u'/tmp/'</em>, <em>parent_id=None</em>, <em>mid=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/c07d66d/freediscovery/cluster/base.py#L137"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster._ClusteringWrapper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Document clustering</p>
+<p>The algorithms are adapted from scikit learn.</p>
+<p>The option <cite>use_hashing=False</cite> must be set for the feature extraction.
+Recommended options also include, <cite>use_idf=1, sublinear_tf=0, binary=0</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>cache_dir</strong> (<em>str</em>) &#8211; directory where to save temporary and regression files</li>
+<li><strong>parent_id</strong> (<em>str</em><em>, </em><em>optional</em>) &#8211; dataset id</li>
+<li><strong>mid</strong> (<em>str</em><em>, </em><em>optional</em>) &#8211; model id</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="freediscovery.cluster._ClusteringWrapper.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>cache_dir=u'/tmp/'</em>, <em>parent_id=None</em>, <em>mid=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/c07d66d/freediscovery/cluster/base.py#L157"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster._ClusteringWrapper.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.cluster._ClusteringWrapper.__init__" title="freediscovery.cluster._ClusteringWrapper.__init__"><code class="xref py py-obj docutils literal"><span class="pre">__init__</span></code></a>([cache_dir,&nbsp;parent_id,&nbsp;mid])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#freediscovery.cluster._ClusteringWrapper.birch" title="freediscovery.cluster._ClusteringWrapper.birch"><code class="xref py py-obj docutils literal"><span class="pre">birch</span></code></a>(n_clusters[,&nbsp;threshold])</td>
+<td>Perform Birch clustering</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.cluster._ClusteringWrapper.compute_labels" title="freediscovery.cluster._ClusteringWrapper.compute_labels"><code class="xref py py-obj docutils literal"><span class="pre">compute_labels</span></code></a>([label_method,&nbsp;n_top_words,&nbsp;...])</td>
+<td>Compute the cluster labels</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#freediscovery.cluster._ClusteringWrapper.dbscan" title="freediscovery.cluster._ClusteringWrapper.dbscan"><code class="xref py py-obj docutils literal"><span class="pre">dbscan</span></code></a>([n_clusters,&nbsp;eps,&nbsp;min_samples,&nbsp;...])</td>
+<td>Perform DBSCAN clustering</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.cluster._ClusteringWrapper.delete" title="freediscovery.cluster._ClusteringWrapper.delete"><code class="xref py py-obj docutils literal"><span class="pre">delete</span></code></a>()</td>
+<td>Delete a trained model</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#freediscovery.cluster._ClusteringWrapper.get_params" title="freediscovery.cluster._ClusteringWrapper.get_params"><code class="xref py py-obj docutils literal"><span class="pre">get_params</span></code></a>()</td>
+<td>Get model parameters</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.cluster._ClusteringWrapper.k_means" title="freediscovery.cluster._ClusteringWrapper.k_means"><code class="xref py py-obj docutils literal"><span class="pre">k_means</span></code></a>(n_clusters[,&nbsp;batch_size])</td>
+<td>Perform K-mean clustering</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#freediscovery.cluster._ClusteringWrapper.list_models" title="freediscovery.cluster._ClusteringWrapper.list_models"><code class="xref py py-obj docutils literal"><span class="pre">list_models</span></code></a>()</td>
+<td>List existing models of this type</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.cluster._ClusteringWrapper.scores" title="freediscovery.cluster._ClusteringWrapper.scores"><code class="xref py py-obj docutils literal"><span class="pre">scores</span></code></a>(ref_labels,&nbsp;labels)</td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">param ref_labels:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">reference labels</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#freediscovery.cluster._ClusteringWrapper.ward_hc" title="freediscovery.cluster._ClusteringWrapper.ward_hc"><code class="xref py py-obj docutils literal"><span class="pre">ward_hc</span></code></a>(n_clusters[,&nbsp;n_neighbors])</td>
+<td>Perform Ward hierarchical clustering</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="freediscovery.cluster._ClusteringWrapper.birch">
+<code class="descname">birch</code><span class="sig-paren">(</span><em>n_clusters</em>, <em>threshold=0.5</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/c07d66d/freediscovery/cluster/base.py#L283"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster._ClusteringWrapper.birch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform Birch clustering</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>n_clusters</strong> (<em>int</em>) &#8211; number of clusters</li>
+<li><strong>lsi_components</strong> (<em>int</em>) &#8211; apply LSA before the clustering algorithm</li>
+<li><strong>threshold</strong> (<em>float</em>) &#8211; birch threshold</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.cluster._ClusteringWrapper.compute_labels">
+<code class="descname">compute_labels</code><span class="sig-paren">(</span><em>label_method=u'centroid-frequency'</em>, <em>n_top_words=6</em>, <em>cluster_indices=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/c07d66d/freediscovery/cluster/base.py#L224"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster._ClusteringWrapper.compute_labels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the cluster labels</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>label_method</strong> (<em>str</em><em>, </em><em>default='centroid-frequency'</em>) &#8211; the method used for computing the cluster labels</li>
+<li><strong>n_top_words</strong> (<em>int</em><em>, </em><em>default=10</em>) &#8211; keep only most relevant n_top_words words</li>
+<li><strong>cluster_indices</strong> (<em>list</em><em>, </em><em>default=None</em>) &#8211; if not None, ignore clustering given by the clustering model and compute
+terms for the cluster provided by the given indices</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>cluster_labels</strong></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">array [n_samples]</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.cluster._ClusteringWrapper.dbscan">
+<code class="descname">dbscan</code><span class="sig-paren">(</span><em>n_clusters=None</em>, <em>eps=0.5</em>, <em>min_samples=10</em>, <em>algorithm=u'auto'</em>, <em>leaf_size=30</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/c07d66d/freediscovery/cluster/base.py#L335"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster._ClusteringWrapper.dbscan" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform DBSCAN clustering</p>
+<p>This can also be used for Duplicate Detection (when ep</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>n_clusters</strong> (<em>int</em>) &#8211; number of clusters # not used just present for compatibility</li>
+<li><strong>lsi_components</strong> (<em>int</em>) &#8211; apply LSA before the clustering algorithm</li>
+<li><strong>eps</strong> (<em>float</em>) &#8211; <dl class="docutils">
+<dt>The maximum distance between two samples for them to be considered</dt>
+<dd>as in the same neighborhood.</dd>
+</dl>
+</li>
+<li><strong>min_samples</strong> (<em>int</em>) &#8211; The number of samples (or total weight) in a neighborhood for a point
+to be considered as a core point. This includes the point itself.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.cluster._ClusteringWrapper.delete">
+<code class="descname">delete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/c07d66d/freediscovery/base.py#L100"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster._ClusteringWrapper.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete a trained model</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.cluster._ClusteringWrapper.get_params">
+<code class="descname">get_params</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/c07d66d/freediscovery/base.py#L110"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster._ClusteringWrapper.get_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get model parameters</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.cluster._ClusteringWrapper.k_means">
+<code class="descname">k_means</code><span class="sig-paren">(</span><em>n_clusters</em>, <em>batch_size=1000</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/c07d66d/freediscovery/cluster/base.py#L265"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster._ClusteringWrapper.k_means" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform K-mean clustering</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>n_clusters</strong> (<em>int</em>) &#8211; number of clusters</li>
+<li><strong>batch_size</strong> (<em>int</em>) &#8211; the bath size for the MiniBatchKMeans algorithm</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.cluster._ClusteringWrapper.list_models">
+<code class="descname">list_models</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/c07d66d/freediscovery/base.py#L137"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster._ClusteringWrapper.list_models" title="Permalink to this definition">¶</a></dt>
+<dd><p>List existing models of this type</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.cluster._ClusteringWrapper.scores">
+<code class="descname">scores</code><span class="sig-paren">(</span><em>ref_labels</em>, <em>labels</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/c07d66d/freediscovery/cluster/base.py#L364"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster._ClusteringWrapper.scores" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>ref_labels</strong> (<em>list</em><em>,</em><em></em>) &#8211; reference labels</li>
+<li><strong>labels</strong> (<em>list</em><em>,</em><em></em>) &#8211; computed labels</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.cluster._ClusteringWrapper.ward_hc">
+<code class="descname">ward_hc</code><span class="sig-paren">(</span><em>n_clusters</em>, <em>n_neighbors=10</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/c07d66d/freediscovery/cluster/base.py#L306"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster._ClusteringWrapper.ward_hc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform Ward hierarchical clustering</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>n_clusters</strong> (<em>int</em>) &#8211; number of clusters</li>
+<li><strong>lsi_components</strong> (<em>int</em>) &#8211; apply LSA before the clustering algorithm</li>
+<li><strong>n_neighbors</strong> (<em>int</em>) &#8211; N nearest neighbors used for computing the connectivity matrix</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="freediscovery.cluster.ClusterLabels.html" class="btn btn-neutral float-right" title="freediscovery.cluster.ClusterLabels" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="freediscovery.lsi._LSIWrapper.html" class="btn btn-neutral" title="freediscovery.lsi._LSIWrapper" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Grossman Labs LLC.
+      Last updated on Jan 17, 2017.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.8.dev0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,359 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Clustering Example [Python API] &mdash; FreeDiscovery 0.8.dev0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="FreeDiscovery 0.8.dev0 documentation" href="../index.html"/>
+        <link rel="up" title="Examples" href="index.html"/>
+        <link rel="next" title="Email threading Example [REST API]" href="REST_email_threading.html"/>
+        <link rel="prev" title="Categorization Example [Python API]" href="python_categorization.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> FreeDiscovery
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.8.dev0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation_instructions.html">Installation Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rest_api/index.html">REST API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python_api.html">Python API Reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="python_categorization.html">Categorization Example [Python API]</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Clustering Example [Python API]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="REST_email_threading.html">Email threading Example [REST API]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="REST_clustering.html">Clustering Example [REST API]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="REST_duplicate_detection.html">Duplicate Detection Example [REST API]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="REST_categorization.html">Categorization Example [REST API]</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../scaling_benchmarks.html">Scaling Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">Deployment options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">FreeDiscovery</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+        <li><a href="index.html">Examples</a> &raquo;</li>
+      
+    <li>Clustering Example [Python API]</li>
+    <li class="wy-breadcrumbs-aside">
+      
+          
+          <a href="../_sources/examples/python_clustering.rst.txt" rel="nofollow"> View page source</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="clustering-example-python-api">
+<span id="sphx-glr-examples-python-clustering-py"></span><h1>Clustering Example [Python API]<a class="headerlink" href="#clustering-example-python-api" title="Permalink to this headline">¶</a></h1>
+<p>An example of clustering using the Python API</p>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="mf">0.</span> <span class="n">Load</span> <span class="n">Dataset</span>
+
+<span class="mf">1.</span> <span class="n">Feature</span> <span class="n">extraction</span> <span class="p">(</span><span class="n">non</span> <span class="n">hashed</span><span class="p">)</span>
+
+
+<span class="mf">2.</span> <span class="n">Computing</span> <span class="n">LSI</span>
+
+
+<span class="mf">3.</span> <span class="n">Document</span> <span class="n">Clustering</span> <span class="p">(</span><span class="n">LSI</span> <span class="o">+</span> <span class="n">K</span><span class="o">-</span><span class="n">Means</span><span class="p">)</span>
+
+    <span class="o">..</span> <span class="n">computed</span> <span class="ow">in</span> <span class="mf">2.2</span><span class="n">s</span>
+   <span class="n">N_documents</span>                                      <span class="n">cluster_names</span>
+<span class="mi">7</span>          <span class="mi">608</span>  <span class="p">[</span><span class="n">nemec</span><span class="p">,</span> <span class="n">enron_development</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">enron</span><span class="p">,</span> <span class="n">doc</span><span class="p">,</span> <span class="n">ect</span><span class="p">]</span>
+<span class="mi">4</span>          <span class="mi">328</span>  <span class="p">[</span><span class="n">energy</span><span class="p">,</span> <span class="n">market</span><span class="p">,</span> <span class="n">enrononline</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">services</span><span class="p">,</span> <span class="o">...</span>
+<span class="mi">1</span>          <span class="mi">278</span>  <span class="p">[</span><span class="n">dasovich</span><span class="p">,</span> <span class="n">transaction</span><span class="p">,</span> <span class="n">enron</span><span class="p">,</span> <span class="n">master</span><span class="p">,</span> <span class="n">counter</span><span class="o">...</span>
+<span class="mi">8</span>          <span class="mi">269</span>              <span class="p">[</span><span class="n">ect</span><span class="p">,</span> <span class="n">fri</span><span class="p">,</span> <span class="n">eb3325</span><span class="p">,</span> <span class="n">meet</span><span class="p">,</span> <span class="n">normal</span><span class="p">,</span> <span class="n">hou</span><span class="p">]</span>
+<span class="mi">3</span>          <span class="mi">237</span>  <span class="p">[</span><span class="n">tana</span><span class="p">,</span> <span class="n">jones</span><span class="p">,</span> <span class="n">haedicke</span><span class="p">,</span> <span class="n">enron</span><span class="p">,</span> <span class="n">migration</span><span class="p">,</span> <span class="n">normal</span><span class="p">]</span>
+<span class="mi">6</span>          <span class="mi">213</span>               <span class="p">[</span><span class="n">wed</span><span class="p">,</span> <span class="n">tenet</span><span class="p">,</span> <span class="n">normal</span><span class="p">,</span> <span class="n">tue</span><span class="p">,</span> <span class="nb">oct</span><span class="p">,</span> <span class="n">test</span><span class="p">]</span>
+<span class="mi">2</span>          <span class="mi">194</span>       <span class="p">[</span><span class="n">mon</span><span class="p">,</span> <span class="n">tenet</span><span class="p">,</span> <span class="n">normal</span><span class="p">,</span> <span class="n">thu</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">sensitivity</span><span class="p">]</span>
+<span class="mi">0</span>          <span class="mi">185</span>  <span class="p">[</span><span class="n">teneo</span><span class="p">,</span> <span class="n">recipients</span><span class="p">,</span> <span class="n">shackleton_sara</span><span class="p">,</span> <span class="n">administr</span><span class="o">...</span>
+<span class="mi">5</span>           <span class="mi">97</span>        <span class="p">[</span><span class="n">sanders</span><span class="p">,</span> <span class="n">nov</span><span class="p">,</span> <span class="n">normal</span><span class="p">,</span> <span class="n">meeting</span><span class="p">,</span> <span class="n">lunch</span><span class="p">,</span> <span class="n">tue</span><span class="p">]</span>
+<span class="mi">9</span>           <span class="mi">56</span>    <span class="p">[</span><span class="n">rewrite</span><span class="p">,</span> <span class="n">server</span><span class="p">,</span> <span class="n">address</span><span class="p">,</span> <span class="n">smtp</span><span class="p">,</span> <span class="n">mail</span><span class="p">,</span> <span class="n">virtual</span><span class="p">]</span>
+
+<span class="mf">4.</span> <span class="n">Document</span> <span class="n">Clustering</span> <span class="p">(</span><span class="n">LSI</span> <span class="o">+</span> <span class="n">Ward</span> <span class="n">Hierarchical</span> <span class="n">Clustering</span><span class="p">)</span>
+
+    <span class="o">..</span> <span class="n">computed</span> <span class="ow">in</span> <span class="mf">1.7</span><span class="n">s</span>
+   <span class="n">N_documents</span>                                      <span class="n">cluster_names</span>
+<span class="mi">2</span>          <span class="mi">940</span>  <span class="p">[</span><span class="n">shackleton</span><span class="p">,</span> <span class="n">enron_development</span><span class="p">,</span> <span class="n">teneo</span><span class="p">,</span> <span class="n">shall</span><span class="p">,</span> <span class="o">...</span>
+<span class="mi">5</span>          <span class="mi">472</span>  <span class="p">[</span><span class="n">tenet</span><span class="p">,</span> <span class="n">normal</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">gmt</span><span class="p">,</span> <span class="n">sensitivity</span><span class="p">,</span> <span class="n">import</span><span class="o">...</span>
+<span class="mi">0</span>          <span class="mi">345</span>     <span class="p">[</span><span class="n">dasovich</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">berkeley</span><span class="p">,</span> <span class="n">alias</span><span class="p">,</span> <span class="n">haas</span><span class="p">,</span> <span class="n">edu</span><span class="p">]</span>
+<span class="mi">1</span>          <span class="mi">187</span>          <span class="p">[</span><span class="n">ect</span><span class="p">,</span> <span class="n">haedicke</span><span class="p">,</span> <span class="n">hou</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">group</span><span class="p">,</span> <span class="n">forster</span><span class="p">]</span>
+<span class="mi">4</span>          <span class="mi">122</span>        <span class="p">[</span><span class="n">tana</span><span class="p">,</span> <span class="n">jones</span><span class="p">,</span> <span class="n">enron</span><span class="p">,</span> <span class="n">lambert</span><span class="p">,</span> <span class="n">shults</span><span class="p">,</span> <span class="n">isda</span><span class="p">]</span>
+<span class="mi">6</span>          <span class="mi">108</span>  <span class="p">[</span><span class="n">nemec</span><span class="p">,</span> <span class="n">doc</span><span class="p">,</span> <span class="n">bump</span><span class="p">,</span> <span class="n">townsend</span><span class="p">,</span> <span class="n">nemec_gerald</span><span class="p">,</span> <span class="n">att</span><span class="o">...</span>
+<span class="mi">3</span>           <span class="mi">98</span>       <span class="p">[</span><span class="n">sanders</span><span class="p">,</span> <span class="n">normal</span><span class="p">,</span> <span class="n">nov</span><span class="p">,</span> <span class="n">lunch</span><span class="p">,</span> <span class="n">sent</span><span class="p">,</span> <span class="n">subject</span><span class="p">]</span>
+<span class="mi">8</span>           <span class="mi">73</span>  <span class="p">[</span><span class="n">ricafrente</span><span class="p">,</span> <span class="n">ricafrente_david</span><span class="p">,</span> <span class="n">eb3325</span><span class="p">,</span> <span class="n">teneo</span><span class="p">,</span> <span class="o">...</span>
+<span class="mi">9</span>           <span class="mi">64</span>  <span class="p">[</span><span class="n">migration</span><span class="p">,</span> <span class="n">outlook</span><span class="p">,</span> <span class="n">team</span><span class="p">,</span> <span class="n">mtg</span><span class="p">,</span> <span class="n">normal</span><span class="p">,</span> <span class="n">sensit</span><span class="o">...</span>
+<span class="mi">7</span>           <span class="mi">56</span>    <span class="p">[</span><span class="n">rewrite</span><span class="p">,</span> <span class="n">server</span><span class="p">,</span> <span class="n">address</span><span class="p">,</span> <span class="n">smtp</span><span class="p">,</span> <span class="n">mail</span><span class="p">,</span> <span class="n">virtual</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">freediscovery.text</span> <span class="kn">import</span> <span class="n">FeatureVectorizer</span>
+<span class="kn">from</span> <span class="nn">freediscovery.cluster</span> <span class="kn">import</span> <span class="n">_ClusteringWrapper</span>
+<span class="kn">from</span> <span class="nn">freediscovery.lsi</span> <span class="kn">import</span> <span class="n">_LSIWrapper</span>
+<span class="kn">from</span> <span class="nn">freediscovery.datasets</span> <span class="kn">import</span> <span class="n">load_dataset</span>
+<span class="kn">from</span> <span class="nn">freediscovery.tests.run_suite</span> <span class="kn">import</span> <span class="n">check_cache</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;{:,.3f}&#39;</span><span class="o">.</span><span class="n">format</span>
+
+<span class="n">dataset_name</span> <span class="o">=</span> <span class="s2">&quot;treclegal09_2k_subset&quot;</span>
+<span class="n">cache_dir</span> <span class="o">=</span> <span class="n">check_cache</span><span class="p">()</span>
+
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;0. Load Dataset&quot;</span><span class="p">)</span>
+
+<span class="n">ds</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="n">dataset_name</span><span class="p">,</span> <span class="n">cache_dir</span><span class="o">=</span><span class="n">cache_dir</span><span class="p">)</span>
+
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">1. Feature extraction (non hashed)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">n_features</span> <span class="o">=</span> <span class="mi">30000</span>
+<span class="n">fe</span> <span class="o">=</span> <span class="n">FeatureVectorizer</span><span class="p">(</span><span class="n">cache_dir</span><span class="o">=</span><span class="n">cache_dir</span><span class="p">)</span>
+<span class="n">uuid</span> <span class="o">=</span> <span class="n">fe</span><span class="o">.</span><span class="n">preprocess</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="s1">&#39;data_dir&#39;</span><span class="p">],</span>
+                     <span class="n">n_features</span><span class="o">=</span><span class="n">n_features</span><span class="p">,</span> <span class="n">use_hashing</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                     <span class="n">use_idf</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">stop_words</span><span class="o">=</span><span class="s1">&#39;english&#39;</span><span class="p">)</span>
+<span class="n">uuid</span><span class="p">,</span> <span class="n">filenames</span> <span class="o">=</span> <span class="n">fe</span><span class="o">.</span><span class="n">transform</span><span class="p">()</span>
+
+
+
+
+<span class="n">n_clusters</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">n_top_words</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">lsi_components</span> <span class="o">=</span> <span class="mi">50</span>
+
+
+<span class="k">def</span> <span class="nf">repr_clustering</span><span class="p">(</span><span class="n">_labels</span><span class="p">,</span> <span class="n">_terms</span><span class="p">):</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">ridx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">_terms</span><span class="p">):</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;cluster_names&#39;</span><span class="p">:</span> <span class="n">row</span><span class="p">,</span> <span class="s1">&#39;N_documents&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">_labels</span> <span class="o">==</span> <span class="n">ridx</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()})</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;N_documents&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">out</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">2. Computing LSI</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">lsi</span> <span class="o">=</span> <span class="n">_LSIWrapper</span><span class="p">(</span><span class="n">cache_dir</span><span class="o">=</span><span class="n">cache_dir</span><span class="p">,</span> <span class="n">parent_id</span><span class="o">=</span><span class="n">uuid</span><span class="p">)</span>
+<span class="n">lsi_res</span><span class="p">,</span> <span class="n">exp_var</span> <span class="o">=</span> <span class="n">lsi</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">lsi_components</span><span class="p">)</span>  <span class="c1"># TODO unused variables</span>
+
+
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">3. Document Clustering (LSI + K-Means)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">cat</span> <span class="o">=</span> <span class="n">_ClusteringWrapper</span><span class="p">(</span><span class="n">cache_dir</span><span class="o">=</span><span class="n">cache_dir</span><span class="p">,</span> <span class="n">parent_id</span><span class="o">=</span><span class="n">lsi</span><span class="o">.</span><span class="n">mid</span><span class="p">)</span>
+
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="n">labels</span><span class="p">,</span> <span class="n">tree</span>  <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">k_means</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">)</span>
+<span class="n">terms</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">compute_labels</span><span class="p">(</span><span class="n">n_top_words</span><span class="o">=</span><span class="n">n_top_words</span><span class="p">)</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;    .. computed in {:.1f}s&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">repr_clustering</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">terms</span><span class="p">))</span>
+
+
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">4. Document Clustering (LSI + Ward Hierarchical Clustering)</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="n">labels</span><span class="p">,</span> <span class="n">tree</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">ward_hc</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">,</span>
+                           <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">5</span>   <span class="c1"># this is the connectivity constraint</span>
+                           <span class="p">)</span>
+<span class="n">terms</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">compute_labels</span><span class="p">(</span><span class="n">n_top_words</span><span class="o">=</span><span class="n">n_top_words</span><span class="p">)</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;    .. computed in {:.1f}s&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">repr_clustering</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">terms</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  23.583 seconds)</p>
+<div class="sphx-glr-footer container">
+<div class="sphx-glr-download container">
+<a class="reference download internal" href="../_downloads/python_clustering.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">python_clustering.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<a class="reference download internal" href="../_downloads/python_clustering.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">python_clustering.ipynb</span></code></a></div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="http://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="REST_email_threading.html" class="btn btn-neutral float-right" title="Email threading Example [REST API]" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="python_categorization.html" class="btn btn-neutral" title="Categorization Example [Python API]" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Grossman Labs LLC.
+      Last updated on Jan 17, 2017.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.8.dev0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,260 @@
+
+
+.. _sphx_glr_examples_REST_clustering.py:
+
+
+Clustering Example [REST API]
+-----------------------------
+
+Cluster documents into clusters
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    0. Load the test dataset
+     POST http://localhost:5001/api/v0/datasets/treclegal09_2k_subset
+
+    1.a Load dataset and initalize feature extraction
+     POST http://localhost:5001/api/v0/feature-extraction
+       => received [u'id', u'filenames']
+       => dsid = c8dc1666411b4c6c
+
+    1.b Run feature extraction
+     POST http://localhost:5001/api/v0/feature-extraction/c8dc1666411b4c6c
+
+    1.d. check the parameters of the extracted features
+     GET http://localhost:5001/api/v0/feature-extraction/c8dc1666411b4c6c
+         - binary: False
+         - n_jobs: -1
+         - stop_words: english
+         - use_hashing: False
+         - min_df: 4.0
+         - n_samples: 2465
+         - analyzer: word
+         - ngram_range: [1, 1]
+         - max_df: 0.75
+         - chunk_size: 2000
+         - use_idf: True
+         - data_dir: ../freediscovery_shared/treclegal09_2k_subset/data
+         - sublinear_tf: True
+         - n_samples_processed: 2465
+         - n_features: 30001
+         - norm: l2
+
+    2. Calculate LSI
+    POST http://localhost:5001/api/v0/lsi/
+      => LSI model id = 4364ce1cd84647af
+      => SVD decomposition with 100 dimensions explaining 50.54 % variabilty of the data
+
+    3.a. Document clustering (LSI + K-means)
+     POST http://localhost:5001/api/v0/clustering/k-mean/
+         => model id = 9da3f73a5eec4c03
+
+    3.b. Computing cluster labels
+     GET http://localhost:5001/api/v0/clustering/k-mean/9da3f73a5eec4c03
+        .. computed in 3.1s
+       N_documents                                      cluster_names
+    4          474  [u'nemec', u'master', u'agreement', u'ena', u'...
+    0          348  [u'ect', u'hou', u'trading', u'enron_developme...
+    3          309  [u'thu', u'sanders', u'oct', u'test', u'tiger'...
+    5          303  [u'tana', u'jones', u'enron', u'haedicke', u'p...
+    1          266  [u'tenet', u'meeting', u'wed', u'nov', u'migra...
+    9          192  [u'teneo', u'recipients', u'administrative', u...
+    2          191  [u'energy', u'berkeley', u'haas', u'edu', u'se...
+    8          189  [u'dasovich', u'calo', u'houston', u'message',...
+    6          137  [u'ricafrente', u'ricafrente_david', u'dupre',...
+    7           56  [u'rewrite', u'server', u'address', u'smtp', u...
+
+    4.a. Document clustering (LSI + Ward HC)
+     POST http://localhost:5001/api/v0/clustering/ward_hc/
+         => model id = 232f52c69c564b18
+
+    4.b. Computing cluster labels
+     GET http://localhost:5001/api/v0/clustering/ward_hc/232f52c69c564b18
+        .. computed in 1.7s
+       N_documents                                      cluster_names
+    0         1781  [u'test', u'tenet', u'oct', u'enron', u'teneo'...
+    1          278  [u'dasovich', u'shall', u'party', u'berkeley',...
+    6           80  [u'sanders', u'nov', u'lunch', u'oct', u'wed',...
+    2           68  [u'nemec', u'doc', u'sheet', u'agreement', u'g...
+    7           56  [u'rewrite', u'server', u'address', u'smtp', u...
+    4           46  [u'migration', u'outlook', u'team', u'nov', u'...
+    8           46  [u'ect', u'hou', u'ellis', u'taffy', u'milliga...
+    5           44  [u'haedicke', u'nov', u'labanowski', u'load', ...
+    3           43  [u'marcelo', u'tozzini', u'afac', u'mbtos', u'...
+    9           23  [u'ruppert', u'exxon', u'sprint', u'gillaspie'...
+
+    5. Delete the extracted features
+     DELETE http://localhost:5001/api/v0/feature-extraction/c8dc1666411b4c6c
+
+
+
+
+|
+
+
+.. code-block:: python
+
+
+    import numpy as np
+    import pandas as pd
+    from time import time
+    import requests
+
+    pd.options.display.float_format = '{:,.3f}'.format
+
+
+    def repr_clustering(labels, terms):
+        out = []
+        for ridx, row in enumerate(terms):
+            out.append({'cluster_names': row, 'N_documents': (labels == ridx).sum()})
+        out = pd.DataFrame(out).sort_values('N_documents', ascending=False)
+        return out
+
+    dataset_name = "treclegal09_2k_subset"     # see list of available datasets
+
+    BASE_URL = "http://localhost:5001/api/v0"  # FreeDiscovery server URL
+
+    print(" 0. Load the test dataset")
+    url = BASE_URL + '/datasets/{}'.format(dataset_name)
+    print(" POST", url)
+    res = requests.get(url).json()
+
+    # To use a custom dataset, simply specify the following variables
+    data_dir = res['data_dir']
+
+    # # 1. Feature extraction (non hashed)
+
+    print("\n1.a Load dataset and initalize feature extraction")
+    url = BASE_URL + '/feature-extraction'
+    print(" POST", url)
+    fe_opts = {'data_dir': data_dir,
+               'stop_words': 'english', 'chunk_size': 2000, 'n_jobs': -1,
+               'use_idf': 1, 'sublinear_tf': 1, 'binary': 0, 'n_features': 30001,
+               'analyzer': 'word', 'ngram_range': (1, 1), "norm": "l2",
+               'use_hashing': False,  # hashing should be disabled for clustering
+               'min_df': 4, 'max_df': 0.75
+               }
+    res = requests.post(url, json=fe_opts).json()
+
+    dsid = res['id']
+    print("   => received {}".format(list(res.keys())))
+    print("   => dsid = {}".format(dsid))
+
+
+    print("\n1.b Run feature extraction")
+    # progress status is available for the hashed version only
+    url = BASE_URL+'/feature-extraction/{}'.format(dsid)
+    print(" POST", url)
+    res = requests.post(url)
+
+    print("\n1.d. check the parameters of the extracted features")
+    url = BASE_URL + '/feature-extraction/{}'.format(dsid)
+    print(' GET', url)
+    res = requests.get(url).json()
+
+    print('\n'.join(['     - {}: {}'.format(key, val) for key, val in res.items() \
+                                                      if "filenames" not in key]))
+
+    print("\n2. Calculate LSI")
+
+    url = BASE_URL + '/lsi/'
+    print("POST", url)
+
+    n_components = 100
+    res = requests.post(url,
+                        json={'n_components': n_components,
+                              'parent_id': dsid
+                              }).json()
+
+    lsi_id = res['id']
+    print('  => LSI model id = {}'.format(lsi_id))
+    print('  => SVD decomposition with {} dimensions explaining {:.2f} % variabilty of the data'.format(
+                            n_components, res['explained_variance']*100))
+
+    # # 3. Document Clustering (LSI + K-Means)
+
+    print("\n3.a. Document clustering (LSI + K-means)")
+
+    url = BASE_URL + '/clustering/k-mean/'
+    print(" POST", url)
+    t0 = time()
+    res = requests.post(url,
+                        json={'parent_id': lsi_id,
+                              'n_clusters': 10,
+                              }).json()
+
+    mid = res['id']
+    print("     => model id = {}".format(mid))
+
+    print("\n3.b. Computing cluster labels")
+    url = BASE_URL + '/clustering/k-mean/{}'.format(mid)
+    print(" GET", url)
+    res = requests.get(url,
+                       json={'n_top_words': 6
+                             }).json()
+    t1 = time()
+
+    print('    .. computed in {:.1f}s'.format(t1 - t0))
+    print(repr_clustering(np.array(res['labels']), res['cluster_terms']))
+
+
+    # # 4. Document Clustering (LSI + Ward Hierarchical Clustering)
+
+    print("\n4.a. Document clustering (LSI + Ward HC)")
+
+    url = BASE_URL + '/clustering/ward_hc/'
+    print(" POST", url)
+    t0 = time()
+    res = requests.post(url,
+                        json={'parent_id': lsi_id,
+                              'n_clusters': 10,
+                              'n_neighbors': 5  # this is the connectivity constraint
+                              }).json()
+
+    mid = res['id']
+    print("     => model id = {}".format(mid))
+
+    print("\n4.b. Computing cluster labels")
+    url = BASE_URL + '/clustering/ward_hc/{}'.format(mid)
+    print(" GET", url)
+    res = requests.get(url,
+                       json={'n_top_words': 6
+                             }).json()
+    t1 = time()
+
+    print('    .. computed in {:.1f}s'.format(t1 - t0))
+    print(repr_clustering(np.array(res['labels']), res['cluster_terms']))
+
+
+    # 4. Cleaning
+    print("\n5. Delete the extracted features")
+    url = BASE_URL + '/feature-extraction/{}'.format(dsid)
+    print(" DELETE", url)
+    requests.delete(url)
+
+**Total running time of the script:** ( 0 minutes  56.629 seconds)
+
+
+
+.. container:: sphx-glr-footer
+
+
+  .. container:: sphx-glr-download
+
+     :download:`Download Python source code: REST_clustering.py <REST_clustering.py>`
+
+
+
+  .. container:: sphx-glr-download
+
+     :download:`Download Jupyter notebook: REST_clustering.ipynb <REST_clustering.ipynb>`
+
+.. rst-class:: sphx-glr-signature
+
+    `Generated by Sphinx-Gallery <http://sphinx-gallery.readthedocs.io>`_

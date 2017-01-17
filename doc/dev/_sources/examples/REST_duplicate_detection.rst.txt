@@ -1,0 +1,282 @@
+
+
+.. _sphx_glr_examples_REST_duplicate_detection.py:
+
+
+Duplicate Detection Example [REST API]
+--------------------------------------
+
+Find near-duplicates in a text collection
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    0. Load the test dataset
+     GET http://localhost:5001/api/v0/datasets/treclegal09_2k_subset
+
+    1.a Load dataset and initalize feature extraction
+     POST http://localhost:5001/api/v0/feature-extraction
+       => received [u'id', u'filenames']
+       => dsid = d1bbc598cf8f4689
+
+    1.b Run feature extraction
+     POST http://localhost:5001/api/v0/feature-extraction/d1bbc598cf8f4689
+
+    1.d. check the parameters of the extracted features
+     GET http://localhost:5001/api/v0/feature-extraction/d1bbc598cf8f4689
+         - binary: False
+         - n_jobs: -1
+         - stop_words: english
+         - use_hashing: False
+         - min_df: 4.0
+         - n_samples: 2465
+         - analyzer: word
+         - ngram_range: [1, 1]
+         - max_df: 0.75
+         - chunk_size: 2000
+         - use_idf: True
+         - data_dir: ../freediscovery_shared/treclegal09_2k_subset/data
+         - sublinear_tf: False
+         - n_samples_processed: 2465
+         - n_features: 30001
+         - norm: l2
+
+    2. Near Duplicates detection by cosine similarity (DBSCAN)
+     POST http://localhost:5001/api/v0/clustering/dbscan/
+         => model id = d87416edd3394bae
+     GET http://localhost:5001/api/v0/clustering/dbscan/d87416edd3394bae
+        .. computed in 6.4s
+    Found 73 duplicates / 2465
+
+    3. Near Duplicates Detection using I-Match
+     POST http://localhost:5001/api/v0/duplicate-detection/
+         => model id = 079cfcb45e174c85
+        .. computed in 0.0s
+     GET http://localhost:5001/api/v0/duplicate-detection/079cfcb45e174c85
+        .. computed in 2.5s
+    Found 340 duplicates / 2465
+
+    3. Duplicate detection by Simhash
+     POST http://localhost:5001/api/v0/duplicate-detection/
+         => model id = 0cf8f7857aaa4f6f
+        .. computed in 0.7s
+     GET http://localhost:5001/api/v0/duplicate-detection/0cf8f7857aaa4f6f
+        .. computed in 0.1s
+    Found 303 duplicates / 2465
+     GET http://localhost:5001/api/v0/duplicate-detection/0cf8f7857aaa4f6f
+        .. computed in 0.1s
+    Found 303 duplicates / 2465
+
+    4.a Delete the extracted features
+     DELETE http://localhost:5001/api/v0/feature-extraction/d1bbc598cf8f4689
+
+
+
+
+|
+
+
+.. code-block:: python
+
+    from __future__ import print_function
+
+    from time import time
+    import sys
+    import platform
+
+    import numpy as np
+    import pandas as pd
+    import requests
+
+    pd.options.display.float_format = '{:,.3f}'.format
+
+
+    dataset_name = "treclegal09_2k_subset"     # see list of available datasets
+
+    BASE_URL = "http://localhost:5001/api/v0"  # FreeDiscovery server URL
+
+    print(" 0. Load the test dataset")
+    url = BASE_URL + '/datasets/{}'.format(dataset_name)
+    print(" GET", url)
+    res = requests.get(url)
+    res = res.json()
+
+    # To use a custom dataset, simply specify the following variables
+    data_dir = res['data_dir']
+    # # 1. Feature extraction (non hashed)
+
+    print("\n1.a Load dataset and initalize feature extraction")
+    url = BASE_URL + '/feature-extraction'
+    print(" POST", url)
+    fe_opts = {'data_dir': data_dir,
+               'stop_words': 'english', 'chunk_size': 2000, 'n_jobs': -1,
+               'use_idf': 1, 'sublinear_tf': 0, 'binary': 0, 'n_features': 30001,
+               'analyzer': 'word', 'ngram_range': (1, 1), "norm": "l2",
+               'use_hashing': False,  # hashing should be disabled for clustering
+               'min_df': 4, 'max_df': 0.75
+              }
+    res = requests.post(url, json=fe_opts)
+
+    dsid = res.json()['id']
+    print("   => received {}".format(list(res.json().keys())))
+    print("   => dsid = {}".format(dsid))
+
+
+    print("\n1.b Run feature extraction")
+    # progress status is available for the hashed version only
+    url = BASE_URL+'/feature-extraction/{}'.format(dsid)
+    print(" POST", url)
+    res = requests.post(url)
+
+    print("\n1.d. check the parameters of the extracted features")
+    url = BASE_URL + '/feature-extraction/{}'.format(dsid)
+    print(' GET', url)
+    res = requests.get(url)
+
+    data = res.json()
+    print('\n'.join(['     - {}: {}'.format(key, val) for key, val in data.items() \
+                                                      if "filenames" not in key]))
+
+
+    print("\n2. Near Duplicates detection by cosine similarity (DBSCAN)")
+
+    url = BASE_URL + '/clustering/dbscan/'
+    print(" POST", url)
+    t0 = time()
+    res = requests.post(url,
+            json={'parent_id': dsid,
+                  'lsi_components': 100,
+                  'eps': 0.1,            # 2*cosine distance for documents to be considered as duplicates
+                  'n_max_samples': 2
+                  }).json()
+
+    mid  = res['id']
+    print("     => model id = {}".format(mid))
+
+    url = BASE_URL + '/clustering/dbscan/{}'.format(mid)
+    print(" GET", url)
+    res = requests.get(url,
+            json={'n_top_words': 0, # don't compute cluster labels
+                  }).json()
+    t1 = time()
+
+    print('    .. computed in {:.1f}s'.format(t1 - t0))
+
+    labels_ = res['labels']
+
+    print('Found {} duplicates / {}'.format(len(labels_) - len(np.unique(labels_)), len(labels_)))
+
+
+    print("\n3. Near Duplicates Detection using I-Match")
+
+    url = BASE_URL + '/duplicate-detection/'
+    print(" POST", url)
+    t0 = time()
+    res = requests.post(url,
+            json={'parent_id': dsid,
+                  'method': 'i-match',
+                  }) 
+
+    data = res.json()
+    mid  = data['id']
+    print("     => model id = {}".format(mid))
+
+    print('    .. computed in {:.1f}s'.format(time() - t0))
+
+
+    url = BASE_URL + '/duplicate-detection/{}'.format(mid)
+    print(" GET", url)
+    t0 = time()
+    res = requests.get(url,
+            json={'n_rand_lexicons': 10,
+                  'rand_lexicon_ratio': 0.9}).json()
+    t1 = time()
+    print('    .. computed in {:.1f}s'.format(time() - t0))
+
+    labels_ = res['cluster_id']
+
+    print('Found {} duplicates / {}'.format(len(labels_) - len(np.unique(labels_)), len(labels_)))
+
+
+
+    if platform.system() == 'Windows':
+        print('Simhash-py is currently not implemented for Windows.')
+        sys.exit()
+
+    print("\n3. Duplicate detection by Simhash")
+
+    url = BASE_URL + '/duplicate-detection/'
+    print(" POST", url)
+    t0 = time()
+    res = requests.post(url,
+            json={'parent_id': dsid,
+                  'method': 'simhash',
+                  }) 
+
+    data = res.json()
+    mid  = data['id']
+    print("     => model id = {}".format(mid))
+
+    print('    .. computed in {:.1f}s'.format(time() - t0))
+
+
+
+    url = BASE_URL + '/duplicate-detection/{}'.format(mid)
+    print(" GET", url)
+    t0 = time()
+    res = requests.get(url,
+            json={'distance': 1 }) 
+    data = res.json()
+    print('    .. computed in {:.1f}s'.format(time() - t0))
+
+    labels_ = data['cluster_id']
+
+    print('Found {} duplicates / {}'.format(len(labels_) - len(np.unique(labels_)), len(labels_)))
+
+
+
+    url = BASE_URL + '/duplicate-detection/{}'.format(mid)
+    print(" GET", url)
+    t0 = time()
+    res = requests.get(url,
+            json={'distance': 1 }) 
+    data = res.json()
+    print('    .. computed in {:.1f}s'.format(time() - t0))
+
+    labels_ = data['cluster_id']
+
+    print('Found {} duplicates / {}'.format(len(labels_) - len(np.unique(labels_)), len(labels_)))
+
+
+
+    # 4. Cleaning
+    print("\n4.a Delete the extracted features")
+    url = BASE_URL + '/feature-extraction/{}'.format(dsid)
+    print(" DELETE", url)
+    requests.delete(url)
+
+**Total running time of the script:** ( 0 minutes  11.894 seconds)
+
+
+
+.. container:: sphx-glr-footer
+
+
+  .. container:: sphx-glr-download
+
+     :download:`Download Python source code: REST_duplicate_detection.py <REST_duplicate_detection.py>`
+
+
+
+  .. container:: sphx-glr-download
+
+     :download:`Download Jupyter notebook: REST_duplicate_detection.ipynb <REST_duplicate_detection.ipynb>`
+
+.. rst-class:: sphx-glr-signature
+
+    `Generated by Sphinx-Gallery <http://sphinx-gallery.readthedocs.io>`_

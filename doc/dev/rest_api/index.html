@@ -93,6 +93,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#load-benchmark-dataset">Load Benchmark Dataset</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#parsers">Parsers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#feature-extraction">Feature Extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#latent-semantic-indexing-lsi">Latent Semantic Indexing (LSI)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#document-categorizaiton">Document Categorizaiton</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#document-clustering">Document Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#near-duplicate-detection">Near Duplicate Detection</a></li>
@@ -241,8 +242,8 @@
 </tbody>
 </table>
 </div>
-<div class="section" id="document-categorizaiton">
-<h2>Document Categorizaiton<a class="headerlink" href="#document-categorizaiton" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="latent-semantic-indexing-lsi">
+<h2>Latent Semantic Indexing (LSI)<a class="headerlink" href="#latent-semantic-indexing-lsi" title="Permalink to this headline">¶</a></h2>
 <table border="1" class="docutils">
 <colgroup>
 <col width="56%" />
@@ -254,14 +255,6 @@
 <td>POST</td>
 <td>Construct the Latent Semantic Indexing (LSI) model</td>
 </tr>
-<tr class="row-even"><td><a class="reference external" href="./lsi_predict_post.html">/api/v0/lsi/&lt;lsi-id&gt;/predict</a></td>
-<td>POST</td>
-<td>Predict categorization with LSI</td>
-</tr>
-<tr class="row-odd"><td><a class="reference external" href="./lsi_test_post.html">/api/v0/lsi/&lt;lsi-id&gt;/test</a></td>
-<td>POST</td>
-<td>Test categorization with LSI</td>
-</tr>
 <tr class="row-even"><td><a class="reference external" href="./lsi_get.html">/api/v0/lsi/&lt;lsi-id&gt;</a></td>
 <td>GET</td>
 <td>Show LSI model parameters</td>
@@ -270,23 +263,35 @@
 <td>DELETE</td>
 <td>Delete a LSI model</td>
 </tr>
-<tr class="row-even"><td><a class="reference external" href="./categorization_post.html">/api/v0/categorization/</a></td>
+</tbody>
+</table>
+</div>
+<div class="section" id="document-categorizaiton">
+<h2>Document Categorizaiton<a class="headerlink" href="#document-categorizaiton" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="56%" />
+<col width="5%" />
+<col width="39%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference external" href="./categorization_post.html">/api/v0/categorization/</a></td>
 <td>POST</td>
 <td>Build the ML categorization model</td>
 </tr>
-<tr class="row-odd"><td><a class="reference external" href="./categorization_predict_post.html">/api/v0/categorization/&lt;model-id&gt;/predict</a></td>
+<tr class="row-even"><td><a class="reference external" href="./categorization_predict_post.html">/api/v0/categorization/&lt;model-id&gt;/predict</a></td>
 <td>POST</td>
 <td>Categorize documents using different ML algorithms</td>
 </tr>
-<tr class="row-even"><td><a class="reference external" href="./categorization_test_post.html">/api/v0/categorization/&lt;model-id&gt;/test</a></td>
+<tr class="row-odd"><td><a class="reference external" href="./categorization_test_post.html">/api/v0/categorization/&lt;model-id&gt;/test</a></td>
 <td>POST</td>
 <td>Test categorization accuracy</td>
 </tr>
-<tr class="row-odd"><td><a class="reference external" href="./categorization_element_get.html">/api/v0/categorization/&lt;model-id&gt;</a></td>
+<tr class="row-even"><td><a class="reference external" href="./categorization_element_get.html">/api/v0/categorization/&lt;model-id&gt;</a></td>
 <td>GET</td>
 <td>Load categorization model parameters</td>
 </tr>
-<tr class="row-even"><td><a class="reference external" href="./categorization_element_delete.html">/api/v0/categorization/&lt;model-id&gt;</a></td>
+<tr class="row-odd"><td><a class="reference external" href="./categorization_element_delete.html">/api/v0/categorization/&lt;model-id&gt;</a></td>
 <td>DELETE</td>
 <td>Delete the categorization model</td>
 </tr>
@@ -415,7 +420,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, Grossman Labs LLC.
-      Last updated on Jan 15, 2017.
+      Last updated on Jan 17, 2017.
 
     </p>
   </div>

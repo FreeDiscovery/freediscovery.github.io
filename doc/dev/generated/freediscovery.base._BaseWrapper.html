@@ -38,7 +38,7 @@
     <link rel="top" title="FreeDiscovery 0.8.dev0 documentation" href="../index.html"/>
         <link rel="up" title="Python API Reference" href="../python_api.html"/>
         <link rel="next" title="freediscovery.io.parse_ground_truth_file" href="freediscovery.io.parse_ground_truth_file.html"/>
-        <link rel="prev" title="freediscovery.threading.EmailThreading" href="freediscovery.threading.EmailThreading.html"/> 
+        <link rel="prev" title="freediscovery.threading._EmailThreadingWrapper" href="freediscovery.threading._EmailThreadingWrapper.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -168,7 +168,7 @@
 <h1>freediscovery.base._BaseWrapper<a class="headerlink" href="#freediscovery-base-basewrapper" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="freediscovery.base._BaseWrapper">
-<em class="property">class </em><code class="descclassname">freediscovery.base.</code><code class="descname">_BaseWrapper</code><span class="sig-paren">(</span><em>cache_dir=u'/tmp/'</em>, <em>dsid=None</em>, <em>mid=None</em>, <em>dataset_definition=&lt;class 'freediscovery.text.FeatureVectorizer'&gt;</em>, <em>load_model=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/4d1db9e/freediscovery/base.py#L45"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.base._BaseWrapper" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">freediscovery.base.</code><code class="descname">_BaseWrapper</code><span class="sig-paren">(</span><em>cache_dir=u'/tmp/'</em>, <em>parent_id=None</em>, <em>mid=None</em>, <em>dataset_definition=&lt;class 'freediscovery.text.FeatureVectorizer'&gt;</em>, <em>load_model=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/c07d66d/freediscovery/base.py#L49"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.base._BaseWrapper" title="Permalink to this definition">¶</a></dt>
 <dd><p>Base class for wrappers in FreeDiscovery</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -176,7 +176,7 @@
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>cache_dir</strong> (<em>str</em>) &#8211; folder where the model will be saved</li>
-<li><strong>dsid</strong> (<em>str</em><em>, </em><em>optional</em>) &#8211; dataset id</li>
+<li><strong>parent_id</strong> (<em>str</em><em>, </em><em>optional</em>) &#8211; dataset id</li>
 <li><strong>mid</strong> (<em>str</em><em>, </em><em>optional</em>) &#8211; model id</li>
 <li><strong>dataset_definition</strong> (<em>a dataset defintion class</em>) &#8211; one of FeatureVectorizer, EmailParser</li>
 <li><strong>load_model</strong> (<em>bool</em>) &#8211; whether the model should be loaded from disk on class
@@ -188,7 +188,7 @@ initialization</li>
 </table>
 <dl class="method">
 <dt id="freediscovery.base._BaseWrapper.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>cache_dir=u'/tmp/'</em>, <em>dsid=None</em>, <em>mid=None</em>, <em>dataset_definition=&lt;class 'freediscovery.text.FeatureVectorizer'&gt;</em>, <em>load_model=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/4d1db9e/freediscovery/base.py#L62"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.base._BaseWrapper.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>cache_dir=u'/tmp/'</em>, <em>parent_id=None</em>, <em>mid=None</em>, <em>dataset_definition=&lt;class 'freediscovery.text.FeatureVectorizer'&gt;</em>, <em>load_model=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/c07d66d/freediscovery/base.py#L66"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.base._BaseWrapper.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods</p>
@@ -198,20 +198,14 @@ initialization</li>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.base._BaseWrapper.__init__" title="freediscovery.base._BaseWrapper.__init__"><code class="xref py py-obj docutils literal"><span class="pre">__init__</span></code></a>([cache_dir,&nbsp;dsid,&nbsp;mid,&nbsp;...])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.base._BaseWrapper.__init__" title="freediscovery.base._BaseWrapper.__init__"><code class="xref py py-obj docutils literal"><span class="pre">__init__</span></code></a>([cache_dir,&nbsp;parent_id,&nbsp;mid,&nbsp;...])</td>
 <td></td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#freediscovery.base._BaseWrapper.delete" title="freediscovery.base._BaseWrapper.delete"><code class="xref py py-obj docutils literal"><span class="pre">delete</span></code></a>()</td>
 <td>Delete a trained model</td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">get_dsid</span></code>(cache_dir,&nbsp;mid)</td>
-<td></td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#freediscovery.base._BaseWrapper.get_params" title="freediscovery.base._BaseWrapper.get_params"><code class="xref py py-obj docutils literal"><span class="pre">get_params</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.base._BaseWrapper.get_params" title="freediscovery.base._BaseWrapper.get_params"><code class="xref py py-obj docutils literal"><span class="pre">get_params</span></code></a>()</td>
 <td>Get model parameters</td>
-</tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">get_path</span></code>(mid)</td>
-<td></td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#freediscovery.base._BaseWrapper.list_models" title="freediscovery.base._BaseWrapper.list_models"><code class="xref py py-obj docutils literal"><span class="pre">list_models</span></code></a>()</td>
 <td>List existing models of this type</td>
@@ -220,19 +214,19 @@ initialization</li>
 </table>
 <dl class="method">
 <dt id="freediscovery.base._BaseWrapper.delete">
-<code class="descname">delete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/4d1db9e/freediscovery/base.py#L110"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.base._BaseWrapper.delete" title="Permalink to this definition">¶</a></dt>
+<code class="descname">delete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/c07d66d/freediscovery/base.py#L100"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.base._BaseWrapper.delete" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete a trained model</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="freediscovery.base._BaseWrapper.get_params">
-<code class="descname">get_params</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/4d1db9e/freediscovery/base.py#L120"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.base._BaseWrapper.get_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_params</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/c07d66d/freediscovery/base.py#L110"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.base._BaseWrapper.get_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get model parameters</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="freediscovery.base._BaseWrapper.list_models">
-<code class="descname">list_models</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/4d1db9e/freediscovery/base.py#L146"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.base._BaseWrapper.list_models" title="Permalink to this definition">¶</a></dt>
+<code class="descname">list_models</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/c07d66d/freediscovery/base.py#L137"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.base._BaseWrapper.list_models" title="Permalink to this definition">¶</a></dt>
 <dd><p>List existing models of this type</p>
 </dd></dl>
 
@@ -250,7 +244,7 @@ initialization</li>
         <a href="freediscovery.io.parse_ground_truth_file.html" class="btn btn-neutral float-right" title="freediscovery.io.parse_ground_truth_file" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="freediscovery.threading.EmailThreading.html" class="btn btn-neutral" title="freediscovery.threading.EmailThreading" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="freediscovery.threading._EmailThreadingWrapper.html" class="btn btn-neutral" title="freediscovery.threading._EmailThreadingWrapper" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -260,7 +254,7 @@ initialization</li>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, Grossman Labs LLC.
-      Last updated on Jan 15, 2017.
+      Last updated on Jan 17, 2017.
 
     </p>
   </div>
