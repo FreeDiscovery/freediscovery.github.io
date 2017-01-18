@@ -22,37 +22,37 @@ An example to illustrate binary categorizaiton with FreeDiscovery
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received [u'id', u'filenames']
-       => dsid = 2f01b2a9b51f44ac
+       => dsid = 264fdbb2feb34fb6
 
     1.b Start feature extraction (in the background)
-     POST http://localhost:5001/api/v0/feature-extraction/2f01b2a9b51f44ac
+     POST http://localhost:5001/api/v0/feature-extraction/264fdbb2feb34fb6
 
     1.c Monitor feature extraction progress
-     GET http://localhost:5001/api/v0/feature-extraction/2f01b2a9b51f44ac
+     GET http://localhost:5001/api/v0/feature-extraction/264fdbb2feb34fb6
 
     1.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/2f01b2a9b51f44ac
+     GET http://localhost:5001/api/v0/feature-extraction/264fdbb2feb34fb6
          - binary: False
-         - n_jobs: -1
-         - stop_words: english
+         - n_jobs: 1
+         - stop_words: None
          - use_hashing: True
          - min_df: 0.0
          - n_samples: 2465
          - analyzer: word
          - ngram_range: [1, 1]
          - max_df: 1.0
-         - chunk_size: 2000
-         - use_idf: True
+         - chunk_size: 5000
+         - use_idf: False
          - data_dir: ../freediscovery_shared/treclegal09_2k_subset/data
-         - sublinear_tf: False
+         - sublinear_tf: True
          - n_samples_processed: 2465
-         - n_features: 50001
-         - norm: l2
+         - n_features: 100001
+         - norm: None
 
     2. Calculate LSI
     POST http://localhost:5001/api/v0/lsi/
-      => LSI model id = c32e560e9c6d415b
-      => SVD decomposition with 100 dimensions explaining 48.38 % variabilty of the data
+      => LSI model id = 53158714c0cb4e54
+      => SVD decomposition with 100 dimensions explaining 99.79 % variabilty of the data
 
     3.a. Train the categorization model
        5 relevant, 63 non-relevant files
@@ -61,109 +61,109 @@ An example to illustrate binary categorizaiton with FreeDiscovery
      ================================================================================
      POST http://localhost:5001/api/v0/categorization/
      Training...
-         => model id = 6e67902b9177454c
-        => Training scores: MAP = 1.000, ROC-AUC = 1.000
+         => model id = b6a256ec84224fa2
+        => Training scores: MAP = 0.537, ROC-AUC = nan
 
     3.b. Check the parameters used in the categorization model
-     GET http://localhost:5001/api/v0/categorization/6e67902b9177454c
+     GET http://localhost:5001/api/v0/categorization/b6a256ec84224fa2
          - method: LinearSVC
          - options: {'loss': 'squared_hinge', 'C': 1.0, 'verbose': 0, 'intercept_scaling': 1, 'fit_intercept': True, 'max_iter': 1000, 'penalty': 'l2', 'multi_class': 'ovr', 'random_state': None, 'dual': True, 'tol': 0.0001, 'class_weight': None}
 
     3.c Categorize the complete dataset with this model
-     GET http://localhost:5001/api/v0/categorization/6e67902b9177454c/predict
+     GET http://localhost:5001/api/v0/categorization/b6a256ec84224fa2/predict
 
     3.d Test categorization accuracy
              using ../freediscovery_shared/treclegal09_2k_subset/ground_truth_file.txt
-    POST http://localhost:5001/api/v0/categorization/6e67902b9177454c/test
-        => Test scores: MAP = 0.959, ROC-AUC = 0.958
+    POST http://localhost:5001/api/v0/categorization/b6a256ec84224fa2/test
+        => Test scores: MAP = 0.502, ROC-AUC = nan
     ================================================================================ 
                 NearestNeighbor  + LSI 
      ================================================================================
      POST http://localhost:5001/api/v0/categorization/
      Training...
-         => model id = b406d95da6f344dd
+         => model id = ba7dcac456a646ea
         => Training scores: MAP = 1.000, ROC-AUC = 1.000
 
     3.b. Check the parameters used in the categorization model
-     GET http://localhost:5001/api/v0/categorization/b406d95da6f344dd
+     GET http://localhost:5001/api/v0/categorization/ba7dcac456a646ea
          - method: NearestNeighbor
-         - options: {'n_neighbors': None, 'n_jobs': None, 'radius': None, 'leaf_size': None, 'algorithm': None}
+         - options: {'n_jobs': None, 'radius': None, 'leaf_size': None, 'algorithm': None}
 
     3.c Categorize the complete dataset with this model
-     GET http://localhost:5001/api/v0/categorization/b406d95da6f344dd/predict
+     GET http://localhost:5001/api/v0/categorization/ba7dcac456a646ea/predict
 
     3.d Test categorization accuracy
              using ../freediscovery_shared/treclegal09_2k_subset/ground_truth_file.txt
-    POST http://localhost:5001/api/v0/categorization/b406d95da6f344dd/test
-        => Test scores: MAP = 0.491, ROC-AUC = 0.926
+    POST http://localhost:5001/api/v0/categorization/ba7dcac456a646ea/test
+        => Test scores: MAP = 0.354, ROC-AUC = 0.793
 
            dist_n  dist_p  ind_n  ind_p  prediction
-    0      1.076   1.184      5      3      -0.731
-    1      1.091   1.219     43      3      -0.727
-    2      0.950   1.413     64      0      -0.763
-    3      1.095   0.000     67      0       1.000
-    4      0.865   1.201     64      0      -0.784
-    5      1.019   1.445     37      0      -0.745
-    6      0.780   1.340     49      0      -0.805
-    7      1.090   1.444     64      1      -0.728
-    8      1.044   1.277      5      0      -0.739
-    9      0.000   1.336      5      3      -1.000
-    10     0.940   1.168     67      0      -0.765
-    11     1.127   1.353      6      4      -0.718
-    12     1.141   1.317      6      4      -0.715
-    13     0.591   1.341     55      3      -0.852
-    14     0.097   1.265     55      3      -0.976
-    15     1.174   1.221     48      1      -0.707
-    16     1.126   1.352      6      0      -0.719
-    17     1.230   1.324      6      4      -0.692
-    18     1.229   1.364     10      1      -0.693
-    19     1.000   1.461     30      3      -0.750
-    20     1.153   1.325     37      1      -0.712
-    21     0.467   1.412     63      1      -0.883
-    22     1.297   1.426     22      0      -0.676
-    23     1.300   1.421     22      4      -0.675
-    24     0.882   1.416     58      2      -0.779
-    25     0.931   1.385     63      0      -0.767
-    26     1.202   1.351     58      4      -0.699
-    27     1.275   1.305     12      2      -0.681
-    28     1.135   1.373      6      0      -0.716
-    29     1.231   1.344      6      4      -0.692
+    0      0.457   0.418     52      3       0.895
+    1      1.166   1.295     53      4      -0.708
+    2      0.175   0.169     21      0       0.958
+    3      0.127   0.000     21      0       1.000
+    4      0.242   0.235     64      0       0.941
+    5      0.208   0.184     64      0       0.954
+    6      0.261   0.229      5      0       0.943
+    7      0.182   0.145     37      0       0.964
+    8      0.170   0.166     37      0       0.958
+    9      0.000   0.220      5      0      -1.000
+    10     0.188   0.102     21      0       0.974
+    11     1.171   1.368     58      4      -0.707
+    12     1.188   1.329     58      4      -0.703
+    13     1.148   1.297     55      3      -0.713
+    14     0.165   1.213     55      3      -0.959
+    15     0.452   0.858     12      1      -0.887
+    16     1.315   1.391     58      4      -0.671
+    17     1.254   1.330     58      4      -0.686
+    18     0.891   1.068     12      1      -0.777
+    19     0.796   1.212     12      1      -0.801
+    20     0.432   0.911     12      1      -0.892
+    21     0.732   1.349     63      3      -0.817
+    22     1.109   1.312     53      4      -0.723
+    23     1.103   1.317     53      4      -0.724
+    24     0.809   1.080     12      4      -0.798
+    25     1.188   1.416     63      4      -0.703
+    26     1.229   1.375     58      4      -0.693
+    27     0.994   1.204     26      2      -0.751
+    28     1.296   1.399     23      4      -0.676
+    29     1.245   1.337      7      4      -0.689
     ...      ...     ...    ...    ...         ...
-    2435   1.303   1.453     45      1      -0.674
-    2436   0.725   1.361     21      2      -0.819
-    2437   1.044   1.361     21      2      -0.739
-    2438   1.234   1.404     21      2      -0.692
-    2439   1.124   1.435     45      2      -0.719
-    2440   1.267   1.417     31      2      -0.683
-    2441   1.057   1.385     45      0      -0.736
-    2442   1.249   1.401     19      1      -0.688
-    2443   1.096   1.425      5      1      -0.726
-    2444   1.276   1.410      5      1      -0.681
-    2445   1.105   1.464      5      2      -0.724
-    2446   1.272   1.427      5      2      -0.682
-    2447   0.981   1.274     64      2      -0.755
-    2448   1.273   1.291     64      2      -0.682
-    2449   0.890   1.230     37      0      -0.777
-    2450   0.563   1.293     66      0      -0.859
-    2451   0.000   1.095     67      0      -1.000
-    2452   0.856   1.256     67      0      -0.786
-    2453   0.927   1.196     67      0      -0.768
-    2454   1.122   1.305     67      0      -0.719
-    2455   1.030   1.124     47      0      -0.742
-    2456   1.209   0.855     66      0       0.786
-    2457   0.963   1.403     48      1      -0.759
-    2458   1.232   1.325     31      1      -0.692
-    2459   0.769   1.047     42      2      -0.808
-    2460   1.265   1.329      7      2      -0.684
-    2461   1.270   1.360      7      2      -0.682
-    2462   1.223   1.337     64      2      -0.694
-    2463   1.262   1.347      7      2      -0.684
-    2464   1.026   1.136     42      2      -0.744
+    2435   1.282   1.378     30      1      -0.679
+    2436   0.229   0.215     67      0       0.946
+    2437   0.442   0.684     47      1      -0.889
+    2438   0.409   0.623     47      0      -0.898
+    2439   0.177   0.220      5      0      -0.956
+    2440   0.371   0.646     47      1      -0.907
+    2441   0.174   0.215      5      0      -0.957
+    2442   0.387   0.625     47      0      -0.903
+    2443   0.265   0.248     52      0       0.938
+    2444   0.472   0.669     50      4      -0.882
+    2445   0.275   0.282     37      0      -0.931
+    2446   0.437   0.666     35      1      -0.891
+    2447   0.224   0.192     64      0       0.952
+    2448   0.348   0.633     66      1      -0.913
+    2449   0.183   0.104     37      0       0.974
+    2450   0.366   0.579     35      0      -0.908
+    2451   0.000   0.261     67      0      -1.000
+    2452   0.476   0.669     47      0      -0.881
+    2453   0.288   0.411     51      0      -0.928
+    2454   0.572   0.673     47      1      -0.857
+    2455   0.286   0.645     47      0      -0.928
+    2456   0.112   0.073     21      0       0.982
+    2457   0.442   0.629     47      0      -0.889
+    2458   0.232   0.187     21      0       0.953
+    2459   0.387   1.085     42      2      -0.903
+    2460   0.825   1.019     42      3      -0.794
+    2461   0.922   0.981     13      2      -0.770
+    2462   0.886   1.230     39      0      -0.779
+    2463   0.950   1.069     42      2      -0.763
+    2464   0.866   1.098     42      0      -0.784
 
     [2465 rows x 5 columns]
 
     5.a Delete the extracted features (and LSI decomposition)
-     DELETE http://localhost:5001/api/v0/feature-extraction/2f01b2a9b51f44ac
+     DELETE http://localhost:5001/api/v0/feature-extraction/264fdbb2feb34fb6
 
 
 
@@ -207,12 +207,8 @@ An example to illustrate binary categorizaiton with FreeDiscovery
         print("\n1.a Load dataset and initalize feature extraction")
         url = BASE_URL + '/feature-extraction'
         print(" POST", url)
-        fe_opts = {'data_dir': data_dir,
-                   'stop_words': 'english', 'chunk_size': 2000, 'n_jobs': -1,
-                   'use_idf': 1, 'sublinear_tf': 0, 'binary': 0, 'n_features': 50001,
-                   'analyzer': 'word', 'ngram_range': (1, 1), "norm": "l2"
-                  }
-        res = requests.post(url, json=fe_opts).json()
+        res = requests.post(url, json={'data_dir': data_dir,
+                                       'use_hashing': True}).json()
 
         dsid = res['id']
         print("   => received {}".format(list(res.keys())))
@@ -344,7 +340,7 @@ An example to illustrate binary categorizaiton with FreeDiscovery
         print(" DELETE", url)
         requests.delete(url)
 
-**Total running time of the script:** ( 0 minutes  59.551 seconds)
+**Total running time of the script:** ( 1 minutes  6.822 seconds)
 
 
 

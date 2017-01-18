@@ -22,75 +22,75 @@ Cluster documents into clusters
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received [u'id', u'filenames']
-       => dsid = f1ee3754607d4c48
+       => dsid = f921229416d745de
 
     1.b Run feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/f1ee3754607d4c48
+     POST http://localhost:5001/api/v0/feature-extraction/f921229416d745de
 
     1.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/f1ee3754607d4c48
+     GET http://localhost:5001/api/v0/feature-extraction/f921229416d745de
          - binary: False
-         - n_jobs: -1
-         - stop_words: english
+         - n_jobs: 1
+         - stop_words: None
          - use_hashing: False
          - min_df: 4.0
          - n_samples: 2465
          - analyzer: word
          - ngram_range: [1, 1]
          - max_df: 0.75
-         - chunk_size: 2000
+         - chunk_size: 5000
          - use_idf: True
          - data_dir: ../freediscovery_shared/treclegal09_2k_subset/data
          - sublinear_tf: True
          - n_samples_processed: 2465
          - n_features: 30001
-         - norm: l2
+         - norm: None
 
     2. Calculate LSI
     POST http://localhost:5001/api/v0/lsi/
-      => LSI model id = 77b71f1f4ada465c
-      => SVD decomposition with 100 dimensions explaining 50.52 % variabilty of the data
+      => LSI model id = 321f7ec731f74a36
+      => SVD decomposition with 100 dimensions explaining 99.76 % variabilty of the data
 
     3.a. Document clustering (LSI + K-means)
      POST http://localhost:5001/api/v0/clustering/k-mean/
-         => model id = f9a170f3125142e0
+         => model id = 9ab8221fe6624a53
 
     3.b. Computing cluster labels
-     GET http://localhost:5001/api/v0/clustering/k-mean/f9a170f3125142e0
-        .. computed in 2.9s
+     GET http://localhost:5001/api/v0/clustering/k-mean/9ab8221fe6624a53
+        .. computed in 2.6s
        N_documents                                      cluster_names
-    8          616  [u'enron_development', u'enron', u'nemec', u'w...
-    3          412  [u'tenet', u'meeting', u'test', u'mon', u'oct'...
-    0          357  [u'test', u'mtg', u'ena', u'trade', u'tenet', ...
-    2          288  [u'berkeley', u'haas', u'edu', u'new', u'enron...
-    6          230  [u'teneo', u'haedicke', u'shackleton_sara', u'...
-    1          193  [u'ect', u'hou', u'trading', u'clair', u'thu',...
-    4          153  [u'sanders', u'tue', u'oct', u'ricafrente', u'...
-    9           96  [u'party', u'shall', u'ruppert', u'agreement',...
-    5           64  [u'migration', u'outlook', u'team', u'mtg', u'...
-    7           56  [u'rewrite', u'server', u'address', u'smtp', u...
+    9          648  [u'ect', u'the', u'you', u'lon', u'and', u'have']
+    0          529  [u'enron', u'net', u'training', u'jones', u'ta...
+    4          281  [u'enron', u'pcb', u'nicolay', u'kean', u'lett...
+    1          260  [u'shackleton', u'you', u'ect', u'harris', u'm...
+    2          211  [u'tana', u'jones', u'enron', u'advice', u'cas...
+    7          174  [u'teneo', u'group', u'recipients', u'administ...
+    3          163  [u'teneo', u'shackleton', u'you', u'marcelo', ...
+    8           99  [u'ruppert', u'nemec', u'gillaspie', u'exxon',...
+    6           56  [u'rewrite', u'server', u'address', u'smtp', u...
+    5           44  [u'enron_development', u'shackleton', u'ect', ...
 
     4.a. Document clustering (LSI + Ward HC)
      POST http://localhost:5001/api/v0/clustering/ward_hc/
-         => model id = 208d9924efed4e66
+         => model id = 2af05f7739e843e7
 
     4.b. Computing cluster labels
-     GET http://localhost:5001/api/v0/clustering/ward_hc/208d9924efed4e66
-        .. computed in 1.7s
+     GET http://localhost:5001/api/v0/clustering/ward_hc/2af05f7739e843e7
+        .. computed in 1.8s
        N_documents                                      cluster_names
-    0         1835  [u'test', u'tenet', u'oct', u'enron', u'teneo'...
-    2          224  [u'dasovich', u'energy', u'berkeley', u'haas',...
-    6           82  [u'sanders', u'nov', u'lunch', u'meeting', u'w...
-    1           75  [u'nemec', u'doc', u'nemec_gerald', u'gallup',...
-    7           56  [u'rewrite', u'server', u'address', u'smtp', u...
-    3           48  [u'ect', u'hou', u'ellis', u'rmt', u'taffy', u...
-    4           45  [u'migration', u'outlook', u'team', u'oct', u'...
-    5           45  [u'haedicke', u'nov', u'labanowski', u'energy'...
-    8           32  [u'marcelo', u'tozzini', u'afac', u'mbtos', u'...
-    9           23  [u'ruppert', u'exxon', u'sprint', u'gillaspie'...
+    0          547  [u'ect', u'the', u'hou', u'enron_development',...
+    2          425  [u'shackleton', u'you', u'marcelo', u'brazil',...
+    8          390  [u'enron', u'net', u'approved', u'jones', u'tr...
+    4          275  [u'enron', u'pcb', u'budget', u'for', u'cleanu...
+    1          213  [u'lon', u'forster', u'newsticker', u'ect', u'...
+    5          187  [u'tana', u'jones', u'enron', u'advice', u'cas...
+    7          148  [u'teneo', u'group', u'recipients', u'administ...
+    3          135  [u'serc', u'nerc', u'letter', u'ingersoll', u'...
+    6           89  [u'ruppert', u'nemec', u'gillaspie', u'exxon',...
+    9           56  [u'rewrite', u'server', u'address', u'smtp', u...
 
     5. Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/f1ee3754607d4c48
+     DELETE http://localhost:5001/api/v0/feature-extraction/f921229416d745de
 
 
 
@@ -134,11 +134,8 @@ Cluster documents into clusters
     url = BASE_URL + '/feature-extraction'
     print(" POST", url)
     fe_opts = {'data_dir': data_dir,
-               'stop_words': 'english', 'chunk_size': 2000, 'n_jobs': -1,
-               'use_idf': 1, 'sublinear_tf': 1, 'binary': 0, 'n_features': 30001,
-               'analyzer': 'word', 'ngram_range': (1, 1), "norm": "l2",
-               'use_hashing': False,  # hashing should be disabled for clustering
-               'min_df': 4, 'max_df': 0.75
+               'use_idf': 1, 'n_features': 30001,
+               'min_df': 4, 'max_df': 0.75 # filter out unfrequent / too frequent words
                }
     res = requests.post(url, json=fe_opts).json()
 
@@ -238,7 +235,7 @@ Cluster documents into clusters
     print(" DELETE", url)
     requests.delete(url)
 
-**Total running time of the script:** ( 1 minutes  0.587 seconds)
+**Total running time of the script:** ( 0 minutes  55.589 seconds)
 
 
 
