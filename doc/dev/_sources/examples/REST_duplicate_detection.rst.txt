@@ -22,13 +22,13 @@ Find near-duplicates in a text collection
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received [u'id', u'filenames']
-       => dsid = 763a62b140ea47a4
+       => dsid = 83294a6be6134429
 
     1.b Run feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/763a62b140ea47a4
+     POST http://localhost:5001/api/v0/feature-extraction/83294a6be6134429
 
     1.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/763a62b140ea47a4
+     GET http://localhost:5001/api/v0/feature-extraction/83294a6be6134429
          - binary: False
          - n_jobs: 1
          - stop_words: None
@@ -49,29 +49,29 @@ Find near-duplicates in a text collection
     2. Near Duplicates detection by cosine similarity (DBSCAN)
     POST http://localhost:5001/api/v0/lsi/
      POST http://localhost:5001/api/v0/clustering/dbscan/
-         => model id = 91b8c90d71dd4a97
-     GET http://localhost:5001/api/v0/clustering/dbscan/91b8c90d71dd4a97
-        .. computed in 1.3s
-    Found 226 duplicates / 2465
+         => model id = 761e1fd759dd476a
+     GET http://localhost:5001/api/v0/clustering/dbscan/761e1fd759dd476a
+        .. computed in 1.4s
+    Found 254 duplicates / 2465
 
     3. Near Duplicates Detection using I-Match
      POST http://localhost:5001/api/v0/duplicate-detection/
-         => model id = c4bebb8f4fbf493f
+         => model id = 85512a0511294d77
         .. computed in 0.0s
-     GET http://localhost:5001/api/v0/duplicate-detection/c4bebb8f4fbf493f
-        .. computed in 2.5s
-    Found 333 duplicates / 2465
+     GET http://localhost:5001/api/v0/duplicate-detection/85512a0511294d77
+        .. computed in 2.6s
+    Found 250 duplicates / 2465
 
     3. Duplicate detection by Simhash
      POST http://localhost:5001/api/v0/duplicate-detection/
-         => model id = cb82edd671c340c0
+         => model id = c13573b90b944770
         .. computed in 0.7s
-     GET http://localhost:5001/api/v0/duplicate-detection/cb82edd671c340c0
+     GET http://localhost:5001/api/v0/duplicate-detection/c13573b90b944770
         .. computed in 0.1s
     Found 333 duplicates / 2465
 
     4.a Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/763a62b140ea47a4
+     DELETE http://localhost:5001/api/v0/feature-extraction/83294a6be6134429
 
 
 
@@ -254,7 +254,7 @@ Find near-duplicates in a text collection
     print(" DELETE", url)
     requests.delete(url)
 
-**Total running time of the script:** ( 0 minutes  45.204 seconds)
+**Total running time of the script:** ( 0 minutes  49.540 seconds)
 
 
 
