@@ -22,36 +22,36 @@ An example to illustrate binary categorizaiton with FreeDiscovery
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received [u'id', u'filenames']
-       => dsid = 203590d690894a31
+       => dsid = e95e9bc359c942b0
 
     1.b Start feature extraction (in the background)
-     POST http://localhost:5001/api/v0/feature-extraction/203590d690894a31
+     POST http://localhost:5001/api/v0/feature-extraction/e95e9bc359c942b0
 
     1.c Monitor feature extraction progress
-     GET http://localhost:5001/api/v0/feature-extraction/203590d690894a31
+     GET http://localhost:5001/api/v0/feature-extraction/e95e9bc359c942b0
 
     1.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/203590d690894a31
+     GET http://localhost:5001/api/v0/feature-extraction/e95e9bc359c942b0
          - binary: False
          - n_jobs: 1
-         - stop_words: None
-         - use_hashing: True
-         - min_df: 0.0
-         - n_samples: 2465
+         - data_dir: ../freediscovery_shared/treclegal09_2k_subset/data/jobRun_4/XML_EXPORT_CONTENT/text_9
+         - chunk_size: 5000
+         - norm: None
          - analyzer: word
+         - n_samples: 2465
          - ngram_range: [1, 1]
          - max_df: 1.0
-         - chunk_size: 5000
+         - min_df: 0.0
          - use_idf: False
-         - data_dir: ../freediscovery_shared/treclegal09_2k_subset/data
+         - stop_words: None
          - sublinear_tf: True
          - n_samples_processed: 2465
          - n_features: 100001
-         - norm: None
+         - use_hashing: True
 
     2. Calculate LSI
     POST http://localhost:5001/api/v0/lsi/
-      => LSI model id = 5d3df577f2344c9b
+      => LSI model id = fce1ac0365664eac
       => SVD decomposition with 100 dimensions explaining 99.79 % variabilty of the data
 
     3.a. Train the categorization model
@@ -61,174 +61,172 @@ An example to illustrate binary categorizaiton with FreeDiscovery
      ================================================================================
      POST http://localhost:5001/api/v0/categorization/
      Training...
-         => model id = 5ba452bc656a4a2b
-        => Training scores: MAP = 0.537, ROC-AUC = nan
+         => model id = 8e58e5ae66d841cb
+        => Training scores: MAP = 0.683, ROC-AUC = nan, F1= 0.000
 
     3.b. Check the parameters used in the categorization model
-     GET http://localhost:5001/api/v0/categorization/5ba452bc656a4a2b
+     GET http://localhost:5001/api/v0/categorization/8e58e5ae66d841cb
          - method: LinearSVC
          - options: {'loss': 'squared_hinge', 'C': 1.0, 'verbose': 0, 'intercept_scaling': 1, 'fit_intercept': True, 'max_iter': 1000, 'penalty': 'l2', 'multi_class': 'ovr', 'random_state': None, 'dual': True, 'tol': 0.0001, 'class_weight': None}
 
     3.c Categorize the complete dataset with this model
-     GET http://localhost:5001/api/v0/categorization/5ba452bc656a4a2b/predict
-                 score
-    internal_id       
-    0           -0.846
-    1           -0.846
-    2           -0.846
-    3           -0.846
-    4           -0.846
-    5           -0.846
-    6           -0.846
-    7           -0.846
-    8           -0.846
-    9           -0.846
-    10          -0.846
-    11          -0.846
-    12          -0.846
-    13          -0.847
-    14          -0.846
-    15          -0.846
-    16          -0.847
-    17          -0.846
-    18          -0.846
-    19          -0.846
-    20          -0.846
-    21          -0.847
-    22          -0.846
-    23          -0.846
-    24          -0.846
-    25          -0.847
-    26          -0.846
-    27          -0.846
-    28          -0.847
-    29          -0.846
-    ...            ...
-    2435        -0.849
-    2436        -0.846
-    2437        -0.846
-    2438        -0.846
-    2439        -0.846
-    2440        -0.846
-    2441        -0.846
-    2442        -0.846
-    2443        -0.846
-    2444        -0.846
-    2445        -0.846
-    2446        -0.846
-    2447        -0.846
-    2448        -0.846
-    2449        -0.846
-    2450        -0.846
-    2451        -0.846
-    2452        -0.846
-    2453        -0.846
-    2454        -0.846
-    2455        -0.846
-    2456        -0.846
-    2457        -0.846
-    2458        -0.846
-    2459        -0.846
-    2460        -0.846
-    2461        -0.846
-    2462        -0.846
-    2463        -0.846
-    2464        -0.846
+     GET http://localhost:5001/api/v0/categorization/8e58e5ae66d841cb/predict
+                 document_id  score
+    internal_id                    
+    0                      0 -0.846
+    1                      1 -0.846
+    2                      2 -0.846
+    3                      3 -0.846
+    4                      4 -0.846
+    5                      5 -0.846
+    6                      6 -0.846
+    7                      7 -0.846
+    8                      8 -0.846
+    9                      9 -0.846
+    10                    10 -0.846
+    11                    11 -0.846
+    12                    12 -0.846
+    13                    13 -0.847
+    14                    14 -0.846
+    15                    15 -0.846
+    16                    16 -0.847
+    17                    17 -0.846
+    18                    18 -0.846
+    19                    19 -0.846
+    20                    20 -0.846
+    21                    21 -0.847
+    22                    22 -0.846
+    23                    23 -0.846
+    24                    24 -0.846
+    25                    25 -0.847
+    26                    26 -0.846
+    27                    27 -0.846
+    28                    28 -0.847
+    29                    29 -0.846
+    ...                  ...    ...
+    2435                2435 -0.849
+    2436                2436 -0.846
+    2437                2437 -0.846
+    2438                2438 -0.846
+    2439                2439 -0.846
+    2440                2440 -0.846
+    2441                2441 -0.846
+    2442                2442 -0.846
+    2443                2443 -0.846
+    2444                2444 -0.846
+    2445                2445 -0.846
+    2446                2446 -0.846
+    2447                2447 -0.846
+    2448                2448 -0.846
+    2449                2449 -0.846
+    2450                2450 -0.846
+    2451                2451 -0.846
+    2452                2452 -0.846
+    2453                2453 -0.846
+    2454                2454 -0.846
+    2455                2455 -0.846
+    2456                2456 -0.846
+    2457                2457 -0.846
+    2458                2458 -0.846
+    2459                2459 -0.846
+    2460                2460 -0.846
+    2461                2461 -0.846
+    2462                2462 -0.846
+    2463                2463 -0.846
+    2464                2464 -0.846
 
-    [2465 rows x 1 columns]
+    [2465 rows x 2 columns]
 
-    3.d Test categorization accuracy
-             using ../freediscovery_shared/treclegal09_2k_subset/ground_truth_file.txt
-    POST http://localhost:5001/api/v0/categorization/5ba452bc656a4a2b/test
-        => Test scores: MAP = 0.502, ROC-AUC = nan
+    3.d Compute the categorization scores
+     GET http://localhost:5001/api/v0/metrics/categorization
+        => Test scores: MAP = 0.545, ROC-AUC = 0.545
     ================================================================================ 
                 NearestNeighbor  + LSI 
      ================================================================================
      POST http://localhost:5001/api/v0/categorization/
      Training...
-         => model id = 44fbd8399a6a45d9
-        => Training scores: MAP = 1.000, ROC-AUC = 1.000
+         => model id = 24ecbbcb6cc14554
+        => Training scores: MAP = 1.000, ROC-AUC = nan, F1= 1.000
 
     3.b. Check the parameters used in the categorization model
-     GET http://localhost:5001/api/v0/categorization/44fbd8399a6a45d9
+     GET http://localhost:5001/api/v0/categorization/24ecbbcb6cc14554
          - method: NearestNeighbor
          - options: {'ranking': None, 'n_jobs': None, 'radius': None, 'leaf_size': None, 'algorithm': None}
 
     3.c Categorize the complete dataset with this model
-     GET http://localhost:5001/api/v0/categorization/44fbd8399a6a45d9/predict
-                 nn_negative__distance  nn_negative__internal_id  nn_positive__distance  nn_positive__internal_id  score
-    internal_id                                                                                                         
-    0                            0.225                        45                  0.208                         3  0.896
-    1                            0.585                        18                  0.641                         4 -0.708
-    2                            0.082                        21                  0.083                         0 -0.959
-    3                            0.063                        21                  0.000                         0  1.000
-    4                            0.123                        64                  0.119                         0  0.941
-    5                            0.102                        64                  0.094                         0  0.953
-    6                            0.134                         5                  0.115                         0  0.942
-    7                            0.093                        37                  0.078                         0  0.961
-    8                            0.084                        37                  0.090                         0 -0.958
-    9                            0.000                         5                  0.109                         0 -1.000
-    10                           0.093                        21                  0.051                         0  0.974
-    11                           0.559                        58                  0.686                         4 -0.721
-    12                           0.565                        58                  0.665                         4 -0.717
-    13                           0.568                        55                  0.662                         3 -0.716
-    14                           0.080                        55                  0.618                         3 -0.960
-    15                           0.219                        12                  0.437                         1 -0.891
-    16                           0.659                         7                  0.701                         4 -0.671
-    17                           0.623                        58                  0.669                         4 -0.688
-    18                           0.422                        12                  0.554                         1 -0.789
-    19                           0.394                        12                  0.617                         1 -0.803
-    20                           0.218                        12                  0.468                         1 -0.891
-    21                           0.368                        63                  0.670                         3 -0.816
-    22                           0.536                        58                  0.658                         4 -0.732
-    23                           0.540                        58                  0.658                         4 -0.730
-    24                           0.409                        12                  0.552                         4 -0.795
-    25                           0.589                        63                  0.712                         4 -0.705
-    26                           0.600                        58                  0.691                         4 -0.700
-    27                           0.492                        12                  0.616                         2 -0.754
-    28                           0.652                         7                  0.706                         4 -0.674
-    29                           0.623                         7                  0.672                         4 -0.689
-    ...                            ...                       ...                    ...                       ...    ...
-    2435                         0.655                        59                  0.678                         1 -0.673
-    2436                         0.113                        21                  0.104                         0  0.948
-    2437                         0.216                        47                  0.348                         1 -0.892
-    2438                         0.209                        47                  0.313                         0 -0.896
-    2439                         0.091                         5                  0.109                         0 -0.955
-    2440                         0.192                        47                  0.321                         0 -0.904
-    2441                         0.088                         5                  0.103                         0 -0.956
-    2442                         0.196                        47                  0.305                         0 -0.902
-    2443                         0.128                        52                  0.125                         0  0.938
-    2444                         0.229                        66                  0.331                         4 -0.886
-    2445                         0.144                        37                  0.142                         0  0.929
-    2446                         0.232                        35                  0.340                         0 -0.884
-    2447                         0.113                        64                  0.098                         0  0.951
-    2448                         0.173                        66                  0.323                         1 -0.914
-    2449                         0.090                        37                  0.054                         0  0.973
-    2450                         0.199                        35                  0.286                         0 -0.901
-    2451                         0.000                        67                  0.126                         0 -1.000
-    2452                         0.237                        47                  0.336                         0 -0.882
-    2453                         0.148                        51                  0.199                         0 -0.926
-    2454                         0.284                        66                  0.347                         1 -0.858
-    2455                         0.137                        47                  0.313                         0 -0.931
-    2456                         0.056                        21                  0.037                         0  0.982
-    2457                         0.218                        47                  0.304                         0 -0.891
-    2458                         0.117                        21                  0.095                         0  0.953
-    2459                         0.194                        42                  0.535                         2 -0.903
-    2460                         0.414                        42                  0.516                         3 -0.793
-    2461                         0.468                        13                  0.509                         2 -0.766
-    2462                         0.432                        39                  0.619                         0 -0.784
-    2463                         0.476                        39                  0.531                         2 -0.762
-    2464                         0.432                        42                  0.557                         3 -0.784
+     GET http://localhost:5001/api/v0/categorization/24ecbbcb6cc14554/predict
+                 document_id  nn_negative__distance  nn_negative__document_id  nn_positive__distance  nn_positive__document_id  score
+    internal_id                                                                                                                      
+    0                      0                  0.222                        52                  0.210                         3  0.895
+    1                      1                  0.580                        53                  0.646                         4 -0.710
+    2                      2                  0.081                        21                  0.087                         0 -0.959
+    3                      3                  0.063                        21                  0.000                         0  1.000
+    4                      4                  0.121                        64                  0.118                         0  0.941
+    5                      5                  0.103                        64                  0.089                         0  0.955
+    6                      6                  0.125                         5                  0.110                         0  0.945
+    7                      7                  0.087                        37                  0.070                         0  0.965
+    8                      8                  0.079                        37                  0.086                         0 -0.961
+    9                      9                  0.000                         5                  0.105                         0 -1.000
+    10                    10                  0.091                        37                  0.049                         0  0.976
+    11                    11                  0.575                        58                  0.685                         0 -0.713
+    12                    12                  0.588                        58                  0.664                         4 -0.706
+    13                    13                  0.589                        55                  0.648                         3 -0.705
+    14                    14                  0.085                        55                  0.613                         3 -0.957
+    15                    15                  0.217                        12                  0.437                         1 -0.891
+    16                    16                  0.645                        58                  0.695                         4 -0.678
+    17                    17                  0.611                        58                  0.663                         4 -0.695
+    18                    18                  0.407                        12                  0.549                         1 -0.797
+    19                    19                  0.394                        12                  0.609                         1 -0.803
+    20                    20                  0.214                        12                  0.467                         1 -0.893
+    21                    21                  0.370                        63                  0.674                         4 -0.815
+    22                    22                  0.540                        53                  0.669                         4 -0.730
+    23                    23                  0.533                        53                  0.670                         4 -0.733
+    24                    24                  0.407                        12                  0.546                         4 -0.797
+    25                    25                  0.608                        63                  0.708                         4 -0.696
+    26                    26                  0.598                        58                  0.685                         4 -0.701
+    27                    27                  0.482                        27                  0.608                         2 -0.759
+    28                    28                  0.641                        23                  0.700                         4 -0.679
+    29                    29                  0.615                        58                  0.665                         4 -0.692
+    ...                  ...                    ...                       ...                    ...                       ...    ...
+    2435                2435                  0.652                        59                  0.686                         1 -0.674
+    2436                2436                  0.111                        21                  0.101                         0  0.950
+    2437                2437                  0.211                        47                  0.343                         1 -0.894
+    2438                2438                  0.199                        47                  0.309                         0 -0.901
+    2439                2439                  0.084                         5                  0.106                         0 -0.958
+    2440                2440                  0.185                        47                  0.315                         0 -0.908
+    2441                2441                  0.087                         5                  0.105                         0 -0.957
+    2442                2442                  0.196                        47                  0.306                         0 -0.902
+    2443                2443                  0.136                        52                  0.125                         0  0.937
+    2444                2444                  0.232                        47                  0.337                         1 -0.884
+    2445                2445                  0.124                        37                  0.124                         0 -0.938
+    2446                2446                  0.203                        35                  0.323                         0 -0.899
+    2447                2447                  0.109                        64                  0.092                         0  0.954
+    2448                2448                  0.171                        66                  0.320                         1 -0.914
+    2449                2449                  0.088                        37                  0.050                         0  0.975
+    2450                2450                  0.190                        35                  0.286                         0 -0.905
+    2451                2451                  0.000                        67                  0.125                         0 -1.000
+    2452                2452                  0.233                        47                  0.333                         0 -0.884
+    2453                2453                  0.147                        51                  0.199                         0 -0.926
+    2454                2454                  0.288                        66                  0.347                         1 -0.856
+    2455                2455                  0.134                        47                  0.318                         0 -0.933
+    2456                2456                  0.054                        21                  0.036                         0  0.982
+    2457                2457                  0.211                        47                  0.309                         0 -0.895
+    2458                2458                  0.112                        21                  0.089                         0  0.956
+    2459                2459                  0.187                        42                  0.533                         2 -0.906
+    2460                2460                  0.415                        42                  0.508                         3 -0.793
+    2461                2461                  0.424                        13                  0.497                         2 -0.788
+    2462                2462                  0.443                        39                  0.608                         0 -0.779
+    2463                2463                  0.471                        13                  0.524                         2 -0.765
+    2464                2464                  0.435                        42                  0.548                         3 -0.782
 
-    [2465 rows x 5 columns]
+    [2465 rows x 6 columns]
 
-    3.d Test categorization accuracy
-             using ../freediscovery_shared/treclegal09_2k_subset/ground_truth_file.txt
-    POST http://localhost:5001/api/v0/categorization/44fbd8399a6a45d9/test
-        => Test scores: MAP = 0.356, ROC-AUC = 0.797
+    3.d Compute the categorization scores
+     GET http://localhost:5001/api/v0/metrics/categorization
+        => Test scores: MAP = 0.356, ROC-AUC = 0.356
 
     5.a Delete the extracted features (and LSI decomposition)
-     DELETE http://localhost:5001/api/v0/feature-extraction/203590d690894a31
+     DELETE http://localhost:5001/api/v0/feature-extraction/e95e9bc359c942b0
 
 
 
@@ -258,21 +256,26 @@ An example to illustrate binary categorizaiton with FreeDiscovery
         print(" 0. Load the test dataset")
         url = BASE_URL + '/datasets/{}'.format(dataset_name)
         print(" GET", url)
-        res = requests.get(url).json()
+        res = requests.get(url, json={'return_file_path': True}).json()
 
         # To use a custom dataset, simply specify the following variables
-        data_dir = res['data_dir']
-        seed_filenames = res['seed_filenames']
+        seed_document_id = res['seed_document_id']
         seed_y = res['seed_y']
-        ground_truth_file = res['ground_truth_file']  # (optional)
+        ground_truth_y = res['ground_truth_y']
 
+        # create a custom dataset definition for ingestion
+        dataset_definition = []
+        for document_id, fname in zip(res['document_id'], res['file_path']):
+            dataset_definition.append({'document_id': document_id,
+                                      'rendering_id': 0,
+                                      'file_path': fname})
 
         # 1. Feature extraction
 
         print("\n1.a Load dataset and initalize feature extraction")
         url = BASE_URL + '/feature-extraction'
         print(" POST", url)
-        res = requests.post(url, json={'data_dir': data_dir,
+        res = requests.post(url, json={'dataset_definition': dataset_definition,
                                        'use_hashing': True}).json()
 
         dsid = res['id']
@@ -315,10 +318,10 @@ An example to illustrate binary categorizaiton with FreeDiscovery
 
         print('\n'.join(['     - {}: {}'.format(key, val) for key, val in res.items() \
                                                           if "filenames" not in key]))
-
-        method = BASE_URL + "/feature-extraction/{}/index".format(dsid)
-        res = requests.get(method, data={'filenames': seed_filenames})
-        seed_index = res.json()['index']
+        # this step is not necessary anymore
+        #method = BASE_URL + "/feature-extraction/{}/id-mapping/flat".format(dsid)
+        #res = requests.get(method, data={'document_id': seed_document_id})
+        #seed_internal_id = res.json()['internal_id']
 
 
         # 3. Document categorization with LSI (used for Nearest Neighbors method)
@@ -345,6 +348,9 @@ An example to illustrate binary categorizaiton with FreeDiscovery
         print("\n3.a. Train the categorization model")
         print("   {} relevant, {} non-relevant files".format(seed_y.count(1), seed_y.count(0)))
 
+        seed_index_nested = [{'document_id': internal_id, 'y': y} \
+                                    for internal_id, y in zip(seed_document_id, seed_y)]
+
         for method, use_lsi in [('LinearSVC', False),
                                 ('NearestNeighbor', True)]:
 
@@ -362,15 +368,14 @@ An example to illustrate binary categorizaiton with FreeDiscovery
             print(' Training...')
 
             res = requests.post(url,
-                                json={'index': seed_index,
-                                      'y': seed_y,
-                                      'parent_id': parent_id,
+                                json={'parent_id': parent_id,
+                                      'index_nested': seed_index_nested,
                                       'method': method,  # one of "LinearSVC", "LogisticRegression", 'xgboost'
                                       }).json()
 
             mid = res['id']
             print("     => model id = {}".format(mid))
-            print('    => Training scores: MAP = {average_precision:.3f}, ROC-AUC = {roc_auc:.3f}'.format(**res))
+            print('    => Training scores: MAP = {average_precision:.3f}, ROC-AUC = {roc_auc:.3f}, F1= {f1:.3f}'.format(**res))
 
             print("\n3.b. Check the parameters used in the categorization model")
             url = BASE_URL + '/categorization/{}'.format(mid)
@@ -403,13 +408,23 @@ An example to illustrate binary categorizaiton with FreeDiscovery
             else:
                 data = res['data']
 
-            print(pd.DataFrame(data).set_index('internal_id'))
+            df = pd.DataFrame(data).set_index('internal_id')
+            if method == "NearestNeighbor":
+                df = df[['document_id', 'nn_negative__distance', 'nn_negative__document_id',
+                      'nn_positive__distance', 'nn_positive__document_id', 'score']]
 
-            print("\n3.d Test categorization accuracy")
-            print("         using {}".format(ground_truth_file))  
-            url = BASE_URL + '/categorization/{}/test'.format(mid)
-            print("POST", url)
-            res = requests.post(url, json={'ground_truth_filename': ground_truth_file}).json()
+            print(df)
+
+            print("\n3.d Compute the categorization scores")
+            url = BASE_URL + '/metrics/categorization'
+            print(" GET", url)
+            res = requests.get(url, json={'y_true': ground_truth_y,
+                                          'y_pred': df.score.values.tolist(),
+                                         } ).json()
+
+
+
+
 
             print('    => Test scores: MAP = {average_precision:.3f}, ROC-AUC = {roc_auc:.3f}'.format(**res))
 
@@ -419,7 +434,7 @@ An example to illustrate binary categorizaiton with FreeDiscovery
         print(" DELETE", url)
         requests.delete(url)
 
-**Total running time of the script:** ( 1 minutes  9.076 seconds)
+**Total running time of the script:** ( 1 minutes  11.756 seconds)
 
 
 

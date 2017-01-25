@@ -1,0 +1,220 @@
+
+
+.. _sphx_glr_examples_REST_data_ingestion.py:
+
+
+Categorization Example [REST API]
+---------------------------------
+
+An example to illustrate binary categorizaiton with FreeDiscovery
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    0. Load the test dataset
+     GET http://localhost:5001/api/v0/datasets/treclegal09_2k_subset
+
+    1.a Load dataset and initalize feature extraction
+     POST http://localhost:5001/api/v0/feature-extraction
+       => received [u'id', u'filenames']
+       => dsid = f694b0f0ac504469
+
+    1.b Start feature extraction
+     POST http://localhost:5001/api/v0/feature-extraction/f694b0f0ac504469
+
+    2.a Load dataset and initalize feature extraction
+     POST http://localhost:5001/api/v0/feature-extraction
+       => received [u'id', u'filenames']
+       => dsid = a5fca38a3e8d4632
+
+    2.b Start feature extraction
+     POST http://localhost:5001/api/v0/feature-extraction/a5fca38a3e8d4632
+
+    2.d. check the parameters of the extracted features
+     GET http://localhost:5001/api/v0/feature-extraction/a5fca38a3e8d4632
+         - binary: False
+         - n_jobs: 1
+         - data_dir: ../freediscovery_shared/treclegal09_2k_subset/data/jobRun_4/XML_EXPORT_CONTENT/text_9
+         - chunk_size: 5000
+         - norm: None
+         - analyzer: word
+         - n_samples: 2465
+         - ngram_range: [1, 1]
+         - max_df: 1.0
+         - min_df: 0.0
+         - use_idf: False
+         - stop_words: None
+         - sublinear_tf: True
+         - n_samples_processed: 2465
+         - n_features: 100001
+         - use_hashing: True
+
+    3. Examine the id mapping
+
+     GET http://localhost:5001/api/v0/feature-extraction/a5fca38a3e8d4632/id-mapping/flat
+       DATA: {"internal_id": [3, 919, 1047]}
+     Response:
+       {"internal_id": [3, 919, 1047], "document_id": [13, 929, 1057]}
+
+     GET http://localhost:5001/api/v0/feature-extraction/a5fca38a3e8d4632/id-mapping/nested
+       DATA {"data": [{"internal_id": 3}, {"internal_id": 919}, {"internal_id": 1047}]}
+     Response:
+       {
+        "data": [
+            {
+                "internal_id": 3, 
+                "document_id": 13
+            }, 
+            {
+                "internal_id": 919, 
+                "document_id": 929
+            }, 
+            {
+                "internal_id": 1047, 
+                "document_id": 1057
+            }
+        ]
+    }
+
+    5.a Delete the extracted features
+     DELETE http://localhost:5001/api/v0/feature-extraction/a5fca38a3e8d4632
+
+
+
+
+|
+
+
+.. code-block:: python
+
+
+    from __future__ import print_function
+
+    import requests
+    import pandas as pd
+    import json
+
+    pd.options.display.float_format = '{:,.3f}'.format
+    pd.options.display.expand_frame_repr = False
+
+    dataset_name = "treclegal09_2k_subset"     # see list of available datasets
+
+    BASE_URL = "http://localhost:5001/api/v0"  # FreeDiscovery server URL
+
+    if __name__ == '__main__':
+
+        print(" 0. Load the test dataset")
+        url = BASE_URL + '/datasets/{}'.format(dataset_name)
+        print(" GET", url)
+        res = requests.get(url, json={'return_file_path': True}).json()
+
+        # To use a custom dataset, simply specify the following variables
+        seed_document_id = res['seed_document_id']
+        seed_y = res['seed_y']
+        ground_truth_y = res['ground_truth_y']
+        data_dir = res['data_dir']
+
+        # create a custom dataset definition for ingestion
+        dataset_definition = []
+        for internal_id, fname in zip(res['document_id'], res['file_path']):
+            dataset_definition.append({'document_id': internal_id + 10, 
+                                      'rendering_id': 0,
+                                      'file_path': fname})
+
+        # 1. Ingest a dataset specified by folder path
+
+        print("\n1.a Load dataset and initalize feature extraction")
+        url = BASE_URL + '/feature-extraction'
+        print(" POST", url)
+        res = requests.post(url, json={'dataset_definition': dataset_definition,
+                                       'use_hashing': True}).json()
+
+        dsid = res['id']
+        print("   => received {}".format(list(res.keys())))
+        print("   => dsid = {}".format(dsid))
+
+        print("\n1.b Start feature extraction")
+
+        url = BASE_URL+'/feature-extraction/{}'.format(dsid)
+        print(" POST", url)
+        res = requests.post(url,)
+
+        # 2. Ingest a dataset specified by a path to each file in the dataset
+
+
+        print("\n2.a Load dataset and initalize feature extraction")
+        url = BASE_URL + '/feature-extraction'
+        print(" POST", url)
+        res = requests.post(url, json={'dataset_definition': dataset_definition,
+                                       'use_hashing': True}).json()
+
+        dsid = res['id']
+        print("   => received {}".format(list(res.keys())))
+        print("   => dsid = {}".format(dsid))
+
+        print("\n2.b Start feature extraction")
+
+        url = BASE_URL+'/feature-extraction/{}'.format(dsid)
+        print(" POST", url)
+        res = requests.post(url,)
+
+
+        print("\n2.d. check the parameters of the extracted features")
+        url = BASE_URL + '/feature-extraction/{}'.format(dsid)
+        print(' GET', url)
+        res = requests.get(url).json()
+
+        print('\n'.join(['     - {}: {}'.format(key, val) for key, val in res.items() \
+                                                          if "filenames" not in key]))
+
+        print("\n3. Examine the id mapping\n")
+
+        method = BASE_URL + "/feature-extraction/{}/id-mapping/flat".format(dsid)
+        print(' GET', method)
+        data = {'internal_id': seed_document_id[:3]}
+        print('   DATA:', json.dumps(data))
+        res = requests.get(method, data=data).json()
+
+        print(' Response:')
+        print('  ', json.dumps(res))
+
+        method = BASE_URL + "/feature-extraction/{}/id-mapping/nested".format(dsid)
+        print('\n GET', method)
+        data = {'data': [{'internal_id': el} for el in seed_document_id[:3]]}
+        print('   DATA', json.dumps(data))
+        res = requests.get(method, json=data).json()
+
+        print(' Response:')
+        print('  ', json.dumps(res, indent=4))
+
+        # 4. Cleaning
+        print("\n5.a Delete the extracted features")
+        url = BASE_URL + '/feature-extraction/{}'.format(dsid)
+        print(" DELETE", url)
+        requests.delete(url)
+
+**Total running time of the script:** ( 0 minutes  6.089 seconds)
+
+
+
+.. container:: sphx-glr-footer
+
+
+  .. container:: sphx-glr-download
+
+     :download:`Download Python source code: REST_data_ingestion.py <REST_data_ingestion.py>`
+
+
+
+  .. container:: sphx-glr-download
+
+     :download:`Download Jupyter notebook: REST_data_ingestion.ipynb <REST_data_ingestion.ipynb>`
+
+.. rst-class:: sphx-glr-signature
+
+    `Generated by Sphinx-Gallery <http://sphinx-gallery.readthedocs.io>`_
