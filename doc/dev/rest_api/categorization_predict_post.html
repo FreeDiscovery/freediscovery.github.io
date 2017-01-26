@@ -90,8 +90,7 @@
 <li class="toctree-l1"><a class="reference internal" href="index.html">REST API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../python_api.html">Python API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../scaling_benchmarks.html">Scaling Benchmarks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../deployment.html">Deployment options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_manual/index.html">User Manual</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../whats_new.html">Release history</a></li>
 </ul>
@@ -151,7 +150,19 @@
 <li><p class="first"><strong>Method</strong>: <code class="docutils literal"><span class="pre">GET</span></code>,  <strong>URL Params</strong>: None</p>
 </li>
 <li><p class="first"><strong>Success Response</strong>: <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">200</span></code></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="s2">&quot;prediction&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">&gt;</span><span class="p">}</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="s2">&quot;data&quot;</span> <span class="p">:</span> <span class="p">[</span>
+             <span class="p">{</span><span class="s2">&quot;internal_id&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span> <span class="p">,</span> <span class="s2">&quot;document_id&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">,</span>
+              <span class="s2">&quot;rendition_id&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span><span class="p">,</span>
+              <span class="s2">&quot;nn_positive&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;internal_id&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span> <span class="p">,</span>
+                              <span class="s2">&quot;document_id&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">,</span>
+                              <span class="s2">&quot;rendition_id&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">,</span>
+                              <span class="s2">&quot;distane&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span>
+                             <span class="p">},</span>
+              <span class="s2">&quot;nn_negative&quot;</span><span class="p">:</span> <span class="p">{</span><span class="o">...</span><span class="p">}</span>
+             <span class="p">},</span>
+             <span class="p">{</span><span class="o">...</span><span class="p">}</span>
+            <span class="p">]</span>
+  <span class="p">}</span>
 </pre></div>
 </div>
 </li>
@@ -169,7 +180,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, Grossman Labs LLC.
-      Last updated on Jan 25, 2017.
+      Last updated on Jan 26, 2017.
 
     </p>
   </div>

@@ -104,8 +104,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../python_api.html">Python API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../scaling_benchmarks.html">Scaling Benchmarks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../deployment.html">Deployment options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_manual/index.html">User Manual</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../whats_new.html">Release history</a></li>
 </ul>
@@ -159,7 +158,6 @@
   <div class="section" id="rest-api-reference">
 <h1>REST API Reference<a class="headerlink" href="#rest-api-reference" title="Permalink to this headline">¶</a></h1>
 <p>This REST API allows to use FreeDiscovery from any supported programming language.</p>
-<p>Following resources are defined,</p>
 <div class="section" id="load-benchmark-dataset">
 <h2>Load Benchmark Dataset<a class="headerlink" href="#load-benchmark-dataset" title="Permalink to this headline">¶</a></h2>
 <table border="1" class="docutils">
@@ -212,9 +210,9 @@
 <h2>Feature Extraction<a class="headerlink" href="#feature-extraction" title="Permalink to this headline">¶</a></h2>
 <table border="1" class="docutils">
 <colgroup>
-<col width="57%" />
+<col width="61%" />
 <col width="4%" />
-<col width="39%" />
+<col width="35%" />
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference external" href="./feature_extraction_post.html">/api/v0/feature-extraction/</a></td>
@@ -233,11 +231,15 @@
 <td>GET</td>
 <td>Load extracted features (and obtain the processing status)</td>
 </tr>
-<tr class="row-odd"><td><a class="reference external" href="./feature_extraction_index_get.html">/api/v0/feature-extraction/&lt;dataset-id&gt;/index</a></td>
+<tr class="row-odd"><td><a class="reference external" href="./feature_extraction_id_map_flat.html">/api/v0/feature-extraction/&lt;dataset-id&gt;/id-mapping/flat</a></td>
 <td>GET</td>
-<td>Query document index for a list of filenames</td>
+<td>Compute correspondence between id fields (flat)</td>
 </tr>
-<tr class="row-even"><td><a class="reference external" href="./feature_extraction_delete.html">/api/v0/feature-extraction/&lt;dataset-id&gt;</a></td>
+<tr class="row-even"><td><a class="reference external" href="./feature_extraction_id_map_nest.html">/api/v0/feature-extraction/&lt;dataset-id&gt;/id-mapping/nested</a></td>
+<td>GET</td>
+<td>Compute correspondence between id fields (nested)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="./feature_extraction_delete.html">/api/v0/feature-extraction/&lt;dataset-id&gt;</a></td>
 <td>DELETE</td>
 <td>Delete a processed dataset</td>
 </tr>
@@ -285,15 +287,11 @@
 <td>POST</td>
 <td>Categorize documents using different ML algorithms</td>
 </tr>
-<tr class="row-odd"><td><a class="reference external" href="./categorization_test_post.html">/api/v0/categorization/&lt;model-id&gt;/test</a></td>
-<td>POST</td>
-<td>Test categorization accuracy</td>
-</tr>
-<tr class="row-even"><td><a class="reference external" href="./categorization_element_get.html">/api/v0/categorization/&lt;model-id&gt;</a></td>
+<tr class="row-odd"><td><a class="reference external" href="./categorization_element_get.html">/api/v0/categorization/&lt;model-id&gt;</a></td>
 <td>GET</td>
 <td>Load categorization model parameters</td>
 </tr>
-<tr class="row-odd"><td><a class="reference external" href="./categorization_element_delete.html">/api/v0/categorization/&lt;model-id&gt;</a></td>
+<tr class="row-even"><td><a class="reference external" href="./categorization_element_delete.html">/api/v0/categorization/&lt;model-id&gt;</a></td>
 <td>DELETE</td>
 <td>Delete the categorization model</td>
 </tr>
@@ -438,7 +436,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, Grossman Labs LLC.
-      Last updated on Jan 25, 2017.
+      Last updated on Jan 26, 2017.
 
     </p>
   </div>

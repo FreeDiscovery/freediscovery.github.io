@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Categorization Example [REST API] &mdash; FreeDiscovery 0.8.dev0 documentation</title>
+  <title>Data Ingestion Example [REST API] &mdash; FreeDiscovery 0.8.dev0 documentation</title>
   
 
   
@@ -38,7 +38,7 @@
     <link rel="top" title="FreeDiscovery 0.8.dev0 documentation" href="../index.html"/>
         <link rel="up" title="Examples" href="index.html"/>
         <link rel="next" title="Clustering Example [REST API]" href="REST_clustering.html"/>
-        <link rel="prev" title="Email threading Example [REST API]" href="REST_email_threading.html"/> 
+        <link rel="prev" title="Semantic Search Example [REST API]" href="REST_semantic_search.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -95,14 +95,14 @@
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="python_clustering.html">Clustering Example [Python API]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="REST_email_threading.html">Email threading Example [REST API]</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Categorization Example [REST API]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="REST_semantic_search.html">Semantic Search Example [REST API]</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Data Ingestion Example [REST API]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="REST_clustering.html">Clustering Example [REST API]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="REST_duplicate_detection.html">Duplicate Detection Example [REST API]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="REST_categorization.html">Categorization Example [REST API]</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../scaling_benchmarks.html">Scaling Benchmarks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../deployment.html">Deployment options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_manual/index.html">User Manual</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../whats_new.html">Release history</a></li>
 </ul>
@@ -141,7 +141,7 @@
       
         <li><a href="index.html">Examples</a> &raquo;</li>
       
-    <li>Categorization Example [REST API]</li>
+    <li>Data Ingestion Example [REST API]</li>
     <li class="wy-breadcrumbs-aside">
       
           
@@ -155,9 +155,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="categorization-example-rest-api">
-<span id="sphx-glr-examples-rest-data-ingestion-py"></span><h1>Categorization Example [REST API]<a class="headerlink" href="#categorization-example-rest-api" title="Permalink to this headline">¶</a></h1>
-<p>An example to illustrate binary categorizaiton with FreeDiscovery</p>
+  <div class="section" id="data-ingestion-example-rest-api">
+<span id="sphx-glr-examples-rest-data-ingestion-py"></span><h1>Data Ingestion Example [REST API]<a class="headerlink" href="#data-ingestion-example-rest-api" title="Permalink to this headline">¶</a></h1>
+<p>An example illustrating the data ingestion in FreeDiscovery</p>
 <p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="mf">0.</span> <span class="n">Load</span> <span class="n">the</span> <span class="n">test</span> <span class="n">dataset</span>
  <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">datasets</span><span class="o">/</span><span class="n">treclegal09_2k_subset</span>
@@ -165,21 +165,21 @@
 <span class="mf">1.</span><span class="n">a</span> <span class="n">Load</span> <span class="n">dataset</span> <span class="ow">and</span> <span class="n">initalize</span> <span class="n">feature</span> <span class="n">extraction</span>
  <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span>
    <span class="o">=&gt;</span> <span class="n">received</span> <span class="p">[</span><span class="s1">u&#39;id&#39;</span><span class="p">,</span> <span class="s1">u&#39;filenames&#39;</span><span class="p">]</span>
-   <span class="o">=&gt;</span> <span class="n">dsid</span> <span class="o">=</span> <span class="n">f694b0f0ac504469</span>
+   <span class="o">=&gt;</span> <span class="n">dsid</span> <span class="o">=</span> <span class="mi">54734</span><span class="n">a82f6614bbd</span>
 
 <span class="mf">1.</span><span class="n">b</span> <span class="n">Start</span> <span class="n">feature</span> <span class="n">extraction</span>
- <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="n">f694b0f0ac504469</span>
+ <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="mi">54734</span><span class="n">a82f6614bbd</span>
 
 <span class="mf">2.</span><span class="n">a</span> <span class="n">Load</span> <span class="n">dataset</span> <span class="ow">and</span> <span class="n">initalize</span> <span class="n">feature</span> <span class="n">extraction</span>
  <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span>
    <span class="o">=&gt;</span> <span class="n">received</span> <span class="p">[</span><span class="s1">u&#39;id&#39;</span><span class="p">,</span> <span class="s1">u&#39;filenames&#39;</span><span class="p">]</span>
-   <span class="o">=&gt;</span> <span class="n">dsid</span> <span class="o">=</span> <span class="n">a5fca38a3e8d4632</span>
+   <span class="o">=&gt;</span> <span class="n">dsid</span> <span class="o">=</span> <span class="n">af32066b62834b95</span>
 
 <span class="mf">2.</span><span class="n">b</span> <span class="n">Start</span> <span class="n">feature</span> <span class="n">extraction</span>
- <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="n">a5fca38a3e8d4632</span>
+ <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="n">af32066b62834b95</span>
 
 <span class="mf">2.</span><span class="n">d</span><span class="o">.</span> <span class="n">check</span> <span class="n">the</span> <span class="n">parameters</span> <span class="n">of</span> <span class="n">the</span> <span class="n">extracted</span> <span class="n">features</span>
- <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="n">a5fca38a3e8d4632</span>
+ <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="n">af32066b62834b95</span>
      <span class="o">-</span> <span class="n">binary</span><span class="p">:</span> <span class="kc">False</span>
      <span class="o">-</span> <span class="n">n_jobs</span><span class="p">:</span> <span class="mi">1</span>
      <span class="o">-</span> <span class="n">data_dir</span><span class="p">:</span> <span class="o">../</span><span class="n">freediscovery_shared</span><span class="o">/</span><span class="n">treclegal09_2k_subset</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">jobRun_4</span><span class="o">/</span><span class="n">XML_EXPORT_CONTENT</span><span class="o">/</span><span class="n">text_9</span>
@@ -199,12 +199,12 @@
 
 <span class="mf">3.</span> <span class="n">Examine</span> <span class="n">the</span> <span class="nb">id</span> <span class="n">mapping</span>
 
- <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="n">a5fca38a3e8d4632</span><span class="o">/</span><span class="nb">id</span><span class="o">-</span><span class="n">mapping</span><span class="o">/</span><span class="n">flat</span>
+ <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="n">af32066b62834b95</span><span class="o">/</span><span class="nb">id</span><span class="o">-</span><span class="n">mapping</span><span class="o">/</span><span class="n">flat</span>
    <span class="n">DATA</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;internal_id&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">919</span><span class="p">,</span> <span class="mi">1047</span><span class="p">]}</span>
  <span class="n">Response</span><span class="p">:</span>
    <span class="p">{</span><span class="s2">&quot;internal_id&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">919</span><span class="p">,</span> <span class="mi">1047</span><span class="p">],</span> <span class="s2">&quot;document_id&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">13</span><span class="p">,</span> <span class="mi">929</span><span class="p">,</span> <span class="mi">1057</span><span class="p">]}</span>
 
- <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="n">a5fca38a3e8d4632</span><span class="o">/</span><span class="nb">id</span><span class="o">-</span><span class="n">mapping</span><span class="o">/</span><span class="n">nested</span>
+ <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="n">af32066b62834b95</span><span class="o">/</span><span class="nb">id</span><span class="o">-</span><span class="n">mapping</span><span class="o">/</span><span class="n">nested</span>
    <span class="n">DATA</span> <span class="p">{</span><span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;internal_id&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;internal_id&quot;</span><span class="p">:</span> <span class="mi">919</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;internal_id&quot;</span><span class="p">:</span> <span class="mi">1047</span><span class="p">}]}</span>
  <span class="n">Response</span><span class="p">:</span>
    <span class="p">{</span>
@@ -225,7 +225,7 @@
 <span class="p">}</span>
 
 <span class="mf">5.</span><span class="n">a</span> <span class="n">Delete</span> <span class="n">the</span> <span class="n">extracted</span> <span class="n">features</span>
- <span class="n">DELETE</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="n">a5fca38a3e8d4632</span>
+ <span class="n">DELETE</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="n">af32066b62834b95</span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -337,7 +337,7 @@
     <span class="n">requests</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  6.089 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  5.876 seconds)</p>
 <div class="sphx-glr-footer container">
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../_downloads/REST_data_ingestion.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">REST_data_ingestion.py</span></code></a></div>
@@ -357,7 +357,7 @@
         <a href="REST_clustering.html" class="btn btn-neutral float-right" title="Clustering Example [REST API]" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="REST_email_threading.html" class="btn btn-neutral" title="Email threading Example [REST API]" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="REST_semantic_search.html" class="btn btn-neutral" title="Semantic Search Example [REST API]" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -367,7 +367,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, Grossman Labs LLC.
-      Last updated on Jan 25, 2017.
+      Last updated on Jan 26, 2017.
 
     </p>
   </div>
