@@ -1,0 +1,233 @@
+
+
+.. _sphx_glr_examples_REST_semantic_search.py:
+
+
+Semantic Search Example [REST API]
+----------------------------------
+
+An example of Semantic Search
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    0. Load the test dataset
+     GET http://localhost:5001/api/v0/datasets/treclegal09_2k_subset
+
+    1.a Load dataset and initalize feature extraction
+     POST http://localhost:5001/api/v0/feature-extraction
+       => received [u'id', u'filenames']
+       => dsid = df0371a81e9743b3
+
+    1.b Start feature extraction
+     POST http://localhost:5001/api/v0/feature-extraction/df0371a81e9743b3
+
+    2. Calculate LSI
+    POST http://localhost:5001/api/v0/lsi/
+      => LSI model id = ed296f48975246ca
+      => SVD decomposition with 100 dimensions explaining 99.79 % variabilty of the data
+
+    3.a. Perform the semantic search
+     POST http://localhost:5001/api/v0/search/
+                 document_id  score
+    internal_id                    
+    0                      0  1.322
+    1                      1  1.370
+    2                      2  1.269
+    3                      3  1.275
+    4                      4  1.262
+    5                      5  1.279
+    6                      6  1.281
+    7                      7  1.277
+    8                      8  1.284
+    9                      9  1.283
+    10                    10  1.282
+    11                    11  1.268
+    12                    12  1.279
+    13                    13  1.296
+    14                    14  1.226
+    15                    15  1.217
+    16                    16  1.321
+    17                    17  1.295
+    18                    18  1.242
+    19                    19  1.229
+    20                    20  1.215
+    21                    21  1.326
+    22                    22  1.273
+    23                    23  1.271
+    24                    24  1.229
+    25                    25  1.306
+    26                    26  1.286
+    27                    27  1.204
+    28                    28  1.317
+    29                    29  1.296
+    ...                  ...    ...
+    2435                2435  1.316
+    2436                2436  1.282
+    2437                2437  1.249
+    2438                2438  1.246
+    2439                2439  1.275
+    2440                2440  1.238
+    2441                2441  1.276
+    2442                2442  1.238
+    2443                2443  1.293
+    2444                2444  1.263
+    2445                2445  1.284
+    2446                2446  1.252
+    2447                2447  1.275
+    2448                2448  1.241
+    2449                2449  1.282
+    2450                2450  1.247
+    2451                2451  1.282
+    2452                2452  1.250
+    2453                2453  1.264
+    2454                2454  1.229
+    2455                2455  1.232
+    2456                2456  1.275
+    2457                2457  1.241
+    2458                2458  1.279
+    2459                2459  1.268
+    2460                2460  1.275
+    2461                2461  1.272
+    2462                2462  1.274
+    2463                2463  1.244
+    2464                2464  1.256
+
+    [2465 rows x 2 columns]
+    1.47139928473
+
+    4. Delete the extracted features
+     DELETE http://localhost:5001/api/v0/feature-extraction/df0371a81e9743b3
+
+
+
+
+|
+
+
+.. code-block:: python
+
+
+    from __future__ import print_function
+
+    import requests
+    import pandas as pd
+
+    pd.options.display.float_format = '{:,.3f}'.format
+    pd.options.display.expand_frame_repr = False
+
+    dataset_name = "treclegal09_2k_subset"     # see list of available datasets
+
+    BASE_URL = "http://localhost:5001/api/v0"  # FreeDiscovery server URL
+
+    if __name__ == '__main__':
+
+        print(" 0. Load the test dataset")
+        url = BASE_URL + '/datasets/{}'.format(dataset_name)
+        print(" GET", url)
+        res = requests.get(url, json={'return_file_path': True}).json()
+
+        # To use a custom dataset, simply specify the following variables
+        seed_document_id = res['seed_document_id']
+        seed_y = res['seed_y']
+        ground_truth_y = res['ground_truth_y']
+
+        # create a custom dataset definition for ingestion
+        dataset_definition = []
+        for document_id, fname in zip(res['document_id'], res['file_path']):
+            dataset_definition.append({'document_id': document_id,
+                                      'rendering_id': 0,
+                                      'file_path': fname})
+
+        # 1. Feature extraction
+
+        print("\n1.a Load dataset and initalize feature extraction")
+        url = BASE_URL + '/feature-extraction'
+        print(" POST", url)
+        res = requests.post(url, json={'dataset_definition': dataset_definition,
+                                       'use_hashing': True}).json()
+
+        dsid = res['id']
+        print("   => received {}".format(list(res.keys())))
+        print("   => dsid = {}".format(dsid))
+
+        print("\n1.b Start feature extraction")
+
+        url = BASE_URL+'/feature-extraction/{}'.format(dsid)
+        print(" POST", url)
+        requests.post(url)
+
+        # 3. Document categorization with LSI (used for Nearest Neighbors method)
+
+        print("\n2. Calculate LSI")
+
+        url = BASE_URL + '/lsi/'
+        print("POST", url)
+
+        n_components = 100
+        res = requests.post(url,
+                            json={'n_components': n_components,
+                                  'parent_id': dsid
+                                  }).json()
+
+        lsi_id = res['id']
+        print('  => LSI model id = {}'.format(lsi_id))
+        print('  => SVD decomposition with {} dimensions explaining {:.2f} % variabilty of the data'.format(
+                                n_components, res['explained_variance']*100))
+
+
+        # 3. Semantic search
+
+        print("\n3.a. Perform the semantic search")
+
+
+        query = """There are some conflicts with the draft date, so we will probably need to
+                    have it on a different date."""
+
+        url = BASE_URL + '/search/'
+        print(" POST", url)
+
+        res = requests.get(url,
+                            json={'parent_id': lsi_id,
+                                  'query': query
+                                  }).json()
+
+        data = res['data']
+
+        df = pd.DataFrame(data).set_index('internal_id')
+        print(df)
+
+        print(df.score.max())
+
+
+        # 4. Cleaning
+        print("\n4. Delete the extracted features")
+        url = BASE_URL + '/feature-extraction/{}'.format(dsid)
+        print(" DELETE", url)
+        requests.delete(url)
+
+**Total running time of the script:** ( 0 minutes  53.375 seconds)
+
+
+
+.. container:: sphx-glr-footer
+
+
+  .. container:: sphx-glr-download
+
+     :download:`Download Python source code: REST_semantic_search.py <REST_semantic_search.py>`
+
+
+
+  .. container:: sphx-glr-download
+
+     :download:`Download Jupyter notebook: REST_semantic_search.ipynb <REST_semantic_search.ipynb>`
+
+.. rst-class:: sphx-glr-signature
+
+    `Generated by Sphinx-Gallery <http://sphinx-gallery.readthedocs.io>`_

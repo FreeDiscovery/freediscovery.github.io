@@ -1,0 +1,456 @@
+
+
+.. _sphx_glr_examples_REST_categorization.py:
+
+
+Categorization Example [REST API]
+---------------------------------
+
+An example to illustrate binary categorizaiton with FreeDiscovery
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    0. Load the test dataset
+     GET http://localhost:5001/api/v0/datasets/treclegal09_2k_subset
+
+    1.a Load dataset and initalize feature extraction
+     POST http://localhost:5001/api/v0/feature-extraction
+       => received [u'id', u'filenames']
+       => dsid = a86d415a8c204219
+
+    1.b Start feature extraction (in the background)
+     POST http://localhost:5001/api/v0/feature-extraction/a86d415a8c204219
+
+    1.c Monitor feature extraction progress
+     GET http://localhost:5001/api/v0/feature-extraction/a86d415a8c204219
+
+    1.d. check the parameters of the extracted features
+     GET http://localhost:5001/api/v0/feature-extraction/a86d415a8c204219
+         - binary: False
+         - n_jobs: 1
+         - data_dir: ../freediscovery_shared/treclegal09_2k_subset/data/jobRun_4/XML_EXPORT_CONTENT/text_9
+         - chunk_size: 5000
+         - norm: None
+         - analyzer: word
+         - n_samples: 2465
+         - ngram_range: [1, 1]
+         - max_df: 1.0
+         - min_df: 0.0
+         - use_idf: False
+         - stop_words: None
+         - sublinear_tf: True
+         - n_samples_processed: 2465
+         - n_features: 100001
+         - use_hashing: True
+
+    2. Calculate LSI
+    POST http://localhost:5001/api/v0/lsi/
+      => LSI model id = 41d46289324240b5
+      => SVD decomposition with 100 dimensions explaining 99.79 % variabilty of the data
+
+    3.a. Train the categorization model
+       5 relevant, 63 non-relevant files
+    ================================================================================ 
+                LinearSVC   
+     ================================================================================
+     POST http://localhost:5001/api/v0/categorization/
+     Training...
+         => model id = 5e2497ec13714d83
+        => Training scores: MAP = 0.683, ROC-AUC = nan, F1= 0.000
+
+    3.b. Check the parameters used in the categorization model
+     GET http://localhost:5001/api/v0/categorization/5e2497ec13714d83
+         - method: LinearSVC
+         - options: {'loss': 'squared_hinge', 'C': 1.0, 'verbose': 0, 'intercept_scaling': 1, 'fit_intercept': True, 'max_iter': 1000, 'penalty': 'l2', 'multi_class': 'ovr', 'random_state': None, 'dual': True, 'tol': 0.0001, 'class_weight': None}
+
+    3.c Categorize the complete dataset with this model
+     GET http://localhost:5001/api/v0/categorization/5e2497ec13714d83/predict
+                 document_id  score
+    internal_id                    
+    0                      0 -0.846
+    1                      1 -0.846
+    2                      2 -0.846
+    3                      3 -0.846
+    4                      4 -0.846
+    5                      5 -0.846
+    6                      6 -0.846
+    7                      7 -0.846
+    8                      8 -0.846
+    9                      9 -0.846
+    10                    10 -0.846
+    11                    11 -0.846
+    12                    12 -0.846
+    13                    13 -0.847
+    14                    14 -0.846
+    15                    15 -0.846
+    16                    16 -0.847
+    17                    17 -0.846
+    18                    18 -0.846
+    19                    19 -0.846
+    20                    20 -0.846
+    21                    21 -0.847
+    22                    22 -0.846
+    23                    23 -0.846
+    24                    24 -0.846
+    25                    25 -0.847
+    26                    26 -0.846
+    27                    27 -0.846
+    28                    28 -0.847
+    29                    29 -0.846
+    ...                  ...    ...
+    2435                2435 -0.849
+    2436                2436 -0.846
+    2437                2437 -0.846
+    2438                2438 -0.846
+    2439                2439 -0.846
+    2440                2440 -0.846
+    2441                2441 -0.846
+    2442                2442 -0.846
+    2443                2443 -0.846
+    2444                2444 -0.846
+    2445                2445 -0.846
+    2446                2446 -0.846
+    2447                2447 -0.846
+    2448                2448 -0.846
+    2449                2449 -0.846
+    2450                2450 -0.846
+    2451                2451 -0.846
+    2452                2452 -0.846
+    2453                2453 -0.846
+    2454                2454 -0.846
+    2455                2455 -0.846
+    2456                2456 -0.846
+    2457                2457 -0.846
+    2458                2458 -0.846
+    2459                2459 -0.846
+    2460                2460 -0.846
+    2461                2461 -0.846
+    2462                2462 -0.846
+    2463                2463 -0.846
+    2464                2464 -0.846
+
+    [2465 rows x 2 columns]
+
+    3.d Compute the categorization scores
+     GET http://localhost:5001/api/v0/metrics/categorization
+        => Test scores: MAP = 0.545, ROC-AUC = 0.545
+    ================================================================================ 
+                NearestNeighbor  + LSI 
+     ================================================================================
+     POST http://localhost:5001/api/v0/categorization/
+     Training...
+         => model id = e6294c2e445e47f1
+        => Training scores: MAP = 1.000, ROC-AUC = nan, F1= 1.000
+
+    3.b. Check the parameters used in the categorization model
+     GET http://localhost:5001/api/v0/categorization/e6294c2e445e47f1
+         - method: NearestNeighbor
+         - options: {'ranking': None, 'n_jobs': None, 'radius': None, 'leaf_size': None, 'algorithm': None}
+
+    3.c Categorize the complete dataset with this model
+     GET http://localhost:5001/api/v0/categorization/e6294c2e445e47f1/predict
+                 document_id  nn_negative__distance  nn_negative__document_id  nn_positive__distance  nn_positive__document_id  score
+    internal_id                                                                                                                      
+    0                      0                  0.226                        52                  0.206                         3  0.897
+    1                      1                  0.571                        53                  0.653                         4 -0.715
+    2                      2                  0.086                        21                  0.085                         0  0.958
+    3                      3                  0.063                        21                  0.000                         0  1.000
+    4                      4                  0.123                        64                  0.119                         0  0.940
+    5                      5                  0.109                        21                  0.094                         0  0.953
+    6                      6                  0.126                         5                  0.113                         0  0.943
+    7                      7                  0.097                        21                  0.071                         0  0.965
+    8                      8                  0.089                        37                  0.087                         0  0.956
+    9                      9                  0.000                         5                  0.106                         0 -1.000
+    10                    10                  0.091                        21                  0.048                         0  0.976
+    11                    11                  0.570                        58                  0.683                         4 -0.715
+    12                    12                  0.570                        58                  0.660                         4 -0.715
+    13                    13                  0.569                        55                  0.662                         3 -0.715
+    14                    14                  0.080                        55                  0.611                         1 -0.960
+    15                    15                  0.213                        12                  0.442                         1 -0.893
+    16                    16                  0.655                         7                  0.702                         4 -0.673
+    17                    17                  0.616                        58                  0.668                         4 -0.692
+    18                    18                  0.413                        12                  0.557                         1 -0.794
+    19                    19                  0.386                        12                  0.600                         1 -0.807
+    20                    20                  0.210                        12                  0.467                         1 -0.895
+    21                    21                  0.372                        63                  0.664                         3 -0.814
+    22                    22                  0.531                        53                  0.646                         4 -0.734
+    23                    23                  0.528                        53                  0.646                         4 -0.736
+    24                    24                  0.413                        12                  0.552                         4 -0.794
+    25                    25                  0.587                        63                  0.713                         4 -0.707
+    26                    26                  0.597                        58                  0.688                         4 -0.702
+    27                    27                  0.487                        12                  0.611                         2 -0.756
+    28                    28                  0.648                         7                  0.707                         4 -0.676
+    29                    29                  0.621                        58                  0.671                         4 -0.689
+    ...                  ...                    ...                       ...                    ...                       ...    ...
+    2435                2435                  0.649                        59                  0.681                         1 -0.676
+    2436                2436                  0.109                        21                  0.098                         0  0.951
+    2437                2437                  0.217                        47                  0.367                         0 -0.891
+    2438                2438                  0.208                        35                  0.338                         0 -0.896
+    2439                2439                  0.087                         5                  0.107                         0 -0.956
+    2440                2440                  0.199                        47                  0.346                         0 -0.900
+    2441                2441                  0.086                         5                  0.103                         0 -0.957
+    2442                2442                  0.203                        47                  0.332                         0 -0.898
+    2443                2443                  0.127                        52                  0.124                         0  0.938
+    2444                2444                  0.227                        66                  0.368                         0 -0.887
+    2445                2445                  0.141                         5                  0.135                         0  0.933
+    2446                2446                  0.205                        35                  0.351                         0 -0.897
+    2447                2447                  0.112                        64                  0.095                         0  0.952
+    2448                2448                  0.171                        66                  0.345                         0 -0.915
+    2449                2449                  0.090                        21                  0.052                         0  0.974
+    2450                2450                  0.201                        35                  0.301                         0 -0.900
+    2451                2451                  0.000                        67                  0.126                         0 -1.000
+    2452                2452                  0.239                        66                  0.358                         0 -0.881
+    2453                2453                  0.147                        51                  0.196                         0 -0.926
+    2454                2454                  0.286                        47                  0.367                         4 -0.857
+    2455                2455                  0.140                        47                  0.328                         0 -0.930
+    2456                2456                  0.057                        21                  0.035                         0  0.982
+    2457                2457                  0.219                        47                  0.325                         0 -0.891
+    2458                2458                  0.117                        21                  0.095                         0  0.952
+    2459                2459                  0.188                        42                  0.534                         2 -0.906
+    2460                2460                  0.416                        42                  0.519                         3 -0.792
+    2461                2461                  0.447                        13                  0.514                         2 -0.777
+    2462                2462                  0.431                        39                  0.623                         0 -0.784
+    2463                2463                  0.471                        39                  0.530                         2 -0.765
+    2464                2464                  0.446                        42                  0.563                         3 -0.777
+
+    [2465 rows x 6 columns]
+
+    3.d Compute the categorization scores
+     GET http://localhost:5001/api/v0/metrics/categorization
+        => Test scores: MAP = 0.274, ROC-AUC = 0.274
+
+    5.a Delete the extracted features (and LSI decomposition)
+     DELETE http://localhost:5001/api/v0/feature-extraction/a86d415a8c204219
+
+
+
+
+|
+
+
+.. code-block:: python
+
+
+    from __future__ import print_function
+
+    from time import time, sleep
+    from multiprocessing import Process
+    import requests
+    import pandas as pd
+
+    pd.options.display.float_format = '{:,.3f}'.format
+    pd.options.display.expand_frame_repr = False
+
+    dataset_name = "treclegal09_2k_subset"     # see list of available datasets
+
+    BASE_URL = "http://localhost:5001/api/v0"  # FreeDiscovery server URL
+
+    if __name__ == '__main__':
+
+        print(" 0. Load the test dataset")
+        url = BASE_URL + '/datasets/{}'.format(dataset_name)
+        print(" GET", url)
+        res = requests.get(url, json={'return_file_path': True}).json()
+
+        # To use a custom dataset, simply specify the following variables
+        seed_document_id = res['seed_document_id']
+        seed_y = res['seed_y']
+        ground_truth_y = res['ground_truth_y']
+
+        # create a custom dataset definition for ingestion
+        dataset_definition = []
+        for document_id, fname in zip(res['document_id'], res['file_path']):
+            dataset_definition.append({'document_id': document_id,
+                                      'rendering_id': 0,
+                                      'file_path': fname})
+
+        # 1. Feature extraction
+
+        print("\n1.a Load dataset and initalize feature extraction")
+        url = BASE_URL + '/feature-extraction'
+        print(" POST", url)
+        res = requests.post(url, json={'dataset_definition': dataset_definition,
+                                       'use_hashing': True}).json()
+
+        dsid = res['id']
+        print("   => received {}".format(list(res.keys())))
+        print("   => dsid = {}".format(dsid))
+
+        print("\n1.b Start feature extraction (in the background)")
+
+        # Make this call in a background process (there should be a better way of doing it)
+        url = BASE_URL+'/feature-extraction/{}'.format(dsid)
+        print(" POST", url)
+        p = Process(target=requests.post, args=(url,))
+        p.start()
+        sleep(5.0) # wait a bit for the processing to start
+
+        print('\n1.c Monitor feature extraction progress')
+        url = BASE_URL+'/feature-extraction/{}'.format(dsid)
+        print(" GET", url)
+
+        t0 = time()
+        while True:
+            res = requests.get(url)
+            if res.status_code == 520:
+                p.terminate()
+                raise ValueError('Processing did not start')
+            elif res.status_code == 200:
+                break # processing finished
+            data = res.json()
+            print('     ... {}k/{}k files processed in {:.1f} min'.format(
+                        data['n_samples_processed']//1000, data['n_samples']//1000, (time() - t0)/60.))
+            sleep(15.0)
+
+        p.terminate()  # just in case, should not be necessary
+
+
+        print("\n1.d. check the parameters of the extracted features")
+        url = BASE_URL + '/feature-extraction/{}'.format(dsid)
+        print(' GET', url)
+        res = requests.get(url).json()
+
+        print('\n'.join(['     - {}: {}'.format(key, val) for key, val in res.items() \
+                                                          if "filenames" not in key]))
+        # this step is not necessary anymore
+        #method = BASE_URL + "/feature-extraction/{}/id-mapping/flat".format(dsid)
+        #res = requests.get(method, data={'document_id': seed_document_id})
+        #seed_internal_id = res.json()['internal_id']
+
+
+        # 3. Document categorization with LSI (used for Nearest Neighbors method)
+
+        print("\n2. Calculate LSI")
+
+        url = BASE_URL + '/lsi/'
+        print("POST", url)
+
+        n_components = 100
+        res = requests.post(url,
+                            json={'n_components': n_components,
+                                  'parent_id': dsid
+                                  }).json()
+
+        lsi_id = res['id']
+        print('  => LSI model id = {}'.format(lsi_id))
+        print('  => SVD decomposition with {} dimensions explaining {:.2f} % variabilty of the data'.format(
+                                n_components, res['explained_variance']*100))
+
+
+        # 3. Document categorization
+
+        print("\n3.a. Train the categorization model")
+        print("   {} relevant, {} non-relevant files".format(seed_y.count(1), seed_y.count(0)))
+
+        seed_index_nested = [{'document_id': internal_id, 'y': y} \
+                                    for internal_id, y in zip(seed_document_id, seed_y)]
+
+        for method, use_lsi in [('LinearSVC', False),
+                                ('NearestNeighbor', True)]:
+
+            print('='*80, '\n', ' '*10,
+                  method, " + LSI" if use_lsi else ' ', '\n', '='*80)
+            if use_lsi:
+                # Categorization with the previously created LSI model
+                parent_id = lsi_id
+            else:
+                # Categorization with original text features
+                parent_id = dsid
+
+            url = BASE_URL + '/categorization/'
+            print(" POST", url)
+            print(' Training...')
+
+            res = requests.post(url,
+                                json={'parent_id': parent_id,
+                                      'index_nested': seed_index_nested,
+                                      'method': method,  # one of "LinearSVC", "LogisticRegression", 'xgboost'
+                                      }).json()
+
+            mid = res['id']
+            print("     => model id = {}".format(mid))
+            print('    => Training scores: MAP = {average_precision:.3f}, ROC-AUC = {roc_auc:.3f}, F1= {f1:.3f}'.format(**res))
+
+            print("\n3.b. Check the parameters used in the categorization model")
+            url = BASE_URL + '/categorization/{}'.format(mid)
+            print(" GET", url)
+            res = requests.get(url).json()
+
+            print('\n'.join(['     - {}: {}'.format(key, val) for key, val in res.items() \
+                                                              if key not in ['index', 'y']]))
+
+            print("\n3.c Categorize the complete dataset with this model")
+            url = BASE_URL + '/categorization/{}/predict'.format(mid)
+            print(" GET", url)
+            res = requests.get(url).json()
+
+            if method == "NearestNeighbor":
+
+                def flatten_dict(d, parent_key='', sep='__'):
+                    """Flatten a nested dictionary """
+                    import collections
+                    items = []
+                    for k, v in d.items():
+                        new_key = parent_key + sep + k if parent_key else k
+                        if isinstance(v, collections.MutableMapping):
+                            items.extend(flatten_dict(v, new_key, sep=sep).items())
+                        else:
+                            items.append((new_key, v))
+                    return dict(items)
+            
+                data = [flatten_dict(el) for el in res['data']]
+            else:
+                data = res['data']
+
+            df = pd.DataFrame(data).set_index('internal_id')
+            if method == "NearestNeighbor":
+                df = df[['document_id', 'nn_negative__distance', 'nn_negative__document_id',
+                      'nn_positive__distance', 'nn_positive__document_id', 'score']]
+
+            print(df)
+
+            print("\n3.d Compute the categorization scores")
+            url = BASE_URL + '/metrics/categorization'
+            print(" GET", url)
+            res = requests.get(url, json={'y_true': ground_truth_y,
+                                          'y_pred': df.score.values.tolist(),
+                                         } ).json()
+
+
+
+
+
+            print('    => Test scores: MAP = {average_precision:.3f}, ROC-AUC = {roc_auc:.3f}'.format(**res))
+
+        # 4. Cleaning
+        print("\n5.a Delete the extracted features (and LSI decomposition)")
+        url = BASE_URL + '/feature-extraction/{}'.format(dsid)
+        print(" DELETE", url)
+        requests.delete(url)
+
+**Total running time of the script:** ( 1 minutes  6.448 seconds)
+
+
+
+.. container:: sphx-glr-footer
+
+
+  .. container:: sphx-glr-download
+
+     :download:`Download Python source code: REST_categorization.py <REST_categorization.py>`
+
+
+
+  .. container:: sphx-glr-download
+
+     :download:`Download Jupyter notebook: REST_categorization.ipynb <REST_categorization.ipynb>`
+
+.. rst-class:: sphx-glr-signature
+
+    `Generated by Sphinx-Gallery <http://sphinx-gallery.readthedocs.io>`_

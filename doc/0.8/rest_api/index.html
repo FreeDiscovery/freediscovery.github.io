@@ -1,0 +1,489 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>REST API Reference &mdash; FreeDiscovery 0.8.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="FreeDiscovery 0.8.0 documentation" href="../index.html"/>
+        <link rel="next" title="Python API Reference" href="../python_api.html"/>
+        <link rel="prev" title="Installation Instructions" href="../installation_instructions.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> FreeDiscovery
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.8.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation_instructions.html">Installation Instructions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">REST API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#load-benchmark-dataset">Load Benchmark Dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#parsers">Parsers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#feature-extraction">Feature Extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#latent-semantic-indexing-lsi">Latent Semantic Indexing (LSI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#document-categorizaiton">Document Categorizaiton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#document-clustering">Document Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#near-duplicate-detection">Near Duplicate Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#email-threading">Email threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#semantic-search">Semantic search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#metrics">Metrics</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../python_api.html">Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_manual/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats_new.html">Release history</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">FreeDiscovery</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>REST API Reference</li>
+    <li class="wy-breadcrumbs-aside">
+      
+          
+          <a href="../_sources/rest_api/index.rst.txt" rel="nofollow"> View page source</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="rest-api-reference">
+<h1>REST API Reference<a class="headerlink" href="#rest-api-reference" title="Permalink to this headline">¶</a></h1>
+<p>This REST API allows to use FreeDiscovery from any supported programming language.</p>
+<div class="section" id="load-benchmark-dataset">
+<h2>Load Benchmark Dataset<a class="headerlink" href="#load-benchmark-dataset" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="47%" />
+<col width="5%" />
+<col width="48%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference external" href="./dataset_get.html">/api/v0/dataset/&lt;dataset-name&gt;</a></td>
+<td>GET</td>
+<td>Load benchmark dataset</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="parsers">
+<h2>Parsers<a class="headerlink" href="#parsers" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="57%" />
+<col width="4%" />
+<col width="39%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference external" href="./email_parser_post.html">/api/v0/email-parser/</a></td>
+<td>POST</td>
+<td>Load a dataset and parse emails</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="./email_parser_get.html">/api/v0/email-parser/</a></td>
+<td>GET</td>
+<td>List processed datasets</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="./email_parser_element_get.html">/api/v0/email-parser/&lt;dataset-id&gt;</a></td>
+<td>GET</td>
+<td>Load parsed emails</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="./email_parser_index_get.html">/api/v0/email-parser/&lt;dataset-id&gt;/index</a></td>
+<td>GET</td>
+<td>Query document index for a list of filenames</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="./email_parser_delete.html">/api/v0/email-parser/&lt;dataset-id&gt;</a></td>
+<td>DELETE</td>
+<td>Delete a processed dataset</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="feature-extraction">
+<h2>Feature Extraction<a class="headerlink" href="#feature-extraction" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="61%" />
+<col width="4%" />
+<col width="35%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference external" href="./feature_extraction_post.html">/api/v0/feature-extraction/</a></td>
+<td>POST</td>
+<td>Load a dataset and initialize feature extraction</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="./feature_extraction_get.html">/api/v0/feature-extraction/</a></td>
+<td>GET</td>
+<td>List processed datasets</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="./feature_extraction_element_post.html">/api/v0/feature-extraction/&lt;dataset-id&gt;</a></td>
+<td>POST</td>
+<td>Run feature extraction on a dataset</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="./feature_extraction_element_get.html">/api/v0/feature-extraction/&lt;dataset-id&gt;</a></td>
+<td>GET</td>
+<td>Load extracted features (and obtain the processing status)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="./feature_extraction_id_map_flat.html">/api/v0/feature-extraction/&lt;dataset-id&gt;/id-mapping/flat</a></td>
+<td>GET</td>
+<td>Compute correspondence between id fields (flat)</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="./feature_extraction_id_map_nest.html">/api/v0/feature-extraction/&lt;dataset-id&gt;/id-mapping/nested</a></td>
+<td>GET</td>
+<td>Compute correspondence between id fields (nested)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="./feature_extraction_delete.html">/api/v0/feature-extraction/&lt;dataset-id&gt;</a></td>
+<td>DELETE</td>
+<td>Delete a processed dataset</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="latent-semantic-indexing-lsi">
+<h2>Latent Semantic Indexing (LSI)<a class="headerlink" href="#latent-semantic-indexing-lsi" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="56%" />
+<col width="5%" />
+<col width="39%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference external" href="./lsi_post.html">/api/v0/lsi/</a></td>
+<td>POST</td>
+<td>Construct the Latent Semantic Indexing (LSI) model</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="./lsi_get.html">/api/v0/lsi/&lt;lsi-id&gt;</a></td>
+<td>GET</td>
+<td>Show LSI model parameters</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="./lsi_delete.html">/api/v0/lsi/&lt;lsi-id&gt;</a></td>
+<td>DELETE</td>
+<td>Delete a LSI model</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="document-categorizaiton">
+<h2>Document Categorizaiton<a class="headerlink" href="#document-categorizaiton" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="56%" />
+<col width="5%" />
+<col width="39%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference external" href="./categorization_post.html">/api/v0/categorization/</a></td>
+<td>POST</td>
+<td>Build the ML categorization model</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="./categorization_predict_post.html">/api/v0/categorization/&lt;model-id&gt;/predict</a></td>
+<td>POST</td>
+<td>Categorize documents using different ML algorithms</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="./categorization_element_get.html">/api/v0/categorization/&lt;model-id&gt;</a></td>
+<td>GET</td>
+<td>Load categorization model parameters</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="./categorization_element_delete.html">/api/v0/categorization/&lt;model-id&gt;</a></td>
+<td>DELETE</td>
+<td>Delete the categorization model</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="document-clustering">
+<h2>Document Clustering<a class="headerlink" href="#document-clustering" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="58%" />
+<col width="4%" />
+<col width="38%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference external" href="./clustering_k_mean_post.html">/api/v0/clustering/k-mean</a></td>
+<td>POST</td>
+<td>Compute clustering (K-mean)</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="./clustering_birch_post.html">/api/v0/clustering/birch</a></td>
+<td>POST</td>
+<td>Compute clustering (Birch)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="./clustering_hac_post.html">/api/v0/clustering/ward-hc</a></td>
+<td>POST</td>
+<td>Compute clustering (Ward hierarchical)</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="./clustering_dbscan_post.html">/api/v0/clustering/dbscan</a></td>
+<td>POST</td>
+<td>Compute clustering (DBSCAN)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="./clustering_model_element_get.html">/api/v0/clustering/&lt;model-name&gt;/&lt;model-id&gt;</a></td>
+<td>POST</td>
+<td>Compute cluster labels</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="./clustering_model_element_delete.html">/api/v0/clustering/&lt;model-name&gt;/&lt;model-id&gt;</a></td>
+<td>DELETE</td>
+<td>Delete a clustering model</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="near-duplicate-detection">
+<h2>Near Duplicate Detection<a class="headerlink" href="#near-duplicate-detection" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="57%" />
+<col width="4%" />
+<col width="39%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference external" href="./duplicate_detection_post.html">/api/v0/duplicate-detection/</a></td>
+<td>POST</td>
+<td>Compute near duplicates</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="./duplicate_detection_element_get.html">/api/v0/duplicate-detection/&lt;model-id&gt;</a></td>
+<td>GET</td>
+<td>Query duplicates</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="email-threading">
+<h2>Email threading<a class="headerlink" href="#email-threading" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="57%" />
+<col width="4%" />
+<col width="39%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference external" href="./email_threading_post.html">/api/v0/email-threading/</a></td>
+<td>POST</td>
+<td>Thread emails</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="./email_threading_element_get.html">/api/v0/email-threading/&lt;model-id&gt;</a></td>
+<td>GET</td>
+<td>Get threading parameters</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="semantic-search">
+<h2>Semantic search<a class="headerlink" href="#semantic-search" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="57%" />
+<col width="4%" />
+<col width="39%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference external" href="./search_get.html">/api/v0/search/</a></td>
+<td>POST</td>
+<td>(Semantic) search</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="metrics">
+<h2>Metrics<a class="headerlink" href="#metrics" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="57%" />
+<col width="4%" />
+<col width="39%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference external" href="./metrics_categorization_get.html">/api/v0/metrics/categorization</a></td>
+<td>GET</td>
+<td>Retrieve categorization metrics</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="./metrics_clustering_get.html">/api/v0/metrics/clustering</a></td>
+<td>GET</td>
+<td>Retrieve clustering metrics</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="./metrics_duplicate_detection_get.html">/api/v0/metrics/duplicate-detection</a></td>
+<td>GET</td>
+<td>Retrieve duplicate detection metrics</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../python_api.html" class="btn btn-neutral float-right" title="Python API Reference" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../installation_instructions.html" class="btn btn-neutral" title="Installation Instructions" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Grossman Labs LLC.
+      Last updated on Jan 26, 2017.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.8.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

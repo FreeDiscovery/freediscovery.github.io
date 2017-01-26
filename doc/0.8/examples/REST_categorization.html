@@ -1,0 +1,656 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Categorization Example [REST API] &mdash; FreeDiscovery 0.8.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="FreeDiscovery 0.8.0 documentation" href="../index.html"/>
+        <link rel="up" title="Examples" href="index.html"/>
+        <link rel="next" title="User Manual" href="../user_manual/index.html"/>
+        <link rel="prev" title="Duplicate Detection Example [REST API]" href="REST_duplicate_detection.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> FreeDiscovery
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.8.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation_instructions.html">Installation Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rest_api/index.html">REST API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python_api.html">Python API Reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="python_clustering.html">Clustering Example [Python API]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="REST_email_threading.html">Email threading Example [REST API]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="REST_semantic_search.html">Semantic Search Example [REST API]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="REST_data_ingestion.html">Data Ingestion Example [REST API]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="REST_clustering.html">Clustering Example [REST API]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="REST_duplicate_detection.html">Duplicate Detection Example [REST API]</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Categorization Example [REST API]</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../user_manual/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats_new.html">Release history</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">FreeDiscovery</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+        <li><a href="index.html">Examples</a> &raquo;</li>
+      
+    <li>Categorization Example [REST API]</li>
+    <li class="wy-breadcrumbs-aside">
+      
+          
+          <a href="../_sources/examples/REST_categorization.rst.txt" rel="nofollow"> View page source</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="categorization-example-rest-api">
+<span id="sphx-glr-examples-rest-categorization-py"></span><h1>Categorization Example [REST API]<a class="headerlink" href="#categorization-example-rest-api" title="Permalink to this headline">¶</a></h1>
+<p>An example to illustrate binary categorizaiton with FreeDiscovery</p>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="mf">0.</span> <span class="n">Load</span> <span class="n">the</span> <span class="n">test</span> <span class="n">dataset</span>
+ <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">datasets</span><span class="o">/</span><span class="n">treclegal09_2k_subset</span>
+
+<span class="mf">1.</span><span class="n">a</span> <span class="n">Load</span> <span class="n">dataset</span> <span class="ow">and</span> <span class="n">initalize</span> <span class="n">feature</span> <span class="n">extraction</span>
+ <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span>
+   <span class="o">=&gt;</span> <span class="n">received</span> <span class="p">[</span><span class="s1">u&#39;id&#39;</span><span class="p">,</span> <span class="s1">u&#39;filenames&#39;</span><span class="p">]</span>
+   <span class="o">=&gt;</span> <span class="n">dsid</span> <span class="o">=</span> <span class="n">a86d415a8c204219</span>
+
+<span class="mf">1.</span><span class="n">b</span> <span class="n">Start</span> <span class="n">feature</span> <span class="n">extraction</span> <span class="p">(</span><span class="ow">in</span> <span class="n">the</span> <span class="n">background</span><span class="p">)</span>
+ <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="n">a86d415a8c204219</span>
+
+<span class="mf">1.</span><span class="n">c</span> <span class="n">Monitor</span> <span class="n">feature</span> <span class="n">extraction</span> <span class="n">progress</span>
+ <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="n">a86d415a8c204219</span>
+
+<span class="mf">1.</span><span class="n">d</span><span class="o">.</span> <span class="n">check</span> <span class="n">the</span> <span class="n">parameters</span> <span class="n">of</span> <span class="n">the</span> <span class="n">extracted</span> <span class="n">features</span>
+ <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="n">a86d415a8c204219</span>
+     <span class="o">-</span> <span class="n">binary</span><span class="p">:</span> <span class="kc">False</span>
+     <span class="o">-</span> <span class="n">n_jobs</span><span class="p">:</span> <span class="mi">1</span>
+     <span class="o">-</span> <span class="n">data_dir</span><span class="p">:</span> <span class="o">../</span><span class="n">freediscovery_shared</span><span class="o">/</span><span class="n">treclegal09_2k_subset</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">jobRun_4</span><span class="o">/</span><span class="n">XML_EXPORT_CONTENT</span><span class="o">/</span><span class="n">text_9</span>
+     <span class="o">-</span> <span class="n">chunk_size</span><span class="p">:</span> <span class="mi">5000</span>
+     <span class="o">-</span> <span class="n">norm</span><span class="p">:</span> <span class="kc">None</span>
+     <span class="o">-</span> <span class="n">analyzer</span><span class="p">:</span> <span class="n">word</span>
+     <span class="o">-</span> <span class="n">n_samples</span><span class="p">:</span> <span class="mi">2465</span>
+     <span class="o">-</span> <span class="n">ngram_range</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+     <span class="o">-</span> <span class="n">max_df</span><span class="p">:</span> <span class="mf">1.0</span>
+     <span class="o">-</span> <span class="n">min_df</span><span class="p">:</span> <span class="mf">0.0</span>
+     <span class="o">-</span> <span class="n">use_idf</span><span class="p">:</span> <span class="kc">False</span>
+     <span class="o">-</span> <span class="n">stop_words</span><span class="p">:</span> <span class="kc">None</span>
+     <span class="o">-</span> <span class="n">sublinear_tf</span><span class="p">:</span> <span class="kc">True</span>
+     <span class="o">-</span> <span class="n">n_samples_processed</span><span class="p">:</span> <span class="mi">2465</span>
+     <span class="o">-</span> <span class="n">n_features</span><span class="p">:</span> <span class="mi">100001</span>
+     <span class="o">-</span> <span class="n">use_hashing</span><span class="p">:</span> <span class="kc">True</span>
+
+<span class="mf">2.</span> <span class="n">Calculate</span> <span class="n">LSI</span>
+<span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">lsi</span><span class="o">/</span>
+  <span class="o">=&gt;</span> <span class="n">LSI</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="mi">41</span><span class="n">d46289324240b5</span>
+  <span class="o">=&gt;</span> <span class="n">SVD</span> <span class="n">decomposition</span> <span class="k">with</span> <span class="mi">100</span> <span class="n">dimensions</span> <span class="n">explaining</span> <span class="mf">99.79</span> <span class="o">%</span> <span class="n">variabilty</span> <span class="n">of</span> <span class="n">the</span> <span class="n">data</span>
+
+<span class="mf">3.</span><span class="n">a</span><span class="o">.</span> <span class="n">Train</span> <span class="n">the</span> <span class="n">categorization</span> <span class="n">model</span>
+   <span class="mi">5</span> <span class="n">relevant</span><span class="p">,</span> <span class="mi">63</span> <span class="n">non</span><span class="o">-</span><span class="n">relevant</span> <span class="n">files</span>
+<span class="o">================================================================================</span>
+            <span class="n">LinearSVC</span>
+ <span class="o">================================================================================</span>
+ <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">categorization</span><span class="o">/</span>
+ <span class="n">Training</span><span class="o">...</span>
+     <span class="o">=&gt;</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="mi">5</span><span class="n">e2497ec13714d83</span>
+    <span class="o">=&gt;</span> <span class="n">Training</span> <span class="n">scores</span><span class="p">:</span> <span class="n">MAP</span> <span class="o">=</span> <span class="mf">0.683</span><span class="p">,</span> <span class="n">ROC</span><span class="o">-</span><span class="n">AUC</span> <span class="o">=</span> <span class="n">nan</span><span class="p">,</span> <span class="n">F1</span><span class="o">=</span> <span class="mf">0.000</span>
+
+<span class="mf">3.</span><span class="n">b</span><span class="o">.</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">parameters</span> <span class="n">used</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">categorization</span> <span class="n">model</span>
+ <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">categorization</span><span class="o">/</span><span class="mi">5</span><span class="n">e2497ec13714d83</span>
+     <span class="o">-</span> <span class="n">method</span><span class="p">:</span> <span class="n">LinearSVC</span>
+     <span class="o">-</span> <span class="n">options</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;loss&#39;</span><span class="p">:</span> <span class="s1">&#39;squared_hinge&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;verbose&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;intercept_scaling&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;fit_intercept&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;max_iter&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="s1">&#39;penalty&#39;</span><span class="p">:</span> <span class="s1">&#39;l2&#39;</span><span class="p">,</span> <span class="s1">&#39;multi_class&#39;</span><span class="p">:</span> <span class="s1">&#39;ovr&#39;</span><span class="p">,</span> <span class="s1">&#39;random_state&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;dual&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;tol&#39;</span><span class="p">:</span> <span class="mf">0.0001</span><span class="p">,</span> <span class="s1">&#39;class_weight&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
+
+<span class="mf">3.</span><span class="n">c</span> <span class="n">Categorize</span> <span class="n">the</span> <span class="n">complete</span> <span class="n">dataset</span> <span class="k">with</span> <span class="n">this</span> <span class="n">model</span>
+ <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">categorization</span><span class="o">/</span><span class="mi">5</span><span class="n">e2497ec13714d83</span><span class="o">/</span><span class="n">predict</span>
+             <span class="n">document_id</span>  <span class="n">score</span>
+<span class="n">internal_id</span>
+<span class="mi">0</span>                      <span class="mi">0</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">1</span>                      <span class="mi">1</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">2</span>                      <span class="mi">2</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">3</span>                      <span class="mi">3</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">4</span>                      <span class="mi">4</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">5</span>                      <span class="mi">5</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">6</span>                      <span class="mi">6</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">7</span>                      <span class="mi">7</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">8</span>                      <span class="mi">8</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">9</span>                      <span class="mi">9</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">10</span>                    <span class="mi">10</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">11</span>                    <span class="mi">11</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">12</span>                    <span class="mi">12</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">13</span>                    <span class="mi">13</span> <span class="o">-</span><span class="mf">0.847</span>
+<span class="mi">14</span>                    <span class="mi">14</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">15</span>                    <span class="mi">15</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">16</span>                    <span class="mi">16</span> <span class="o">-</span><span class="mf">0.847</span>
+<span class="mi">17</span>                    <span class="mi">17</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">18</span>                    <span class="mi">18</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">19</span>                    <span class="mi">19</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">20</span>                    <span class="mi">20</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">21</span>                    <span class="mi">21</span> <span class="o">-</span><span class="mf">0.847</span>
+<span class="mi">22</span>                    <span class="mi">22</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">23</span>                    <span class="mi">23</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">24</span>                    <span class="mi">24</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">25</span>                    <span class="mi">25</span> <span class="o">-</span><span class="mf">0.847</span>
+<span class="mi">26</span>                    <span class="mi">26</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">27</span>                    <span class="mi">27</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">28</span>                    <span class="mi">28</span> <span class="o">-</span><span class="mf">0.847</span>
+<span class="mi">29</span>                    <span class="mi">29</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="o">...</span>                  <span class="o">...</span>    <span class="o">...</span>
+<span class="mi">2435</span>                <span class="mi">2435</span> <span class="o">-</span><span class="mf">0.849</span>
+<span class="mi">2436</span>                <span class="mi">2436</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">2437</span>                <span class="mi">2437</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">2438</span>                <span class="mi">2438</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">2439</span>                <span class="mi">2439</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">2440</span>                <span class="mi">2440</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">2441</span>                <span class="mi">2441</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">2442</span>                <span class="mi">2442</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">2443</span>                <span class="mi">2443</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">2444</span>                <span class="mi">2444</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">2445</span>                <span class="mi">2445</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">2446</span>                <span class="mi">2446</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">2447</span>                <span class="mi">2447</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">2448</span>                <span class="mi">2448</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">2449</span>                <span class="mi">2449</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">2450</span>                <span class="mi">2450</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">2451</span>                <span class="mi">2451</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">2452</span>                <span class="mi">2452</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">2453</span>                <span class="mi">2453</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">2454</span>                <span class="mi">2454</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">2455</span>                <span class="mi">2455</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">2456</span>                <span class="mi">2456</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">2457</span>                <span class="mi">2457</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">2458</span>                <span class="mi">2458</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">2459</span>                <span class="mi">2459</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">2460</span>                <span class="mi">2460</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">2461</span>                <span class="mi">2461</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">2462</span>                <span class="mi">2462</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">2463</span>                <span class="mi">2463</span> <span class="o">-</span><span class="mf">0.846</span>
+<span class="mi">2464</span>                <span class="mi">2464</span> <span class="o">-</span><span class="mf">0.846</span>
+
+<span class="p">[</span><span class="mi">2465</span> <span class="n">rows</span> <span class="n">x</span> <span class="mi">2</span> <span class="n">columns</span><span class="p">]</span>
+
+<span class="mf">3.</span><span class="n">d</span> <span class="n">Compute</span> <span class="n">the</span> <span class="n">categorization</span> <span class="n">scores</span>
+ <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">metrics</span><span class="o">/</span><span class="n">categorization</span>
+    <span class="o">=&gt;</span> <span class="n">Test</span> <span class="n">scores</span><span class="p">:</span> <span class="n">MAP</span> <span class="o">=</span> <span class="mf">0.545</span><span class="p">,</span> <span class="n">ROC</span><span class="o">-</span><span class="n">AUC</span> <span class="o">=</span> <span class="mf">0.545</span>
+<span class="o">================================================================================</span>
+            <span class="n">NearestNeighbor</span>  <span class="o">+</span> <span class="n">LSI</span>
+ <span class="o">================================================================================</span>
+ <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">categorization</span><span class="o">/</span>
+ <span class="n">Training</span><span class="o">...</span>
+     <span class="o">=&gt;</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="n">e6294c2e445e47f1</span>
+    <span class="o">=&gt;</span> <span class="n">Training</span> <span class="n">scores</span><span class="p">:</span> <span class="n">MAP</span> <span class="o">=</span> <span class="mf">1.000</span><span class="p">,</span> <span class="n">ROC</span><span class="o">-</span><span class="n">AUC</span> <span class="o">=</span> <span class="n">nan</span><span class="p">,</span> <span class="n">F1</span><span class="o">=</span> <span class="mf">1.000</span>
+
+<span class="mf">3.</span><span class="n">b</span><span class="o">.</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">parameters</span> <span class="n">used</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">categorization</span> <span class="n">model</span>
+ <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">categorization</span><span class="o">/</span><span class="n">e6294c2e445e47f1</span>
+     <span class="o">-</span> <span class="n">method</span><span class="p">:</span> <span class="n">NearestNeighbor</span>
+     <span class="o">-</span> <span class="n">options</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;ranking&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;n_jobs&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;radius&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;leaf_size&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;algorithm&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
+
+<span class="mf">3.</span><span class="n">c</span> <span class="n">Categorize</span> <span class="n">the</span> <span class="n">complete</span> <span class="n">dataset</span> <span class="k">with</span> <span class="n">this</span> <span class="n">model</span>
+ <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">categorization</span><span class="o">/</span><span class="n">e6294c2e445e47f1</span><span class="o">/</span><span class="n">predict</span>
+             <span class="n">document_id</span>  <span class="n">nn_negative__distance</span>  <span class="n">nn_negative__document_id</span>  <span class="n">nn_positive__distance</span>  <span class="n">nn_positive__document_id</span>  <span class="n">score</span>
+<span class="n">internal_id</span>
+<span class="mi">0</span>                      <span class="mi">0</span>                  <span class="mf">0.226</span>                        <span class="mi">52</span>                  <span class="mf">0.206</span>                         <span class="mi">3</span>  <span class="mf">0.897</span>
+<span class="mi">1</span>                      <span class="mi">1</span>                  <span class="mf">0.571</span>                        <span class="mi">53</span>                  <span class="mf">0.653</span>                         <span class="mi">4</span> <span class="o">-</span><span class="mf">0.715</span>
+<span class="mi">2</span>                      <span class="mi">2</span>                  <span class="mf">0.086</span>                        <span class="mi">21</span>                  <span class="mf">0.085</span>                         <span class="mi">0</span>  <span class="mf">0.958</span>
+<span class="mi">3</span>                      <span class="mi">3</span>                  <span class="mf">0.063</span>                        <span class="mi">21</span>                  <span class="mf">0.000</span>                         <span class="mi">0</span>  <span class="mf">1.000</span>
+<span class="mi">4</span>                      <span class="mi">4</span>                  <span class="mf">0.123</span>                        <span class="mi">64</span>                  <span class="mf">0.119</span>                         <span class="mi">0</span>  <span class="mf">0.940</span>
+<span class="mi">5</span>                      <span class="mi">5</span>                  <span class="mf">0.109</span>                        <span class="mi">21</span>                  <span class="mf">0.094</span>                         <span class="mi">0</span>  <span class="mf">0.953</span>
+<span class="mi">6</span>                      <span class="mi">6</span>                  <span class="mf">0.126</span>                         <span class="mi">5</span>                  <span class="mf">0.113</span>                         <span class="mi">0</span>  <span class="mf">0.943</span>
+<span class="mi">7</span>                      <span class="mi">7</span>                  <span class="mf">0.097</span>                        <span class="mi">21</span>                  <span class="mf">0.071</span>                         <span class="mi">0</span>  <span class="mf">0.965</span>
+<span class="mi">8</span>                      <span class="mi">8</span>                  <span class="mf">0.089</span>                        <span class="mi">37</span>                  <span class="mf">0.087</span>                         <span class="mi">0</span>  <span class="mf">0.956</span>
+<span class="mi">9</span>                      <span class="mi">9</span>                  <span class="mf">0.000</span>                         <span class="mi">5</span>                  <span class="mf">0.106</span>                         <span class="mi">0</span> <span class="o">-</span><span class="mf">1.000</span>
+<span class="mi">10</span>                    <span class="mi">10</span>                  <span class="mf">0.091</span>                        <span class="mi">21</span>                  <span class="mf">0.048</span>                         <span class="mi">0</span>  <span class="mf">0.976</span>
+<span class="mi">11</span>                    <span class="mi">11</span>                  <span class="mf">0.570</span>                        <span class="mi">58</span>                  <span class="mf">0.683</span>                         <span class="mi">4</span> <span class="o">-</span><span class="mf">0.715</span>
+<span class="mi">12</span>                    <span class="mi">12</span>                  <span class="mf">0.570</span>                        <span class="mi">58</span>                  <span class="mf">0.660</span>                         <span class="mi">4</span> <span class="o">-</span><span class="mf">0.715</span>
+<span class="mi">13</span>                    <span class="mi">13</span>                  <span class="mf">0.569</span>                        <span class="mi">55</span>                  <span class="mf">0.662</span>                         <span class="mi">3</span> <span class="o">-</span><span class="mf">0.715</span>
+<span class="mi">14</span>                    <span class="mi">14</span>                  <span class="mf">0.080</span>                        <span class="mi">55</span>                  <span class="mf">0.611</span>                         <span class="mi">1</span> <span class="o">-</span><span class="mf">0.960</span>
+<span class="mi">15</span>                    <span class="mi">15</span>                  <span class="mf">0.213</span>                        <span class="mi">12</span>                  <span class="mf">0.442</span>                         <span class="mi">1</span> <span class="o">-</span><span class="mf">0.893</span>
+<span class="mi">16</span>                    <span class="mi">16</span>                  <span class="mf">0.655</span>                         <span class="mi">7</span>                  <span class="mf">0.702</span>                         <span class="mi">4</span> <span class="o">-</span><span class="mf">0.673</span>
+<span class="mi">17</span>                    <span class="mi">17</span>                  <span class="mf">0.616</span>                        <span class="mi">58</span>                  <span class="mf">0.668</span>                         <span class="mi">4</span> <span class="o">-</span><span class="mf">0.692</span>
+<span class="mi">18</span>                    <span class="mi">18</span>                  <span class="mf">0.413</span>                        <span class="mi">12</span>                  <span class="mf">0.557</span>                         <span class="mi">1</span> <span class="o">-</span><span class="mf">0.794</span>
+<span class="mi">19</span>                    <span class="mi">19</span>                  <span class="mf">0.386</span>                        <span class="mi">12</span>                  <span class="mf">0.600</span>                         <span class="mi">1</span> <span class="o">-</span><span class="mf">0.807</span>
+<span class="mi">20</span>                    <span class="mi">20</span>                  <span class="mf">0.210</span>                        <span class="mi">12</span>                  <span class="mf">0.467</span>                         <span class="mi">1</span> <span class="o">-</span><span class="mf">0.895</span>
+<span class="mi">21</span>                    <span class="mi">21</span>                  <span class="mf">0.372</span>                        <span class="mi">63</span>                  <span class="mf">0.664</span>                         <span class="mi">3</span> <span class="o">-</span><span class="mf">0.814</span>
+<span class="mi">22</span>                    <span class="mi">22</span>                  <span class="mf">0.531</span>                        <span class="mi">53</span>                  <span class="mf">0.646</span>                         <span class="mi">4</span> <span class="o">-</span><span class="mf">0.734</span>
+<span class="mi">23</span>                    <span class="mi">23</span>                  <span class="mf">0.528</span>                        <span class="mi">53</span>                  <span class="mf">0.646</span>                         <span class="mi">4</span> <span class="o">-</span><span class="mf">0.736</span>
+<span class="mi">24</span>                    <span class="mi">24</span>                  <span class="mf">0.413</span>                        <span class="mi">12</span>                  <span class="mf">0.552</span>                         <span class="mi">4</span> <span class="o">-</span><span class="mf">0.794</span>
+<span class="mi">25</span>                    <span class="mi">25</span>                  <span class="mf">0.587</span>                        <span class="mi">63</span>                  <span class="mf">0.713</span>                         <span class="mi">4</span> <span class="o">-</span><span class="mf">0.707</span>
+<span class="mi">26</span>                    <span class="mi">26</span>                  <span class="mf">0.597</span>                        <span class="mi">58</span>                  <span class="mf">0.688</span>                         <span class="mi">4</span> <span class="o">-</span><span class="mf">0.702</span>
+<span class="mi">27</span>                    <span class="mi">27</span>                  <span class="mf">0.487</span>                        <span class="mi">12</span>                  <span class="mf">0.611</span>                         <span class="mi">2</span> <span class="o">-</span><span class="mf">0.756</span>
+<span class="mi">28</span>                    <span class="mi">28</span>                  <span class="mf">0.648</span>                         <span class="mi">7</span>                  <span class="mf">0.707</span>                         <span class="mi">4</span> <span class="o">-</span><span class="mf">0.676</span>
+<span class="mi">29</span>                    <span class="mi">29</span>                  <span class="mf">0.621</span>                        <span class="mi">58</span>                  <span class="mf">0.671</span>                         <span class="mi">4</span> <span class="o">-</span><span class="mf">0.689</span>
+<span class="o">...</span>                  <span class="o">...</span>                    <span class="o">...</span>                       <span class="o">...</span>                    <span class="o">...</span>                       <span class="o">...</span>    <span class="o">...</span>
+<span class="mi">2435</span>                <span class="mi">2435</span>                  <span class="mf">0.649</span>                        <span class="mi">59</span>                  <span class="mf">0.681</span>                         <span class="mi">1</span> <span class="o">-</span><span class="mf">0.676</span>
+<span class="mi">2436</span>                <span class="mi">2436</span>                  <span class="mf">0.109</span>                        <span class="mi">21</span>                  <span class="mf">0.098</span>                         <span class="mi">0</span>  <span class="mf">0.951</span>
+<span class="mi">2437</span>                <span class="mi">2437</span>                  <span class="mf">0.217</span>                        <span class="mi">47</span>                  <span class="mf">0.367</span>                         <span class="mi">0</span> <span class="o">-</span><span class="mf">0.891</span>
+<span class="mi">2438</span>                <span class="mi">2438</span>                  <span class="mf">0.208</span>                        <span class="mi">35</span>                  <span class="mf">0.338</span>                         <span class="mi">0</span> <span class="o">-</span><span class="mf">0.896</span>
+<span class="mi">2439</span>                <span class="mi">2439</span>                  <span class="mf">0.087</span>                         <span class="mi">5</span>                  <span class="mf">0.107</span>                         <span class="mi">0</span> <span class="o">-</span><span class="mf">0.956</span>
+<span class="mi">2440</span>                <span class="mi">2440</span>                  <span class="mf">0.199</span>                        <span class="mi">47</span>                  <span class="mf">0.346</span>                         <span class="mi">0</span> <span class="o">-</span><span class="mf">0.900</span>
+<span class="mi">2441</span>                <span class="mi">2441</span>                  <span class="mf">0.086</span>                         <span class="mi">5</span>                  <span class="mf">0.103</span>                         <span class="mi">0</span> <span class="o">-</span><span class="mf">0.957</span>
+<span class="mi">2442</span>                <span class="mi">2442</span>                  <span class="mf">0.203</span>                        <span class="mi">47</span>                  <span class="mf">0.332</span>                         <span class="mi">0</span> <span class="o">-</span><span class="mf">0.898</span>
+<span class="mi">2443</span>                <span class="mi">2443</span>                  <span class="mf">0.127</span>                        <span class="mi">52</span>                  <span class="mf">0.124</span>                         <span class="mi">0</span>  <span class="mf">0.938</span>
+<span class="mi">2444</span>                <span class="mi">2444</span>                  <span class="mf">0.227</span>                        <span class="mi">66</span>                  <span class="mf">0.368</span>                         <span class="mi">0</span> <span class="o">-</span><span class="mf">0.887</span>
+<span class="mi">2445</span>                <span class="mi">2445</span>                  <span class="mf">0.141</span>                         <span class="mi">5</span>                  <span class="mf">0.135</span>                         <span class="mi">0</span>  <span class="mf">0.933</span>
+<span class="mi">2446</span>                <span class="mi">2446</span>                  <span class="mf">0.205</span>                        <span class="mi">35</span>                  <span class="mf">0.351</span>                         <span class="mi">0</span> <span class="o">-</span><span class="mf">0.897</span>
+<span class="mi">2447</span>                <span class="mi">2447</span>                  <span class="mf">0.112</span>                        <span class="mi">64</span>                  <span class="mf">0.095</span>                         <span class="mi">0</span>  <span class="mf">0.952</span>
+<span class="mi">2448</span>                <span class="mi">2448</span>                  <span class="mf">0.171</span>                        <span class="mi">66</span>                  <span class="mf">0.345</span>                         <span class="mi">0</span> <span class="o">-</span><span class="mf">0.915</span>
+<span class="mi">2449</span>                <span class="mi">2449</span>                  <span class="mf">0.090</span>                        <span class="mi">21</span>                  <span class="mf">0.052</span>                         <span class="mi">0</span>  <span class="mf">0.974</span>
+<span class="mi">2450</span>                <span class="mi">2450</span>                  <span class="mf">0.201</span>                        <span class="mi">35</span>                  <span class="mf">0.301</span>                         <span class="mi">0</span> <span class="o">-</span><span class="mf">0.900</span>
+<span class="mi">2451</span>                <span class="mi">2451</span>                  <span class="mf">0.000</span>                        <span class="mi">67</span>                  <span class="mf">0.126</span>                         <span class="mi">0</span> <span class="o">-</span><span class="mf">1.000</span>
+<span class="mi">2452</span>                <span class="mi">2452</span>                  <span class="mf">0.239</span>                        <span class="mi">66</span>                  <span class="mf">0.358</span>                         <span class="mi">0</span> <span class="o">-</span><span class="mf">0.881</span>
+<span class="mi">2453</span>                <span class="mi">2453</span>                  <span class="mf">0.147</span>                        <span class="mi">51</span>                  <span class="mf">0.196</span>                         <span class="mi">0</span> <span class="o">-</span><span class="mf">0.926</span>
+<span class="mi">2454</span>                <span class="mi">2454</span>                  <span class="mf">0.286</span>                        <span class="mi">47</span>                  <span class="mf">0.367</span>                         <span class="mi">4</span> <span class="o">-</span><span class="mf">0.857</span>
+<span class="mi">2455</span>                <span class="mi">2455</span>                  <span class="mf">0.140</span>                        <span class="mi">47</span>                  <span class="mf">0.328</span>                         <span class="mi">0</span> <span class="o">-</span><span class="mf">0.930</span>
+<span class="mi">2456</span>                <span class="mi">2456</span>                  <span class="mf">0.057</span>                        <span class="mi">21</span>                  <span class="mf">0.035</span>                         <span class="mi">0</span>  <span class="mf">0.982</span>
+<span class="mi">2457</span>                <span class="mi">2457</span>                  <span class="mf">0.219</span>                        <span class="mi">47</span>                  <span class="mf">0.325</span>                         <span class="mi">0</span> <span class="o">-</span><span class="mf">0.891</span>
+<span class="mi">2458</span>                <span class="mi">2458</span>                  <span class="mf">0.117</span>                        <span class="mi">21</span>                  <span class="mf">0.095</span>                         <span class="mi">0</span>  <span class="mf">0.952</span>
+<span class="mi">2459</span>                <span class="mi">2459</span>                  <span class="mf">0.188</span>                        <span class="mi">42</span>                  <span class="mf">0.534</span>                         <span class="mi">2</span> <span class="o">-</span><span class="mf">0.906</span>
+<span class="mi">2460</span>                <span class="mi">2460</span>                  <span class="mf">0.416</span>                        <span class="mi">42</span>                  <span class="mf">0.519</span>                         <span class="mi">3</span> <span class="o">-</span><span class="mf">0.792</span>
+<span class="mi">2461</span>                <span class="mi">2461</span>                  <span class="mf">0.447</span>                        <span class="mi">13</span>                  <span class="mf">0.514</span>                         <span class="mi">2</span> <span class="o">-</span><span class="mf">0.777</span>
+<span class="mi">2462</span>                <span class="mi">2462</span>                  <span class="mf">0.431</span>                        <span class="mi">39</span>                  <span class="mf">0.623</span>                         <span class="mi">0</span> <span class="o">-</span><span class="mf">0.784</span>
+<span class="mi">2463</span>                <span class="mi">2463</span>                  <span class="mf">0.471</span>                        <span class="mi">39</span>                  <span class="mf">0.530</span>                         <span class="mi">2</span> <span class="o">-</span><span class="mf">0.765</span>
+<span class="mi">2464</span>                <span class="mi">2464</span>                  <span class="mf">0.446</span>                        <span class="mi">42</span>                  <span class="mf">0.563</span>                         <span class="mi">3</span> <span class="o">-</span><span class="mf">0.777</span>
+
+<span class="p">[</span><span class="mi">2465</span> <span class="n">rows</span> <span class="n">x</span> <span class="mi">6</span> <span class="n">columns</span><span class="p">]</span>
+
+<span class="mf">3.</span><span class="n">d</span> <span class="n">Compute</span> <span class="n">the</span> <span class="n">categorization</span> <span class="n">scores</span>
+ <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">metrics</span><span class="o">/</span><span class="n">categorization</span>
+    <span class="o">=&gt;</span> <span class="n">Test</span> <span class="n">scores</span><span class="p">:</span> <span class="n">MAP</span> <span class="o">=</span> <span class="mf">0.274</span><span class="p">,</span> <span class="n">ROC</span><span class="o">-</span><span class="n">AUC</span> <span class="o">=</span> <span class="mf">0.274</span>
+
+<span class="mf">5.</span><span class="n">a</span> <span class="n">Delete</span> <span class="n">the</span> <span class="n">extracted</span> <span class="n">features</span> <span class="p">(</span><span class="ow">and</span> <span class="n">LSI</span> <span class="n">decomposition</span><span class="p">)</span>
+ <span class="n">DELETE</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="n">a86d415a8c204219</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span><span class="p">,</span> <span class="n">sleep</span>
+<span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Process</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;{:,.3f}&#39;</span><span class="o">.</span><span class="n">format</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">expand_frame_repr</span> <span class="o">=</span> <span class="bp">False</span>
+
+<span class="n">dataset_name</span> <span class="o">=</span> <span class="s2">&quot;treclegal09_2k_subset&quot;</span>     <span class="c1"># see list of available datasets</span>
+
+<span class="n">BASE_URL</span> <span class="o">=</span> <span class="s2">&quot;http://localhost:5001/api/v0&quot;</span>  <span class="c1"># FreeDiscovery server URL</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; 0. Load the test dataset&quot;</span><span class="p">)</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/datasets/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dataset_name</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; GET&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;return_file_path&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">})</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+    <span class="c1"># To use a custom dataset, simply specify the following variables</span>
+    <span class="n">seed_document_id</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;seed_document_id&#39;</span><span class="p">]</span>
+    <span class="n">seed_y</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;seed_y&#39;</span><span class="p">]</span>
+    <span class="n">ground_truth_y</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;ground_truth_y&#39;</span><span class="p">]</span>
+
+    <span class="c1"># create a custom dataset definition for ingestion</span>
+    <span class="n">dataset_definition</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">document_id</span><span class="p">,</span> <span class="n">fname</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;document_id&#39;</span><span class="p">],</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;file_path&#39;</span><span class="p">]):</span>
+        <span class="n">dataset_definition</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;document_id&#39;</span><span class="p">:</span> <span class="n">document_id</span><span class="p">,</span>
+                                  <span class="s1">&#39;rendering_id&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                  <span class="s1">&#39;file_path&#39;</span><span class="p">:</span> <span class="n">fname</span><span class="p">})</span>
+
+    <span class="c1"># 1. Feature extraction</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">1.a Load dataset and initalize feature extraction&quot;</span><span class="p">)</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/feature-extraction&#39;</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;dataset_definition&#39;</span><span class="p">:</span> <span class="n">dataset_definition</span><span class="p">,</span>
+                                   <span class="s1">&#39;use_hashing&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">})</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+    <span class="n">dsid</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;   =&gt; received {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">keys</span><span class="p">())))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;   =&gt; dsid = {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dsid</span><span class="p">))</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">1.b Start feature extraction (in the background)&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Make this call in a background process (there should be a better way of doing it)</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span><span class="o">+</span><span class="s1">&#39;/feature-extraction/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dsid</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">url</span><span class="p">,))</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="mf">5.0</span><span class="p">)</span> <span class="c1"># wait a bit for the processing to start</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">1.c Monitor feature extraction progress&#39;</span><span class="p">)</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span><span class="o">+</span><span class="s1">&#39;/feature-extraction/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dsid</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; GET&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">520</span><span class="p">:</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Processing did not start&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+            <span class="k">break</span> <span class="c1"># processing finished</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;     ... {}k/{}k files processed in {:.1f} min&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;n_samples_processed&#39;</span><span class="p">]</span><span class="o">//</span><span class="mi">1000</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;n_samples&#39;</span><span class="p">]</span><span class="o">//</span><span class="mi">1000</span><span class="p">,</span> <span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span><span class="o">/</span><span class="mf">60.</span><span class="p">))</span>
+        <span class="n">sleep</span><span class="p">(</span><span class="mf">15.0</span><span class="p">)</span>
+
+    <span class="n">p</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span>  <span class="c1"># just in case, should not be necessary</span>
+
+
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">1.d. check the parameters of the extracted features&quot;</span><span class="p">)</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/feature-extraction/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dsid</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39; GET&#39;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;     - {}: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">res</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> \
+                                                      <span class="k">if</span> <span class="s2">&quot;filenames&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">key</span><span class="p">]))</span>
+    <span class="c1"># this step is not necessary anymore</span>
+    <span class="c1">#method = BASE_URL + &quot;/feature-extraction/{}/id-mapping/flat&quot;.format(dsid)</span>
+    <span class="c1">#res = requests.get(method, data={&#39;document_id&#39;: seed_document_id})</span>
+    <span class="c1">#seed_internal_id = res.json()[&#39;internal_id&#39;]</span>
+
+
+    <span class="c1"># 3. Document categorization with LSI (used for Nearest Neighbors method)</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">2. Calculate LSI&quot;</span><span class="p">)</span>
+
+    <span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/lsi/&#39;</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+
+    <span class="n">n_components</span> <span class="o">=</span> <span class="mi">100</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span>
+                        <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;n_components&#39;</span><span class="p">:</span> <span class="n">n_components</span><span class="p">,</span>
+                              <span class="s1">&#39;parent_id&#39;</span><span class="p">:</span> <span class="n">dsid</span>
+                              <span class="p">})</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+    <span class="n">lsi_id</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;  =&gt; LSI model id = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">lsi_id</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;  =&gt; SVD decomposition with {} dimensions explaining {:.2f} % variabilty of the data&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                            <span class="n">n_components</span><span class="p">,</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;explained_variance&#39;</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
+
+
+    <span class="c1"># 3. Document categorization</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">3.a. Train the categorization model&quot;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;   {} relevant, {} non-relevant files&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">seed_y</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">seed_y</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">0</span><span class="p">)))</span>
+
+    <span class="n">seed_index_nested</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;document_id&#39;</span><span class="p">:</span> <span class="n">internal_id</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y</span><span class="p">}</span> \
+                                <span class="k">for</span> <span class="n">internal_id</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">seed_document_id</span><span class="p">,</span> <span class="n">seed_y</span><span class="p">)]</span>
+
+    <span class="k">for</span> <span class="n">method</span><span class="p">,</span> <span class="n">use_lsi</span> <span class="ow">in</span> <span class="p">[(</span><span class="s1">&#39;LinearSVC&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">),</span>
+                            <span class="p">(</span><span class="s1">&#39;NearestNeighbor&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">)]:</span>
+
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">80</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="o">*</span><span class="mi">10</span><span class="p">,</span>
+              <span class="n">method</span><span class="p">,</span> <span class="s2">&quot; + LSI&quot;</span> <span class="k">if</span> <span class="n">use_lsi</span> <span class="k">else</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">80</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">use_lsi</span><span class="p">:</span>
+            <span class="c1"># Categorization with the previously created LSI model</span>
+            <span class="n">parent_id</span> <span class="o">=</span> <span class="n">lsi_id</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Categorization with original text features</span>
+            <span class="n">parent_id</span> <span class="o">=</span> <span class="n">dsid</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/categorization/&#39;</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot; POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39; Training...&#39;</span><span class="p">)</span>
+
+        <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span>
+                            <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;parent_id&#39;</span><span class="p">:</span> <span class="n">parent_id</span><span class="p">,</span>
+                                  <span class="s1">&#39;index_nested&#39;</span><span class="p">:</span> <span class="n">seed_index_nested</span><span class="p">,</span>
+                                  <span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="n">method</span><span class="p">,</span>  <span class="c1"># one of &quot;LinearSVC&quot;, &quot;LogisticRegression&quot;, &#39;xgboost&#39;</span>
+                                  <span class="p">})</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+        <span class="n">mid</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;     =&gt; model id = {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mid</span><span class="p">))</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;    =&gt; Training scores: MAP = {average_precision:.3f}, ROC-AUC = {roc_auc:.3f}, F1= {f1:.3f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">res</span><span class="p">))</span>
+
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">3.b. Check the parameters used in the categorization model&quot;</span><span class="p">)</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/categorization/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mid</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot; GET&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;     - {}: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">res</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> \
+                                                          <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">]]))</span>
+
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">3.c Categorize the complete dataset with this model&quot;</span><span class="p">)</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/categorization/{}/predict&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mid</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot; GET&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;NearestNeighbor&quot;</span><span class="p">:</span>
+
+            <span class="k">def</span> <span class="nf">flatten_dict</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">parent_key</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;__&#39;</span><span class="p">):</span>
+                <span class="sd">&quot;&quot;&quot;Flatten a nested dictionary &quot;&quot;&quot;</span>
+                <span class="kn">import</span> <span class="nn">collections</span>
+                <span class="n">items</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="n">new_key</span> <span class="o">=</span> <span class="n">parent_key</span> <span class="o">+</span> <span class="n">sep</span> <span class="o">+</span> <span class="n">k</span> <span class="k">if</span> <span class="n">parent_key</span> <span class="k">else</span> <span class="n">k</span>
+                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">MutableMapping</span><span class="p">):</span>
+                        <span class="n">items</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">flatten_dict</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">new_key</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="n">sep</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">new_key</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span>
+                <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+
+            <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">flatten_dict</span><span class="p">(</span><span class="n">el</span><span class="p">)</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span>
+
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;internal_id&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;NearestNeighbor&quot;</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;document_id&#39;</span><span class="p">,</span> <span class="s1">&#39;nn_negative__distance&#39;</span><span class="p">,</span> <span class="s1">&#39;nn_negative__document_id&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;nn_positive__distance&#39;</span><span class="p">,</span> <span class="s1">&#39;nn_positive__document_id&#39;</span><span class="p">,</span> <span class="s1">&#39;score&#39;</span><span class="p">]]</span>
+
+        <span class="k">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">3.d Compute the categorization scores&quot;</span><span class="p">)</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/metrics/categorization&#39;</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot; GET&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;y_true&#39;</span><span class="p">:</span> <span class="n">ground_truth_y</span><span class="p">,</span>
+                                      <span class="s1">&#39;y_pred&#39;</span><span class="p">:</span> <span class="n">df</span><span class="o">.</span><span class="n">score</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+                                     <span class="p">}</span> <span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+
+
+
+
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;    =&gt; Test scores: MAP = {average_precision:.3f}, ROC-AUC = {roc_auc:.3f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">res</span><span class="p">))</span>
+
+    <span class="c1"># 4. Cleaning</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">5.a Delete the extracted features (and LSI decomposition)&quot;</span><span class="p">)</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/feature-extraction/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dsid</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; DELETE&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+    <span class="n">requests</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Total running time of the script:</strong> ( 1 minutes  6.448 seconds)</p>
+<div class="sphx-glr-footer container">
+<div class="sphx-glr-download container">
+<a class="reference download internal" href="../_downloads/REST_categorization.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">REST_categorization.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<a class="reference download internal" href="../_downloads/REST_categorization.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">REST_categorization.ipynb</span></code></a></div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="http://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../user_manual/index.html" class="btn btn-neutral float-right" title="User Manual" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="REST_duplicate_detection.html" class="btn btn-neutral" title="Duplicate Detection Example [REST API]" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Grossman Labs LLC.
+      Last updated on Jan 26, 2017.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.8.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

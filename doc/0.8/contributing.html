@@ -1,0 +1,270 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Contributing &mdash; FreeDiscovery 0.8.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/gallery.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="FreeDiscovery 0.8.0 documentation" href="index.html"/>
+        <link rel="next" title="Release history" href="whats_new.html"/>
+        <link rel="prev" title="Deployment options" href="user_manual/deployment.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> FreeDiscovery
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.8.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation_instructions.html">Installation Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rest_api/index.html">REST API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_api.html">Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_manual/index.html">User Manual</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submitting-bugs">Submitting bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#contributing">Contributing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-suite">Test Suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-documentation">Building Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new.html">Release history</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">FreeDiscovery</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Contributing</li>
+    <li class="wy-breadcrumbs-aside">
+      
+          
+          <a href="_sources/contributing.md.txt" rel="nofollow"> View page source</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="contributing">
+<span id="contributing"></span><h1>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h1>
+<p>This section aims to regroup useful information for contributing to FreeDiscovery.</p>
+<div class="section" id="submitting-bugs">
+<span id="submitting-bugs"></span><h2>Submitting bugs<a class="headerlink" href="#submitting-bugs" title="Permalink to this headline">¶</a></h2>
+<p>Please feel free to open an issue in the GitHub issue tracker at <a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/issues">https://github.com/FreeDiscovery/FreeDiscovery</a> for any problem that you may encounter.</p>
+<p>Running the test suite (cf. below) may also help in diagnosing the source of the problem.</p>
+</div>
+<div class="section" id="contributing">
+<span id="id1"></span><h2>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h2>
+<p>This section describes the workflow for creating Pull Requests (PR). For more complex contributions, it may also be useful to create an associated issue.</p>
+<ol class="simple">
+<li>Fork the main FreeDiscovery repository</li>
+<li>Clone this fork on your computer and <a class="reference external" href="https://freediscovery.github.io/doc/dev/installation_instructions.html#a-python-install">install it</a></li>
+<li>Make the appropriate changes</li>
+<li>Make sure that the tests suite (cf. below) does not produce errors</li>
+<li>Commit and push the changes to GitHub</li>
+<li>Create a Pull Request from your branch to the <code class="docutils literal"><span class="pre">master</span></code> branch of the FreeDiscovery repository so it can be reviewed and merged.</li>
+<li>If any of the continuous integration services (Travis CI, Appveyor CI, Circle CI) produce an error, review the corresponding output and fix the code if appropriate.</li>
+<li>After the PR is merged, this branch can be safely deleted from your fork (and a new one may be created for subsequent contributions).</li>
+</ol>
+</div>
+<div class="section" id="test-suite">
+<span id="test-suite"></span><h2>Test Suite<a class="headerlink" href="#test-suite" title="Permalink to this headline">¶</a></h2>
+<p>A two level test suite is implemented in FreeDiscovery, that validates both the algorithms and the REST API,</p>
+<p>The tests are located under <code class="docutils literal"><span class="pre">freediscovery/tests/</span></code> and can be run with,</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">py</span><span class="o">.</span><span class="n">test</span> <span class="o">-</span><span class="n">s</span> <span class="n">FreeDiscovery</span><span class="o">/</span><span class="n">freediscovery</span><span class="o">/</span>
+</pre></div>
+</div>
+<p>or alternatively from Python with,</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">freediscovery.tests</span> <span class="k">as</span> <span class="nn">ft</span><span class="p">;</span> <span class="n">ft</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>It is automatically run as part of the installation procedure locally. The Continuous Integration also runs this test suite on Linux and Windows for all commits and pull requests on GitHub.</p>
+</div>
+<div class="section" id="building-documentation">
+<span id="building-documentation"></span><h2>Building Documentation<a class="headerlink" href="#building-documentation" title="Permalink to this headline">¶</a></h2>
+<p>This html documentation can be built from sources with,</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># starting the FreeDiscovery server at localhost</span>
+<span class="n">cd</span> <span class="n">FreeDiscovery</span><span class="o">/</span><span class="n">doc</span><span class="o">/</span>
+<span class="n">make</span> <span class="n">html</span>
+</pre></div>
+</div>
+<p>which requires to install dependencies in <code class="docutils literal"><span class="pre">build_tools/requirements_extra_pip.txt</span></code>. This would also run and include examples using <code class="docutils literal"><span class="pre">sphinx-gallery</span></code>.</p>
+<p>Alternatively  <code class="docutils literal"><span class="pre">make</span> <span class="pre">latexpdf</span></code> generates documentation in .pdf format (requires <code class="docutils literal"><span class="pre">pdflatex</span></code>).</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="whats_new.html" class="btn btn-neutral float-right" title="Release history" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="user_manual/deployment.html" class="btn btn-neutral" title="Deployment options" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Grossman Labs LLC.
+      Last updated on Jan 26, 2017.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.8.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

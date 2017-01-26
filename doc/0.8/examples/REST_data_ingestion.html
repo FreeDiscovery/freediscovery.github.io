@@ -1,0 +1,420 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Data Ingestion Example [REST API] &mdash; FreeDiscovery 0.8.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="FreeDiscovery 0.8.0 documentation" href="../index.html"/>
+        <link rel="up" title="Examples" href="index.html"/>
+        <link rel="next" title="Clustering Example [REST API]" href="REST_clustering.html"/>
+        <link rel="prev" title="Semantic Search Example [REST API]" href="REST_semantic_search.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> FreeDiscovery
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.8.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation_instructions.html">Installation Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rest_api/index.html">REST API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python_api.html">Python API Reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="python_clustering.html">Clustering Example [Python API]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="REST_email_threading.html">Email threading Example [REST API]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="REST_semantic_search.html">Semantic Search Example [REST API]</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Data Ingestion Example [REST API]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="REST_clustering.html">Clustering Example [REST API]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="REST_duplicate_detection.html">Duplicate Detection Example [REST API]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="REST_categorization.html">Categorization Example [REST API]</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../user_manual/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats_new.html">Release history</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">FreeDiscovery</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+        <li><a href="index.html">Examples</a> &raquo;</li>
+      
+    <li>Data Ingestion Example [REST API]</li>
+    <li class="wy-breadcrumbs-aside">
+      
+          
+          <a href="../_sources/examples/REST_data_ingestion.rst.txt" rel="nofollow"> View page source</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="data-ingestion-example-rest-api">
+<span id="sphx-glr-examples-rest-data-ingestion-py"></span><h1>Data Ingestion Example [REST API]<a class="headerlink" href="#data-ingestion-example-rest-api" title="Permalink to this headline">¶</a></h1>
+<p>An example illustrating the data ingestion in FreeDiscovery</p>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="mf">0.</span> <span class="n">Load</span> <span class="n">the</span> <span class="n">test</span> <span class="n">dataset</span>
+ <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">datasets</span><span class="o">/</span><span class="n">treclegal09_2k_subset</span>
+
+<span class="mf">1.</span><span class="n">a</span> <span class="n">Load</span> <span class="n">dataset</span> <span class="ow">and</span> <span class="n">initalize</span> <span class="n">feature</span> <span class="n">extraction</span>
+ <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span>
+   <span class="o">=&gt;</span> <span class="n">received</span> <span class="p">[</span><span class="s1">u&#39;id&#39;</span><span class="p">,</span> <span class="s1">u&#39;filenames&#39;</span><span class="p">]</span>
+   <span class="o">=&gt;</span> <span class="n">dsid</span> <span class="o">=</span> <span class="n">bb703beec9e34cad</span>
+
+<span class="mf">1.</span><span class="n">b</span> <span class="n">Start</span> <span class="n">feature</span> <span class="n">extraction</span>
+ <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="n">bb703beec9e34cad</span>
+
+<span class="mf">2.</span><span class="n">a</span> <span class="n">Load</span> <span class="n">dataset</span> <span class="ow">and</span> <span class="n">initalize</span> <span class="n">feature</span> <span class="n">extraction</span>
+ <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span>
+   <span class="o">=&gt;</span> <span class="n">received</span> <span class="p">[</span><span class="s1">u&#39;id&#39;</span><span class="p">,</span> <span class="s1">u&#39;filenames&#39;</span><span class="p">]</span>
+   <span class="o">=&gt;</span> <span class="n">dsid</span> <span class="o">=</span> <span class="mi">5</span><span class="n">f13d5e4e95f46b4</span>
+
+<span class="mf">2.</span><span class="n">b</span> <span class="n">Start</span> <span class="n">feature</span> <span class="n">extraction</span>
+ <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="mi">5</span><span class="n">f13d5e4e95f46b4</span>
+
+<span class="mf">2.</span><span class="n">d</span><span class="o">.</span> <span class="n">check</span> <span class="n">the</span> <span class="n">parameters</span> <span class="n">of</span> <span class="n">the</span> <span class="n">extracted</span> <span class="n">features</span>
+ <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="mi">5</span><span class="n">f13d5e4e95f46b4</span>
+     <span class="o">-</span> <span class="n">binary</span><span class="p">:</span> <span class="kc">False</span>
+     <span class="o">-</span> <span class="n">n_jobs</span><span class="p">:</span> <span class="mi">1</span>
+     <span class="o">-</span> <span class="n">data_dir</span><span class="p">:</span> <span class="o">../</span><span class="n">freediscovery_shared</span><span class="o">/</span><span class="n">treclegal09_2k_subset</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">jobRun_4</span><span class="o">/</span><span class="n">XML_EXPORT_CONTENT</span><span class="o">/</span><span class="n">text_9</span>
+     <span class="o">-</span> <span class="n">chunk_size</span><span class="p">:</span> <span class="mi">5000</span>
+     <span class="o">-</span> <span class="n">norm</span><span class="p">:</span> <span class="kc">None</span>
+     <span class="o">-</span> <span class="n">analyzer</span><span class="p">:</span> <span class="n">word</span>
+     <span class="o">-</span> <span class="n">n_samples</span><span class="p">:</span> <span class="mi">2465</span>
+     <span class="o">-</span> <span class="n">ngram_range</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+     <span class="o">-</span> <span class="n">max_df</span><span class="p">:</span> <span class="mf">1.0</span>
+     <span class="o">-</span> <span class="n">min_df</span><span class="p">:</span> <span class="mf">0.0</span>
+     <span class="o">-</span> <span class="n">use_idf</span><span class="p">:</span> <span class="kc">False</span>
+     <span class="o">-</span> <span class="n">stop_words</span><span class="p">:</span> <span class="kc">None</span>
+     <span class="o">-</span> <span class="n">sublinear_tf</span><span class="p">:</span> <span class="kc">True</span>
+     <span class="o">-</span> <span class="n">n_samples_processed</span><span class="p">:</span> <span class="mi">2465</span>
+     <span class="o">-</span> <span class="n">n_features</span><span class="p">:</span> <span class="mi">100001</span>
+     <span class="o">-</span> <span class="n">use_hashing</span><span class="p">:</span> <span class="kc">True</span>
+
+<span class="mf">3.</span> <span class="n">Examine</span> <span class="n">the</span> <span class="nb">id</span> <span class="n">mapping</span>
+
+ <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="mi">5</span><span class="n">f13d5e4e95f46b4</span><span class="o">/</span><span class="nb">id</span><span class="o">-</span><span class="n">mapping</span><span class="o">/</span><span class="n">flat</span>
+   <span class="n">DATA</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;internal_id&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">919</span><span class="p">,</span> <span class="mi">1047</span><span class="p">]}</span>
+ <span class="n">Response</span><span class="p">:</span>
+   <span class="p">{</span><span class="s2">&quot;internal_id&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">919</span><span class="p">,</span> <span class="mi">1047</span><span class="p">],</span> <span class="s2">&quot;document_id&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">13</span><span class="p">,</span> <span class="mi">929</span><span class="p">,</span> <span class="mi">1057</span><span class="p">]}</span>
+
+ <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="mi">5</span><span class="n">f13d5e4e95f46b4</span><span class="o">/</span><span class="nb">id</span><span class="o">-</span><span class="n">mapping</span><span class="o">/</span><span class="n">nested</span>
+   <span class="n">DATA</span> <span class="p">{</span><span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;internal_id&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;internal_id&quot;</span><span class="p">:</span> <span class="mi">919</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;internal_id&quot;</span><span class="p">:</span> <span class="mi">1047</span><span class="p">}]}</span>
+ <span class="n">Response</span><span class="p">:</span>
+   <span class="p">{</span>
+    <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;internal_id&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+            <span class="s2">&quot;document_id&quot;</span><span class="p">:</span> <span class="mi">13</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;internal_id&quot;</span><span class="p">:</span> <span class="mi">919</span><span class="p">,</span>
+            <span class="s2">&quot;document_id&quot;</span><span class="p">:</span> <span class="mi">929</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;internal_id&quot;</span><span class="p">:</span> <span class="mi">1047</span><span class="p">,</span>
+            <span class="s2">&quot;document_id&quot;</span><span class="p">:</span> <span class="mi">1057</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+
+<span class="mf">5.</span><span class="n">a</span> <span class="n">Delete</span> <span class="n">the</span> <span class="n">extracted</span> <span class="n">features</span>
+ <span class="n">DELETE</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="mi">5</span><span class="n">f13d5e4e95f46b4</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;{:,.3f}&#39;</span><span class="o">.</span><span class="n">format</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">expand_frame_repr</span> <span class="o">=</span> <span class="bp">False</span>
+
+<span class="n">dataset_name</span> <span class="o">=</span> <span class="s2">&quot;treclegal09_2k_subset&quot;</span>     <span class="c1"># see list of available datasets</span>
+
+<span class="n">BASE_URL</span> <span class="o">=</span> <span class="s2">&quot;http://localhost:5001/api/v0&quot;</span>  <span class="c1"># FreeDiscovery server URL</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; 0. Load the test dataset&quot;</span><span class="p">)</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/datasets/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dataset_name</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; GET&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;return_file_path&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">})</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+    <span class="c1"># To use a custom dataset, simply specify the following variables</span>
+    <span class="n">seed_document_id</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;seed_document_id&#39;</span><span class="p">]</span>
+    <span class="n">seed_y</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;seed_y&#39;</span><span class="p">]</span>
+    <span class="n">ground_truth_y</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;ground_truth_y&#39;</span><span class="p">]</span>
+    <span class="n">data_dir</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;data_dir&#39;</span><span class="p">]</span>
+
+    <span class="c1"># create a custom dataset definition for ingestion</span>
+    <span class="n">dataset_definition</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">internal_id</span><span class="p">,</span> <span class="n">fname</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;document_id&#39;</span><span class="p">],</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;file_path&#39;</span><span class="p">]):</span>
+        <span class="n">dataset_definition</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;document_id&#39;</span><span class="p">:</span> <span class="n">internal_id</span> <span class="o">+</span> <span class="mi">10</span><span class="p">,</span>
+                                  <span class="s1">&#39;rendering_id&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                  <span class="s1">&#39;file_path&#39;</span><span class="p">:</span> <span class="n">fname</span><span class="p">})</span>
+
+    <span class="c1"># 1. Ingest a dataset specified by folder path</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">1.a Load dataset and initalize feature extraction&quot;</span><span class="p">)</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/feature-extraction&#39;</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;dataset_definition&#39;</span><span class="p">:</span> <span class="n">dataset_definition</span><span class="p">,</span>
+                                   <span class="s1">&#39;use_hashing&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">})</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+    <span class="n">dsid</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;   =&gt; received {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">keys</span><span class="p">())))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;   =&gt; dsid = {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dsid</span><span class="p">))</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">1.b Start feature extraction&quot;</span><span class="p">)</span>
+
+    <span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span><span class="o">+</span><span class="s1">&#39;/feature-extraction/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dsid</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,)</span>
+
+    <span class="c1"># 2. Ingest a dataset specified by a path to each file in the dataset</span>
+
+
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">2.a Load dataset and initalize feature extraction&quot;</span><span class="p">)</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/feature-extraction&#39;</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;dataset_definition&#39;</span><span class="p">:</span> <span class="n">dataset_definition</span><span class="p">,</span>
+                                   <span class="s1">&#39;use_hashing&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">})</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+    <span class="n">dsid</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;   =&gt; received {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">keys</span><span class="p">())))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;   =&gt; dsid = {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dsid</span><span class="p">))</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">2.b Start feature extraction&quot;</span><span class="p">)</span>
+
+    <span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span><span class="o">+</span><span class="s1">&#39;/feature-extraction/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dsid</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,)</span>
+
+
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">2.d. check the parameters of the extracted features&quot;</span><span class="p">)</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/feature-extraction/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dsid</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39; GET&#39;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;     - {}: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">res</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> \
+                                                      <span class="k">if</span> <span class="s2">&quot;filenames&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">key</span><span class="p">]))</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">3. Examine the id mapping</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">method</span> <span class="o">=</span> <span class="n">BASE_URL</span> <span class="o">+</span> <span class="s2">&quot;/feature-extraction/{}/id-mapping/flat&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dsid</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39; GET&#39;</span><span class="p">,</span> <span class="n">method</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;internal_id&#39;</span><span class="p">:</span> <span class="n">seed_document_id</span><span class="p">[:</span><span class="mi">3</span><span class="p">]}</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;   DATA:&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39; Response:&#39;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;  &#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">res</span><span class="p">))</span>
+
+    <span class="n">method</span> <span class="o">=</span> <span class="n">BASE_URL</span> <span class="o">+</span> <span class="s2">&quot;/feature-extraction/{}/id-mapping/nested&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dsid</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> GET&#39;</span><span class="p">,</span> <span class="n">method</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;internal_id&#39;</span><span class="p">:</span> <span class="n">el</span><span class="p">}</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">seed_document_id</span><span class="p">[:</span><span class="mi">3</span><span class="p">]]}</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;   DATA&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39; Response:&#39;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;  &#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
+
+    <span class="c1"># 4. Cleaning</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">5.a Delete the extracted features&quot;</span><span class="p">)</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/feature-extraction/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dsid</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; DELETE&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+    <span class="n">requests</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  5.959 seconds)</p>
+<div class="sphx-glr-footer container">
+<div class="sphx-glr-download container">
+<a class="reference download internal" href="../_downloads/REST_data_ingestion.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">REST_data_ingestion.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<a class="reference download internal" href="../_downloads/REST_data_ingestion.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">REST_data_ingestion.ipynb</span></code></a></div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="http://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="REST_clustering.html" class="btn btn-neutral float-right" title="Clustering Example [REST API]" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="REST_semantic_search.html" class="btn btn-neutral" title="Semantic Search Example [REST API]" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Grossman Labs LLC.
+      Last updated on Jan 26, 2017.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.8.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
