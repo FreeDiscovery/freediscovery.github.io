@@ -165,87 +165,87 @@
 <span class="mf">1.</span><span class="n">a</span> <span class="n">Load</span> <span class="n">dataset</span> <span class="ow">and</span> <span class="n">initalize</span> <span class="n">feature</span> <span class="n">extraction</span>
  <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span>
    <span class="o">=&gt;</span> <span class="n">received</span> <span class="p">[</span><span class="s1">u&#39;id&#39;</span><span class="p">,</span> <span class="s1">u&#39;filenames&#39;</span><span class="p">]</span>
-   <span class="o">=&gt;</span> <span class="n">dsid</span> <span class="o">=</span> <span class="mi">6130</span><span class="n">baccc3d94193</span>
+   <span class="o">=&gt;</span> <span class="n">dsid</span> <span class="o">=</span> <span class="mi">46</span><span class="n">ba3dbb78644f3c</span>
 
 <span class="mf">1.</span><span class="n">b</span> <span class="n">Start</span> <span class="n">feature</span> <span class="n">extraction</span>
- <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="mi">6130</span><span class="n">baccc3d94193</span>
+ <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="mi">46</span><span class="n">ba3dbb78644f3c</span>
 
 <span class="mf">2.</span> <span class="n">Calculate</span> <span class="n">LSI</span>
 <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">lsi</span><span class="o">/</span>
-  <span class="o">=&gt;</span> <span class="n">LSI</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="n">f6f6e1743eb24b66</span>
+  <span class="o">=&gt;</span> <span class="n">LSI</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="mi">34</span><span class="n">fbff9c683a4937</span>
   <span class="o">=&gt;</span> <span class="n">SVD</span> <span class="n">decomposition</span> <span class="k">with</span> <span class="mi">100</span> <span class="n">dimensions</span> <span class="n">explaining</span> <span class="mf">99.79</span> <span class="o">%</span> <span class="n">variabilty</span> <span class="n">of</span> <span class="n">the</span> <span class="n">data</span>
 
 <span class="mf">3.</span><span class="n">a</span><span class="o">.</span> <span class="n">Perform</span> <span class="n">the</span> <span class="n">semantic</span> <span class="n">search</span>
  <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">search</span><span class="o">/</span>
              <span class="n">document_id</span>  <span class="n">score</span>
 <span class="n">internal_id</span>
-<span class="mi">0</span>                      <span class="mi">0</span>  <span class="mf">1.332</span>
-<span class="mi">1</span>                      <span class="mi">1</span>  <span class="mf">1.370</span>
-<span class="mi">2</span>                      <span class="mi">2</span>  <span class="mf">1.268</span>
-<span class="mi">3</span>                      <span class="mi">3</span>  <span class="mf">1.278</span>
-<span class="mi">4</span>                      <span class="mi">4</span>  <span class="mf">1.265</span>
-<span class="mi">5</span>                      <span class="mi">5</span>  <span class="mf">1.281</span>
-<span class="mi">6</span>                      <span class="mi">6</span>  <span class="mf">1.282</span>
-<span class="mi">7</span>                      <span class="mi">7</span>  <span class="mf">1.282</span>
-<span class="mi">8</span>                      <span class="mi">8</span>  <span class="mf">1.285</span>
-<span class="mi">9</span>                      <span class="mi">9</span>  <span class="mf">1.284</span>
-<span class="mi">10</span>                    <span class="mi">10</span>  <span class="mf">1.286</span>
-<span class="mi">11</span>                    <span class="mi">11</span>  <span class="mf">1.265</span>
-<span class="mi">12</span>                    <span class="mi">12</span>  <span class="mf">1.273</span>
-<span class="mi">13</span>                    <span class="mi">13</span>  <span class="mf">1.285</span>
-<span class="mi">14</span>                    <span class="mi">14</span>  <span class="mf">1.222</span>
-<span class="mi">15</span>                    <span class="mi">15</span>  <span class="mf">1.217</span>
-<span class="mi">16</span>                    <span class="mi">16</span>  <span class="mf">1.319</span>
-<span class="mi">17</span>                    <span class="mi">17</span>  <span class="mf">1.301</span>
-<span class="mi">18</span>                    <span class="mi">18</span>  <span class="mf">1.263</span>
-<span class="mi">19</span>                    <span class="mi">19</span>  <span class="mf">1.220</span>
-<span class="mi">20</span>                    <span class="mi">20</span>  <span class="mf">1.214</span>
-<span class="mi">21</span>                    <span class="mi">21</span>  <span class="mf">1.330</span>
-<span class="mi">22</span>                    <span class="mi">22</span>  <span class="mf">1.269</span>
-<span class="mi">23</span>                    <span class="mi">23</span>  <span class="mf">1.268</span>
-<span class="mi">24</span>                    <span class="mi">24</span>  <span class="mf">1.225</span>
+<span class="mi">0</span>                      <span class="mi">0</span>  <span class="mf">1.327</span>
+<span class="mi">1</span>                      <span class="mi">1</span>  <span class="mf">1.372</span>
+<span class="mi">2</span>                      <span class="mi">2</span>  <span class="mf">1.273</span>
+<span class="mi">3</span>                      <span class="mi">3</span>  <span class="mf">1.281</span>
+<span class="mi">4</span>                      <span class="mi">4</span>  <span class="mf">1.268</span>
+<span class="mi">5</span>                      <span class="mi">5</span>  <span class="mf">1.284</span>
+<span class="mi">6</span>                      <span class="mi">6</span>  <span class="mf">1.286</span>
+<span class="mi">7</span>                      <span class="mi">7</span>  <span class="mf">1.280</span>
+<span class="mi">8</span>                      <span class="mi">8</span>  <span class="mf">1.287</span>
+<span class="mi">9</span>                      <span class="mi">9</span>  <span class="mf">1.287</span>
+<span class="mi">10</span>                    <span class="mi">10</span>  <span class="mf">1.289</span>
+<span class="mi">11</span>                    <span class="mi">11</span>  <span class="mf">1.273</span>
+<span class="mi">12</span>                    <span class="mi">12</span>  <span class="mf">1.282</span>
+<span class="mi">13</span>                    <span class="mi">13</span>  <span class="mf">1.288</span>
+<span class="mi">14</span>                    <span class="mi">14</span>  <span class="mf">1.218</span>
+<span class="mi">15</span>                    <span class="mi">15</span>  <span class="mf">1.218</span>
+<span class="mi">16</span>                    <span class="mi">16</span>  <span class="mf">1.323</span>
+<span class="mi">17</span>                    <span class="mi">17</span>  <span class="mf">1.299</span>
+<span class="mi">18</span>                    <span class="mi">18</span>  <span class="mf">1.256</span>
+<span class="mi">19</span>                    <span class="mi">19</span>  <span class="mf">1.234</span>
+<span class="mi">20</span>                    <span class="mi">20</span>  <span class="mf">1.217</span>
+<span class="mi">21</span>                    <span class="mi">21</span>  <span class="mf">1.315</span>
+<span class="mi">22</span>                    <span class="mi">22</span>  <span class="mf">1.286</span>
+<span class="mi">23</span>                    <span class="mi">23</span>  <span class="mf">1.285</span>
+<span class="mi">24</span>                    <span class="mi">24</span>  <span class="mf">1.227</span>
 <span class="mi">25</span>                    <span class="mi">25</span>  <span class="mf">1.304</span>
-<span class="mi">26</span>                    <span class="mi">26</span>  <span class="mf">1.286</span>
-<span class="mi">27</span>                    <span class="mi">27</span>  <span class="mf">1.188</span>
-<span class="mi">28</span>                    <span class="mi">28</span>  <span class="mf">1.314</span>
-<span class="mi">29</span>                    <span class="mi">29</span>  <span class="mf">1.301</span>
+<span class="mi">26</span>                    <span class="mi">26</span>  <span class="mf">1.287</span>
+<span class="mi">27</span>                    <span class="mi">27</span>  <span class="mf">1.222</span>
+<span class="mi">28</span>                    <span class="mi">28</span>  <span class="mf">1.318</span>
+<span class="mi">29</span>                    <span class="mi">29</span>  <span class="mf">1.297</span>
 <span class="o">...</span>                  <span class="o">...</span>    <span class="o">...</span>
-<span class="mi">2435</span>                <span class="mi">2435</span>  <span class="mf">1.299</span>
-<span class="mi">2436</span>                <span class="mi">2436</span>  <span class="mf">1.286</span>
-<span class="mi">2437</span>                <span class="mi">2437</span>  <span class="mf">1.251</span>
-<span class="mi">2438</span>                <span class="mi">2438</span>  <span class="mf">1.249</span>
+<span class="mi">2435</span>                <span class="mi">2435</span>  <span class="mf">1.315</span>
+<span class="mi">2436</span>                <span class="mi">2436</span>  <span class="mf">1.288</span>
+<span class="mi">2437</span>                <span class="mi">2437</span>  <span class="mf">1.242</span>
+<span class="mi">2438</span>                <span class="mi">2438</span>  <span class="mf">1.239</span>
 <span class="mi">2439</span>                <span class="mi">2439</span>  <span class="mf">1.280</span>
-<span class="mi">2440</span>                <span class="mi">2440</span>  <span class="mf">1.241</span>
+<span class="mi">2440</span>                <span class="mi">2440</span>  <span class="mf">1.230</span>
 <span class="mi">2441</span>                <span class="mi">2441</span>  <span class="mf">1.282</span>
-<span class="mi">2442</span>                <span class="mi">2442</span>  <span class="mf">1.242</span>
-<span class="mi">2443</span>                <span class="mi">2443</span>  <span class="mf">1.296</span>
-<span class="mi">2444</span>                <span class="mi">2444</span>  <span class="mf">1.264</span>
-<span class="mi">2445</span>                <span class="mi">2445</span>  <span class="mf">1.287</span>
-<span class="mi">2446</span>                <span class="mi">2446</span>  <span class="mf">1.253</span>
+<span class="mi">2442</span>                <span class="mi">2442</span>  <span class="mf">1.232</span>
+<span class="mi">2443</span>                <span class="mi">2443</span>  <span class="mf">1.299</span>
+<span class="mi">2444</span>                <span class="mi">2444</span>  <span class="mf">1.256</span>
+<span class="mi">2445</span>                <span class="mi">2445</span>  <span class="mf">1.286</span>
+<span class="mi">2446</span>                <span class="mi">2446</span>  <span class="mf">1.240</span>
 <span class="mi">2447</span>                <span class="mi">2447</span>  <span class="mf">1.278</span>
-<span class="mi">2448</span>                <span class="mi">2448</span>  <span class="mf">1.241</span>
-<span class="mi">2449</span>                <span class="mi">2449</span>  <span class="mf">1.286</span>
+<span class="mi">2448</span>                <span class="mi">2448</span>  <span class="mf">1.232</span>
+<span class="mi">2449</span>                <span class="mi">2449</span>  <span class="mf">1.289</span>
 <span class="mi">2450</span>                <span class="mi">2450</span>  <span class="mf">1.242</span>
-<span class="mi">2451</span>                <span class="mi">2451</span>  <span class="mf">1.289</span>
-<span class="mi">2452</span>                <span class="mi">2452</span>  <span class="mf">1.256</span>
-<span class="mi">2453</span>                <span class="mi">2453</span>  <span class="mf">1.272</span>
-<span class="mi">2454</span>                <span class="mi">2454</span>  <span class="mf">1.235</span>
-<span class="mi">2455</span>                <span class="mi">2455</span>  <span class="mf">1.235</span>
-<span class="mi">2456</span>                <span class="mi">2456</span>  <span class="mf">1.277</span>
-<span class="mi">2457</span>                <span class="mi">2457</span>  <span class="mf">1.244</span>
-<span class="mi">2458</span>                <span class="mi">2458</span>  <span class="mf">1.282</span>
-<span class="mi">2459</span>                <span class="mi">2459</span>  <span class="mf">1.266</span>
-<span class="mi">2460</span>                <span class="mi">2460</span>  <span class="mf">1.270</span>
-<span class="mi">2461</span>                <span class="mi">2461</span>  <span class="mf">1.295</span>
-<span class="mi">2462</span>                <span class="mi">2462</span>  <span class="mf">1.265</span>
-<span class="mi">2463</span>                <span class="mi">2463</span>  <span class="mf">1.245</span>
-<span class="mi">2464</span>                <span class="mi">2464</span>  <span class="mf">1.253</span>
+<span class="mi">2451</span>                <span class="mi">2451</span>  <span class="mf">1.287</span>
+<span class="mi">2452</span>                <span class="mi">2452</span>  <span class="mf">1.243</span>
+<span class="mi">2453</span>                <span class="mi">2453</span>  <span class="mf">1.274</span>
+<span class="mi">2454</span>                <span class="mi">2454</span>  <span class="mf">1.227</span>
+<span class="mi">2455</span>                <span class="mi">2455</span>  <span class="mf">1.227</span>
+<span class="mi">2456</span>                <span class="mi">2456</span>  <span class="mf">1.280</span>
+<span class="mi">2457</span>                <span class="mi">2457</span>  <span class="mf">1.236</span>
+<span class="mi">2458</span>                <span class="mi">2458</span>  <span class="mf">1.284</span>
+<span class="mi">2459</span>                <span class="mi">2459</span>  <span class="mf">1.260</span>
+<span class="mi">2460</span>                <span class="mi">2460</span>  <span class="mf">1.260</span>
+<span class="mi">2461</span>                <span class="mi">2461</span>  <span class="mf">1.259</span>
+<span class="mi">2462</span>                <span class="mi">2462</span>  <span class="mf">1.269</span>
+<span class="mi">2463</span>                <span class="mi">2463</span>  <span class="mf">1.227</span>
+<span class="mi">2464</span>                <span class="mi">2464</span>  <span class="mf">1.250</span>
 
 <span class="p">[</span><span class="mi">2465</span> <span class="n">rows</span> <span class="n">x</span> <span class="mi">2</span> <span class="n">columns</span><span class="p">]</span>
-<span class="mf">1.46141632264</span>
+<span class="mf">1.48426379836</span>
 
 <span class="mf">4.</span> <span class="n">Delete</span> <span class="n">the</span> <span class="n">extracted</span> <span class="n">features</span>
- <span class="n">DELETE</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="mi">6130</span><span class="n">baccc3d94193</span>
+ <span class="n">DELETE</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="mi">46</span><span class="n">ba3dbb78644f3c</span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -350,7 +350,7 @@
     <span class="n">requests</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  53.289 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 1 minutes  2.739 seconds)</p>
 <div class="sphx-glr-footer container">
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../_downloads/REST_semantic_search.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">REST_semantic_search.py</span></code></a></div>
