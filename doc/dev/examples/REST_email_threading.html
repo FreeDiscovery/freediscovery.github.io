@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Email threading Example [REST API] &mdash; FreeDiscovery 0.8.dev0 documentation</title>
+  <title>Email threading Example [REST API] &mdash; FreeDiscovery 0.8.0 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="FreeDiscovery 0.8.dev0 documentation" href="../index.html"/>
+    <link rel="top" title="FreeDiscovery 0.8.0 documentation" href="../index.html"/>
         <link rel="up" title="Examples" href="index.html"/>
         <link rel="next" title="Semantic Search Example [REST API]" href="REST_semantic_search.html"/>
         <link rel="prev" title="Clustering Example [Python API]" href="python_clustering.html"/> 
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                0.8.dev0
+                0.8.0
               </div>
             
           
@@ -165,10 +165,10 @@
 <span class="mf">1.</span><span class="n">a</span> <span class="n">Parse</span> <span class="n">emails</span>
  <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">email</span><span class="o">-</span><span class="n">parser</span>
    <span class="o">=&gt;</span> <span class="n">received</span> <span class="p">[</span><span class="s1">u&#39;id&#39;</span><span class="p">,</span> <span class="s1">u&#39;filenames&#39;</span><span class="p">]</span>
-   <span class="o">=&gt;</span> <span class="n">dsid</span> <span class="o">=</span> <span class="mi">000104</span><span class="n">c073874c90</span>
+   <span class="o">=&gt;</span> <span class="n">dsid</span> <span class="o">=</span> <span class="n">a4e402b035e34cc5</span>
 
 <span class="mf">1.</span><span class="n">b</span><span class="o">.</span> <span class="n">check</span> <span class="n">the</span> <span class="n">parameters</span> <span class="n">of</span> <span class="n">the</span> <span class="n">emails</span>
- <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">email</span><span class="o">-</span><span class="n">parser</span><span class="o">/</span><span class="mi">000104</span><span class="n">c073874c90</span>
+ <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">email</span><span class="o">-</span><span class="n">parser</span><span class="o">/</span><span class="n">a4e402b035e34cc5</span>
      <span class="o">-</span> <span class="n">encoding</span><span class="p">:</span> <span class="n">latin</span><span class="o">-</span><span class="mi">1</span>
      <span class="o">-</span> <span class="nb">type</span><span class="p">:</span> <span class="n">EmailParser</span>
      <span class="o">-</span> <span class="n">data_dir</span><span class="p">:</span> <span class="o">../</span><span class="n">freediscovery_shared</span><span class="o">/</span><span class="n">fedora_ml_3k_subset</span><span class="o">/</span><span class="n">data</span>
@@ -176,7 +176,7 @@
 
 <span class="mf">2.</span> <span class="n">Email</span> <span class="n">threading</span>
  <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">email</span><span class="o">-</span><span class="n">threading</span><span class="o">/</span>
-     <span class="o">=&gt;</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="mi">284</span><span class="n">fbea2888b4700</span>
+     <span class="o">=&gt;</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="n">a115c3b12370448a</span>
 
 <span class="n">Threading</span> <span class="n">examples</span>
 <span class="n">cf</span><span class="o">.</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">redhat</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">archives</span><span class="o">/</span><span class="n">rhl</span><span class="o">-</span><span class="n">devel</span><span class="o">-</span><span class="nb">list</span><span class="o">/</span><span class="mi">2008</span><span class="o">-</span><span class="n">October</span><span class="o">/</span><span class="n">thread</span><span class="o">.</span><span class="n">htlm</span>
@@ -313,7 +313,7 @@
     <span class="n">print_thread</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="n">idx</span><span class="p">])</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  15.490 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  16.184 seconds)</p>
 <div class="sphx-glr-footer container">
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../_downloads/REST_email_threading.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">REST_email_threading.py</span></code></a></div>
@@ -365,7 +365,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.8.dev0',
+            VERSION:'0.8.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
