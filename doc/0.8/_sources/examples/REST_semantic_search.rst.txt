@@ -22,87 +22,87 @@ An example of Semantic Search
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received [u'id', u'filenames']
-       => dsid = c355740a0ff04da9
+       => dsid = a9383a94de7248d5
 
     1.b Start feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/c355740a0ff04da9
+     POST http://localhost:5001/api/v0/feature-extraction/a9383a94de7248d5
 
     2. Calculate LSI
     POST http://localhost:5001/api/v0/lsi/
-      => LSI model id = ba5dadb4718d42fe
+      => LSI model id = 816e11c8aa934259
       => SVD decomposition with 100 dimensions explaining 99.79 % variabilty of the data
 
     3.a. Perform the semantic search
      POST http://localhost:5001/api/v0/search/
                  document_id  score
     internal_id                    
-    0                      0  1.323
-    1                      1  1.387
-    2                      2  1.276
-    3                      3  1.284
-    4                      4  1.269
-    5                      5  1.282
+    0                      0  1.337
+    1                      1  1.371
+    2                      2  1.273
+    3                      3  1.280
+    4                      4  1.267
+    5                      5  1.284
     6                      6  1.289
     7                      7  1.282
-    8                      8  1.290
-    9                      9  1.285
-    10                    10  1.291
-    11                    11  1.286
-    12                    12  1.295
-    13                    13  1.289
-    14                    14  1.226
-    15                    15  1.230
-    16                    16  1.331
-    17                    17  1.305
-    18                    18  1.241
-    19                    19  1.229
-    20                    20  1.225
-    21                    21  1.309
-    22                    22  1.292
-    23                    23  1.289
-    24                    24  1.229
-    25                    25  1.313
-    26                    26  1.298
-    27                    27  1.212
-    28                    28  1.328
-    29                    29  1.305
+    8                      8  1.287
+    9                      9  1.284
+    10                    10  1.286
+    11                    11  1.270
+    12                    12  1.278
+    13                    13  1.292
+    14                    14  1.213
+    15                    15  1.217
+    16                    16  1.325
+    17                    17  1.301
+    18                    18  1.252
+    19                    19  1.217
+    20                    20  1.216
+    21                    21  1.322
+    22                    22  1.263
+    23                    23  1.263
+    24                    24  1.217
+    25                    25  1.310
+    26                    26  1.289
+    27                    27  1.205
+    28                    28  1.321
+    29                    29  1.301
     ...                  ...    ...
-    2435                2435  1.311
+    2435                2435  1.308
     2436                2436  1.287
-    2437                2437  1.250
-    2438                2438  1.248
-    2439                2439  1.277
-    2440                2440  1.235
-    2441                2441  1.279
+    2437                2437  1.246
+    2438                2438  1.246
+    2439                2439  1.282
+    2440                2440  1.239
+    2441                2441  1.282
     2442                2442  1.237
-    2443                2443  1.301
-    2444                2444  1.266
-    2445                2445  1.286
-    2446                2446  1.250
-    2447                2447  1.281
-    2448                2448  1.244
-    2449                2449  1.291
-    2450                2450  1.261
-    2451                2451  1.292
-    2452                2452  1.257
-    2453                2453  1.272
-    2454                2454  1.233
-    2455                2455  1.237
-    2456                2456  1.283
-    2457                2457  1.246
+    2443                2443  1.300
+    2444                2444  1.263
+    2445                2445  1.288
+    2446                2446  1.248
+    2447                2447  1.280
+    2448                2448  1.240
+    2449                2449  1.287
+    2450                2450  1.245
+    2451                2451  1.289
+    2452                2452  1.250
+    2453                2453  1.273
+    2454                2454  1.232
+    2455                2455  1.231
+    2456                2456  1.280
+    2457                2457  1.244
     2458                2458  1.287
     2459                2459  1.265
-    2460                2460  1.276
-    2461                2461  1.277
-    2462                2462  1.282
-    2463                2463  1.237
-    2464                2464  1.269
+    2460                2460  1.279
+    2461                2461  1.304
+    2462                2462  1.271
+    2463                2463  1.246
+    2464                2464  1.246
 
     [2465 rows x 2 columns]
-    1.4758892182
+    1.45772439462
 
     4. Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/c355740a0ff04da9
+     DELETE http://localhost:5001/api/v0/feature-extraction/a9383a94de7248d5
 
 
 
@@ -211,7 +211,7 @@ An example of Semantic Search
         print(" DELETE", url)
         requests.delete(url)
 
-**Total running time of the script:** ( 1 minutes  1.114 seconds)
+**Total running time of the script:** ( 0 minutes  50.604 seconds)
 
 
 

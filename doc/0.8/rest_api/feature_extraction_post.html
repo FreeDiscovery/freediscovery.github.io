@@ -148,7 +148,8 @@
 <li><strong>URL</strong>: <code class="docutils literal"><span class="pre">/api/v0/feature-extraction/</span></code></li>
 <li><strong>Method</strong>: <code class="docutils literal"><span class="pre">POST</span></code>,                <strong>URL Params</strong>: None</li>
 <li><strong>Data Params</strong>: (following the <a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.HashingVectorizer.html">sklearn.feature_extraction.text.HashingVectorizer</a> API)<ul>
-<li><code class="docutils literal"><span class="pre">data_dir</span></code>: [required] relative path to the directory with the input files</li>
+<li><code class="docutils literal"><span class="pre">data_dir</span></code>: [optional] relative path to the directory with the input files. Either <code class="docutils literal"><span class="pre">data_dir</span></code> or <code class="docutils literal"><span class="pre">dataset_definition</span></code> must be provided.</li>
+<li><code class="docutils literal"><span class="pre">dataset_definition</span></code>: [optional] a list of dictionaries <code class="docutils literal"><span class="pre">[{'file_path':</span> <span class="pre">&lt;str&gt;,</span> <span class="pre">'document_id':</span> <span class="pre">&lt;int&gt;,</span> <span class="pre">'rendition_id':</span> <span class="pre">&lt;int&gt;},</span> <span class="pre">...]</span></code> where <code class="docutils literal"><span class="pre">document_id</span></code> and <code class="docutils literal"><span class="pre">rendition_id</span></code> are optional. Either <code class="docutils literal"><span class="pre">data_dir</span></code> or <code class="docutils literal"><span class="pre">dataset_definition</span></code> must be provided.</li>
 <li><code class="docutils literal"><span class="pre">n_features</span></code>: [optional] number of features (overlapping character/word n-grams that are hashed).
 n_features refers to the number of buckets in the hash.  The larger the number, the fewer collisions.   (default: 1100000)</li>
 <li><code class="docutils literal"><span class="pre">analyzer</span></code>: &#8216;word&#8217;, &#8216;char&#8217;, &#8216;char_wb&#8217;
@@ -195,8 +196,8 @@ If &#8220;english&#8221;, a built-in stop word list for English is used. ( defau
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2016, Grossman Labs LLC.
-      Last updated on Jan 26, 2017.
+        &copy; Copyright 2016 - 2017, Grossman Labs LLC.
+      Last updated on Feb 07, 2017.
 
     </p>
   </div>
