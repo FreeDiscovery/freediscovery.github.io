@@ -22,16 +22,16 @@ An example to illustrate binary categorizaiton with FreeDiscovery
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received [u'id', u'filenames']
-       => dsid = 9473b21935ba44c2
+       => dsid = bfdf47a6c5744ec5
 
     1.b Start feature extraction (in the background)
-     POST http://localhost:5001/api/v0/feature-extraction/9473b21935ba44c2
+     POST http://localhost:5001/api/v0/feature-extraction/bfdf47a6c5744ec5
 
     1.c Monitor feature extraction progress
-     GET http://localhost:5001/api/v0/feature-extraction/9473b21935ba44c2
+     GET http://localhost:5001/api/v0/feature-extraction/bfdf47a6c5744ec5
 
     1.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/9473b21935ba44c2
+     GET http://localhost:5001/api/v0/feature-extraction/bfdf47a6c5744ec5
          - binary: False
          - n_jobs: 1
          - data_dir: ../freediscovery_shared/treclegal09_2k_subset/data/jobRun_4/XML_EXPORT_CONTENT/text_9
@@ -51,7 +51,7 @@ An example to illustrate binary categorizaiton with FreeDiscovery
 
     2. Calculate LSI
     POST http://localhost:5001/api/v0/lsi/
-      => LSI model id = 10957f97f2cc40ac
+      => LSI model id = 4cf263b300934c03
       => SVD decomposition with 100 dimensions explaining 99.79 % variabilty of the data
 
     3.a. Train the categorization model
@@ -61,16 +61,16 @@ An example to illustrate binary categorizaiton with FreeDiscovery
      ================================================================================
      POST http://localhost:5001/api/v0/categorization/
      Training...
-         => model id = 9728a5d1aa014233
-        => Training scores: MAP = 0.683, ROC-AUC = nan, F1= 0.000
+         => model id = 0d6c1434025942db
+        => Training scores: MAP = 0.683, ROC-AUC = 0.892, F1= 0.000
 
     3.b. Check the parameters used in the categorization model
-     GET http://localhost:5001/api/v0/categorization/9728a5d1aa014233
+     GET http://localhost:5001/api/v0/categorization/0d6c1434025942db
          - method: LinearSVC
          - options: {'loss': 'squared_hinge', 'C': 1.0, 'verbose': 0, 'intercept_scaling': 1, 'fit_intercept': True, 'max_iter': 1000, 'penalty': 'l2', 'multi_class': 'ovr', 'random_state': None, 'dual': True, 'tol': 0.0001, 'class_weight': None}
 
     3.c Categorize the complete dataset with this model
-     GET http://localhost:5001/api/v0/categorization/9728a5d1aa014233/predict
+     GET http://localhost:5001/api/v0/categorization/0d6c1434025942db/predict
                  document_id  score
     internal_id                    
     0                      0 -0.846
@@ -145,88 +145,88 @@ An example to illustrate binary categorizaiton with FreeDiscovery
      ================================================================================
      POST http://localhost:5001/api/v0/categorization/
      Training...
-         => model id = 643c08d9091d4663
-        => Training scores: MAP = 1.000, ROC-AUC = nan, F1= 1.000
+         => model id = feb3ca7357be4e26
+        => Training scores: MAP = 1.000, ROC-AUC = 1.000, F1= 1.000
 
     3.b. Check the parameters used in the categorization model
-     GET http://localhost:5001/api/v0/categorization/643c08d9091d4663
+     GET http://localhost:5001/api/v0/categorization/feb3ca7357be4e26
          - method: NearestNeighbor
          - options: {'ranking': None, 'n_jobs': None, 'radius': None, 'leaf_size': None, 'algorithm': None}
 
     3.c Categorize the complete dataset with this model
-     GET http://localhost:5001/api/v0/categorization/643c08d9091d4663/predict
+     GET http://localhost:5001/api/v0/categorization/feb3ca7357be4e26/predict
                  document_id  nn_negative__distance  nn_negative__document_id  nn_positive__distance  nn_positive__document_id  score
     internal_id                                                                                                                      
-    0                      0                  0.235                        45                  0.212                         3  0.894
-    1                      1                  0.578                        18                  0.644                         4 -0.711
-    2                      2                  0.085                        21                  0.088                         0 -0.958
-    3                      3                  0.063                        21                  0.000                         0  1.000
-    4                      4                  0.121                        64                  0.119                         0  0.941
-    5                      5                  0.107                        21                  0.093                         0  0.954
-    6                      6                  0.128                         5                  0.111                         0  0.945
-    7                      7                  0.090                        37                  0.072                         0  0.964
-    8                      8                  0.084                        37                  0.086                         0 -0.958
-    9                      9                  0.000                         5                  0.105                         0 -1.000
-    10                    10                  0.093                        64                  0.051                         0  0.975
-    11                    11                  0.566                        58                  0.679                         4 -0.717
-    12                    12                  0.575                        58                  0.658                         4 -0.712
-    13                    13                  0.590                        55                  0.653                         3 -0.705
-    14                    14                  0.081                        55                  0.612                         3 -0.959
-    15                    15                  0.215                        12                  0.435                         1 -0.892
-    16                    16                  0.653                        58                  0.693                         4 -0.674
-    17                    17                  0.621                        58                  0.658                         4 -0.689
-    18                    18                  0.410                        12                  0.538                         1 -0.795
-    19                    19                  0.393                        12                  0.607                         1 -0.804
-    20                    20                  0.208                        12                  0.463                         1 -0.896
-    21                    21                  0.364                        63                  0.673                         3 -0.818
-    22                    22                  0.555                        53                  0.660                         4 -0.723
-    23                    23                  0.546                        53                  0.661                         4 -0.727
-    24                    24                  0.397                        12                  0.540                         4 -0.801
-    25                    25                  0.603                        63                  0.707                         4 -0.699
-    26                    26                  0.601                        58                  0.680                         4 -0.699
-    27                    27                  0.494                        26                  0.598                         2 -0.753
-    28                    28                  0.647                        23                  0.698                         4 -0.677
-    29                    29                  0.624                        58                  0.660                         4 -0.688
+    0                      0                  0.230                        45                  0.210                         3  0.895
+    1                      1                  0.579                        53                  0.653                         4 -0.711
+    2                      2                  0.084                        21                  0.085                         0 -0.958
+    3                      3                  0.065                        21                  0.000                         0  1.000
+    4                      4                  0.124                        21                  0.119                         0  0.941
+    5                      5                  0.103                        64                  0.092                         0  0.954
+    6                      6                  0.132                         5                  0.114                         0  0.943
+    7                      7                  0.096                        37                  0.070                         0  0.965
+    8                      8                  0.085                        37                  0.087                         0 -0.958
+    9                      9                  0.000                         5                  0.103                         0 -1.000
+    10                    10                  0.093                        21                  0.048                         0  0.976
+    11                    11                  0.569                        58                  0.686                         4 -0.715
+    12                    12                  0.575                        58                  0.664                         4 -0.712
+    13                    13                  0.583                        55                  0.652                         3 -0.708
+    14                    14                  0.082                        55                  0.605                         1 -0.959
+    15                    15                  0.226                        12                  0.438                         1 -0.887
+    16                    16                  0.644                         7                  0.710                         4 -0.678
+    17                    17                  0.623                        58                  0.675                         4 -0.688
+    18                    18                  0.412                        12                  0.555                         1 -0.794
+    19                    19                  0.403                        12                  0.612                         1 -0.798
+    20                    20                  0.217                        12                  0.465                         1 -0.891
+    21                    21                  0.364                        63                  0.668                         3 -0.818
+    22                    22                  0.534                        53                  0.645                         4 -0.733
+    23                    23                  0.528                        53                  0.645                         4 -0.736
+    24                    24                  0.414                        12                  0.549                         4 -0.793
+    25                    25                  0.596                        63                  0.720                         4 -0.702
+    26                    26                  0.599                        58                  0.696                         4 -0.701
+    27                    27                  0.489                        12                  0.608                         2 -0.755
+    28                    28                  0.639                         7                  0.715                         4 -0.680
+    29                    29                  0.612                         7                  0.680                         4 -0.694
     ...                  ...                    ...                       ...                    ...                       ...    ...
-    2435                2435                  0.652                        30                  0.687                         0 -0.674
-    2436                2436                  0.114                        21                  0.100                         0  0.950
-    2437                2437                  0.214                        47                  0.339                         1 -0.893
-    2438                2438                  0.203                        47                  0.314                         0 -0.899
-    2439                2439                  0.088                         5                  0.108                         0 -0.956
-    2440                2440                  0.186                        47                  0.324                         1 -0.907
-    2441                2441                  0.089                         5                  0.105                         0 -0.955
-    2442                2442                  0.196                        47                  0.314                         0 -0.902
-    2443                2443                  0.133                        52                  0.127                         0  0.937
-    2444                2444                  0.233                        47                  0.339                         1 -0.884
-    2445                2445                  0.139                        37                  0.134                         0  0.933
-    2446                2446                  0.212                        35                  0.333                         1 -0.894
-    2447                2447                  0.111                        64                  0.094                         0  0.953
-    2448                2448                  0.178                        66                  0.319                         1 -0.911
-    2449                2449                  0.090                        21                  0.049                         0  0.975
-    2450                2450                  0.187                        35                  0.292                         0 -0.906
+    2435                2435                  0.656                        59                  0.680                         1 -0.672
+    2436                2436                  0.113                        21                  0.102                         0  0.949
+    2437                2437                  0.220                        47                  0.352                         0 -0.890
+    2438                2438                  0.207                        47                  0.313                         0 -0.897
+    2439                2439                  0.090                         5                  0.104                         0 -0.955
+    2440                2440                  0.189                        47                  0.320                         0 -0.906
+    2441                2441                  0.087                         5                  0.100                         0 -0.956
+    2442                2442                  0.196                        47                  0.307                         0 -0.902
+    2443                2443                  0.131                        52                  0.125                         0  0.938
+    2444                2444                  0.235                        47                  0.338                         1 -0.882
+    2445                2445                  0.142                        37                  0.141                         0  0.930
+    2446                2446                  0.213                        35                  0.341                         0 -0.893
+    2447                2447                  0.109                        64                  0.094                         0  0.953
+    2448                2448                  0.171                        66                  0.320                         0 -0.914
+    2449                2449                  0.090                        21                  0.051                         0  0.975
+    2450                2450                  0.197                        35                  0.287                         0 -0.902
     2451                2451                  0.000                        67                  0.126                         0 -1.000
-    2452                2452                  0.234                        47                  0.339                         0 -0.883
-    2453                2453                  0.152                        51                  0.199                         0 -0.924
-    2454                2454                  0.287                        47                  0.338                         1 -0.856
-    2455                2455                  0.143                        47                  0.324                         0 -0.928
-    2456                2456                  0.058                        21                  0.038                         0  0.981
-    2457                2457                  0.220                        47                  0.314                         0 -0.890
-    2458                2458                  0.117                        21                  0.092                         0  0.954
-    2459                2459                  0.188                        42                  0.532                         2 -0.906
-    2460                2460                  0.417                        42                  0.521                         3 -0.792
-    2461                2461                  0.438                        13                  0.494                         2 -0.781
-    2462                2462                  0.442                        39                  0.616                         0 -0.779
-    2463                2463                  0.474                        39                  0.516                         2 -0.763
-    2464                2464                  0.433                        42                  0.553                         2 -0.784
+    2452                2452                  0.237                        47                  0.335                         0 -0.881
+    2453                2453                  0.156                        51                  0.200                         0 -0.922
+    2454                2454                  0.291                        47                  0.350                         1 -0.854
+    2455                2455                  0.139                        47                  0.314                         0 -0.931
+    2456                2456                  0.058                        21                  0.039                         0  0.981
+    2457                2457                  0.218                        47                  0.308                         0 -0.891
+    2458                2458                  0.115                        21                  0.093                         0  0.953
+    2459                2459                  0.190                        42                  0.538                         2 -0.905
+    2460                2460                  0.418                        42                  0.519                         3 -0.791
+    2461                2461                  0.434                        13                  0.504                         2 -0.783
+    2462                2462                  0.432                        39                  0.624                         0 -0.784
+    2463                2463                  0.468                        39                  0.535                         2 -0.766
+    2464                2464                  0.443                        42                  0.563                         3 -0.779
 
     [2465 rows x 6 columns]
 
     3.d Compute the categorization scores
      GET http://localhost:5001/api/v0/metrics/categorization
-        => Test scores: MAP = 0.005, ROC-AUC = 0.355
+        => Test scores: MAP = 0.005, ROC-AUC = 0.353
 
     5.a Delete the extracted features (and LSI decomposition)
-     DELETE http://localhost:5001/api/v0/feature-extraction/9473b21935ba44c2
+     DELETE http://localhost:5001/api/v0/feature-extraction/bfdf47a6c5744ec5
 
 
 
@@ -434,7 +434,7 @@ An example to illustrate binary categorizaiton with FreeDiscovery
         print(" DELETE", url)
         requests.delete(url)
 
-**Total running time of the script:** ( 1 minutes  5.260 seconds)
+**Total running time of the script:** ( 1 minutes  7.162 seconds)
 
 
 
