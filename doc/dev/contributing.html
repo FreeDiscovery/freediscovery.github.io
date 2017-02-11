@@ -89,7 +89,7 @@
             
                 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation_instructions.html">Installation Instructions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rest_api/index.html">REST API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rest_api.html">REST API reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="python_api.html">Python API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user_manual/index.html">User Manual</a></li>
@@ -97,7 +97,11 @@
 <li class="toctree-l2"><a class="reference internal" href="#submitting-bugs">Submitting bugs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#contributing">Contributing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#test-suite">Test Suite</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#building-documentation">Building Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-documentation">Building Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sphinx-documentation">1. Sphinx documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#rest-api-documentation">2. REST API documentation</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="whats_new.html">Release history</a></li>
@@ -186,7 +190,9 @@
 </div>
 <div class="section" id="building-documentation">
 <span id="building-documentation"></span><h2>Building Documentation<a class="headerlink" href="#building-documentation" title="Permalink to this headline">¶</a></h2>
-<p>This html documentation can be built from sources with,</p>
+<div class="section" id="sphinx-documentation">
+<span id="sphinx-documentation"></span><h3>1. Sphinx documentation<a class="headerlink" href="#sphinx-documentation" title="Permalink to this headline">¶</a></h3>
+<p>The html documentation can be built from sources with,</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># starting the FreeDiscovery server at localhost</span>
 <span class="n">cd</span> <span class="n">FreeDiscovery</span><span class="o">/</span><span class="n">doc</span><span class="o">/</span>
 <span class="n">make</span> <span class="n">html</span>
@@ -194,6 +200,18 @@
 </div>
 <p>which requires to install dependencies in <code class="docutils literal"><span class="pre">build_tools/requirements_extra_pip.txt</span></code>. This would also run and include examples using <code class="docutils literal"><span class="pre">sphinx-gallery</span></code>.</p>
 <p>Alternatively  <code class="docutils literal"><span class="pre">make</span> <span class="pre">latexpdf</span></code> generates documentation in .pdf format (requires <code class="docutils literal"><span class="pre">pdflatex</span></code>).</p>
+</div>
+</div>
+<div class="section" id="rest-api-documentation">
+<span id="rest-api-documentation"></span><h2>2. REST API documentation<a class="headerlink" href="#rest-api-documentation" title="Permalink to this headline">¶</a></h2>
+<p>The rest API documentation can be generated with,</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">npm</span> <span class="n">install</span> <span class="o">-</span><span class="n">g</span> <span class="n">bootprint</span> 
+<span class="n">sudo</span> <span class="n">npm</span> <span class="n">install</span> <span class="o">-</span><span class="n">g</span> <span class="n">bootprint</span><span class="o">-</span><span class="n">openapi</span>
+<span class="n">bootprint</span> <span class="n">openapi</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">0.0</span><span class="o">.</span><span class="mf">0.0</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">openapi</span><span class="o">-</span><span class="n">specs</span><span class="o">.</span><span class="n">json</span> <span class="n">openapi_docs</span>
+
+<span class="n">cp</span> <span class="o">-</span><span class="n">r</span> <span class="n">openapi_docs</span><span class="o">/</span> <span class="n">_build</span><span class="o">/</span><span class="n">html</span><span class="o">/</span>
+</pre></div>
+</div>
 </div>
 </div>
 
@@ -217,7 +235,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016 - 2017, Grossman Labs LLC.
-      Last updated on Feb 10, 2017.
+      Last updated on Feb 11, 2017.
 
     </p>
   </div>
