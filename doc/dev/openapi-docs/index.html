@@ -152,17 +152,6 @@
                     </tr>
                     <tr>
                             <td class="swagger--summary-path" rowspan="1">
-                                <a href="#path--api-v0-datasets--name-">/api/v0/datasets/{name}</a>
-                            </td>
-                        <td>
-                            <a href="#operation--api-v0-datasets--name--get">GET</a>
-                        </td>
-                        <td>
-                            
-                        </td>
-                    </tr>
-                    <tr>
-                            <td class="swagger--summary-path" rowspan="1">
                                 <a href="#path--api-v0-duplicate-detection-">/api/v0/duplicate-detection/</a>
                             </td>
                         <td>
@@ -234,7 +223,7 @@
                                 <a href="#path--api-v0-email-parser--dsid--index">/api/v0/email-parser/{dsid}/index</a>
                             </td>
                         <td>
-                            <a href="#operation--api-v0-email-parser--dsid--index-get">GET</a>
+                            <a href="#operation--api-v0-email-parser--dsid--index-post">POST</a>
                         </td>
                         <td>
                             
@@ -254,6 +243,17 @@
                     <tr>
                         <td>
                             <a href="#operation--api-v0-email-threading--mid--get">GET</a>
+                        </td>
+                        <td>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                            <td class="swagger--summary-path" rowspan="1">
+                                <a href="#path--api-v0-example-dataset--name-">/api/v0/example-dataset/{name}</a>
+                            </td>
+                        <td>
+                            <a href="#operation--api-v0-example-dataset--name--get">GET</a>
                         </td>
                         <td>
                             
@@ -310,7 +310,7 @@
                                 <a href="#path--api-v0-feature-extraction--dsid--id-mapping-flat">/api/v0/feature-extraction/{dsid}/id-mapping/flat</a>
                             </td>
                         <td>
-                            <a href="#operation--api-v0-feature-extraction--dsid--id-mapping-flat-get">GET</a>
+                            <a href="#operation--api-v0-feature-extraction--dsid--id-mapping-flat-post">POST</a>
                         </td>
                         <td>
                             
@@ -321,7 +321,7 @@
                                 <a href="#path--api-v0-feature-extraction--dsid--id-mapping-nested">/api/v0/feature-extraction/{dsid}/id-mapping/nested</a>
                             </td>
                         <td>
-                            <a href="#operation--api-v0-feature-extraction--dsid--id-mapping-nested-get">GET</a>
+                            <a href="#operation--api-v0-feature-extraction--dsid--id-mapping-nested-post">POST</a>
                         </td>
                         <td>
                             
@@ -370,7 +370,7 @@
                                 <a href="#path--api-v0-metrics-categorization">/api/v0/metrics/categorization</a>
                             </td>
                         <td>
-                            <a href="#operation--api-v0-metrics-categorization-get">GET</a>
+                            <a href="#operation--api-v0-metrics-categorization-post">POST</a>
                         </td>
                         <td>
                             
@@ -381,7 +381,7 @@
                                 <a href="#path--api-v0-metrics-clustering">/api/v0/metrics/clustering</a>
                             </td>
                         <td>
-                            <a href="#operation--api-v0-metrics-clustering-get">GET</a>
+                            <a href="#operation--api-v0-metrics-clustering-post">POST</a>
                         </td>
                         <td>
                             
@@ -392,7 +392,7 @@
                                 <a href="#path--api-v0-metrics-duplicate-detection">/api/v0/metrics/duplicate-detection</a>
                             </td>
                         <td>
-                            <a href="#operation--api-v0-metrics-duplicate-detection-get">GET</a>
+                            <a href="#operation--api-v0-metrics-duplicate-detection-post">POST</a>
                         </td>
                         <td>
                             
@@ -403,7 +403,7 @@
                                 <a href="#path--api-v0-search-">/api/v0/search/</a>
                             </td>
                         <td>
-                            <a href="#operation--api-v0-search--get">GET</a>
+                            <a href="#operation--api-v0-search--post">POST</a>
                         </td>
                         <td>
                             
@@ -2432,269 +2432,6 @@
                         </section>
                 </div>
             </div>    
-        <span id="path--api-v0-datasets--name-"></span>
-            <div id="operation--api-v0-datasets--name--get" class="swagger--panel-operation-get panel">
-                <div class="panel-heading">
-                    <div class="operation-summary"></div>
-                    <h3 class="panel-title"><span class="operation-name">GET</span> <strong>/api/v0/datasets/{name}</strong></h3>
-                </div>
-                <div class="panel-body">
-                    <section class="sw-operation-description">
-                        <p>Download a benchmark dataset.</p>
-            <p>The currently supported datasets are listed below,</p>
-            <ol>
-            <li><p>TREC 2009 legal collection</p>
-            <ul>
-            <li><code>treclegal09_2k_subset</code>  :   2 400 documents,   2 MB</li>
-            <li><code>treclegal09_20k_subset</code> :  20 000 documents,  30 MB</li>
-            <li><code>treclegal09_37k_subset</code> :  37 000 documents,  55 MB</li>
-            <li><code>treclegal09</code>            : 700 000 documents, 1.2 GB</li>
-            </ul>
-            <p>The ground truth files for categorization are adapted from TAR Toolkit.</p>
-            </li>
-            <li><p>Fedora mailing list (2009-2009)</p>
-            <ul>
-            <li><code>fedora_ml</code></li>
-            </ul>
-            </li>
-            </ol>
-            <p>If you encounter any issues for downloads with this function,
-            you can also manually download and extract the required dataset to <code>cache_dir</code> (the
-            download url is <code>http://r0h.eu/d/&lt;name&gt;.tar.gz</code>), then re-run this function to get
-            the required metadata.</p>
-            
-                    </section>
-                        
-                            <section class="sw-request-body">
-                                
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <p></p>
-                                            </div>
-                                            <div class="col-md-6 sw-request-model">
-                            <div  class="panel panel-definition">
-                                <div class="panel-body">
-                                        
-                                                <section class="json-schema-properties">
-                                                    <dl>
-                                                            <dt data-property-name="return_file_path">
-                                                                <span class="json-property-name">return_file_path:</span>
-                                                                <span class="json-property-type">boolean</span>
-                                                                <span class="json-property-range" title="Value limits"></span>
-                                                                
-                                                            </dt>
-                                                            <dd>
-                                                                
-                                                                <div class="json-inner-schema">
-                                                                    
-                                                                </div>
-                                                            </dd>
-                                                    </dl>
-                                                </section>
-                                </div>
-                            </div></div>
-                                        </div>
-                            </section>        
-                        <section class="sw-request-params">
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th class="sw-param-name"></th>
-                                    <th class="sw-param-description"></th>
-                                    <th class="sw-param-type"></th>
-                                    <th class="sw-param-data-type"></th>
-                                    <th class="sw-param-annotation"></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                        <tr>
-                                            <td>
-                                                name
-                                            <td></td>
-                                            <td>path</td>
-                                            <td><span class="json-property-type">string</span>
-                                        <span class="json-property-range" title="Value limits"></span>
-                                        
-                                            </td>
-                                            <td>
-                                                    <span class="json-property-required"></span>
-                                            </td>
-                                        </tr>
-                                </tbody>
-                            </table>
-                        </section>
-                    
-                        <section class="sw-responses">
-                    
-                            <dl>
-                                    <dt class="sw-response-default">
-                                        default 
-                                    
-                                    </dt>
-                                    <dd class="sw-response-default">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                
-                                                <div class="col-md-6 sw-response-model">
-                                                <div  class="panel panel-definition">
-                                                    <div class="panel-body">
-                                                            
-                                                                    <section class="json-schema-properties">
-                                                                        <dl>
-                                                                                <dt data-property-name="base_dir">
-                                                                                    <span class="json-property-name">base_dir:</span>
-                                                                                    <span class="json-property-type">string</span>
-                                                                                    <span class="json-property-range" title="Value limits"></span>
-                                                                                    
-                                                                                        <span class="json-property-required"></span>
-                                                                                </dt>
-                                                                                <dd>
-                                                                                    
-                                                                                    <div class="json-inner-schema">
-                                                                                        
-                                                                                    </div>
-                                                                                </dd>
-                                                                                <dt data-property-name="data_dir">
-                                                                                    <span class="json-property-name">data_dir:</span>
-                                                                                    <span class="json-property-type">string</span>
-                                                                                    <span class="json-property-range" title="Value limits"></span>
-                                                                                    
-                                                                                        <span class="json-property-required"></span>
-                                                                                </dt>
-                                                                                <dd>
-                                                                                    
-                                                                                    <div class="json-inner-schema">
-                                                                                        
-                                                                                    </div>
-                                                                                </dd>
-                                                                                <dt data-property-name="document_id">
-                                                                                    <span class="json-property-name">document_id:</span>
-                                                                                    <span class="json-property-type">integer[]</span>
-                                                                                    <span class="json-property-range" title="Value limits"></span>
-                                                                                    
-                                                                                </dt>
-                                                                                <dd>
-                                                                                    
-                                                                                    <div class="json-inner-schema">
-                                                                                        
-                                                                                                        <section class="json-schema-array-items">
-                                                                                                            <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
-                                                                                                            <span class="json-property-range" title="Value limits"></span>
-                                                                                                            
-                                                                                                            <div class="json-inner-schema">
-                                                                                                                
-                                                                                                            </div>
-                                                                                                        </section>                </div>
-                                                                                </dd>
-                                                                                <dt data-property-name="file_path">
-                                                                                    <span class="json-property-name">file_path:</span>
-                                                                                    <span class="json-property-type">string[]</span>
-                                                                                    <span class="json-property-range" title="Value limits"></span>
-                                                                                    
-                                                                                </dt>
-                                                                                <dd>
-                                                                                    
-                                                                                    <div class="json-inner-schema">
-                                                                                        
-                                                                                                        <section class="json-schema-array-items">
-                                                                                                            <span class="json-property-type">string</span>
-                                                                                                            <span class="json-property-range" title="Value limits"></span>
-                                                                                                            
-                                                                                                            <div class="json-inner-schema">
-                                                                                                                
-                                                                                                            </div>
-                                                                                                        </section>                </div>
-                                                                                </dd>
-                                                                                <dt data-property-name="ground_truth_y">
-                                                                                    <span class="json-property-name">ground_truth_y:</span>
-                                                                                    <span class="json-property-type">integer[]</span>
-                                                                                    <span class="json-property-range" title="Value limits"></span>
-                                                                                    
-                                                                                </dt>
-                                                                                <dd>
-                                                                                    
-                                                                                    <div class="json-inner-schema">
-                                                                                        
-                                                                                                        <section class="json-schema-array-items">
-                                                                                                            <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
-                                                                                                            <span class="json-property-range" title="Value limits"></span>
-                                                                                                            
-                                                                                                            <div class="json-inner-schema">
-                                                                                                                
-                                                                                                            </div>
-                                                                                                        </section>                </div>
-                                                                                </dd>
-                                                                                <dt data-property-name="seed_document_id">
-                                                                                    <span class="json-property-name">seed_document_id:</span>
-                                                                                    <span class="json-property-type">integer[]</span>
-                                                                                    <span class="json-property-range" title="Value limits"></span>
-                                                                                    
-                                                                                </dt>
-                                                                                <dd>
-                                                                                    
-                                                                                    <div class="json-inner-schema">
-                                                                                        
-                                                                                                        <section class="json-schema-array-items">
-                                                                                                            <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
-                                                                                                            <span class="json-property-range" title="Value limits"></span>
-                                                                                                            
-                                                                                                            <div class="json-inner-schema">
-                                                                                                                
-                                                                                                            </div>
-                                                                                                        </section>                </div>
-                                                                                </dd>
-                                                                                <dt data-property-name="seed_file_path">
-                                                                                    <span class="json-property-name">seed_file_path:</span>
-                                                                                    <span class="json-property-type">string[]</span>
-                                                                                    <span class="json-property-range" title="Value limits"></span>
-                                                                                    
-                                                                                </dt>
-                                                                                <dd>
-                                                                                    
-                                                                                    <div class="json-inner-schema">
-                                                                                        
-                                                                                                        <section class="json-schema-array-items">
-                                                                                                            <span class="json-property-type">string</span>
-                                                                                                            <span class="json-property-range" title="Value limits"></span>
-                                                                                                            
-                                                                                                            <div class="json-inner-schema">
-                                                                                                                
-                                                                                                            </div>
-                                                                                                        </section>                </div>
-                                                                                </dd>
-                                                                                <dt data-property-name="seed_y">
-                                                                                    <span class="json-property-name">seed_y:</span>
-                                                                                    <span class="json-property-type">integer[]</span>
-                                                                                    <span class="json-property-range" title="Value limits"></span>
-                                                                                    
-                                                                                </dt>
-                                                                                <dd>
-                                                                                    
-                                                                                    <div class="json-inner-schema">
-                                                                                        
-                                                                                                        <section class="json-schema-array-items">
-                                                                                                            <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
-                                                                                                            <span class="json-property-range" title="Value limits"></span>
-                                                                                                            
-                                                                                                            <div class="json-inner-schema">
-                                                                                                                
-                                                                                                            </div>
-                                                                                                        </section>                </div>
-                                                                                </dd>
-                                                                        </dl>
-                                                                    </section>
-                                                    </div>
-                                                </div></div>
-                                            
-                                            </div>                </dd>
-                            </dl>
-                        </section>
-                </div>
-            </div>    
         <span id="path--api-v0-duplicate-detection-"></span>
             <div id="operation--api-v0-duplicate-detection--post" class="swagger--panel-operation-post panel">
                 <div class="panel-heading">
@@ -3661,10 +3398,10 @@
                 </div>
             </div>    
         <span id="path--api-v0-email-parser--dsid--index"></span>
-            <div id="operation--api-v0-email-parser--dsid--index-get" class="swagger--panel-operation-get panel">
+            <div id="operation--api-v0-email-parser--dsid--index-post" class="swagger--panel-operation-post panel">
                 <div class="panel-heading">
                     <div class="operation-summary"></div>
-                    <h3 class="panel-title"><span class="operation-name">GET</span> <strong>/api/v0/email-parser/{dsid}/index</strong></h3>
+                    <h3 class="panel-title"><span class="operation-name">POST</span> <strong>/api/v0/email-parser/{dsid}/index</strong></h3>
                 </div>
                 <div class="panel-body">
                     <section class="sw-operation-description">
@@ -3974,6 +3711,269 @@
                                                                                     <div class="json-inner-schema">
                                                                                         
                                                                                     </div>
+                                                                                </dd>
+                                                                        </dl>
+                                                                    </section>
+                                                    </div>
+                                                </div></div>
+                                            
+                                            </div>                </dd>
+                            </dl>
+                        </section>
+                </div>
+            </div>    
+        <span id="path--api-v0-example-dataset--name-"></span>
+            <div id="operation--api-v0-example-dataset--name--get" class="swagger--panel-operation-get panel">
+                <div class="panel-heading">
+                    <div class="operation-summary"></div>
+                    <h3 class="panel-title"><span class="operation-name">GET</span> <strong>/api/v0/example-dataset/{name}</strong></h3>
+                </div>
+                <div class="panel-body">
+                    <section class="sw-operation-description">
+                        <p>Download a benchmark dataset.</p>
+            <p>The currently supported datasets are listed below,</p>
+            <ol>
+            <li><p>TREC 2009 legal collection</p>
+            <ul>
+            <li><code>treclegal09_2k_subset</code>  :   2 400 documents,   2 MB</li>
+            <li><code>treclegal09_20k_subset</code> :  20 000 documents,  30 MB</li>
+            <li><code>treclegal09_37k_subset</code> :  37 000 documents,  55 MB</li>
+            <li><code>treclegal09</code>            : 700 000 documents, 1.2 GB</li>
+            </ul>
+            <p>The ground truth files for categorization are adapted from TAR Toolkit.</p>
+            </li>
+            <li><p>Fedora mailing list (2009-2009)</p>
+            <ul>
+            <li><code>fedora_ml</code></li>
+            </ul>
+            </li>
+            </ol>
+            <p>If you encounter any issues for downloads with this function,
+            you can also manually download and extract the required dataset to <code>cache_dir</code> (the
+            download url is <code>http://r0h.eu/d/&lt;name&gt;.tar.gz</code>), then re-run this function to get
+            the required metadata.</p>
+            
+                    </section>
+                        
+                            <section class="sw-request-body">
+                                
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <p></p>
+                                            </div>
+                                            <div class="col-md-6 sw-request-model">
+                            <div  class="panel panel-definition">
+                                <div class="panel-body">
+                                        
+                                                <section class="json-schema-properties">
+                                                    <dl>
+                                                            <dt data-property-name="return_file_path">
+                                                                <span class="json-property-name">return_file_path:</span>
+                                                                <span class="json-property-type">boolean</span>
+                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                
+                                                            </dt>
+                                                            <dd>
+                                                                
+                                                                <div class="json-inner-schema">
+                                                                    
+                                                                </div>
+                                                            </dd>
+                                                    </dl>
+                                                </section>
+                                </div>
+                            </div></div>
+                                        </div>
+                            </section>        
+                        <section class="sw-request-params">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="sw-param-name"></th>
+                                    <th class="sw-param-description"></th>
+                                    <th class="sw-param-type"></th>
+                                    <th class="sw-param-data-type"></th>
+                                    <th class="sw-param-annotation"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                        <tr>
+                                            <td>
+                                                name
+                                            <td></td>
+                                            <td>path</td>
+                                            <td><span class="json-property-type">string</span>
+                                        <span class="json-property-range" title="Value limits"></span>
+                                        
+                                            </td>
+                                            <td>
+                                                    <span class="json-property-required"></span>
+                                            </td>
+                                        </tr>
+                                </tbody>
+                            </table>
+                        </section>
+                    
+                        <section class="sw-responses">
+                    
+                            <dl>
+                                    <dt class="sw-response-default">
+                                        default 
+                                    
+                                    </dt>
+                                    <dd class="sw-response-default">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                
+                                                <div class="col-md-6 sw-response-model">
+                                                <div  class="panel panel-definition">
+                                                    <div class="panel-body">
+                                                            
+                                                                    <section class="json-schema-properties">
+                                                                        <dl>
+                                                                                <dt data-property-name="base_dir">
+                                                                                    <span class="json-property-name">base_dir:</span>
+                                                                                    <span class="json-property-type">string</span>
+                                                                                    <span class="json-property-range" title="Value limits"></span>
+                                                                                    
+                                                                                        <span class="json-property-required"></span>
+                                                                                </dt>
+                                                                                <dd>
+                                                                                    
+                                                                                    <div class="json-inner-schema">
+                                                                                        
+                                                                                    </div>
+                                                                                </dd>
+                                                                                <dt data-property-name="data_dir">
+                                                                                    <span class="json-property-name">data_dir:</span>
+                                                                                    <span class="json-property-type">string</span>
+                                                                                    <span class="json-property-range" title="Value limits"></span>
+                                                                                    
+                                                                                        <span class="json-property-required"></span>
+                                                                                </dt>
+                                                                                <dd>
+                                                                                    
+                                                                                    <div class="json-inner-schema">
+                                                                                        
+                                                                                    </div>
+                                                                                </dd>
+                                                                                <dt data-property-name="document_id">
+                                                                                    <span class="json-property-name">document_id:</span>
+                                                                                    <span class="json-property-type">integer[]</span>
+                                                                                    <span class="json-property-range" title="Value limits"></span>
+                                                                                    
+                                                                                </dt>
+                                                                                <dd>
+                                                                                    
+                                                                                    <div class="json-inner-schema">
+                                                                                        
+                                                                                                        <section class="json-schema-array-items">
+                                                                                                            <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
+                                                                                                            <span class="json-property-range" title="Value limits"></span>
+                                                                                                            
+                                                                                                            <div class="json-inner-schema">
+                                                                                                                
+                                                                                                            </div>
+                                                                                                        </section>                </div>
+                                                                                </dd>
+                                                                                <dt data-property-name="file_path">
+                                                                                    <span class="json-property-name">file_path:</span>
+                                                                                    <span class="json-property-type">string[]</span>
+                                                                                    <span class="json-property-range" title="Value limits"></span>
+                                                                                    
+                                                                                </dt>
+                                                                                <dd>
+                                                                                    
+                                                                                    <div class="json-inner-schema">
+                                                                                        
+                                                                                                        <section class="json-schema-array-items">
+                                                                                                            <span class="json-property-type">string</span>
+                                                                                                            <span class="json-property-range" title="Value limits"></span>
+                                                                                                            
+                                                                                                            <div class="json-inner-schema">
+                                                                                                                
+                                                                                                            </div>
+                                                                                                        </section>                </div>
+                                                                                </dd>
+                                                                                <dt data-property-name="ground_truth_y">
+                                                                                    <span class="json-property-name">ground_truth_y:</span>
+                                                                                    <span class="json-property-type">integer[]</span>
+                                                                                    <span class="json-property-range" title="Value limits"></span>
+                                                                                    
+                                                                                </dt>
+                                                                                <dd>
+                                                                                    
+                                                                                    <div class="json-inner-schema">
+                                                                                        
+                                                                                                        <section class="json-schema-array-items">
+                                                                                                            <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
+                                                                                                            <span class="json-property-range" title="Value limits"></span>
+                                                                                                            
+                                                                                                            <div class="json-inner-schema">
+                                                                                                                
+                                                                                                            </div>
+                                                                                                        </section>                </div>
+                                                                                </dd>
+                                                                                <dt data-property-name="seed_document_id">
+                                                                                    <span class="json-property-name">seed_document_id:</span>
+                                                                                    <span class="json-property-type">integer[]</span>
+                                                                                    <span class="json-property-range" title="Value limits"></span>
+                                                                                    
+                                                                                </dt>
+                                                                                <dd>
+                                                                                    
+                                                                                    <div class="json-inner-schema">
+                                                                                        
+                                                                                                        <section class="json-schema-array-items">
+                                                                                                            <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
+                                                                                                            <span class="json-property-range" title="Value limits"></span>
+                                                                                                            
+                                                                                                            <div class="json-inner-schema">
+                                                                                                                
+                                                                                                            </div>
+                                                                                                        </section>                </div>
+                                                                                </dd>
+                                                                                <dt data-property-name="seed_file_path">
+                                                                                    <span class="json-property-name">seed_file_path:</span>
+                                                                                    <span class="json-property-type">string[]</span>
+                                                                                    <span class="json-property-range" title="Value limits"></span>
+                                                                                    
+                                                                                </dt>
+                                                                                <dd>
+                                                                                    
+                                                                                    <div class="json-inner-schema">
+                                                                                        
+                                                                                                        <section class="json-schema-array-items">
+                                                                                                            <span class="json-property-type">string</span>
+                                                                                                            <span class="json-property-range" title="Value limits"></span>
+                                                                                                            
+                                                                                                            <div class="json-inner-schema">
+                                                                                                                
+                                                                                                            </div>
+                                                                                                        </section>                </div>
+                                                                                </dd>
+                                                                                <dt data-property-name="seed_y">
+                                                                                    <span class="json-property-name">seed_y:</span>
+                                                                                    <span class="json-property-type">integer[]</span>
+                                                                                    <span class="json-property-range" title="Value limits"></span>
+                                                                                    
+                                                                                </dt>
+                                                                                <dd>
+                                                                                    
+                                                                                    <div class="json-inner-schema">
+                                                                                        
+                                                                                                        <section class="json-schema-array-items">
+                                                                                                            <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
+                                                                                                            <span class="json-property-range" title="Value limits"></span>
+                                                                                                            
+                                                                                                            <div class="json-inner-schema">
+                                                                                                                
+                                                                                                            </div>
+                                                                                                        </section>                </div>
                                                                                 </dd>
                                                                         </dl>
                                                                     </section>
@@ -4369,17 +4369,12 @@
             <ul>
             <li><code>data_dir</code>: [optional] relative path to the directory with the input files. Either <code>data_dir</code> or <code>dataset_definition</code> must be provided.</li>
             <li><code>dataset_definition</code>: [optional] a list of dictionaries <code>[{&#39;file_path&#39;: &lt;str&gt;, &#39;document_id&#39;: &lt;int&gt;, &#39;rendition_id&#39;: &lt;int&gt;}, ...]</code> where <code>document_id</code> and <code>rendition_id</code> are optional. Either <code>data_dir</code> or <code>dataset_definition</code> must be provided.</li>
-            <li><code>n_features</code>: [optional] number of features (overlapping character/word n-grams that are hashed).<pre><code>          n_features refers <span class="hljs-built_in">to</span> <span class="hljs-operator">the</span> <span class="hljs-built_in">number</span> <span class="hljs-operator">of</span> buckets <span class="hljs-operator">in</span> <span class="hljs-operator">the</span> hash.  The larger <span class="hljs-operator">the</span> <span class="hljs-built_in">number</span>, <span class="hljs-operator">the</span> fewer collisions.   (default: <span class="hljs-number">1100000</span>)
-            </code></pre></li>
-            <li><code>analyzer</code>: &#39;word&#39;, &#39;char&#39;, &#39;char_wb&#39;<pre><code>        Whether <span class="hljs-operator">the</span> feature should be made <span class="hljs-operator">of</span> <span class="hljs-built_in">word</span> <span class="hljs-operator">or</span> <span class="hljs-keyword">character</span> n-grams.<br>        Option ‘char_wb’ creates <span class="hljs-keyword">character</span> n-grams only <span class="hljs-built_in">from</span> <span class="hljs-keyword">text</span> inside <span class="hljs-built_in">word</span> boundaries.  ( default: <span class="hljs-string">'word'</span>)
-            </code></pre></li>
-            <li><p><code>ngram_range</code> : tuple (min_n, max_n), default=(1, 1)</p>
-            <pre><code>        The <span class="hljs-built_in">lower</span> <span class="hljs-operator">and</span> <span class="hljs-built_in">upper</span> boundary <span class="hljs-operator">of</span> <span class="hljs-operator">the</span> range <span class="hljs-operator">of</span> n-values <span class="hljs-keyword">for</span> different n-grams <span class="hljs-built_in">to</span> be extracted. All values <span class="hljs-operator">of</span> n such that min_n &lt;= n &lt;= max_n will be used.
-            </code></pre></li>
-            <li><p><code>stop_words</code>: &quot;english&quot; or &quot;None&quot;</p>
-            <pre><code>          Remove <span class="hljs-built_in">stop</span> <span class="hljs-keyword">words</span> <span class="hljs-built_in">from</span> <span class="hljs-operator">the</span> resulting tokens. Only applies <span class="hljs-keyword">for</span> <span class="hljs-operator">the</span> <span class="hljs-string">"word"</span> analyzer.<br>          If <span class="hljs-string">"english"</span>, <span class="hljs-operator">a</span> built-<span class="hljs-operator">in</span> <span class="hljs-built_in">stop</span> <span class="hljs-built_in">word</span> list <span class="hljs-keyword">for</span> English is used. ( default: <span class="hljs-string">"None"</span>)
-            </code></pre></li>
-            <li><code>n_jobs</code>: The maximum number of concurrently running jobs (default: 1)</li>
+            <li><code>n_features</code>: [optional] number of features (overlapping character/word n-grams that are hashed).  n_features refers to the number of buckets in the hash.  The larger the number, the fewer collisions.   (default: 1100000)</li>
+            <li><code>analyzer</code>: &#39;word&#39;, &#39;char&#39;, &#39;char_wb&#39; Whether the feature should be made of word or character n-grams.  Option ‘char_wb’ creates character n-grams only from text inside word boundaries.  ( default: &#39;word&#39;)</li>
+            <li><p><code>ngram_range</code> : tuple (min_n, max_n), default=(1, 1) The lower and upper boundary of the range of n-values for different n-grams to be extracted. All values of n such that min_n &lt;= n &lt;= max_n will be used.</p>
+            </li>
+            <li><p><code>stop_words</code>: &quot;english&quot; or &quot;None&quot; Remove stop words from the resulting tokens. Only applies for the &quot;word&quot; analyzer.  If &quot;english&quot;, a built-in stop word list for English is used. ( default: &quot;None&quot;) - <code>n_jobs</code>: The maximum number of concurrently running jobs (default: 1)</p>
+            </li>
             <li><code>norm</code>: The normalization to use after the feature weighting (&#39;None&#39;, &#39;l1&#39;, &#39;l2&#39;) (default: &#39;None&#39;)</li>
             <li><code>chuck_size</code>: The number of documents simultaneously processed by a running job (default: 5000)</li>
             <li><code>binary</code>: If set to 1, all non zero counts are set to 1. (default: True)</li>
@@ -5254,10 +5249,10 @@
                 </div>
             </div>    
         <span id="path--api-v0-feature-extraction--dsid--id-mapping-flat"></span>
-            <div id="operation--api-v0-feature-extraction--dsid--id-mapping-flat-get" class="swagger--panel-operation-get panel">
+            <div id="operation--api-v0-feature-extraction--dsid--id-mapping-flat-post" class="swagger--panel-operation-post panel">
                 <div class="panel-heading">
                     <div class="operation-summary"></div>
-                    <h3 class="panel-title"><span class="operation-name">GET</span> <strong>/api/v0/feature-extraction/{dsid}/id-mapping/flat</strong></h3>
+                    <h3 class="panel-title"><span class="operation-name">POST</span> <strong>/api/v0/feature-extraction/{dsid}/id-mapping/flat</strong></h3>
                 </div>
                 <div class="panel-body">
                     <section class="sw-operation-description">
@@ -5508,10 +5503,10 @@
                 </div>
             </div>    
         <span id="path--api-v0-feature-extraction--dsid--id-mapping-nested"></span>
-            <div id="operation--api-v0-feature-extraction--dsid--id-mapping-nested-get" class="swagger--panel-operation-get panel">
+            <div id="operation--api-v0-feature-extraction--dsid--id-mapping-nested-post" class="swagger--panel-operation-post panel">
                 <div class="panel-heading">
                     <div class="operation-summary"></div>
-                    <h3 class="panel-title"><span class="operation-name">GET</span> <strong>/api/v0/feature-extraction/{dsid}/id-mapping/nested</strong></h3>
+                    <h3 class="panel-title"><span class="operation-name">POST</span> <strong>/api/v0/feature-extraction/{dsid}/id-mapping/nested</strong></h3>
                 </div>
                 <div class="panel-body">
                     <section class="sw-operation-description">
@@ -6185,10 +6180,10 @@
                 </div>
             </div>    
         <span id="path--api-v0-metrics-categorization"></span>
-            <div id="operation--api-v0-metrics-categorization-get" class="swagger--panel-operation-get panel">
+            <div id="operation--api-v0-metrics-categorization-post" class="swagger--panel-operation-post panel">
                 <div class="panel-heading">
                     <div class="operation-summary"></div>
-                    <h3 class="panel-title"><span class="operation-name">GET</span> <strong>/api/v0/metrics/categorization</strong></h3>
+                    <h3 class="panel-title"><span class="operation-name">POST</span> <strong>/api/v0/metrics/categorization</strong></h3>
                 </div>
                 <div class="panel-body">
                     <section class="sw-operation-description">
@@ -6373,10 +6368,10 @@
                 </div>
             </div>    
         <span id="path--api-v0-metrics-clustering"></span>
-            <div id="operation--api-v0-metrics-clustering-get" class="swagger--panel-operation-get panel">
+            <div id="operation--api-v0-metrics-clustering-post" class="swagger--panel-operation-post panel">
                 <div class="panel-heading">
                     <div class="operation-summary"></div>
-                    <h3 class="panel-title"><span class="operation-name">GET</span> <strong>/api/v0/metrics/clustering</strong></h3>
+                    <h3 class="panel-title"><span class="operation-name">POST</span> <strong>/api/v0/metrics/clustering</strong></h3>
                 </div>
                 <div class="panel-body">
                     <section class="sw-operation-description">
@@ -6538,10 +6533,10 @@
                 </div>
             </div>    
         <span id="path--api-v0-metrics-duplicate-detection"></span>
-            <div id="operation--api-v0-metrics-duplicate-detection-get" class="swagger--panel-operation-get panel">
+            <div id="operation--api-v0-metrics-duplicate-detection-post" class="swagger--panel-operation-post panel">
                 <div class="panel-heading">
                     <div class="operation-summary"></div>
-                    <h3 class="panel-title"><span class="operation-name">GET</span> <strong>/api/v0/metrics/duplicate-detection</strong></h3>
+                    <h3 class="panel-title"><span class="operation-name">POST</span> <strong>/api/v0/metrics/duplicate-detection</strong></h3>
                 </div>
                 <div class="panel-body">
                     <section class="sw-operation-description">
@@ -6703,10 +6698,10 @@
                 </div>
             </div>    
         <span id="path--api-v0-search-"></span>
-            <div id="operation--api-v0-search--get" class="swagger--panel-operation-get panel">
+            <div id="operation--api-v0-search--post" class="swagger--panel-operation-post panel">
                 <div class="panel-heading">
                     <div class="operation-summary"></div>
-                    <h3 class="panel-title"><span class="operation-name">GET</span> <strong>/api/v0/search/</strong></h3>
+                    <h3 class="panel-title"><span class="operation-name">POST</span> <strong>/api/v0/search/</strong></h3>
                 </div>
                 <div class="panel-body">
                     <section class="sw-operation-description">

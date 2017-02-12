@@ -17,92 +17,92 @@ An example of Semantic Search
  Out::
 
     0. Load the test dataset
-     GET http://localhost:5001/api/v0/datasets/treclegal09_2k_subset
+     GET http://localhost:5001/api/v0/example-dataset/treclegal09_2k_subset
 
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received [u'id', u'filenames']
-       => dsid = 14766eaa1f9c4149
+       => dsid = 82b42646a9e64f8d
 
     1.b Start feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/14766eaa1f9c4149
+     POST http://localhost:5001/api/v0/feature-extraction/82b42646a9e64f8d
 
     2. Calculate LSI
     POST http://localhost:5001/api/v0/lsi/
-      => LSI model id = 7a9a333099bd4a84
+      => LSI model id = 68123f169df84dae
       => SVD decomposition with 100 dimensions explaining 99.79 % variabilty of the data
 
     3.a. Perform the semantic search
      POST http://localhost:5001/api/v0/search/
                  document_id  score
     internal_id                    
-    0                      0  1.329
-    1                      1  1.382
-    2                      2  1.272
-    3                      3  1.280
-    4                      4  1.268
-    5                      5  1.278
-    6                      6  1.284
-    7                      7  1.275
+    0                      0  1.324
+    1                      1  1.379
+    2                      2  1.268
+    3                      3  1.276
+    4                      4  1.262
+    5                      5  1.277
+    6                      6  1.282
+    7                      7  1.276
     8                      8  1.284
-    9                      9  1.282
-    10                    10  1.285
-    11                    11  1.271
-    12                    12  1.281
-    13                    13  1.295
-    14                    14  1.229
-    15                    15  1.223
+    9                      9  1.286
+    10                    10  1.282
+    11                    11  1.273
+    12                    12  1.283
+    13                    13  1.281
+    14                    14  1.222
+    15                    15  1.218
     16                    16  1.323
-    17                    17  1.291
-    18                    18  1.243
-    19                    19  1.217
-    20                    20  1.218
-    21                    21  1.317
-    22                    22  1.265
-    23                    23  1.266
-    24                    24  1.228
-    25                    25  1.307
-    26                    26  1.282
-    27                    27  1.218
-    28                    28  1.319
-    29                    29  1.293
+    17                    17  1.300
+    18                    18  1.246
+    19                    19  1.233
+    20                    20  1.215
+    21                    21  1.319
+    22                    22  1.270
+    23                    23  1.269
+    24                    24  1.224
+    25                    25  1.306
+    26                    26  1.290
+    27                    27  1.203
+    28                    28  1.318
+    29                    29  1.301
     ...                  ...    ...
-    2435                2435  1.313
-    2436                2436  1.282
-    2437                2437  1.243
-    2438                2438  1.241
-    2439                2439  1.279
-    2440                2440  1.237
-    2441                2441  1.281
+    2435                2435  1.310
+    2436                2436  1.284
+    2437                2437  1.248
+    2438                2438  1.245
+    2439                2439  1.278
+    2440                2440  1.239
+    2441                2441  1.279
     2442                2442  1.239
-    2443                2443  1.300
-    2444                2444  1.265
-    2445                2445  1.279
-    2446                2446  1.240
-    2447                2447  1.276
-    2448                2448  1.237
+    2443                2443  1.294
+    2444                2444  1.261
+    2445                2445  1.285
+    2446                2446  1.250
+    2447                2447  1.275
+    2448                2448  1.238
     2449                2449  1.283
-    2450                2450  1.248
-    2451                2451  1.281
-    2452                2452  1.244
-    2453                2453  1.269
-    2454                2454  1.230
-    2455                2455  1.235
-    2456                2456  1.280
+    2450                2450  1.242
+    2451                2451  1.284
+    2452                2452  1.249
+    2453                2453  1.268
+    2454                2454  1.231
+    2455                2455  1.231
+    2456                2456  1.275
     2457                2457  1.240
-    2458                2458  1.281
-    2459                2459  1.260
-    2460                2460  1.269
-    2461                2461  1.285
-    2462                2462  1.266
-    2463                2463  1.227
-    2464                2464  1.240
+    2458                2458  1.279
+    2459                2459  1.264
+    2460                2460  1.271
+    2461                2461  1.272
+    2462                2462  1.273
+    2463                2463  1.243
+    2464                2464  1.256
 
     [2465 rows x 2 columns]
-    1.45922457941
+    1.45118000354
 
     4. Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/14766eaa1f9c4149
+     DELETE http://localhost:5001/api/v0/feature-extraction/82b42646a9e64f8d
 
 
 
@@ -128,7 +128,7 @@ An example of Semantic Search
     if __name__ == '__main__':
 
         print(" 0. Load the test dataset")
-        url = BASE_URL + '/datasets/{}'.format(dataset_name)
+        url = BASE_URL + '/example-dataset/{}'.format(dataset_name)
         print(" GET", url)
         res = requests.get(url, json={'return_file_path': True}).json()
 
@@ -192,7 +192,7 @@ An example of Semantic Search
         url = BASE_URL + '/search/'
         print(" POST", url)
 
-        res = requests.get(url,
+        res = requests.post(url,
                             json={'parent_id': lsi_id,
                                   'query': query
                                   }).json()
@@ -211,7 +211,7 @@ An example of Semantic Search
         print(" DELETE", url)
         requests.delete(url)
 
-**Total running time of the script:** ( 0 minutes  54.891 seconds)
+**Total running time of the script:** ( 1 minutes  0.191 seconds)
 
 
 
