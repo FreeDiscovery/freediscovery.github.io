@@ -22,16 +22,16 @@ An example to illustrate binary categorizaiton with FreeDiscovery
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received [u'id', u'filenames']
-       => dsid = 21fd8df56c044b0e
+       => dsid = 7704e50ca1ed4df1
 
     1.b Start feature extraction (in the background)
-     POST http://localhost:5001/api/v0/feature-extraction/21fd8df56c044b0e
+     POST http://localhost:5001/api/v0/feature-extraction/7704e50ca1ed4df1
 
     1.c Monitor feature extraction progress
-     GET http://localhost:5001/api/v0/feature-extraction/21fd8df56c044b0e
+     GET http://localhost:5001/api/v0/feature-extraction/7704e50ca1ed4df1
 
     1.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/21fd8df56c044b0e
+     GET http://localhost:5001/api/v0/feature-extraction/7704e50ca1ed4df1
          - binary: False
          - n_jobs: 1
          - data_dir: ../freediscovery_shared/treclegal09_2k_subset/data/jobRun_4/XML_EXPORT_CONTENT/text_9
@@ -51,7 +51,7 @@ An example to illustrate binary categorizaiton with FreeDiscovery
 
     2. Calculate LSI
     POST http://localhost:5001/api/v0/lsi/
-      => LSI model id = 81843fbf6df0410a
+      => LSI model id = 80fd27a0c6cd4cc0
       => SVD decomposition with 100 dimensions explaining 99.79 % variabilty of the data
 
     3.a. Train the categorization model
@@ -61,172 +61,166 @@ An example to illustrate binary categorizaiton with FreeDiscovery
      ================================================================================
      POST http://localhost:5001/api/v0/categorization/
      Training...
-         => model id = 9654fa817e76400a
-        => Training scores: MAP = 0.683, ROC-AUC = 0.892, F1= 0.000
+         => model id = 24a4cb41dc924361
+        => Training scores: MAP = 0.537, ROC-AUC = 0.500, F1= 0.000
 
     3.b. Check the parameters used in the categorization model
-     GET http://localhost:5001/api/v0/categorization/9654fa817e76400a
+     GET http://localhost:5001/api/v0/categorization/24a4cb41dc924361
+         - y: [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
          - method: LinearSVC
          - options: {'loss': 'squared_hinge', 'C': 1.0, 'verbose': 0, 'intercept_scaling': 1, 'fit_intercept': True, 'max_iter': 1000, 'penalty': 'l2', 'multi_class': 'ovr', 'random_state': None, 'dual': True, 'tol': 0.0001, 'class_weight': None}
 
     3.c Categorize the complete dataset with this model
-     GET http://localhost:5001/api/v0/categorization/9654fa817e76400a/predict
-                 document_id  score
-    internal_id                    
-    0                      0 -0.846
-    1                      1 -0.846
-    2                      2 -0.846
-    3                      3 -0.846
-    4                      4 -0.846
-    5                      5 -0.846
-    6                      6 -0.846
-    7                      7 -0.846
-    8                      8 -0.846
-    9                      9 -0.846
-    10                    10 -0.846
-    11                    11 -0.846
-    12                    12 -0.846
-    13                    13 -0.847
-    14                    14 -0.846
-    15                    15 -0.846
-    16                    16 -0.847
-    17                    17 -0.846
-    18                    18 -0.846
-    19                    19 -0.846
-    20                    20 -0.846
-    21                    21 -0.847
-    22                    22 -0.846
-    23                    23 -0.846
-    24                    24 -0.846
-    25                    25 -0.847
-    26                    26 -0.846
-    27                    27 -0.846
-    28                    28 -0.847
-    29                    29 -0.846
-    ...                  ...    ...
-    2435                2435 -0.849
-    2436                2436 -0.846
-    2437                2437 -0.846
-    2438                2438 -0.846
-    2439                2439 -0.846
-    2440                2440 -0.846
-    2441                2441 -0.846
-    2442                2442 -0.846
-    2443                2443 -0.846
-    2444                2444 -0.846
-    2445                2445 -0.846
-    2446                2446 -0.846
-    2447                2447 -0.846
-    2448                2448 -0.846
-    2449                2449 -0.846
-    2450                2450 -0.846
-    2451                2451 -0.846
-    2452                2452 -0.846
-    2453                2453 -0.846
-    2454                2454 -0.846
-    2455                2455 -0.846
-    2456                2456 -0.846
-    2457                2457 -0.846
-    2458                2458 -0.846
-    2459                2459 -0.846
-    2460                2460 -0.846
-    2461                2461 -0.846
-    2462                2462 -0.846
-    2463                2463 -0.846
-    2464                2464 -0.846
+     GET http://localhost:5001/api/v0/categorization/24a4cb41dc924361/predict
+                 document_id                                           scores
+    internal_id                                                              
+    0                      0  [{u'category': u'0', u'score': 0.699664799519}]
+    1                      1  [{u'category': u'0', u'score': 0.699724320238}]
+    2                      2  [{u'category': u'0', u'score': 0.699663249198}]
+    3                      3  [{u'category': u'0', u'score': 0.699662266124}]
+    4                      4  [{u'category': u'0', u'score': 0.699663857536}]
+    5                      5  [{u'category': u'0', u'score': 0.699663193111}]
+    6                      6   [{u'category': u'0', u'score': 0.69966308374}]
+    7                      7  [{u'category': u'0', u'score': 0.699663225664}]
+    8                      8  [{u'category': u'0', u'score': 0.699663167172}]
+    9                      9  [{u'category': u'0', u'score': 0.699663223812}]
+    10                    10  [{u'category': u'0', u'score': 0.699662976244}]
+    11                    11  [{u'category': u'0', u'score': 0.699746887683}]
+    12                    12    [{u'category': u'0', u'score': 0.6997365651}]
+    13                    13  [{u'category': u'0', u'score': 0.699885607391}]
+    14                    14  [{u'category': u'0', u'score': 0.699703417362}]
+    15                    15  [{u'category': u'0', u'score': 0.699665109899}]
+    16                    16  [{u'category': u'0', u'score': 0.699899910715}]
+    17                    17  [{u'category': u'0', u'score': 0.699795895656}]
+    18                    18  [{u'category': u'0', u'score': 0.699702321527}]
+    19                    19  [{u'category': u'0', u'score': 0.699726564878}]
+    20                    20  [{u'category': u'0', u'score': 0.699666036551}]
+    21                    21  [{u'category': u'0', u'score': 0.699964616301}]
+    22                    22  [{u'category': u'0', u'score': 0.699736010196}]
+    23                    23  [{u'category': u'0', u'score': 0.699735717857}]
+    24                    24  [{u'category': u'0', u'score': 0.699681718499}]
+    25                    25   [{u'category': u'0', u'score': 0.70001779267}]
+    26                    26  [{u'category': u'0', u'score': 0.699807393155}]
+    27                    27  [{u'category': u'0', u'score': 0.699726764614}]
+    28                    28  [{u'category': u'0', u'score': 0.699949173514}]
+    29                    29  [{u'category': u'0', u'score': 0.699802853335}]
+    ...                  ...                                              ...
+    2435                2435  [{u'category': u'0', u'score': 0.700266667376}]
+    2436                2436  [{u'category': u'0', u'score': 0.699664265227}]
+    2437                2437  [{u'category': u'0', u'score': 0.699664541833}]
+    2438                2438   [{u'category': u'0', u'score': 0.69966351027}]
+    2439                2439  [{u'category': u'0', u'score': 0.699663562076}]
+    2440                2440  [{u'category': u'0', u'score': 0.699663838682}]
+    2441                2441  [{u'category': u'0', u'score': 0.699663310491}]
+    2442                2442  [{u'category': u'0', u'score': 0.699663587097}]
+    2443                2443  [{u'category': u'0', u'score': 0.699663709099}]
+    2444                2444  [{u'category': u'0', u'score': 0.699663985705}]
+    2445                2445   [{u'category': u'0', u'score': 0.69966331832}]
+    2446                2446  [{u'category': u'0', u'score': 0.699663594927}]
+    2447                2447  [{u'category': u'0', u'score': 0.699662864449}]
+    2448                2448  [{u'category': u'0', u'score': 0.699663141056}]
+    2449                2449  [{u'category': u'0', u'score': 0.699663082723}]
+    2450                2450  [{u'category': u'0', u'score': 0.699663284972}]
+    2451                2451   [{u'category': u'0', u'score': 0.69966976269}]
+    2452                2452  [{u'category': u'0', u'score': 0.699670039294}]
+    2453                2453  [{u'category': u'0', u'score': 0.699665658145}]
+    2454                2454   [{u'category': u'0', u'score': 0.69966593475}]
+    2455                2455  [{u'category': u'0', u'score': 0.699666240533}]
+    2456                2456  [{u'category': u'0', u'score': 0.699662858447}]
+    2457                2457   [{u'category': u'0', u'score': 0.69966645826}]
+    2458                2458  [{u'category': u'0', u'score': 0.699663076176}]
+    2459                2459  [{u'category': u'0', u'score': 0.699694461016}]
+    2460                2460  [{u'category': u'0', u'score': 0.699666015809}]
+    2461                2461  [{u'category': u'0', u'score': 0.699711917957}]
+    2462                2462  [{u'category': u'0', u'score': 0.699693604714}]
+    2463                2463  [{u'category': u'0', u'score': 0.699682358871}]
+    2464                2464  [{u'category': u'0', u'score': 0.699724034587}]
 
     [2465 rows x 2 columns]
-
-    3.d Compute the categorization scores
-     GET http://localhost:5001/api/v0/metrics/categorization
-        => Test scores: MAP = 0.006, ROC-AUC = 0.545
     ================================================================================ 
                 NearestNeighbor  + LSI 
      ================================================================================
      POST http://localhost:5001/api/v0/categorization/
      Training...
-         => model id = 8f4d6d17778e417e
+         => model id = 82efb5a1a6b54746
         => Training scores: MAP = 1.000, ROC-AUC = 1.000, F1= 1.000
 
     3.b. Check the parameters used in the categorization model
-     GET http://localhost:5001/api/v0/categorization/8f4d6d17778e417e
+     GET http://localhost:5001/api/v0/categorization/82efb5a1a6b54746
+         - y: [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
          - method: NearestNeighbor
-         - options: {'ranking': None, 'n_jobs': None, 'radius': None, 'leaf_size': None, 'algorithm': None}
+         - options: {'n_jobs': 1, 'radius': None, 'leaf_size': 30, 'algorithm': u'brute'}
 
     3.c Categorize the complete dataset with this model
-     GET http://localhost:5001/api/v0/categorization/8f4d6d17778e417e/predict
-                 document_id  nn_negative__distance  nn_negative__document_id  nn_positive__distance  nn_positive__document_id  score
-    internal_id                                                                                                                      
-    0                      0                  0.224                        45                  0.206                         3  0.897
-    1                      1                  0.580                        53                  0.651                         4 -0.710
-    2                      2                  0.078                        21                  0.079                         0 -0.961
-    3                      3                  0.062                        21                  0.000                         0  1.000
-    4                      4                  0.123                        21                  0.120                         0  0.940
-    5                      5                  0.106                        64                  0.092                         0  0.954
-    6                      6                  0.131                        49                  0.112                         0  0.944
-    7                      7                  0.095                        21                  0.069                         0  0.965
-    8                      8                  0.086                        37                  0.082                         0  0.959
-    9                      9                  0.000                         5                  0.107                         0 -1.000
-    10                    10                  0.087                        21                  0.045                         0  0.978
-    11                    11                  0.576                        58                  0.682                         1 -0.712
-    12                    12                  0.584                        58                  0.661                         1 -0.708
-    13                    13                  0.577                        55                  0.645                         3 -0.712
-    14                    14                  0.084                        55                  0.605                         3 -0.958
-    15                    15                  0.213                        12                  0.431                         1 -0.893
-    16                    16                  0.653                         7                  0.706                         4 -0.674
-    17                    17                  0.627                        58                  0.673                         4 -0.686
-    18                    18                  0.397                        12                  0.546                         1 -0.801
-    19                    19                  0.397                        12                  0.605                         1 -0.802
-    20                    20                  0.206                        12                  0.460                         1 -0.897
-    21                    21                  0.365                        63                  0.673                         3 -0.818
-    22                    22                  0.541                        58                  0.652                         4 -0.730
-    23                    23                  0.537                        53                  0.652                         4 -0.731
-    24                    24                  0.411                        12                  0.546                         4 -0.794
-    25                    25                  0.595                        63                  0.715                         4 -0.702
-    26                    26                  0.605                        58                  0.692                         4 -0.697
-    27                    27                  0.487                        12                  0.614                         4 -0.756
-    28                    28                  0.649                         7                  0.710                         4 -0.676
-    29                    29                  0.624                         7                  0.676                         4 -0.688
-    ...                  ...                    ...                       ...                    ...                       ...    ...
-    2435                2435                  0.648                        59                  0.684                         1 -0.676
-    2436                2436                  0.109                        21                  0.098                         0  0.951
-    2437                2437                  0.214                        47                  0.354                         0 -0.893
-    2438                2438                  0.206                        47                  0.321                         0 -0.897
-    2439                2439                  0.088                         5                  0.105                         0 -0.956
-    2440                2440                  0.185                        47                  0.321                         0 -0.908
-    2441                2441                  0.086                         5                  0.102                         0 -0.957
-    2442                2442                  0.189                        47                  0.311                         0 -0.905
-    2443                2443                  0.130                        52                  0.122                         0  0.939
-    2444                2444                  0.230                        47                  0.346                         0 -0.885
-    2445                2445                  0.143                        64                  0.132                         0  0.934
-    2446                2446                  0.211                        35                  0.340                         0 -0.895
-    2447                2447                  0.111                        64                  0.094                         0  0.953
-    2448                2448                  0.169                        66                  0.330                         0 -0.915
-    2449                2449                  0.087                        21                  0.049                         0  0.975
-    2450                2450                  0.194                        35                  0.291                         0 -0.903
-    2451                2451                  0.000                        67                  0.128                         0 -1.000
-    2452                2452                  0.234                        47                  0.346                         0 -0.883
-    2453                2453                  0.146                        51                  0.200                         0 -0.927
-    2454                2454                  0.281                        47                  0.351                         1 -0.859
-    2455                2455                  0.135                        47                  0.324                         0 -0.933
-    2456                2456                  0.056                        21                  0.037                         0  0.982
-    2457                2457                  0.212                        47                  0.315                         0 -0.894
-    2458                2458                  0.112                        21                  0.090                         0  0.955
-    2459                2459                  0.185                        42                  0.532                         2 -0.907
-    2460                2460                  0.411                        42                  0.518                         3 -0.794
-    2461                2461                  0.451                        13                  0.513                         2 -0.774
-    2462                2462                  0.433                        39                  0.618                         0 -0.784
-    2463                2463                  0.461                        39                  0.541                         2 -0.770
-    2464                2464                  0.435                        42                  0.562                         0 -0.783
+     GET http://localhost:5001/api/v0/categorization/82efb5a1a6b54746/predict
+                 document_id                                             scores
+    internal_id                                                                
+    0                      0  [{u'category': u'1', u'score': 0.914783134837,...
+    1                      1  [{u'category': u'0', u'score': 0.341194765769,...
+    2                      2  [{u'category': u'0', u'score': 0.988202559805,...
+    3                      3  [{u'category': u'1', u'score': 1.0, u'internal...
+    4                      4  [{u'category': u'1', u'score': 0.971132061684,...
+    5                      5  [{u'category': u'1', u'score': 0.983426184133,...
+    6                      6  [{u'category': u'1', u'score': 0.975598366372,...
+    7                      7  [{u'category': u'1', u'score': 0.987956006553,...
+    8                      8  [{u'category': u'0', u'score': 0.984428596715,...
+    9                      9  [{u'category': u'0', u'score': 1.0, u'internal...
+    10                    10  [{u'category': u'1', u'score': 0.995684779283,...
+    11                    11  [{u'category': u'0', u'score': 0.34324401371, ...
+    12                    12  [{u'category': u'0', u'score': 0.312620565406,...
+    13                    13  [{u'category': u'0', u'score': 0.299137601983,...
+    14                    14  [{u'category': u'0', u'score': 0.986463957756,...
+    15                    15  [{u'category': u'0', u'score': 0.903850805402,...
+    16                    16  [{u'category': u'0', u'score': 0.152787118579,...
+    17                    17  [{u'category': u'0', u'score': 0.261417576815,...
+    18                    18  [{u'category': u'0', u'score': 0.673798198571,...
+    19                    19  [{u'category': u'0', u'score': 0.652174712428,...
+    20                    20  [{u'category': u'0', u'score': 0.904942426095,...
+    21                    21  [{u'category': u'0', u'score': 0.738418798736,...
+    22                    22  [{u'category': u'0', u'score': 0.401681576567,...
+    23                    23  [{u'category': u'0', u'score': 0.420722212672,...
+    24                    24  [{u'category': u'0', u'score': 0.666209831481,...
+    25                    25  [{u'category': u'0', u'score': 0.270310846579,...
+    26                    26  [{u'category': u'0', u'score': 0.28814357633, ...
+    27                    27  [{u'category': u'0', u'score': 0.495724935707,...
+    28                    28  [{u'category': u'0', u'score': 0.180280609901,...
+    29                    29  [{u'category': u'0', u'score': 0.244890649396,...
+    ...                  ...                                                ...
+    2435                2435  [{u'category': u'0', u'score': 0.154198781989,...
+    2436                2436  [{u'category': u'1', u'score': 0.976304896591,...
+    2437                2437  [{u'category': u'0', u'score': 0.90348136163, ...
+    2438                2438  [{u'category': u'0', u'score': 0.916215351381,...
+    2439                2439  [{u'category': u'0', u'score': 0.984150574029,...
+    2440                2440  [{u'category': u'0', u'score': 0.929780477574,...
+    2441                2441  [{u'category': u'0', u'score': 0.983209726037,...
+    2442                2442  [{u'category': u'0', u'score': 0.923554302246,...
+    2443                2443  [{u'category': u'1', u'score': 0.968034679661,...
+    2444                2444  [{u'category': u'0', u'score': 0.890529681813,...
+    2445                2445  [{u'category': u'1', u'score': 0.966115290488,...
+    2446                2446  [{u'category': u'0', u'score': 0.904076138735,...
+    2447                2447  [{u'category': u'1', u'score': 0.980514537285,...
+    2448                2448  [{u'category': u'0', u'score': 0.93747634969, ...
+    2449                2449  [{u'category': u'1', u'score': 0.99487979597, ...
+    2450                2450  [{u'category': u'0', u'score': 0.91924580793, ...
+    2451                2451  [{u'category': u'0', u'score': 1.0, u'internal...
+    2452                2452  [{u'category': u'0', u'score': 0.888464168226,...
+    2453                2453  [{u'category': u'0', u'score': 0.953483326732,...
+    2454                2454  [{u'category': u'0', u'score': 0.833852594151,...
+    2455                2455  [{u'category': u'0', u'score': 0.96402151695, ...
+    2456                2456  [{u'category': u'1', u'score': 0.997040113042,...
+    2457                2457  [{u'category': u'0', u'score': 0.909682375384,...
+    2458                2458  [{u'category': u'1', u'score': 0.981762520832,...
+    2459                2459  [{u'category': u'0', u'score': 0.922053254146,...
+    2460                2460  [{u'category': u'0', u'score': 0.657943307113,...
+    2461                2461  [{u'category': u'0', u'score': 0.627715149984,...
+    2462                2462  [{u'category': u'0', u'score': 0.600586030428,...
+    2463                2463  [{u'category': u'0', u'score': 0.549994515553,...
+    2464                2464  [{u'category': u'0', u'score': 0.608037227874,...
 
-    [2465 rows x 6 columns]
-
-    3.d Compute the categorization scores
-     GET http://localhost:5001/api/v0/metrics/categorization
-        => Test scores: MAP = 0.005, ROC-AUC = 0.349
+    [2465 rows x 2 columns]
 
     5.a Delete the extracted features (and LSI decomposition)
-     DELETE http://localhost:5001/api/v0/feature-extraction/21fd8df56c044b0e
+     DELETE http://localhost:5001/api/v0/feature-extraction/7704e50ca1ed4df1
 
 
 
@@ -348,7 +342,7 @@ An example to illustrate binary categorizaiton with FreeDiscovery
         print("\n3.a. Train the categorization model")
         print("   {} relevant, {} non-relevant files".format(seed_y.count(1), seed_y.count(0)))
 
-        seed_index_nested = [{'document_id': internal_id, 'y': y} \
+        seed_index_nested = [{'document_id': internal_id, 'category': y} \
                                     for internal_id, y in zip(seed_document_id, seed_y)]
 
         for method, use_lsi in [('LinearSVC', False),
@@ -369,7 +363,7 @@ An example to illustrate binary categorizaiton with FreeDiscovery
 
             res = requests.post(url,
                                 json={'parent_id': parent_id,
-                                      'index_nested': seed_index_nested,
+                                      'data': seed_index_nested,
                                       'method': method,  # one of "LinearSVC", "LogisticRegression", 'xgboost'
                                       }).json()
 
@@ -383,7 +377,7 @@ An example to illustrate binary categorizaiton with FreeDiscovery
             res = requests.get(url).json()
 
             print('\n'.join(['     - {}: {}'.format(key, val) for key, val in res.items() \
-                                                              if key not in ['index', 'y']]))
+                                                              if key not in ['index', 'category']]))
 
             print("\n3.c Categorize the complete dataset with this model")
             url = BASE_URL + '/categorization/{}/predict'.format(mid)
@@ -391,42 +385,26 @@ An example to illustrate binary categorizaiton with FreeDiscovery
             res = requests.get(url).json()
 
             if method == "NearestNeighbor":
-
-                def flatten_dict(d, parent_key='', sep='__'):
-                    """Flatten a nested dictionary """
-                    import collections
-                    items = []
-                    for k, v in d.items():
-                        new_key = parent_key + sep + k if parent_key else k
-                        if isinstance(v, collections.MutableMapping):
-                            items.extend(flatten_dict(v, new_key, sep=sep).items())
-                        else:
-                            items.append((new_key, v))
-                    return dict(items)
-            
-                data = [flatten_dict(el) for el in res['data']]
+                data = res['data']
             else:
                 data = res['data']
 
             df = pd.DataFrame(data).set_index('internal_id')
-            if method == "NearestNeighbor":
-                df = df[['document_id', 'nn_negative__distance', 'nn_negative__document_id',
-                      'nn_positive__distance', 'nn_positive__document_id', 'score']]
+            #if method == "NearestNeighbor":
+            #    df = df[['document_id', 'nn_negative__distance', 'nn_negative__document_id',
+            #          'nn_positive__distance', 'nn_positive__document_id', 'score']]
 
             print(df)
 
-            print("\n3.d Compute the categorization scores")
-            url = BASE_URL + '/metrics/categorization'
-            print(" GET", url)
-            res = requests.post(url, json={'y_true': ground_truth_y,
-                                          'y_pred': df.score.values.tolist(),
-                                         } ).json()
+            #print("\n3.d Compute the categorization scores")
+            #url = BASE_URL + '/metrics/categorization'
+            #print(" GET", url)
+            #res = requests.post(url, json={'y_true': ground_truth_y,
+            #                              'y_pred': df.score.values.tolist(),
+            #                             } ).json()
 
 
-
-
-
-            print('    => Test scores: MAP = {average_precision:.3f}, ROC-AUC = {roc_auc:.3f}'.format(**res))
+            #print('    => Test scores: MAP = {average_precision:.3f}, ROC-AUC = {roc_auc:.3f}'.format(**res))
 
         # 4. Cleaning
         print("\n5.a Delete the extracted features (and LSI decomposition)")
@@ -434,7 +412,7 @@ An example to illustrate binary categorizaiton with FreeDiscovery
         print(" DELETE", url)
         requests.delete(url)
 
-**Total running time of the script:** ( 1 minutes  11.384 seconds)
+**Total running time of the script:** ( 0 minutes  57.170 seconds)
 
 
 
