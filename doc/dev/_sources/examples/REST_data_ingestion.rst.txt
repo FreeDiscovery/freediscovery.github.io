@@ -22,21 +22,21 @@ An example illustrating the data ingestion in FreeDiscovery
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received [u'id', u'filenames']
-       => dsid = 1c1163bc766f4b3d
+       => dsid = 44700e82574f45c4
 
     1.b Start feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/1c1163bc766f4b3d
+     POST http://localhost:5001/api/v0/feature-extraction/44700e82574f45c4
 
     2.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received [u'id', u'filenames']
-       => dsid = 5984222d32224c57
+       => dsid = e39ecffacd5e4c3a
 
     2.b Start feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/5984222d32224c57
+     POST http://localhost:5001/api/v0/feature-extraction/e39ecffacd5e4c3a
 
     2.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/5984222d32224c57
+     GET http://localhost:5001/api/v0/feature-extraction/e39ecffacd5e4c3a
          - binary: False
          - n_jobs: 1
          - data_dir: ../freediscovery_shared/treclegal09_2k_subset/data/jobRun_4/XML_EXPORT_CONTENT/text_9
@@ -56,33 +56,33 @@ An example illustrating the data ingestion in FreeDiscovery
 
     3. Examine the id mapping
 
-     GET http://localhost:5001/api/v0/feature-extraction/5984222d32224c57/id-mapping/flat
-       DATA: {"internal_id": [3, 919, 1047]}
+     GET http://localhost:5001/api/v0/feature-extraction/e39ecffacd5e4c3a/id-mapping/flat
+       DATA: {"internal_id": [0, 1, 2]}
      Response:
-       {"internal_id": [3, 919, 1047], "document_id": [13, 929, 1057]}
+       {"internal_id": [0, 1, 2], "document_id": [0, 1, 4]}
 
-     GET http://localhost:5001/api/v0/feature-extraction/5984222d32224c57/id-mapping/nested
-       DATA {"data": [{"internal_id": 3}, {"internal_id": 919}, {"internal_id": 1047}]}
+     GET http://localhost:5001/api/v0/feature-extraction/e39ecffacd5e4c3a/id-mapping/nested
+       DATA {"data": [{"internal_id": 0}, {"internal_id": 1}, {"internal_id": 2}]}
      Response:
        {
         "data": [
             {
-                "internal_id": 3, 
-                "document_id": 13
+                "internal_id": 0, 
+                "document_id": 0
             }, 
             {
-                "internal_id": 919, 
-                "document_id": 929
+                "internal_id": 1, 
+                "document_id": 1
             }, 
             {
-                "internal_id": 1047, 
-                "document_id": 1057
+                "internal_id": 2, 
+                "document_id": 4
             }
         ]
     }
 
     5.a Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/5984222d32224c57
+     DELETE http://localhost:5001/api/v0/feature-extraction/e39ecffacd5e4c3a
 
 
 
@@ -98,6 +98,7 @@ An example illustrating the data ingestion in FreeDiscovery
     import requests
     import pandas as pd
     import json
+    import os.path
 
     pd.options.display.float_format = '{:,.3f}'.format
     pd.options.display.expand_frame_repr = False
@@ -111,20 +112,15 @@ An example illustrating the data ingestion in FreeDiscovery
         print(" 0. Load the test dataset")
         url = BASE_URL + '/example-dataset/{}'.format(dataset_name)
         print(" GET", url)
-        res = requests.get(url, json={'return_file_path': True}).json()
+        input_ds = requests.get(url).json()
 
         # To use a custom dataset, simply specify the following variables
-        seed_document_id = res['seed_document_id']
-        seed_y = res['seed_y']
-        ground_truth_y = res['ground_truth_y']
-        data_dir = res['data_dir']
-
         # create a custom dataset definition for ingestion
-        dataset_definition = []
-        for internal_id, fname in zip(res['document_id'], res['file_path']):
-            dataset_definition.append({'document_id': internal_id + 10, 
-                                      'rendering_id': 0,
-                                      'file_path': fname})
+        data_dir = input_ds['metadata']['data_dir']
+        dataset_definition = [{'document_id': row['document_id'],
+                               'file_path': os.path.join(data_dir, row['file_path'])} \
+                                       for row in input_ds['dataset']]
+
 
         # 1. Ingest a dataset specified by folder path
 
@@ -176,7 +172,7 @@ An example illustrating the data ingestion in FreeDiscovery
 
         method = BASE_URL + "/feature-extraction/{}/id-mapping/flat".format(dsid)
         print(' GET', method)
-        data = {'internal_id': seed_document_id[:3]}
+        data = {'internal_id': [row['internal_id'] for row in input_ds['dataset'][:3]]}
         print('   DATA:', json.dumps(data))
         res = requests.post(method, data=data).json()
 
@@ -185,7 +181,7 @@ An example illustrating the data ingestion in FreeDiscovery
 
         method = BASE_URL + "/feature-extraction/{}/id-mapping/nested".format(dsid)
         print('\n GET', method)
-        data = {'data': [{'internal_id': el} for el in seed_document_id[:3]]}
+        data = {'data': [{'internal_id': row['internal_id']} for row in input_ds['dataset'][:3]]}
         print('   DATA', json.dumps(data))
         res = requests.post(method, json=data).json()
 
@@ -198,7 +194,7 @@ An example illustrating the data ingestion in FreeDiscovery
         print(" DELETE", url)
         requests.delete(url)
 
-**Total running time of the script:** ( 0 minutes  5.774 seconds)
+**Total running time of the script:** ( 0 minutes  6.780 seconds)
 
 
 

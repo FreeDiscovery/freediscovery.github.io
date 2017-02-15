@@ -22,87 +22,87 @@ An example of Semantic Search
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received [u'id', u'filenames']
-       => dsid = 712414a9ce194d12
+       => dsid = 89dcea6e1ef44df1
 
     1.b Start feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/712414a9ce194d12
+     POST http://localhost:5001/api/v0/feature-extraction/89dcea6e1ef44df1
 
     2. Calculate LSI
     POST http://localhost:5001/api/v0/lsi/
-      => LSI model id = 23a37c2d2d86421d
+      => LSI model id = 82686e8bcb1a40be
       => SVD decomposition with 100 dimensions explaining 99.79 % variabilty of the data
 
     3.a. Perform the semantic search
      POST http://localhost:5001/api/v0/search/
                  document_id  score
     internal_id                    
-    0                      0  1.328
-    1                      1  1.377
-    2                      2  1.272
-    3                      3  1.280
-    4                      4  1.271
-    5                      5  1.281
-    6                      6  1.284
-    7                      7  1.279
-    8                      8  1.279
-    9                      9  1.284
-    10                    10  1.284
-    11                    11  1.253
-    12                    12  1.263
-    13                    13  1.305
-    14                    14  1.237
-    15                    15  1.219
-    16                    16  1.300
-    17                    17  1.276
-    18                    18  1.246
-    19                    19  1.215
-    20                    20  1.214
-    21                    21  1.321
-    22                    22  1.282
-    23                    23  1.284
-    24                    24  1.221
-    25                    25  1.289
-    26                    26  1.263
-    27                    27  1.206
-    28                    28  1.295
-    29                    29  1.275
+    0                      0  1.336
+    1                      1  1.365
+    2                      4  1.281
+    3                      9  1.285
+    4                     16  1.271
+    5                     25  1.285
+    6                     36  1.288
+    7                     49  1.283
+    8                     64  1.291
+    9                     81  1.288
+    10                   100  1.290
+    11                   121  1.266
+    12                   144  1.271
+    13                   169  1.283
+    14                   196  1.214
+    15                   225  1.212
+    16                   256  1.329
+    17                   289  1.294
+    18                   324  1.242
+    19                   361  1.228
+    20                   400  1.211
+    21                   441  1.314
+    22                   484  1.288
+    23                   529  1.284
+    24                   576  1.229
+    25                   625  1.313
+    26                   676  1.286
+    27                   729  1.217
+    28                   784  1.325
+    29                   841  1.296
     ...                  ...    ...
-    2435                2435  1.321
-    2436                2436  1.281
-    2437                2437  1.246
-    2438                2438  1.247
-    2439                2439  1.281
-    2440                2440  1.244
-    2441                2441  1.282
-    2442                2442  1.244
-    2443                2443  1.297
-    2444                2444  1.265
-    2445                2445  1.277
-    2446                2446  1.241
-    2447                2447  1.277
-    2448                2448  1.241
-    2449                2449  1.283
-    2450                2450  1.243
-    2451                2451  1.279
-    2452                2452  1.243
-    2453                2453  1.268
-    2454                2454  1.231
-    2455                2455  1.237
-    2456                2456  1.278
-    2457                2457  1.247
-    2458                2458  1.283
-    2459                2459  1.259
-    2460                2460  1.266
-    2461                2461  1.283
-    2462                2462  1.250
-    2463                2463  1.230
-    2464                2464  1.233
+    2435             5929225  1.316
+    2436             5934096  1.290
+    2437             5938969  1.246
+    2438             5943844  1.242
+    2439             5948721  1.282
+    2440             5953600  1.234
+    2441             5958481  1.282
+    2442             5963364  1.233
+    2443             5968249  1.305
+    2444             5973136  1.265
+    2445             5978025  1.287
+    2446             5982916  1.244
+    2447             5987809  1.282
+    2448             5992704  1.238
+    2449             5997601  1.289
+    2450             6002500  1.249
+    2451             6007401  1.289
+    2452             6012304  1.246
+    2453             6017209  1.271
+    2454             6022116  1.226
+    2455             6027025  1.233
+    2456             6031936  1.284
+    2457             6036849  1.239
+    2458             6041764  1.285
+    2459             6046681  1.261
+    2460             6051600  1.276
+    2461             6056521  1.285
+    2462             6061444  1.276
+    2463             6066369  1.240
+    2464             6071296  1.267
 
     [2465 rows x 2 columns]
-    1.47381907136
+    1.47704212515
 
     4. Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/712414a9ce194d12
+     DELETE http://localhost:5001/api/v0/feature-extraction/89dcea6e1ef44df1
 
 
 
@@ -115,6 +115,7 @@ An example of Semantic Search
 
     from __future__ import print_function
 
+    import os.path
     import requests
     import pandas as pd
 
@@ -130,19 +131,13 @@ An example of Semantic Search
         print(" 0. Load the test dataset")
         url = BASE_URL + '/example-dataset/{}'.format(dataset_name)
         print(" GET", url)
-        res = requests.get(url, json={'return_file_path': True}).json()
-
-        # To use a custom dataset, simply specify the following variables
-        seed_document_id = res['seed_document_id']
-        seed_y = res['seed_y']
-        ground_truth_y = res['ground_truth_y']
+        input_ds = requests.get(url).json()
 
         # create a custom dataset definition for ingestion
-        dataset_definition = []
-        for document_id, fname in zip(res['document_id'], res['file_path']):
-            dataset_definition.append({'document_id': document_id,
-                                      'rendering_id': 0,
-                                      'file_path': fname})
+        data_dir = input_ds['metadata']['data_dir']
+        dataset_definition = [{'document_id': row['document_id'],
+                               'file_path': os.path.join(data_dir, row['file_path'])} \
+                                       for row in input_ds['dataset']]
 
         # 1. Feature extraction
 
@@ -211,7 +206,7 @@ An example of Semantic Search
         print(" DELETE", url)
         requests.delete(url)
 
-**Total running time of the script:** ( 0 minutes  53.313 seconds)
+**Total running time of the script:** ( 1 minutes  0.156 seconds)
 
 
 

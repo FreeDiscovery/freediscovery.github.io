@@ -17,21 +17,21 @@ Cluster documents into clusters
  Out::
 
     0. Load the example dataset
-     POST http://localhost:5001/api/v0/example-dataset/treclegal09_2k_subset
+     GET http://localhost:5001/api/v0/example-dataset/treclegal09_2k_subset
 
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received [u'id', u'filenames']
-       => dsid = 07fa7ad2dd994be0
+       => dsid = 0122ea2d4d4447ad
 
     1.b Run feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/07fa7ad2dd994be0
+     POST http://localhost:5001/api/v0/feature-extraction/0122ea2d4d4447ad
 
     1.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/07fa7ad2dd994be0
+     GET http://localhost:5001/api/v0/feature-extraction/0122ea2d4d4447ad
          - binary: False
          - n_jobs: 1
-         - data_dir: ../freediscovery_shared/treclegal09_2k_subset/data
+         - data_dir: ../freediscovery_shared/treclegal09_2k_subset/data/jobRun_4/XML_EXPORT_CONTENT/text_9
          - use_hashing: False
          - min_df: 4.0
          - analyzer: word
@@ -48,49 +48,49 @@ Cluster documents into clusters
 
     2. Calculate LSI
     POST http://localhost:5001/api/v0/lsi/
-      => LSI model id = 0c4c856143214425
+      => LSI model id = 85ec16e75d374280
       => SVD decomposition with 100 dimensions explaining 99.76 % variabilty of the data
 
     3.a. Document clustering (LSI + K-means)
      POST http://localhost:5001/api/v0/clustering/k-mean/
-         => model id = cad506aa67064341
+         => model id = 0aa50646a4db4746
 
     3.b. Computing cluster labels
-     GET http://localhost:5001/api/v0/clustering/k-mean/cad506aa67064341
-        .. computed in 2.7s
+     GET http://localhost:5001/api/v0/clustering/k-mean/0aa50646a4db4746
+        .. computed in 2.6s
        N_documents                                      cluster_names
-    9          581  [u'enron_development', u'enron', u'training', ...
-    1          520  [u'enron', u'net', u'tana', u'jones', u'traini...
-    4          332  [u'shackleton', u'marcelo', u'brazil', u'tozzi...
-    2          223  [u'tana', u'jones', u'enron', u'advice', u'pla...
-    8          191  [u'teneo', u'group', u'recipients', u'administ...
-    0          176  [u'shackleton', u'sampling', u'ect', u'harris'...
-    3          174  [u'enron', u'nicolay', u'serc', u'nerc', u'kea...
-    6          114  [u'ect', u'lon', u'hou', u'newsticker', u'fors...
-    7           98  [u'ruppert', u'nemec', u'gillaspie', u'exxon',...
-    5           56  [u'rewrite', u'server', u'address', u'smtp', u...
+    0          600  [u'enron', u'enron_development', u'pcb', u'fue...
+    1          425  [u'enron', u'approved', u'translated', u'net',...
+    2          361  [u'shackleton', u'marcelo', u'brazil', u'tozzi...
+    3          228  [u'teneo', u'group', u'recipients', u'administ...
+    6          216  [u'serc', u'enron', u'nerc', u'nicolay', u'let...
+    5          198  [u'ect', u'lon', u'forster', u'newsticker', u'...
+    8          146  [u'tana', u'jones', u'cash', u'advice', u'coll...
+    4          128  [u'enron', u'tana', u'jones', u'net', u'kean',...
+    9          107  [u'ruppert', u'nemec', u'translated', u'gillas...
+    7           56  [u'rewrite', u'server', u'address', u'smtp', u...
 
     4.a. Document clustering (LSI + Ward HC)
      POST http://localhost:5001/api/v0/clustering/ward_hc/
-         => model id = 09c5f1579114465a
+         => model id = 682d8a0fb1cc4be1
 
     4.b. Computing cluster labels
-     GET http://localhost:5001/api/v0/clustering/ward_hc/09c5f1579114465a
+     GET http://localhost:5001/api/v0/clustering/ward_hc/682d8a0fb1cc4be1
         .. computed in 1.9s
        N_documents                                      cluster_names
-    0          841  [u'enron', u'pcb', u'test', u'shackleton', u't...
-    2          416  [u'shackleton', u'marcelo', u'teneo', u'brazil...
-    3          409  [u'enron', u'approved', u'net', u'jones', u'ta...
-    1          192  [u'lon', u'forster', u'newsticker', u'ect', u'...
-    5          175  [u'tana', u'jones', u'enron', u'advice', u'pla...
-    7          135  [u'teneo', u'group', u'recipients', u'administ...
-    8          114  [u'serc', u'nerc', u'enron', u'letter', u'nico...
-    6           87  [u'ruppert', u'nemec', u'gillaspie', u'exxon',...
-    9           56  [u'rewrite', u'server', u'address', u'smtp', u...
-    4           40  [u'ect', u'hou', u'shackleton', u'clair', u'rm...
+    1          724  [u'enron', u'translated', u'pcb', u'letter', u...
+    2          423  [u'enron', u'approved', u'net', u'translated',...
+    3          420  [u'shackleton', u'marcelo', u'teneo', u'brazil...
+    0          212  [u'ect', u'lon', u'forster', u'usvi', u'hou', ...
+    4          186  [u'tana', u'jones', u'enron', u'advice', u'cas...
+    8          177  [u'enron', u'serc', u'nerc', u'nicolay', u'let...
+    7          148  [u'teneo', u'group', u'recipients', u'administ...
+    6           84  [u'ruppert', u'nemec', u'gillaspie', u'exxon',...
+    5           56  [u'rewrite', u'server', u'address', u'smtp', u...
+    9           35  [u'enron_development', u'shackleton', u'hendry...
 
     5. Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/07fa7ad2dd994be0
+     DELETE http://localhost:5001/api/v0/feature-extraction/0122ea2d4d4447ad
 
 
 
@@ -101,6 +101,7 @@ Cluster documents into clusters
 .. code-block:: python
 
 
+    import os.path
     import numpy as np
     import pandas as pd
     from time import time
@@ -122,18 +123,21 @@ Cluster documents into clusters
 
     print(" 0. Load the example dataset")
     url = BASE_URL + '/example-dataset/{}'.format(dataset_name)
-    print(" POST", url)
-    res = requests.get(url).json()
+    print(" GET", url)
+    input_ds = requests.get(url).json()
 
     # To use a custom dataset, simply specify the following variables
-    data_dir = res['data_dir']
+    data_dir = input_ds['metadata']['data_dir']
+    dataset_definition = [{'document_id': row['document_id'],
+                           'file_path': os.path.join(data_dir, row['file_path'])} \
+                                   for row in input_ds['dataset']]
 
     # # 1. Feature extraction (non hashed)
 
     print("\n1.a Load dataset and initalize feature extraction")
     url = BASE_URL + '/feature-extraction'
     print(" POST", url)
-    fe_opts = {'data_dir': data_dir,
+    fe_opts = {'dataset_definition': dataset_definition,
                'use_idf': 1, 'n_features': 30001,
                'min_df': 4, 'max_df': 0.75 # filter out unfrequent / too frequent words
                }
@@ -235,7 +239,7 @@ Cluster documents into clusters
     print(" DELETE", url)
     requests.delete(url)
 
-**Total running time of the script:** ( 0 minutes  49.062 seconds)
+**Total running time of the script:** ( 0 minutes  51.831 seconds)
 
 
 

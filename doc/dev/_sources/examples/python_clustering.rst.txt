@@ -18,11 +18,6 @@ An example of clustering using the Python API
 
     0. Load Dataset
 
-    Warning: downloading dataset treclegal09_2k_subset (2.8 MB) !
-
-    File /tmp/treclegal09_2k_subset.tar.gz downloaded!
-    Archive extracted!
-
     1. Feature extraction (non hashed)
 
 
@@ -31,33 +26,33 @@ An example of clustering using the Python API
 
     3. Document Clustering (LSI + K-Means)
 
-        .. computed in 2.2s
+        .. computed in 2.5s
        N_documents                                      cluster_names
-    1          457       [fri, shackleton, normal, brazil, test, oct]
-    0          455  [enron, dasovich, party, shall, alias, transac...
-    4          320        [thu, tue, normal, tenet, sensitivity, gmt]
-    3          301  [haedicke, recipients, administrative, group, ...
-    9          247  [energy, services, market, power, trading, enr...
-    7          197    [mon, normal, tenet, nov, meeting, sensitivity]
-    5          178        [wed, normal, tenet, oct, gmt, sensitivity]
-    2          129                [ect, hou, tana, jones, clair, lon]
-    6          125  [nemec, doc, bump, townsend, gillaspie, nemec_...
-    8           56    [rewrite, server, address, smtp, mail, virtual]
+    4          520  [shackleton, enron_development, test, load, en...
+    1          462       [enron, energy, berkeley, haas, new, market]
+    2          321               [tenet, normal, thu, oct, mtg, test]
+    5          263        [tana, jones, ect, enron, hou, transaction]
+    6          258               [wed, tenet, normal, nov, fri, test]
+    3          234  [teneo, shackleton_sara, recipients, administr...
+    8          190           [haedicke, ect, lon, load, forster, gtc]
+    0           97       [sanders, nov, normal, lunch, subject, sent]
+    9           64  [migration, outlook, team, mtg, normal, sensit...
+    7           56    [rewrite, server, address, smtp, mail, virtual]
 
     4. Document Clustering (LSI + Ward Hierarchical Clustering)
 
         .. computed in 1.2s
        N_documents                                      cluster_names
-    3          798  [shackleton, shall, teneo, enron_development, ...
-    2          495   [dasovich, enron, berkeley, alias, energy, haas]
-    0          454  [tenet, normal, test, sensitivity, gmt, import...
-    1          189       [ect, haedicke, hou, lon, group, recipients]
-    4          129         [tana, jones, enron, advice, isda, update]
-    6          113  [nemec, doc, bump, townsend, nemec_gerald, att...
-    5           92       [sanders, normal, nov, lunch, sent, meeting]
+    1          991  [shackleton, ect, enron_development, teneo, ho...
+    0          405  [tenet, normal, test, gmt, sensitivity, import...
+    2          377     [dasovich, berkeley, haas, alias, energy, edu]
+    4          161  [haedicke, ect, lon, recipients, group, admini...
+    3          148        [tana, jones, enron, advice, isda, lambert]
+    6           97  [nemec, doc, bump, attached, agreement, nemec_...
+    7           91       [sanders, nov, normal, lunch, meeting, sent]
     8           75  [ricafrente, ricafrente_david, eb3325, teneo, ...
     9           64  [migration, outlook, team, mtg, normal, sensit...
-    7           56    [rewrite, server, address, smtp, mail, virtual]
+    5           56    [rewrite, server, address, smtp, mail, virtual]
 
 
 
@@ -84,14 +79,14 @@ An example of clustering using the Python API
 
     print("0. Load Dataset")
 
-    ds = load_dataset(dataset_name, cache_dir=cache_dir)
+    md, training_set, dataset = load_dataset(dataset_name, cache_dir=cache_dir)
 
 
     print("\n1. Feature extraction (non hashed)\n")
 
     n_features = 30000
     fe = FeatureVectorizer(cache_dir=cache_dir)
-    uuid = fe.preprocess(ds['data_dir'],
+    uuid = fe.preprocess(md['data_dir'],
                          n_features=n_features, use_hashing=False,
                          use_idf=True, stop_words='english')
     uuid, filenames = fe.transform()
@@ -143,7 +138,7 @@ An example of clustering using the Python API
     print('    .. computed in {:.1f}s'.format(t1 - t0))
     print(repr_clustering(labels, terms))
 
-**Total running time of the script:** ( 0 minutes  26.959 seconds)
+**Total running time of the script:** ( 0 minutes  29.294 seconds)
 
 
 

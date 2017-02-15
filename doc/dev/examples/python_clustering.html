@@ -159,48 +159,43 @@
 <span id="sphx-glr-examples-python-clustering-py"></span><h1>Clustering Example [Python API]<a class="headerlink" href="#clustering-example-python-api" title="Permalink to this headline">¶</a></h1>
 <p>An example of clustering using the Python API</p>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span>0. Load Dataset
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="mf">0.</span> <span class="n">Load</span> <span class="n">Dataset</span>
 
-Warning: downloading dataset treclegal09_2k_subset (2.8 MB) !
-
-File /tmp/treclegal09_2k_subset.tar.gz downloaded!
-Archive extracted!
-
-1. Feature extraction (non hashed)
+<span class="mf">1.</span> <span class="n">Feature</span> <span class="n">extraction</span> <span class="p">(</span><span class="n">non</span> <span class="n">hashed</span><span class="p">)</span>
 
 
-2. Computing LSI
+<span class="mf">2.</span> <span class="n">Computing</span> <span class="n">LSI</span>
 
 
-3. Document Clustering (LSI + K-Means)
+<span class="mf">3.</span> <span class="n">Document</span> <span class="n">Clustering</span> <span class="p">(</span><span class="n">LSI</span> <span class="o">+</span> <span class="n">K</span><span class="o">-</span><span class="n">Means</span><span class="p">)</span>
 
-    .. computed in 2.2s
-   N_documents                                      cluster_names
-1          457       [fri, shackleton, normal, brazil, test, oct]
-0          455  [enron, dasovich, party, shall, alias, transac...
-4          320        [thu, tue, normal, tenet, sensitivity, gmt]
-3          301  [haedicke, recipients, administrative, group, ...
-9          247  [energy, services, market, power, trading, enr...
-7          197    [mon, normal, tenet, nov, meeting, sensitivity]
-5          178        [wed, normal, tenet, oct, gmt, sensitivity]
-2          129                [ect, hou, tana, jones, clair, lon]
-6          125  [nemec, doc, bump, townsend, gillaspie, nemec_...
-8           56    [rewrite, server, address, smtp, mail, virtual]
+    <span class="o">..</span> <span class="n">computed</span> <span class="ow">in</span> <span class="mf">2.5</span><span class="n">s</span>
+   <span class="n">N_documents</span>                                      <span class="n">cluster_names</span>
+<span class="mi">4</span>          <span class="mi">520</span>  <span class="p">[</span><span class="n">shackleton</span><span class="p">,</span> <span class="n">enron_development</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">load</span><span class="p">,</span> <span class="n">en</span><span class="o">...</span>
+<span class="mi">1</span>          <span class="mi">462</span>       <span class="p">[</span><span class="n">enron</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">berkeley</span><span class="p">,</span> <span class="n">haas</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="n">market</span><span class="p">]</span>
+<span class="mi">2</span>          <span class="mi">321</span>               <span class="p">[</span><span class="n">tenet</span><span class="p">,</span> <span class="n">normal</span><span class="p">,</span> <span class="n">thu</span><span class="p">,</span> <span class="nb">oct</span><span class="p">,</span> <span class="n">mtg</span><span class="p">,</span> <span class="n">test</span><span class="p">]</span>
+<span class="mi">5</span>          <span class="mi">263</span>        <span class="p">[</span><span class="n">tana</span><span class="p">,</span> <span class="n">jones</span><span class="p">,</span> <span class="n">ect</span><span class="p">,</span> <span class="n">enron</span><span class="p">,</span> <span class="n">hou</span><span class="p">,</span> <span class="n">transaction</span><span class="p">]</span>
+<span class="mi">6</span>          <span class="mi">258</span>               <span class="p">[</span><span class="n">wed</span><span class="p">,</span> <span class="n">tenet</span><span class="p">,</span> <span class="n">normal</span><span class="p">,</span> <span class="n">nov</span><span class="p">,</span> <span class="n">fri</span><span class="p">,</span> <span class="n">test</span><span class="p">]</span>
+<span class="mi">3</span>          <span class="mi">234</span>  <span class="p">[</span><span class="n">teneo</span><span class="p">,</span> <span class="n">shackleton_sara</span><span class="p">,</span> <span class="n">recipients</span><span class="p">,</span> <span class="n">administr</span><span class="o">...</span>
+<span class="mi">8</span>          <span class="mi">190</span>           <span class="p">[</span><span class="n">haedicke</span><span class="p">,</span> <span class="n">ect</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">load</span><span class="p">,</span> <span class="n">forster</span><span class="p">,</span> <span class="n">gtc</span><span class="p">]</span>
+<span class="mi">0</span>           <span class="mi">97</span>       <span class="p">[</span><span class="n">sanders</span><span class="p">,</span> <span class="n">nov</span><span class="p">,</span> <span class="n">normal</span><span class="p">,</span> <span class="n">lunch</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">sent</span><span class="p">]</span>
+<span class="mi">9</span>           <span class="mi">64</span>  <span class="p">[</span><span class="n">migration</span><span class="p">,</span> <span class="n">outlook</span><span class="p">,</span> <span class="n">team</span><span class="p">,</span> <span class="n">mtg</span><span class="p">,</span> <span class="n">normal</span><span class="p">,</span> <span class="n">sensit</span><span class="o">...</span>
+<span class="mi">7</span>           <span class="mi">56</span>    <span class="p">[</span><span class="n">rewrite</span><span class="p">,</span> <span class="n">server</span><span class="p">,</span> <span class="n">address</span><span class="p">,</span> <span class="n">smtp</span><span class="p">,</span> <span class="n">mail</span><span class="p">,</span> <span class="n">virtual</span><span class="p">]</span>
 
-4. Document Clustering (LSI + Ward Hierarchical Clustering)
+<span class="mf">4.</span> <span class="n">Document</span> <span class="n">Clustering</span> <span class="p">(</span><span class="n">LSI</span> <span class="o">+</span> <span class="n">Ward</span> <span class="n">Hierarchical</span> <span class="n">Clustering</span><span class="p">)</span>
 
-    .. computed in 1.2s
-   N_documents                                      cluster_names
-3          798  [shackleton, shall, teneo, enron_development, ...
-2          495   [dasovich, enron, berkeley, alias, energy, haas]
-0          454  [tenet, normal, test, sensitivity, gmt, import...
-1          189       [ect, haedicke, hou, lon, group, recipients]
-4          129         [tana, jones, enron, advice, isda, update]
-6          113  [nemec, doc, bump, townsend, nemec_gerald, att...
-5           92       [sanders, normal, nov, lunch, sent, meeting]
-8           75  [ricafrente, ricafrente_david, eb3325, teneo, ...
-9           64  [migration, outlook, team, mtg, normal, sensit...
-7           56    [rewrite, server, address, smtp, mail, virtual]
+    <span class="o">..</span> <span class="n">computed</span> <span class="ow">in</span> <span class="mf">1.2</span><span class="n">s</span>
+   <span class="n">N_documents</span>                                      <span class="n">cluster_names</span>
+<span class="mi">1</span>          <span class="mi">991</span>  <span class="p">[</span><span class="n">shackleton</span><span class="p">,</span> <span class="n">ect</span><span class="p">,</span> <span class="n">enron_development</span><span class="p">,</span> <span class="n">teneo</span><span class="p">,</span> <span class="n">ho</span><span class="o">...</span>
+<span class="mi">0</span>          <span class="mi">405</span>  <span class="p">[</span><span class="n">tenet</span><span class="p">,</span> <span class="n">normal</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">gmt</span><span class="p">,</span> <span class="n">sensitivity</span><span class="p">,</span> <span class="n">import</span><span class="o">...</span>
+<span class="mi">2</span>          <span class="mi">377</span>     <span class="p">[</span><span class="n">dasovich</span><span class="p">,</span> <span class="n">berkeley</span><span class="p">,</span> <span class="n">haas</span><span class="p">,</span> <span class="n">alias</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">edu</span><span class="p">]</span>
+<span class="mi">4</span>          <span class="mi">161</span>  <span class="p">[</span><span class="n">haedicke</span><span class="p">,</span> <span class="n">ect</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">recipients</span><span class="p">,</span> <span class="n">group</span><span class="p">,</span> <span class="n">admini</span><span class="o">...</span>
+<span class="mi">3</span>          <span class="mi">148</span>        <span class="p">[</span><span class="n">tana</span><span class="p">,</span> <span class="n">jones</span><span class="p">,</span> <span class="n">enron</span><span class="p">,</span> <span class="n">advice</span><span class="p">,</span> <span class="n">isda</span><span class="p">,</span> <span class="n">lambert</span><span class="p">]</span>
+<span class="mi">6</span>           <span class="mi">97</span>  <span class="p">[</span><span class="n">nemec</span><span class="p">,</span> <span class="n">doc</span><span class="p">,</span> <span class="n">bump</span><span class="p">,</span> <span class="n">attached</span><span class="p">,</span> <span class="n">agreement</span><span class="p">,</span> <span class="n">nemec_</span><span class="o">...</span>
+<span class="mi">7</span>           <span class="mi">91</span>       <span class="p">[</span><span class="n">sanders</span><span class="p">,</span> <span class="n">nov</span><span class="p">,</span> <span class="n">normal</span><span class="p">,</span> <span class="n">lunch</span><span class="p">,</span> <span class="n">meeting</span><span class="p">,</span> <span class="n">sent</span><span class="p">]</span>
+<span class="mi">8</span>           <span class="mi">75</span>  <span class="p">[</span><span class="n">ricafrente</span><span class="p">,</span> <span class="n">ricafrente_david</span><span class="p">,</span> <span class="n">eb3325</span><span class="p">,</span> <span class="n">teneo</span><span class="p">,</span> <span class="o">...</span>
+<span class="mi">9</span>           <span class="mi">64</span>  <span class="p">[</span><span class="n">migration</span><span class="p">,</span> <span class="n">outlook</span><span class="p">,</span> <span class="n">team</span><span class="p">,</span> <span class="n">mtg</span><span class="p">,</span> <span class="n">normal</span><span class="p">,</span> <span class="n">sensit</span><span class="o">...</span>
+<span class="mi">5</span>           <span class="mi">56</span>    <span class="p">[</span><span class="n">rewrite</span><span class="p">,</span> <span class="n">server</span><span class="p">,</span> <span class="n">address</span><span class="p">,</span> <span class="n">smtp</span><span class="p">,</span> <span class="n">mail</span><span class="p">,</span> <span class="n">virtual</span><span class="p">]</span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -222,14 +217,14 @@ Archive extracted!
 
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;0. Load Dataset&quot;</span><span class="p">)</span>
 
-<span class="n">ds</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="n">dataset_name</span><span class="p">,</span> <span class="n">cache_dir</span><span class="o">=</span><span class="n">cache_dir</span><span class="p">)</span>
+<span class="n">md</span><span class="p">,</span> <span class="n">training_set</span><span class="p">,</span> <span class="n">dataset</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="n">dataset_name</span><span class="p">,</span> <span class="n">cache_dir</span><span class="o">=</span><span class="n">cache_dir</span><span class="p">)</span>
 
 
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">1. Feature extraction (non hashed)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="n">n_features</span> <span class="o">=</span> <span class="mi">30000</span>
 <span class="n">fe</span> <span class="o">=</span> <span class="n">FeatureVectorizer</span><span class="p">(</span><span class="n">cache_dir</span><span class="o">=</span><span class="n">cache_dir</span><span class="p">)</span>
-<span class="n">uuid</span> <span class="o">=</span> <span class="n">fe</span><span class="o">.</span><span class="n">preprocess</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="s1">&#39;data_dir&#39;</span><span class="p">],</span>
+<span class="n">uuid</span> <span class="o">=</span> <span class="n">fe</span><span class="o">.</span><span class="n">preprocess</span><span class="p">(</span><span class="n">md</span><span class="p">[</span><span class="s1">&#39;data_dir&#39;</span><span class="p">],</span>
                      <span class="n">n_features</span><span class="o">=</span><span class="n">n_features</span><span class="p">,</span> <span class="n">use_hashing</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
                      <span class="n">use_idf</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">stop_words</span><span class="o">=</span><span class="s1">&#39;english&#39;</span><span class="p">)</span>
 <span class="n">uuid</span><span class="p">,</span> <span class="n">filenames</span> <span class="o">=</span> <span class="n">fe</span><span class="o">.</span><span class="n">transform</span><span class="p">()</span>
@@ -282,7 +277,7 @@ Archive extracted!
 <span class="k">print</span><span class="p">(</span><span class="n">repr_clustering</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">terms</span><span class="p">))</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  26.959 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  29.294 seconds)</p>
 <div class="sphx-glr-footer container">
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../_downloads/python_clustering.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">python_clustering.py</span></code></a></div>
