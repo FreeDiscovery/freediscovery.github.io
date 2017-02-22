@@ -22,13 +22,13 @@ Cluster documents into clusters
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received [u'id', u'filenames']
-       => dsid = 0122ea2d4d4447ad
+       => dsid = d7d6ddf294d64ec0
 
     1.b Run feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/0122ea2d4d4447ad
+     POST http://localhost:5001/api/v0/feature-extraction/d7d6ddf294d64ec0
 
     1.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/0122ea2d4d4447ad
+     GET http://localhost:5001/api/v0/feature-extraction/d7d6ddf294d64ec0
          - binary: False
          - n_jobs: 1
          - data_dir: ../freediscovery_shared/treclegal09_2k_subset/data/jobRun_4/XML_EXPORT_CONTENT/text_9
@@ -48,49 +48,49 @@ Cluster documents into clusters
 
     2. Calculate LSI
     POST http://localhost:5001/api/v0/lsi/
-      => LSI model id = 85ec16e75d374280
+      => LSI model id = c29485dc9c81415a
       => SVD decomposition with 100 dimensions explaining 99.76 % variabilty of the data
 
     3.a. Document clustering (LSI + K-means)
      POST http://localhost:5001/api/v0/clustering/k-mean/
-         => model id = 0aa50646a4db4746
+         => model id = 588128fd84424f86
 
     3.b. Computing cluster labels
-     GET http://localhost:5001/api/v0/clustering/k-mean/0aa50646a4db4746
-        .. computed in 2.6s
+     GET http://localhost:5001/api/v0/clustering/k-mean/588128fd84424f86
+        .. computed in 2.4s
        N_documents                                      cluster_names
-    0          600  [u'enron', u'enron_development', u'pcb', u'fue...
-    1          425  [u'enron', u'approved', u'translated', u'net',...
-    2          361  [u'shackleton', u'marcelo', u'brazil', u'tozzi...
-    3          228  [u'teneo', u'group', u'recipients', u'administ...
-    6          216  [u'serc', u'enron', u'nerc', u'nicolay', u'let...
-    5          198  [u'ect', u'lon', u'forster', u'newsticker', u'...
-    8          146  [u'tana', u'jones', u'cash', u'advice', u'coll...
-    4          128  [u'enron', u'tana', u'jones', u'net', u'kean',...
-    9          107  [u'ruppert', u'nemec', u'translated', u'gillas...
-    7           56  [u'rewrite', u'server', u'address', u'smtp', u...
+    7          628  [enron_development, enron, pcb, cleanup, phase...
+    3          413      [enron, jones, tana, approved, net, changing]
+    2          340  [shackleton, marcelo, brazil, tozzini, harris,...
+    6          295          [tana, jones, lon, advice, usvi, forster]
+    5          220  [teneo, group, recipients, administrative, tes...
+    4          191         [enron, tana, jones, nicolay, advice, net]
+    0          166   [serc, nerc, enron, letter, training, ingersoll]
+    9           91  [ruppert, nemec, gillaspie, exxon, scuba, tran...
+    1           65        [ect, hou, shackleton, flynn, heard, clair]
+    8           56    [rewrite, server, address, smtp, mail, virtual]
 
     4.a. Document clustering (LSI + Ward HC)
      POST http://localhost:5001/api/v0/clustering/ward_hc/
-         => model id = 682d8a0fb1cc4be1
+         => model id = 2291b588d5414e0f
 
     4.b. Computing cluster labels
-     GET http://localhost:5001/api/v0/clustering/ward_hc/682d8a0fb1cc4be1
-        .. computed in 1.9s
+     GET http://localhost:5001/api/v0/clustering/ward_hc/2291b588d5414e0f
+        .. computed in 1.8s
        N_documents                                      cluster_names
-    1          724  [u'enron', u'translated', u'pcb', u'letter', u...
-    2          423  [u'enron', u'approved', u'net', u'translated',...
-    3          420  [u'shackleton', u'marcelo', u'teneo', u'brazil...
-    0          212  [u'ect', u'lon', u'forster', u'usvi', u'hou', ...
-    4          186  [u'tana', u'jones', u'enron', u'advice', u'cas...
-    8          177  [u'enron', u'serc', u'nerc', u'nicolay', u'let...
-    7          148  [u'teneo', u'group', u'recipients', u'administ...
-    6           84  [u'ruppert', u'nemec', u'gillaspie', u'exxon',...
-    5           56  [u'rewrite', u'server', u'address', u'smtp', u...
-    9           35  [u'enron_development', u'shackleton', u'hendry...
+    0          811             [enron, tana, jones, pcb, letter, net]
+    2          438  [shackleton, marcelo, brazil, teneo, tozzini, ...
+    3          413      [enron, jones, tana, approved, net, changing]
+    5          244               [lon, forster, ect, tana, eta, usvi]
+    1          154         [tana, jones, enron, advice, cash, update]
+    7          123  [teneo, group, recipients, administrative, tes...
+    8           91    [serc, nerc, training, letter, enron, november]
+    6           86  [ruppert, nemec, gillaspie, exxon, translated,...
+    9           56    [rewrite, server, address, smtp, mail, virtual]
+    4           49      [ect, hou, shackleton, marcelo, flynn, clair]
 
     5. Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/0122ea2d4d4447ad
+     DELETE http://localhost:5001/api/v0/feature-extraction/d7d6ddf294d64ec0
 
 
 
@@ -239,7 +239,7 @@ Cluster documents into clusters
     print(" DELETE", url)
     requests.delete(url)
 
-**Total running time of the script:** ( 0 minutes  51.831 seconds)
+**Total running time of the script:** ( 0 minutes  49.835 seconds)
 
 
 
