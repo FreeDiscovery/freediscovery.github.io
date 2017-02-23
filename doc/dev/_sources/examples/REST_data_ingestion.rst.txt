@@ -21,68 +21,68 @@ An example illustrating the data ingestion in FreeDiscovery
 
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
-       => received [u'id', u'filenames']
-       => dsid = 18b168dff871440f
+       => received ['filenames', 'id']
+       => dsid = 87617fb1313c469f
 
     1.b Start feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/18b168dff871440f
+     POST http://localhost:5001/api/v0/feature-extraction/87617fb1313c469f
 
     2.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
-       => received [u'id', u'filenames']
-       => dsid = f7079237633c41e8
+       => received ['filenames', 'id']
+       => dsid = 0b579ce2fbe14ffa
 
     2.b Start feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/f7079237633c41e8
+     POST http://localhost:5001/api/v0/feature-extraction/0b579ce2fbe14ffa
 
     2.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/f7079237633c41e8
-         - binary: False
-         - n_jobs: 1
-         - data_dir: ../freediscovery_shared/treclegal09_2k_subset/data/jobRun_4/XML_EXPORT_CONTENT/text_9
-         - use_hashing: True
-         - min_df: 0.0
+     GET http://localhost:5001/api/v0/feature-extraction/0b579ce2fbe14ffa
          - analyzer: word
-         - n_samples: 2465
-         - ngram_range: [1, 1]
-         - max_df: 1.0
+         - binary: False
          - chunk_size: 5000
-         - use_idf: False
-         - stop_words: None
+         - data_dir: ../freediscovery_shared/treclegal09_2k_subset/data/jobRun_4/XML_EXPORT_CONTENT/text_9
+         - max_df: 1.0
+         - min_df: 0.0
          - n_features: 100001
+         - n_jobs: 1
+         - n_samples: 2465
          - n_samples_processed: 2465
-         - sublinear_tf: True
+         - ngram_range: [1, 1]
          - norm: None
+         - stop_words: None
+         - sublinear_tf: True
+         - use_hashing: True
+         - use_idf: False
 
     3. Examine the id mapping
 
-     GET http://localhost:5001/api/v0/feature-extraction/f7079237633c41e8/id-mapping/flat
+     GET http://localhost:5001/api/v0/feature-extraction/0b579ce2fbe14ffa/id-mapping/flat
        DATA: {"internal_id": [0, 1, 2]}
      Response:
-       {"internal_id": [0, 1, 2], "document_id": [0, 1, 4]}
+       {"document_id": [0, 1, 4], "internal_id": [0, 1, 2]}
 
-     GET http://localhost:5001/api/v0/feature-extraction/f7079237633c41e8/id-mapping/nested
+     GET http://localhost:5001/api/v0/feature-extraction/0b579ce2fbe14ffa/id-mapping/nested
        DATA {"data": [{"internal_id": 0}, {"internal_id": 1}, {"internal_id": 2}]}
      Response:
        {
         "data": [
             {
-                "internal_id": 0, 
-                "document_id": 0
-            }, 
+                "document_id": 0,
+                "internal_id": 0
+            },
             {
-                "internal_id": 1, 
-                "document_id": 1
-            }, 
+                "document_id": 1,
+                "internal_id": 1
+            },
             {
-                "internal_id": 2, 
-                "document_id": 4
+                "document_id": 4,
+                "internal_id": 2
             }
         ]
     }
 
     5.a Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/f7079237633c41e8
+     DELETE http://localhost:5001/api/v0/feature-extraction/0b579ce2fbe14ffa
 
 
 
@@ -194,7 +194,7 @@ An example illustrating the data ingestion in FreeDiscovery
         print(" DELETE", url)
         requests.delete(url)
 
-**Total running time of the script:** ( 0 minutes  5.769 seconds)
+**Total running time of the script:** ( 0 minutes  6.119 seconds)
 
 
 

@@ -170,7 +170,7 @@
 <h1>freediscovery.pipeline.PipelineFinder<a class="headerlink" href="#freediscovery-pipeline-pipelinefinder" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="freediscovery.pipeline.PipelineFinder">
-<em class="property">class </em><code class="descclassname">freediscovery.pipeline.</code><code class="descname">PipelineFinder</code><span class="sig-paren">(</span><em>mid=None</em>, <em>cache_dir=u'/tmp/'</em>, <em>ingestion_method=u'vectorizer'</em>, <em>steps=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/1b98045/freediscovery/pipeline.py#L41"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.pipeline.PipelineFinder" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">freediscovery.pipeline.</code><code class="descname">PipelineFinder</code><span class="sig-paren">(</span><em>mid=None</em>, <em>cache_dir='/tmp/'</em>, <em>ingestion_method='vectorizer'</em>, <em>steps=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/1f2fb6b/freediscovery/pipeline.py#L41"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.pipeline.PipelineFinder" title="Permalink to this definition">¶</a></dt>
 <dd><p>Walk through the hierarchy of existing models
 and find the processing pipeline that terminate with the
 model having the given uid</p>
@@ -197,7 +197,7 @@ and as values the model ids</p>
 </table>
 <dl class="method">
 <dt id="freediscovery.pipeline.PipelineFinder.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>mid=None</em>, <em>cache_dir=u'/tmp/'</em>, <em>ingestion_method=u'vectorizer'</em>, <em>steps=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/1b98045/freediscovery/pipeline.py#L63"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>mid=None</em>, <em>cache_dir='/tmp/'</em>, <em>ingestion_method='vectorizer'</em>, <em>steps=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/1f2fb6b/freediscovery/pipeline.py#L63"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods</p>
@@ -228,46 +228,28 @@ and as values the model ids</p>
 <tr class="row-odd"><td><a class="reference internal" href="#freediscovery.pipeline.PipelineFinder.get_path" title="freediscovery.pipeline.PipelineFinder.get_path"><code class="xref py py-obj docutils literal"><span class="pre">get_path</span></code></a>([mid,&nbsp;absolute])</td>
 <td>Find the path to the model specified by mid</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#freediscovery.pipeline.PipelineFinder.has_key" title="freediscovery.pipeline.PipelineFinder.has_key"><code class="xref py py-obj docutils literal"><span class="pre">has_key</span></code></a>((k)&nbsp;-&gt;&nbsp;True&nbsp;if&nbsp;D&nbsp;has&nbsp;a&nbsp;key&nbsp;k,&nbsp;else&nbsp;False)</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">items</span></code></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.pipeline.PipelineFinder.items" title="freediscovery.pipeline.PipelineFinder.items"><code class="xref py py-obj docutils literal"><span class="pre">items</span></code></a>(()&nbsp;-&gt;&nbsp;list&nbsp;of&nbsp;(key,&nbsp;value)&nbsp;pairs&nbsp;in&nbsp;od)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">keys</span></code></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#freediscovery.pipeline.PipelineFinder.iteritems" title="freediscovery.pipeline.PipelineFinder.iteritems"><code class="xref py py-obj docutils literal"><span class="pre">iteritems</span></code></a>()</td>
-<td>od.iteritems -&gt; an iterator over the (key, value) pairs in od</td>
+<tr class="row-even"><td><a class="reference internal" href="#freediscovery.pipeline.PipelineFinder.move_to_end" title="freediscovery.pipeline.PipelineFinder.move_to_end"><code class="xref py py-obj docutils literal"><span class="pre">move_to_end</span></code></a></td>
+<td>Move an existing element to the end (or beginning if last==False).</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.pipeline.PipelineFinder.iterkeys" title="freediscovery.pipeline.PipelineFinder.iterkeys"><code class="xref py py-obj docutils literal"><span class="pre">iterkeys</span></code></a>(()&nbsp;-&gt;&nbsp;an&nbsp;iterator&nbsp;over&nbsp;the&nbsp;keys&nbsp;in&nbsp;od)</td>
-<td></td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#freediscovery.pipeline.PipelineFinder.itervalues" title="freediscovery.pipeline.PipelineFinder.itervalues"><code class="xref py py-obj docutils literal"><span class="pre">itervalues</span></code></a>()</td>
-<td>od.itervalues -&gt; an iterator over the values in od</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.pipeline.PipelineFinder.keys" title="freediscovery.pipeline.PipelineFinder.keys"><code class="xref py py-obj docutils literal"><span class="pre">keys</span></code></a>(()&nbsp;-&gt;&nbsp;list&nbsp;of&nbsp;keys&nbsp;in&nbsp;od)</td>
-<td></td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#freediscovery.pipeline.PipelineFinder.pop" title="freediscovery.pipeline.PipelineFinder.pop"><code class="xref py py-obj docutils literal"><span class="pre">pop</span></code></a>((k[,d])&nbsp;-&gt;&nbsp;v,&nbsp;...)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.pipeline.PipelineFinder.pop" title="freediscovery.pipeline.PipelineFinder.pop"><code class="xref py py-obj docutils literal"><span class="pre">pop</span></code></a>((k[,d])&nbsp;-&gt;&nbsp;v,&nbsp;...)</td>
 <td>value.  If key is not found, d is returned if given, otherwise KeyError</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.pipeline.PipelineFinder.popitem" title="freediscovery.pipeline.PipelineFinder.popitem"><code class="xref py py-obj docutils literal"><span class="pre">popitem</span></code></a>(()&nbsp;-&gt;&nbsp;(k,&nbsp;v),&nbsp;...)</td>
+<tr class="row-even"><td><a class="reference internal" href="#freediscovery.pipeline.PipelineFinder.popitem" title="freediscovery.pipeline.PipelineFinder.popitem"><code class="xref py py-obj docutils literal"><span class="pre">popitem</span></code></a>(()&nbsp;-&gt;&nbsp;(k,&nbsp;v),&nbsp;...)</td>
 <td>Pairs are returned in LIFO order if last is true or FIFO order if false.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#freediscovery.pipeline.PipelineFinder.setdefault" title="freediscovery.pipeline.PipelineFinder.setdefault"><code class="xref py py-obj docutils literal"><span class="pre">setdefault</span></code></a>((k[,d])&nbsp;-&gt;&nbsp;od.get(k,d),&nbsp;...)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.pipeline.PipelineFinder.setdefault" title="freediscovery.pipeline.PipelineFinder.setdefault"><code class="xref py py-obj docutils literal"><span class="pre">setdefault</span></code></a>((k[,d])&nbsp;-&gt;&nbsp;od.get(k,d),&nbsp;...)</td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.pipeline.PipelineFinder.update" title="freediscovery.pipeline.PipelineFinder.update"><code class="xref py py-obj docutils literal"><span class="pre">update</span></code></a>(([E,&nbsp;...)</td>
-<td>If E present and has a .keys() method, does:     for k in E: D[k] = E[k]</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#freediscovery.pipeline.PipelineFinder.values" title="freediscovery.pipeline.PipelineFinder.values"><code class="xref py py-obj docutils literal"><span class="pre">values</span></code></a>(()&nbsp;-&gt;&nbsp;list&nbsp;of&nbsp;values&nbsp;in&nbsp;od)</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">update</span></code></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.pipeline.PipelineFinder.viewitems" title="freediscovery.pipeline.PipelineFinder.viewitems"><code class="xref py py-obj docutils literal"><span class="pre">viewitems</span></code></a>(...)</td>
-<td></td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#freediscovery.pipeline.PipelineFinder.viewkeys" title="freediscovery.pipeline.PipelineFinder.viewkeys"><code class="xref py py-obj docutils literal"><span class="pre">viewkeys</span></code></a>(...)</td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.pipeline.PipelineFinder.viewvalues" title="freediscovery.pipeline.PipelineFinder.viewvalues"><code class="xref py py-obj docutils literal"><span class="pre">viewvalues</span></code></a>(...)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">values</span></code></td>
 <td></td>
 </tr>
 </tbody>
@@ -289,7 +271,7 @@ and as values the model ids</p>
 </table>
 <dl class="classmethod">
 <dt id="freediscovery.pipeline.PipelineFinder.by_id">
-<em class="property">classmethod </em><code class="descname">by_id</code><span class="sig-paren">(</span><em>mid</em>, <em>cache_dir=u'/tmp/'</em>, <em>ingestion_method=u'vectorizer'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/1b98045/freediscovery/pipeline.py#L86"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.by_id" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">by_id</code><span class="sig-paren">(</span><em>mid</em>, <em>cache_dir='/tmp/'</em>, <em>ingestion_method='vectorizer'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/1f2fb6b/freediscovery/pipeline.py#L86"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.by_id" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find a pipeline by id</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -316,12 +298,12 @@ and as values the model ids</p>
 
 <dl class="method">
 <dt id="freediscovery.pipeline.PipelineFinder.clear">
-<code class="descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; None.  Remove all items from od.<a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/1b98045/freediscovery/../../../../opt/circleci/python/2.7.11/lib/python2.7/collections.py#L96"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.clear" title="Permalink to this definition">¶</a></dt>
+<code class="descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; None.  Remove all items from od.<a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.clear" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="freediscovery.pipeline.PipelineFinder.copy">
-<code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; a shallow copy of od<a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/1b98045/freediscovery/../../../../opt/circleci/python/2.7.11/lib/python2.7/collections.py#L192"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.copy" title="Permalink to this definition">¶</a></dt>
+<code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; a shallow copy of od<a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.copy" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -332,7 +314,7 @@ and as values the model ids</p>
 
 <dl class="method">
 <dt id="freediscovery.pipeline.PipelineFinder.fromkeys">
-<code class="descname">fromkeys</code><span class="sig-paren">(</span><em>S</em><span class="optional">[</span>, <em>v</em><span class="optional">]</span><span class="sig-paren">)</span> &rarr; New ordered dictionary with keys from S.<a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/1b98045/freediscovery/../../../../opt/circleci/python/2.7.11/lib/python2.7/collections.py#L196"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.fromkeys" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fromkeys</code><span class="sig-paren">(</span><em>S</em><span class="optional">[</span>, <em>v</em><span class="optional">]</span><span class="sig-paren">)</span> &rarr; New ordered dictionary with keys from S.<a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.fromkeys" title="Permalink to this definition">¶</a></dt>
 <dd><p>If not specified, the value defaults to None.</p>
 </dd></dl>
 
@@ -343,41 +325,17 @@ and as values the model ids</p>
 
 <dl class="method">
 <dt id="freediscovery.pipeline.PipelineFinder.get_path">
-<code class="descname">get_path</code><span class="sig-paren">(</span><em>mid=None</em>, <em>absolute=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/1b98045/freediscovery/pipeline.py#L181"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.get_path" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_path</code><span class="sig-paren">(</span><em>mid=None</em>, <em>absolute=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/1f2fb6b/freediscovery/pipeline.py#L181"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.get_path" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find the path to the model specified by mid</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="freediscovery.pipeline.PipelineFinder.has_key">
-<code class="descname">has_key</code><span class="sig-paren">(</span><em>k</em><span class="sig-paren">)</span> &rarr; True if D has a key k, else False<a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.has_key" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="freediscovery.pipeline.PipelineFinder.items">
-<code class="descname">items</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; list of (key, value) pairs in od<a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/1b98045/freediscovery/../../../../opt/circleci/python/2.7.11/lib/python2.7/collections.py#L113"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.items" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="freediscovery.pipeline.PipelineFinder.iteritems">
-<code class="descname">iteritems</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/1b98045/freediscovery/../../../../opt/circleci/python/2.7.11/lib/python2.7/collections.py#L126"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.iteritems" title="Permalink to this definition">¶</a></dt>
-<dd><p>od.iteritems -&gt; an iterator over the (key, value) pairs in od</p>
+<dt id="freediscovery.pipeline.PipelineFinder.move_to_end">
+<code class="descname">move_to_end</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.move_to_end" title="Permalink to this definition">¶</a></dt>
+<dd><p>Move an existing element to the end (or beginning if last==False).</p>
+<p>Raises KeyError if the element does not exist.
+When last=True, acts like a fast version of self[key]=self.pop(key).</p>
 </dd></dl>
-
-<dl class="method">
-<dt id="freediscovery.pipeline.PipelineFinder.iterkeys">
-<code class="descname">iterkeys</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; an iterator over the keys in od<a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/1b98045/freediscovery/../../../../opt/circleci/python/2.7.11/lib/python2.7/collections.py#L117"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.iterkeys" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="freediscovery.pipeline.PipelineFinder.itervalues">
-<code class="descname">itervalues</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/1b98045/freediscovery/../../../../opt/circleci/python/2.7.11/lib/python2.7/collections.py#L121"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.itervalues" title="Permalink to this definition">¶</a></dt>
-<dd><p>od.itervalues -&gt; an iterator over the values in od</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="freediscovery.pipeline.PipelineFinder.keys">
-<code class="descname">keys</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; list of keys in od<a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/1b98045/freediscovery/../../../../opt/circleci/python/2.7.11/lib/python2.7/collections.py#L105"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.keys" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="freediscovery.pipeline.PipelineFinder.parent">
@@ -387,48 +345,20 @@ and as values the model ids</p>
 
 <dl class="method">
 <dt id="freediscovery.pipeline.PipelineFinder.pop">
-<code class="descname">pop</code><span class="sig-paren">(</span><em>k</em><span class="optional">[</span>, <em>d</em><span class="optional">]</span><span class="sig-paren">)</span> &rarr; v, remove specified key and return the corresponding<a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/1b98045/freediscovery/../../../../opt/circleci/python/2.7.11/lib/python2.7/collections.py#L137"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.pop" title="Permalink to this definition">¶</a></dt>
+<code class="descname">pop</code><span class="sig-paren">(</span><em>k</em><span class="optional">[</span>, <em>d</em><span class="optional">]</span><span class="sig-paren">)</span> &rarr; v, remove specified key and return the corresponding<a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.pop" title="Permalink to this definition">¶</a></dt>
 <dd><p>value.  If key is not found, d is returned if given, otherwise KeyError
 is raised.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="freediscovery.pipeline.PipelineFinder.popitem">
-<code class="descname">popitem</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; (k, v), return and remove a (key, value) pair.<a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/1b98045/freediscovery/../../../../opt/circleci/python/2.7.11/lib/python2.7/collections.py#L158"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.popitem" title="Permalink to this definition">¶</a></dt>
+<code class="descname">popitem</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; (k, v), return and remove a (key, value) pair.<a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.popitem" title="Permalink to this definition">¶</a></dt>
 <dd><p>Pairs are returned in LIFO order if last is true or FIFO order if false.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="freediscovery.pipeline.PipelineFinder.setdefault">
-<code class="descname">setdefault</code><span class="sig-paren">(</span><em>k</em><span class="optional">[</span>, <em>d</em><span class="optional">]</span><span class="sig-paren">)</span> &rarr; od.get(k,d), also set od[k]=d if k not in od<a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/1b98045/freediscovery/../../../../opt/circleci/python/2.7.11/lib/python2.7/collections.py#L151"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.setdefault" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="freediscovery.pipeline.PipelineFinder.update">
-<code class="descname">update</code><span class="sig-paren">(</span><span class="optional">[</span><em>E</em>, <span class="optional">]</span><em>**F</em><span class="sig-paren">)</span> &rarr; None.  Update D from mapping/iterable E and F.<a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/1b98045/freediscovery/../../virtualenvs/venv-system/lib/python2.7/_abcoll.py#L548"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.update" title="Permalink to this definition">¶</a></dt>
-<dd><p>If E present and has a .keys() method, does:     for k in E: D[k] = E[k]
-If E present and lacks .keys() method, does:     for (k, v) in E: D[k] = v
-In either case, this is followed by: for k, v in F.items(): D[k] = v</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="freediscovery.pipeline.PipelineFinder.values">
-<code class="descname">values</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; list of values in od<a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/1b98045/freediscovery/../../../../opt/circleci/python/2.7.11/lib/python2.7/collections.py#L109"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.values" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="freediscovery.pipeline.PipelineFinder.viewitems">
-<code class="descname">viewitems</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; a set-like object providing a view on od's items<a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/1b98045/freediscovery/../../../../opt/circleci/python/2.7.11/lib/python2.7/collections.py#L230"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.viewitems" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="freediscovery.pipeline.PipelineFinder.viewkeys">
-<code class="descname">viewkeys</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; a set-like object providing a view on od's keys<a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/1b98045/freediscovery/../../../../opt/circleci/python/2.7.11/lib/python2.7/collections.py#L222"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.viewkeys" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="freediscovery.pipeline.PipelineFinder.viewvalues">
-<code class="descname">viewvalues</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; an object providing a view on od's values<a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/1b98045/freediscovery/../../../../opt/circleci/python/2.7.11/lib/python2.7/collections.py#L226"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.viewvalues" title="Permalink to this definition">¶</a></dt>
+<code class="descname">setdefault</code><span class="sig-paren">(</span><em>k</em><span class="optional">[</span>, <em>d</em><span class="optional">]</span><span class="sig-paren">)</span> &rarr; od.get(k,d), also set od[k]=d if k not in od<a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.setdefault" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
