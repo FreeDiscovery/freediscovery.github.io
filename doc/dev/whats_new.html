@@ -170,7 +170,8 @@
 <div class="section" id="enhancements">
 <span id="enhancements"></span><h3>Enhancements<a class="headerlink" href="#enhancements" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Categorization and semantic search support sorting and filtering of documents below a user provided threashold. It also enforces the resulting score in the <code class="docutils literal"><span class="pre">[0,</span> <span class="pre">1]</span></code> range (PR <a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/pull/96/files">#96</a>, <a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/pull/100/files">#101</a>)</li>
+<li>Categorization and semantic search support sorting and filtering of documents below a user provided threashold. (PR <a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/pull/96/files">#96</a>)</li>
+<li>The similarity and ML scores can now be scaled to [0, 1] range using <code class="docutils literal"><span class="pre">nn_metric</span></code> and <code class="docutils literal"><span class="pre">ml_output</span></code> input parameters (PR <a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/pull/100/files">#101</a>).</li>
 <li>The REST API documentation is generated automatically from the code (using an OpenAPI specification) which allows to enforce consistency between the code and the docs (PR <a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/pull/85">#85</a>)</li>
 </ul>
 </div>
@@ -187,7 +188,7 @@
 </ul>
 </li>
 <li>Significant changes in the REST API to accomodate for multi-class categorization</li>
-<li>The <code class="docutils literal"><span class="pre">internal_id</span></code> field is not longer exposed, document are indexed with <code class="docutils literal"><span class="pre">document_id</span></code>, <code class="docutils literal"><span class="pre">rendition_id</span></code> keys.</li>
+<li>The endpoint <code class="docutils literal"><span class="pre">/api/v0/feature-extraction/{dsid}/id-mapping/flat</span></code> is removed, while <code class="docutils literal"><span class="pre">/api/v0/feature-extraction/{dsid}/id-mapping/nested</span></code> is renamed to <code class="docutils literal"><span class="pre">/api/v0/feature-extraction/{dsid}/id-mapping</span></code>.</li>
 </ul>
 </div>
 </div>
@@ -237,7 +238,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016 - 2017, Grossman Labs LLC.
-      Last updated on Feb 23, 2017.
+      Last updated on Feb 24, 2017.
 
     </p>
   </div>

@@ -167,7 +167,7 @@
 <h1>freediscovery.search.Search<a class="headerlink" href="#freediscovery-search-search" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="freediscovery.search.Search">
-<em class="property">class </em><code class="descclassname">freediscovery.search.</code><code class="descname">Search</code><span class="sig-paren">(</span><em>vectorizer</em>, <em>lsi=None</em>, <em>n_jobs=1</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/1f2fb6b/freediscovery/search.py#L69"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.search.Search" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">freediscovery.search.</code><code class="descname">Search</code><span class="sig-paren">(</span><em>vectorizer</em>, <em>lsi=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/1df3825/freediscovery/search.py#L69"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.search.Search" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform (semantic) search in a document collection</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -177,8 +177,6 @@
 <li><strong>vectorizer</strong> (<em>{TfidfVectorizer</em><em>, </em><em>HashingVectorizer}</em>) &#8211; the (fitted) vectorizer that was used on the document collection</li>
 <li><strong>lsi</strong> (<em>TruncatedSVD</em>) &#8211; (optional) an LSI model fitted on the vectorised document-term matrix
 If provided this corresponds to a semantic search, default=None</li>
-<li><strong>n_jobs</strong> (<em>int</em>) &#8211; The number of parallel jobs to run for neighbors search.
-If -1, then the number of jobs is set to the number of CPU cores.</li>
 </ul>
 </td>
 </tr>
@@ -186,7 +184,7 @@ If -1, then the number of jobs is set to the number of CPU cores.</li>
 </table>
 <dl class="method">
 <dt id="freediscovery.search.Search.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>vectorizer</em>, <em>lsi=None</em>, <em>n_jobs=1</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/1f2fb6b/freediscovery/search.py#L83"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.search.Search.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>vectorizer</em>, <em>lsi=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/1df3825/freediscovery/search.py#L80"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.search.Search.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods</p>
@@ -196,7 +194,7 @@ If -1, then the number of jobs is set to the number of CPU cores.</li>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.search.Search.__init__" title="freediscovery.search.Search.__init__"><code class="xref py py-obj docutils literal"><span class="pre">__init__</span></code></a>(vectorizer[,&nbsp;lsi,&nbsp;n_jobs])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.search.Search.__init__" title="freediscovery.search.Search.__init__"><code class="xref py py-obj docutils literal"><span class="pre">__init__</span></code></a>(vectorizer[,&nbsp;lsi])</td>
 <td></td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#freediscovery.search.Search.fit" title="freediscovery.search.Search.fit"><code class="xref py py-obj docutils literal"><span class="pre">fit</span></code></a>(X)</td>
@@ -209,7 +207,7 @@ If -1, then the number of jobs is set to the number of CPU cores.</li>
 </table>
 <dl class="method">
 <dt id="freediscovery.search.Search.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/1f2fb6b/freediscovery/search.py#L90"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.search.Search.fit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/1df3825/freediscovery/search.py#L86"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.search.Search.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fit using a document term matrix (optionally in the LSI space)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -224,7 +222,7 @@ dense documents / lsi terms array (if lsi was provided)</td>
 
 <dl class="method">
 <dt id="freediscovery.search.Search.search">
-<code class="descname">search</code><span class="sig-paren">(</span><em>text</em>, <em>metric='jaccard_norm'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/1f2fb6b/freediscovery/search.py#L102"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.search.Search.search" title="Permalink to this definition">¶</a></dt>
+<code class="descname">search</code><span class="sig-paren">(</span><em>text</em>, <em>metric='jaccard_norm'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/1df3825/freediscovery/search.py#L98"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.search.Search.search" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform the search operation</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -262,7 +260,7 @@ dense documents / lsi terms array (if lsi was provided)</td>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016 - 2017, Grossman Labs LLC.
-      Last updated on Feb 23, 2017.
+      Last updated on Feb 24, 2017.
 
     </p>
   </div>
