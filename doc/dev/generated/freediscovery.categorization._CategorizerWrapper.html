@@ -169,7 +169,7 @@
 <h1>freediscovery.categorization._CategorizerWrapper<a class="headerlink" href="#freediscovery-categorization-categorizerwrapper" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="freediscovery.categorization._CategorizerWrapper">
-<em class="property">class </em><code class="descclassname">freediscovery.categorization.</code><code class="descname">_CategorizerWrapper</code><span class="sig-paren">(</span><em>cache_dir='/tmp/'</em>, <em>parent_id=None</em>, <em>mid=None</em>, <em>cv_scoring='roc_auc'</em>, <em>cv_n_folds=3</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/edb8fc8/freediscovery/categorization.py#L64"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.categorization._CategorizerWrapper" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">freediscovery.categorization.</code><code class="descname">_CategorizerWrapper</code><span class="sig-paren">(</span><em>cache_dir='/tmp/'</em>, <em>parent_id=None</em>, <em>mid=None</em>, <em>cv_scoring='roc_auc'</em>, <em>cv_n_folds=3</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/b4c3812/freediscovery/categorization.py#L64"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.categorization._CategorizerWrapper" title="Permalink to this definition">¶</a></dt>
 <dd><p>Document categorization model</p>
 <p>The option <cite>use_hashing=True</cite> must be set for the feature extraction.
 Recommended options also include, <cite>use_idf=1, sublinear_tf=0, binary=0</cite>.</p>
@@ -190,7 +190,7 @@ Recommended options also include, <cite>use_idf=1, sublinear_tf=0, binary=0</cit
 </table>
 <dl class="method">
 <dt id="freediscovery.categorization._CategorizerWrapper.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>cache_dir='/tmp/'</em>, <em>parent_id=None</em>, <em>mid=None</em>, <em>cv_scoring='roc_auc'</em>, <em>cv_n_folds=3</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/edb8fc8/freediscovery/categorization.py#L86"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.categorization._CategorizerWrapper.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>cache_dir='/tmp/'</em>, <em>parent_id=None</em>, <em>mid=None</em>, <em>cv_scoring='roc_auc'</em>, <em>cv_n_folds=3</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/b4c3812/freediscovery/categorization.py#L86"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.categorization._CategorizerWrapper.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods</p>
@@ -206,44 +206,71 @@ Recommended options also include, <cite>use_idf=1, sublinear_tf=0, binary=0</cit
 <tr class="row-even"><td><a class="reference internal" href="#freediscovery.categorization._CategorizerWrapper.delete" title="freediscovery.categorization._CategorizerWrapper.delete"><code class="xref py py-obj docutils literal"><span class="pre">delete</span></code></a>()</td>
 <td>Delete a trained model</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.categorization._CategorizerWrapper.get_params" title="freediscovery.categorization._CategorizerWrapper.get_params"><code class="xref py py-obj docutils literal"><span class="pre">get_params</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.categorization._CategorizerWrapper.fit" title="freediscovery.categorization._CategorizerWrapper.fit"><code class="xref py py-obj docutils literal"><span class="pre">fit</span></code></a>(index,&nbsp;y[,&nbsp;method,&nbsp;cv])</td>
+<td>Train the categorization model</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#freediscovery.categorization._CategorizerWrapper.get_params" title="freediscovery.categorization._CategorizerWrapper.get_params"><code class="xref py py-obj docutils literal"><span class="pre">get_params</span></code></a>()</td>
 <td>Get model parameters</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#freediscovery.categorization._CategorizerWrapper.list_models" title="freediscovery.categorization._CategorizerWrapper.list_models"><code class="xref py py-obj docutils literal"><span class="pre">list_models</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.categorization._CategorizerWrapper.list_models" title="freediscovery.categorization._CategorizerWrapper.list_models"><code class="xref py py-obj docutils literal"><span class="pre">list_models</span></code></a>()</td>
 <td>List existing models of this type</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.categorization._CategorizerWrapper.predict" title="freediscovery.categorization._CategorizerWrapper.predict"><code class="xref py py-obj docutils literal"><span class="pre">predict</span></code></a>([chunk_size,&nbsp;ml_output,&nbsp;nn_metric])</td>
+<tr class="row-even"><td><a class="reference internal" href="#freediscovery.categorization._CategorizerWrapper.predict" title="freediscovery.categorization._CategorizerWrapper.predict"><code class="xref py py-obj docutils literal"><span class="pre">predict</span></code></a>([chunk_size,&nbsp;ml_output,&nbsp;nn_metric])</td>
 <td>Predict the relevance using a previously trained model</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#freediscovery.categorization._CategorizerWrapper.to_dict" title="freediscovery.categorization._CategorizerWrapper.to_dict"><code class="xref py py-obj docutils literal"><span class="pre">to_dict</span></code></a>(Y_pred,&nbsp;nn_pred,&nbsp;labels,&nbsp;id_mapping)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.categorization._CategorizerWrapper.to_dict" title="freediscovery.categorization._CategorizerWrapper.to_dict"><code class="xref py py-obj docutils literal"><span class="pre">to_dict</span></code></a>(Y_pred,&nbsp;nn_pred,&nbsp;labels,&nbsp;id_mapping)</td>
 <td>Create a nested dictionary result that would be returned by</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.categorization._CategorizerWrapper.train" title="freediscovery.categorization._CategorizerWrapper.train"><code class="xref py py-obj docutils literal"><span class="pre">train</span></code></a>(index,&nbsp;y[,&nbsp;method,&nbsp;cv])</td>
-<td>Train the categorization model</td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
 <dt id="freediscovery.categorization._CategorizerWrapper.delete">
-<code class="descname">delete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/edb8fc8/freediscovery/base.py#L100"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.categorization._CategorizerWrapper.delete" title="Permalink to this definition">¶</a></dt>
+<code class="descname">delete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/b4c3812/freediscovery/base.py#L100"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.categorization._CategorizerWrapper.delete" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete a trained model</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="freediscovery.categorization._CategorizerWrapper.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>index</em>, <em>y</em>, <em>method='LinearSVC'</em>, <em>cv=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/b4c3812/freediscovery/categorization.py#L161"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.categorization._CategorizerWrapper.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Train the categorization model</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>index</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>)</em><em></em>) &#8211; document indices of the training set</li>
+<li><strong>y</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>)</em><em></em>) &#8211; target class relative to index (string or int)</li>
+<li><strong>method</strong> (<em>str</em>) &#8211; the ML algorithm to use (one of &#8220;LogisticRegression&#8221;, &#8220;LinearSVC&#8221;, &#8216;xgboost&#8217;)</li>
+<li><strong>cv</strong> (<em>str</em>) &#8211; use cross-validation</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
+<li><strong>cmod</strong> (<em>sklearn.BaseEstimator</em>) &#8211; the scikit learn classifier object</li>
+<li><strong>Y_train</strong> (<em>array-like, shape (n_samples)</em>) &#8211; training predictions</li>
+</ul>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="freediscovery.categorization._CategorizerWrapper.get_params">
-<code class="descname">get_params</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/edb8fc8/freediscovery/base.py#L110"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.categorization._CategorizerWrapper.get_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_params</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/b4c3812/freediscovery/base.py#L110"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.categorization._CategorizerWrapper.get_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get model parameters</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="freediscovery.categorization._CategorizerWrapper.list_models">
-<code class="descname">list_models</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/edb8fc8/freediscovery/base.py#L137"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.categorization._CategorizerWrapper.list_models" title="Permalink to this definition">¶</a></dt>
+<code class="descname">list_models</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/b4c3812/freediscovery/base.py#L137"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.categorization._CategorizerWrapper.list_models" title="Permalink to this definition">¶</a></dt>
 <dd><p>List existing models of this type</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="freediscovery.categorization._CategorizerWrapper.predict">
-<code class="descname">predict</code><span class="sig-paren">(</span><em>chunk_size=5000</em>, <em>ml_output='probability'</em>, <em>nn_metric='cosine'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/edb8fc8/freediscovery/categorization.py#L236"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.categorization._CategorizerWrapper.predict" title="Permalink to this definition">¶</a></dt>
+<code class="descname">predict</code><span class="sig-paren">(</span><em>chunk_size=5000</em>, <em>ml_output='probability'</em>, <em>nn_metric='cosine'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/b4c3812/freediscovery/categorization.py#L236"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.categorization._CategorizerWrapper.predict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Predict the relevance using a previously trained model</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -269,7 +296,7 @@ Recommended options also include, <cite>use_idf=1, sublinear_tf=0, binary=0</cit
 
 <dl class="staticmethod">
 <dt id="freediscovery.categorization._CategorizerWrapper.to_dict">
-<em class="property">static </em><code class="descname">to_dict</code><span class="sig-paren">(</span><em>Y_pred</em>, <em>nn_pred</em>, <em>labels</em>, <em>id_mapping</em>, <em>max_result_categories=1</em>, <em>sort=False</em>, <em>min_score=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/edb8fc8/freediscovery/categorization.py#L299"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.categorization._CategorizerWrapper.to_dict" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">to_dict</code><span class="sig-paren">(</span><em>Y_pred</em>, <em>nn_pred</em>, <em>labels</em>, <em>id_mapping</em>, <em>max_result_categories=1</em>, <em>sort=False</em>, <em>min_score=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/b4c3812/freediscovery/categorization.py#L300"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.categorization._CategorizerWrapper.to_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a nested dictionary result that would be returned by
 the REST API given the categorization results</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -285,33 +312,6 @@ the REST API given the categorization results</p>
 <li><strong>sort</strong> (<em>bool</em>) &#8211; sort by the score of the most likely class</li>
 <li><strong>min_score</strong> (<em>{int</em><em>, </em><em>None}</em>) &#8211; filter out results below a score threashold</li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="freediscovery.categorization._CategorizerWrapper.train">
-<code class="descname">train</code><span class="sig-paren">(</span><em>index</em>, <em>y</em>, <em>method='LinearSVC'</em>, <em>cv=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/edb8fc8/freediscovery/categorization.py#L161"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.categorization._CategorizerWrapper.train" title="Permalink to this definition">¶</a></dt>
-<dd><p>Train the categorization model</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>index</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>)</em><em></em>) &#8211; document indices of the training set</li>
-<li><strong>y</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>)</em><em></em>) &#8211; target class relative to index (string or int)</li>
-<li><strong>method</strong> (<em>str</em>) &#8211; the ML algorithm to use (one of &#8220;LogisticRegression&#8221;, &#8220;LinearSVC&#8221;, &#8216;xgboost&#8217;)</li>
-<li><strong>cv</strong> (<em>str</em>) &#8211; use cross-validation</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
-<li><strong>cmod</strong> (<em>sklearn.BaseEstimator</em>) &#8211; the scikit learn classifier object</li>
-<li><strong>Y_train</strong> (<em>array-like, shape (n_samples)</em>) &#8211; training predictions</li>
-</ul>
-</p>
 </td>
 </tr>
 </tbody>
@@ -342,7 +342,7 @@ the REST API given the categorization results</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016 - 2017, Grossman Labs LLC.
-      Last updated on Feb 26, 2017.
+      Last updated on Feb 27, 2017.
 
     </p>
   </div>
