@@ -22,13 +22,13 @@ Find near-duplicates in a text collection
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received ['filenames', 'id']
-       => dsid = 3a05f90cd9544efd
+       => dsid = 4b8cc2f6031c4695
 
     1.b Run feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/3a05f90cd9544efd
+     POST http://localhost:5001/api/v0/feature-extraction/4b8cc2f6031c4695
 
     1.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/3a05f90cd9544efd
+     GET http://localhost:5001/api/v0/feature-extraction/4b8cc2f6031c4695
          - analyzer: word
          - binary: False
          - chunk_size: 5000
@@ -49,29 +49,29 @@ Find near-duplicates in a text collection
     2. Near Duplicates detection by cosine similarity (DBSCAN)
     POST http://localhost:5001/api/v0/lsi/
      POST http://localhost:5001/api/v0/clustering/dbscan/
-         => model id = cf7fd02df5364d83
-     GET http://localhost:5001/api/v0/clustering/dbscan/cf7fd02df5364d83
-        .. computed in 1.5s
-    Found 260 duplicates / 2465
+         => model id = 4a4577edef174707
+     GET http://localhost:5001/api/v0/clustering/dbscan/4a4577edef174707
+        .. computed in 6.4s
+    Found 320 duplicates / 2465
 
     3. Near Duplicates Detection using I-Match
      POST http://localhost:5001/api/v0/duplicate-detection/
-         => model id = e9893fce04954b0a
+         => model id = c83f568ea6e34051
         .. computed in 0.1s
-     GET http://localhost:5001/api/v0/duplicate-detection/e9893fce04954b0a
-        .. computed in 3.4s
-    Found 236 duplicates / 2465
+     GET http://localhost:5001/api/v0/duplicate-detection/c83f568ea6e34051
+        .. computed in 3.9s
+    Found 359 duplicates / 2465
 
     3. Duplicate detection by Simhash
      POST http://localhost:5001/api/v0/duplicate-detection/
-         => model id = 7862a5ddbecb4349
-        .. computed in 0.9s
-     GET http://localhost:5001/api/v0/duplicate-detection/7862a5ddbecb4349
-        .. computed in 0.1s
-    Found 333 duplicates / 2465
+         => model id = 5bf78132e864477d
+        .. computed in 0.8s
+     GET http://localhost:5001/api/v0/duplicate-detection/5bf78132e864477d
+        .. computed in 1.2s
+    Found 533 duplicates / 2465
 
     4.a Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/3a05f90cd9544efd
+     DELETE http://localhost:5001/api/v0/feature-extraction/4b8cc2f6031c4695
 
 
 
@@ -160,7 +160,7 @@ Find near-duplicates in a text collection
     t0 = time()
     res = requests.post(url,
             json={'parent_id': lsi_id,
-                  'eps': 0.35,            # 2*cosine distance for documents to be considered as duplicates
+                  'min_similarity': 0.90,            # 2*cosine distance for documents to be considered as duplicates
                   'n_max_samples': 2
                   }).json()
 
@@ -176,9 +176,10 @@ Find near-duplicates in a text collection
 
     print('    .. computed in {:.1f}s'.format(t1 - t0))
 
-    labels_ = res['labels']
-
-    print('Found {} duplicates / {}'.format(len(labels_) - len(np.unique(labels_)), len(labels_)))
+    data = res['data']
+    print('Found {} duplicates / {}'.format(sum([len(row['documents']) for row in data \
+                                                if len(row['documents']) > 1]),
+                                            len(input_ds['dataset'])))
 
 
     print("\n3. Near Duplicates Detection using I-Match")
@@ -207,9 +208,10 @@ Find near-duplicates in a text collection
     t1 = time()
     print('    .. computed in {:.1f}s'.format(time() - t0))
 
-    labels_ = res['cluster_id']
+    data = res['data']
 
-    print('Found {} duplicates / {}'.format(len(labels_) - len(np.unique(labels_)), len(labels_)))
+    print('Found {} duplicates / {}'.format(sum([len(row['documents']) for row in data]),
+                                            len(input_ds['dataset'])))
 
 
 
@@ -243,9 +245,10 @@ Find near-duplicates in a text collection
     data = res.json()
     print('    .. computed in {:.1f}s'.format(time() - t0))
 
-    labels_ = data['cluster_id']
+    data = data['data']
 
-    print('Found {} duplicates / {}'.format(len(labels_) - len(np.unique(labels_)), len(labels_)))
+    print('Found {} duplicates / {}'.format(sum([len(row['documents']) for row in data]),
+                                            len(input_ds['dataset'])))
 
 
 
@@ -255,7 +258,7 @@ Find near-duplicates in a text collection
     print(" DELETE", url)
     requests.delete(url)
 
-**Total running time of the script:** ( 0 minutes  10.820 seconds)
+**Total running time of the script:** ( 0 minutes  16.874 seconds)
 
 
 

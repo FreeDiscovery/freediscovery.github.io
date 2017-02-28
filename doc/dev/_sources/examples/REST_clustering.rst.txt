@@ -22,13 +22,13 @@ Cluster documents into clusters
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received ['filenames', 'id']
-       => dsid = d702000478874f94
+       => dsid = 32ca130140c34fdf
 
     1.b Run feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/d702000478874f94
+     POST http://localhost:5001/api/v0/feature-extraction/32ca130140c34fdf
 
     1.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/d702000478874f94
+     GET http://localhost:5001/api/v0/feature-extraction/32ca130140c34fdf
          - analyzer: word
          - binary: False
          - chunk_size: 5000
@@ -48,49 +48,38 @@ Cluster documents into clusters
 
     2. Calculate LSI
     POST http://localhost:5001/api/v0/lsi/
-      => LSI model id = 86580efda13f4879
+      => LSI model id = 50c1b814345641c4
       => SVD decomposition with 100 dimensions explaining 99.76 % variabilty of the data
 
     3.a. Document clustering (LSI + K-means)
      POST http://localhost:5001/api/v0/clustering/k-mean/
-         => model id = 43e8e69851dc49d2
+         => model id = a1054c1cb7c047ff
 
     3.b. Computing cluster labels
-     GET http://localhost:5001/api/v0/clustering/k-mean/43e8e69851dc49d2
-        .. computed in 1.0s
-       N_documents                                      cluster_names
-    9          648  [lon, ect, newsticker, forster, usvi, informat...
-    0          421        [enron, net, approved, date, epa, changing]
-    3          384         [enron, nicolay, serc, nerc, letter, fuel]
-    6          288  [shackleton, marcelo, brazil, tozzini, harris,...
-    2          202      [tana, jones, enron, advice, trading, update]
-    8          174  [teneo, group, recipients, administrative, tes...
-    1          133  [teneo, shackleton, group, marcelo, recipients...
-    7           97  [ruppert, nemec, gillaspie, exxon, translated,...
-    4           60        [ect, hou, shackleton, jones, flynn, enron]
-    5           58  [rewrite, server, address, smtp, enron_develop...
+     GET http://localhost:5001/api/v0/clustering/k-mean/a1054c1cb7c047ff
+        .. computed in 1.6s
+       cluster_id              cluster_label  cluster_similarity  n_documents
+    0           0          enron nicolay net               0.729          562
+    1           1  shackleton marcelo brazil               0.683           93
+    2           2           tana jones enron               0.670          181
+    3           3     teneo group recipients               0.713          190
+    4           4    ruppert nemec gillaspie               0.745           96
+    5           5  shackleton marcelo bailey               0.649          339
+    6           6          enron pcb cleanup               0.495          238
+    7           7     rewrite server address               1.000           56
+    8           8         lon ect newsticker               0.598          145
+    9           9         hou ect translated               0.319          565
 
-    4.a. Document clustering (LSI + Ward HC)
+    4.a. Document clustering (LSI + Birch clustering)
      POST http://localhost:5001/api/v0/clustering/ward_hc/
-         => model id = 04660e8b116241d9
+         => model id = 0f66fe3c02fa4841
 
     4.b. Computing cluster labels
-     GET http://localhost:5001/api/v0/clustering/ward_hc/04660e8b116241d9
-        .. computed in 2.1s
-       N_documents                                      cluster_names
-    1          756                [enron, pcb, fuel, test, net, corp]
-    0          446  [shackleton, marcelo, brazil, teneo, tozzini, ...
-    2          443     [enron, net, approved, changing, place, nemec]
-    3          248       [lon, forster, teneo, ect, tana, newsticker]
-    4          147      [enron, tana, jones, advice, trading, update]
-    8          127       [serc, nerc, letter, enron, nicolay, presto]
-    7          116  [teneo, group, recipients, administrative, tes...
-    6           86  [ruppert, nemec, gillaspie, exxon, translated,...
-    5           56    [rewrite, server, address, smtp, mail, virtual]
-    9           40         [ect, hou, shackleton, jones, tana, flynn]
+     GET http://localhost:5001/api/v0/clustering/birch/0f66fe3c02fa4841
+        .. computed in 2.6s
 
     5. Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/d702000478874f94
+     DELETE http://localhost:5001/api/v0/feature-extraction/32ca130140c34fdf
 
 
 
@@ -109,13 +98,6 @@ Cluster documents into clusters
 
     pd.options.display.float_format = '{:,.3f}'.format
 
-
-    def repr_clustering(labels, terms):
-        out = []
-        for ridx, row in enumerate(terms):
-            out.append({'cluster_names': row, 'N_documents': (labels == ridx).sum()})
-        out = pd.DataFrame(out).sort_values('N_documents', ascending=False)
-        return out
 
     dataset_name = "treclegal09_2k_subset"     # see list of available datasets
 
@@ -197,17 +179,22 @@ Cluster documents into clusters
     url = BASE_URL + '/clustering/k-mean/{}'.format(mid)
     print(" GET", url)
     res = requests.get(url,
-                       json={'n_top_words': 6
+                       json={'n_top_words': 3
                              }).json()
     t1 = time()
 
+
+    data = res['data']
+    for row in data:
+        row['n_documents'] = len(row.pop('documents'))
+
     print('    .. computed in {:.1f}s'.format(t1 - t0))
-    print(repr_clustering(np.array(res['labels']), res['cluster_terms']))
+    print(pd.DataFrame(data))
 
 
-    # # 4. Document Clustering (LSI + Ward Hierarchical Clustering)
+    # # 4. Document Clustering (LSI + Birch Clustering)
 
-    print("\n4.a. Document clustering (LSI + Ward HC)")
+    print("\n4.a. Document clustering (LSI + Birch clustering)")
 
     url = BASE_URL + '/clustering/ward_hc/'
     print(" POST", url)
@@ -215,14 +202,14 @@ Cluster documents into clusters
     res = requests.post(url,
                         json={'parent_id': lsi_id,
                               'n_clusters': 10,
-                              'n_neighbors': 5  # this is the connectivity constraint
+                              'min_similarity': 0.7
                               }).json()
 
     mid = res['id']
     print("     => model id = {}".format(mid))
 
     print("\n4.b. Computing cluster labels")
-    url = BASE_URL + '/clustering/ward_hc/{}'.format(mid)
+    url = BASE_URL + '/clustering/birch/{}'.format(mid)
     print(" GET", url)
     res = requests.get(url,
                        json={'n_top_words': 6
@@ -230,7 +217,9 @@ Cluster documents into clusters
     t1 = time()
 
     print('    .. computed in {:.1f}s'.format(t1 - t0))
-    print(repr_clustering(np.array(res['labels']), res['cluster_terms']))
+    data = res['data']
+    for row in data:
+        row['n_documents'] = len(row.pop('documents'))
 
 
     # 4. Cleaning
@@ -239,7 +228,7 @@ Cluster documents into clusters
     print(" DELETE", url)
     requests.delete(url)
 
-**Total running time of the script:** ( 0 minutes  8.091 seconds)
+**Total running time of the script:** ( 0 minutes  8.762 seconds)
 
 
 
