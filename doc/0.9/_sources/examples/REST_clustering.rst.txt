@@ -1,0 +1,250 @@
+
+
+.. _sphx_glr_examples_REST_clustering.py:
+
+
+Clustering Example [REST API]
+-----------------------------
+
+Cluster documents into clusters
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    0. Load the example dataset
+     GET http://localhost:5001/api/v0/example-dataset/treclegal09_2k_subset
+
+    1.a Load dataset and initalize feature extraction
+     POST http://localhost:5001/api/v0/feature-extraction
+       => received ['filenames', 'id']
+       => dsid = eec66442f08d4b30
+
+    1.b Run feature extraction
+     POST http://localhost:5001/api/v0/feature-extraction/eec66442f08d4b30
+
+    1.d. check the parameters of the extracted features
+     GET http://localhost:5001/api/v0/feature-extraction/eec66442f08d4b30
+         - analyzer: word
+         - binary: False
+         - chunk_size: 5000
+         - data_dir: ../freediscovery_shared/treclegal09_2k_subset/data/jobRun_4/XML_EXPORT_CONTENT/text_9
+         - max_df: 0.75
+         - min_df: 4.0
+         - n_features: 30001
+         - n_jobs: 1
+         - n_samples: 2465
+         - n_samples_processed: 2465
+         - ngram_range: [1, 1]
+         - norm: None
+         - stop_words: None
+         - sublinear_tf: True
+         - use_hashing: False
+         - use_idf: True
+
+    2. Calculate LSI
+    POST http://localhost:5001/api/v0/lsi/
+      => LSI model id = fb9bfa44d4f84fc5
+      => SVD decomposition with 100 dimensions explaining 99.76 % variabilty of the data
+
+    3.a. Document clustering (LSI + K-means)
+     POST http://localhost:5001/api/v0/clustering/k-mean/
+         => model id = ee7177c3181743d1
+
+    3.b. Computing cluster labels
+     GET http://localhost:5001/api/v0/clustering/k-mean/ee7177c3181743d1
+        .. computed in 1.8s
+       cluster_id                cluster_label  cluster_similarity  n_documents
+    0           0       canadian usvi talisman               0.512          149
+    1           1              enron serc nerc               0.603          227
+    2           2  enron pcb enron_development               0.329          613
+    3           3       teneo group recipients               0.682          244
+    4           4           enron approved net               0.749          434
+    5           5       rewrite server address               1.000           56
+    6           6             enron tana jones               0.653          200
+    7           7           lon ect newsticker               0.649           92
+    8           8    shackleton marcelo brazil               0.648          342
+    9           9      ruppert nemec gillaspie               0.717          108
+
+    4.a. Document clustering (LSI + Birch clustering)
+     POST http://localhost:5001/api/v0/clustering/ward_hc/
+         => model id = fb6c397f453148f2
+
+    4.b. Computing cluster labels
+     GET http://localhost:5001/api/v0/clustering/birch/fb6c397f453148f2
+        .. computed in 2.8s
+
+    5. Delete the extracted features
+     DELETE http://localhost:5001/api/v0/feature-extraction/eec66442f08d4b30
+
+
+
+
+|
+
+
+.. code-block:: python
+
+
+    import os.path
+    import numpy as np
+    import pandas as pd
+    from time import time
+    import requests
+
+    pd.options.display.float_format = '{:,.3f}'.format
+
+
+    dataset_name = "treclegal09_2k_subset"     # see list of available datasets
+
+    BASE_URL = "http://localhost:5001/api/v0"  # FreeDiscovery server URL
+
+    print(" 0. Load the example dataset")
+    url = BASE_URL + '/example-dataset/{}'.format(dataset_name)
+    print(" GET", url)
+    input_ds = requests.get(url).json()
+
+    # To use a custom dataset, simply specify the following variables
+    data_dir = input_ds['metadata']['data_dir']
+    dataset_definition = [{'document_id': row['document_id'],
+                           'file_path': os.path.join(data_dir, row['file_path'])} \
+                                   for row in input_ds['dataset']]
+
+    # # 1. Feature extraction (non hashed)
+
+    print("\n1.a Load dataset and initalize feature extraction")
+    url = BASE_URL + '/feature-extraction'
+    print(" POST", url)
+    fe_opts = {'dataset_definition': dataset_definition,
+               'use_idf': 1, 'n_features': 30001,
+               'min_df': 4, 'max_df': 0.75 # filter out unfrequent / too frequent words
+               }
+    res = requests.post(url, json=fe_opts).json()
+
+    dsid = res['id']
+    print("   => received {}".format(list(res.keys())))
+    print("   => dsid = {}".format(dsid))
+
+
+    print("\n1.b Run feature extraction")
+    # progress status is available for the hashed version only
+    url = BASE_URL+'/feature-extraction/{}'.format(dsid)
+    print(" POST", url)
+    res = requests.post(url)
+
+    print("\n1.d. check the parameters of the extracted features")
+    url = BASE_URL + '/feature-extraction/{}'.format(dsid)
+    print(' GET', url)
+    res = requests.get(url).json()
+
+    print('\n'.join(['     - {}: {}'.format(key, val) for key, val in res.items() \
+                                                      if "filenames" not in key]))
+
+    print("\n2. Calculate LSI")
+
+    url = BASE_URL + '/lsi/'
+    print("POST", url)
+
+    n_components = 100
+    res = requests.post(url,
+                        json={'n_components': n_components,
+                              'parent_id': dsid
+                              }).json()
+
+    lsi_id = res['id']
+    print('  => LSI model id = {}'.format(lsi_id))
+    print('  => SVD decomposition with {} dimensions explaining {:.2f} % variabilty of the data'.format(
+                            n_components, res['explained_variance']*100))
+
+    # # 3. Document Clustering (LSI + K-Means)
+
+    print("\n3.a. Document clustering (LSI + K-means)")
+
+    url = BASE_URL + '/clustering/k-mean/'
+    print(" POST", url)
+    t0 = time()
+    res = requests.post(url,
+                        json={'parent_id': lsi_id,
+                              'n_clusters': 10,
+                              }).json()
+
+    mid = res['id']
+    print("     => model id = {}".format(mid))
+
+    print("\n3.b. Computing cluster labels")
+    url = BASE_URL + '/clustering/k-mean/{}'.format(mid)
+    print(" GET", url)
+    res = requests.get(url,
+                       json={'n_top_words': 3
+                             }).json()
+    t1 = time()
+
+
+    data = res['data']
+    for row in data:
+        row['n_documents'] = len(row.pop('documents'))
+
+    print('    .. computed in {:.1f}s'.format(t1 - t0))
+    print(pd.DataFrame(data))
+
+
+    # # 4. Document Clustering (LSI + Birch Clustering)
+
+    print("\n4.a. Document clustering (LSI + Birch clustering)")
+
+    url = BASE_URL + '/clustering/ward_hc/'
+    print(" POST", url)
+    t0 = time()
+    res = requests.post(url,
+                        json={'parent_id': lsi_id,
+                              'n_clusters': 10,
+                              'min_similarity': 0.7
+                              }).json()
+
+    mid = res['id']
+    print("     => model id = {}".format(mid))
+
+    print("\n4.b. Computing cluster labels")
+    url = BASE_URL + '/clustering/birch/{}'.format(mid)
+    print(" GET", url)
+    res = requests.get(url,
+                       json={'n_top_words': 6
+                             }).json()
+    t1 = time()
+
+    print('    .. computed in {:.1f}s'.format(t1 - t0))
+    data = res['data']
+    for row in data:
+        row['n_documents'] = len(row.pop('documents'))
+
+
+    # 4. Cleaning
+    print("\n5. Delete the extracted features")
+    url = BASE_URL + '/feature-extraction/{}'.format(dsid)
+    print(" DELETE", url)
+    requests.delete(url)
+
+**Total running time of the script:** ( 0 minutes  9.549 seconds)
+
+
+
+.. container:: sphx-glr-footer
+
+
+  .. container:: sphx-glr-download
+
+     :download:`Download Python source code: REST_clustering.py <REST_clustering.py>`
+
+
+
+  .. container:: sphx-glr-download
+
+     :download:`Download Jupyter notebook: REST_clustering.ipynb <REST_clustering.ipynb>`
+
+.. rst-class:: sphx-glr-signature
+
+    `Generated by Sphinx-Gallery <http://sphinx-gallery.readthedocs.io>`_

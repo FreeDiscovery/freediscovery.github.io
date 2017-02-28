@@ -1,0 +1,381 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>freediscovery.dupdet._DuplicateDetectionWrapper &mdash; FreeDiscovery 0.9.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="FreeDiscovery 0.9.0 documentation" href="../index.html"/>
+        <link rel="up" title="Python API Reference" href="../python_api.html"/>
+        <link rel="next" title="freediscovery.dupdet.SimhashDuplicates" href="freediscovery.dupdet.SimhashDuplicates.html"/>
+        <link rel="prev" title="freediscovery.cluster.utils._merge_clusters" href="freediscovery.cluster.utils._merge_clusters.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> FreeDiscovery
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.9.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation_instructions.html">Installation Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rest_api.html">REST API reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../python_api.html">Python API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#datasets">Datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#parsers">Parsers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#feature-extraction">Feature extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#document-categorization">Document categorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#document-clustering">Document clustering</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../python_api.html#duplicates-detection">Duplicates detection</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">freediscovery.dupdet._DuplicateDetectionWrapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="freediscovery.dupdet.SimhashDuplicates.html">freediscovery.dupdet.SimhashDuplicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="freediscovery.dupdet.IMatchDuplicates.html">freediscovery.dupdet.IMatchDuplicates</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#email-threading">Email threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#semantic-search">Semantic search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#tools">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#io">IO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#metrics">Metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#exceptions">Exceptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_manual/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats_new.html">Release history</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">FreeDiscovery</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+        <li><a href="../python_api.html">Python API Reference</a> &raquo;</li>
+      
+    <li>freediscovery.dupdet._DuplicateDetectionWrapper</li>
+    <li class="wy-breadcrumbs-aside">
+      
+          
+          <a href="../_sources/generated/freediscovery.dupdet._DuplicateDetectionWrapper.rst.txt" rel="nofollow"> View page source</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="freediscovery-dupdet-duplicatedetectionwrapper">
+<h1>freediscovery.dupdet._DuplicateDetectionWrapper<a class="headerlink" href="#freediscovery-dupdet-duplicatedetectionwrapper" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="freediscovery.dupdet._DuplicateDetectionWrapper">
+<em class="property">class </em><code class="descclassname">freediscovery.dupdet.</code><code class="descname">_DuplicateDetectionWrapper</code><span class="sig-paren">(</span><em>cache_dir='/tmp/'</em>, <em>parent_id=None</em>, <em>mid=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/1e65472/freediscovery/dupdet/base.py#L19"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.dupdet._DuplicateDetectionWrapper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find near duplicates in a document collection.</p>
+<p>Currently supported backends are simhash-py and i-match.</p>
+<p>The option <cite>use_hashing=False</cite> must be set for the feature extraction.
+Recommended options also include, <cite>use_idf=1, sublinear_tf=0, binary=0</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>cache_dir</strong> (<em>str</em>) &#8211; directory where to save temporary and regression files</li>
+<li><strong>parent_id</strong> (<em>str</em><em>, </em><em>optional</em>) &#8211; dataset id</li>
+<li><strong>mid</strong> (<em>str</em><em>, </em><em>optional</em>) &#8211; model id</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="freediscovery.dupdet._DuplicateDetectionWrapper.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>cache_dir='/tmp/'</em>, <em>parent_id=None</em>, <em>mid=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/1e65472/freediscovery/dupdet/base.py#L39"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.dupdet._DuplicateDetectionWrapper.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.dupdet._DuplicateDetectionWrapper.__init__" title="freediscovery.dupdet._DuplicateDetectionWrapper.__init__"><code class="xref py py-obj docutils literal"><span class="pre">__init__</span></code></a>([cache_dir,&nbsp;parent_id,&nbsp;mid])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#freediscovery.dupdet._DuplicateDetectionWrapper.centroid_similarity" title="freediscovery.dupdet._DuplicateDetectionWrapper.centroid_similarity"><code class="xref py py-obj docutils literal"><span class="pre">centroid_similarity</span></code></a>(internal_ids[,&nbsp;nn_metric])</td>
+<td>Given a list of documents in a cluster, compute the cluster centroid,</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.dupdet._DuplicateDetectionWrapper.delete" title="freediscovery.dupdet._DuplicateDetectionWrapper.delete"><code class="xref py py-obj docutils literal"><span class="pre">delete</span></code></a>()</td>
+<td>Delete a trained model</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#freediscovery.dupdet._DuplicateDetectionWrapper.fit" title="freediscovery.dupdet._DuplicateDetectionWrapper.fit"><code class="xref py py-obj docutils literal"><span class="pre">fit</span></code></a>([method])</td>
+<td>Precompute all the required values for duplicate detection</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.dupdet._DuplicateDetectionWrapper.get_params" title="freediscovery.dupdet._DuplicateDetectionWrapper.get_params"><code class="xref py py-obj docutils literal"><span class="pre">get_params</span></code></a>()</td>
+<td>Get model parameters</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#freediscovery.dupdet._DuplicateDetectionWrapper.list_models" title="freediscovery.dupdet._DuplicateDetectionWrapper.list_models"><code class="xref py py-obj docutils literal"><span class="pre">list_models</span></code></a>()</td>
+<td>List existing models of this type</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.dupdet._DuplicateDetectionWrapper.query" title="freediscovery.dupdet._DuplicateDetectionWrapper.query"><code class="xref py py-obj docutils literal"><span class="pre">query</span></code></a>(\*\*args)</td>
+<td>Find all the nearests neighbours for the dataset</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="freediscovery.dupdet._DuplicateDetectionWrapper.centroid_similarity">
+<code class="descname">centroid_similarity</code><span class="sig-paren">(</span><em>internal_ids</em>, <em>nn_metric='jaccard_norm'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/1e65472/freediscovery/cluster/base.py#L141"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.dupdet._DuplicateDetectionWrapper.centroid_similarity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a list of documents in a cluster, compute the cluster centroid,
+intertia and individual distances</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>internal_ids</strong> (<em>list</em>) &#8211; a list of internal ids</li>
+<li><strong>nn_metric</strong> (<em>str</em>) &#8211; a rescaling of the metric if needed</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.dupdet._DuplicateDetectionWrapper.delete">
+<code class="descname">delete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/1e65472/freediscovery/base.py#L100"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.dupdet._DuplicateDetectionWrapper.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete a trained model</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.dupdet._DuplicateDetectionWrapper.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>method='simhash'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/1e65472/freediscovery/dupdet/base.py#L48"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.dupdet._DuplicateDetectionWrapper.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Precompute all the required values for duplicate detection</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.dupdet._DuplicateDetectionWrapper.get_params">
+<code class="descname">get_params</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/1e65472/freediscovery/base.py#L110"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.dupdet._DuplicateDetectionWrapper.get_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get model parameters</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.dupdet._DuplicateDetectionWrapper.list_models">
+<code class="descname">list_models</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/1e65472/freediscovery/base.py#L137"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.dupdet._DuplicateDetectionWrapper.list_models" title="Permalink to this definition">¶</a></dt>
+<dd><p>List existing models of this type</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.dupdet._DuplicateDetectionWrapper.query">
+<code class="descname">query</code><span class="sig-paren">(</span><em>**args</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/1e65472/freediscovery/dupdet/base.py#L77"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.dupdet._DuplicateDetectionWrapper.query" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find all the nearests neighbours for the dataset</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>distance</strong> (<em>int</em><em>, </em><em>default=1</em>) &#8211; Maximum number of differnet bits in the simhash</li>
+<li><strong>blocks</strong> (<em>int</em><em> or </em><em>'auto'</em><em>, </em><em>default='auto'</em>) &#8211; number of blocks into which the simhash is split
+when searching for duplicates,
+see  <a class="reference external" href="https://github.com/seomoz/simhash-py">https://github.com/seomoz/simhash-py</a></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>cluster_id</strong> &#8211; the exact duplicates (documents with the same simhash)
+are grouped by in cluster_id</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">array</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="freediscovery.dupdet.SimhashDuplicates.html" class="btn btn-neutral float-right" title="freediscovery.dupdet.SimhashDuplicates" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="freediscovery.cluster.utils._merge_clusters.html" class="btn btn-neutral" title="freediscovery.cluster.utils._merge_clusters" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 - 2017, Grossman Labs LLC.
+      Last updated on Feb 28, 2017.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.9.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+ 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-91765795-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
