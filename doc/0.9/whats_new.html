@@ -160,7 +160,7 @@
 <span id="release-history"></span><h1>Release history<a class="headerlink" href="#release-history" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="version-0-9">
 <span id="version-0-9"></span><h2>Version 0.9<a class="headerlink" href="#version-0-9" title="Permalink to this headline">¶</a></h2>
-<p><strong>In developpement</strong></p>
+<p><strong>Jan 28, 2017</strong></p>
 <div class="section" id="new-features">
 <span id="new-features"></span><h3>New features<a class="headerlink" href="#new-features" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
@@ -172,9 +172,11 @@
 <span id="enhancements"></span><h3>Enhancements<a class="headerlink" href="#enhancements" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Categorization and semantic search support sorting and filtering of documents below a user provided threashold. (PR <a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/pull/96/files">#96</a>)</li>
+<li>Categorization returns only <code class="docutils literal"><span class="pre">max_result_categories</span></code> categories with the highest score.</li>
 <li>The similarity and ML scores can now be scaled to [0, 1] range using <code class="docutils literal"><span class="pre">nn_metric</span></code> and <code class="docutils literal"><span class="pre">ml_output</span></code> input parameters (PR <a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/pull/100/files">#101</a>).</li>
 <li>The REST API documentation is generated automatically from the code (using an OpenAPI specification) which allows to enforce consistency between the code and the docs (PR <a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/pull/85">#85</a>)</li>
-<li>Adapted clustering and duplicate detection to return structured objects indexed by <code class="docutils literal"><span class="pre">document_id</span></code>( and optionally <code class="docutils literal"><span class="pre">rendering_id</span></code>)</li>
+<li>Adapted clustering and duplicate detection API to return structured objects indexed by <code class="docutils literal"><span class="pre">document_id</span></code>( and optionally <code class="docutils literal"><span class="pre">rendering_id</span></code>)</li>
+<li>Improved tests coverage and overall simplified the API</li>
 </ul>
 </div>
 <div class="section" id="api-changes">
@@ -189,10 +191,10 @@
 <li><code class="docutils literal"><span class="pre">/api/v0/email-parser/{dsid}/index</span></code></li>
 </ul>
 </li>
-<li>Significant changes in the REST API to accommodate for multi-class categorization</li>
+<li>Significant changes in the categorization REST API to accommodate for multi-class cases</li>
 <li>The endpoint <code class="docutils literal"><span class="pre">/api/v0/feature-extraction/{dsid}/id-mapping/flat</span></code> is removed, while <code class="docutils literal"><span class="pre">/api/v0/feature-extraction/{dsid}/id-mapping/nested</span></code> is renamed to <code class="docutils literal"><span class="pre">/api/v0/feature-extraction/{dsid}/id-mapping</span></code>.</li>
-<li>Removed the <code class="docutils literal"><span class="pre">/categorization/&lt;mid&gt;/predict</span></code> which is superseded by <code class="docutils literal"><span class="pre">/metrics/categorization</span></code>.</li>
-<li>The <code class="docutils literal"><span class="pre">internal_id</span></code> is no longer exposed in categorization and semantic search</li>
+<li>Removed the <code class="docutils literal"><span class="pre">/categorization/&lt;mid&gt;/test</span></code> which is superseded by <code class="docutils literal"><span class="pre">/metrics/categorization</span></code>.</li>
+<li>The <code class="docutils literal"><span class="pre">internal_id</span></code> is no longer exposed in the public API</li>
 </ul>
 </div>
 </div>
