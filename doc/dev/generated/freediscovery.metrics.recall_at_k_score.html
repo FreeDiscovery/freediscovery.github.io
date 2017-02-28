@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>freediscovery.exceptions.DatasetNotFound &mdash; FreeDiscovery 0.9.dev0 documentation</title>
+  <title>freediscovery.metrics.recall_at_k_score &mdash; FreeDiscovery 0.9.dev0 documentation</title>
   
 
   
@@ -37,8 +37,8 @@
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="FreeDiscovery 0.9.dev0 documentation" href="../index.html"/>
         <link rel="up" title="Python API Reference" href="../python_api.html"/>
-        <link rel="next" title="freediscovery.exceptions.ModelNotFound" href="freediscovery.exceptions.ModelNotFound.html"/>
-        <link rel="prev" title="freediscovery.exceptions.NotFound" href="freediscovery.exceptions.NotFound.html"/> 
+        <link rel="next" title="freediscovery.metrics.ratio_duplicates_score" href="freediscovery.metrics.ratio_duplicates_score.html"/>
+        <link rel="prev" title="freediscovery.io.parse_rcv1_smart_tokens" href="freediscovery.io.parse_rcv1_smart_tokens.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -102,17 +102,13 @@
 <li class="toctree-l2"><a class="reference internal" href="../python_api.html#semantic-search">Semantic search</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python_api.html#tools">Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python_api.html#io">IO</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../python_api.html#metrics">Metrics</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../python_api.html#exceptions">Exceptions</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="freediscovery.exceptions.NotFound.html">freediscovery.exceptions.NotFound</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">freediscovery.exceptions.DatasetNotFound</a></li>
-<li class="toctree-l3"><a class="reference internal" href="freediscovery.exceptions.ModelNotFound.html">freediscovery.exceptions.ModelNotFound</a></li>
-<li class="toctree-l3"><a class="reference internal" href="freediscovery.exceptions.InitException.html">freediscovery.exceptions.InitException</a></li>
-<li class="toctree-l3"><a class="reference internal" href="freediscovery.exceptions.WrongParameter.html">freediscovery.exceptions.WrongParameter</a></li>
-<li class="toctree-l3"><a class="reference internal" href="freediscovery.exceptions.NotImplementedFD.html">freediscovery.exceptions.NotImplementedFD</a></li>
-<li class="toctree-l3"><a class="reference internal" href="freediscovery.exceptions.OptionalDependencyMissing.html">freediscovery.exceptions.OptionalDependencyMissing</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../python_api.html#metrics">Metrics</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">freediscovery.metrics.recall_at_k_score</a></li>
+<li class="toctree-l3"><a class="reference internal" href="freediscovery.metrics.ratio_duplicates_score.html">freediscovery.metrics.ratio_duplicates_score</a></li>
+<li class="toctree-l3"><a class="reference internal" href="freediscovery.metrics.f1_same_duplicates_score.html">freediscovery.metrics.f1_same_duplicates_score</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#exceptions">Exceptions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
@@ -155,11 +151,11 @@
       
         <li><a href="../python_api.html">Python API Reference</a> &raquo;</li>
       
-    <li>freediscovery.exceptions.DatasetNotFound</li>
+    <li>freediscovery.metrics.recall_at_k_score</li>
     <li class="wy-breadcrumbs-aside">
       
           
-          <a href="../_sources/generated/freediscovery.exceptions.DatasetNotFound.rst.txt" rel="nofollow"> View page source</a>
+          <a href="../_sources/generated/freediscovery.metrics.recall_at_k_score.rst.txt" rel="nofollow"> View page source</a>
         
       
     </li>
@@ -169,18 +165,31 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="freediscovery-exceptions-datasetnotfound">
-<h1>freediscovery.exceptions.DatasetNotFound<a class="headerlink" href="#freediscovery-exceptions-datasetnotfound" title="Permalink to this headline">¶</a></h1>
-<dl class="exception">
-<dt id="freediscovery.exceptions.DatasetNotFound">
-<em class="property">exception </em><code class="descclassname">freediscovery.exceptions.</code><code class="descname">DatasetNotFound</code><span class="sig-paren">(</span><em>message=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/cbb7a05/freediscovery/exceptions.py#L29"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.exceptions.DatasetNotFound" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="freediscovery.exceptions.DatasetNotFound.with_traceback">
-<code class="descname">with_traceback</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#freediscovery.exceptions.DatasetNotFound.with_traceback" title="Permalink to this definition">¶</a></dt>
-<dd><p>Exception.with_traceback(tb) &#8211;
-set self.__traceback__ to tb and return self.</p>
-</dd></dl>
-
+  <div class="section" id="freediscovery-metrics-recall-at-k-score">
+<h1>freediscovery.metrics.recall_at_k_score<a class="headerlink" href="#freediscovery-metrics-recall-at-k-score" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="freediscovery.metrics.recall_at_k_score">
+<code class="descclassname">freediscovery.metrics.</code><code class="descname">recall_at_k_score</code><span class="sig-paren">(</span><em>y_true</em>, <em>y_pred</em>, <em>k</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/cbb7a05/freediscovery/metrics.py#L19"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.metrics.recall_at_k_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recall after retrieving k documents from the collections</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>y_true</strong> (<em>ndarray</em><em> [</em><em>n_samples</em><em>]</em><em></em>) &#8211; array of integer classes</li>
+<li><strong>y_pred</strong> (<em>ndarray</em><em> [</em><em>n_samples</em><em>]</em><em></em>) &#8211; array of float predicted scores</li>
+<li><strong>k</strong> (<em>{int</em><em>, </em><em>float}</em>) &#8211; the threashold either float in [0., 1.] or int in [0, n_samples]</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>score</strong> &#8211; the recall at k score</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>
@@ -192,10 +201,10 @@ set self.__traceback__ to tb and return self.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="freediscovery.exceptions.ModelNotFound.html" class="btn btn-neutral float-right" title="freediscovery.exceptions.ModelNotFound" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="freediscovery.metrics.ratio_duplicates_score.html" class="btn btn-neutral float-right" title="freediscovery.metrics.ratio_duplicates_score" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="freediscovery.exceptions.NotFound.html" class="btn btn-neutral" title="freediscovery.exceptions.NotFound" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="freediscovery.io.parse_rcv1_smart_tokens.html" class="btn btn-neutral" title="freediscovery.io.parse_rcv1_smart_tokens" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

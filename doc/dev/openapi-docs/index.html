@@ -782,6 +782,19 @@
                                                                                                                     
                                                                                                                 </div>
                                                                                                             </dd>
+                                                                                                            <dt data-property-name="recall_at_20p">
+                                                                                                                <span class="json-property-name">recall_at_20p:</span>
+                                                                                                                
+                                                                                                                <span class="json-property-type">number</span>
+                                                                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                                                                
+                                                                                                            </dt>
+                                                                                                            <dd>
+                                                                                                                
+                                                                                                                <div class="json-inner-schema">
+                                                                                                                    
+                                                                                                                </div>
+                                                                                                            </dd>
                                                                                                             <dt data-property-name="roc_auc">
                                                                                                                 <span class="json-property-name">roc_auc:</span>
                                                                                                                 
@@ -1027,12 +1040,14 @@
                 <div class="panel-body">
                     <section class="sw-operation-description">
                         <p>Predict document categorization with a previously trained model</p>
-            <h2 id="parameters">Parameters</h2>
-            <p>max_result_categories : the maximum number of categories in the results
-            sort : sort by the score of the most likely class
-            ml_output : type of the output in [&#39;decision_function&#39;, &#39;probability&#39;], only affects ML methods.
-            nn_metric : The similarity returned by nearest neighbor classifier in [&#39;cosine&#39;, &#39;jaccard&#39;, &#39;cosine_norm&#39;, &#39;jaccard_norm&#39;].
-            min_score : filter out results below a similarity threashold</p>
+            <p><em>*Parameters</em> </p>
+            <ul>
+            <li><code>max_result_categories</code> : the maximum number of categories in the results</li>
+            <li><code>sort</code> : sort by the score of the most likely class</li>
+            <li><code>ml_output</code> : type of the output in [&#39;decision_function&#39;, &#39;probability&#39;], only affects ML methods.</li>
+            <li><code>nn_metric</code> : The similarity returned by nearest neighbor classifier in [&#39;cosine&#39;, &#39;jaccard&#39;, &#39;cosine_norm&#39;, &#39;jaccard_norm&#39;].</li>
+            <li><code>min_score</code> : filter out results below a similarity threashold</li>
+            </ul>
             
                     </section>
                         
@@ -1849,7 +1864,7 @@
                                 <tbody>
                                         <tr>
                                             <td>
-                                                mid
+                                                method
                                             <td></td>
                                             <td>path</td>
                                             <td>
@@ -1863,7 +1878,7 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                method
+                                                mid
                                             <td></td>
                                             <td>path</td>
                                             <td>
@@ -1971,7 +1986,7 @@
                                 <tbody>
                                         <tr>
                                             <td>
-                                                mid
+                                                method
                                             <td></td>
                                             <td>path</td>
                                             <td>
@@ -1985,7 +2000,7 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                method
+                                                mid
                                             <td></td>
                                             <td>path</td>
                                             <td>
@@ -5914,7 +5929,9 @@
                 <div class="panel-body">
                     <section class="sw-operation-description">
                         <p>Compute categorization metrics to assess the quality
-            of categorization, comparing the groud truth labels with the predicted ones.</p>
+            of categorization.</p>
+            <p>In the case of binary categrorization, category labels are sorted alphabetically
+            and the second one is expected to be the positive one.</p>
             <p><strong>Parameters</strong></p>
             <ul>
             <li>y_true: [required] ground truth categorization data</li>
@@ -6224,6 +6241,19 @@
                                                                                 </dd>
                                                                                 <dt data-property-name="recall">
                                                                                     <span class="json-property-name">recall:</span>
+                                                                                    
+                                                                                    <span class="json-property-type">number</span>
+                                                                                    <span class="json-property-range" title="Value limits"></span>
+                                                                                    
+                                                                                </dt>
+                                                                                <dd>
+                                                                                    
+                                                                                    <div class="json-inner-schema">
+                                                                                        
+                                                                                    </div>
+                                                                                </dd>
+                                                                                <dt data-property-name="recall_at_20p">
+                                                                                    <span class="json-property-name">recall_at_20p:</span>
                                                                                     
                                                                                     <span class="json-property-type">number</span>
                                                                                     <span class="json-property-range" title="Value limits"></span>
