@@ -425,7 +425,8 @@
                 </div>
                 <div class="panel-body">
                     <section class="sw-operation-description">
-                        
+                        <p>List existing categorization models</p>
+            
                     </section>
                         
                             <section class="sw-request-body">
@@ -535,7 +536,7 @@
                (<em>Warning:</em> for the moment xgboost is not istalled for a direct install on Windows)</li>
             </ul>
             </li>
-            <li><code>cv</code>: binary, if true optimal parameters of the ML model are determined by cross-validation over 5 stratified K-folds (default True).</li>
+            <li><code>cv</code>: binary, if true optimal parameters of the ML model are determined by cross-validation over 5 stratified K-folds (default False).</li>
             <li><code>training_scores</code>: binary, compute the efficiency scores on the training dataset. This would make computations much slower for NearestNeighbors (default False). </li>
             </ul>
             
@@ -1040,7 +1041,7 @@
                 <div class="panel-body">
                     <section class="sw-operation-description">
                         <p>Predict document categorization with a previously trained model</p>
-            <p><em>*Parameters</em> </p>
+            <p><strong>Parameters</strong></p>
             <ul>
             <li><code>max_result_categories</code> : the maximum number of categories in the results</li>
             <li><code>sort</code> : sort by the score of the most likely class</li>
@@ -1340,7 +1341,7 @@
                 <div class="panel-body">
                     <section class="sw-operation-description">
                         <p>Compute birch clustering</p>
-            <p>The option <code>use_hashing=False</code> must be set for the feature extraction. Recommended options also include, <code>use_idf=1, sublinear_tf=0, binary=0</code>.</p>
+            <p>The option <code>use_hashing=False</code> must be set for the feature extraction. Recommended options for data ingestion also include, <code>use_idf=1, sublinear_tf=0, binary=0</code>.</p>
             <p><strong>Parameters</strong></p>
             <ul>
             <li><code>parent_id</code>: <code>dataset_id</code> or <code>lsi_id</code></li>
@@ -1495,7 +1496,7 @@
                 <div class="panel-body">
                     <section class="sw-operation-description">
                         <p>Compute clustering (DBSCAN)</p>
-            <p>The option <code>use_hashing=False</code> must be set for the feature extraction. Recommended options also include, <code>use_idf=1, sublinear_tf=0, binary=0</code>.</p>
+            <p>The option <code>use_hashing=False</code> must be set for the feature extraction. Recommended options for the data ingestion also include, <code>use_idf=1, sublinear_tf=0, binary=0</code>.</p>
             <p><strong>Parameters</strong></p>
             <ul>
             <li><code>parent_id</code>: <code>dataset_id</code> or <code>lsi_id</code></li>
@@ -1635,7 +1636,7 @@
                 <div class="panel-body">
                     <section class="sw-operation-description">
                         <p>Compute K-mean clustering</p>
-            <p>The option <code>use_hashing=False</code> must be set for the feature extraction. Recommended options also include, <code>use_idf=1, sublinear_tf=0, binary=0</code>.</p>
+            <p>The option <code>use_hashing=False</code> must be set for the feature extraction. Recommended options for feature extraction include, <code>use_idf=1, sublinear_tf=0, binary=0</code>.</p>
             <p><strong>Parameters</strong></p>
             <ul>
             <li><code>parent_id</code>: <code>dataset_id</code> or <code>lsi_id</code></li>
@@ -1745,8 +1746,8 @@
                 <div class="panel-body">
                     <section class="sw-operation-description">
                         <p>Compute Ward Hierarchical Clustering.</p>
-            <p>The option <code>use_hashing=False</code> must be set for the feature extraction. Recommended options also include, <code>use_idf=1, sublinear_tf=0, binary=0</code>.</p>
-            <p>The Ward Hierarchical clustering is generally slower that K-mean, however the run time can be reduced by decreasing the following parameters,</p>
+            <p>The option <code>use_hashing=False</code> must be set for the feature extraction. Recommended options for data ingestion also include, <code>use_idf=1, sublinear_tf=0, binary=0</code>.</p>
+            <p>The Ward Hierarchical clustering is generally slower that K-mean, and does not scale well with the dataset size. The run time can be reduced by decreasing the following parameters,</p>
             <ul>
             <li><code>lsi_components</code>: the number of dimensions used for the Latent Semantic Indexing decomposition (e.g. from 150 to 50)</li>
             <li><code>n_neighbors</code>:  the number of neighbors used to construct the connectivity (e.g. from 10 to 5)</li>
@@ -5479,7 +5480,7 @@
                 </div>
                 <div class="panel-body">
                     <section class="sw-operation-description">
-                        <p>Compute correspondence between id fields (nested). At least one of the fields used for indexing must be provided,and all the rest will be computed (if available)</p>
+                        <p>Compute correspondence between id fields for documents. At least one of the fields used for indexing must be provided,and all the rest will be computed (if available)</p>
             
                     </section>
                         
@@ -5726,7 +5727,8 @@
                 </div>
                 <div class="panel-body">
                     <section class="sw-operation-description">
-                        
+                        <p>List existing LSI models</p>
+            
                     </section>
                         
                             <section class="sw-request-body">
@@ -5836,14 +5838,13 @@
                 <div class="panel-body">
                     <section class="sw-operation-description">
                         <p>Build a Latent Semantic Indexing (LSI) model</p>
-            <p>The option <code>use_hashing=True</code> must be set for the feature extraction.
-            Recommended options also include, <code>use_idf=1, sublinear_tf=0, binary=0</code>.</p>
+            <p>Recommended data ingestion options also include, <code>use_idf=1, sublinear_tf=0, binary=0</code>.</p>
             <p>The recommended value for the <code>n_components</code> (dimensions of the SVD decompositions) is
             in the [100, 200] range.</p>
             <p><strong>Parameters</strong></p>
             <ul>
             <li><code>n_components</code>: Desired dimensionality of the output data. Must be strictly less than the number of features.</li>
-            <li><code>parent_id</code>: <code>dataset_id</code></li>
+            <li><code>parent_id</code>: parent dataset identified by <code>dataset_id</code></li>
             </ul>
             
                     </section>
@@ -6886,11 +6887,11 @@
                 </div>
                 <div class="panel-body">
                     <section class="sw-operation-description">
-                        <p>Perform document search (if <code>parent_id</code> is a <code>dataset_id</code>) or a semantic search (if <code>parent_id</code> is a <code>lsi_id</code>).&quot;)</p>
+                        <p>Perform document search (if <code>parent_id</code> is a <code>dataset_id</code>) or a semantic search (if <code>parent_id</code> is a <code>lsi_id</code>).</p>
             <h2 id="parameters">Parameters</h2>
             <ul>
-            <li>nn_metric : The similarity returned by nearest neighbor classifier in [&#39;cosine&#39;, &#39;jaccard&#39;, &#39;cosine_norm&#39;, &#39;jaccard_norm&#39;].</li>
-            <li>min_score : filter out results below a similarity threashold</li>
+            <li><code>nn_metric</code> : The similarity returned by nearest neighbor classifier in [&#39;cosine&#39;, &#39;jaccard&#39;, &#39;cosine_norm&#39;, &#39;jaccard_norm&#39;].</li>
+            <li><code>min_score</code> : filter out results below a similarity threashold</li>
             </ul>
             
                     </section>
@@ -7075,7 +7076,7 @@
                 </div>
                 <div class="panel-body">
                     <section class="sw-operation-description">
-                        <p>Perform a mechanism for adding / managing custom stop words</p>
+                        <p>Store a list of custom stop words</p>
             
                     </section>
                         
@@ -7209,7 +7210,8 @@
                 </div>
                 <div class="panel-body">
                     <section class="sw-operation-description">
-                        
+                        <p>Load a stored list of stop words</p>
+            
                     </section>
                         
                             <section class="sw-request-body">

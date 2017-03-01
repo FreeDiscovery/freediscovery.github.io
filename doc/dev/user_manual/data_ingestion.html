@@ -97,7 +97,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Data ingestion</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#format-of-processed-files">Format of processed files</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#document-indexing">Document indexing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#sample-datasets">Sample datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-datasets">Example datasets</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="scaling_benchmarks.html">Scaling Benchmarks</a></li>
@@ -166,7 +166,7 @@
 </div>
 <div class="section" id="document-indexing">
 <span id="document-indexing"></span><h2>Document indexing<a class="headerlink" href="#document-indexing" title="Permalink to this headline">¶</a></h2>
-<p>Each document in the collection is given a unique numerical <code class="docutils literal"><span class="pre">internal_id</span></code> that is used to identify documents. In addition, the following fields can also be used for indexing,</p>
+<p>Each document in the collection is given a unique numerical <code class="docutils literal"><span class="pre">internal_id</span></code> that is used to identify documents internally. This field is however not exposed by the REST API. Instead, the following fields can also be used for indexing,</p>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">file_path</span></code>: the path to the file relative to the <code class="docutils literal"><span class="pre">data_dir</span></code>. Note that when FreeDiscovery is provided with a list of <code class="docutils literal"><span class="pre">file_path</span></code>, the <code class="docutils literal"><span class="pre">data_dir</span></code> will be recomputed as the longest common path (and <code class="docutils literal"><span class="pre">file_path</span></code> will be changed accordingly).</li>
 <li><code class="docutils literal"><span class="pre">document_id</span></code>: an external numeric document id provided in the <code class="docutils literal"><span class="pre">POST</span> <span class="pre">/api/v0/feature-extraction/&lt;id&gt;</span></code> step</li>
@@ -174,15 +174,14 @@
 </ul>
 <p>To use a field (or a group of fields) as a index, it must be unique, meaning that duplicates are not supported. The only field that is unique by construction is <code class="docutils literal"><span class="pre">internal_id</span></code>, all the rest being user provided. Additional information regarding data ingestion and indexing can be found in the <a class="reference external" href="`../examples/REST_data_ingestion.html"><code class="docutils literal"><span class="pre">REST_data_ingestion</span></code></a> example. The main API endpoints that allow mapping between different fields are,</p>
 <ul class="simple">
-<li><a class="reference external" href="../rest_api/feature_extraction_id_map_flat.html"><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/api/v0/feature-extraction/&lt;id&gt;/id-mapping/flat</span></code></a></li>
-<li>and <a class="reference external" href="../rest_api/feature_extraction_id_map_nested.html"><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/api/v0/feature-extraction/&lt;id&gt;/id-mapping/nested</span></code></a>
+<li><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/api/v0/feature-extraction/&lt;id&gt;/id-mapping/nested</span></code>
 the training of the categorization model also uses a similar mechanism to identify training set documents.</li>
 </ul>
 <p><strong>Note:</strong> the different fields above can always be associated to the processed documents, however attempting to index (e.g. select) a subset of documents using a field (or a group of fields) with duplicates will result in an error.</p>
 </div>
-<div class="section" id="sample-datasets">
-<span id="sample-datasets"></span><h2>Sample datasets<a class="headerlink" href="#sample-datasets" title="Permalink to this headline">¶</a></h2>
-<p>A <a class="reference external" href="../rest_api/dataset_get.html">few sample datasets</a> (subsets of the TREC Legal 2009 collection) can be automatically downloaded by FreeDiscovery with the following command,</p>
+<div class="section" id="example-datasets">
+<span id="example-datasets"></span><h2>Example datasets<a class="headerlink" href="#example-datasets" title="Permalink to this headline">¶</a></h2>
+<p>A <a class="reference external" href="../rest_api/dataset_get.html">few example datasets</a> (subsets of the TREC Legal 2009 collection) can be automatically downloaded by FreeDiscovery with the following command,</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">GET</span> <span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">dataset</span><span class="o">/&lt;</span><span class="n">dataset</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span>
 </pre></div>
 </div>
@@ -210,7 +209,7 @@ the training of the categorization model also uses a similar mechanism to identi
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016 - 2017, Grossman Labs LLC.
-      Last updated on Feb 28, 2017.
+      Last updated on Mar 01, 2017.
 
     </p>
   </div>
