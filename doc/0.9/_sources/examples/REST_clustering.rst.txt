@@ -22,13 +22,13 @@ Cluster documents into clusters
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received ['filenames', 'id']
-       => dsid = 1e2d8655fbf74c60
+       => dsid = 969c927ed82f4e47
 
     1.b Run feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/1e2d8655fbf74c60
+     POST http://localhost:5001/api/v0/feature-extraction/969c927ed82f4e47
 
     1.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/1e2d8655fbf74c60
+     GET http://localhost:5001/api/v0/feature-extraction/969c927ed82f4e47
          - analyzer: word
          - binary: False
          - chunk_size: 5000
@@ -48,38 +48,38 @@ Cluster documents into clusters
 
     2. Calculate LSI
     POST http://localhost:5001/api/v0/lsi/
-      => LSI model id = ea216b2ea73347b0
+      => LSI model id = 076b6abc89fb44d9
       => SVD decomposition with 100 dimensions explaining 99.76 % variabilty of the data
 
     3.a. Document clustering (LSI + K-means)
      POST http://localhost:5001/api/v0/clustering/k-mean/
-         => model id = ad85e2f2bbf84006
+         => model id = afe9861150bb4d28
 
     3.b. Computing cluster labels
-     GET http://localhost:5001/api/v0/clustering/k-mean/ad85e2f2bbf84006
-        .. computed in 1.7s
+     GET http://localhost:5001/api/v0/clustering/k-mean/afe9861150bb4d28
+        .. computed in 1.6s
        cluster_id                 cluster_label  cluster_similarity  n_documents
-    0           0        rewrite server address               1.000           56
-    1           1            enron training net               0.734          504
-    2           2            ect hou shackleton               0.605          119
-    3           3        teneo group recipients               0.693          223
-    4           4       ruppert nemec gillaspie               0.746           95
-    5           5              tana jones enron               0.666          176
-    6           6  enron_development enron fuel               0.306          524
-    7           7     shackleton marcelo brazil               0.695          270
-    8           8             enron nicolay pcb               0.525          269
-    9           9              lon usvi forster               0.533          229
+    0           0               lon forster ect               0.554          201
+    1           1     shackleton marcelo brazil               0.675          334
+    2           2       ruppert nemec gillaspie               0.602          157
+    3           3            enron net training               0.756          485
+    4           4        rewrite server address               1.000           56
+    5           5      enron nicolay translated               0.535          262
+    6           6        teneo group recipients               0.711          192
+    7           7              enron tana jones               0.669          167
+    8           8            ect hou shackleton               0.634           93
+    9           9  enron_development enron corp               0.307          518
 
     4.a. Document clustering (LSI + Birch clustering)
      POST http://localhost:5001/api/v0/clustering/ward_hc/
-         => model id = 3d48603ce708492a
+         => model id = cc730baa1c114637
 
     4.b. Computing cluster labels
-     GET http://localhost:5001/api/v0/clustering/birch/3d48603ce708492a
+     GET http://localhost:5001/api/v0/clustering/birch/cc730baa1c114637
         .. computed in 2.6s
 
     5. Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/1e2d8655fbf74c60
+     DELETE http://localhost:5001/api/v0/feature-extraction/969c927ed82f4e47
 
 
 
@@ -228,7 +228,7 @@ Cluster documents into clusters
     print(" DELETE", url)
     requests.delete(url)
 
-**Total running time of the script:** ( 0 minutes  8.775 seconds)
+**Total running time of the script:** ( 0 minutes  8.772 seconds)
 
 
 
