@@ -22,13 +22,13 @@ Cluster documents into clusters
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received ['filenames', 'id']
-       => dsid = 7d558c0439504337
+       => dsid = a363198a82f34523
 
     1.b Run feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/7d558c0439504337
+     POST http://localhost:5001/api/v0/feature-extraction/a363198a82f34523
 
     1.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/7d558c0439504337
+     GET http://localhost:5001/api/v0/feature-extraction/a363198a82f34523
          - analyzer: word
          - binary: False
          - chunk_size: 5000
@@ -48,38 +48,38 @@ Cluster documents into clusters
 
     2. Calculate LSI
     POST http://localhost:5001/api/v0/lsi/
-      => LSI model id = 9bd0cbe9e63a42d6
+      => LSI model id = 0760d35f6b5b4d48
       => SVD decomposition with 100 dimensions explaining 99.76 % variabilty of the data
 
     3.a. Document clustering (LSI + K-means)
      POST http://localhost:5001/api/v0/clustering/k-mean/
-         => model id = e2c73ef7c34f4d65
+         => model id = 187716de383146c3
 
     3.b. Computing cluster labels
-     GET http://localhost:5001/api/v0/clustering/k-mean/e2c73ef7c34f4d65
+     GET http://localhost:5001/api/v0/clustering/k-mean/187716de383146c3
         .. computed in 1.7s
-       cluster_id                  cluster_label  cluster_similarity  n_documents
-    0           0                ect lon forster               0.562          186
-    1           1              enron pcb cleanup               0.496          206
-    2           2         rewrite server address               1.000           56
-    3           3             enron nicolay serc               0.612          210
-    4           4         teneo group recipients               0.691          227
-    5           5               tana jones enron               0.672          181
-    6           6             enron approved net               0.756          427
-    7           7  enron_development enron alias               0.309          518
-    8           8      shackleton marcelo brazil               0.651          358
-    9           9        ruppert nemec gillaspie               0.740           96
+       cluster_id                cluster_label  cluster_similarity  n_documents
+    0           0               tana lon jones               0.535          311
+    1           1       teneo group recipients               0.722          165
+    2           2       teneo shackleton group               0.700          138
+    3           3             enron tana jones               0.646          167
+    4           4              serc nerc enron               0.648          171
+    5           5            ruppert nemec ect               0.335          560
+    6           6           enron net approved               0.769          431
+    7           7       rewrite server address               1.000           56
+    8           8  pcb enron_development enron               0.487          162
+    9           9    shackleton marcelo brazil               0.660          304
 
     4.a. Document clustering (LSI + Birch clustering)
      POST http://localhost:5001/api/v0/clustering/ward_hc/
-         => model id = 6a29648cd00044ae
+         => model id = 8c035dae23b1426d
 
     4.b. Computing cluster labels
-     GET http://localhost:5001/api/v0/clustering/birch/6a29648cd00044ae
+     GET http://localhost:5001/api/v0/clustering/birch/8c035dae23b1426d
         .. computed in 2.6s
 
     5. Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/7d558c0439504337
+     DELETE http://localhost:5001/api/v0/feature-extraction/a363198a82f34523
 
 
 
@@ -228,7 +228,7 @@ Cluster documents into clusters
     print(" DELETE", url)
     requests.delete(url)
 
-**Total running time of the script:** ( 0 minutes  8.893 seconds)
+**Total running time of the script:** ( 0 minutes  8.771 seconds)
 
 
 
