@@ -22,13 +22,13 @@ Cluster documents into clusters
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received ['filenames', 'id']
-       => dsid = a363198a82f34523
+       => dsid = 95c79145c76b4258
 
     1.b Run feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/a363198a82f34523
+     POST http://localhost:5001/api/v0/feature-extraction/95c79145c76b4258
 
     1.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/a363198a82f34523
+     GET http://localhost:5001/api/v0/feature-extraction/95c79145c76b4258
          - analyzer: word
          - binary: False
          - chunk_size: 5000
@@ -48,38 +48,38 @@ Cluster documents into clusters
 
     2. Calculate LSI
     POST http://localhost:5001/api/v0/lsi/
-      => LSI model id = 0760d35f6b5b4d48
+      => LSI model id = 25d1197ee0864b0d
       => SVD decomposition with 100 dimensions explaining 99.76 % variabilty of the data
 
     3.a. Document clustering (LSI + K-means)
      POST http://localhost:5001/api/v0/clustering/k-mean/
-         => model id = 187716de383146c3
+         => model id = 9d824a57fc504fa5
 
     3.b. Computing cluster labels
-     GET http://localhost:5001/api/v0/clustering/k-mean/187716de383146c3
+     GET http://localhost:5001/api/v0/clustering/k-mean/9d824a57fc504fa5
         .. computed in 1.7s
-       cluster_id                cluster_label  cluster_similarity  n_documents
-    0           0               tana lon jones               0.535          311
-    1           1       teneo group recipients               0.722          165
-    2           2       teneo shackleton group               0.700          138
-    3           3             enron tana jones               0.646          167
-    4           4              serc nerc enron               0.648          171
-    5           5            ruppert nemec ect               0.335          560
-    6           6           enron net approved               0.769          431
-    7           7       rewrite server address               1.000           56
-    8           8  pcb enron_development enron               0.487          162
-    9           9    shackleton marcelo brazil               0.660          304
+       cluster_id                        cluster_label  cluster_similarity  n_documents
+    0           0                     enron jones tana               0.526          271
+    1           1            shackleton marcelo brazil               0.655          400
+    2           2                     tana jones enron               0.593          223
+    3           3  enron_development shackleton hendry               0.640           53
+    4           4              ruppert nemec gillaspie               0.751           98
+    5           5                     hou enron letter               0.318          560
+    6           6                   enron training net               0.724          520
+    7           7               teneo group recipients               0.708          189
+    8           8               rewrite server address               1.000           56
+    9           9                   ect lon newsticker               0.638           95
 
     4.a. Document clustering (LSI + Birch clustering)
      POST http://localhost:5001/api/v0/clustering/ward_hc/
-         => model id = 8c035dae23b1426d
+         => model id = e7fb2c96a39f4105
 
     4.b. Computing cluster labels
-     GET http://localhost:5001/api/v0/clustering/birch/8c035dae23b1426d
-        .. computed in 2.6s
+     GET http://localhost:5001/api/v0/clustering/birch/e7fb2c96a39f4105
+        .. computed in 2.7s
 
     5. Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/a363198a82f34523
+     DELETE http://localhost:5001/api/v0/feature-extraction/95c79145c76b4258
 
 
 
@@ -228,7 +228,7 @@ Cluster documents into clusters
     print(" DELETE", url)
     requests.delete(url)
 
-**Total running time of the script:** ( 0 minutes  8.771 seconds)
+**Total running time of the script:** ( 0 minutes  9.300 seconds)
 
 
 
