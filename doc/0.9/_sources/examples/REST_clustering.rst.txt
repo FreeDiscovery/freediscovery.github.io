@@ -22,13 +22,13 @@ Cluster documents into clusters
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received ['filenames', 'id']
-       => dsid = 80d219d88c8a4561
+       => dsid = c2f81fade7024cec
 
     1.b Run feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/80d219d88c8a4561
+     POST http://localhost:5001/api/v0/feature-extraction/c2f81fade7024cec
 
     1.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/80d219d88c8a4561
+     GET http://localhost:5001/api/v0/feature-extraction/c2f81fade7024cec
          - analyzer: word
          - binary: False
          - chunk_size: 5000
@@ -48,38 +48,38 @@ Cluster documents into clusters
 
     2. Calculate LSI
     POST http://localhost:5001/api/v0/lsi/
-      => LSI model id = 162e6bf26d3c4c3f
+      => LSI model id = 161de3b0e19d45ca
       => SVD decomposition with 100 dimensions explaining 99.76 % variabilty of the data
 
     3.a. Document clustering (LSI + K-means)
      POST http://localhost:5001/api/v0/clustering/k-mean/
-         => model id = fe797b8912444377
+         => model id = 7c0325b1299643a4
 
     3.b. Computing cluster labels
-     GET http://localhost:5001/api/v0/clustering/k-mean/fe797b8912444377
+     GET http://localhost:5001/api/v0/clustering/k-mean/7c0325b1299643a4
         .. computed in 1.7s
-       cluster_id                        cluster_label  cluster_similarity  n_documents
-    0           0                   enron pcb training               0.441          366
-    1           1                      enron serc nerc               0.622          214
-    2           2             ruppert nemec translated               0.665          121
-    3           3            shackleton marcelo brazil               0.685          304
-    4           4                   ect hou shackleton               0.651           84
-    5           5               rewrite server address               0.340          429
-    6           6  enron_development shackleton harris               0.494          109
-    7           7                   enron approved net               0.766          424
-    8           8                     tana jones enron               0.679          164
-    9           9               teneo group recipients               0.675          250
+       cluster_id                         cluster_label  cluster_similarity  n_documents
+    0           0                       serc nerc enron               0.682          147
+    1           1                      enron tana jones               0.738          464
+    2           2             shackleton marcelo brazil               0.696          259
+    3           3               ruppert nemec gillaspie               0.330          592
+    4           4                teneo group recipients               0.676          250
+    5           5                rewrite server address               1.000           56
+    6           6                    ect hou shackleton               0.668           81
+    7           7  enron_development shackleton marcelo               0.562           99
+    8           8                      tana jones enron               0.598          295
+    9           9                     enron pcb cleanup               0.503          222
 
     4.a. Document clustering (LSI + Birch clustering)
      POST http://localhost:5001/api/v0/clustering/ward_hc/
-         => model id = d30974f60668425e
+         => model id = a7cceefc782f470d
 
     4.b. Computing cluster labels
-     GET http://localhost:5001/api/v0/clustering/birch/d30974f60668425e
+     GET http://localhost:5001/api/v0/clustering/birch/a7cceefc782f470d
         .. computed in 2.7s
 
     5. Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/80d219d88c8a4561
+     DELETE http://localhost:5001/api/v0/feature-extraction/c2f81fade7024cec
 
 
 
@@ -228,7 +228,7 @@ Cluster documents into clusters
     print(" DELETE", url)
     requests.delete(url)
 
-**Total running time of the script:** ( 0 minutes  9.361 seconds)
+**Total running time of the script:** ( 0 minutes  9.339 seconds)
 
 
 

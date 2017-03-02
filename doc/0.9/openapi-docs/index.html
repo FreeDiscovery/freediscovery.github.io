@@ -1911,7 +1911,7 @@
                                 <tbody>
                                         <tr>
                                             <td>
-                                                method
+                                                mid
                                             <td></td>
                                             <td>path</td>
                                             <td>
@@ -1925,7 +1925,7 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                mid
+                                                method
                                             <td></td>
                                             <td>path</td>
                                             <td>
@@ -2047,7 +2047,7 @@
                                 <tbody>
                                         <tr>
                                             <td>
-                                                method
+                                                mid
                                             <td></td>
                                             <td>path</td>
                                             <td>
@@ -2061,7 +2061,7 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                mid
+                                                method
                                             <td></td>
                                             <td>path</td>
                                             <td>
@@ -6890,8 +6890,12 @@
                         <p>Perform document search (if <code>parent_id</code> is a <code>dataset_id</code>) or a semantic search (if <code>parent_id</code> is a <code>lsi_id</code>).</p>
             <h2 id="parameters">Parameters</h2>
             <ul>
+            <li><code>parent_id</code> : the id of the previous processing step (either <code>dataset_id</code> or <code>lsi_id</code>)</li>
+            <li><code>query</code> : the seach query</li>
             <li><code>nn_metric</code> : The similarity returned by nearest neighbor classifier in [&#39;cosine&#39;, &#39;jaccard&#39;, &#39;cosine_norm&#39;, &#39;jaccard_norm&#39;].</li>
             <li><code>min_score</code> : filter out results below a similarity threashold</li>
+            <li><code>max_results</code> : return only the first <code>max_results</code> documents</li>
+            <li><code>sort</code> : sort the results by score</li>
             </ul>
             
                     </section>
@@ -6908,6 +6912,19 @@
                                         
                                                 <section class="json-schema-properties">
                                                     <dl>
+                                                            <dt data-property-name="max_results">
+                                                                <span class="json-property-name">max_results:</span>
+                                                                
+                                                                <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
+                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                
+                                                            </dt>
+                                                            <dd>
+                                                                
+                                                                <div class="json-inner-schema">
+                                                                    
+                                                                </div>
+                                                            </dd>
                                                             <dt data-property-name="min_score">
                                                                 <span class="json-property-name">min_score:</span>
                                                                 
@@ -6957,6 +6974,20 @@
                                                                 <span class="json-property-range" title="Value limits"></span>
                                                                 
                                                                     <span class="json-property-required"></span>
+                                                            </dt>
+                                                            <dd>
+                                                                
+                                                                <div class="json-inner-schema">
+                                                                    
+                                                                </div>
+                                                            </dd>
+                                                            <dt data-property-name="sort">
+                                                                <span class="json-property-name">sort:</span>
+                                                                
+                                                                <span class="json-property-type">boolean</span>
+                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                
+                                                                        <span class="json-property-default-value">true</span>
                                                             </dt>
                                                             <dd>
                                                                 
