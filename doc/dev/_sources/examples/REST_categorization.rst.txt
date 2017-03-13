@@ -22,16 +22,16 @@ An example to illustrate binary categorizaiton with FreeDiscovery
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received ['filenames', 'id']
-       => dsid = 31b283df62074cd0
+       => dsid = 905d37841c304f05
 
     1.b Start feature extraction (in the background)
-     POST http://localhost:5001/api/v0/feature-extraction/31b283df62074cd0
+     POST http://localhost:5001/api/v0/feature-extraction/905d37841c304f05
 
     1.c Monitor feature extraction progress
-     GET http://localhost:5001/api/v0/feature-extraction/31b283df62074cd0
+     GET http://localhost:5001/api/v0/feature-extraction/905d37841c304f05
 
     1.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/31b283df62074cd0
+     GET http://localhost:5001/api/v0/feature-extraction/905d37841c304f05
          - analyzer: word
          - binary: False
          - chunk_size: 5000
@@ -51,8 +51,8 @@ An example to illustrate binary categorizaiton with FreeDiscovery
 
     2. Calculate LSI
     POST http://localhost:5001/api/v0/lsi/
-      => LSI model id = 0090a94e2778430f
-      => SVD decomposition with 100 dimensions explaining 76.49 % variabilty of the data
+      => LSI model id = 803b9daf95724680
+      => SVD decomposition with 100 dimensions explaining 76.50 % variabilty of the data
 
     3.a. Train the categorization model
        category
@@ -64,16 +64,16 @@ An example to illustrate binary categorizaiton with FreeDiscovery
      ================================================================================
      POST http://localhost:5001/api/v0/categorization/
      Training...
-         => model id = 95a38a00df534451
+         => model id = edf6693e92fc4d84
         => Training scores: MAP = 0.907, ROC-AUC = 0.900, recall @20%: 0.800 
 
     3.b. Check the parameters used in the categorization model
-     GET http://localhost:5001/api/v0/categorization/95a38a00df534451
+     GET http://localhost:5001/api/v0/categorization/edf6693e92fc4d84
          - method: LinearSVC
          - options: {'C': 1.0, 'class_weight': None, 'dual': True, 'fit_intercept': True, 'intercept_scaling': 1, 'loss': 'squared_hinge', 'max_iter': 1000, 'multi_class': 'ovr', 'penalty': 'l2', 'random_state': None, 'tol': 0.0001, 'verbose': 0}
 
     3.c Categorize the complete dataset with this model
-     GET http://localhost:5001/api/v0/categorization/95a38a00df534451/predict
+     GET http://localhost:5001/api/v0/categorization/edf6693e92fc4d84/predict
                  category  score
     document_id                 
     0            negative  0.641
@@ -148,88 +148,88 @@ An example to illustrate binary categorizaiton with FreeDiscovery
      ================================================================================
      POST http://localhost:5001/api/v0/categorization/
      Training...
-         => model id = cdf5c50da1d54a58
+         => model id = f00ea903ac8540f0
         => Training scores: MAP = 1.000, ROC-AUC = 1.000, recall @20%: 1.000 
 
     3.b. Check the parameters used in the categorization model
-     GET http://localhost:5001/api/v0/categorization/cdf5c50da1d54a58
+     GET http://localhost:5001/api/v0/categorization/f00ea903ac8540f0
          - method: NearestNeighbor
          - options: {'algorithm': 'brute', 'leaf_size': 30, 'n_jobs': 1, 'radius': None}
 
     3.c Categorize the complete dataset with this model
-     GET http://localhost:5001/api/v0/categorization/cdf5c50da1d54a58/predict
+     GET http://localhost:5001/api/v0/categorization/f00ea903ac8540f0/predict
                  category  nearest_document_id  score
     document_id                                      
-    0            negative              4272489  0.422
-    1            negative               225625  0.339
-    4            negative              3048516  0.414
+    0            negative              2560000  0.408
+    1            negative               225625  0.337
+    4            negative              3048516  0.406
     9            positive                    9  1.000
-    16           positive                    9  0.615
-    25           negative              2442969  0.360
-    36           negative              2560000  0.516
-    49           negative              1449616  0.387
-    64           negative              1787569  0.422
+    16           positive                    9  0.607
+    25           negative              2442969  0.341
+    36           negative              2560000  0.508
+    49           negative              1449616  0.404
+    64           negative                   81  0.433
     81           negative                   81  1.000
-    100          negative              6007401  0.491
-    121          negative                 1024  0.350
-    144          negative                 1024  0.334
-    169          negative              4157521  0.362
-    196          negative              4157521  0.986
-    225          negative              2442969  0.418
-    256          negative                 1024  0.365
-    289          negative              2085136  0.319
-    324          negative                 9801  0.336
-    361          negative              1218816  0.469
-    400          negative              6007401  0.441
-    441          negative              5175625  0.712
-    484          negative              3254416  0.339
-    529          negative              3254416  0.335
-    576          negative              4498641  0.385
-    625          negative              5175625  0.484
-    676          negative                 1024  0.319
-    729          negative               908209  0.374
-    784          negative                 1024  0.357
-    841          negative               498436  0.318
+    100          positive                    9  0.486
+    121          negative                 1024  0.349
+    144          negative                 1024  0.337
+    169          negative              4157521  0.374
+    196          negative              4157521  0.985
+    225          negative              2442969  0.414
+    256          negative                 1024  0.373
+    289          negative              3632836  0.328
+    324          negative                   81  0.331
+    361          negative              1218816  0.457
+    400          negative              6007401  0.439
+    441          negative              5175625  0.726
+    484          negative              3254416  0.329
+    529          negative              3254416  0.325
+    576          negative              4498641  0.388
+    625          negative              5175625  0.482
+    676          negative                 1024  0.320
+    729          negative               131044  0.368
+    784          negative                 1024  0.363
+    841          negative              3632836  0.323
     ...               ...                  ...    ...
-    5929225      negative              4575321  0.288
-    5934096      negative               378225  0.575
-    5938969      negative               378225  0.425
-    5943844      negative              1449616  0.365
-    5948721      negative              1247689  0.395
-    5953600      negative              1247689  0.369
-    5958481      negative              2259009  0.421
-    5963364      negative               131044  0.337
-    5968249      negative                   81  0.392
-    5973136      negative                   81  0.325
+    5929225      negative              2050624  0.288
+    5934096      negative               378225  0.544
+    5938969      negative               378225  0.408
+    5943844      negative              1449616  0.360
+    5948721      negative              1247689  0.385
+    5953600      negative              1247689  0.362
+    5958481      negative              2259009  0.416
+    5963364      negative               131044  0.343
+    5968249      negative                   81  0.402
+    5973136      negative                   81  0.328
     5978025      negative                   81  0.426
-    5982916      negative                   81  0.345
-    5987809      negative              5354596  0.419
-    5992704      positive              1096209  0.322
-    5997601      negative              6007401  0.512
-    6002500      negative              5697769  0.641
+    5982916      negative                   81  0.342
+    5987809      negative              5354596  0.430
+    5992704      positive              1096209  0.320
+    5997601      negative               378225  0.492
+    6002500      negative              5697769  0.662
     6007401      negative              6007401  1.000
-    6012304      negative              6007401  0.693
-    6017209      negative              1787569  0.503
-    6022116      negative              1787569  0.420
-    6027025      positive                    9  0.492
-    6031936      positive                    9  0.742
-    6036849      negative              2442969  0.499
-    6041764      negative              2442969  0.340
-    6046681      negative              2076481  0.701
-    6051600      negative              2076481  0.340
-    6056521      positive              1096209  0.309
-    6061444      negative              2076481  0.360
-    6066369      positive              1096209  0.319
-    6071296      negative              4498641  0.437
+    6012304      negative              6007401  0.700
+    6017209      negative              1787569  0.491
+    6022116      negative              1787569  0.412
+    6027025      positive                    9  0.489
+    6031936      positive                    9  0.745
+    6036849      negative              2442969  0.498
+    6041764      negative               378225  0.339
+    6046681      negative              2076481  0.709
+    6051600      negative              2076481  0.343
+    6056521      negative                 6561  0.301
+    6061444      negative              2076481  0.345
+    6066369      positive               844561  0.316
+    6071296      negative              2076481  0.428
 
     [2465 rows x 3 columns]
 
     3.d Compute the categorization scores
      GET http://localhost:5001/api/v0/metrics/categorization
-        => Test scores: MAP = 0.647, ROC-AUC = 0.799, recall @20%: 0.750 
+        => Test scores: MAP = 0.649, ROC-AUC = 0.802, recall @20%: 0.750 
 
     5.a Delete the extracted features (and LSI decomposition)
-     DELETE http://localhost:5001/api/v0/feature-extraction/31b283df62074cd0
+     DELETE http://localhost:5001/api/v0/feature-extraction/905d37841c304f05
 
 
 
@@ -411,7 +411,7 @@ An example to illustrate binary categorizaiton with FreeDiscovery
         print(" DELETE", url)
         requests.delete(url)
 
-**Total running time of the script:** ( 0 minutes  16.165 seconds)
+**Total running time of the script:** ( 0 minutes  17.694 seconds)
 
 
 

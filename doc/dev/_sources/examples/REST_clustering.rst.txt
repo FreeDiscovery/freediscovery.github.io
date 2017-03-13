@@ -22,13 +22,13 @@ Cluster documents into clusters
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received ['filenames', 'id']
-       => dsid = 42179f9a2d564da4
+       => dsid = 176cd80e57344027
 
     1.b Run feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/42179f9a2d564da4
+     POST http://localhost:5001/api/v0/feature-extraction/176cd80e57344027
 
     1.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/42179f9a2d564da4
+     GET http://localhost:5001/api/v0/feature-extraction/176cd80e57344027
          - analyzer: word
          - binary: False
          - chunk_size: 5000
@@ -48,38 +48,38 @@ Cluster documents into clusters
 
     2. Calculate LSI
     POST http://localhost:5001/api/v0/lsi/
-      => LSI model id = 5a511323bae54a9f
-      => SVD decomposition with 100 dimensions explaining 53.30 % variabilty of the data
+      => LSI model id = d5b6c0c3784c4762
+      => SVD decomposition with 100 dimensions explaining 53.28 % variabilty of the data
 
     3.a. Document clustering (LSI + K-means)
      POST http://localhost:5001/api/v0/clustering/k-mean/
-         => model id = 78a4028d051048b9
+         => model id = 09583e40d7914e42
 
     3.b. Computing cluster labels
-     GET http://localhost:5001/api/v0/clustering/k-mean/78a4028d051048b9
+     GET http://localhost:5001/api/v0/clustering/k-mean/09583e40d7914e42
         .. computed in 1.7s
        cluster_id                       cluster_label  cluster_similarity  n_documents
-    0           0                   sanders wed tenet               0.381          269
-    1           1                energy power deseret               0.352          442
-    2           2  eb3325 ricafrente ricafrente_david               0.422          164
-    3           3      enron_development enron brazil               0.362          269
-    4           4                      tana jones thu               0.401          196
-    5           5               shall party agreement               0.533          109
-    6           6                    mtg mon haedicke               0.367          323
-    7           7            dasovich test recipients               0.370          280
-    8           8              rewrite server address               1.000           56
-    9           9                       ect nemec lon               0.355          357
+    0           0            teneo trading recipients               0.357          364
+    1           1            sanders meeting haedicke               0.409          213
+    2           2                 jones tana dasovich               0.350          356
+    3           3              rewrite server address               1.000           56
+    4           4                       ect hou enron               0.374          372
+    5           5      transaction confirmation party               0.355          327
+    6           6               clair conf conference               0.374          213
+    7           7              migration outlook team               0.666           64
+    8           8  eb3325 ricafrente ricafrente_david               0.407          179
+    9           9                       tenet tue mtg               0.364          321
 
     4.a. Document clustering (LSI + Birch clustering)
      POST http://localhost:5001/api/v0/clustering/ward_hc/
-         => model id = 4fabc1162d9b49b0
+         => model id = e9d5cf72a45b471b
 
     4.b. Computing cluster labels
-     GET http://localhost:5001/api/v0/clustering/birch/4fabc1162d9b49b0
-        .. computed in 2.7s
+     GET http://localhost:5001/api/v0/clustering/birch/e9d5cf72a45b471b
+        .. computed in 2.8s
 
     5. Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/42179f9a2d564da4
+     DELETE http://localhost:5001/api/v0/feature-extraction/176cd80e57344027
 
 
 
@@ -228,7 +228,7 @@ Cluster documents into clusters
     print(" DELETE", url)
     requests.delete(url)
 
-**Total running time of the script:** ( 0 minutes  8.958 seconds)
+**Total running time of the script:** ( 0 minutes  9.472 seconds)
 
 
 
