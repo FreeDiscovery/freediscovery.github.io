@@ -1,8 +1,9 @@
 """
-Categorization Interpreation Example [Python API]
+Categorization Interpretation Example [Python API]
 -------------------------------------------------
 
-A visual explanation for the binary categorization outcome for a single document
+A visual interpretation for the binary categorization outcome for a single document
+by looking at the relative contribution of individual words
 """
 import os
 from sklearn.datasets import fetch_20newsgroups
