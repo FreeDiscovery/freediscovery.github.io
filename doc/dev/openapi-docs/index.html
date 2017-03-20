@@ -6899,7 +6899,8 @@
             <h2 id="parameters">Parameters</h2>
             <ul>
             <li><code>parent_id</code> : the id of the previous processing step (either <code>dataset_id</code> or <code>lsi_id</code>)</li>
-            <li><code>query</code> : the seach query</li>
+            <li><code>query</code> : the seach query. Either <code>query</code> or <code>query_document_id</code> must be provided.</li>
+            <li><code>query_document_id</code> : the id of the document used as the search query. Either <code>query</code> or <code>query_document_id</code> must be provided.</li>
             <li><code>nn_metric</code> : The similarity returned by nearest neighbor classifier in [&#39;cosine&#39;, &#39;jaccard&#39;, &#39;cosine_norm&#39;, &#39;jaccard_norm&#39;].</li>
             <li><code>min_score</code> : filter out results below a similarity threashold</li>
             <li><code>max_results</code> : return only the first <code>max_results</code> documents</li>
@@ -6981,7 +6982,19 @@
                                                                 <span class="json-property-type">string</span>
                                                                 <span class="json-property-range" title="Value limits"></span>
                                                                 
-                                                                    <span class="json-property-required"></span>
+                                                            </dt>
+                                                            <dd>
+                                                                
+                                                                <div class="json-inner-schema">
+                                                                    
+                                                                </div>
+                                                            </dd>
+                                                            <dt data-property-name="query_document_id">
+                                                                <span class="json-property-name">query_document_id:</span>
+                                                                
+                                                                <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
+                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                
                                                             </dt>
                                                             <dd>
                                                                 
