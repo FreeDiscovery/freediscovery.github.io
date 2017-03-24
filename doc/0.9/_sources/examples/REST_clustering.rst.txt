@@ -22,13 +22,13 @@ Cluster documents into clusters
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received ['filenames', 'id']
-       => dsid = d0fd753176d24c1a
+       => dsid = 70bb8303f3794533
 
     1.b Run feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/d0fd753176d24c1a
+     POST http://localhost:5001/api/v0/feature-extraction/70bb8303f3794533
 
     1.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/d0fd753176d24c1a
+     GET http://localhost:5001/api/v0/feature-extraction/70bb8303f3794533
          - analyzer: word
          - binary: False
          - chunk_size: 5000
@@ -40,7 +40,7 @@ Cluster documents into clusters
          - n_samples: 2465
          - n_samples_processed: 2465
          - ngram_range: [1, 1]
-         - norm: None
+         - norm: l2
          - stop_words: None
          - sublinear_tf: True
          - use_hashing: False
@@ -48,38 +48,38 @@ Cluster documents into clusters
 
     2. Calculate LSI
     POST http://localhost:5001/api/v0/lsi/
-      => LSI model id = 979e908c7ec84304
-      => SVD decomposition with 100 dimensions explaining 99.76 % variabilty of the data
+      => LSI model id = 38dcfaab50a143c0
+      => SVD decomposition with 100 dimensions explaining 53.28 % variabilty of the data
 
     3.a. Document clustering (LSI + K-means)
      POST http://localhost:5001/api/v0/clustering/k-mean/
-         => model id = d0af4a3b0a454c83
+         => model id = 062627ceeb4f44fe
 
     3.b. Computing cluster labels
-     GET http://localhost:5001/api/v0/clustering/k-mean/d0af4a3b0a454c83
-        .. computed in 1.6s
-       cluster_id              cluster_label  cluster_similarity  n_documents
-    0           0          pcb enron cleanup               0.548          134
-    1           1            enron serc nerc               0.583          238
-    2           2  shackleton marcelo brazil               0.678          315
-    3           3     teneo group recipients               0.676          255
-    4           4         ect hou shackleton               0.698           73
-    5           5    ruppert nemec gillaspie               0.722          106
-    6           6     rewrite server address               1.000           56
-    7           7           enron tana jones               0.757          441
-    8           8  lon enron_development ect               0.329          633
-    9           9           tana jones enron               0.658          214
+     GET http://localhost:5001/api/v0/clustering/k-mean/062627ceeb4f44fe
+        .. computed in 2.0s
+       cluster_id                      cluster_label  cluster_similarity  n_documents
+    0           0                class berkeley haas               0.385          314
+    1           1             nemec counterparty doc               0.367          260
+    2           2                    sanders fri oct               0.457          141
+    3           3                  thu tenet meeting               0.371          321
+    4           4          shackleton teneo dasovich               0.335          434
+    5           5                        ect hou tue               0.326          581
+    6           6              shall party agreement               0.553           99
+    7           7  enron_development test recipients               0.403          195
+    8           8             migration outlook team               0.666           64
+    9           9             rewrite server address               1.000           56
 
     4.a. Document clustering (LSI + Birch clustering)
      POST http://localhost:5001/api/v0/clustering/ward_hc/
-         => model id = 19ea828f7469456e
+         => model id = 0e47875277444a35
 
     4.b. Computing cluster labels
-     GET http://localhost:5001/api/v0/clustering/birch/19ea828f7469456e
-        .. computed in 2.6s
+     GET http://localhost:5001/api/v0/clustering/birch/0e47875277444a35
+        .. computed in 2.9s
 
     5. Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/d0fd753176d24c1a
+     DELETE http://localhost:5001/api/v0/feature-extraction/70bb8303f3794533
 
 
 
@@ -228,7 +228,7 @@ Cluster documents into clusters
     print(" DELETE", url)
     requests.delete(url)
 
-**Total running time of the script:** ( 0 minutes  8.841 seconds)
+**Total running time of the script:** ( 0 minutes  9.967 seconds)
 
 
 

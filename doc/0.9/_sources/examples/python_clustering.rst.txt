@@ -26,33 +26,33 @@ An example of clustering using the Python API
 
     3. Document Clustering (LSI + K-Means)
 
-        .. computed in 0.9s
+        .. computed in 1.0s
        N_documents                                      cluster_names
-    0          499  [teneo, recipients, administrative, group, sha...
-    3          436  [energy, power, services, haedicke, market, en...
-    7          300      [nemec, rewrite, address, mail, server, smtp]
-    6          235    [tue, normal, tenet, sanders, nov, sensitivity]
-    2          215               [mon, tenet, normal, nov, thu, test]
-    5          202     [fri, normal, oct, sensitivity, gmt, priority]
-    1          194              [ect, tana, jones, hou, enron, heard]
-    4          156        [wed, normal, tenet, oct, gmt, sensitivity]
-    8          136  [dasovich, test, group, recipients, administra...
-    9           92  [enron_development, ect, cone, serralheiro, he...
+    3          547  [enron, energy, migration, outlook, team, trad...
+    1          448  [enron_development, load, shackleton, test, ta...
+    4          388  [teneo, nemec, recipients, administrative, gro...
+    8          277       [tenet, normal, tue, test, sensitivity, gmt]
+    2          211        [mon, normal, tenet, nov, gmt, sensitivity]
+    6          170       [ect, lon, forster, enrononline, gtc, shall]
+    5          152        [sanders, haedicke, normal, nov, sent, gmt]
+    9          120              [ect, hou, clair, tana, jones, ellis]
+    7           96     [dasovich, alias, berkeley, haas, edu, cruise]
+    0           56    [rewrite, server, address, smtp, mail, virtual]
 
     4. Document Clustering (LSI + Ward Hierarchical Clustering)
 
-        .. computed in 1.4s
+        .. computed in 1.6s
        N_documents                                      cluster_names
-    2         1044  [ect, shackleton, teneo, enron_development, gr...
-    1          440  [tenet, normal, test, gmt, sensitivity, import...
-    0          362   [dasovich, energy, berkeley, enron, alias, haas]
-    3          135     [tana, jones, enron, advice, trading, lambert]
-    6          132  [nemec, doc, bump, townsend, nemec_gerald, att...
-    7           97       [sanders, normal, nov, lunch, sent, meeting]
+    0         1351         [ect, fri, shackleton, test, teneo, group]
+    2          231              [tenet, tue, wed, normal, test, meet]
+    1          175               [mon, tenet, thu, normal, test, nov]
+    4          153       [dasovich, alias, berkeley, haas, edu, test]
+    6          136      [tana, jones, enron, advice, update, trading]
+    5          122          [nemec, doc, townsend, net, bump, sounds]
+    3          100       [sanders, nov, normal, lunch, sent, meeting]
     8           77  [ricafrente, ricafrente_david, eb3325, teneo, ...
-    9           64  [migration, outlook, team, mtg, normal, sensit...
-    4           58  [haedicke, labanowski, energy, nov, load, normal]
-    5           56    [rewrite, server, address, smtp, mail, virtual]
+    9           64       [migration, outlook, team, mtg, normal, oct]
+    7           56    [rewrite, server, address, smtp, mail, virtual]
 
 
 
@@ -74,7 +74,7 @@ An example of clustering using the Python API
     pd.options.display.float_format = '{:,.3f}'.format
 
     dataset_name = "treclegal09_2k_subset"
-    cache_dir = check_cache()
+    cache_dir = check_cache(test_env=False)
 
 
     print("0. Load Dataset")
@@ -138,7 +138,7 @@ An example of clustering using the Python API
     print('    .. computed in {:.1f}s'.format(t1 - t0))
     print(repr_clustering(labels, terms))
 
-**Total running time of the script:** ( 0 minutes  8.840 seconds)
+**Total running time of the script:** ( 0 minutes  10.087 seconds)
 
 
 
