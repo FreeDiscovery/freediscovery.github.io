@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Clustering Example [REST API] &mdash; FreeDiscovery 0.9.0 documentation</title>
+  <title>Clustering Example [REST API] &mdash; FreeDiscovery 0.9.1 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="FreeDiscovery 0.9.0 documentation" href="../index.html"/>
+    <link rel="top" title="FreeDiscovery 0.9.1 documentation" href="../index.html"/>
         <link rel="up" title="Examples" href="index.html"/>
         <link rel="next" title="Duplicate Detection Example [REST API]" href="REST_duplicate_detection.html"/>
         <link rel="prev" title="Data Ingestion Example [REST API]" href="REST_data_ingestion.html"/> 
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                0.9.0
+                0.9.1
               </div>
             
           
@@ -165,13 +165,13 @@
 <span class="mf">1.</span><span class="n">a</span> <span class="n">Load</span> <span class="n">dataset</span> <span class="ow">and</span> <span class="n">initalize</span> <span class="n">feature</span> <span class="n">extraction</span>
  <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span>
    <span class="o">=&gt;</span> <span class="n">received</span> <span class="p">[</span><span class="s1">&#39;filenames&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">]</span>
-   <span class="o">=&gt;</span> <span class="n">dsid</span> <span class="o">=</span> <span class="n">c2f81fade7024cec</span>
+   <span class="o">=&gt;</span> <span class="n">dsid</span> <span class="o">=</span> <span class="n">d0fd753176d24c1a</span>
 
 <span class="mf">1.</span><span class="n">b</span> <span class="n">Run</span> <span class="n">feature</span> <span class="n">extraction</span>
- <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="n">c2f81fade7024cec</span>
+ <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="n">d0fd753176d24c1a</span>
 
 <span class="mf">1.</span><span class="n">d</span><span class="o">.</span> <span class="n">check</span> <span class="n">the</span> <span class="n">parameters</span> <span class="n">of</span> <span class="n">the</span> <span class="n">extracted</span> <span class="n">features</span>
- <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="n">c2f81fade7024cec</span>
+ <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="n">d0fd753176d24c1a</span>
      <span class="o">-</span> <span class="n">analyzer</span><span class="p">:</span> <span class="n">word</span>
      <span class="o">-</span> <span class="n">binary</span><span class="p">:</span> <span class="kc">False</span>
      <span class="o">-</span> <span class="n">chunk_size</span><span class="p">:</span> <span class="mi">5000</span>
@@ -191,38 +191,38 @@
 
 <span class="mf">2.</span> <span class="n">Calculate</span> <span class="n">LSI</span>
 <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">lsi</span><span class="o">/</span>
-  <span class="o">=&gt;</span> <span class="n">LSI</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="mi">161</span><span class="n">de3b0e19d45ca</span>
+  <span class="o">=&gt;</span> <span class="n">LSI</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="mf">979e908</span><span class="n">c7ec84304</span>
   <span class="o">=&gt;</span> <span class="n">SVD</span> <span class="n">decomposition</span> <span class="k">with</span> <span class="mi">100</span> <span class="n">dimensions</span> <span class="n">explaining</span> <span class="mf">99.76</span> <span class="o">%</span> <span class="n">variabilty</span> <span class="n">of</span> <span class="n">the</span> <span class="n">data</span>
 
 <span class="mf">3.</span><span class="n">a</span><span class="o">.</span> <span class="n">Document</span> <span class="n">clustering</span> <span class="p">(</span><span class="n">LSI</span> <span class="o">+</span> <span class="n">K</span><span class="o">-</span><span class="n">means</span><span class="p">)</span>
  <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">clustering</span><span class="o">/</span><span class="n">k</span><span class="o">-</span><span class="n">mean</span><span class="o">/</span>
-     <span class="o">=&gt;</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="mi">7</span><span class="n">c0325b1299643a4</span>
+     <span class="o">=&gt;</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="n">d0af4a3b0a454c83</span>
 
 <span class="mf">3.</span><span class="n">b</span><span class="o">.</span> <span class="n">Computing</span> <span class="n">cluster</span> <span class="n">labels</span>
- <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">clustering</span><span class="o">/</span><span class="n">k</span><span class="o">-</span><span class="n">mean</span><span class="o">/</span><span class="mi">7</span><span class="n">c0325b1299643a4</span>
-    <span class="o">..</span> <span class="n">computed</span> <span class="ow">in</span> <span class="mf">1.7</span><span class="n">s</span>
-   <span class="n">cluster_id</span>                         <span class="n">cluster_label</span>  <span class="n">cluster_similarity</span>  <span class="n">n_documents</span>
-<span class="mi">0</span>           <span class="mi">0</span>                       <span class="n">serc</span> <span class="n">nerc</span> <span class="n">enron</span>               <span class="mf">0.682</span>          <span class="mi">147</span>
-<span class="mi">1</span>           <span class="mi">1</span>                      <span class="n">enron</span> <span class="n">tana</span> <span class="n">jones</span>               <span class="mf">0.738</span>          <span class="mi">464</span>
-<span class="mi">2</span>           <span class="mi">2</span>             <span class="n">shackleton</span> <span class="n">marcelo</span> <span class="n">brazil</span>               <span class="mf">0.696</span>          <span class="mi">259</span>
-<span class="mi">3</span>           <span class="mi">3</span>               <span class="n">ruppert</span> <span class="n">nemec</span> <span class="n">gillaspie</span>               <span class="mf">0.330</span>          <span class="mi">592</span>
-<span class="mi">4</span>           <span class="mi">4</span>                <span class="n">teneo</span> <span class="n">group</span> <span class="n">recipients</span>               <span class="mf">0.676</span>          <span class="mi">250</span>
-<span class="mi">5</span>           <span class="mi">5</span>                <span class="n">rewrite</span> <span class="n">server</span> <span class="n">address</span>               <span class="mf">1.000</span>           <span class="mi">56</span>
-<span class="mi">6</span>           <span class="mi">6</span>                    <span class="n">ect</span> <span class="n">hou</span> <span class="n">shackleton</span>               <span class="mf">0.668</span>           <span class="mi">81</span>
-<span class="mi">7</span>           <span class="mi">7</span>  <span class="n">enron_development</span> <span class="n">shackleton</span> <span class="n">marcelo</span>               <span class="mf">0.562</span>           <span class="mi">99</span>
-<span class="mi">8</span>           <span class="mi">8</span>                      <span class="n">tana</span> <span class="n">jones</span> <span class="n">enron</span>               <span class="mf">0.598</span>          <span class="mi">295</span>
-<span class="mi">9</span>           <span class="mi">9</span>                     <span class="n">enron</span> <span class="n">pcb</span> <span class="n">cleanup</span>               <span class="mf">0.503</span>          <span class="mi">222</span>
+ <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">clustering</span><span class="o">/</span><span class="n">k</span><span class="o">-</span><span class="n">mean</span><span class="o">/</span><span class="n">d0af4a3b0a454c83</span>
+    <span class="o">..</span> <span class="n">computed</span> <span class="ow">in</span> <span class="mf">1.6</span><span class="n">s</span>
+   <span class="n">cluster_id</span>              <span class="n">cluster_label</span>  <span class="n">cluster_similarity</span>  <span class="n">n_documents</span>
+<span class="mi">0</span>           <span class="mi">0</span>          <span class="n">pcb</span> <span class="n">enron</span> <span class="n">cleanup</span>               <span class="mf">0.548</span>          <span class="mi">134</span>
+<span class="mi">1</span>           <span class="mi">1</span>            <span class="n">enron</span> <span class="n">serc</span> <span class="n">nerc</span>               <span class="mf">0.583</span>          <span class="mi">238</span>
+<span class="mi">2</span>           <span class="mi">2</span>  <span class="n">shackleton</span> <span class="n">marcelo</span> <span class="n">brazil</span>               <span class="mf">0.678</span>          <span class="mi">315</span>
+<span class="mi">3</span>           <span class="mi">3</span>     <span class="n">teneo</span> <span class="n">group</span> <span class="n">recipients</span>               <span class="mf">0.676</span>          <span class="mi">255</span>
+<span class="mi">4</span>           <span class="mi">4</span>         <span class="n">ect</span> <span class="n">hou</span> <span class="n">shackleton</span>               <span class="mf">0.698</span>           <span class="mi">73</span>
+<span class="mi">5</span>           <span class="mi">5</span>    <span class="n">ruppert</span> <span class="n">nemec</span> <span class="n">gillaspie</span>               <span class="mf">0.722</span>          <span class="mi">106</span>
+<span class="mi">6</span>           <span class="mi">6</span>     <span class="n">rewrite</span> <span class="n">server</span> <span class="n">address</span>               <span class="mf">1.000</span>           <span class="mi">56</span>
+<span class="mi">7</span>           <span class="mi">7</span>           <span class="n">enron</span> <span class="n">tana</span> <span class="n">jones</span>               <span class="mf">0.757</span>          <span class="mi">441</span>
+<span class="mi">8</span>           <span class="mi">8</span>  <span class="n">lon</span> <span class="n">enron_development</span> <span class="n">ect</span>               <span class="mf">0.329</span>          <span class="mi">633</span>
+<span class="mi">9</span>           <span class="mi">9</span>           <span class="n">tana</span> <span class="n">jones</span> <span class="n">enron</span>               <span class="mf">0.658</span>          <span class="mi">214</span>
 
 <span class="mf">4.</span><span class="n">a</span><span class="o">.</span> <span class="n">Document</span> <span class="n">clustering</span> <span class="p">(</span><span class="n">LSI</span> <span class="o">+</span> <span class="n">Birch</span> <span class="n">clustering</span><span class="p">)</span>
  <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">clustering</span><span class="o">/</span><span class="n">ward_hc</span><span class="o">/</span>
-     <span class="o">=&gt;</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="n">a7cceefc782f470d</span>
+     <span class="o">=&gt;</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="mi">19</span><span class="n">ea828f7469456e</span>
 
 <span class="mf">4.</span><span class="n">b</span><span class="o">.</span> <span class="n">Computing</span> <span class="n">cluster</span> <span class="n">labels</span>
- <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">clustering</span><span class="o">/</span><span class="n">birch</span><span class="o">/</span><span class="n">a7cceefc782f470d</span>
-    <span class="o">..</span> <span class="n">computed</span> <span class="ow">in</span> <span class="mf">2.7</span><span class="n">s</span>
+ <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">clustering</span><span class="o">/</span><span class="n">birch</span><span class="o">/</span><span class="mi">19</span><span class="n">ea828f7469456e</span>
+    <span class="o">..</span> <span class="n">computed</span> <span class="ow">in</span> <span class="mf">2.6</span><span class="n">s</span>
 
 <span class="mf">5.</span> <span class="n">Delete</span> <span class="n">the</span> <span class="n">extracted</span> <span class="n">features</span>
- <span class="n">DELETE</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="n">c2f81fade7024cec</span>
+ <span class="n">DELETE</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="n">d0fd753176d24c1a</span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -367,7 +367,7 @@
 <span class="n">requests</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  9.339 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  8.841 seconds)</p>
 <div class="sphx-glr-footer docutils container">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" href="../_downloads/REST_clustering.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">REST_clustering.py</span></code></a></div>
@@ -397,7 +397,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016 - 2017, Grossman Labs LLC.
-      Last updated on Mar 02, 2017.
+      Last updated on Mar 24, 2017.
 
     </p>
   </div>
@@ -419,7 +419,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.9.0',
+            VERSION:'0.9.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
