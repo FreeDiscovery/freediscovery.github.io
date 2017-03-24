@@ -22,13 +22,13 @@ Cluster documents into clusters
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received ['filenames', 'id']
-       => dsid = c8b8f35fbe0d45dc
+       => dsid = dbd0d3bc2d104af8
 
     1.b Run feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/c8b8f35fbe0d45dc
+     POST http://localhost:5001/api/v0/feature-extraction/dbd0d3bc2d104af8
 
     1.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/c8b8f35fbe0d45dc
+     GET http://localhost:5001/api/v0/feature-extraction/dbd0d3bc2d104af8
          - analyzer: word
          - binary: False
          - chunk_size: 5000
@@ -48,38 +48,38 @@ Cluster documents into clusters
 
     2. Calculate LSI
     POST http://localhost:5001/api/v0/lsi/
-      => LSI model id = 97ddab6f73e649c0
-      => SVD decomposition with 100 dimensions explaining 53.29 % variabilty of the data
+      => LSI model id = 0325e59dbe384829
+      => SVD decomposition with 100 dimensions explaining 53.28 % variabilty of the data
 
     3.a. Document clustering (LSI + K-means)
      POST http://localhost:5001/api/v0/clustering/k-mean/
-         => model id = 066014ed55434cf2
+         => model id = 824c44abad8841fa
 
     3.b. Computing cluster labels
-     GET http://localhost:5001/api/v0/clustering/k-mean/066014ed55434cf2
-        .. computed in 1.9s
-       cluster_id                    cluster_label  cluster_similarity  n_documents
-    0           0           migration team outlook               0.403          267
-    1           1                meeting tue tenet               0.387          198
-    2           2  recipients group administrative               0.345          433
-    3           3                     thu load oct               0.376          263
-    4           4           rewrite server address               1.000           56
-    5           5            shall party agreement               0.531          109
-    6           6              sanders nov meeting               0.572           85
-    7           7      mon enron_development tenet               0.379          253
-    8           8                    ect enron hou               0.426          171
-    9           9           wed haedicke kincannon               0.316          630
+     GET http://localhost:5001/api/v0/clustering/k-mean/824c44abad8841fa
+        .. computed in 1.7s
+       cluster_id                   cluster_label  cluster_similarity  n_documents
+    0           0                    ect hou tana               0.401          201
+    1           1                    thu oct load               0.350          381
+    2           2           tue migration outlook               0.402          224
+    3           3             enron ellis project               0.332          658
+    4           4          mon shackleton deseret               0.358          308
+    5           5          rewrite server address               1.000           56
+    6           6                 sanders fri oct               0.523          105
+    7           7           shall party agreement               0.534          109
+    8           8  calo enron_development tozzini               0.416          130
+    9           9           nemec test recipients               0.365          293
 
     4.a. Document clustering (LSI + Birch clustering)
      POST http://localhost:5001/api/v0/clustering/ward_hc/
-         => model id = f8ff898ea83643df
+         => model id = 3c3527e9d9ee49e5
 
     4.b. Computing cluster labels
-     GET http://localhost:5001/api/v0/clustering/birch/f8ff898ea83643df
-        .. computed in 2.6s
+     GET http://localhost:5001/api/v0/clustering/birch/3c3527e9d9ee49e5
+        .. computed in 2.5s
 
     5. Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/c8b8f35fbe0d45dc
+     DELETE http://localhost:5001/api/v0/feature-extraction/dbd0d3bc2d104af8
 
 
 
@@ -228,7 +228,7 @@ Cluster documents into clusters
     print(" DELETE", url)
     requests.delete(url)
 
-**Total running time of the script:** ( 0 minutes  10.592 seconds)
+**Total running time of the script:** ( 0 minutes  8.946 seconds)
 
 
 
