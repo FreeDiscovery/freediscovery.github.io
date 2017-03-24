@@ -22,13 +22,13 @@ Cluster documents into clusters
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received ['filenames', 'id']
-       => dsid = 0feae76521494075
+       => dsid = a556d1c07b6e4454
 
     1.b Run feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/0feae76521494075
+     POST http://localhost:5001/api/v0/feature-extraction/a556d1c07b6e4454
 
     1.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/0feae76521494075
+     GET http://localhost:5001/api/v0/feature-extraction/a556d1c07b6e4454
          - analyzer: word
          - binary: False
          - chunk_size: 5000
@@ -48,38 +48,38 @@ Cluster documents into clusters
 
     2. Calculate LSI
     POST http://localhost:5001/api/v0/lsi/
-      => LSI model id = 69ff5840a3d94f87
-      => SVD decomposition with 100 dimensions explaining 53.28 % variabilty of the data
+      => LSI model id = af0fbc9ec5e448a6
+      => SVD decomposition with 100 dimensions explaining 53.29 % variabilty of the data
 
     3.a. Document clustering (LSI + K-means)
      POST http://localhost:5001/api/v0/clustering/k-mean/
-         => model id = 3c1439e20477457e
+         => model id = 65fae10a0ccc4ed5
 
     3.b. Computing cluster labels
-     GET http://localhost:5001/api/v0/clustering/k-mean/3c1439e20477457e
+     GET http://localhost:5001/api/v0/clustering/k-mean/65fae10a0ccc4ed5
         .. computed in 1.8s
-       cluster_id               cluster_label  cluster_similarity  n_documents
-    0           0               wed tenet oct               0.404          209
-    1           1           thu ect migration               0.341          457
-    2           2        teneo nov recipients               0.365          333
-    3           3     transaction enron trade               0.348          383
-    4           4           sanders lunch nov               0.549           95
-    5           5             tana jones test               0.351          360
-    6           6  enron_development kean ect               0.383          196
-    7           7      energy services market               0.462          162
-    8           8       dasovich enron mexico               0.380          214
-    9           9      rewrite server address               1.000           56
+       cluster_id                  cluster_label  cluster_similarity  n_documents
+    0           0                 ect tana jones               0.438          157
+    1           1                  tenet tue wed               0.353          431
+    2           2          thu migration outlook               0.419          194
+    3           3              dupre lay project               0.380          198
+    4           4  teneo enron_development nemec               0.320          636
+    5           5      haedicke deseret etringer               0.495          100
+    6           6        party shall transaction               0.458          145
+    7           7         dasovich berkeley haas               0.371          317
+    8           8         rewrite server address               1.000           56
+    9           9          brazil trading harris               0.369          231
 
     4.a. Document clustering (LSI + Birch clustering)
      POST http://localhost:5001/api/v0/clustering/ward_hc/
-         => model id = 970e668c83da4875
+         => model id = 65f63351d02b4dfb
 
     4.b. Computing cluster labels
-     GET http://localhost:5001/api/v0/clustering/birch/970e668c83da4875
-        .. computed in 2.8s
+     GET http://localhost:5001/api/v0/clustering/birch/65f63351d02b4dfb
+        .. computed in 2.7s
 
     5. Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/0feae76521494075
+     DELETE http://localhost:5001/api/v0/feature-extraction/a556d1c07b6e4454
 
 
 
@@ -228,7 +228,7 @@ Cluster documents into clusters
     print(" DELETE", url)
     requests.delete(url)
 
-**Total running time of the script:** ( 0 minutes  9.381 seconds)
+**Total running time of the script:** ( 0 minutes  9.449 seconds)
 
 
 
