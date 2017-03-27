@@ -22,13 +22,13 @@ Cluster documents into clusters
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received ['filenames', 'id']
-       => dsid = 3657082b174c4364
+       => dsid = 653a2b3dc40c415b
 
     1.b Run feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/3657082b174c4364
+     POST http://localhost:5001/api/v0/feature-extraction/653a2b3dc40c415b
 
     1.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/3657082b174c4364
+     GET http://localhost:5001/api/v0/feature-extraction/653a2b3dc40c415b
          - analyzer: word
          - binary: False
          - chunk_size: 5000
@@ -48,38 +48,38 @@ Cluster documents into clusters
 
     2. Calculate LSI
     POST http://localhost:5001/api/v0/lsi/
-      => LSI model id = b132c737ae1a48ce
+      => LSI model id = e44620e133ef4730
       => SVD decomposition with 100 dimensions explaining 53.28 % variabilty of the data
 
     3.a. Document clustering (LSI + K-means)
      POST http://localhost:5001/api/v0/clustering/k-mean/
-         => model id = 28bfe449f5a34a2d
+         => model id = 9f8e1d3926af43fe
 
     3.b. Computing cluster labels
-     GET http://localhost:5001/api/v0/clustering/k-mean/28bfe449f5a34a2d
-        .. computed in 1.8s
-       cluster_id                    cluster_label  cluster_similarity  n_documents
-    0           0                    ect hou taffy               0.556           88
-    1           1                    wed tenet tue               0.354          401
-    2           2           migration outlook team               0.673           64
-    3           3                 thu haedicke nov               0.348          351
-    4           4  teneo recipients administrative               0.387          285
-    5           5                berkeley haas edu               0.395          298
-    6           6  enron_development clair ruppert               0.341          355
-    7           7           rewrite server address               1.000           56
-    8           8          transaction party shall               0.612           71
-    9           9                    fri oct tenet               0.329          496
+     GET http://localhost:5001/api/v0/clustering/k-mean/9f8e1d3926af43fe
+        .. computed in 1.7s
+       cluster_id                     cluster_label  cluster_similarity  n_documents
+    0           0                    ect hou master               0.355          319
+    1           1   enron_development berkeley haas               0.354          457
+    2           2                 meeting tue tenet               0.384          231
+    3           3  teneo shackleton_sara recipients               0.357          369
+    4           4            rewrite server address               1.000           56
+    5           5               mtg migration enron               0.381          248
+    6           6                   sanders wed nov               0.404          198
+    7           7    test recipients administrative               0.370          282
+    8           8             shall party agreement               0.591           75
+    9           9                   eb3325 fri meet               0.378          230
 
     4.a. Document clustering (LSI + Birch clustering)
      POST http://localhost:5001/api/v0/clustering/ward_hc/
-         => model id = dabd0302438445b2
+         => model id = e1095f7af3b8411b
 
     4.b. Computing cluster labels
-     GET http://localhost:5001/api/v0/clustering/birch/dabd0302438445b2
+     GET http://localhost:5001/api/v0/clustering/birch/e1095f7af3b8411b
         .. computed in 2.7s
 
     5. Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/3657082b174c4364
+     DELETE http://localhost:5001/api/v0/feature-extraction/653a2b3dc40c415b
 
 
 
@@ -228,7 +228,7 @@ Cluster documents into clusters
     print(" DELETE", url)
     requests.delete(url)
 
-**Total running time of the script:** ( 0 minutes  9.478 seconds)
+**Total running time of the script:** ( 0 minutes  9.386 seconds)
 
 
 
