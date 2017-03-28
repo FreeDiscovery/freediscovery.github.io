@@ -22,13 +22,13 @@ Cluster documents into clusters
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received ['filenames', 'id']
-       => dsid = 653a2b3dc40c415b
+       => dsid = 88b3b4fb52c448ba
 
     1.b Run feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/653a2b3dc40c415b
+     POST http://localhost:5001/api/v0/feature-extraction/88b3b4fb52c448ba
 
     1.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/653a2b3dc40c415b
+     GET http://localhost:5001/api/v0/feature-extraction/88b3b4fb52c448ba
          - analyzer: word
          - binary: False
          - chunk_size: 5000
@@ -48,38 +48,38 @@ Cluster documents into clusters
 
     2. Calculate LSI
     POST http://localhost:5001/api/v0/lsi/
-      => LSI model id = e44620e133ef4730
-      => SVD decomposition with 100 dimensions explaining 53.28 % variabilty of the data
+      => LSI model id = 2fb01f7abdc146dc
+      => SVD decomposition with 100 dimensions explaining 53.26 % variabilty of the data
 
     3.a. Document clustering (LSI + K-means)
      POST http://localhost:5001/api/v0/clustering/k-mean/
-         => model id = 9f8e1d3926af43fe
+         => model id = 618edeb467d54c11
 
     3.b. Computing cluster labels
-     GET http://localhost:5001/api/v0/clustering/k-mean/9f8e1d3926af43fe
+     GET http://localhost:5001/api/v0/clustering/k-mean/618edeb467d54c11
         .. computed in 1.7s
-       cluster_id                     cluster_label  cluster_similarity  n_documents
-    0           0                    ect hou master               0.355          319
-    1           1   enron_development berkeley haas               0.354          457
-    2           2                 meeting tue tenet               0.384          231
-    3           3  teneo shackleton_sara recipients               0.357          369
-    4           4            rewrite server address               1.000           56
-    5           5               mtg migration enron               0.381          248
-    6           6                   sanders wed nov               0.404          198
-    7           7    test recipients administrative               0.370          282
-    8           8             shall party agreement               0.591           75
-    9           9                   eb3325 fri meet               0.378          230
+       cluster_id                   cluster_label  cluster_similarity  n_documents
+    0           0               sanders lunch wed               0.338          401
+    1           1                   ect hou clair               0.374          256
+    2           2               meeting fri tenet               0.437          150
+    3           3  test recipients administrative               0.427          168
+    4           4               trading enron doc               0.332          472
+    5           5          rewrite server address               1.000           56
+    6           6           shall party agreement               0.580           88
+    7           7        enrononline market price               0.388          286
+    8           8           mtg migration outlook               0.506          110
+    9           9                 tue eb3325 meet               0.341          478
 
     4.a. Document clustering (LSI + Birch clustering)
      POST http://localhost:5001/api/v0/clustering/ward_hc/
-         => model id = e1095f7af3b8411b
+         => model id = 474c928bd39840ab
 
     4.b. Computing cluster labels
-     GET http://localhost:5001/api/v0/clustering/birch/e1095f7af3b8411b
+     GET http://localhost:5001/api/v0/clustering/birch/474c928bd39840ab
         .. computed in 2.7s
 
     5. Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/653a2b3dc40c415b
+     DELETE http://localhost:5001/api/v0/feature-extraction/88b3b4fb52c448ba
 
 
 
@@ -228,7 +228,7 @@ Cluster documents into clusters
     print(" DELETE", url)
     requests.delete(url)
 
-**Total running time of the script:** ( 0 minutes  9.386 seconds)
+**Total running time of the script:** ( 0 minutes  9.414 seconds)
 
 
 
