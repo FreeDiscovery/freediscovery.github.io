@@ -1383,9 +1383,9 @@
             <p><strong>Parameters</strong></p>
             <ul>
             <li><code>parent_id</code>: <code>dataset_id</code> or <code>lsi_id</code></li>
-            <li><code>n_clusters</code>: the number of clusters</li>
-            <li><code>min_similarity</code>: The radius of the subcluster obtained by merging a new sample and the closest subcluster should be lesser than the threshold. Otherwise a new subcluster is started. See <a href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.Birch.html">sklearn.cluster.Birch</a></li>
-            <li><code>branching_factor</code>: Maximum number of CF subclusters in each node. If a new samples enters such that the number of subclusters exceed the branching_factor then the node has to be split. The corresponding parent also has to be split and if the number of subclusters in the parent is greater than the branching factor, then it has to be split recursively.</li>
+            <li><code>n_clusters</code>: the number of clusters or -1 to use hierarchical clustering (default: -1)</li>
+            <li><code>min_similarity</code>: The radius of the subcluster obtained by merging a new sample and the closest subcluster should be lesser than the threshold. Otherwise a new subcluster is started. See <a href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.Birch.html">sklearn.cluster.Birch</a>. Increasing this value would increase the hierarchical tree depth (and the number of clusters).</li>
+            <li><code>branching_factor</code>: Maximum number of CF subclusters in each node. If a new samples enters such that the number of subclusters exceed the branching_factor then the node has to be split. The corresponding parent also has to be split and if the number of subclusters in the parent is greater than the branching factor, then it has to be split recursively. Decreasing this value would increase the number of clusters.</li>
             <li><code>nn_metric</code> : The similarity returned by nearest neighbor classifier in [&#39;cosine&#39;, &#39;jaccard&#39;, &#39;cosine_norm&#39;, &#39;jaccard_norm&#39;].</li>
             </ul>
             
@@ -1409,7 +1409,7 @@
                                                                 <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
                                                                 <span class="json-property-range" title="Value limits"></span>
                                                                 
-                                                                        <span class="json-property-default-value">50</span>
+                                                                        <span class="json-property-default-value">20</span>
                                                             </dt>
                                                             <dd>
                                                                 
@@ -1437,7 +1437,7 @@
                                                                 <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
                                                                 <span class="json-property-range" title="Value limits"></span>
                                                                 
-                                                                        <span class="json-property-default-value">150</span>
+                                                                        <span class="json-property-default-value">-1</span>
                                                             </dt>
                                                             <dd>
                                                                 
@@ -2020,7 +2020,10 @@
             <p><strong>Parameters</strong></p>
             <ul>
             <li><code>n_top_words</code>: keep only most relevant <code>n_top_words</code> words</li>
-            <li><code>nn_metric</code> : The similarity returned by nearest neighbor classifier in [&#39;cosine&#39;, &#39;jaccard&#39;, &#39;cosine_norm&#39;, &#39;jaccard_norm&#39;].</li>
+            <li><code>nn_metric</code> : The similarity metric in [&#39;cosine&#39;, &#39;jaccard&#39;, &#39;cosine_norm&#39;, &#39;jaccard_norm&#39;].</li>
+            <li><code>return_optimal_sampling</code> : Instead of cluster results, the optimal sampling results will be returned (with no cluster labels). This option is only valid with Birch algorithm. Note that optimal sampling cannot return more samples than the subclusters in the birch clustering results (default: false)</li>
+            <li><code>sampling_min_similarity</code> : Similarity threashold used by smart sampling. Decreasing this value would result in more sampled documents. Default: 1.0 (i.e. use the full cluster hierarichy).</li>
+            <li><code>sampling_min_coverage</code> : Minimal coverage requirement in [0, 1] range. Increasing this value would result in a larger number of samples. (default: 0.9)</li>
             </ul>
             
                     </section>
@@ -2058,6 +2061,47 @@
                                                                 <span class="json-property-range" title="Value limits"></span>
                                                                 
                                                                         <span class="json-property-default-value">jaccard_norm</span>
+                                                            </dt>
+                                                            <dd>
+                                                                
+                                                                <div class="json-inner-schema">
+                                                                    
+                                                                </div>
+                                                            </dd>
+                                                            <dt data-property-name="return_optimal_sampling">
+                                                                <span class="json-property-name">return_optimal_sampling:</span>
+                                                                
+                                                                <span class="json-property-type">boolean</span>
+                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                
+                                                            </dt>
+                                                            <dd>
+                                                                
+                                                                <div class="json-inner-schema">
+                                                                    
+                                                                </div>
+                                                            </dd>
+                                                            <dt data-property-name="sampling_min_coverage">
+                                                                <span class="json-property-name">sampling_min_coverage:</span>
+                                                                
+                                                                <span class="json-property-type">number</span>
+                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                
+                                                                        <span class="json-property-default-value">0.9</span>
+                                                            </dt>
+                                                            <dd>
+                                                                
+                                                                <div class="json-inner-schema">
+                                                                    
+                                                                </div>
+                                                            </dd>
+                                                            <dt data-property-name="sampling_min_similarity">
+                                                                <span class="json-property-name">sampling_min_similarity:</span>
+                                                                
+                                                                <span class="json-property-type">number</span>
+                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                
+                                                                        <span class="json-property-default-value">1</span>
                                                             </dt>
                                                             <dd>
                                                                 
@@ -2231,8 +2275,8 @@
                                                                                                                                             
                                                                                                                                         </div>
                                                                                                                                     </dd>
-                                                                                                                                    <dt data-property-name="document_id">
-                                                                                                                                        <span class="json-property-name">document_id:</span>
+                                                                                                                                    <dt data-property-name="cluster_size">
+                                                                                                                                        <span class="json-property-name">cluster_size:</span>
                                                                                                                                         
                                                                                                                                         <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
                                                                                                                                         <span class="json-property-range" title="Value limits"></span>
@@ -2308,19 +2352,6 @@
                                                                                                                                                                             </section>
                                                                                                                                                                 </div>
                                                                                                                                                             </section>                </div>
-                                                                                                                                    </dd>
-                                                                                                                                    <dt data-property-name="render_id">
-                                                                                                                                        <span class="json-property-name">render_id:</span>
-                                                                                                                                        
-                                                                                                                                        <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
-                                                                                                                                        <span class="json-property-range" title="Value limits"></span>
-                                                                                                                                        
-                                                                                                                                    </dt>
-                                                                                                                                    <dd>
-                                                                                                                                        
-                                                                                                                                        <div class="json-inner-schema">
-                                                                                                                                            
-                                                                                                                                        </div>
                                                                                                                                     </dd>
                                                                                                                             </dl>
                                                                                                                         </section>
@@ -2770,8 +2801,8 @@
                                                                                                                                             
                                                                                                                                         </div>
                                                                                                                                     </dd>
-                                                                                                                                    <dt data-property-name="document_id">
-                                                                                                                                        <span class="json-property-name">document_id:</span>
+                                                                                                                                    <dt data-property-name="cluster_size">
+                                                                                                                                        <span class="json-property-name">cluster_size:</span>
                                                                                                                                         
                                                                                                                                         <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
                                                                                                                                         <span class="json-property-range" title="Value limits"></span>
@@ -2847,19 +2878,6 @@
                                                                                                                                                                             </section>
                                                                                                                                                                 </div>
                                                                                                                                                             </section>                </div>
-                                                                                                                                    </dd>
-                                                                                                                                    <dt data-property-name="render_id">
-                                                                                                                                        <span class="json-property-name">render_id:</span>
-                                                                                                                                        
-                                                                                                                                        <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
-                                                                                                                                        <span class="json-property-range" title="Value limits"></span>
-                                                                                                                                        
-                                                                                                                                    </dt>
-                                                                                                                                    <dd>
-                                                                                                                                        
-                                                                                                                                        <div class="json-inner-schema">
-                                                                                                                                            
-                                                                                                                                        </div>
                                                                                                                                     </dd>
                                                                                                                             </dl>
                                                                                                                         </section>
