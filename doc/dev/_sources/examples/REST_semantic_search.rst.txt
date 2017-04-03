@@ -22,87 +22,87 @@ An example of Semantic Search
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received ['filenames', 'id']
-       => dsid = a3666c1caf3b4d4d
+       => dsid = dfe2cab5c94f4a77
 
     1.b Start feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/a3666c1caf3b4d4d
+     POST http://localhost:5001/api/v0/feature-extraction/dfe2cab5c94f4a77
 
     2. Calculate LSI
     POST http://localhost:5001/api/v0/lsi/
-      => LSI model id = a0046390861344ab
-      => SVD decomposition with 100 dimensions explaining 76.49 % variabilty of the data
+      => LSI model id = 879dd0edd0b743a4
+      => SVD decomposition with 100 dimensions explaining 76.48 % variabilty of the data
 
     3.a. Perform the semantic search
      POST http://localhost:5001/api/v0/search/
                  score
     document_id       
-    4528384      0.444
-    1572516      0.421
-    21316        0.420
-    674041       0.405
-    202500       0.402
-    2152089      0.401
-    3545689      0.399
-    1976836      0.396
-    68644        0.395
-    69169        0.394
+    4528384      0.460
+    21316        0.433
+    4116841      0.414
+    2152089      0.406
+    1572516      0.404
+    1454436      0.402
+    4363921      0.396
+    3545689      0.394
+    6724         0.391
     1550025      0.390
-    4923961      0.390
-    49729        0.388
-    649636       0.388
-    648025       0.387
-    2856100      0.387
-    4116841      0.381
-    48841        0.375
-    1276900      0.375
-    6724         0.375
-    3748096      0.375
-    1274641      0.375
-    4765489      0.375
-    4363921      0.374
-    3286969      0.372
-    3651921      0.372
-    6889         0.372
-    266256       0.371
-    1227664      0.371
-    2013561      0.371
+    6889         0.388
+    648025       0.386
+    649636       0.386
+    674041       0.385
+    49729        0.382
+    4393216      0.381
+    8836         0.381
+    9025         0.379
+    68644        0.377
+    2856100      0.376
+    4923961      0.375
+    69169        0.374
+    776161       0.372
+    1682209      0.372
+    4765489      0.372
+    48841        0.372
+    558009       0.369
+    3632836      0.369
+    3651921      0.368
+    4380649      0.367
     ...            ...
-    1750329      0.179
-    2277081      0.179
-    708964       0.179
-    1610361      0.179
-    4214809      0.179
-    228484       0.178
-    4410000      0.178
-    2050624      0.178
-    243049       0.177
-    3600         0.177
-    1288225      0.177
-    3751969      0.177
-    906304       0.176
-    904401       0.176
-    4389025      0.175
-    8649         0.174
-    4293184      0.174
-    2226064      0.174
-    8464         0.174
-    1038361      0.173
-    3196944      0.173
-    1040400      0.173
+    904401       0.175
+    872356       0.175
+    906304       0.174
+    114921       0.174
+    1607824      0.174
+    708964       0.172
+    1610361      0.172
     5143824      0.171
-    872356       0.167
-    1763584      0.166
-    495616       0.165
-    614656       0.157
-    1510441      0.157
-    2268036      0.155
-    2271049      0.152
+    3196944      0.171
+    1763584      0.170
+    4389025      0.169
+    8464         0.168
+    383161       0.168
+    386884       0.168
+    8649         0.168
+    142884       0.168
+    144400       0.168
+    5531904      0.168
+    5541316      0.168
+    1038361      0.167
+    3312400      0.167
+    495616       0.167
+    385641       0.167
+    1040400      0.166
+    1085764      0.163
+    2271049      0.162
+    2268036      0.162
+    1083681      0.161
+    614656       0.148
+    1510441      0.148
 
     [2465 rows x 1 columns]
-    0.444064107858
+    0.460352516587
 
     4. Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/a3666c1caf3b4d4d
+     DELETE http://localhost:5001/api/v0/feature-extraction/dfe2cab5c94f4a77
 
 
 
@@ -206,7 +206,7 @@ An example of Semantic Search
         print(" DELETE", url)
         requests.delete(url)
 
-**Total running time of the script:** ( 0 minutes  8.931 seconds)
+**Total running time of the script:** ( 0 minutes  9.036 seconds)
 
 
 
