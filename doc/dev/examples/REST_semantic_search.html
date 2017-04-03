@@ -167,87 +167,87 @@
 <span class="mf">1.</span><span class="n">a</span> <span class="n">Load</span> <span class="n">dataset</span> <span class="ow">and</span> <span class="n">initalize</span> <span class="n">feature</span> <span class="n">extraction</span>
  <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span>
    <span class="o">=&gt;</span> <span class="n">received</span> <span class="p">[</span><span class="s1">&#39;filenames&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">]</span>
-   <span class="o">=&gt;</span> <span class="n">dsid</span> <span class="o">=</span> <span class="mf">4e650</span><span class="n">eb4a83a49b6</span>
+   <span class="o">=&gt;</span> <span class="n">dsid</span> <span class="o">=</span> <span class="mi">68</span><span class="n">d317ae935c41dd</span>
 
 <span class="mf">1.</span><span class="n">b</span> <span class="n">Start</span> <span class="n">feature</span> <span class="n">extraction</span>
- <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="mf">4e650</span><span class="n">eb4a83a49b6</span>
+ <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="mi">68</span><span class="n">d317ae935c41dd</span>
 
 <span class="mf">2.</span> <span class="n">Calculate</span> <span class="n">LSI</span>
 <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">lsi</span><span class="o">/</span>
-  <span class="o">=&gt;</span> <span class="n">LSI</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="n">c0fb4aff8e3d45b1</span>
-  <span class="o">=&gt;</span> <span class="n">SVD</span> <span class="n">decomposition</span> <span class="k">with</span> <span class="mi">100</span> <span class="n">dimensions</span> <span class="n">explaining</span> <span class="mf">76.50</span> <span class="o">%</span> <span class="n">variabilty</span> <span class="n">of</span> <span class="n">the</span> <span class="n">data</span>
+  <span class="o">=&gt;</span> <span class="n">LSI</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="mi">0</span><span class="n">f96ac3b9ab74c1f</span>
+  <span class="o">=&gt;</span> <span class="n">SVD</span> <span class="n">decomposition</span> <span class="k">with</span> <span class="mi">100</span> <span class="n">dimensions</span> <span class="n">explaining</span> <span class="mf">76.48</span> <span class="o">%</span> <span class="n">variabilty</span> <span class="n">of</span> <span class="n">the</span> <span class="n">data</span>
 
 <span class="mf">3.</span><span class="n">a</span><span class="o">.</span> <span class="n">Perform</span> <span class="n">the</span> <span class="n">semantic</span> <span class="n">search</span>
  <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">search</span><span class="o">/</span>
              <span class="n">score</span>
 <span class="n">document_id</span>
 <span class="mi">4528384</span>      <span class="mf">0.469</span>
-<span class="mi">21316</span>        <span class="mf">0.442</span>
-<span class="mi">4116841</span>      <span class="mf">0.429</span>
-<span class="mi">1572516</span>      <span class="mf">0.420</span>
-<span class="mi">2152089</span>      <span class="mf">0.419</span>
-<span class="mi">1454436</span>      <span class="mf">0.415</span>
-<span class="mi">674041</span>       <span class="mf">0.399</span>
-<span class="mi">3545689</span>      <span class="mf">0.398</span>
-<span class="mi">68644</span>        <span class="mf">0.394</span>
-<span class="mi">69169</span>        <span class="mf">0.390</span>
-<span class="mi">4923961</span>      <span class="mf">0.390</span>
-<span class="mi">4363921</span>      <span class="mf">0.389</span>
-<span class="mi">1550025</span>      <span class="mf">0.386</span>
+<span class="mi">21316</span>        <span class="mf">0.439</span>
+<span class="mi">2152089</span>      <span class="mf">0.422</span>
+<span class="mi">4116841</span>      <span class="mf">0.411</span>
+<span class="mi">3545689</span>      <span class="mf">0.410</span>
+<span class="mi">776161</span>       <span class="mf">0.407</span>
+<span class="mi">1682209</span>      <span class="mf">0.407</span>
+<span class="mi">1572516</span>      <span class="mf">0.405</span>
+<span class="mi">68644</span>        <span class="mf">0.399</span>
+<span class="mi">1454436</span>      <span class="mf">0.398</span>
+<span class="mi">674041</span>       <span class="mf">0.398</span>
+<span class="mi">69169</span>        <span class="mf">0.396</span>
+<span class="mi">4923961</span>      <span class="mf">0.394</span>
+<span class="mi">774400</span>       <span class="mf">0.391</span>
+<span class="mi">777924</span>       <span class="mf">0.391</span>
+<span class="mi">1684804</span>      <span class="mf">0.390</span>
+<span class="mi">1274641</span>      <span class="mf">0.389</span>
+<span class="mi">1276900</span>      <span class="mf">0.388</span>
+<span class="mi">3748096</span>      <span class="mf">0.387</span>
+<span class="mi">1550025</span>      <span class="mf">0.384</span>
 <span class="mi">648025</span>       <span class="mf">0.383</span>
-<span class="mi">649636</span>       <span class="mf">0.383</span>
-<span class="mi">6724</span>         <span class="mf">0.382</span>
-<span class="mi">202500</span>       <span class="mf">0.381</span>
-<span class="mi">49729</span>        <span class="mf">0.381</span>
-<span class="mi">6889</span>         <span class="mf">0.381</span>
-<span class="mi">1976836</span>      <span class="mf">0.378</span>
-<span class="mi">558009</span>       <span class="mf">0.377</span>
-<span class="mi">4393216</span>      <span class="mf">0.376</span>
-<span class="mi">8836</span>         <span class="mf">0.376</span>
-<span class="mi">9025</span>         <span class="mf">0.376</span>
-<span class="mi">3225616</span>      <span class="mf">0.373</span>
-<span class="mi">102400</span>       <span class="mf">0.371</span>
-<span class="mi">48841</span>        <span class="mf">0.371</span>
-<span class="mi">4765489</span>      <span class="mf">0.370</span>
-<span class="mi">3748096</span>      <span class="mf">0.366</span>
-<span class="mi">1274641</span>      <span class="mf">0.366</span>
+<span class="mi">649636</span>       <span class="mf">0.382</span>
+<span class="mi">14641</span>        <span class="mf">0.382</span>
+<span class="mi">66564</span>        <span class="mf">0.381</span>
+<span class="mi">66049</span>        <span class="mf">0.380</span>
+<span class="mi">4910656</span>      <span class="mf">0.378</span>
+<span class="mi">3225616</span>      <span class="mf">0.377</span>
+<span class="mi">202500</span>       <span class="mf">0.377</span>
+<span class="mi">21609</span>        <span class="mf">0.376</span>
+<span class="mi">4464769</span>      <span class="mf">0.376</span>
 <span class="o">...</span>            <span class="o">...</span>
-<span class="mi">898704</span>       <span class="mf">0.180</span>
-<span class="mi">2280100</span>      <span class="mf">0.179</span>
-<span class="mi">243049</span>       <span class="mf">0.178</span>
-<span class="mi">101761</span>       <span class="mf">0.177</span>
-<span class="mi">904401</span>       <span class="mf">0.177</span>
-<span class="mi">2277081</span>      <span class="mf">0.177</span>
-<span class="mi">906304</span>       <span class="mf">0.176</span>
-<span class="mi">5085025</span>      <span class="mf">0.174</span>
-<span class="mi">1607824</span>      <span class="mf">0.174</span>
-<span class="mi">708964</span>       <span class="mf">0.173</span>
-<span class="mi">1610361</span>      <span class="mf">0.173</span>
-<span class="mi">122500</span>       <span class="mf">0.172</span>
-<span class="mi">4293184</span>      <span class="mf">0.172</span>
-<span class="mi">1763584</span>      <span class="mf">0.172</span>
-<span class="mi">3600</span>         <span class="mf">0.172</span>
+<span class="mi">1085764</span>      <span class="mf">0.177</span>
+<span class="mi">2277081</span>      <span class="mf">0.176</span>
+<span class="mi">3312400</span>      <span class="mf">0.176</span>
+<span class="mi">2050624</span>      <span class="mf">0.176</span>
+<span class="mi">4571044</span>      <span class="mf">0.176</span>
+<span class="mi">3196944</span>      <span class="mf">0.175</span>
+<span class="mi">1763584</span>      <span class="mf">0.175</span>
+<span class="mi">708964</span>       <span class="mf">0.175</span>
+<span class="mi">1610361</span>      <span class="mf">0.175</span>
+<span class="mi">1607824</span>      <span class="mf">0.175</span>
+<span class="mi">243049</span>       <span class="mf">0.173</span>
+<span class="mi">898704</span>       <span class="mf">0.173</span>
+<span class="mi">1083681</span>      <span class="mf">0.173</span>
+<span class="mi">4389025</span>      <span class="mf">0.173</span>
+<span class="mi">8464</span>         <span class="mf">0.172</span>
+<span class="mi">8649</span>         <span class="mf">0.172</span>
+<span class="mi">904401</span>       <span class="mf">0.172</span>
+<span class="mi">906304</span>       <span class="mf">0.171</span>
 <span class="mi">385641</span>       <span class="mf">0.171</span>
-<span class="mi">3312400</span>      <span class="mf">0.171</span>
-<span class="mi">383161</span>       <span class="mf">0.170</span>
-<span class="mi">386884</span>       <span class="mf">0.170</span>
-<span class="mi">1311025</span>      <span class="mf">0.168</span>
-<span class="mi">1085764</span>      <span class="mf">0.168</span>
-<span class="mi">1083681</span>      <span class="mf">0.166</span>
-<span class="mi">114921</span>       <span class="mf">0.166</span>
-<span class="mi">304704</span>       <span class="mf">0.164</span>
-<span class="mi">5143824</span>      <span class="mf">0.158</span>
-<span class="mi">495616</span>       <span class="mf">0.158</span>
-<span class="mi">2268036</span>      <span class="mf">0.152</span>
-<span class="mi">614656</span>       <span class="mf">0.151</span>
-<span class="mi">1510441</span>      <span class="mf">0.151</span>
-<span class="mi">2271049</span>      <span class="mf">0.145</span>
+<span class="mi">2226064</span>      <span class="mf">0.170</span>
+<span class="mi">1288225</span>      <span class="mf">0.168</span>
+<span class="mi">3751969</span>      <span class="mf">0.168</span>
+<span class="mi">2280100</span>      <span class="mf">0.168</span>
+<span class="mi">495616</span>       <span class="mf">0.162</span>
+<span class="mi">614656</span>       <span class="mf">0.162</span>
+<span class="mi">1510441</span>      <span class="mf">0.162</span>
+<span class="mi">872356</span>       <span class="mf">0.161</span>
+<span class="mi">304704</span>       <span class="mf">0.155</span>
+<span class="mi">2268036</span>      <span class="mf">0.139</span>
+<span class="mi">2271049</span>      <span class="mf">0.133</span>
 
 <span class="p">[</span><span class="mi">2465</span> <span class="n">rows</span> <span class="n">x</span> <span class="mi">1</span> <span class="n">columns</span><span class="p">]</span>
-<span class="mf">0.469364973864</span>
+<span class="mf">0.469456070398</span>
 
 <span class="mf">4.</span> <span class="n">Delete</span> <span class="n">the</span> <span class="n">extracted</span> <span class="n">features</span>
- <span class="n">DELETE</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="mf">4e650</span><span class="n">eb4a83a49b6</span>
+ <span class="n">DELETE</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="mi">68</span><span class="n">d317ae935c41dd</span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -347,7 +347,7 @@
     <span class="n">requests</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  9.469 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  9.534 seconds)</p>
 <div class="sphx-glr-footer container">
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../_downloads/REST_semantic_search.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">REST_semantic_search.py</span></code></a></div>
