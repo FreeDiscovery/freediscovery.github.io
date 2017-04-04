@@ -20,20 +20,14 @@ Thread a email collection
      GET http://localhost:5001/api/v0/example-dataset/fedora_ml_3k_subset
 
     1.a Parse emails
-     POST http://localhost:5001/api/v0/email-parser
+     POST http://localhost:5001/api/v0/feature-extraction
        => received ['filenames', 'id']
-       => dsid = f27d6c3365c84b5a
-
-    1.b. check the parameters of the emails
-     GET http://localhost:5001/api/v0/email-parser/f27d6c3365c84b5a
-         - data_dir: ../freediscovery_shared/fedora_ml_3k_subset/data
-         - encoding: latin-1
-         - n_samples: 3063
-         - type: EmailParser
+       => dsid = 2cfd64f95600414b
+     POST http://localhost:5001/api/v0/feature-extraction/2cfd64f95600414b
 
     2. Email threading
      POST http://localhost:5001/api/v0/email-threading/
-         => model id = 96fee87dd0534d4a
+         => model id = 9ecdf69f89db4858
 
     Threading examples
     cf. https://www.redhat.com/archives/rhl-devel-list/2008-October/thread.htlm 
@@ -126,24 +120,20 @@ Thread a email collection
 
 
     print("\n1.a Parse emails")
-    url = BASE_URL + '/email-parser'
+    url = BASE_URL + '/feature-extraction'
     print(" POST", url)
-    res = requests.post(url, json={'data_dir': data_dir })
+    res = requests.post(url, json={'data_dir': data_dir,
+                                   'parse_email_headers': True}).json()
 
-    dsid = res.json()['id']
-    print("   => received {}".format(list(res.json().keys())))
+    dsid = res['id']
+    print("   => received {}".format(list(res.keys())))
     print("   => dsid = {}".format(dsid))
 
 
+    url = BASE_URL+'/feature-extraction/{}'.format(dsid)
+    print(" POST", url)
+    requests.post(url)
 
-    print("\n1.b. check the parameters of the emails")
-    url = BASE_URL + '/email-parser/{}'.format(dsid)
-    print(' GET', url)
-    res = requests.get(url)
-
-    data = res.json()
-    print('\n'.join(['     - {}: {}'.format(key, val) for key, val in data.items() \
-                                                            if key != 'filenames']))
 
     print("\n2. Email threading")
 
@@ -173,7 +163,7 @@ Thread a email collection
         print(' ')
         print_thread(res['data'][idx])
 
-**Total running time of the script:** ( 0 minutes  17.391 seconds)
+**Total running time of the script:** ( 0 minutes  24.932 seconds)
 
 
 

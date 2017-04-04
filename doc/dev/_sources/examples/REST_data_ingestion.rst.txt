@@ -22,21 +22,21 @@ An example illustrating the data ingestion in FreeDiscovery
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received ['filenames', 'id']
-       => dsid = 00e4f320f1634853
+       => dsid = 43c549cb1fff4b40
 
     1.b Start feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/00e4f320f1634853
+     POST http://localhost:5001/api/v0/feature-extraction/43c549cb1fff4b40
 
     2.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received ['filenames', 'id']
-       => dsid = e58e1621c17f4b4f
+       => dsid = 40f29d6ef7c542cd
 
     2.b Start feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/e58e1621c17f4b4f
+     POST http://localhost:5001/api/v0/feature-extraction/40f29d6ef7c542cd
 
     2.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/e58e1621c17f4b4f
+     GET http://localhost:5001/api/v0/feature-extraction/40f29d6ef7c542cd
          - analyzer: word
          - binary: False
          - chunk_size: 5000
@@ -49,6 +49,7 @@ An example illustrating the data ingestion in FreeDiscovery
          - n_samples_processed: 2465
          - ngram_range: [1, 1]
          - norm: l2
+         - parse_email_headers: False
          - stop_words: None
          - sublinear_tf: True
          - use_hashing: True
@@ -57,7 +58,7 @@ An example illustrating the data ingestion in FreeDiscovery
     3. Examine the id mapping
 
 
-     GET http://localhost:5001/api/v0/feature-extraction/e58e1621c17f4b4f/id-mapping
+     GET http://localhost:5001/api/v0/feature-extraction/40f29d6ef7c542cd/id-mapping
        DATA {"data": [{"internal_id": 0}, {"internal_id": 1}, {"internal_id": 2}]}
      Response:
        {
@@ -81,7 +82,7 @@ An example illustrating the data ingestion in FreeDiscovery
     }
 
     5.a Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/e58e1621c17f4b4f
+     DELETE http://localhost:5001/api/v0/feature-extraction/40f29d6ef7c542cd
 
 
 
@@ -184,7 +185,7 @@ An example illustrating the data ingestion in FreeDiscovery
         print(" DELETE", url)
         requests.delete(url)
 
-**Total running time of the script:** ( 0 minutes  5.759 seconds)
+**Total running time of the script:** ( 0 minutes  6.272 seconds)
 
 
 
