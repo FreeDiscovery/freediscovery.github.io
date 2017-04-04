@@ -22,13 +22,13 @@ Cluster documents into clusters
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received ['filenames', 'id']
-       => dsid = 0e26bdecee034c11
+       => dsid = 4e44bec340b84101
 
     1.b Run feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/0e26bdecee034c11
+     POST http://localhost:5001/api/v0/feature-extraction/4e44bec340b84101
 
     1.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/0e26bdecee034c11
+     GET http://localhost:5001/api/v0/feature-extraction/4e44bec340b84101
          - analyzer: word
          - binary: False
          - chunk_size: 5000
@@ -48,140 +48,147 @@ Cluster documents into clusters
 
     2. Calculate LSI
     POST http://localhost:5001/api/v0/lsi/
-      => LSI model id = 526a530769684fb9
-      => SVD decomposition with 100 dimensions explaining 53.27 % variabilty of the data
+      => LSI model id = 96a0f31afaea4fff
+      => SVD decomposition with 100 dimensions explaining 53.26 % variabilty of the data
 
     3.a. Document clustering (LSI + K-means)
      POST http://localhost:5001/api/v0/clustering/k-mean/
-         => model id = 846e301eba274b90
+         => model id = 5571fab0bf954db0
 
     3.b. Computing cluster labels
-     GET http://localhost:5001/api/v0/clustering/k-mean/846e301eba274b90
+     GET http://localhost:5001/api/v0/clustering/k-mean/5571fab0bf954db0
         .. computed in 1.6s
-       cluster_id                     cluster_label  cluster_similarity  cluster_size  n_documents
-    0           0                 tue teneo sanders               0.337           421          421
-    1           1                  enron tana jones               0.337           433          433
-    2           2                  nemec doc gallup               0.400           174          174
-    3           3             dasovich enron market               0.404           277          277
-    4           4   ricafrente ricafrente_david nov               0.391           202          202
-    5           5                     tenet wed oct               0.390           239          239
-    6           6            rewrite server address               1.000            56           56
-    7           7                  ect haedicke hou               0.354           358          358
-    8           8           shall party transaction               0.534           109          109
-    9           9  fri enron_development conference               0.396           196          196
+       cluster_id                       cluster_label  cluster_similarity  cluster_size  n_documents
+    0           0    thu enron_development shackleton               0.330           484          484
+    1           1               wed migration outlook               0.362           346          346
+    2           2               berkeley deseret haas               0.346           399          399
+    3           3                   meeting tue tenet               0.390           233          233
+    4           4              rewrite server address               1.000            56           56
+    5           5             transaction party price               0.591            79           79
+    6           6                       ect hou ellis               0.578            81           81
+    7           7                 energy services mon               0.348           363          363
+    8           8  eb3325 ricafrente ricafrente_david               0.483           112          112
+    9           9               jones tana recipients               0.365           312          312
 
     4.a. Document clustering (LSI + Birch clustering)
      POST http://localhost:5001/api/v0/clustering/birch/
-         => model id = 2b15ba80bc274f4d
+         => model id = 6a17bf3abafa49e0
 
     4.b. Computing cluster labels
-     GET http://localhost:5001/api/v0/clustering/birch/2b15ba80bc274f4d
-        .. computed in 2.7s
-                                                 children  cluster_depth  cluster_id                        cluster_label  cluster_similarity  cluster_size  n_documents
-    0                                 [1, 22, 25, 27, 41]              0           0                         test ect oct               0.294          2465         2465
-    1   [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 1...              1           1         enron_development tana jones               0.306          1252         1252
-    2                                                  []              2           2  confirmation catalytica transaction               0.504            52           52
-    3                                                  []              2           3                        tenet tue thu               0.466            50           50
-    4                                                  []              2           4              shall party transaction               0.455           130          130
-    5                                                  []              2           5        enron_development cone issues               0.460            90           90
-    6                                                  []              2           6                  alias berkeley haas               0.477            68           68
-    7                                                  []              2           7                   tana jones lambert               0.545            35           35
-    8                                                  []              2           8               rewrite server address               0.582           120          120
-    9                                                  []              2           9          energy services enrononline               0.484            81           81
-    10                                                 []              2          10                mtg migration outlook               0.493            36           36
-    11                                                 []              2          11                foreign tax brazilian               0.524            48           48
-    12                                                 []              2          12                harris dead brokerage               0.450            63           63
-    13                                                 []              2          13                  dasovich new mexico               0.458            67           67
-    14                                                 []              2          14               tiger guaranty sanders               0.416            84           84
-    15                                                 []              2          15                      kean tana jones               0.457            63           63
-    16                                                 []              2          16               migration outlook team               0.473            38           38
-    17                                                 []              2          17                   ellis eb3325 class               0.457            55           55
-    18                                                 []              2          18                    tana jones credit               0.436            56           56
-    19                                                 []              2          19                enron shults canadian               0.482            33           33
-    20                                                 []              2          20                   murray sample conf               0.428            43           43
-    21                                                 []              2          21        hendry enron_development cini               0.512            40           40
-    22                                           [23, 24]              1          22                        load test fri               0.496            64           64
-    23                                                 []              2          23                         tue nov load               0.598             8            8
-    24                                                 []              2          24                         load oct fri               0.507            56           56
-    25                                               [26]              1          25                     haedicke nov thu               0.589            60           60
-    26                                                 []              2          26                     haedicke nov thu               0.589            60           60
-    27  [28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 3...              1          27                  wed test shackleton               0.330           507          507
-    28                                                 []              2          28              test nicolay recipients               0.496            80           80
-    29                                                 []              2          29                     lunch lafuze wed               0.520            46           46
-    30                                                 []              2          30                        nov tenet wed               0.492            37           37
-    31                                                 []              2          31              ruppert exxon gillaspie               0.471            61           61
-    32                                                 []              2          32                      nemec sheet doc               0.553            40           40
-    33                                                 []              2          33              simons shackleton south               0.546            22           22
-    34                                                 []              2          34               calo shackleton dinner               0.571            18           18
-    35                                                 []              2          35                enron project meeting               0.457            24           24
-    36                                                 []              2          36                 mtg deseret etringer               0.478            40           40
-    37                                                 []              2          37                    sanders lunch nov               0.491            36           36
-    38                                                 []              2          38                        tue tenet mtg               0.464            37           37
-    39                                                 []              2          39                wed migration outlook               0.500            33           33
-    40                                                 []              2          40          dupre shackleton catalytica               0.543            33           33
-    41  [42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 5...              1          41                        ect teneo hou               0.328           582          582
-    42                                                 []              2          42                mon migration outlook               0.533            14           14
-    43                                                 []              2          43                       ect hou master               0.534            90           90
-    44                                                 []              2          44                 advice lessee mexico               0.423            70           70
-    45                                                 []              2          45                      thu sanders nov               0.555            23           23
-    46                                                 []              2          46                      sanders lay tue               0.546            29           29
-    47                                                 []              2          47                       nemec lon bump               0.532            14           14
-    48                                                 []              2          48      mon ricafrente_david ricafrente               0.522            30           30
-    49                                                 []              2          49                      pier usvi gpier               0.631            30           30
-    50                                                 []              2          50                  tenet oct migration               0.469            48           48
-    51                                                 []              2          51              kincannon meeting sager               0.423            65           65
-    52                                                 []              2          52                teneo taylor_mark mon               0.645             7            7
-    53                                                 []              2          53                     doc teneo gallup               0.571            25           25
-    54                                                 []              2          54     teneo shackleton_sara recipients               0.535            38           38
-    55                                                 []              2          55      fri ricafrente ricafrente_david               0.494            38           38
-    56                                                 []              2          56                      eb3325 meet mon               0.429            61           61
+     GET http://localhost:5001/api/v0/clustering/birch/6a17bf3abafa49e0
+        .. computed in 2.8s
+                                                 children  cluster_depth  cluster_id                       cluster_label  cluster_similarity  cluster_size  n_documents
+    0                                  [1, 3, 15, 21, 42]              0           0                        test ect oct               0.294          2465         2465
+    1                                                 [2]              1           1              rewrite server address               0.700            91           91
+    2                                                  []              2           2              rewrite server address               0.700            91           91
+    3              [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]              1           3                  load haedicke test               0.337           458          458
+    4                                                  []              2           4                  haedicke ellis ect               0.432            61           61
+    5                                                  []              2           5      test recipients administrative               0.521            64           64
+    6                                                  []              2           6                   ellis gtc library               0.562            22           22
+    7                                                  []              2           7                  tana jones nicolay               0.518            22           22
+    8                                                  []              2           8               kean deseret etringer               0.495            39           39
+    9                                                  []              2           9                  tana jones trading               0.452            71           71
+    10                                                 []              2          10                    haedicke thu nov               0.541            39           39
+    11                                                 []              2          11                  load yosemite meet               0.532            25           25
+    12                                                 []              2          12           class forster taylor_mark               0.462            45           45
+    13                                                 []              2          13                   fri load haedicke               0.459            38           38
+    14                                                 []              2          14                        calo nov mon               0.417            32           32
+    15                               [16, 17, 18, 19, 20]              1          15               tiger conference test               0.370           145          145
+    16                                                 []              2          16                rcr dernehl dasovich               0.461            60           60
+    17                                                 []              2          17           conference shackleton fri               0.507            17           17
+    18                                                 []              2          18                tiger guaranty sekse               0.583            35           35
+    19                                                 []              2          19                      thu kean lunch               0.481            17           17
+    20                                                 []              2          20                    hendry aven week               0.519            16           16
+    21  [22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 3...              1          21                   enron tenet nemec               0.317           896          896
+    22                                                 []              2          22                       serc tva nerc               0.495            63           63
+    23                                                 []              2          23                     mtg trade tenet               0.448            49           49
+    24                                                 []              2          24             transaction party price               0.576            80           80
+    25                                                 []              2          25                   dasovich wed load               0.511            52           52
+    26                                                 []              2          26                  customer shall ena               0.509            68           68
+    27                                                 []              2          27                     bump hyvl yates               0.538            45           45
+    28                                                 []              2          28             nemec ruppert gillaspie               0.493            76           76
+    29                                                 []              2          29            energy enrononline power               0.493            72           72
+    30                                                 []              2          30              deseret etringer flynn               0.441            46           46
+    31                                                 []              2          31                   meeting fri tenet               0.569            26           26
+    32                                                 []              2          32                     enron urine cat               0.442            34           34
+    33                                                 []              2          33                   mon meeting tenet               0.464            58           58
+    34                                                 []              2          34      conference midamerican roberts               0.434            41           41
+    35                                                 []              2          35                       tue oct tenet               0.525            24           24
+    36                                                 []              2          36                    enron tana jones               0.593            34           34
+    37                                                 []              2          37                 lessee shall lessor               0.748            31           31
+    38                                                 []              2          38                guaranty rod formosa               0.586            15           15
+    39                                                 []              2          39                       tue tenet mtg               0.560            22           22
+    40                                                 []              2          40                advice update mexico               0.633            25           25
+    41                                                 []              2          41                   tenet meeting tue               0.471            35           35
+    42  [43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 5...              1          42       ect sanders enron_development               0.311           875          875
+    43                                                 []              2          43                        ect hou calo               0.489            82           82
+    44                                                 []              2          44                otc cftc derivatives               0.497            35           35
+    45                                                 []              2          45                 alias berkeley haas               0.429           106          106
+    46                                                 []              2          46                       lon ect lunch               0.484            26           26
+    47                                                 []              2          47                       nov wed tenet               0.502            34           34
+    48                                                 []              2          48   kincannon catalytica confirmation               0.441            57           57
+    49                                                 []              2          49  ricafrente ricafrente_david eb3325               0.541            63           63
+    50                                                 []              2          50                     sanders nov thu               0.553            77           77
+    51                                                 []              2          51       enron_development cone hendry               0.511            73           73
+    52                                                 []              2          52                    eb3325 tenet wed               0.486            27           27
+    53                                                 []              2          53                      mon lyco tenet               0.480            32           32
+    54                                                 []              2          54                     gtc master usvi               0.465            56           56
+    55                                                 []              2          55                      doc dead horse               0.571            23           23
+    56                                                 []              2          56                 wed tenet breakfast               0.481            50           50
+    57                                                 []              2          57        teneo shackleton_sara bailey               0.439            48           48
+    58                                                 []              2          58                       thu tenet oct               0.485            32           32
+    59                                                 []              2          59              migration outlook team               0.633            54           54
 
     4.a. Optimal sampling (LSI + Birch clustering)
-     GET http://localhost:5001/api/v0/clustering/birch/2b15ba80bc274f4d
+     GET http://localhost:5001/api/v0/clustering/birch/6a17bf3abafa49e0
         .. computed in 0.6s
         cluster_id  cluster_similarity  cluster_size                                          documents
-    0            0               0.455           130  [{'document_id': 599076, 'similarity': 0.45485...
-    1            1               0.582           120  [{'document_id': 5041, 'similarity': 0.5819823...
-    2            2               0.460            90  [{'document_id': 900, 'similarity': 0.46017110...
-    3            3               0.534            90  [{'document_id': 2030625, 'similarity': 0.5340...
-    4            4               0.416            84  [{'document_id': 4541161, 'similarity': 0.4155...
-    5            5               0.484            81  [{'document_id': 1745041, 'similarity': 0.4843...
-    6            6               0.496            80  [{'document_id': 156025, 'similarity': 0.49580...
-    7            7               0.423            70  [{'document_id': 2016400, 'similarity': 0.4225...
-    8            8               0.477            68  [{'document_id': 401956, 'similarity': 0.47735...
-    9            9               0.458            67  [{'document_id': 399424, 'similarity': 0.45757...
-    10          10               0.423            65  [{'document_id': 2999824, 'similarity': 0.4228...
-    11          11               0.450            63  [{'document_id': 27889, 'similarity': 0.450071...
-    12          12               0.457            63  [{'document_id': 5564881, 'similarity': 0.4567...
-    13          13               0.471            61  [{'document_id': 703921, 'similarity': 0.47050...
-    14          14               0.429            61  [{'document_id': 2676496, 'similarity': 0.4285...
-    15          15               0.589            60  [{'document_id': 2992900, 'similarity': 0.5885...
-    16          16               0.436            56  [{'document_id': 1976836, 'similarity': 0.4361...
-    17          17               0.507            56  [{'document_id': 350464, 'similarity': 0.50675...
-    18          18               0.457            55  [{'document_id': 39204, 'similarity': 0.456913...
-    19          19               0.504            52  [{'document_id': 97969, 'similarity': 0.503900...
-    20          20               0.466            50  [{'document_id': 2223081, 'similarity': 0.4658...
-    21          21               0.524            48  [{'document_id': 4624, 'similarity': 0.5244410...
-    22          22               0.469            48  [{'document_id': 3097600, 'similarity': 0.4689...
-    23          23               0.520            46  [{'document_id': 2560000, 'similarity': 0.5200...
-    24          24               0.428            43  [{'document_id': 3861225, 'similarity': 0.4282...
-    25          25               0.512            40  [{'document_id': 96721, 'similarity': 0.512072...
-    26          26               0.553            40  [{'document_id': 790321, 'similarity': 0.55333...
-    27          27               0.478            40  [{'document_id': 12769, 'similarity': 0.478128...
-    28          28               0.473            38  [{'document_id': 5560164, 'similarity': 0.4732...
-    29          29               0.535            38  [{'document_id': 3418801, 'similarity': 0.5346...
-    30          30               0.494            38  [{'document_id': 2455489, 'similarity': 0.4942...
-    31          31               0.492            37  [{'document_id': 2334784, 'similarity': 0.4921...
-    32          32               0.464            37  [{'document_id': 3171961, 'similarity': 0.4635...
-    33          33               0.493            36  [{'document_id': 5447556, 'similarity': 0.4927...
-    34          34               0.491            36  [{'document_id': 4028049, 'similarity': 0.4909...
-    35          35               0.545            35  [{'document_id': 277729, 'similarity': 0.54477...
-    36          36               0.482            33  [{'document_id': 1960000, 'similarity': 0.4823...
-    37          37               0.500            33  [{'document_id': 2310400, 'similarity': 0.5003...
-    38          38               0.543            33  [{'document_id': 119025, 'similarity': 0.54329...
+    0            0               0.429           106  [{'document_id': 1296, 'similarity': 0.4294199...
+    1            1               0.700            91  [{'document_id': 5041, 'similarity': 0.6999143...
+    2            2               0.489            82  [{'document_id': 2030625, 'similarity': 0.4886...
+    3            3               0.576            80  [{'document_id': 73441, 'similarity': 0.576497...
+    4            4               0.553            77  [{'document_id': 3814209, 'similarity': 0.5533...
+    5            5               0.493            76  [{'document_id': 633616, 'similarity': 0.49321...
+    6            6               0.511            73  [{'document_id': 900, 'similarity': 0.51097173...
+    7            7               0.493            72  [{'document_id': 142884, 'similarity': 0.49289...
+    8            8               0.452            71  [{'document_id': 247009, 'similarity': 0.45237...
+    9            9               0.509            68  [{'document_id': 609961, 'similarity': 0.50926...
+    10          10               0.521            64  [{'document_id': 855625, 'similarity': 0.52056...
+    11          11               0.495            63  [{'document_id': 552049, 'similarity': 0.49519...
+    12          12               0.541            63  [{'document_id': 2778889, 'similarity': 0.5413...
+    13          13               0.432            61  [{'document_id': 13225, 'similarity': 0.432449...
+    14          14               0.461            60  [{'document_id': 502681, 'similarity': 0.46122...
+    15          15               0.464            58  [{'document_id': 2253001, 'similarity': 0.4639...
+    16          16               0.441            57  [{'document_id': 4955076, 'similarity': 0.4411...
+    17          17               0.465            56  [{'document_id': 3651921, 'similarity': 0.4653...
+    18          18               0.633            54  [{'document_id': 5326864, 'similarity': 0.6332...
+    19          19               0.511            52  [{'document_id': 349281, 'similarity': 0.51130...
+    20          20               0.481            50  [{'document_id': 3455881, 'similarity': 0.4814...
+    21          21               0.448            49  [{'document_id': 5673924, 'similarity': 0.4478...
+    22          22               0.439            48  [{'document_id': 4682896, 'similarity': 0.4390...
+    23          23               0.441            46  [{'document_id': 4734976, 'similarity': 0.4407...
+    24          24               0.462            45  [{'document_id': 3709476, 'similarity': 0.4620...
+    25          25               0.538            45  [{'document_id': 300304, 'similarity': 0.53822...
+    26          26               0.434            41  [{'document_id': 874225, 'similarity': 0.43449...
+    27          27               0.495            39  [{'document_id': 137641, 'similarity': 0.49523...
+    28          28               0.541            39  [{'document_id': 2913849, 'similarity': 0.5411...
+    29          29               0.459            38  [{'document_id': 846400, 'similarity': 0.45850...
+    30          30               0.583            35  [{'document_id': 22500, 'similarity': 0.582916...
+    31          31               0.471            35  [{'document_id': 3549456, 'similarity': 0.4714...
+    32          32               0.497            35  [{'document_id': 1288225, 'similarity': 0.4965...
+    33          33               0.442            34  [{'document_id': 481636, 'similarity': 0.44196...
+    34          34               0.593            34  [{'document_id': 1968409, 'similarity': 0.5931...
+    35          35               0.502            34  [{'document_id': 2334784, 'similarity': 0.5017...
+    36          36               0.417            32  [{'document_id': 61504, 'similarity': 0.417324...
+    37          37               0.480            32  [{'document_id': 3104644, 'similarity': 0.4803...
+    38          38               0.485            32  [{'document_id': 2223081, 'similarity': 0.4849...
+    39          39               0.748            31  [{'document_id': 295936, 'similarity': 0.74819...
+    40          40               0.486            27  [{'document_id': 3034564, 'similarity': 0.4859...
+    41          41               0.569            26  [{'document_id': 3052009, 'similarity': 0.5689...
+    42          42               0.484            26  [{'document_id': 3553225, 'similarity': 0.4838...
 
     5. Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/0e26bdecee034c11
+     DELETE http://localhost:5001/api/v0/feature-extraction/4e44bec340b84101
 
 
 
@@ -349,7 +356,7 @@ Cluster documents into clusters
     print(" DELETE", url)
     requests.delete(url)
 
-**Total running time of the script:** ( 0 minutes  9.730 seconds)
+**Total running time of the script:** ( 0 minutes  9.710 seconds)
 
 
 
