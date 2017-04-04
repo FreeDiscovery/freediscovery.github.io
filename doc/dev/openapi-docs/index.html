@@ -110,17 +110,6 @@
                         </td>
                     </tr>
                     <tr>
-                            <td class="swagger--summary-path" rowspan="1">
-                                <a href="#path--api-v0-clustering-ward_hc">/api/v0/clustering/ward_hc</a>
-                            </td>
-                        <td>
-                            <a href="#operation--api-v0-clustering-ward_hc-post">POST</a>
-                        </td>
-                        <td>
-                            
-                        </td>
-                    </tr>
-                    <tr>
                             <td class="swagger--summary-path" rowspan="2">
                                 <a href="#path--api-v0-clustering--method---mid-">/api/v0/clustering/{method}/{mid}</a>
                             </td>
@@ -539,9 +528,6 @@
             <li>&quot;LogisticRegression&quot;: <a href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression">LogisticRegression</a></li>
             <li>&quot;LinearSVC&quot;: <a href="http://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html">Linear SVM</a>,</li>
             <li>&quot;NearestNeighbor&quot;: nearest neighbor classifier (requires LSI)</li>
-            <li>&quot;NearestCentroid&quot;: nearest centroid classifier (requires LSI)</li>
-            <li>&quot;xgboost&quot;: <a href="https://xgboost.readthedocs.io/en/latest/model.html">Gradient Boosting</a>
-               (<em>Warning:</em> for the moment xgboost is not istalled for a direct install on Windows)</li>
             </ul>
             </li>
             <li><code>cv</code>: binary, if true optimal parameters of the ML model are determined by cross-validation over 5 stratified K-folds (default False).</li>
@@ -1717,136 +1703,6 @@
                                                                 <span class="json-property-range" title="Value limits"></span>
                                                                 
                                                                         <span class="json-property-default-value">150</span>
-                                                            </dt>
-                                                            <dd>
-                                                                
-                                                                <div class="json-inner-schema">
-                                                                    
-                                                                </div>
-                                                            </dd>
-                                                            <dt data-property-name="parent_id">
-                                                                <span class="json-property-name">parent_id:</span>
-                                                                
-                                                                <span class="json-property-type">string</span>
-                                                                <span class="json-property-range" title="Value limits"></span>
-                                                                
-                                                                    <span class="json-property-required"></span>
-                                                            </dt>
-                                                            <dd>
-                                                                
-                                                                <div class="json-inner-schema">
-                                                                    
-                                                                </div>
-                                                            </dd>
-                                                    </dl>
-                                                </section>
-                                </div>
-                            </div></div>
-                                        </div>
-                            </section>        
-                    
-                        <section class="sw-responses">
-                    
-                            <dl>
-                                    <dt class="sw-response-default">
-                                        default 
-                                    
-                                    </dt>
-                                    <dd class="sw-response-default">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                
-                                                <div class="col-md-6 sw-response-model">
-                                                <div  class="panel panel-definition">
-                                                    <div class="panel-body">
-                                                            
-                                                                    <section class="json-schema-properties">
-                                                                        <dl>
-                                                                                <dt data-property-name="id">
-                                                                                    <span class="json-property-name">id:</span>
-                                                                                    
-                                                                                    <span class="json-property-type">string</span>
-                                                                                    <span class="json-property-range" title="Value limits"></span>
-                                                                                    
-                                                                                        <span class="json-property-required"></span>
-                                                                                </dt>
-                                                                                <dd>
-                                                                                    
-                                                                                    <div class="json-inner-schema">
-                                                                                        
-                                                                                    </div>
-                                                                                </dd>
-                                                                        </dl>
-                                                                    </section>
-                                                    </div>
-                                                </div></div>
-                                            
-                                            </div>                </dd>
-                            </dl>
-                        </section>
-                </div>
-            </div>    
-        <span id="path--api-v0-clustering-ward_hc"></span>
-            <div id="operation--api-v0-clustering-ward_hc-post" class="swagger--panel-operation-post panel">
-                <div class="panel-heading">
-                    <div class="operation-summary"></div>
-                    <h3 class="panel-title"><span class="operation-name">POST</span> <strong>/api/v0/clustering/ward_hc</strong></h3>
-                </div>
-                <div class="panel-body">
-                    <section class="sw-operation-description">
-                        <p>Compute Ward Hierarchical Clustering.</p>
-            <p>The option <code>use_hashing=False</code> must be set for the feature extraction. Recommended options for data ingestion also include, <code>use_idf=1, sublinear_tf=0, binary=0</code>.</p>
-            <p>The Ward Hierarchical clustering is generally slower that K-mean, and does not scale well with the dataset size. The run time can be reduced by decreasing the following parameters,</p>
-            <ul>
-            <li><code>lsi_components</code>: the number of dimensions used for the Latent Semantic Indexing decomposition (e.g. from 150 to 50)</li>
-            <li><code>n_neighbors</code>:  the number of neighbors used to construct the connectivity (e.g. from 10 to 5)</li>
-            </ul>
-            <p><strong>Parameters</strong></p>
-            <ul>
-            <li><code>parent_id</code>: <code>dataset_id</code> or <code>lsi_id</code></li>
-            <li><code>n_clusters</code>: the number of clusters</li>
-            <li><code>n_neighbors</code> Number of neighbors for each sample, used to compute the connectivity matrix (see <a href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.AgglomerativeClustering.html">AgglomerativeClustering</a> and <a href="http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.kneighbors_graph.html">kneighbors_graph</a></li>
-            </ul>
-            
-                    </section>
-                        
-                            <section class="sw-request-body">
-                                
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <p></p>
-                                            </div>
-                                            <div class="col-md-6 sw-request-model">
-                            <div  class="panel panel-definition">
-                                <div class="panel-body">
-                                        
-                                                <section class="json-schema-properties">
-                                                    <dl>
-                                                            <dt data-property-name="n_clusters">
-                                                                <span class="json-property-name">n_clusters:</span>
-                                                                
-                                                                <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
-                                                                <span class="json-property-range" title="Value limits"></span>
-                                                                
-                                                                        <span class="json-property-default-value">150</span>
-                                                            </dt>
-                                                            <dd>
-                                                                
-                                                                <div class="json-inner-schema">
-                                                                    
-                                                                </div>
-                                                            </dd>
-                                                            <dt data-property-name="n_neighbors">
-                                                                <span class="json-property-name">n_neighbors:</span>
-                                                                
-                                                                <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
-                                                                <span class="json-property-range" title="Value limits"></span>
-                                                                
-                                                                        <span class="json-property-default-value">5</span>
                                                             </dt>
                                                             <dd>
                                                                 
