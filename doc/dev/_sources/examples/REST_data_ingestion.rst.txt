@@ -22,21 +22,21 @@ An example illustrating the data ingestion in FreeDiscovery
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received ['filenames', 'id']
-       => dsid = 43c549cb1fff4b40
+       => dsid = ce44792876a54f41
 
     1.b Start feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/43c549cb1fff4b40
+     POST http://localhost:5001/api/v0/feature-extraction/ce44792876a54f41
 
     2.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received ['filenames', 'id']
-       => dsid = 40f29d6ef7c542cd
+       => dsid = 1783bb783eb74dba
 
     2.b Start feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/40f29d6ef7c542cd
+     POST http://localhost:5001/api/v0/feature-extraction/1783bb783eb74dba
 
     2.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/40f29d6ef7c542cd
+     GET http://localhost:5001/api/v0/feature-extraction/1783bb783eb74dba
          - analyzer: word
          - binary: False
          - chunk_size: 5000
@@ -58,7 +58,7 @@ An example illustrating the data ingestion in FreeDiscovery
     3. Examine the id mapping
 
 
-     GET http://localhost:5001/api/v0/feature-extraction/40f29d6ef7c542cd/id-mapping
+     GET http://localhost:5001/api/v0/feature-extraction/1783bb783eb74dba/id-mapping
        DATA {"data": [{"internal_id": 0}, {"internal_id": 1}, {"internal_id": 2}]}
      Response:
        {
@@ -82,7 +82,7 @@ An example illustrating the data ingestion in FreeDiscovery
     }
 
     5.a Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/40f29d6ef7c542cd
+     DELETE http://localhost:5001/api/v0/feature-extraction/1783bb783eb74dba
 
 
 
@@ -185,7 +185,7 @@ An example illustrating the data ingestion in FreeDiscovery
         print(" DELETE", url)
         requests.delete(url)
 
-**Total running time of the script:** ( 0 minutes  6.272 seconds)
+**Total running time of the script:** ( 0 minutes  5.459 seconds)
 
 
 
