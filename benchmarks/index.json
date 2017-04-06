@@ -1,0 +1,75 @@
+{
+    "benchmarks": {
+        "search.time_erdm": {
+            "code": "def time_erdm():\n    dataset_id = '4b0f9f68c4f6451d'\n    lsi_id = 'd4588ea914a543f0'\n\n    query = \"\"\"There are some conflicts with the draft date, so we will probably need to\n                have it on a different date.\"\"\"\n\n    url = BASE_URL + '/search/'\n\n    res = requests.post(url,\n                        json={'parent_id': lsi_id,\n                              'query': query\n                              })\n\n    res = res.json()\n",
+            "goal_time": 2.0,
+            "name": "search.time_erdm",
+            "number": 0,
+            "param_names": [],
+            "params": [],
+            "pretty_name": "search.time_erdm",
+            "repeat": 1,
+            "timeout": 10000,
+            "type": "time",
+            "unit": "seconds"
+        }
+    },
+    "graph_param_list": [],
+    "hash_length": 8,
+    "machines": {
+        "dev.freediscovery.io": {
+            "arch": "x86_64",
+            "cpu": "Intel(R) Xeon(R) CPU E3-1225 V2 @ 3.20GHz (4 cores)",
+            "machine": "dev.freediscovery.io",
+            "os": "Linux 3.14.32-xxxx-grs-ipv6-64",
+            "ram": "16GB",
+            "version": 1
+        }
+    },
+    "pages": [
+        [
+            "",
+            "Grid view",
+            "Display as a agrid"
+        ],
+        [
+            "summarylist",
+            "List view",
+            "Display as a list"
+        ],
+        [
+            "regressions",
+            "Show regressions",
+            "Display information about recent regressions"
+        ]
+    ],
+    "params": {
+        "branch": [
+            "master"
+        ]
+    },
+    "project": "FreeDiscovery",
+    "project_url": "https://github.com/FreeDiscovery/FreeDiscovery",
+    "revision_to_date": {
+        "56": 1478893134000,
+        "95": 1481388122000,
+        "235": 1488458497000,
+        "264": 1490350177000,
+        "278": 1490968089000
+    },
+    "revision_to_hash": {
+        "56": "04dfcfe713b810c849d5e975b3b21012bbf9d2b2",
+        "95": "fb0ca0a4bab7084a22271c65248dccc76a27c693",
+        "235": "6b44cb816c7fe6d3f6ca18a1fc534971f3c17ad7",
+        "264": "9fc4deb4043f898e2ffd74c51d4630ef1af63cd1",
+        "278": "692dd0d30345be919b037546708a59877af3ea9d"
+    },
+    "show_commit_url": "https://github.com/FreeDiscovery/FreeDiscovery/commit/",
+    "tags": {
+        "v0.6-beta": 56,
+        "v0.6.0": 95,
+        "v0.9.0": 235,
+        "v0.9.1": 264,
+        "v0.9.2": 278
+    }
+}
