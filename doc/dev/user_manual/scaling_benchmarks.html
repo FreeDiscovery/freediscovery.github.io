@@ -97,6 +97,9 @@
 <li class="toctree-l2"><a class="reference internal" href="data_ingestion.html">Data ingestion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="document_similarity.html">Document similarity</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Scaling Benchmarks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#document-ingestion">Document ingestion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#preprocessing">Preprocessing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#semantic-search">Semantic search</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#near-duplicates-detection">Near Duplicates Detection</a></li>
 </ul>
 </li>
@@ -162,6 +165,91 @@
 <h1>Scaling Benchmarks<a class="headerlink" href="#scaling-benchmarks" title="Permalink to this headline">¶</a></h1>
 <p>This page aims to summarize the performance and scaling of the algorithms used in FreeDiscovery.</p>
 <p>Benchmarks are computed running the <a class="reference external" href="./examples/index.html">examples</a> on the TREC 2009 corpus of 700 000 documents (1.5 GB or 7 GB uncompressed). The following benchmarks are given for Intel(R) Xeon(R) CPU E3-1225 V2 &#64; 3.20GHz (4 CPU cores) server with 16 GB of RAM. The time complexites are experimentally (approximately) estimated for the given parameters.</p>
+<div class="section" id="document-ingestion">
+<h2>Document ingestion<a class="headerlink" href="#document-ingestion" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="32%" />
+<col width="13%" />
+<col width="39%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Method</th>
+<th class="head">Parameters</th>
+<th class="head">Time (s)</th>
+<th class="head">Complexity</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Vectorizer</td>
+<td><ul class="first last simple">
+<li><cite>use_hashing=False</cite></li>
+<li><cite>use_idf=False</cite></li>
+</ul>
+</td>
+<td>780</td>
+<td><cite>O(n_samples)</cite></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="preprocessing">
+<h2>Preprocessing<a class="headerlink" href="#preprocessing" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="32%" />
+<col width="13%" />
+<col width="39%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Method</th>
+<th class="head">Parameters</th>
+<th class="head">Time (s)</th>
+<th class="head">Complexity</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>LSI</td>
+<td><ul class="first last simple">
+<li><cite>n_components=150</cite></li>
+</ul>
+</td>
+<td>270</td>
+<td><cite>O(n_samples)</cite></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="semantic-search">
+<h2>Semantic search<a class="headerlink" href="#semantic-search" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="28%" />
+<col width="11%" />
+<col width="34%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Method</th>
+<th class="head">Parameters</th>
+<th class="head">Time (s)</th>
+<th class="head">Complexity</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Text query</td>
+<td><ul class="first last simple">
+<li><cite>n_components=150</cite></li>
+</ul>
+</td>
+<td>270</td>
+<td><cite>O(n_samples)</cite></td>
+</tr>
+</tbody>
+</table>
+</div>
 <div class="section" id="near-duplicates-detection">
 <h2>Near Duplicates Detection<a class="headerlink" href="#near-duplicates-detection" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference external" href="./examples/duplicate_detection_example.html">examples/duplicate_detection_example.py</a> script with <cite>dataset_name=&#8217;legal09int&#8217;</cite> was used,</p>
@@ -234,7 +322,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016 - 2017, Grossman Labs LLC.
-      Last updated on Apr 05, 2017.
+      Last updated on Apr 07, 2017.
 
     </p>
   </div>
