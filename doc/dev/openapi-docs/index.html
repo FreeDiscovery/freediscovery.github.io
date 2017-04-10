@@ -996,6 +996,8 @@
             <li><code>nn_metric</code> : The similarity returned by nearest neighbor classifier in [&#39;cosine&#39;, &#39;jaccard&#39;, &#39;cosine_norm&#39;, &#39;jaccard_norm&#39;].</li>
             <li><code>min_score</code> : filter out results below a similarity threashold</li>
             <li><code>subset</code>: apply prediction to a document subset. Must be one of [&#39;all&#39;, &#39;train&#39;, &#39;test&#39;]. Default: &#39;test&#39;.</li>
+            <li><code>batch_id</code>: retrieve a given subset of scores (-1 to retrieve all). Default: 0</li>
+            <li><code>batch_size</code>: the number of document scores retrieved per batch. Default: 10000</li>
             </ul>
             
                     </section>
@@ -1012,6 +1014,33 @@
                                         
                                                 <section class="json-schema-properties">
                                                     <dl>
+                                                            <dt data-property-name="batch_id">
+                                                                <span class="json-property-name">batch_id:</span>
+                                                                
+                                                                <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
+                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                
+                                                            </dt>
+                                                            <dd>
+                                                                
+                                                                <div class="json-inner-schema">
+                                                                    
+                                                                </div>
+                                                            </dd>
+                                                            <dt data-property-name="batch_size">
+                                                                <span class="json-property-name">batch_size:</span>
+                                                                
+                                                                <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
+                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                
+                                                                        <span class="json-property-default-value">10000</span>
+                                                            </dt>
+                                                            <dd>
+                                                                
+                                                                <div class="json-inner-schema">
+                                                                    
+                                                                </div>
+                                                            </dd>
                                                             <dt data-property-name="max_result_categories">
                                                                 <span class="json-property-name">max_result_categories:</span>
                                                                 
@@ -1311,6 +1340,76 @@
                                                                                                                         </section>
                                                                                                             </div>
                                                                                                         </section>                </div>
+                                                                                </dd>
+                                                                                <dt data-property-name="pagination">
+                                                                                    <span class="json-property-name">pagination:</span>
+                                                                                    
+                                                                                    <span class="json-property-type">object</span>
+                                                                                    <span class="json-property-range" title="Value limits"></span>
+                                                                                    
+                                                                                        <span class="json-property-required"></span>
+                                                                                </dt>
+                                                                                <dd>
+                                                                                    
+                                                                                    <div class="json-inner-schema">
+                                                                                        
+                                                                                                <section class="json-schema-properties">
+                                                                                                    <dl>
+                                                                                                            <dt data-property-name="batch_id">
+                                                                                                                <span class="json-property-name">batch_id:</span>
+                                                                                                                
+                                                                                                                <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
+                                                                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                                                                
+                                                                                                            </dt>
+                                                                                                            <dd>
+                                                                                                                
+                                                                                                                <div class="json-inner-schema">
+                                                                                                                    
+                                                                                                                </div>
+                                                                                                            </dd>
+                                                                                                            <dt data-property-name="batch_id_last">
+                                                                                                                <span class="json-property-name">batch_id_last:</span>
+                                                                                                                
+                                                                                                                <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
+                                                                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                                                                
+                                                                                                            </dt>
+                                                                                                            <dd>
+                                                                                                                
+                                                                                                                <div class="json-inner-schema">
+                                                                                                                    
+                                                                                                                </div>
+                                                                                                            </dd>
+                                                                                                            <dt data-property-name="current_response_count">
+                                                                                                                <span class="json-property-name">current_response_count:</span>
+                                                                                                                
+                                                                                                                <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
+                                                                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                                                                
+                                                                                                            </dt>
+                                                                                                            <dd>
+                                                                                                                
+                                                                                                                <div class="json-inner-schema">
+                                                                                                                    
+                                                                                                                </div>
+                                                                                                            </dd>
+                                                                                                            <dt data-property-name="total_response_count">
+                                                                                                                <span class="json-property-name">total_response_count:</span>
+                                                                                                                
+                                                                                                                <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
+                                                                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                                                                
+                                                                                                            </dt>
+                                                                                                            <dd>
+                                                                                                                
+                                                                                                                <div class="json-inner-schema">
+                                                                                                                    
+                                                                                                                </div>
+                                                                                                            </dd>
+                                                                                                    </dl>
+                                                                                                </section>
+                                                                                    </div>
                                                                                 </dd>
                                                                         </dl>
                                                                     </section>
@@ -1771,7 +1870,7 @@
                                 <tbody>
                                         <tr>
                                             <td>
-                                                method
+                                                mid
                                             <td></td>
                                             <td>path</td>
                                             <td>
@@ -1785,7 +1884,7 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                mid
+                                                method
                                             <td></td>
                                             <td>path</td>
                                             <td>
@@ -1951,7 +2050,7 @@
                                 <tbody>
                                         <tr>
                                             <td>
-                                                method
+                                                mid
                                             <td></td>
                                             <td>path</td>
                                             <td>
@@ -1965,7 +2064,7 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                mid
+                                                method
                                             <td></td>
                                             <td>path</td>
                                             <td>
@@ -6061,8 +6160,8 @@
             <li><code>max_results</code> : return only the first <code>max_results</code> documents. If <code>max_results &lt;= 0</code> all documents are returned.</li>
             <li><code>sort_by</code> : if provided and not None, the field used for sorting results. Valid values are [None, &#39;score&#39;]</li>
             <li><code>sort_order</code>: the sort order (if applicable), one of [&#39;ascending&#39;, &#39;descending&#39;]</li>
-            <li><code>batch_id</code>: retrieve a given subset of scores. Default: -1 (retrieves all scrores)</li>
-            <li><code>batch_size</code>: the number of document scores retrieved per batch. Default: 5000</li>
+            <li><code>batch_id</code>: retrieve a given subset of scores (-1 to retrieve all). Default: 0</li>
+            <li><code>batch_size</code>: the number of document scores retrieved per batch. Default: 10000</li>
             </ul>
             
                     </section>
@@ -6085,7 +6184,6 @@
                                                                 <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
                                                                 <span class="json-property-range" title="Value limits"></span>
                                                                 
-                                                                        <span class="json-property-default-value">-1</span>
                                                             </dt>
                                                             <dd>
                                                                 
@@ -6099,7 +6197,7 @@
                                                                 <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
                                                                 <span class="json-property-range" title="Value limits"></span>
                                                                 
-                                                                        <span class="json-property-default-value">5000</span>
+                                                                        <span class="json-property-default-value">10000</span>
                                                             </dt>
                                                             <dd>
                                                                 
