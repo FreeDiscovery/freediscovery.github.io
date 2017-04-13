@@ -1892,7 +1892,7 @@
                                 <tbody>
                                         <tr>
                                             <td>
-                                                mid
+                                                method
                                             <td></td>
                                             <td>path</td>
                                             <td>
@@ -1906,7 +1906,7 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                method
+                                                mid
                                             <td></td>
                                             <td>path</td>
                                             <td>
@@ -2072,7 +2072,7 @@
                                 <tbody>
                                         <tr>
                                             <td>
-                                                mid
+                                                method
                                             <td></td>
                                             <td>path</td>
                                             <td>
@@ -2086,7 +2086,7 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                method
+                                                mid
                                             <td></td>
                                             <td>path</td>
                                             <td>
@@ -4765,10 +4765,17 @@
                 <div class="panel-body">
                     <section class="sw-operation-description">
                         <p>Add new documents to an existing processed dataset.
-                     This will also automatically update the LSI model if any
-                     is present. Raw documents on disk are not affected.</p>
-            <pre><code>     <span class="hljs-type">This</span> operation cannot be undone.<br><br>     <span class="hljs-type">Warning</span>: all categorization, clustering, duplicate detection <span class="hljs-keyword">and</span><br>     email threading models associated <span class="hljs-keyword">with</span> this dataset will be removed <span class="hljs-keyword">and</span><br>     need <span class="hljs-keyword">to</span> be re-trained.<br><br>     **<span class="hljs-type">Parameters</span>**<br>      - `dataset_definition`: [optional] a <span class="hljs-built_in">list</span> <span class="hljs-keyword">of</span> dictionaries `[{<span class="hljs-symbol">'file_path'</span>: &lt;str&gt;, <span class="hljs-symbol">'document_id'</span>: &lt;<span class="hljs-built_in">int</span>&gt;, <span class="hljs-symbol">'rendition_id'</span>: &lt;<span class="hljs-built_in">int</span>&gt;}, ...]` where  `rendition_id` are optional.
-            </code></pre>
+            This will also automatically update the LSI model if any
+            is present. Raw documents on disk are not affected.</p>
+            <p>This operation cannot be undone.</p>
+            <p>Warning: all categorization, clustering, duplicate detection and
+            email threading models associated with this dataset will be removed and
+            need to be re-trained.</p>
+            <p><strong>Parameters</strong></p>
+            <ul>
+            <li><code>dataset_definition</code>: [optional] a list of dictionaries <code>[{&#39;file_path&#39;: &lt;str&gt;, &#39;document_id&#39;: &lt;int&gt;, &#39;rendition_id&#39;: &lt;int&gt;}, ...]</code> where  <code>rendition_id</code> are optional.</li>
+            </ul>
+            
                     </section>
                         
                             <section class="sw-request-body">
@@ -5083,11 +5090,15 @@
                 <div class="panel-body">
                     <section class="sw-operation-description">
                         <p>Compute correspondence between id fields for documents. 
-                     At least one of the fields used for indexing must be provided,
-                     and all the rest will be computed (if available).
-                     If the data parameter is not provided, return all the correspondence table</p>
-            <pre><code>     **Parameters**<br>      - `data`: <span class="hljs-operator">the</span> ids <span class="hljs-operator">of</span> documents used <span class="hljs-keyword">as</span> <span class="hljs-operator">the</span> query<br>      - `return_file_path`: whether <span class="hljs-operator">the</span> results should <span class="hljs-built_in">include</span> <span class="hljs-operator">the</span> <span class="hljs-built_in">file</span> path
-            </code></pre>
+            At least one of the fields used for indexing must be provided,
+            and all the rest will be computed (if available).
+            If the data parameter is not provided, return all the correspondence table</p>
+            <p><strong>Parameters</strong></p>
+            <ul>
+            <li><code>data</code>: the ids of documents used as the query</li>
+            <li><code>return_file_path</code>: whether the results should include the file path</li>
+            </ul>
+            
                     </section>
                         
                             <section class="sw-request-body">
