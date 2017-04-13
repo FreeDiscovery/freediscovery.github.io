@@ -1,0 +1,531 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Python API Reference &mdash; FreeDiscovery 1.0.0.rc1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/gallery.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="FreeDiscovery 1.0.0.rc1 documentation" href="index.html"/>
+        <link rel="next" title="freediscovery.datasets.load_dataset" href="generated/freediscovery.datasets.load_dataset.html"/>
+        <link rel="prev" title="REST API reference" href="rest_api.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> FreeDiscovery
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0.rc1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation_instructions.html">Installation Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rest_api.html">REST API reference</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Python API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#datasets">Datasets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/freediscovery.datasets.load_dataset.html">freediscovery.datasets.load_dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/freediscovery.ingestion.DocumentIndex.html">freediscovery.ingestion.DocumentIndex</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#feature-extraction">Feature extraction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/freediscovery.text.FeatureVectorizer.html">freediscovery.text.FeatureVectorizer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#document-categorization">Document categorization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/freediscovery.categorization._CategorizerWrapper.html">freediscovery.categorization._CategorizerWrapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/freediscovery.categorization.NearestNeighborRanker.html">freediscovery.categorization.NearestNeighborRanker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/freediscovery.lsi._LSIWrapper.html">freediscovery.lsi._LSIWrapper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#document-clustering">Document clustering</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/freediscovery.cluster._ClusteringWrapper.html">freediscovery.cluster._ClusteringWrapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/freediscovery.cluster.ClusterLabels.html">freediscovery.cluster.ClusterLabels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/freediscovery.cluster._DendrogramChildren.html">freediscovery.cluster._DendrogramChildren</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/freediscovery.cluster.utils._binary_linkage2clusters.html">freediscovery.cluster.utils._binary_linkage2clusters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/freediscovery.cluster.utils._merge_clusters.html">freediscovery.cluster.utils._merge_clusters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#duplicates-detection">Duplicates detection</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/freediscovery.dupdet._DuplicateDetectionWrapper.html">freediscovery.dupdet._DuplicateDetectionWrapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/freediscovery.dupdet.SimhashDuplicates.html">freediscovery.dupdet.SimhashDuplicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/freediscovery.dupdet.IMatchDuplicates.html">freediscovery.dupdet.IMatchDuplicates</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#email-threading">Email threading</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/freediscovery.email_threading._EmailThreadingWrapper.html">freediscovery.email_threading._EmailThreadingWrapper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#semantic-search">Semantic search</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/freediscovery.search.Search.html">freediscovery.search.Search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/freediscovery.search._SearchWrapper.html">freediscovery.search._SearchWrapper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tools">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/freediscovery.base._BaseWrapper.html">freediscovery.base._BaseWrapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/freediscovery.pipeline.PipelineFinder.html">freediscovery.pipeline.PipelineFinder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/freediscovery.utils.generate_uuid.html">freediscovery.utils.generate_uuid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/freediscovery.utils.setup_model.html">freediscovery.utils.setup_model</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#io">IO</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/freediscovery.io.parse_ground_truth_file.html">freediscovery.io.parse_ground_truth_file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/freediscovery.io.parse_rcv1_smart_tokens.html">freediscovery.io.parse_rcv1_smart_tokens</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#metrics">Metrics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/freediscovery.metrics.recall_at_k_score.html">freediscovery.metrics.recall_at_k_score</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/freediscovery.metrics.ratio_duplicates_score.html">freediscovery.metrics.ratio_duplicates_score</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/freediscovery.metrics.f1_same_duplicates_score.html">freediscovery.metrics.f1_same_duplicates_score</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#exceptions">Exceptions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/freediscovery.exceptions.NotFound.html">freediscovery.exceptions.NotFound</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/freediscovery.exceptions.DatasetNotFound.html">freediscovery.exceptions.DatasetNotFound</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/freediscovery.exceptions.ModelNotFound.html">freediscovery.exceptions.ModelNotFound</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/freediscovery.exceptions.InitException.html">freediscovery.exceptions.InitException</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/freediscovery.exceptions.WrongParameter.html">freediscovery.exceptions.WrongParameter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/freediscovery.exceptions.NotImplementedFD.html">freediscovery.exceptions.NotImplementedFD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/freediscovery.exceptions.OptionalDependencyMissing.html">freediscovery.exceptions.OptionalDependencyMissing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_manual/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new.html">Release history</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">FreeDiscovery</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Python API Reference</li>
+    <li class="wy-breadcrumbs-aside">
+      
+          
+          
+            <a href="https://github.com/FreeDiscovery/FreeDiscovery/blob/master/doc/python_api.rst" class="fa fa-github"> Edit on GitHub</a>
+          
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="python-api-reference">
+<h1>Python API Reference<a class="headerlink" href="#python-api-reference" title="Permalink to this headline">¶</a></h1>
+<dl class="docutils">
+<dt>Two types of classes can be found in FreeDiscovery,</dt>
+<dd><ul class="first last simple">
+<li>scikit-learn compatible estimators that inherit from <cite>sklearn.base.BaseEstimator</cite></li>
+<li>freediscovery specific classes that add a persistance layer and are designed to function together with the REST API.</li>
+</ul>
+</dd>
+</dl>
+<div class="section" id="datasets">
+<h2>Datasets<a class="headerlink" href="#datasets" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="generated/freediscovery.datasets.load_dataset.html#freediscovery.datasets.load_dataset" title="freediscovery.datasets.load_dataset"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.datasets.load_dataset</span></code></a>([name,&nbsp;...])</td>
+<td>Download a benchmark dataset.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="generated/freediscovery.ingestion.DocumentIndex.html#freediscovery.ingestion.DocumentIndex" title="freediscovery.ingestion.DocumentIndex"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.ingestion.DocumentIndex</span></code></a>(...)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="feature-extraction">
+<h2>Feature extraction<a class="headerlink" href="#feature-extraction" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="generated/freediscovery.text.FeatureVectorizer.html#freediscovery.text.FeatureVectorizer" title="freediscovery.text.FeatureVectorizer"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.text.FeatureVectorizer</span></code></a>([...])</td>
+<td>Extract features from text documents</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="document-categorization">
+<h2>Document categorization<a class="headerlink" href="#document-categorization" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="generated/freediscovery.categorization._CategorizerWrapper.html#freediscovery.categorization._CategorizerWrapper" title="freediscovery.categorization._CategorizerWrapper"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.categorization._CategorizerWrapper</span></code></a>([...])</td>
+<td>Document categorization model</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="generated/freediscovery.categorization.NearestNeighborRanker.html#freediscovery.categorization.NearestNeighborRanker" title="freediscovery.categorization.NearestNeighborRanker"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.categorization.NearestNeighborRanker</span></code></a>([...])</td>
+<td>A nearest neighbor ranker.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="generated/freediscovery.lsi._LSIWrapper.html#freediscovery.lsi._LSIWrapper" title="freediscovery.lsi._LSIWrapper"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.lsi._LSIWrapper</span></code></a>([cache_dir,&nbsp;...])</td>
+<td>Document categorization using Latent Semantic Indexing (LSI)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="document-clustering">
+<h2>Document clustering<a class="headerlink" href="#document-clustering" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="generated/freediscovery.cluster._ClusteringWrapper.html#freediscovery.cluster._ClusteringWrapper" title="freediscovery.cluster._ClusteringWrapper"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.cluster._ClusteringWrapper</span></code></a>([...])</td>
+<td>Document clustering</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="generated/freediscovery.cluster.ClusterLabels.html#freediscovery.cluster.ClusterLabels" title="freediscovery.cluster.ClusterLabels"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.cluster.ClusterLabels</span></code></a>(vect,&nbsp;model)</td>
+<td>Calculate the cluster labels.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="generated/freediscovery.cluster._DendrogramChildren.html#freediscovery.cluster._DendrogramChildren" title="freediscovery.cluster._DendrogramChildren"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.cluster._DendrogramChildren</span></code></a>(ddata)</td>
+<td>Compute childen for a given dendogram node</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="generated/freediscovery.cluster.utils._binary_linkage2clusters.html#freediscovery.cluster.utils._binary_linkage2clusters" title="freediscovery.cluster.utils._binary_linkage2clusters"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.cluster.utils._binary_linkage2clusters</span></code></a>(...)</td>
+<td>Given a list of elements of size n_sample and a linkage matrix</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="generated/freediscovery.cluster.utils._merge_clusters.html#freediscovery.cluster.utils._merge_clusters" title="freediscovery.cluster.utils._merge_clusters"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.cluster.utils._merge_clusters</span></code></a>(X)</td>
+<td>Compute a union of all clusters</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="duplicates-detection">
+<h2>Duplicates detection<a class="headerlink" href="#duplicates-detection" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="generated/freediscovery.dupdet._DuplicateDetectionWrapper.html#freediscovery.dupdet._DuplicateDetectionWrapper" title="freediscovery.dupdet._DuplicateDetectionWrapper"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.dupdet._DuplicateDetectionWrapper</span></code></a>([...])</td>
+<td>Find near duplicates in a document collection.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="generated/freediscovery.dupdet.SimhashDuplicates.html#freediscovery.dupdet.SimhashDuplicates" title="freediscovery.dupdet.SimhashDuplicates"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.dupdet.SimhashDuplicates</span></code></a>([...])</td>
+<td>Find near duplicates using simhash-py</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="generated/freediscovery.dupdet.IMatchDuplicates.html#freediscovery.dupdet.IMatchDuplicates" title="freediscovery.dupdet.IMatchDuplicates"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.dupdet.IMatchDuplicates</span></code></a>([...])</td>
+<td>Find near duplicates using the randomized I-match backend</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="email-threading">
+<h2>Email threading<a class="headerlink" href="#email-threading" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="generated/freediscovery.email_threading._EmailThreadingWrapper.html#freediscovery.email_threading._EmailThreadingWrapper" title="freediscovery.email_threading._EmailThreadingWrapper"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.email_threading._EmailThreadingWrapper</span></code></a>([...])</td>
+<td>JWZ Email threading class</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="semantic-search">
+<h2>Semantic search<a class="headerlink" href="#semantic-search" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="generated/freediscovery.search.Search.html#freediscovery.search.Search" title="freediscovery.search.Search"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.search.Search</span></code></a>(vectorizer[,&nbsp;lsi])</td>
+<td>Perform (semantic) search in a document collection</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="generated/freediscovery.search._SearchWrapper.html#freediscovery.search._SearchWrapper" title="freediscovery.search._SearchWrapper"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.search._SearchWrapper</span></code></a>([...])</td>
+<td>Document search wrapper</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tools">
+<h2>Tools<a class="headerlink" href="#tools" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="generated/freediscovery.base._BaseWrapper.html#freediscovery.base._BaseWrapper" title="freediscovery.base._BaseWrapper"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.base._BaseWrapper</span></code></a>([cache_dir,&nbsp;...])</td>
+<td>Base class for wrappers in FreeDiscovery</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="generated/freediscovery.pipeline.PipelineFinder.html#freediscovery.pipeline.PipelineFinder" title="freediscovery.pipeline.PipelineFinder"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.pipeline.PipelineFinder</span></code></a>([mid,&nbsp;...])</td>
+<td>Walk through the hierarchy of existing models</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="generated/freediscovery.utils.generate_uuid.html#freediscovery.utils.generate_uuid" title="freediscovery.utils.generate_uuid"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.utils.generate_uuid</span></code></a>([size])</td>
+<td>Generate a unique id for the model</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="generated/freediscovery.utils.setup_model.html#freediscovery.utils.setup_model" title="freediscovery.utils.setup_model"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.utils.setup_model</span></code></a>(base_path)</td>
+<td>Generate a unique model id and create the corresponding folder for storing results</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="io">
+<h2>IO<a class="headerlink" href="#io" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="generated/freediscovery.io.parse_ground_truth_file.html#freediscovery.io.parse_ground_truth_file" title="freediscovery.io.parse_ground_truth_file"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.io.parse_ground_truth_file</span></code></a>(...)</td>
+<td>Parse a ground truth file specified by a filename.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="generated/freediscovery.io.parse_rcv1_smart_tokens.html#freediscovery.io.parse_rcv1_smart_tokens" title="freediscovery.io.parse_rcv1_smart_tokens"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.io.parse_rcv1_smart_tokens</span></code></a>(text)</td>
+<td>Parse a dataset stored in the SMART tokenized format, used in particular for the RCV1-v2 dataset,    <a class="reference external" href="http://www.jmlr.org/papers/volume5/lewis04a/lyrl2004_rcv1v2_README.htm">http://www.jmlr.org/papers/volume5/lewis04a/lyrl2004_rcv1v2_README.htm</a> (cf.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="metrics">
+<h2>Metrics<a class="headerlink" href="#metrics" title="Permalink to this headline">¶</a></h2>
+<p>This module aims to extend <a class="reference external" href="http://scikit-learn.org/stable/modules/classes.html#module-sklearn.metrics">sklearn.metrics</a> with a few additional metrics,</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="generated/freediscovery.metrics.recall_at_k_score.html#freediscovery.metrics.recall_at_k_score" title="freediscovery.metrics.recall_at_k_score"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.metrics.recall_at_k_score</span></code></a>(...)</td>
+<td>Recall after retrieving k documents from the collections</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="generated/freediscovery.metrics.ratio_duplicates_score.html#freediscovery.metrics.ratio_duplicates_score" title="freediscovery.metrics.ratio_duplicates_score"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.metrics.ratio_duplicates_score</span></code></a>(x,&nbsp;y)</td>
+<td>Given cluster labels x and y, compute the relative error between the number of duplicates in x vs the one in y.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="generated/freediscovery.metrics.f1_same_duplicates_score.html#freediscovery.metrics.f1_same_duplicates_score" title="freediscovery.metrics.f1_same_duplicates_score"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.metrics.f1_same_duplicates_score</span></code></a>(x,&nbsp;y)</td>
+<td>Given cluster labels x and y, compute the f1 score</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="exceptions">
+<h2>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="generated/freediscovery.exceptions.NotFound.html#freediscovery.exceptions.NotFound" title="freediscovery.exceptions.NotFound"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.exceptions.NotFound</span></code></a>([message])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="generated/freediscovery.exceptions.DatasetNotFound.html#freediscovery.exceptions.DatasetNotFound" title="freediscovery.exceptions.DatasetNotFound"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.exceptions.DatasetNotFound</span></code></a>([...])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="generated/freediscovery.exceptions.ModelNotFound.html#freediscovery.exceptions.ModelNotFound" title="freediscovery.exceptions.ModelNotFound"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.exceptions.ModelNotFound</span></code></a>([message])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="generated/freediscovery.exceptions.InitException.html#freediscovery.exceptions.InitException" title="freediscovery.exceptions.InitException"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.exceptions.InitException</span></code></a>([message])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="generated/freediscovery.exceptions.WrongParameter.html#freediscovery.exceptions.WrongParameter" title="freediscovery.exceptions.WrongParameter"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.exceptions.WrongParameter</span></code></a>([...])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="generated/freediscovery.exceptions.NotImplementedFD.html#freediscovery.exceptions.NotImplementedFD" title="freediscovery.exceptions.NotImplementedFD"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.exceptions.NotImplementedFD</span></code></a>([...])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="generated/freediscovery.exceptions.OptionalDependencyMissing.html#freediscovery.exceptions.OptionalDependencyMissing" title="freediscovery.exceptions.OptionalDependencyMissing"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.exceptions.OptionalDependencyMissing</span></code></a>([...])</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="generated/freediscovery.datasets.load_dataset.html" class="btn btn-neutral float-right" title="freediscovery.datasets.load_dataset" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="rest_api.html" class="btn btn-neutral" title="REST API reference" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 - 2017, Grossman Labs LLC.
+      Last updated on Apr 13, 2017.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0.rc1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+ 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-91765795-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
