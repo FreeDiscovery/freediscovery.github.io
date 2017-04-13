@@ -170,7 +170,7 @@
 <h1>freediscovery.lsi._LSIWrapper<a class="headerlink" href="#freediscovery-lsi-lsiwrapper" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="freediscovery.lsi._LSIWrapper">
-<em class="property">class </em><code class="descclassname">freediscovery.lsi.</code><code class="descname">_LSIWrapper</code><span class="sig-paren">(</span><em>cache_dir='/tmp/'</em>, <em>parent_id=None</em>, <em>mid=None</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/04b190e/freediscovery/lsi.py#L26"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.lsi._LSIWrapper" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">freediscovery.lsi.</code><code class="descname">_LSIWrapper</code><span class="sig-paren">(</span><em>cache_dir='/tmp/'</em>, <em>parent_id=None</em>, <em>mid=None</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/43133f8/freediscovery/lsi.py#L26"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.lsi._LSIWrapper" title="Permalink to this definition">¶</a></dt>
 <dd><p>Document categorization using Latent Semantic Indexing (LSI)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -188,7 +188,7 @@
 </table>
 <dl class="method">
 <dt id="freediscovery.lsi._LSIWrapper.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>cache_dir='/tmp/'</em>, <em>parent_id=None</em>, <em>mid=None</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/04b190e/freediscovery/lsi.py#L43"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.lsi._LSIWrapper.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>cache_dir='/tmp/'</em>, <em>parent_id=None</em>, <em>mid=None</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/43133f8/freediscovery/lsi.py#L43"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.lsi._LSIWrapper.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods</p>
@@ -201,29 +201,46 @@
 <tr class="row-odd"><td><a class="reference internal" href="#freediscovery.lsi._LSIWrapper.__init__" title="freediscovery.lsi._LSIWrapper.__init__"><code class="xref py py-obj docutils literal"><span class="pre">__init__</span></code></a>([cache_dir,&nbsp;parent_id,&nbsp;mid,&nbsp;verbose])</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#freediscovery.lsi._LSIWrapper.delete" title="freediscovery.lsi._LSIWrapper.delete"><code class="xref py py-obj docutils literal"><span class="pre">delete</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#freediscovery.lsi._LSIWrapper.append" title="freediscovery.lsi._LSIWrapper.append"><code class="xref py py-obj docutils literal"><span class="pre">append</span></code></a>(X)</td>
+<td>Add new documents to an existing LSI model</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.lsi._LSIWrapper.delete" title="freediscovery.lsi._LSIWrapper.delete"><code class="xref py py-obj docutils literal"><span class="pre">delete</span></code></a>()</td>
 <td>Delete a trained model</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.lsi._LSIWrapper.fit_transform" title="freediscovery.lsi._LSIWrapper.fit_transform"><code class="xref py py-obj docutils literal"><span class="pre">fit_transform</span></code></a>([n_components,&nbsp;n_iter])</td>
+<tr class="row-even"><td><a class="reference internal" href="#freediscovery.lsi._LSIWrapper.fit_transform" title="freediscovery.lsi._LSIWrapper.fit_transform"><code class="xref py py-obj docutils literal"><span class="pre">fit_transform</span></code></a>([n_components,&nbsp;n_iter])</td>
 <td>Perform the SVD decomposition</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#freediscovery.lsi._LSIWrapper.get_params" title="freediscovery.lsi._LSIWrapper.get_params"><code class="xref py py-obj docutils literal"><span class="pre">get_params</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.lsi._LSIWrapper.get_params" title="freediscovery.lsi._LSIWrapper.get_params"><code class="xref py py-obj docutils literal"><span class="pre">get_params</span></code></a>()</td>
 <td>Get model parameters</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.lsi._LSIWrapper.list_models" title="freediscovery.lsi._LSIWrapper.list_models"><code class="xref py py-obj docutils literal"><span class="pre">list_models</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#freediscovery.lsi._LSIWrapper.list_models" title="freediscovery.lsi._LSIWrapper.list_models"><code class="xref py py-obj docutils literal"><span class="pre">list_models</span></code></a>()</td>
 <td>List existing models of this type</td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
+<dt id="freediscovery.lsi._LSIWrapper.append">
+<code class="descname">append</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/43133f8/freediscovery/lsi.py#L105"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.lsi._LSIWrapper.append" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add new documents to an existing LSI model</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>X</strong> (<em>scipy.sparse CSR array</em>) &#8211; the additional data to add to the index</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="freediscovery.lsi._LSIWrapper.delete">
-<code class="descname">delete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/04b190e/freediscovery/base.py#L99"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.lsi._LSIWrapper.delete" title="Permalink to this definition">¶</a></dt>
+<code class="descname">delete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/43133f8/freediscovery/base.py#L103"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.lsi._LSIWrapper.delete" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete a trained model</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="freediscovery.lsi._LSIWrapper.fit_transform">
-<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>n_components=150</em>, <em>n_iter=5</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/04b190e/freediscovery/lsi.py#L53"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.lsi._LSIWrapper.fit_transform" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>n_components=150</em>, <em>n_iter=5</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/43133f8/freediscovery/lsi.py#L53"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.lsi._LSIWrapper.fit_transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform the SVD decomposition</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -249,13 +266,13 @@
 
 <dl class="method">
 <dt id="freediscovery.lsi._LSIWrapper.get_params">
-<code class="descname">get_params</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/04b190e/freediscovery/base.py#L109"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.lsi._LSIWrapper.get_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_params</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/43133f8/freediscovery/base.py#L113"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.lsi._LSIWrapper.get_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get model parameters</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="freediscovery.lsi._LSIWrapper.list_models">
-<code class="descname">list_models</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/04b190e/freediscovery/base.py#L136"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.lsi._LSIWrapper.list_models" title="Permalink to this definition">¶</a></dt>
+<code class="descname">list_models</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/43133f8/freediscovery/base.py#L140"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.lsi._LSIWrapper.list_models" title="Permalink to this definition">¶</a></dt>
 <dd><p>List existing models of this type</p>
 </dd></dl>
 
@@ -283,7 +300,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016 - 2017, Grossman Labs LLC.
-      Last updated on Apr 10, 2017.
+      Last updated on Apr 13, 2017.
 
     </p>
   </div>

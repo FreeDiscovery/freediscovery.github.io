@@ -169,8 +169,6 @@
 <ol>
 <li><p class="first">Download and install <a class="reference external" href="http://conda.pydata.org/miniconda.html">Miniconda</a> 64 bit for Python 3.5 (a cross-platform package manager for Python &amp; R)</p>
 </li>
-<li><p class="first">To install the optional simhash-py dependency, a g++ (GCC &gt;= 4.8) compiler is required on Linux (on Windows it is not installed).</p>
-</li>
 <li><p class="first">A virtual environment with all the dependencies can be setup with the following commands,</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>  <span class="n">cd</span> <span class="n">FreeDiscovery</span>
   <span class="n">conda</span> <span class="n">config</span> <span class="o">--</span><span class="n">append</span> <span class="n">channels</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
@@ -179,8 +177,8 @@
   <span class="n">source</span> <span class="n">activate</span> <span class="n">freediscovery</span><span class="o">-</span><span class="n">env</span>   <span class="c1"># on Linux/Mac OS X</span>
   <span class="c1"># or &quot;activate freediscovery-env&quot;   # on Windows </span>
 
-  <span class="c1"># (optional, Linux only) requires g++ compiler</span>
-  <span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">build_tools</span><span class="o">/</span><span class="n">requirements_pip_comp</span><span class="o">.</span><span class="n">txt</span> 
+  <span class="c1"># (optional dependencies, Linux only) </span>
+  <span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">build_tools</span><span class="o">/</span><span class="n">requirements_pip_comp</span><span class="o">.</span><span class="n">txt</span> 
 
   <span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">develop</span>
 </pre></div>
@@ -193,21 +191,7 @@
 </li>
 </ol>
 <p><strong>Note 1</strong>: all of the above commands (except the installation of the compiler) should be run without <code class="docutils literal"><span class="pre">sudo</span></code> and with regular user permissions.</p>
-<p><strong>Note 2</strong>: for convenience, running steps 2 and 3 can be automated:</p>
-<ul>
-<li><p class="first">on Linux and Mac OS X:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">bash</span> <span class="n">build_tools</span><span class="o">/</span><span class="n">conda_setup</span><span class="o">.</span><span class="n">sh</span>
-</pre></div>
-</div>
-</li>
-<li><p class="first">on Windows by double-clicking on <code class="docutils literal"><span class="pre">build_tools/conda_setup.bat</span></code> in files explorer, or running,</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">cd</span> <span class="n">build_tools</span>
-    <span class="n">conda_setup</span><span class="o">.</span><span class="n">bat</span>
-</pre></div>
-</div>
-</li>
-</ul>
-<p><strong>Note 3</strong>: is recommended to use conda in a virtual environment for reproducibility. However, it is also possible to use system Python (3.5 or 3.6), and install the list of dependencies (split between <code class="docutils literal"><span class="pre">requirements.txt</span></code> and <code class="docutils literal"><span class="pre">scripts/requirements_pip*.txt</span></code> under <code class="docutils literal"><span class="pre">build_tools/</span></code>) with <code class="docutils literal"><span class="pre">pip</span></code>.</p>
+<p><strong>Note 2</strong>: is recommended to use conda in a virtual environment for reproducibility. However, it is also possible to use system Python (3.5 or 3.6), and install the list of dependencies (split between <code class="docutils literal"><span class="pre">requirements.txt</span></code> and <code class="docutils literal"><span class="pre">scripts/requirements_pip*.txt</span></code> under <code class="docutils literal"><span class="pre">build_tools/</span></code>) with <code class="docutils literal"><span class="pre">pip</span></code>.</p>
 </div>
 <div class="section" id="starting-the-freediscovery-server">
 <span id="starting-the-freediscovery-server"></span><h2>3. Starting the FreeDiscovery Server<a class="headerlink" href="#starting-the-freediscovery-server" title="Permalink to this headline">¶</a></h2>
@@ -254,7 +238,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016 - 2017, Grossman Labs LLC.
-      Last updated on Apr 10, 2017.
+      Last updated on Apr 13, 2017.
 
     </p>
   </div>

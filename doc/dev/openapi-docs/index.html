@@ -236,6 +236,28 @@
                     </tr>
                     <tr>
                             <td class="swagger--summary-path" rowspan="1">
+                                <a href="#path--api-v0-feature-extraction--dsid--append">/api/v0/feature-extraction/{dsid}/append</a>
+                            </td>
+                        <td>
+                            <a href="#operation--api-v0-feature-extraction--dsid--append-post">POST</a>
+                        </td>
+                        <td>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                            <td class="swagger--summary-path" rowspan="1">
+                                <a href="#path--api-v0-feature-extraction--dsid--delete">/api/v0/feature-extraction/{dsid}/delete</a>
+                            </td>
+                        <td>
+                            <a href="#operation--api-v0-feature-extraction--dsid--delete-post">POST</a>
+                        </td>
+                        <td>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                            <td class="swagger--summary-path" rowspan="1">
                                 <a href="#path--api-v0-feature-extraction--dsid--id-mapping">/api/v0/feature-extraction/{dsid}/id-mapping</a>
                             </td>
                         <td>
@@ -993,7 +1015,7 @@
             <li><code>sort_order</code>: the sort order (if applicable), one of [&#39;ascending&#39;, &#39;descending&#39;]</li>
             <li><code>max_results</code> : return only the first <code>max_results</code> documents. If <code>max_results &lt;= 0</code> all documents are returned.</li>
             <li><code>ml_output</code> : type of the output in [&#39;decision_function&#39;, &#39;probability&#39;], only affects ML methods.</li>
-            <li><code>nn_metric</code> : The similarity returned by nearest neighbor classifier in [&#39;cosine&#39;, &#39;jaccard&#39;, &#39;cosine_norm&#39;, &#39;jaccard_norm&#39;].</li>
+            <li><code>metric</code> : The similarity returned by nearest neighbor classifier in [&#39;cosine&#39;, &#39;jaccard&#39;].</li>
             <li><code>min_score</code> : filter out results below a similarity threashold</li>
             <li><code>subset</code>: apply prediction to a document subset. Must be one of [&#39;all&#39;, &#39;train&#39;, &#39;test&#39;]. Default: &#39;test&#39;.</li>
             <li><code>batch_id</code>: retrieve a given subset of scores (-1 to retrieve all). Default: 0</li>
@@ -1068,6 +1090,20 @@
                                                                     
                                                                 </div>
                                                             </dd>
+                                                            <dt data-property-name="metric">
+                                                                <span class="json-property-name">metric:</span>
+                                                                
+                                                                <span class="json-property-type">string</span>
+                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                
+                                                                        <span class="json-property-default-value">cosine</span>
+                                                            </dt>
+                                                            <dd>
+                                                                
+                                                                <div class="json-inner-schema">
+                                                                    
+                                                                </div>
+                                                            </dd>
                                                             <dt data-property-name="min_score">
                                                                 <span class="json-property-name">min_score:</span>
                                                                 
@@ -1089,20 +1125,6 @@
                                                                 <span class="json-property-range" title="Value limits"></span>
                                                                 
                                                                         <span class="json-property-default-value">probability</span>
-                                                            </dt>
-                                                            <dd>
-                                                                
-                                                                <div class="json-inner-schema">
-                                                                    
-                                                                </div>
-                                                            </dd>
-                                                            <dt data-property-name="nn_metric">
-                                                                <span class="json-property-name">nn_metric:</span>
-                                                                
-                                                                <span class="json-property-type">string</span>
-                                                                <span class="json-property-range" title="Value limits"></span>
-                                                                
-                                                                        <span class="json-property-default-value">jaccard_norm</span>
                                                             </dt>
                                                             <dd>
                                                                 
@@ -1437,7 +1459,7 @@
             <li><code>n_clusters</code>: the number of clusters or -1 to use hierarchical clustering (default: -1)</li>
             <li><code>min_similarity</code>: The radius of the subcluster obtained by merging a new sample and the closest subcluster should be lesser than the threshold. Otherwise a new subcluster is started. See <a href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.Birch.html">sklearn.cluster.Birch</a>. Increasing this value would increase the hierarchical tree depth (and the number of clusters).</li>
             <li><code>branching_factor</code>: Maximum number of CF subclusters in each node. If a new samples enters such that the number of subclusters exceed the branching_factor then the node has to be split. The corresponding parent also has to be split and if the number of subclusters in the parent is greater than the branching factor, then it has to be split recursively. Decreasing this value would increase the number of clusters.</li>
-            <li><code>nn_metric</code> : The similarity returned by nearest neighbor classifier in [&#39;cosine&#39;, &#39;jaccard&#39;, &#39;cosine_norm&#39;, &#39;jaccard_norm&#39;].</li>
+            <li><code>metric</code> : The similarity returned by nearest neighbor classifier in [&#39;cosine&#39;, &#39;jaccard&#39;].</li>
             </ul>
             
                     </section>
@@ -1468,13 +1490,27 @@
                                                                     
                                                                 </div>
                                                             </dd>
+                                                            <dt data-property-name="metric">
+                                                                <span class="json-property-name">metric:</span>
+                                                                
+                                                                <span class="json-property-type">string</span>
+                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                
+                                                                        <span class="json-property-default-value">cosine</span>
+                                                            </dt>
+                                                            <dd>
+                                                                
+                                                                <div class="json-inner-schema">
+                                                                    
+                                                                </div>
+                                                            </dd>
                                                             <dt data-property-name="min_similarity">
                                                                 <span class="json-property-name">min_similarity:</span>
                                                                 
                                                                 <span class="json-property-type">number</span>
                                                                 <span class="json-property-range" title="Value limits"></span>
                                                                 
-                                                                        <span class="json-property-default-value">0.75</span>
+                                                                        <span class="json-property-default-value">0.5</span>
                                                             </dt>
                                                             <dd>
                                                                 
@@ -1489,20 +1525,6 @@
                                                                 <span class="json-property-range" title="Value limits"></span>
                                                                 
                                                                         <span class="json-property-default-value">-1</span>
-                                                            </dt>
-                                                            <dd>
-                                                                
-                                                                <div class="json-inner-schema">
-                                                                    
-                                                                </div>
-                                                            </dd>
-                                                            <dt data-property-name="nn_metric">
-                                                                <span class="json-property-name">nn_metric:</span>
-                                                                
-                                                                <span class="json-property-type">string</span>
-                                                                <span class="json-property-range" title="Value limits"></span>
-                                                                
-                                                                        <span class="json-property-default-value">jaccard_norm</span>
                                                             </dt>
                                                             <dd>
                                                                 
@@ -1590,7 +1612,7 @@
             <ul>
             <li><code>parent_id</code>: <code>dataset_id</code> or <code>lsi_id</code></li>
             <li><code>min_similarity</code>: The radius of the subcluster obtained by merging a new sample and the closest subcluster should be lesser than the threshold. Otherwise a new subcluster is started. See <a href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.Birch.html">sklearn.cluster.Birch</a></li>
-            <li><code>nn_metric</code> : The similarity returned by nearest neighbor classifier in [&#39;cosine&#39;, &#39;jaccard&#39;, &#39;cosine_norm&#39;, &#39;jaccard_norm&#39;].</li>
+            <li><code>metric</code> : The similarity returned by nearest neighbor classifier in [&#39;cosine&#39;, &#39;jaccard&#39;].</li>
             <li><code>min_samples</code>: (optional) int The number of samples (or total weight) in a neighborhood for a point to be considered as a core point. This includes the point itself.</li>
             </ul>
             
@@ -1608,6 +1630,20 @@
                                         
                                                 <section class="json-schema-properties">
                                                     <dl>
+                                                            <dt data-property-name="metric">
+                                                                <span class="json-property-name">metric:</span>
+                                                                
+                                                                <span class="json-property-type">string</span>
+                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                
+                                                                        <span class="json-property-default-value">jaccard_norm</span>
+                                                            </dt>
+                                                            <dd>
+                                                                
+                                                                <div class="json-inner-schema">
+                                                                    
+                                                                </div>
+                                                            </dd>
                                                             <dt data-property-name="min_samples">
                                                                 <span class="json-property-name">min_samples:</span>
                                                                 
@@ -1628,21 +1664,7 @@
                                                                 <span class="json-property-type">number</span>
                                                                 <span class="json-property-range" title="Value limits"></span>
                                                                 
-                                                                        <span class="json-property-default-value">0.75</span>
-                                                            </dt>
-                                                            <dd>
-                                                                
-                                                                <div class="json-inner-schema">
-                                                                    
-                                                                </div>
-                                                            </dd>
-                                                            <dt data-property-name="nn_metric">
-                                                                <span class="json-property-name">nn_metric:</span>
-                                                                
-                                                                <span class="json-property-type">string</span>
-                                                                <span class="json-property-range" title="Value limits"></span>
-                                                                
-                                                                        <span class="json-property-default-value">jaccard_norm</span>
+                                                                        <span class="json-property-default-value">0.5</span>
                                                             </dt>
                                                             <dd>
                                                                 
@@ -1941,7 +1963,7 @@
             <p><strong>Parameters</strong></p>
             <ul>
             <li><code>n_top_words</code>: keep only most relevant <code>n_top_words</code> words</li>
-            <li><code>nn_metric</code> : The similarity metric in [&#39;cosine&#39;, &#39;jaccard&#39;, &#39;cosine_norm&#39;, &#39;jaccard_norm&#39;].</li>
+            <li><code>metric</code> : The similarity metric in [&#39;cosine&#39;, &#39;jaccard&#39;].</li>
             <li><code>return_optimal_sampling</code> : Instead of cluster results, the optimal sampling results will be returned (with no cluster labels). This option is only valid with Birch algorithm. Note that optimal sampling cannot return more samples than the subclusters in the birch clustering results (default: false)</li>
             <li><code>sampling_min_similarity</code> : Similarity threashold used by smart sampling. Decreasing this value would result in more sampled documents. Default: 1.0 (i.e. use the full cluster hierarichy).</li>
             <li><code>sampling_min_coverage</code> : Minimal coverage requirement in [0, 1] range. Increasing this value would result in a larger number of samples. (default: 0.9)</li>
@@ -1961,13 +1983,13 @@
                                         
                                                 <section class="json-schema-properties">
                                                     <dl>
-                                                            <dt data-property-name="n_top_words">
-                                                                <span class="json-property-name">n_top_words:</span>
+                                                            <dt data-property-name="metric">
+                                                                <span class="json-property-name">metric:</span>
                                                                 
-                                                                <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
+                                                                <span class="json-property-type">string</span>
                                                                 <span class="json-property-range" title="Value limits"></span>
                                                                 
-                                                                        <span class="json-property-default-value">5</span>
+                                                                        <span class="json-property-default-value">cosine</span>
                                                             </dt>
                                                             <dd>
                                                                 
@@ -1975,13 +1997,13 @@
                                                                     
                                                                 </div>
                                                             </dd>
-                                                            <dt data-property-name="nn_metric">
-                                                                <span class="json-property-name">nn_metric:</span>
+                                                            <dt data-property-name="n_top_words">
+                                                                <span class="json-property-name">n_top_words:</span>
                                                                 
-                                                                <span class="json-property-type">string</span>
+                                                                <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
                                                                 <span class="json-property-range" title="Value limits"></span>
                                                                 
-                                                                        <span class="json-property-default-value">jaccard_norm</span>
+                                                                        <span class="json-property-default-value">5</span>
                                                             </dt>
                                                             <dd>
                                                                 
@@ -2500,7 +2522,7 @@
             <li><code>distance</code> : int, default=2 Maximum number of differnet bits in the simhash (Simhash method only)</li>
             <li><code>n_rand_lexicons</code> : int, default=1 number of random lexicons used for duplicate detection (I-Match method only)</li>
             <li><code>rand_lexicon_ratio</code> : float, default=0.7 ratio of the vocabulary used in random lexicons (I-Match method only)</li>
-            <li><code>nn_metric</code> : The similarity returned by nearest neighbor classifier in [&#39;cosine&#39;, &#39;jaccard&#39;, &#39;cosine_norm&#39;, &#39;jaccard_norm&#39;].</li>
+            <li><code>metric</code> : The similarity returned by nearest neighbor classifier in [&#39;cosine&#39;, &#39;jaccard&#39;].</li>
             </ul>
             
                     </section>
@@ -2530,12 +2552,13 @@
                                                                     
                                                                 </div>
                                                             </dd>
-                                                            <dt data-property-name="n_rand_lexicons">
-                                                                <span class="json-property-name">n_rand_lexicons:</span>
+                                                            <dt data-property-name="metric">
+                                                                <span class="json-property-name">metric:</span>
                                                                 
-                                                                <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
+                                                                <span class="json-property-type">string</span>
                                                                 <span class="json-property-range" title="Value limits"></span>
                                                                 
+                                                                        <span class="json-property-default-value">cosine</span>
                                                             </dt>
                                                             <dd>
                                                                 
@@ -2543,13 +2566,12 @@
                                                                     
                                                                 </div>
                                                             </dd>
-                                                            <dt data-property-name="nn_metric">
-                                                                <span class="json-property-name">nn_metric:</span>
+                                                            <dt data-property-name="n_rand_lexicons">
+                                                                <span class="json-property-name">n_rand_lexicons:</span>
                                                                 
-                                                                <span class="json-property-type">string</span>
+                                                                <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
                                                                 <span class="json-property-range" title="Value limits"></span>
                                                                 
-                                                                        <span class="json-property-default-value">jaccard_norm</span>
                                                             </dt>
                                                             <dd>
                                                                 
@@ -3031,7 +3053,7 @@
             </li>
             <li><p>Fedora mailing list (2009-2009)</p>
             <ul>
-            <li><code>fedora_ml</code></li>
+            <li><code>fedora_ml_3k_subset</code></li>
             </ul>
             </li>
             <li><p>The 20 newsgoups dataset</p>
@@ -3801,7 +3823,7 @@
             <li><code>chuck_size</code>: The number of documents simultaneously processed by a running job (default: 5000)</li>
             <li><code>binary</code>: If set to 1, all non zero counts are set to 1. (default: False)</li>
             <li><code>use_idf</code>: Enable inverse-document-frequency reweighting (default: False).</li>
-            <li><code>sublinear_tf</code>: Apply sublinear tf scaling, i.e. replace tf with log(1 + tf) (default: False).</li>
+            <li><code>sublinear_tf</code>: Apply sublinear tf scaling, i.e. replace tf with log(1 + tf) (default: True).</li>
             <li><code>use_hashing</code>: Enable hashing. This option must be set to True for classification and set to False for clustering. (default: True)</li>
             <li><code>min_df</code>: When building the vocabulary ignore terms that have a document frequency strictly lower than the given threshold. This value is ignored when hashing is used.</li>
             <li><code>max_df</code>: When building the vocabulary ignore terms that have a document frequency strictly higher than the given threshold. This value is ignored when hashing is used.</li>
@@ -4734,16 +4756,19 @@
                         </section>
                 </div>
             </div>    
-        <span id="path--api-v0-feature-extraction--dsid--id-mapping"></span>
-            <div id="operation--api-v0-feature-extraction--dsid--id-mapping-post" class="swagger--panel-operation-post panel">
+        <span id="path--api-v0-feature-extraction--dsid--append"></span>
+            <div id="operation--api-v0-feature-extraction--dsid--append-post" class="swagger--panel-operation-post panel">
                 <div class="panel-heading">
                     <div class="operation-summary"></div>
-                    <h3 class="panel-title"><span class="operation-name">POST</span> <strong>/api/v0/feature-extraction/{dsid}/id-mapping</strong></h3>
+                    <h3 class="panel-title"><span class="operation-name">POST</span> <strong>/api/v0/feature-extraction/{dsid}/append</strong></h3>
                 </div>
                 <div class="panel-body">
                     <section class="sw-operation-description">
-                        <p>Compute correspondence between id fields for documents. At least one of the fields used for indexing must be provided,and all the rest will be computed (if available)</p>
-            
+                        <p>Add new documents to an existing processed dataset.
+                     This will also automatically update the LSI model if any
+                     is present. Raw documents on disk are not affected.</p>
+            <pre><code>     <span class="hljs-type">This</span> operation cannot be undone.<br><br>     <span class="hljs-type">Warning</span>: all categorization, clustering, duplicate detection <span class="hljs-keyword">and</span><br>     email threading models associated <span class="hljs-keyword">with</span> this dataset will be removed <span class="hljs-keyword">and</span><br>     need <span class="hljs-keyword">to</span> be re-trained.<br><br>     **<span class="hljs-type">Parameters</span>**<br>      - `dataset_definition`: [optional] a <span class="hljs-built_in">list</span> <span class="hljs-keyword">of</span> dictionaries `[{<span class="hljs-symbol">'file_path'</span>: &lt;str&gt;, <span class="hljs-symbol">'document_id'</span>: &lt;<span class="hljs-built_in">int</span>&gt;, <span class="hljs-symbol">'rendition_id'</span>: &lt;<span class="hljs-built_in">int</span>&gt;}, ...]` where  `rendition_id` are optional.
+            </code></pre>
                     </section>
                         
                             <section class="sw-request-body">
@@ -4758,8 +4783,8 @@
                                         
                                                 <section class="json-schema-properties">
                                                     <dl>
-                                                            <dt data-property-name="data">
-                                                                <span class="json-property-name">data:</span>
+                                                            <dt data-property-name="dataset_definition">
+                                                                <span class="json-property-name">dataset_definition:</span>
                                                                 
                                                                 <span class="json-property-type">object[]</span>
                                                                 <span class="json-property-range" title="Value limits"></span>
@@ -4805,21 +4830,8 @@
                                                                                                                         
                                                                                                                     </div>
                                                                                                                 </dd>
-                                                                                                                <dt data-property-name="internal_id">
-                                                                                                                    <span class="json-property-name">internal_id:</span>
-                                                                                                                    
-                                                                                                                    <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
-                                                                                                                    <span class="json-property-range" title="Value limits"></span>
-                                                                                                                    
-                                                                                                                </dt>
-                                                                                                                <dd>
-                                                                                                                    
-                                                                                                                    <div class="json-inner-schema">
-                                                                                                                        
-                                                                                                                    </div>
-                                                                                                                </dd>
-                                                                                                                <dt data-property-name="render_id">
-                                                                                                                    <span class="json-property-name">render_id:</span>
+                                                                                                                <dt data-property-name="rendition_id">
+                                                                                                                    <span class="json-property-name">rendition_id:</span>
                                                                                                                     
                                                                                                                     <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
                                                                                                                     <span class="json-property-range" title="Value limits"></span>
@@ -4893,13 +4905,357 @@
                                                             
                                                                     <section class="json-schema-properties">
                                                                         <dl>
+                                                                        </dl>
+                                                                    </section>
+                                                    </div>
+                                                </div></div>
+                                            
+                                            </div>                </dd>
+                            </dl>
+                        </section>
+                </div>
+            </div>    
+        <span id="path--api-v0-feature-extraction--dsid--delete"></span>
+            <div id="operation--api-v0-feature-extraction--dsid--delete-post" class="swagger--panel-operation-post panel">
+                <div class="panel-heading">
+                    <div class="operation-summary"></div>
+                    <h3 class="panel-title"><span class="operation-name">POST</span> <strong>/api/v0/feature-extraction/{dsid}/delete</strong></h3>
+                </div>
+                <div class="panel-body">
+                    <section class="sw-operation-description">
+                        <p>Remove documents from an existing processed dataset.
+                     This will also automatically update the LSI model if any
+                     is present.  Raw documents on disk are not affected.</p>
+            <pre><code>     <span class="hljs-type">This</span> operation cannot be undone.<br><br>     <span class="hljs-type">Warning</span>: all categorization, clustering, duplicate detection <span class="hljs-keyword">and</span><br>     email threading models associated <span class="hljs-keyword">with</span> this dataset will be removed <span class="hljs-keyword">and</span><br>     need <span class="hljs-keyword">to</span> be re-trained.<br><br>     **<span class="hljs-type">Parameters</span>**<br>      - `dataset_definition`: [optional] a <span class="hljs-built_in">list</span> <span class="hljs-keyword">of</span> dictionaries `[{<span class="hljs-symbol">'file_path'</span>: &lt;str&gt;, <span class="hljs-symbol">'document_id'</span>: &lt;<span class="hljs-built_in">int</span>&gt;, <span class="hljs-symbol">'rendition_id'</span>: &lt;<span class="hljs-built_in">int</span>&gt;}, ...]` where  `rendition_id` are optional.
+            </code></pre>
+                    </section>
+                        
+                            <section class="sw-request-body">
+                                
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <p></p>
+                                            </div>
+                                            <div class="col-md-6 sw-request-model">
+                            <div  class="panel panel-definition">
+                                <div class="panel-body">
+                                        
+                                                <section class="json-schema-properties">
+                                                    <dl>
+                                                            <dt data-property-name="dataset_definition">
+                                                                <span class="json-property-name">dataset_definition:</span>
+                                                                
+                                                                <span class="json-property-type">object[]</span>
+                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                
+                                                                    <span class="json-property-required"></span>
+                                                            </dt>
+                                                            <dd>
+                                                                
+                                                                <div class="json-inner-schema">
+                                                                    
+                                                                                    <section class="json-schema-array-items">
+                                                                                        
+                                                                                        <span class="json-property-type">object</span>
+                                                                                        <span class="json-property-range" title="Value limits"></span>
+                                                                                        
+                                                                                        <div class="json-inner-schema">
+                                                                                            
+                                                                                                    <section class="json-schema-properties">
+                                                                                                        <dl>
+                                                                                                                <dt data-property-name="document_id">
+                                                                                                                    <span class="json-property-name">document_id:</span>
+                                                                                                                    
+                                                                                                                    <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
+                                                                                                                    <span class="json-property-range" title="Value limits"></span>
+                                                                                                                    
+                                                                                                                </dt>
+                                                                                                                <dd>
+                                                                                                                    
+                                                                                                                    <div class="json-inner-schema">
+                                                                                                                        
+                                                                                                                    </div>
+                                                                                                                </dd>
+                                                                                                                <dt data-property-name="file_path">
+                                                                                                                    <span class="json-property-name">file_path:</span>
+                                                                                                                    
+                                                                                                                    <span class="json-property-type">string</span>
+                                                                                                                    <span class="json-property-range" title="Value limits"></span>
+                                                                                                                    
+                                                                                                                </dt>
+                                                                                                                <dd>
+                                                                                                                    
+                                                                                                                    <div class="json-inner-schema">
+                                                                                                                        
+                                                                                                                    </div>
+                                                                                                                </dd>
+                                                                                                                <dt data-property-name="rendition_id">
+                                                                                                                    <span class="json-property-name">rendition_id:</span>
+                                                                                                                    
+                                                                                                                    <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
+                                                                                                                    <span class="json-property-range" title="Value limits"></span>
+                                                                                                                    
+                                                                                                                </dt>
+                                                                                                                <dd>
+                                                                                                                    
+                                                                                                                    <div class="json-inner-schema">
+                                                                                                                        
+                                                                                                                    </div>
+                                                                                                                </dd>
+                                                                                                        </dl>
+                                                                                                    </section>
+                                                                                        </div>
+                                                                                    </section>                </div>
+                                                            </dd>
+                                                    </dl>
+                                                </section>
+                                </div>
+                            </div></div>
+                                        </div>
+                            </section>        
+                        <section class="sw-request-params">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="sw-param-name"></th>
+                                    <th class="sw-param-description"></th>
+                                    <th class="sw-param-type"></th>
+                                    <th class="sw-param-data-type"></th>
+                                    <th class="sw-param-annotation"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                        <tr>
+                                            <td>
+                                                dsid
+                                            <td></td>
+                                            <td>path</td>
+                                            <td>
+                                        <span class="json-property-type">string</span>
+                                        <span class="json-property-range" title="Value limits"></span>
+                                        
+                                            </td>
+                                            <td>
+                                                    <span class="json-property-required"></span>
+                                            </td>
+                                        </tr>
+                                </tbody>
+                            </table>
+                        </section>
+                    
+                        <section class="sw-responses">
+                    
+                            <dl>
+                                    <dt class="sw-response-default">
+                                        default 
+                                    
+                                    </dt>
+                                    <dd class="sw-response-default">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                
+                                                <div class="col-md-6 sw-response-model">
+                                                <div  class="panel panel-definition">
+                                                    <div class="panel-body">
+                                                            
+                                                                    <section class="json-schema-properties">
+                                                                        <dl>
+                                                                        </dl>
+                                                                    </section>
+                                                    </div>
+                                                </div></div>
+                                            
+                                            </div>                </dd>
+                            </dl>
+                        </section>
+                </div>
+            </div>    
+        <span id="path--api-v0-feature-extraction--dsid--id-mapping"></span>
+            <div id="operation--api-v0-feature-extraction--dsid--id-mapping-post" class="swagger--panel-operation-post panel">
+                <div class="panel-heading">
+                    <div class="operation-summary"></div>
+                    <h3 class="panel-title"><span class="operation-name">POST</span> <strong>/api/v0/feature-extraction/{dsid}/id-mapping</strong></h3>
+                </div>
+                <div class="panel-body">
+                    <section class="sw-operation-description">
+                        <p>Compute correspondence between id fields for documents. 
+                     At least one of the fields used for indexing must be provided,
+                     and all the rest will be computed (if available).
+                     If the data parameter is not provided, return all the correspondence table</p>
+            <pre><code>     **Parameters**<br>      - `data`: <span class="hljs-operator">the</span> ids <span class="hljs-operator">of</span> documents used <span class="hljs-keyword">as</span> <span class="hljs-operator">the</span> query<br>      - `return_file_path`: whether <span class="hljs-operator">the</span> results should <span class="hljs-built_in">include</span> <span class="hljs-operator">the</span> <span class="hljs-built_in">file</span> path
+            </code></pre>
+                    </section>
+                        
+                            <section class="sw-request-body">
+                                
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <p></p>
+                                            </div>
+                                            <div class="col-md-6 sw-request-model">
+                            <div  class="panel panel-definition">
+                                <div class="panel-body">
+                                        
+                                                <section class="json-schema-properties">
+                                                    <dl>
+                                                            <dt data-property-name="data">
+                                                                <span class="json-property-name">data:</span>
+                                                                
+                                                                <span class="json-property-type">object[]</span>
+                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                
+                                                            </dt>
+                                                            <dd>
+                                                                
+                                                                <div class="json-inner-schema">
+                                                                    
+                                                                                    <section class="json-schema-array-items">
+                                                                                        
+                                                                                        <span class="json-property-type">object</span>
+                                                                                        <span class="json-property-range" title="Value limits"></span>
+                                                                                        
+                                                                                        <div class="json-inner-schema">
+                                                                                            
+                                                                                                    <section class="json-schema-properties">
+                                                                                                        <dl>
+                                                                                                                <dt data-property-name="document_id">
+                                                                                                                    <span class="json-property-name">document_id:</span>
+                                                                                                                    
+                                                                                                                    <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
+                                                                                                                    <span class="json-property-range" title="Value limits"></span>
+                                                                                                                    
+                                                                                                                </dt>
+                                                                                                                <dd>
+                                                                                                                    
+                                                                                                                    <div class="json-inner-schema">
+                                                                                                                        
+                                                                                                                    </div>
+                                                                                                                </dd>
+                                                                                                                <dt data-property-name="file_path">
+                                                                                                                    <span class="json-property-name">file_path:</span>
+                                                                                                                    
+                                                                                                                    <span class="json-property-type">string</span>
+                                                                                                                    <span class="json-property-range" title="Value limits"></span>
+                                                                                                                    
+                                                                                                                </dt>
+                                                                                                                <dd>
+                                                                                                                    
+                                                                                                                    <div class="json-inner-schema">
+                                                                                                                        
+                                                                                                                    </div>
+                                                                                                                </dd>
+                                                                                                                <dt data-property-name="internal_id">
+                                                                                                                    <span class="json-property-name">internal_id:</span>
+                                                                                                                    
+                                                                                                                    <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
+                                                                                                                    <span class="json-property-range" title="Value limits"></span>
+                                                                                                                    
+                                                                                                                </dt>
+                                                                                                                <dd>
+                                                                                                                    
+                                                                                                                    <div class="json-inner-schema">
+                                                                                                                        
+                                                                                                                    </div>
+                                                                                                                </dd>
+                                                                                                                <dt data-property-name="render_id">
+                                                                                                                    <span class="json-property-name">render_id:</span>
+                                                                                                                    
+                                                                                                                    <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
+                                                                                                                    <span class="json-property-range" title="Value limits"></span>
+                                                                                                                    
+                                                                                                                </dt>
+                                                                                                                <dd>
+                                                                                                                    
+                                                                                                                    <div class="json-inner-schema">
+                                                                                                                        
+                                                                                                                    </div>
+                                                                                                                </dd>
+                                                                                                        </dl>
+                                                                                                    </section>
+                                                                                        </div>
+                                                                                    </section>                </div>
+                                                            </dd>
+                                                            <dt data-property-name="return_file_path">
+                                                                <span class="json-property-name">return_file_path:</span>
+                                                                
+                                                                <span class="json-property-type">boolean</span>
+                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                
+                                                                        <span class="json-property-default-value">true</span>
+                                                            </dt>
+                                                            <dd>
+                                                                
+                                                                <div class="json-inner-schema">
+                                                                    
+                                                                </div>
+                                                            </dd>
+                                                    </dl>
+                                                </section>
+                                </div>
+                            </div></div>
+                                        </div>
+                            </section>        
+                        <section class="sw-request-params">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="sw-param-name"></th>
+                                    <th class="sw-param-description"></th>
+                                    <th class="sw-param-type"></th>
+                                    <th class="sw-param-data-type"></th>
+                                    <th class="sw-param-annotation"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                        <tr>
+                                            <td>
+                                                dsid
+                                            <td></td>
+                                            <td>path</td>
+                                            <td>
+                                        <span class="json-property-type">string</span>
+                                        <span class="json-property-range" title="Value limits"></span>
+                                        
+                                            </td>
+                                            <td>
+                                                    <span class="json-property-required"></span>
+                                            </td>
+                                        </tr>
+                                </tbody>
+                            </table>
+                        </section>
+                    
+                        <section class="sw-responses">
+                    
+                            <dl>
+                                    <dt class="sw-response-default">
+                                        default 
+                                    
+                                    </dt>
+                                    <dd class="sw-response-default">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                
+                                                <div class="col-md-6 sw-response-model">
+                                                <div  class="panel panel-definition">
+                                                    <div class="panel-body">
+                                                            
+                                                                    <section class="json-schema-properties">
+                                                                        <dl>
                                                                                 <dt data-property-name="data">
                                                                                     <span class="json-property-name">data:</span>
                                                                                     
                                                                                     <span class="json-property-type">object[]</span>
                                                                                     <span class="json-property-range" title="Value limits"></span>
                                                                                     
-                                                                                        <span class="json-property-required"></span>
                                                                                 </dt>
                                                                                 <dd>
                                                                                     
@@ -6155,7 +6511,7 @@
             <li><code>parent_id</code> : the id of the previous processing step (either <code>dataset_id</code> or <code>lsi_id</code>)</li>
             <li><code>query</code> : the seach query. Either <code>query</code> or <code>query_document_id</code> must be provided.</li>
             <li><code>query_document_id</code> : the id of the document used as the search query. Either <code>query</code> or <code>query_document_id</code> must be provided.</li>
-            <li><code>nn_metric</code> : The similarity returned by nearest neighbor classifier in [&#39;cosine&#39;, &#39;jaccard&#39;, &#39;cosine_norm&#39;, &#39;jaccard_norm&#39;].</li>
+            <li><code>metric</code> : The similarity returned by nearest neighbor classifier in [&#39;cosine&#39;, &#39;jaccard&#39;].</li>
             <li><code>min_score</code> : filter out results below a similarity threashold</li>
             <li><code>max_results</code> : return only the first <code>max_results</code> documents. If <code>max_results &lt;= 0</code> all documents are returned.</li>
             <li><code>sort_by</code> : if provided and not None, the field used for sorting results. Valid values are [None, &#39;score&#39;]</li>
@@ -6218,13 +6574,13 @@
                                                                     
                                                                 </div>
                                                             </dd>
-                                                            <dt data-property-name="min_score">
-                                                                <span class="json-property-name">min_score:</span>
+                                                            <dt data-property-name="metric">
+                                                                <span class="json-property-name">metric:</span>
                                                                 
-                                                                <span class="json-property-type">number</span>
+                                                                <span class="json-property-type">string</span>
                                                                 <span class="json-property-range" title="Value limits"></span>
                                                                 
-                                                                        <span class="json-property-default-value">-1</span>
+                                                                        <span class="json-property-default-value">cosine</span>
                                                             </dt>
                                                             <dd>
                                                                 
@@ -6232,13 +6588,13 @@
                                                                     
                                                                 </div>
                                                             </dd>
-                                                            <dt data-property-name="nn_metric">
-                                                                <span class="json-property-name">nn_metric:</span>
+                                                            <dt data-property-name="min_score">
+                                                                <span class="json-property-name">min_score:</span>
                                                                 
-                                                                <span class="json-property-type">string</span>
+                                                                <span class="json-property-type">number</span>
                                                                 <span class="json-property-range" title="Value limits"></span>
                                                                 
-                                                                        <span class="json-property-default-value">jaccard_norm</span>
+                                                                        <span class="json-property-default-value">-1</span>
                                                             </dt>
                                                             <dd>
                                                                 

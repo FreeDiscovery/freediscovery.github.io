@@ -171,7 +171,7 @@
 <h1>freediscovery.pipeline.PipelineFinder<a class="headerlink" href="#freediscovery-pipeline-pipelinefinder" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="freediscovery.pipeline.PipelineFinder">
-<em class="property">class </em><code class="descclassname">freediscovery.pipeline.</code><code class="descname">PipelineFinder</code><span class="sig-paren">(</span><em>mid=None</em>, <em>cache_dir='/tmp/'</em>, <em>ingestion_method='vectorizer'</em>, <em>steps=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/04b190e/freediscovery/pipeline.py#L41"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.pipeline.PipelineFinder" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">freediscovery.pipeline.</code><code class="descname">PipelineFinder</code><span class="sig-paren">(</span><em>mid=None</em>, <em>cache_dir='/tmp/'</em>, <em>steps=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/43133f8/freediscovery/pipeline.py#L41"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.pipeline.PipelineFinder" title="Permalink to this definition">¶</a></dt>
 <dd><p>Walk through the hierarchy of existing models
 and find the processing pipeline that terminate with the
 model having the given uid</p>
@@ -182,8 +182,6 @@ model having the given uid</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>uid</strong> (<em>str</em>) &#8211; a unique model id</li>
 <li><strong>cache_dir</strong> (<em>str</em>) &#8211; folder where models are saved</li>
-<li><strong>ingestion_method</strong> (<em>str</em><em>, </em><em>default='vectorizer'</em>) &#8211; default ingestion method (one of [&#8216;vectorizer&#8217;, &#8216;parser&#8217;])
-unless email threading is used, this whould be set to &#8216;vectorizer&#8217;</li>
 </ul>
 </td>
 </tr>
@@ -198,7 +196,7 @@ and as values the model ids</p>
 </table>
 <dl class="method">
 <dt id="freediscovery.pipeline.PipelineFinder.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>mid=None</em>, <em>cache_dir='/tmp/'</em>, <em>ingestion_method='vectorizer'</em>, <em>steps=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/04b190e/freediscovery/pipeline.py#L63"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>mid=None</em>, <em>cache_dir='/tmp/'</em>, <em>steps=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/43133f8/freediscovery/pipeline.py#L60"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods</p>
@@ -208,10 +206,10 @@ and as values the model ids</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.pipeline.PipelineFinder.__init__" title="freediscovery.pipeline.PipelineFinder.__init__"><code class="xref py py-obj docutils literal"><span class="pre">__init__</span></code></a>([mid,&nbsp;cache_dir,&nbsp;ingestion_method,&nbsp;...])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.pipeline.PipelineFinder.__init__" title="freediscovery.pipeline.PipelineFinder.__init__"><code class="xref py py-obj docutils literal"><span class="pre">__init__</span></code></a>([mid,&nbsp;cache_dir,&nbsp;steps])</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#freediscovery.pipeline.PipelineFinder.by_id" title="freediscovery.pipeline.PipelineFinder.by_id"><code class="xref py py-obj docutils literal"><span class="pre">by_id</span></code></a>(mid[,&nbsp;cache_dir,&nbsp;ingestion_method])</td>
+<tr class="row-even"><td><a class="reference internal" href="#freediscovery.pipeline.PipelineFinder.by_id" title="freediscovery.pipeline.PipelineFinder.by_id"><code class="xref py py-obj docutils literal"><span class="pre">by_id</span></code></a>(mid[,&nbsp;cache_dir])</td>
 <td>Find a pipeline by id</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#freediscovery.pipeline.PipelineFinder.clear" title="freediscovery.pipeline.PipelineFinder.clear"><code class="xref py py-obj docutils literal"><span class="pre">clear</span></code></a>(()&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Remove&nbsp;all&nbsp;items&nbsp;from&nbsp;od.)</td>
@@ -272,7 +270,7 @@ and as values the model ids</p>
 </table>
 <dl class="classmethod">
 <dt id="freediscovery.pipeline.PipelineFinder.by_id">
-<em class="property">classmethod </em><code class="descname">by_id</code><span class="sig-paren">(</span><em>mid</em>, <em>cache_dir='/tmp/'</em>, <em>ingestion_method='vectorizer'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/04b190e/freediscovery/pipeline.py#L86"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.by_id" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">by_id</code><span class="sig-paren">(</span><em>mid</em>, <em>cache_dir='/tmp/'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/43133f8/freediscovery/pipeline.py#L81"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.by_id" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find a pipeline by id</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -281,8 +279,6 @@ and as values the model ids</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>mid</strong> (<em>str</em>) &#8211; a unique model id</li>
 <li><strong>cache_dir</strong> (<em>str</em>) &#8211; folder where models are saved</li>
-<li><strong>ingestion_method</strong> (<em>str</em><em>, </em><em>default='vectorizer'</em>) &#8211; default ingestion method (one of [&#8216;vectorizer&#8217;, &#8216;parser&#8217;])
-unless email threading is used, this whould be set to &#8216;vectorizer&#8217;</li>
 </ul>
 </td>
 </tr>
@@ -326,7 +322,7 @@ and as values the model ids</p>
 
 <dl class="method">
 <dt id="freediscovery.pipeline.PipelineFinder.get_path">
-<code class="descname">get_path</code><span class="sig-paren">(</span><em>mid=None</em>, <em>absolute=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/04b190e/freediscovery/pipeline.py#L181"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.get_path" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_path</code><span class="sig-paren">(</span><em>mid=None</em>, <em>absolute=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/43133f8/freediscovery/pipeline.py#L167"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.get_path" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find the path to the model specified by mid</p>
 </dd></dl>
 
@@ -386,7 +382,7 @@ is raised.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016 - 2017, Grossman Labs LLC.
-      Last updated on Apr 10, 2017.
+      Last updated on Apr 13, 2017.
 
     </p>
   </div>
