@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Installation Instructions &mdash; FreeDiscovery 0.9.0 documentation</title>
+  <title>Installation Instructions &mdash; FreeDiscovery 1.0.0.rc1 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="FreeDiscovery 0.9.0 documentation" href="index.html"/>
+    <link rel="top" title="FreeDiscovery 1.0.0.rc1 documentation" href="index.html"/>
         <link rel="next" title="REST API reference" href="rest_api.html"/>
         <link rel="prev" title="FreeDiscovery" href="index.html"/> 
 
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                0.9.0
+                1.0.0.rc1
               </div>
             
           
@@ -90,11 +90,7 @@
                 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installation Instructions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#downloading-freediscovery">1. Downloading FreeDiscovery</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#installing-the-dependencies">2. Installing the Dependencies</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#a-python-install">2.a. Python Install</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#b-docker-container">2.b. Docker Container</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-the-dependencies">2. Installing the Dependencies</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#starting-the-freediscovery-server">3. Starting the FreeDiscovery Server</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#on-linux-mac-os">3.1. On Linux/Mac OS</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#on-windows">3.2. On Windows</a></li>
@@ -146,7 +142,9 @@
     <li class="wy-breadcrumbs-aside">
       
           
-          <a href="_sources/installation_instructions.md.txt" rel="nofollow"> View page source</a>
+          
+            <a href="https://github.com/FreeDiscovery/FreeDiscovery/blob/master/doc/installation_instructions.md" class="fa fa-github"> Edit on GitHub</a>
+          
         
       
     </li>
@@ -158,27 +156,22 @@
             
   <div class="section" id="installation-instructions">
 <span id="installation-instructions"></span><h1>Installation Instructions<a class="headerlink" href="#installation-instructions" title="Permalink to this headline">¶</a></h1>
-<p>There are two ways of installing FreeDiscovery,</p>
-<ol class="simple">
-<li>An installation into a Python virtual environment (recommended for development and testing)</li>
-<li>Using a Docker container (recommended in production)</li>
-</ol>
 <div class="section" id="downloading-freediscovery">
 <span id="downloading-freediscovery"></span><h2>1. Downloading FreeDiscovery<a class="headerlink" href="#downloading-freediscovery" title="Permalink to this headline">¶</a></h2>
 <p>The latest development version of FreeDiscovery can be obtained from <a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery">Github</a> with,</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">FreeDiscovery</span><span class="o">/</span><span class="n">FreeDiscovery</span><span class="o">.</span><span class="n">git</span>
 </pre></div>
 </div>
-<p>or by downloading the latest stable version from the <a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/releases">Github releases page</a>.</p>
+<p>It is recommended to use the latest stable version with,</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">checkout</span> <span class="n">v1</span><span class="o">.</span><span class="mf">0.0</span><span class="o">-</span><span class="n">rc1</span>
+</pre></div>
+</div>
+<p>Althernaitively, the latest stable version can be donwloaded from the <a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/releases">Github releases page</a>.</p>
 </div>
 <div class="section" id="installing-the-dependencies">
 <span id="installing-the-dependencies"></span><h2>2. Installing the Dependencies<a class="headerlink" href="#installing-the-dependencies" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="a-python-install">
-<span id="a-python-install"></span><h3>2.a. Python Install<a class="headerlink" href="#a-python-install" title="Permalink to this headline">¶</a></h3>
 <ol>
 <li><p class="first">Download and install <a class="reference external" href="http://conda.pydata.org/miniconda.html">Miniconda</a> 64 bit for Python 3.5 (a cross-platform package manager for Python &amp; R)</p>
-</li>
-<li><p class="first">To install the optional simhash-py dependency, a g++ (GCC &gt;= 4.8) compiler is required on Linux (on Windows it is not installed).</p>
 </li>
 <li><p class="first">A virtual environment with all the dependencies can be setup with the following commands,</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>  <span class="n">cd</span> <span class="n">FreeDiscovery</span>
@@ -186,10 +179,10 @@
   <span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">freediscovery</span><span class="o">-</span><span class="n">env</span> <span class="o">--</span><span class="n">file</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span> <span class="n">python</span><span class="o">=</span><span class="mf">3.6</span>
 
   <span class="n">source</span> <span class="n">activate</span> <span class="n">freediscovery</span><span class="o">-</span><span class="n">env</span>   <span class="c1"># on Linux/Mac OS X</span>
-  <span class="c1"># or &quot;activate freediscovery-env&quot;   # on Windows </span>
+  <span class="c1"># Note: on Windows the above command is &quot;activate freediscovery-env&quot;</span>
 
-  <span class="c1"># (optional, Linux only) requires g++ compiler</span>
-  <span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">build_tools</span><span class="o">/</span><span class="n">requirements_pip_comp</span><span class="o">.</span><span class="n">txt</span> 
+  <span class="c1"># (optional dependencies, Linux only) </span>
+  <span class="n">conda</span> <span class="n">install</span> <span class="n">simhash</span><span class="o">-</span><span class="n">py</span>
 
   <span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">develop</span>
 </pre></div>
@@ -201,40 +194,8 @@
 </div>
 </li>
 </ol>
-<p><strong>Note</strong>: for convenience, running steps 2 and 3 can be automated:</p>
-<ul>
-<li><p class="first">on Linux and Mac OS X:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">bash</span> <span class="n">build_tools</span><span class="o">/</span><span class="n">conda_setup</span><span class="o">.</span><span class="n">sh</span>
-</pre></div>
-</div>
-</li>
-<li><p class="first">on Windows by double-clicking on <code class="docutils literal"><span class="pre">build_tools/conda_setup.bat</span></code> in files explorer, or running,</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">cd</span> <span class="n">build_tools</span>
-    <span class="n">conda_setup</span><span class="o">.</span><span class="n">bat</span>
-</pre></div>
-</div>
-</li>
-</ul>
-<p><strong>Note 2</strong>: is recommended to use conda in a virtual environment for reproducibility. However, it is also possible to use system Python (3.5 or 3.6), and install the list of dependencies (split between <code class="docutils literal"><span class="pre">requirements.txt</span></code> and <code class="docutils literal"><span class="pre">scripts/requirements_pip*.txt</span></code> under <code class="docutils literal"><span class="pre">build_tools/</span></code>) with <code class="docutils literal"><span class="pre">pip</span></code>.</p>
-</div>
-<div class="section" id="b-docker-container">
-<span id="b-docker-container"></span><h3>2.b. Docker Container<a class="headerlink" href="#b-docker-container" title="Permalink to this headline">¶</a></h3>
-<ol>
-<li><p class="first">Download and <a class="reference external" href="https://docs.docker.com/engine/installation/">install Docker</a></p>
-</li>
-<li><p class="first">Download the pre-build container images (requires authentication),</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span> <span class="n">docker</span> <span class="n">pull</span> <span class="s2">&quot;freediscovery/freediscovery:&lt;version&gt;&quot;</span>
-</pre></div>
-</div>
-<p>or build the container locally,</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span> <span class="n">cd</span> <span class="n">FreeDiscovery</span>
- <span class="n">docker</span> <span class="n">build</span> <span class="o">-</span><span class="n">t</span> <span class="s2">&quot;freediscovery/freediscovery:&lt;version&gt;&quot;</span> <span class="o">.</span>     
-</pre></div>
-</div>
-<p>where <code class="docutils literal"><span class="pre">&lt;version&gt;</span></code> is the stable version <code class="docutils literal"><span class="pre">0.7</span></code> or latest development version with the tag <code class="docutils literal"><span class="pre">latest</span></code>.</p>
-</li>
-</ol>
-</div>
+<p><strong>Note 1</strong>: all of the above commands (except the installation of the compiler) should be run without <code class="docutils literal"><span class="pre">sudo</span></code> and with regular user permissions.</p>
+<p><strong>Note 2</strong>: is recommended to use conda in a virtual environment for reproducibility. However, it is also possible to use system Python (3.5 or 3.6), and install the list of dependencies manually.</p>
 </div>
 <div class="section" id="starting-the-freediscovery-server">
 <span id="starting-the-freediscovery-server"></span><h2>3. Starting the FreeDiscovery Server<a class="headerlink" href="#starting-the-freediscovery-server" title="Permalink to this headline">¶</a></h2>
@@ -244,11 +205,6 @@
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">bash</span> <span class="n">conda_run</span><span class="o">.</span><span class="n">sh</span>
 </pre></div>
 </div>
-<p>for the Python install, or with</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">bash</span> <span class="n">docker_run</span><span class="o">.</span><span class="n">sh</span> <span class="n">freediscovery</span><span class="o">/</span><span class="n">freediscovery</span><span class="p">:</span><span class="o">&lt;</span><span class="n">version</span><span class="o">&gt;</span>
-</pre></div>
-</div>
-<p>for the docker container, respectively. The repository shared with the Docker container (used to ingest the data) is <code class="docutils literal"><span class="pre">../freediscovery_shared</span></code>.</p>
 </div>
 <div class="section" id="on-windows">
 <span id="on-windows"></span><h3>3.2. On Windows<a class="headerlink" href="#on-windows" title="Permalink to this headline">¶</a></h3>
@@ -260,11 +216,6 @@
 <div class="highlight-default"><div class="highlight"><pre><span></span> <span class="n">python</span> <span class="n">scripts</span>\<span class="n">run_api</span><span class="o">.</span><span class="n">py</span> <span class="o">..</span>\<span class="n">freediscovery_shared</span> 
 </pre></div>
 </div>
-<p>for the Python install, or with,</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span> <span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">t</span> <span class="o">-</span><span class="n">i</span> <span class="o">-</span><span class="n">v</span> <span class="o">/&lt;</span><span class="n">absolute</span><span class="o">-</span><span class="n">path</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">the</span><span class="o">-</span><span class="n">foder</span><span class="o">-</span><span class="k">with</span><span class="o">-</span><span class="n">data</span><span class="o">&gt;</span><span class="p">:</span><span class="o">/</span><span class="n">freediscovery_shared</span> <span class="o">-</span><span class="n">p</span> <span class="mi">5001</span><span class="p">:</span><span class="mi">5001</span> <span class="n">freediscovery</span><span class="o">/</span><span class="n">freediscovery</span><span class="p">:</span><span class="o">&lt;</span><span class="n">version</span><span class="o">&gt;</span>
-</pre></div>
-</div>
-<p>for the docker install.</p>
 </li>
 </ol>
 </div>
@@ -291,7 +242,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016 - 2017, Grossman Labs LLC.
-      Last updated on Mar 02, 2017.
+      Last updated on Apr 13, 2017.
 
     </p>
   </div>
@@ -313,7 +264,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.9.0',
+            VERSION:'1.0.0.rc1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>freediscovery.cluster.ClusterLabels &mdash; FreeDiscovery 0.9.0 documentation</title>
+  <title>freediscovery.cluster.ClusterLabels &mdash; FreeDiscovery 0.9.3 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="FreeDiscovery 0.9.0 documentation" href="../index.html"/>
+    <link rel="top" title="FreeDiscovery 0.9.3 documentation" href="../index.html"/>
         <link rel="up" title="Python API Reference" href="../python_api.html"/>
         <link rel="next" title="freediscovery.cluster._DendrogramChildren" href="freediscovery.cluster._DendrogramChildren.html"/>
         <link rel="prev" title="freediscovery.cluster._ClusteringWrapper" href="freediscovery.cluster._ClusteringWrapper.html"/> 
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                0.9.0
+                0.9.3
               </div>
             
           
@@ -157,7 +157,9 @@
     <li class="wy-breadcrumbs-aside">
       
           
-          <a href="../_sources/generated/freediscovery.cluster.ClusterLabels.rst.txt" rel="nofollow"> View page source</a>
+          
+            <a href="https://github.com/FreeDiscovery/FreeDiscovery/blob/master/doc/generated/freediscovery.cluster.ClusterLabels.rst" class="fa fa-github"> Edit on GitHub</a>
+          
         
       
     </li>
@@ -171,7 +173,7 @@
 <h1>freediscovery.cluster.ClusterLabels<a class="headerlink" href="#freediscovery-cluster-clusterlabels" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="freediscovery.cluster.ClusterLabels">
-<em class="property">class </em><code class="descclassname">freediscovery.cluster.</code><code class="descname">ClusterLabels</code><span class="sig-paren">(</span><em>vect</em>, <em>model</em>, <em>pars</em>, <em>lsi=None</em>, <em>cluster_indices=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/8f86d2b/freediscovery/cluster/base.py#L52"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.ClusterLabels" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">freediscovery.cluster.</code><code class="descname">ClusterLabels</code><span class="sig-paren">(</span><em>vect</em>, <em>model</em>, <em>lsi=None</em>, <em>method='centroid-frequency'</em>, <em>n_top_words=6</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/518b95c/freediscovery/cluster/base.py#L55"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.ClusterLabels" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the cluster labels.</p>
 <p>This is an internal class that is called by Clustering</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -181,10 +183,10 @@
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>vect</strong> (<em>VectorizerMixin object</em>) &#8211; a scikit-learn&#8217;s text vectorizer</li>
 <li><strong>model</strong> (<em>ClusterMixin object</em>) &#8211; the cluster object</li>
-<li><strong>pars</strong> (<em>dict</em>) &#8211; clustering algorithms parameters</li>
 <li><strong>lsi_components</strong> (<em>TruncatedSVD object</em><em> or </em><em>None</em>) &#8211; LSA object if it was used for clustering</li>
-<li><strong>cluster_indices</strong> (<em>list</em><em>, </em><em>default=None</em>) &#8211; if not None, ignore clustering given by the clustering model and compute
-terms for the cluster provided by the given indices</li>
+<li><strong>method</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default='centroid-frequency'</em>) &#8211; the method used to compute the centroid labels
+Only &#8216;centroid-frequency&#8217; is supported at the moment.</li>
+<li><strong>n_top_words</strong> (<em>int</em><em>, </em><em>default=10</em>) &#8211; keep only most relevant n_top_words words</li>
 </ul>
 </td>
 </tr>
@@ -192,7 +194,7 @@ terms for the cluster provided by the given indices</li>
 </table>
 <dl class="method">
 <dt id="freediscovery.cluster.ClusterLabels.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>vect</em>, <em>model</em>, <em>pars</em>, <em>lsi=None</em>, <em>cluster_indices=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/8f86d2b/freediscovery/cluster/base.py#L71"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.ClusterLabels.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>vect</em>, <em>model</em>, <em>lsi=None</em>, <em>method='centroid-frequency'</em>, <em>n_top_words=6</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/518b95c/freediscovery/cluster/base.py#L74"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.ClusterLabels.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods</p>
@@ -202,34 +204,28 @@ terms for the cluster provided by the given indices</li>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.cluster.ClusterLabels.__init__" title="freediscovery.cluster.ClusterLabels.__init__"><code class="xref py py-obj docutils literal"><span class="pre">__init__</span></code></a>(vect,&nbsp;model,&nbsp;pars[,&nbsp;lsi,&nbsp;...])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.cluster.ClusterLabels.__init__" title="freediscovery.cluster.ClusterLabels.__init__"><code class="xref py py-obj docutils literal"><span class="pre">__init__</span></code></a>(vect,&nbsp;model[,&nbsp;lsi,&nbsp;method,&nbsp;n_top_words])</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#freediscovery.cluster.ClusterLabels.predict" title="freediscovery.cluster.ClusterLabels.predict"><code class="xref py py-obj docutils literal"><span class="pre">predict</span></code></a>([method,&nbsp;n_top_words])</td>
+<tr class="row-even"><td><a class="reference internal" href="#freediscovery.cluster.ClusterLabels.predict" title="freediscovery.cluster.ClusterLabels.predict"><code class="xref py py-obj docutils literal"><span class="pre">predict</span></code></a>([centroids])</td>
 <td>Compute the cluster labels</td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
 <dt id="freediscovery.cluster.ClusterLabels.predict">
-<code class="descname">predict</code><span class="sig-paren">(</span><em>method='centroid-frequency'</em>, <em>n_top_words=6</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/8f86d2b/freediscovery/cluster/base.py#L101"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.ClusterLabels.predict" title="Permalink to this definition">¶</a></dt>
+<code class="descname">predict</code><span class="sig-paren">(</span><em>centroids=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/518b95c/freediscovery/cluster/base.py#L99"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.ClusterLabels.predict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the cluster labels</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>method</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default='centroid-frequency'</em>) &#8211; the method used to compute the centroid labels
-Must be one of &#8216;centroid-frequency&#8217;,</li>
-<li><strong>n_top_words</strong> (<em>int</em><em>, </em><em>default=10</em>) &#8211; keep only most relevant n_top_words words</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>centroids</strong> (<em>list</em><em>, </em><em>default=None</em>) &#8211; if not None, ignore clustering given by the clustering model and
+compute labels for the given cluster centroids</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>cluster_labels</strong></p>
-</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>cluster_labels</strong></td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">array [n_samples]</p>
-</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array [n_samples]</td>
 </tr>
 </tbody>
 </table>
@@ -259,7 +255,7 @@ Must be one of &#8216;centroid-frequency&#8217;,</li>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016 - 2017, Grossman Labs LLC.
-      Last updated on Mar 01, 2017.
+      Last updated on Apr 03, 2017.
 
     </p>
   </div>
@@ -281,7 +277,7 @@ Must be one of &#8216;centroid-frequency&#8217;,</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.9.0',
+            VERSION:'0.9.3',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

@@ -22,13 +22,13 @@ Cluster documents into clusters
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received ['filenames', 'id']
-       => dsid = 95c79145c76b4258
+       => dsid = 65ba071fca194903
 
     1.b Run feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/95c79145c76b4258
+     POST http://localhost:5001/api/v0/feature-extraction/65ba071fca194903
 
     1.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/95c79145c76b4258
+     GET http://localhost:5001/api/v0/feature-extraction/65ba071fca194903
          - analyzer: word
          - binary: False
          - chunk_size: 5000
@@ -40,7 +40,8 @@ Cluster documents into clusters
          - n_samples: 2465
          - n_samples_processed: 2465
          - ngram_range: [1, 1]
-         - norm: None
+         - norm: l2
+         - parse_email_headers: False
          - stop_words: None
          - sublinear_tf: True
          - use_hashing: False
@@ -48,38 +49,46 @@ Cluster documents into clusters
 
     2. Calculate LSI
     POST http://localhost:5001/api/v0/lsi/
-      => LSI model id = 25d1197ee0864b0d
-      => SVD decomposition with 100 dimensions explaining 99.76 % variabilty of the data
+      => LSI model id = d3576544b5824466
+      => SVD decomposition with 100 dimensions explaining 53.28 % variabilty of the data
 
     3.a. Document clustering (LSI + K-means)
      POST http://localhost:5001/api/v0/clustering/k-mean/
-         => model id = 9d824a57fc504fa5
+         => model id = 38979422eec64bb0
 
     3.b. Computing cluster labels
-     GET http://localhost:5001/api/v0/clustering/k-mean/9d824a57fc504fa5
-        .. computed in 1.7s
-       cluster_id                        cluster_label  cluster_similarity  n_documents
-    0           0                     enron jones tana               0.526          271
-    1           1            shackleton marcelo brazil               0.655          400
-    2           2                     tana jones enron               0.593          223
-    3           3  enron_development shackleton hendry               0.640           53
-    4           4              ruppert nemec gillaspie               0.751           98
-    5           5                     hou enron letter               0.318          560
-    6           6                   enron training net               0.724          520
-    7           7               teneo group recipients               0.708          189
-    8           8               rewrite server address               1.000           56
-    9           9                   ect lon newsticker               0.638           95
+     GET http://localhost:5001/api/v0/clustering/k-mean/38979422eec64bb0
+        .. computed in 1.0s
+       cluster_id                   cluster_label  cluster_similarity  cluster_size  n_documents
+    0           0  test recipients administrative               0.416           124          124
+    1           1          migration outlook team               0.582            80           80
+    2           2   nemec enron enron_development               0.240           322          322
+    3           3          rewrite server address               1.000            56           56
+    4           4               meeting mon tenet               0.290           239          239
+    5           5        transaction party eb3325               0.181           512          512
+    6           6    dasovich lessee transmission               0.352           245          245
+    7           7            sanders haedicke nov               0.438           140          140
+    8           8             shackleton fri load               0.207           396          396
+    9           9                   ect wed tenet               0.245           351          351
 
     4.a. Document clustering (LSI + Birch clustering)
-     POST http://localhost:5001/api/v0/clustering/ward_hc/
-         => model id = e7fb2c96a39f4105
+     POST http://localhost:5001/api/v0/clustering/birch/
+         => model id = e2985858f6c04542
 
     4.b. Computing cluster labels
-     GET http://localhost:5001/api/v0/clustering/birch/e7fb2c96a39f4105
-        .. computed in 2.7s
+     GET http://localhost:5001/api/v0/clustering/birch/e2985858f6c04542
+        .. computed in 0.5s
+      children  cluster_depth  cluster_id cluster_label  cluster_similarity  cluster_size  n_documents
+    0       []              0           0  test ect oct               0.109          2465         2465
+
+    4.a. Optimal sampling (LSI + Birch clustering)
+     GET http://localhost:5001/api/v0/clustering/birch/e2985858f6c04542
+        .. computed in 0.0s
+       cluster_id  cluster_similarity  cluster_size                                          documents
+    0           0               0.109          2465  [{'document_id': 585225, 'similarity': 0.10921...
 
     5. Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/95c79145c76b4258
+     DELETE http://localhost:5001/api/v0/feature-extraction/65ba071fca194903
 
 
 
@@ -196,13 +205,14 @@ Cluster documents into clusters
 
     print("\n4.a. Document clustering (LSI + Birch clustering)")
 
-    url = BASE_URL + '/clustering/ward_hc/'
+    url = BASE_URL + '/clustering/birch/'
     print(" POST", url)
     t0 = time()
     res = requests.post(url,
                         json={'parent_id': lsi_id,
-                              'n_clusters': 10,
-                              'min_similarity': 0.7
+                              'n_clusters': -1,
+                              #'min_similarity': 0.95,
+                              'branching_factor': 20 
                               }).json()
 
     mid = res['id']
@@ -212,7 +222,7 @@ Cluster documents into clusters
     url = BASE_URL + '/clustering/birch/{}'.format(mid)
     print(" GET", url)
     res = requests.get(url,
-                       json={'n_top_words': 6
+                       json={'n_top_words': 3
                              }).json()
     t1 = time()
 
@@ -221,6 +231,24 @@ Cluster documents into clusters
     for row in data:
         row['n_documents'] = len(row.pop('documents'))
 
+    print(pd.DataFrame(data))
+
+    # # 4. Optimal sampling (LSI + Birch Clustering)
+
+    print("\n4.a. Optimal sampling (LSI + Birch clustering)")
+
+    t0 = time()
+    url = BASE_URL + '/clustering/birch/{}'.format(mid)
+    print(" GET", url)
+    res = requests.get(url,
+                       json={'return_optimal_sampling': True,
+                             'sampling_min_coverage': 0.9
+                             }).json()
+    t1 = time()
+    print('    .. computed in {:.1f}s'.format(t1 - t0))
+    data = res['data']
+
+    print(pd.DataFrame(data))
 
     # 4. Cleaning
     print("\n5. Delete the extracted features")
@@ -228,7 +256,7 @@ Cluster documents into clusters
     print(" DELETE", url)
     requests.delete(url)
 
-**Total running time of the script:** ( 0 minutes  9.300 seconds)
+**Total running time of the script:** ( 0 minutes  5.299 seconds)
 
 
 

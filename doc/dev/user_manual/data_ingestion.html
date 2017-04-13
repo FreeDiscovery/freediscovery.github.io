@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Data ingestion &mdash; FreeDiscovery 0.9.0 documentation</title>
+  <title>Data ingestion &mdash; FreeDiscovery 1.0.0.rc1 documentation</title>
   
 
   
@@ -35,9 +35,9 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="FreeDiscovery 0.9.0 documentation" href="../index.html"/>
+    <link rel="top" title="FreeDiscovery 1.0.0.rc1 documentation" href="../index.html"/>
         <link rel="up" title="User Manual" href="index.html"/>
-        <link rel="next" title="Scaling Benchmarks" href="scaling_benchmarks.html"/>
+        <link rel="next" title="Document similarity" href="document_similarity.html"/>
         <link rel="prev" title="User Manual" href="index.html"/> 
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                0.9.0
+                1.0.0.rc1
               </div>
             
           
@@ -100,7 +100,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#example-datasets">Example datasets</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="document_similarity.html">Document similarity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scaling_benchmarks.html">Scaling Benchmarks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker.html">Docker setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment options</a></li>
 </ul>
 </li>
@@ -146,7 +148,9 @@
     <li class="wy-breadcrumbs-aside">
       
           
-          <a href="../_sources/user_manual/data_ingestion.md.txt" rel="nofollow"> View page source</a>
+          
+            <a href="https://github.com/FreeDiscovery/FreeDiscovery/blob/master/doc/user_manual/data_ingestion.md" class="fa fa-github"> Edit on GitHub</a>
+          
         
       
     </li>
@@ -168,15 +172,15 @@
 <span id="document-indexing"></span><h2>Document indexing<a class="headerlink" href="#document-indexing" title="Permalink to this headline">¶</a></h2>
 <p>Each document in the collection is given a unique numerical <code class="docutils literal"><span class="pre">internal_id</span></code> that is used to identify documents internally. This field is however not exposed by the REST API. Instead, the following fields can also be used for indexing,</p>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">file_path</span></code>: the path to the file relative to the <code class="docutils literal"><span class="pre">data_dir</span></code>. Note that when FreeDiscovery is provided with a list of <code class="docutils literal"><span class="pre">file_path</span></code>, the <code class="docutils literal"><span class="pre">data_dir</span></code> will be recomputed as the longest common path (and <code class="docutils literal"><span class="pre">file_path</span></code> will be changed accordingly).</li>
-<li><code class="docutils literal"><span class="pre">document_id</span></code>: an external numeric document id provided in the <code class="docutils literal"><span class="pre">POST</span> <span class="pre">/api/v0/feature-extraction/&lt;id&gt;</span></code> step</li>
-<li><code class="docutils literal"><span class="pre">document_id</span></code> together with a <code class="docutils literal"><span class="pre">rendition_id</span></code>, where the latter is also provided in the <code class="docutils literal"><span class="pre">POST</span> <span class="pre">/api/v0/feature-extraction/&lt;id&gt;</span></code> processing step</li>
+<li><code class="docutils literal"><span class="pre">file_path</span></code>: the absolute path to the file. Note that when FreeDiscovery is provided with a list of <code class="docutils literal"><span class="pre">file_path</span></code>, the <code class="docutils literal"><span class="pre">data_dir</span></code> will be recomputed as the longest common path.</li>
+<li><code class="docutils literal"><span class="pre">document_id</span></code>: an external numeric document id provided in the <code class="docutils literal"><span class="pre">POST</span> <span class="pre">/api/v0/feature-extraction/&lt;dataset-id&gt;</span></code> step</li>
+<li><code class="docutils literal"><span class="pre">document_id</span></code> together with a <code class="docutils literal"><span class="pre">rendition_id</span></code>, where the latter is also provided in the <code class="docutils literal"><span class="pre">POST</span> <span class="pre">/api/v0/feature-extraction/&lt;dataset-id&gt;</span></code> processing step</li>
 </ul>
-<p>To use a field (or a group of fields) as a index, it must be unique, meaning that duplicates are not supported. The only field that is unique by construction is <code class="docutils literal"><span class="pre">internal_id</span></code>, all the rest being user provided. Additional information regarding data ingestion and indexing can be found in the <a class="reference external" href="`../examples/REST_data_ingestion.html"><code class="docutils literal"><span class="pre">REST_data_ingestion</span></code></a> example. The main API endpoints that allow mapping between different fields are,</p>
+<p>To use a field (or a group of fields) as a index, it must be unique, meaning that duplicates are not supported. The only field that is unique by construction is <code class="docutils literal"><span class="pre">internal_id</span></code>, all the rest being user provided. Additional information regarding data ingestion and indexing can be found in the <a class="reference external" href="`../examples/REST_data_ingestion.html"><code class="docutils literal"><span class="pre">REST_data_ingestion</span></code></a> example. The mapping between different index fields is provided by</p>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/api/v0/feature-extraction/&lt;id&gt;/id-mapping/nested</span></code>
-the training of the categorization model also uses a similar mechanism to identify training set documents.</li>
+<li><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/api/v0/feature-extraction/&lt;id&gt;/id-mapping/nested</span></code></li>
 </ul>
+<p>The training of the categorization model also uses a similar mechanism to identify training set documents.</p>
 <p><strong>Note:</strong> the different fields above can always be associated to the processed documents, however attempting to index (e.g. select) a subset of documents using a field (or a group of fields) with duplicates will result in an error.</p>
 </div>
 <div class="section" id="example-datasets">
@@ -196,7 +200,7 @@ the training of the categorization model also uses a similar mechanism to identi
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="scaling_benchmarks.html" class="btn btn-neutral float-right" title="Scaling Benchmarks" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="document_similarity.html" class="btn btn-neutral float-right" title="Document similarity" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="index.html" class="btn btn-neutral" title="User Manual" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -209,7 +213,7 @@ the training of the categorization model also uses a similar mechanism to identi
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016 - 2017, Grossman Labs LLC.
-      Last updated on Mar 02, 2017.
+      Last updated on Apr 13, 2017.
 
     </p>
   </div>
@@ -231,7 +235,7 @@ the training of the categorization model also uses a similar mechanism to identi
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.9.0',
+            VERSION:'1.0.0.rc1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
