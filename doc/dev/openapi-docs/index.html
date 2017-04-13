@@ -1015,7 +1015,7 @@
             <li><code>sort_order</code>: the sort order (if applicable), one of [&#39;ascending&#39;, &#39;descending&#39;]</li>
             <li><code>max_results</code> : return only the first <code>max_results</code> documents. If <code>max_results &lt;= 0</code> all documents are returned.</li>
             <li><code>ml_output</code> : type of the output in [&#39;decision_function&#39;, &#39;probability&#39;], only affects ML methods.</li>
-            <li><code>metric</code> : The similarity returned by nearest neighbor classifier in [&#39;cosine&#39;, &#39;jaccard&#39;].</li>
+            <li><code>metric</code> : The similarity returned by nearest neighbor classifier in [&#39;cosine&#39;, &#39;jaccard&#39;, &#39;cosine-positive&#39;].</li>
             <li><code>min_score</code> : filter out results below a similarity threashold</li>
             <li><code>subset</code>: apply prediction to a document subset. Must be one of [&#39;all&#39;, &#39;train&#39;, &#39;test&#39;]. Default: &#39;test&#39;.</li>
             <li><code>batch_id</code>: retrieve a given subset of scores (-1 to retrieve all). Default: 0</li>
@@ -1452,14 +1452,14 @@
                 <div class="panel-body">
                     <section class="sw-operation-description">
                         <p>Compute birch clustering</p>
-            <p>The option <code>use_hashing=False</code> must be set for the feature extraction. Recommended options for data ingestion also include, <code>use_idf=1, sublinear_tf=0, binary=0</code>.</p>
+            <p>The option <code>use_hashing=False</code> must be set for the feature extraction. Recommended options for data ingestion also include, <code>use_idf=0, sublinear_tf=1, binary=0</code>.</p>
             <p><strong>Parameters</strong></p>
             <ul>
             <li><code>parent_id</code>: <code>dataset_id</code> or <code>lsi_id</code></li>
             <li><code>n_clusters</code>: the number of clusters or -1 to use hierarchical clustering (default: -1)</li>
             <li><code>min_similarity</code>: The radius of the subcluster obtained by merging a new sample and the closest subcluster should be lesser than the threshold. Otherwise a new subcluster is started. See <a href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.Birch.html">sklearn.cluster.Birch</a>. Increasing this value would increase the hierarchical tree depth (and the number of clusters).</li>
             <li><code>branching_factor</code>: Maximum number of CF subclusters in each node. If a new samples enters such that the number of subclusters exceed the branching_factor then the node has to be split. The corresponding parent also has to be split and if the number of subclusters in the parent is greater than the branching factor, then it has to be split recursively. Decreasing this value would increase the number of clusters.</li>
-            <li><code>metric</code> : The similarity returned by nearest neighbor classifier in [&#39;cosine&#39;, &#39;jaccard&#39;].</li>
+            <li><code>metric</code> : The similarity returned by nearest neighbor classifier in [&#39;cosine&#39;, &#39;jaccard&#39;, &#39;cosine-positive&#39;].</li>
             </ul>
             
                     </section>
@@ -1607,12 +1607,12 @@
                 <div class="panel-body">
                     <section class="sw-operation-description">
                         <p>Compute clustering (DBSCAN)</p>
-            <p>The option <code>use_hashing=False</code> must be set for the feature extraction. Recommended options for the data ingestion also include, <code>use_idf=1, sublinear_tf=0, binary=0</code>.</p>
+            <p>The option <code>use_hashing=False</code> must be set for the feature extraction. Recommended options for the data ingestion also include, <code>use_idf=0, sublinear_tf=1, binary=0</code>.</p>
             <p><strong>Parameters</strong></p>
             <ul>
             <li><code>parent_id</code>: <code>dataset_id</code> or <code>lsi_id</code></li>
             <li><code>min_similarity</code>: The radius of the subcluster obtained by merging a new sample and the closest subcluster should be lesser than the threshold. Otherwise a new subcluster is started. See <a href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.Birch.html">sklearn.cluster.Birch</a></li>
-            <li><code>metric</code> : The similarity returned by nearest neighbor classifier in [&#39;cosine&#39;, &#39;jaccard&#39;].</li>
+            <li><code>metric</code> : The similarity returned by nearest neighbor classifier in [&#39;cosine&#39;, &#39;jaccard&#39;, &#39;cosine-positive&#39;].</li>
             <li><code>min_samples</code>: (optional) int The number of samples (or total weight) in a neighborhood for a point to be considered as a core point. This includes the point itself.</li>
             </ul>
             
@@ -1747,7 +1747,7 @@
                 <div class="panel-body">
                     <section class="sw-operation-description">
                         <p>Compute K-mean clustering</p>
-            <p>The option <code>use_hashing=False</code> must be set for the feature extraction. Recommended options for feature extraction include, <code>use_idf=1, sublinear_tf=0, binary=0</code>.</p>
+            <p>The option <code>use_hashing=False</code> must be set for the feature extraction. Recommended options for feature extraction include, <code>use_idf=0, sublinear_tf=1, binary=0</code>.</p>
             <p><strong>Parameters</strong></p>
             <ul>
             <li><code>parent_id</code>: <code>dataset_id</code> or <code>lsi_id</code></li>
@@ -1963,7 +1963,7 @@
             <p><strong>Parameters</strong></p>
             <ul>
             <li><code>n_top_words</code>: keep only most relevant <code>n_top_words</code> words</li>
-            <li><code>metric</code> : The similarity metric in [&#39;cosine&#39;, &#39;jaccard&#39;].</li>
+            <li><code>metric</code> : The similarity metric in [&#39;cosine&#39;, &#39;jaccard&#39;, &#39;cosine-positive&#39;].</li>
             <li><code>return_optimal_sampling</code> : Instead of cluster results, the optimal sampling results will be returned (with no cluster labels). This option is only valid with Birch algorithm. Note that optimal sampling cannot return more samples than the subclusters in the birch clustering results (default: false)</li>
             <li><code>sampling_min_similarity</code> : Similarity threashold used by smart sampling. Decreasing this value would result in more sampled documents. Default: 1.0 (i.e. use the full cluster hierarichy).</li>
             <li><code>sampling_min_coverage</code> : Minimal coverage requirement in [0, 1] range. Increasing this value would result in a larger number of samples. (default: 0.9)</li>
@@ -2522,7 +2522,7 @@
             <li><code>distance</code> : int, default=2 Maximum number of differnet bits in the simhash (Simhash method only)</li>
             <li><code>n_rand_lexicons</code> : int, default=1 number of random lexicons used for duplicate detection (I-Match method only)</li>
             <li><code>rand_lexicon_ratio</code> : float, default=0.7 ratio of the vocabulary used in random lexicons (I-Match method only)</li>
-            <li><code>metric</code> : The similarity returned by nearest neighbor classifier in [&#39;cosine&#39;, &#39;jaccard&#39;].</li>
+            <li><code>metric</code> : The similarity returned by nearest neighbor classifier in [&#39;cosine&#39;, &#39;jaccard&#39;, &#39;cosine-positive&#39;].</li>
             </ul>
             
                     </section>
@@ -6522,7 +6522,7 @@
             <li><code>parent_id</code> : the id of the previous processing step (either <code>dataset_id</code> or <code>lsi_id</code>)</li>
             <li><code>query</code> : the seach query. Either <code>query</code> or <code>query_document_id</code> must be provided.</li>
             <li><code>query_document_id</code> : the id of the document used as the search query. Either <code>query</code> or <code>query_document_id</code> must be provided.</li>
-            <li><code>metric</code> : The similarity returned by nearest neighbor classifier in [&#39;cosine&#39;, &#39;jaccard&#39;].</li>
+            <li><code>metric</code> : The similarity returned by nearest neighbor classifier in [&#39;cosine&#39;, &#39;jaccard&#39;, &#39;cosine-positive&#39;].</li>
             <li><code>min_score</code> : filter out results below a similarity threashold</li>
             <li><code>max_results</code> : return only the first <code>max_results</code> documents. If <code>max_results &lt;= 0</code> all documents are returned.</li>
             <li><code>sort_by</code> : if provided and not None, the field used for sorting results. Valid values are [None, &#39;score&#39;]</li>
