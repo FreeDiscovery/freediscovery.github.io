@@ -94,6 +94,12 @@
 <li class="toctree-l1"><a class="reference internal" href="user_manual/index.html">User Manual</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Release history</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#version-1-0">Version 1.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#new-features">New features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#enhancements">Enhancements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#api-changes">API Changes</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#version-0-9">Version 0.9</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#new-features">New features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#enhancements">Enhancements</a></li>
@@ -160,18 +166,44 @@
             
   <div class="section" id="release-history">
 <span id="release-history"></span><h1>Release history<a class="headerlink" href="#release-history" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="version-1-0">
+<span id="version-1-0"></span><h2>Version 1.0<a class="headerlink" href="#version-1-0" title="Permalink to this headline">¶</a></h2>
+<p><strong>In developpement</strong></p>
+<div class="section" id="new-features">
+<span id="new-features"></span><h3>New features<a class="headerlink" href="#new-features" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Ability to add / remove documents in an existing processed dataset using <code class="docutils literal"><span class="pre">/api/v0/feature-extraction/{dsid}/append</span></code> and <code class="docutils literal"><span class="pre">/api/v0/feature-extraction/{dsid}/delete</span></code> URL endpoints</li>
+<li>Pagination in search and document categorization with the <code class="docutils literal"><span class="pre">batch_id</span></code> and <code class="docutils literal"><span class="pre">batch_size</span></code> parameters.</li>
+</ul>
+</div>
+<div class="section" id="enhancements">
+<span id="enhancements"></span><h3>Enhancements<a class="headerlink" href="#enhancements" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Better handling of data persistence, which leads to faster response time for all URL endpoints, and in particular semantic search and categorization. This breaks backward compatibility for the internal data format: datasets need to re-processed and models re-trained.</li>
+<li>Additional tests for categorization and semantic search</li>
+</ul>
+</div>
+<div class="section" id="api-changes">
+<span id="api-changes"></span><h3>API Changes<a class="headerlink" href="#api-changes" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>The <code class="docutils literal"><span class="pre">nn_metric</span></code> parameter was renamed to <code class="docutils literal"><span class="pre">metric</span></code>; a new metric <code class="docutils literal"><span class="pre">cosine-positive</span></code> was added</li>
+<li>Breaking change: by default, the <code class="docutils literal"><span class="pre">cosine</span></code> similarity score is used.</li>
+<li>The <code class="docutils literal"><span class="pre">/email-parser/*</span></code> endpoints are removed and merged into the <code class="docutils literal"><span class="pre">/feature-extraction/</span></code> endpoint, thus unifying data ingestion.</li>
+</ul>
+</div>
+</div>
 <div class="section" id="version-0-9">
 <span id="version-0-9"></span><h2>Version 0.9<a class="headerlink" href="#version-0-9" title="Permalink to this headline">¶</a></h2>
 <p><strong>Jan 28, 2017</strong></p>
 <div class="section" id="new-features">
-<span id="new-features"></span><h3>New features<a class="headerlink" href="#new-features" title="Permalink to this headline">¶</a></h3>
+<span id="id1"></span><h3>New features<a class="headerlink" href="#new-features" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Support for multi-class categorization and non integer class labels (PR <a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/pull/96/files">#96</a>)</li>
 <li>In the case of binary categorization, recall at 20 % of documents is computed as part of the list of default scores (PR <a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/pull/106">#106</a>)</li>
 </ul>
 </div>
 <div class="section" id="enhancements">
-<span id="enhancements"></span><h3>Enhancements<a class="headerlink" href="#enhancements" title="Permalink to this headline">¶</a></h3>
+<span id="id2"></span><h3>Enhancements<a class="headerlink" href="#enhancements" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Categorization and semantic search support sorting and filtering of documents below a user provided threashold. (PR <a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/pull/96/files">#96</a>)</li>
 <li>Categorization returns only <code class="docutils literal"><span class="pre">max_result_categories</span></code> categories with the highest score.</li>
@@ -182,7 +214,7 @@
 </ul>
 </div>
 <div class="section" id="api-changes">
-<span id="api-changes"></span><h3>API Changes<a class="headerlink" href="#api-changes" title="Permalink to this headline">¶</a></h3>
+<span id="id3"></span><h3>API Changes<a class="headerlink" href="#api-changes" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>The following endpoints accepting a request body are modified from <code class="docutils literal"><span class="pre">GET</span></code> to <code class="docutils literal"><span class="pre">POST</span></code> method (PR <a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/pull/94">#94</a>), in accordance with the HTTP/1.1 spec, section 4.3,<ul>
 <li><code class="docutils literal"><span class="pre">/api/v0/metrics/categorization</span></code></li>
@@ -204,21 +236,21 @@
 <span id="version-0-8"></span><h2>Version 0.8<a class="headerlink" href="#version-0-8" title="Permalink to this headline">¶</a></h2>
 <p><strong>Feb. 25, 2017</strong></p>
 <div class="section" id="new-features">
-<span id="id1"></span><h3>New features<a class="headerlink" href="#new-features" title="Permalink to this headline">¶</a></h3>
+<span id="id4"></span><h3>New features<a class="headerlink" href="#new-features" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>NearestNeighbor search now can perform categorization both with positive/negative training documents (supervised) as well as with only a list of positive documents (unsupervised) (PR <a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/pull/50">#50</a>)</li>
 <li>Document search and semantic search (PR <a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/pull/63">#63</a>)</li>
 </ul>
 </div>
 <div class="section" id="enhancements">
-<span id="id2"></span><h3>Enhancements<a class="headerlink" href="#enhancements" title="Permalink to this headline">¶</a></h3>
+<span id="id5"></span><h3>Enhancements<a class="headerlink" href="#enhancements" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>In depth code reorganisation making each processing step a separate REST endpoint (PR <a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/pull/57">#57</a>)</li>
 <li>More rubust default parameters (PR <a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/pull/65">#65</a>)</li>
 </ul>
 </div>
 <div class="section" id="api-changes">
-<span id="id3"></span><h3>API Changes<a class="headerlink" href="#api-changes" title="Permalink to this headline">¶</a></h3>
+<span id="id6"></span><h3>API Changes<a class="headerlink" href="#api-changes" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Ability to associate external <code class="docutils literal"><span class="pre">document_id</span></code>, <code class="docutils literal"><span class="pre">rendition_id</span></code> fields when ingesting documents; document categorization can now be used with these external ids.</li>
 <li>All the wrappers classes are made private in the Python API</li>
