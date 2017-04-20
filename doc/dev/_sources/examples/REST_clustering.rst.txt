@@ -22,13 +22,13 @@ Cluster documents into clusters
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received ['filenames', 'id']
-       => dsid = 9803dbb7fbd342da
+       => dsid = b1265b4596f0474f
 
     1.b Run feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/9803dbb7fbd342da
+     POST http://localhost:5001/api/v0/feature-extraction/b1265b4596f0474f
 
     1.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/9803dbb7fbd342da
+     GET http://localhost:5001/api/v0/feature-extraction/b1265b4596f0474f
          - analyzer: word
          - binary: False
          - chunk_size: 5000
@@ -49,46 +49,46 @@ Cluster documents into clusters
 
     2. Calculate LSI
     POST http://localhost:5001/api/v0/lsi/
-      => LSI model id = 69ada3787fb54ccd
-      => SVD decomposition with 100 dimensions explaining 53.27 % variabilty of the data
+      => LSI model id = d98ad61560f24815
+      => SVD decomposition with 100 dimensions explaining 53.29 % variabilty of the data
 
     3.a. Document clustering (LSI + K-means)
      POST http://localhost:5001/api/v0/clustering/k-mean/
-         => model id = 15c7e89d3e004dcc
+         => model id = 2a95a2a038074695
 
     3.b. Computing cluster labels
-     GET http://localhost:5001/api/v0/clustering/k-mean/15c7e89d3e004dcc
-        .. computed in 1.0s
-       cluster_id                 cluster_label  cluster_similarity  cluster_size  n_documents
-    0           0           party tue agreement               0.234           370          370
-    1           1  enron_development tana jones               0.232           359          359
-    2           2                 mon tenet oct               0.305           245          245
-    3           3              teneo calo group               0.221           396          396
-    4           4           dasovich test group               0.376           138          138
-    5           5             nov wed migration               0.248           335          335
-    6           6               sanders ect hou               0.404           165          165
-    7           7          nemec conference doc               0.257           253          253
-    8           8        rewrite server address               1.000            56           56
-    9           9        energy services market               0.458           148          148
+     GET http://localhost:5001/api/v0/clustering/k-mean/2a95a2a038074695
+        .. computed in 1.8s
+       cluster_id                    cluster_label  cluster_similarity  cluster_size  n_documents
+    0           0  ricafrente ricafrente_david mon               0.306           218          218
+    1           1                    teneo lay doc               0.247           404          404
+    2           2                   tana jones tue               0.181           558          558
+    3           3        migration outlook sanders               0.469           129          129
+    4           4             conference ena legal               0.375           138          138
+    5           5           rewrite server address               1.000            56           56
+    6           6        ect enron_development hou               0.408           141          141
+    7           7                   tenet nov test               0.234           419          419
+    8           8          party shall transaction               0.465           126          126
+    9           9       dasovich kincannon deseret               0.249           276          276
 
     4.a. Document clustering (LSI + Birch clustering)
      POST http://localhost:5001/api/v0/clustering/birch/
-         => model id = f3a1d78760054a2a
+         => model id = 232d4cb4e8eb4c82
 
     4.b. Computing cluster labels
-     GET http://localhost:5001/api/v0/clustering/birch/f3a1d78760054a2a
-        .. computed in 0.8s
+     GET http://localhost:5001/api/v0/clustering/birch/232d4cb4e8eb4c82
+        .. computed in 0.9s
       children  cluster_depth  cluster_id cluster_label  cluster_similarity  cluster_size  n_documents
     0       []              0           0  test ect oct               0.109          2465         2465
 
     4.a. Optimal sampling (LSI + Birch clustering)
-     GET http://localhost:5001/api/v0/clustering/birch/f3a1d78760054a2a
+     GET http://localhost:5001/api/v0/clustering/birch/232d4cb4e8eb4c82
         .. computed in 0.0s
        cluster_id  cluster_similarity  cluster_size                                          documents
-    0           0               0.109          2465  [{'document_id': 585225, 'similarity': 0.10939...
+    0           0               0.109          2465  [{'document_id': 585225, 'similarity': 0.10931...
 
     5. Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/9803dbb7fbd342da
+     DELETE http://localhost:5001/api/v0/feature-extraction/b1265b4596f0474f
 
 
 
@@ -256,7 +256,7 @@ Cluster documents into clusters
     print(" DELETE", url)
     requests.delete(url)
 
-**Total running time of the script:** ( 0 minutes  5.429 seconds)
+**Total running time of the script:** ( 0 minutes  6.836 seconds)
 
 
 
