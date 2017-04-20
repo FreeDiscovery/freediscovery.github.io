@@ -92,6 +92,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../installation_instructions.html">Installation Instructions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../rest_api.html">REST API reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../python_api.html">Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli.html">Command line interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">User Manual</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="data_ingestion.html">Data ingestion</a></li>
@@ -170,6 +171,7 @@
 <span id="downloading-freediscovery"></span><h2>1. Downloading FreeDiscovery<a class="headerlink" href="#downloading-freediscovery" title="Permalink to this headline">¶</a></h2>
 <p>The latest development version of FreeDiscovery can be obtained from <a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery">Github</a> with,</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">FreeDiscovery</span><span class="o">/</span><span class="n">FreeDiscovery</span><span class="o">.</span><span class="n">git</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">FreeDiscovery</span><span class="o">/</span><span class="n">FreeDiscovery</span><span class="o">.</span><span class="n">git</span>
 </pre></div>
 </div>
 <p>or by downloading the latest stable version from the <a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/releases">Github releases page</a>.</p>
@@ -181,11 +183,14 @@
 </li>
 <li><p class="first">Download the pre-build container images (requires authentication),</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span> <span class="n">docker</span> <span class="n">pull</span> <span class="s2">&quot;freediscovery/freediscovery:&lt;version&gt;&quot;</span>
+<span class="n">docker</span> <span class="n">pull</span> <span class="s2">&quot;freediscovery/freediscovery:&lt;version&gt;&quot;</span>
 </pre></div>
 </div>
 <p>or build the container locally,</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span> <span class="n">cd</span> <span class="n">FreeDiscovery</span>
+<span class="n">cd</span> <span class="n">FreeDiscovery</span>
  <span class="n">docker</span> <span class="n">build</span> <span class="o">-</span><span class="n">t</span> <span class="s2">&quot;freediscovery/freediscovery:&lt;version&gt;&quot;</span> <span class="o">.</span>     
+<span class="n">docker</span> <span class="n">build</span> <span class="o">-</span><span class="n">t</span> <span class="s2">&quot;freediscovery/freediscovery:&lt;version&gt;&quot;</span> <span class="o">.</span>     
 </pre></div>
 </div>
 <p>where <code class="docutils literal"><span class="pre">&lt;version&gt;</span></code> is the stable version <code class="docutils literal"><span class="pre">0.7</span></code> or latest development version with the tag <code class="docutils literal"><span class="pre">latest</span></code>.</p>
@@ -198,6 +203,7 @@
 <span id="on-linux-mac-os"></span><h3>3.1. On Linux/Mac OS<a class="headerlink" href="#on-linux-mac-os" title="Permalink to this headline">¶</a></h3>
 <p>The FreeDiscovery server can be started with,</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">bash</span> <span class="n">docker_run</span><span class="o">.</span><span class="n">sh</span> <span class="n">freediscovery</span><span class="o">/</span><span class="n">freediscovery</span><span class="p">:</span><span class="o">&lt;</span><span class="n">version</span><span class="o">&gt;</span>
+<span class="n">bash</span> <span class="n">docker_run</span><span class="o">.</span><span class="n">sh</span> <span class="n">freediscovery</span><span class="o">/</span><span class="n">freediscovery</span><span class="p">:</span><span class="o">&lt;</span><span class="n">version</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <p>for the docker container, respectively. The repository shared with the Docker container (used to ingest the data) is <code class="docutils literal"><span class="pre">../freediscovery_shared</span></code>.</p>
@@ -210,6 +216,7 @@
 </li>
 <li><p class="first">The server can then be started with,</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span> <span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">t</span> <span class="o">-</span><span class="n">i</span> <span class="o">-</span><span class="n">v</span> <span class="o">/&lt;</span><span class="n">absolute</span><span class="o">-</span><span class="n">path</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">the</span><span class="o">-</span><span class="n">foder</span><span class="o">-</span><span class="k">with</span><span class="o">-</span><span class="n">data</span><span class="o">&gt;</span><span class="p">:</span><span class="o">/</span><span class="n">freediscovery_shared</span> <span class="o">-</span><span class="n">p</span> <span class="mi">5001</span><span class="p">:</span><span class="mi">5001</span> <span class="n">freediscovery</span><span class="o">/</span><span class="n">freediscovery</span><span class="p">:</span><span class="o">&lt;</span><span class="n">version</span><span class="o">&gt;</span>
+<span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">t</span> <span class="o">-</span><span class="n">i</span> <span class="o">-</span><span class="n">v</span> <span class="o">/&lt;</span><span class="n">absolute</span><span class="o">-</span><span class="n">path</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">the</span><span class="o">-</span><span class="n">foder</span><span class="o">-</span><span class="k">with</span><span class="o">-</span><span class="n">data</span><span class="o">&gt;</span><span class="p">:</span><span class="o">/</span><span class="n">freediscovery_shared</span> <span class="o">-</span><span class="n">p</span> <span class="mi">5001</span><span class="p">:</span><span class="mi">5001</span> <span class="n">freediscovery</span><span class="o">/</span><span class="n">freediscovery</span><span class="p">:</span><span class="o">&lt;</span><span class="n">version</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <p>for the docker install.</p>
@@ -239,7 +246,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016 - 2017, Grossman Labs LLC.
-      Last updated on Apr 13, 2017.
+      Last updated on Apr 20, 2017.
 
     </p>
   </div>

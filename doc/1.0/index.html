@@ -90,6 +90,7 @@
 <li class="toctree-l1"><a class="reference internal" href="installation_instructions.html">Installation Instructions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rest_api.html">REST API reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="python_api.html">Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command line interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user_manual/index.html">User Manual</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
@@ -150,27 +151,26 @@
 <a class="reference external image-reference" href="https://ci.appveyor.com/project/FreeDiscovery/freediscovery/branch/master"><img alt="https://ci.appveyor.com/api/projects/status/w5kjscmqlrlehp5t/branch/master?svg=true" src="https://ci.appveyor.com/api/projects/status/w5kjscmqlrlehp5t/branch/master?svg=true" /></a>
 <a class="reference external image-reference" href="https://codecov.io/gh/FreeDiscovery/FreeDiscovery"><img alt="https://codecov.io/gh/FreeDiscovery/FreeDiscovery/branch/master/graph/badge.svg" src="https://codecov.io/gh/FreeDiscovery/FreeDiscovery/branch/master/graph/badge.svg" /></a>
 <p>Open Source Software for E-Discovery and Information Retrieval</p>
-<p>FreeDiscovery is built on top of existing machine learning libraries (scikit-learn) and provides REST web services for information retrieval applications. It aims to benefit existing e-discovery platforms with a focus on the following functionality,</p>
-<ul class="simple">
-<li>text categorization</li>
-<li>document clustering</li>
-<li>duplicate detection</li>
-<li>semantic search</li>
-<li>e-mail threading</li>
-</ul>
+<p>FreeDiscovery is built on top of existing machine learning libraries (scikit-learn) and provides REST web services for information retrieval applications. It aims to benefit existing e-discovery platforms with a focus on text categorization, semantic search, document clustering, duplicates detection and e-mail threading.</p>
 <p>In addition, FreeDiscovery can be used as Python package and aims to expose a scikit-learn compatible API.</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">freediscovery</span>
+</pre></div>
+</div>
+<p><strong>Note:</strong> FreeDiscovery can also be installed with <cite>pip install freediscovery</cite>, however this requires manually installing the dependencies (see the documentation for more details).</p>
 <p>We would very much appreciate feedback on the existing functionality. Feel free to open new issues on Github or send any comments to the mailing list <a class="reference external" href="https://groups.google.com/forum/#!forum/freediscovery-ml">https://groups.google.com/forum/#!forum/freediscovery-ml</a> at <a class="reference external" href="mailto:freediscovery-ml&#37;&#52;&#48;googlegroups&#46;com">freediscovery-ml<span>&#64;</span>googlegroups<span>&#46;</span>com</a>.</p>
 <p>For more information see the documentation and API Reference,</p>
 <blockquote>
 <div><ul class="simple">
 <li>development version [<code class="docutils literal"><span class="pre">master</span></code> branch | documentation <a class="reference external" href="http://freediscovery.io/doc/dev/">http://freediscovery.io/doc/dev/</a> ].</li>
-<li>stable version 0.9 [<code class="docutils literal"><span class="pre">0.9.X</span></code> branch | documentation <a class="reference external" href="http://freediscovery.io/doc/stable/">http://freediscovery.io/doc/stable/</a> ].</li>
+<li>stable version 1.0 [<code class="docutils literal"><span class="pre">1.0.X</span></code> branch | documentation <a class="reference external" href="http://freediscovery.io/doc/stable/">http://freediscovery.io/doc/stable/</a> ].</li>
 </ul>
 </div></blockquote>
 <p>FreeDiscovery is released under the 3-clause BSD licence.</p>
 <a class="reference external image-reference" href="http://www.grossmanlabs.com/"><img alt="https://freediscovery.github.io/static/grossmanlabs-old-logo-small.gif" src="https://freediscovery.github.io/static/grossmanlabs-old-logo-small.gif" /></a>
 <div class="section" id="contents">
-<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
+<h3>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h3>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="installation_instructions.html">Installation Instructions</a><ul>
@@ -192,6 +192,10 @@
 <li class="toctree-l2"><a class="reference internal" href="python_api.html#io">IO</a></li>
 <li class="toctree-l2"><a class="reference internal" href="python_api.html#metrics">Metrics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="python_api.html#exceptions">Exceptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command line interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cli.html#freediscovery">freediscovery</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a><ul>
@@ -223,6 +227,7 @@
 </div>
 </div>
 </div>
+</div>
 <div class="section" id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
@@ -250,7 +255,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016 - 2017, Grossman Labs LLC.
-      Last updated on Apr 13, 2017.
+      Last updated on Apr 20, 2017.
 
     </p>
   </div>

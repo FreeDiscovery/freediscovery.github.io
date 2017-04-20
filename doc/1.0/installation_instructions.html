@@ -100,6 +100,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="rest_api.html">REST API reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="python_api.html">Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command line interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user_manual/index.html">User Manual</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
@@ -160,10 +161,12 @@
 <span id="downloading-freediscovery"></span><h2>1. Downloading FreeDiscovery<a class="headerlink" href="#downloading-freediscovery" title="Permalink to this headline">¶</a></h2>
 <p>The latest development version of FreeDiscovery can be obtained from <a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery">Github</a> with,</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">FreeDiscovery</span><span class="o">/</span><span class="n">FreeDiscovery</span><span class="o">.</span><span class="n">git</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">FreeDiscovery</span><span class="o">/</span><span class="n">FreeDiscovery</span><span class="o">.</span><span class="n">git</span>
 </pre></div>
 </div>
 <p>It is recommended to use the latest stable version with,</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">checkout</span> <span class="n">v1</span><span class="o">.</span><span class="mf">0.0</span><span class="o">-</span><span class="n">rc1</span>
+<span class="n">git</span> <span class="n">checkout</span> <span class="n">v1</span><span class="o">.</span><span class="mf">0.0</span><span class="o">-</span><span class="n">rc1</span>
 </pre></div>
 </div>
 <p>Althernaitively, the latest stable version can be donwloaded from the <a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/releases">Github releases page</a>.</p>
@@ -175,21 +178,33 @@
 </li>
 <li><p class="first">A virtual environment with all the dependencies can be setup with the following commands,</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>  <span class="n">cd</span> <span class="n">FreeDiscovery</span>
+<span class="n">cd</span> <span class="n">FreeDiscovery</span>
   <span class="n">conda</span> <span class="n">config</span> <span class="o">--</span><span class="n">append</span> <span class="n">channels</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
+<span class="n">conda</span> <span class="n">config</span> <span class="o">--</span><span class="n">append</span> <span class="n">channels</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
   <span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">freediscovery</span><span class="o">-</span><span class="n">env</span> <span class="o">--</span><span class="n">file</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span> <span class="n">python</span><span class="o">=</span><span class="mf">3.6</span>
+<span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">freediscovery</span><span class="o">-</span><span class="n">env</span> <span class="o">--</span><span class="n">file</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span> <span class="n">python</span><span class="o">=</span><span class="mf">3.6</span>
+
 
   <span class="n">source</span> <span class="n">activate</span> <span class="n">freediscovery</span><span class="o">-</span><span class="n">env</span>   <span class="c1"># on Linux/Mac OS X</span>
+<span class="n">source</span> <span class="n">activate</span> <span class="n">freediscovery</span><span class="o">-</span><span class="n">env</span>   <span class="c1"># on Linux/Mac OS X</span>
   <span class="c1"># Note: on Windows the above command is &quot;activate freediscovery-env&quot;</span>
+<span class="c1"># Note: on Windows the above command is &quot;activate freediscovery-env&quot;</span>
+
 
   <span class="c1"># (optional dependencies, Linux only) </span>
+<span class="c1"># (optional dependencies, Linux only) </span>
   <span class="n">conda</span> <span class="n">install</span> <span class="n">simhash</span><span class="o">-</span><span class="n">py</span>
+<span class="n">conda</span> <span class="n">install</span> <span class="n">simhash</span><span class="o">-</span><span class="n">py</span>
+
 
   <span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">develop</span>
+<span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">develop</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first">[optional] The test suite can then be run with,</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>  <span class="n">python</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;import freediscovery.tests as ft; ft.run()&quot;</span>
+<span class="n">python</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;import freediscovery.tests as ft; ft.run()&quot;</span>
 </pre></div>
 </div>
 </li>
@@ -203,6 +218,7 @@
 <span id="on-linux-mac-os"></span><h3>3.1. On Linux/Mac OS<a class="headerlink" href="#on-linux-mac-os" title="Permalink to this headline">¶</a></h3>
 <p>The FreeDiscovery server can be started with,</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">bash</span> <span class="n">conda_run</span><span class="o">.</span><span class="n">sh</span>
+<span class="n">bash</span> <span class="n">conda_run</span><span class="o">.</span><span class="n">sh</span>
 </pre></div>
 </div>
 </div>
@@ -214,6 +230,7 @@
 </li>
 <li><p class="first">The server can then be started with,</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span> <span class="n">python</span> <span class="n">scripts</span>\<span class="n">run_api</span><span class="o">.</span><span class="n">py</span> <span class="o">..</span>\<span class="n">freediscovery_shared</span> 
+<span class="n">python</span> <span class="n">scripts</span>\<span class="n">run_api</span><span class="o">.</span><span class="n">py</span> <span class="o">..</span>\<span class="n">freediscovery_shared</span> 
 </pre></div>
 </div>
 </li>
@@ -242,7 +259,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016 - 2017, Grossman Labs LLC.
-      Last updated on Apr 13, 2017.
+      Last updated on Apr 20, 2017.
 
     </p>
   </div>
