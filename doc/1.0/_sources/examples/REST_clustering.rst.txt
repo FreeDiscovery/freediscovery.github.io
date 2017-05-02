@@ -22,13 +22,13 @@ Cluster documents into clusters
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received ['filenames', 'id']
-       => dsid = daff4f5336a445f0
+       => dsid = 8777e47f97124e1a
 
     1.b Run feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/daff4f5336a445f0
+     POST http://localhost:5001/api/v0/feature-extraction/8777e47f97124e1a
 
     1.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/daff4f5336a445f0
+     GET http://localhost:5001/api/v0/feature-extraction/8777e47f97124e1a
          - analyzer: word
          - binary: False
          - chunk_size: 5000
@@ -49,46 +49,107 @@ Cluster documents into clusters
 
     2. Calculate LSI
     POST http://localhost:5001/api/v0/lsi/
-      => LSI model id = 3cb35b3c49ce4721
-      => SVD decomposition with 100 dimensions explaining 53.29 % variabilty of the data
+      => LSI model id = 986a85defe8143e8
+      => SVD decomposition with 100 dimensions explaining 53.30 % variabilty of the data
 
     3.a. Document clustering (LSI + K-means)
      POST http://localhost:5001/api/v0/clustering/k-mean/
-         => model id = 987c9bf6ae8c4f05
+         => model id = 6484764acd4d42fa
 
     3.b. Computing cluster labels
-     GET http://localhost:5001/api/v0/clustering/k-mean/987c9bf6ae8c4f05
-        .. computed in 1.1s
-       cluster_id              cluster_label  cluster_similarity  cluster_size  n_documents
-    0           0  energy services kincannon               0.290           238          238
-    1           1  shackleton trading brazil               0.216           402          402
-    2           2       haedicke shall enron               0.255           306          306
-    3           3             tenet thu test               0.277           336          336
-    4           4          nemec tue deseret               0.266           241          241
-    5           5          sanders nov lunch               0.557            97           97
-    6           6     rewrite server address               1.000            56           56
-    7           7     migration outlook team               0.513            99           99
-    8           8       eb3325 meet dasovich               0.334           192          192
-    9           9             ect tana jones               0.204           498          498
+     GET http://localhost:5001/api/v0/clustering/k-mean/6484764acd4d42fa
+        .. computed in 1.0s
+       cluster_id                       cluster_label  cluster_similarity  cluster_size  n_documents
+    0           0        tana jones enron_development               0.152           851          851
+    1           1             shall party transaction               0.529           109          109
+    2           2  ricafrente ricafrente_david eb3325               0.586            76           76
+    3           3                        fri oct test               0.230           396          396
+    4           4             dasovich berkeley group               0.272           385          385
+    5           5                       ect hou clair               0.539            90           90
+    6           6              rewrite server address               1.000            56           56
+    7           7                       tue tenet nov               0.254           341          341
+    8           8              migration outlook team               0.707            64           64
+    9           9              nemec doc nemec_gerald               0.487            97           97
 
     4.a. Document clustering (LSI + Birch clustering)
      POST http://localhost:5001/api/v0/clustering/birch/
-         => model id = 114ca7006d064f58
+         => model id = e5576bf872994ff0
 
     4.b. Computing cluster labels
-     GET http://localhost:5001/api/v0/clustering/birch/114ca7006d064f58
-        .. computed in 0.5s
-      children  cluster_depth  cluster_id cluster_label  cluster_similarity  cluster_size  n_documents
-    0       []              0           0  test ect oct               0.109          2465         2465
+     GET http://localhost:5001/api/v0/clustering/birch/e5576bf872994ff0
+        .. computed in 2.2s
+                                                 children  cluster_depth  cluster_id                     cluster_label  cluster_similarity  cluster_size  n_documents
+    0                                       [1, 3, 8, 29]              0           0                      test ect oct               0.109          2465         2465
+    1                                                 [2]              1           1            rewrite server address               0.588            99           99
+    2                                                  []              2           2            rewrite server address               0.588            99           99
+    3                                        [4, 5, 6, 7]              1           3           shall transaction tiger               0.270           294          294
+    4                                                  []              2           4           tiger party transaction               0.442           110          110
+    5                                                  []              2           5               lessee shall lessor               0.504            50           50
+    6                                                  []              2           6             transaction price lon               0.449            61           61
+    7                                                  []              2           7            taylor_mark teneo pier               0.409            73           73
+    8   [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20...              1           8                    ect test tenet               0.128          1506         1506
+    9                                                  []              2           9    enron_development ellis hendry               0.371           112          112
+    10                                                 []              2          10              marcelo calo tozzini               0.458            71           71
+    11                                                 []              2          11          advice update catalytica               0.425            60           60
+    12                                                 []              2          12                  meet eb3325 dead               0.369            49           49
+    13                                                 []              2          13             townsend nemec sounds               0.460            29           29
+    14                                                 []              2          14             nemec agreement shall               0.371           148          148
+    15                                                 []              2          15                   bump hyvl yates               0.439            62           62
+    16                                                 []              2          16                 lay rice davidson               0.514            19           19
+    17                                                 []              2          17                      load oct thu               0.444            81           81
+    18                                                 []              2          18                haedicke sager nov               0.430            95           95
+    19                                                 []              2          19                   lunch oct tenet               0.374            46           46
+    20                                                 []              2          20                    ect hou energy               0.430           145          145
+    21                                                 []              2          21                  enron tana jones               0.472            50           50
+    22                                                 []              2          22            migration outlook team               0.374           109          109
+    23                                                 []              2          23                     tenet tue thu               0.364            79           79
+    24                                                 []              2          24                     mon tenet nov               0.429            94           94
+    25                                                 []              2          25                 kincannon mtg tue               0.399            49           49
+    26                                                 []              2          26                  kean teneo enron               0.344            80           80
+    27                                                 []              2          27             lunch sampling lafuze               0.353            63           63
+    28                                                 []              2          28   wed ricafrente ricafrente_david               0.452            65           65
+    29                       [30, 31, 32, 33, 34, 35, 36]              1          29             sanders dasovich test               0.179           566          566
+    30                                                 []              2          30           shackleton gdr attorney               0.402            64           64
+    31                                                 []              2          31                   sanders wed nov               0.464           110          110
+    32                                                 []              2          32                  tana jones awais               0.434            56           56
+    33                                                 []              2          33       deseret shackleton etringer               0.316           100          100
+    34                                                 []              2          34                 berkeley haas edu               0.301           124          124
+    35                                                 []              2          35           dasovich bruno gaillard               0.601            53           53
+    36                                                 []              2          36  credit recipients administrative               0.381            59           59
 
     4.a. Optimal sampling (LSI + Birch clustering)
-     GET http://localhost:5001/api/v0/clustering/birch/114ca7006d064f58
-        .. computed in 0.0s
-       cluster_id  cluster_similarity  cluster_size                                          documents
-    0           0               0.109          2465  [{'document_id': 585225, 'similarity': 0.10927...
+     GET http://localhost:5001/api/v0/clustering/birch/e5576bf872994ff0
+        .. computed in 0.4s
+        cluster_id  cluster_similarity  cluster_size                                          documents
+    0            0               0.371           148  [{'document_id': 619369, 'similarity': 0.37141...
+    1            1               0.430           145  [{'document_id': 207025, 'similarity': 0.42958...
+    2            2               0.301           124  [{'document_id': 559504, 'similarity': 0.30142...
+    3            3               0.371           112  [{'document_id': 625, 'similarity': 0.37120801...
+    4            4               0.442           110  [{'document_id': 73441, 'similarity': 0.441635...
+    5            5               0.464           110  [{'document_id': 1322500, 'similarity': 0.4643...
+    6            6               0.374           109  [{'document_id': 5612161, 'similarity': 0.3736...
+    7            7               0.316           100  [{'document_id': 4941729, 'similarity': 0.3157...
+    8            8               0.588            99  [{'document_id': 5041, 'similarity': 0.5883138...
+    9            9               0.430            95  [{'document_id': 2930944, 'similarity': 0.4295...
+    10          10               0.429            94  [{'document_id': 3080025, 'similarity': 0.4289...
+    11          11               0.444            81  [{'document_id': 229441, 'similarity': 0.44429...
+    12          12               0.344            80  [{'document_id': 5697769, 'similarity': 0.3437...
+    13          13               0.364            79  [{'document_id': 2424249, 'similarity': 0.3643...
+    14          14               0.409            73  [{'document_id': 3504384, 'similarity': 0.4085...
+    15          15               0.458            71  [{'document_id': 3600, 'similarity': 0.4575411...
+    16          16               0.452            65  [{'document_id': 2778889, 'similarity': 0.4522...
+    17          17               0.402            64  [{'document_id': 5189284, 'similarity': 0.4024...
+    18          18               0.353            63  [{'document_id': 891136, 'similarity': 0.35290...
+    19          19               0.439            62  [{'document_id': 6051600, 'similarity': 0.4394...
+    20          20               0.449            61  [{'document_id': 5262436, 'similarity': 0.4489...
+    21          21               0.425            60  [{'document_id': 2022084, 'similarity': 0.4246...
+    22          22               0.381            59  [{'document_id': 1038361, 'similarity': 0.3807...
+    23          23               0.434            56  [{'document_id': 211600, 'similarity': 0.43363...
+    24          24               0.601            53  [{'document_id': 583696, 'similarity': 0.60116...
+    25          25               0.504            50  [{'document_id': 672400, 'similarity': 0.50399...
 
     5. Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/daff4f5336a445f0
+     DELETE http://localhost:5001/api/v0/feature-extraction/8777e47f97124e1a
 
 
 
@@ -100,7 +161,6 @@ Cluster documents into clusters
 
 
     import os.path
-    import numpy as np
     import pandas as pd
     from time import time
     import requests
@@ -120,8 +180,8 @@ Cluster documents into clusters
     # To use a custom dataset, simply specify the following variables
     data_dir = input_ds['metadata']['data_dir']
     dataset_definition = [{'document_id': row['document_id'],
-                           'file_path': os.path.join(data_dir, row['file_path'])} \
-                                   for row in input_ds['dataset']]
+                           'file_path': os.path.join(data_dir, row['file_path'])}
+                          for row in input_ds['dataset']]
 
     # # 1. Feature extraction (non hashed)
 
@@ -130,7 +190,7 @@ Cluster documents into clusters
     print(" POST", url)
     fe_opts = {'dataset_definition': dataset_definition,
                'use_idf': 1, 'n_features': 30001,
-               'min_df': 4, 'max_df': 0.75 # filter out unfrequent / too frequent words
+               'min_df': 4, 'max_df': 0.75  # filter out (too)/(un)frequent words
                }
     res = requests.post(url, json=fe_opts).json()
 
@@ -150,8 +210,8 @@ Cluster documents into clusters
     print(' GET', url)
     res = requests.get(url).json()
 
-    print('\n'.join(['     - {}: {}'.format(key, val) for key, val in res.items() \
-                                                      if "filenames" not in key]))
+    print('\n'.join(['     - {}: {}'.format(key, val) for key, val in res.items()
+                     if "filenames" not in key]))
 
     print("\n2. Calculate LSI")
 
@@ -166,8 +226,9 @@ Cluster documents into clusters
 
     lsi_id = res['id']
     print('  => LSI model id = {}'.format(lsi_id))
-    print('  => SVD decomposition with {} dimensions explaining {:.2f} % variabilty of the data'.format(
-                            n_components, res['explained_variance']*100))
+    print(('  => SVD decomposition with {} dimensions '
+           'explaining {:.2f} % variabilty of the data')
+          .format(n_components, res['explained_variance']*100))
 
     # # 3. Document Clustering (LSI + K-Means)
 
@@ -211,8 +272,8 @@ Cluster documents into clusters
     res = requests.post(url,
                         json={'parent_id': lsi_id,
                               'n_clusters': -1,
-                              #'min_similarity': 0.95,
-                              'branching_factor': 20 
+                              'min_similarity': 0.7,
+                              'branching_factor': 20
                               }).json()
 
     mid = res['id']
@@ -256,7 +317,7 @@ Cluster documents into clusters
     print(" DELETE", url)
     requests.delete(url)
 
-**Total running time of the script:** ( 0 minutes  4.899 seconds)
+**Total running time of the script:** ( 0 minutes  6.938 seconds)
 
 
 

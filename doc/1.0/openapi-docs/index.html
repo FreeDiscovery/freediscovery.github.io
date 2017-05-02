@@ -1459,6 +1459,7 @@
             <li><code>n_clusters</code>: the number of clusters or -1 to use hierarchical clustering (default: -1)</li>
             <li><code>min_similarity</code>: The radius of the subcluster obtained by merging a new sample and the closest subcluster should be lesser than the threshold. Otherwise a new subcluster is started. See <a href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.Birch.html">sklearn.cluster.Birch</a>. Increasing this value would increase the hierarchical tree depth (and the number of clusters).</li>
             <li><code>branching_factor</code>: Maximum number of CF subclusters in each node. If a new samples enters such that the number of subclusters exceed the branching_factor then the node has to be split. The corresponding parent also has to be split and if the number of subclusters in the parent is greater than the branching factor, then it has to be split recursively. Decreasing this value would increase the number of clusters.</li>
+            <li><code>max_tree_depth</code> : Maximum hierarchy depth (only applicable when <code>n_clusters=-1</code>)</li>
             <li><code>metric</code> : The similarity returned by nearest neighbor classifier in [&#39;cosine&#39;, &#39;jaccard&#39;, &#39;cosine-positive&#39;].</li>
             </ul>
             
@@ -1483,6 +1484,19 @@
                                                                 <span class="json-property-range" title="Value limits"></span>
                                                                 
                                                                         <span class="json-property-default-value">20</span>
+                                                            </dt>
+                                                            <dd>
+                                                                
+                                                                <div class="json-inner-schema">
+                                                                    
+                                                                </div>
+                                                            </dd>
+                                                            <dt data-property-name="max_tree_depth">
+                                                                <span class="json-property-name">max_tree_depth:</span>
+                                                                
+                                                                <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
+                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                
                                                             </dt>
                                                             <dd>
                                                                 
@@ -1892,7 +1906,7 @@
                                 <tbody>
                                         <tr>
                                             <td>
-                                                method
+                                                mid
                                             <td></td>
                                             <td>path</td>
                                             <td>
@@ -1906,7 +1920,7 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                mid
+                                                method
                                             <td></td>
                                             <td>path</td>
                                             <td>
@@ -2072,7 +2086,7 @@
                                 <tbody>
                                         <tr>
                                             <td>
-                                                method
+                                                mid
                                             <td></td>
                                             <td>path</td>
                                             <td>
@@ -2086,7 +2100,7 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                mid
+                                                method
                                             <td></td>
                                             <td>path</td>
                                             <td>
