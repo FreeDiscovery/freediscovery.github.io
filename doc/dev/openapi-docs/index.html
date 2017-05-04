@@ -1766,6 +1766,7 @@
             <ul>
             <li><code>parent_id</code>: <code>dataset_id</code> or <code>lsi_id</code></li>
             <li><code>n_clusters</code>: the number of clusters</li>
+            <li><code>metric</code> : The similarity returned by nearest neighbor classifier in [&#39;cosine&#39;, &#39;jaccard&#39;, &#39;cosine-positive&#39;].</li>
             </ul>
             
                     </section>
@@ -1782,6 +1783,20 @@
                                         
                                                 <section class="json-schema-properties">
                                                     <dl>
+                                                            <dt data-property-name="metric">
+                                                                <span class="json-property-name">metric:</span>
+                                                                
+                                                                <span class="json-property-type">string</span>
+                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                
+                                                                        <span class="json-property-default-value">cosine</span>
+                                                            </dt>
+                                                            <dd>
+                                                                
+                                                                <div class="json-inner-schema">
+                                                                    
+                                                                </div>
+                                                            </dd>
                                                             <dt data-property-name="n_clusters">
                                                                 <span class="json-property-name">n_clusters:</span>
                                                                 
@@ -1977,7 +1992,6 @@
             <p><strong>Parameters</strong></p>
             <ul>
             <li><code>n_top_words</code>: keep only most relevant <code>n_top_words</code> words</li>
-            <li><code>metric</code> : The similarity metric in [&#39;cosine&#39;, &#39;jaccard&#39;, &#39;cosine-positive&#39;].</li>
             <li><code>return_optimal_sampling</code> : Instead of cluster results, the optimal sampling results will be returned (with no cluster labels). This option is only valid with Birch algorithm. Note that optimal sampling cannot return more samples than the subclusters in the birch clustering results (default: false)</li>
             <li><code>sampling_min_similarity</code> : Similarity threashold used by smart sampling. Decreasing this value would result in more sampled documents. Default: 1.0 (i.e. use the full cluster hierarichy).</li>
             <li><code>sampling_min_coverage</code> : Minimal coverage requirement in [0, 1] range. Increasing this value would result in a larger number of samples. (default: 0.9)</li>
@@ -1997,20 +2011,6 @@
                                         
                                                 <section class="json-schema-properties">
                                                     <dl>
-                                                            <dt data-property-name="metric">
-                                                                <span class="json-property-name">metric:</span>
-                                                                
-                                                                <span class="json-property-type">string</span>
-                                                                <span class="json-property-range" title="Value limits"></span>
-                                                                
-                                                                        <span class="json-property-default-value">cosine</span>
-                                                            </dt>
-                                                            <dd>
-                                                                
-                                                                <div class="json-inner-schema">
-                                                                    
-                                                                </div>
-                                                            </dd>
                                                             <dt data-property-name="n_top_words">
                                                                 <span class="json-property-name">n_top_words:</span>
                                                                 
