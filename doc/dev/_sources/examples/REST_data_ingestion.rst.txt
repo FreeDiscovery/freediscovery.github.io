@@ -21,22 +21,14 @@ An example illustrating the data ingestion in FreeDiscovery
 
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
-       => received ['filenames', 'id']
-       => dsid = 10d3dca8a8a6473e
+       => received ['id']
+       => dsid = f0f68ff14ef646ef
 
     1.b Start feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/10d3dca8a8a6473e
-
-    2.a Load dataset and initalize feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction
-       => received ['filenames', 'id']
-       => dsid = 3ea8cad5c2c7467d
-
-    2.b Start feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/3ea8cad5c2c7467d
+     POST http://localhost:5001/api/v0/feature-extraction/f0f68ff14ef646ef
 
     2.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/3ea8cad5c2c7467d
+     GET http://localhost:5001/api/v0/feature-extraction/f0f68ff14ef646ef
          - analyzer: word
          - binary: False
          - chunk_size: 5000
@@ -58,7 +50,7 @@ An example illustrating the data ingestion in FreeDiscovery
     3. Examine the id mapping
 
 
-     GET http://localhost:5001/api/v0/feature-extraction/3ea8cad5c2c7467d/id-mapping
+     GET http://localhost:5001/api/v0/feature-extraction/f0f68ff14ef646ef/id-mapping
        DATA {"data": [{"internal_id": 0}, {"internal_id": 1}, {"internal_id": 2}]}
      Response:
        {
@@ -82,7 +74,7 @@ An example illustrating the data ingestion in FreeDiscovery
     }
 
     5.a Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/3ea8cad5c2c7467d
+     DELETE http://localhost:5001/api/v0/feature-extraction/f0f68ff14ef646ef
 
 
 
@@ -122,13 +114,11 @@ An example illustrating the data ingestion in FreeDiscovery
                                        for row in input_ds['dataset']]
 
 
-        # 1. Ingest a dataset specified by folder path
-
+        # 2. Ingest a dataset specified by a path to each file in the dataset
         print("\n1.a Load dataset and initalize feature extraction")
         url = BASE_URL + '/feature-extraction'
         print(" POST", url)
-        res = requests.post(url, json={'dataset_definition': dataset_definition,
-                                       'use_hashing': True}).json()
+        res = requests.post(url, json={'use_hashing': True}).json()
 
         dsid = res['id']
         print("   => received {}".format(list(res.keys())))
@@ -138,26 +128,7 @@ An example illustrating the data ingestion in FreeDiscovery
 
         url = BASE_URL+'/feature-extraction/{}'.format(dsid)
         print(" POST", url)
-        res = requests.post(url,)
-
-        # 2. Ingest a dataset specified by a path to each file in the dataset
-
-
-        print("\n2.a Load dataset and initalize feature extraction")
-        url = BASE_URL + '/feature-extraction'
-        print(" POST", url)
-        res = requests.post(url, json={'dataset_definition': dataset_definition,
-                                       'use_hashing': True}).json()
-
-        dsid = res['id']
-        print("   => received {}".format(list(res.keys())))
-        print("   => dsid = {}".format(dsid))
-
-        print("\n2.b Start feature extraction")
-
-        url = BASE_URL+'/feature-extraction/{}'.format(dsid)
-        print(" POST", url)
-        res = requests.post(url,)
+        res = requests.post(url, json={'dataset_definition': dataset_definition})
 
 
         print("\n2.d. check the parameters of the extracted features")
@@ -165,8 +136,8 @@ An example illustrating the data ingestion in FreeDiscovery
         print(' GET', url)
         res = requests.get(url).json()
 
-        print('\n'.join(['     - {}: {}'.format(key, val) for key, val in res.items() \
-                                                          if "filenames" not in key]))
+        print('\n'.join(['     - {}: {}'.format(key, val)
+              for key, val in res.items() if "filenames" not in key]))
 
         print("\n3. Examine the id mapping\n")
 
@@ -185,7 +156,7 @@ An example illustrating the data ingestion in FreeDiscovery
         print(" DELETE", url)
         requests.delete(url)
 
-**Total running time of the script:** ( 0 minutes  4.876 seconds)
+**Total running time of the script:** ( 0 minutes  2.687 seconds)
 
 
 

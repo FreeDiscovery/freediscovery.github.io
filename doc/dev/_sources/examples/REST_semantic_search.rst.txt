@@ -21,88 +21,88 @@ An example of Semantic Search
 
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
-       => received ['filenames', 'id']
-       => dsid = 42a194c9dd704a3c
+       => received ['id']
+       => dsid = ced1be55f3e94a3b
 
     1.b Start feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/42a194c9dd704a3c
+     POST http://localhost:5001/api/v0/feature-extraction/ced1be55f3e94a3b
 
     2. Calculate LSI
     POST http://localhost:5001/api/v0/lsi/
-      => LSI model id = 1d977ce149624d71
-      => SVD decomposition with 100 dimensions explaining 76.49 % variabilty of the data
+      => LSI model id = de618b000848437f
+      => SVD decomposition with 100 dimensions explaining 76.43 % variabilty of the data
 
     3.a. Perform the semantic search
      POST http://localhost:5001/api/v0/search/
                  score
     document_id       
-    4528384      0.461
-    21316        0.408
-    4116841      0.371
-    3545689      0.361
-    2152089      0.358
-    1454436      0.350
-    1572516      0.332
-    68644        0.317
-    1550025      0.317
-    648025       0.313
-    4923961      0.312
-    649636       0.310
-    69169        0.310
-    674041       0.304
-    102400       0.303
-    776161       0.291
-    1682209      0.291
-    5089536      0.291
-    49729        0.285
-    3632836      0.277
-    777924       0.270
-    488601       0.268
-    1684804      0.268
-    2856100      0.268
-    14641        0.267
-    774400       0.267
-    2414916      0.267
-    4363921      0.266
-    6724         0.265
-    4765489      0.264
+    4528384      0.458
+    21316        0.421
+    2152089      0.388
+    68644        0.361
+    1572516      0.360
+    69169        0.355
+    4923961      0.352
+    3545689      0.342
+    674041       0.340
+    1550025      0.335
+    4116841      0.331
+    649636       0.329
+    648025       0.329
+    1276900      0.316
+    1274641      0.316
+    1454436      0.314
+    3748096      0.313
+    776161       0.304
+    1682209      0.304
+    3225616      0.298
+    224676       0.295
+    2022084      0.294
+    1048576      0.292
+    102400       0.288
+    774400       0.279
+    1684804      0.279
+    49729        0.278
+    777924       0.277
+    2217121      0.266
+    25921        0.264
     ...            ...
-    617796      -0.214
-    1085764     -0.216
-    625681      -0.216
-    1527696     -0.216
-    3751969     -0.217
-    1288225     -0.217
-    1083681     -0.221
-    2277081     -0.222
-    1311025     -0.223
-    2280100     -0.227
-    2226064     -0.228
-    1763584     -0.229
-    114921      -0.229
-    304704      -0.232
-    1038361     -0.240
-    3196944     -0.242
-    1040400     -0.244
-    1607824     -0.246
-    1610361     -0.248
-    708964      -0.248
-    4389025     -0.248
-    872356      -0.250
-    8464        -0.250
-    8649        -0.253
-    495616      -0.261
-    5143824     -0.262
-    614656      -0.288
-    1510441     -0.288
-    2268036     -0.308
-    2271049     -0.322
+    124609      -0.206
+    130321      -0.207
+    10404       -0.208
+    1038361     -0.208
+    1311025     -0.209
+    1040400     -0.210
+    3196944     -0.211
+    8464        -0.215
+    8649        -0.215
+    3663396     -0.215
+    4389025     -0.216
+    1288225     -0.220
+    3751969     -0.220
+    2280100     -0.220
+    2277081     -0.223
+    1085764     -0.225
+    4410000     -0.226
+    5202961     -0.227
+    3312400     -0.229
+    1083681     -0.233
+    1607824     -0.235
+    708964      -0.238
+    1610361     -0.238
+    495616      -0.242
+    5143824     -0.242
+    304704      -0.246
+    1510441     -0.276
+    614656      -0.276
+    2271049     -0.315
+    2268036     -0.315
 
     [2465 rows x 1 columns]
-    0.460748986255
+    0.457592759983
 
     4. Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/42a194c9dd704a3c
+     DELETE http://localhost:5001/api/v0/feature-extraction/ced1be55f3e94a3b
 
 
 
@@ -136,16 +136,15 @@ An example of Semantic Search
         # create a custom dataset definition for ingestion
         data_dir = input_ds['metadata']['data_dir']
         dataset_definition = [{'document_id': row['document_id'],
-                               'file_path': os.path.join(data_dir, row['file_path'])} \
-                                       for row in input_ds['dataset']]
+                               'file_path': os.path.join(data_dir, row['file_path'])}
+                              for row in input_ds['dataset']]
 
         # 1. Feature extraction
 
         print("\n1.a Load dataset and initalize feature extraction")
         url = BASE_URL + '/feature-extraction'
         print(" POST", url)
-        res = requests.post(url, json={'dataset_definition': dataset_definition,
-                                       'use_hashing': True}).json()
+        res = requests.post(url).json()
 
         dsid = res['id']
         print("   => received {}".format(list(res.keys())))
@@ -155,7 +154,7 @@ An example of Semantic Search
 
         url = BASE_URL+'/feature-extraction/{}'.format(dsid)
         print(" POST", url)
-        requests.post(url)
+        requests.post(url, json={'dataset_definition': dataset_definition})
 
         # 3. Document categorization with LSI (used for Nearest Neighbors method)
 
@@ -206,7 +205,7 @@ An example of Semantic Search
         print(" DELETE", url)
         requests.delete(url)
 
-**Total running time of the script:** ( 0 minutes  7.761 seconds)
+**Total running time of the script:** ( 0 minutes  4.849 seconds)
 
 
 
