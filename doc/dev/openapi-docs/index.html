@@ -1018,6 +1018,7 @@
             <li><code>metric</code> : The similarity returned by nearest neighbor classifier in [&#39;cosine&#39;, &#39;jaccard&#39;, &#39;cosine-positive&#39;].</li>
             <li><code>min_score</code> : filter out results below a similarity threashold</li>
             <li><code>subset</code>: apply prediction to a document subset. Must be one of [&#39;all&#39;, &#39;train&#39;, &#39;test&#39;]. Default: &#39;test&#39;.</li>
+            <li><code>subset_document_id</code>: apply prediction to a subset of document_id. </li>
             <li><code>batch_id</code>: retrieve a given subset of scores (-1 to retrieve all). Default: 0</li>
             <li><code>batch_size</code>: the number of document scores retrieved per batch. Default: 10000</li>
             </ul>
@@ -1173,6 +1174,27 @@
                                                                 <div class="json-inner-schema">
                                                                     
                                                                 </div>
+                                                            </dd>
+                                                            <dt data-property-name="subset_document_id">
+                                                                <span class="json-property-name">subset_document_id:</span>
+                                                                
+                                                                <span class="json-property-type">integer[]</span>
+                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                
+                                                            </dt>
+                                                            <dd>
+                                                                
+                                                                <div class="json-inner-schema">
+                                                                    
+                                                                                    <section class="json-schema-array-items">
+                                                                                        
+                                                                                        <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
+                                                                                        <span class="json-property-range" title="Value limits"></span>
+                                                                                        
+                                                                                        <div class="json-inner-schema">
+                                                                                            
+                                                                                        </div>
+                                                                                    </section>                </div>
                                                             </dd>
                                                     </dl>
                                                 </section>
@@ -6181,7 +6203,10 @@
             <li><code>sort_by</code> : if provided and not None, the field used for sorting results. Valid values are [None, &#39;score&#39;]</li>
             <li><code>sort_order</code>: the sort order (if applicable), one of [&#39;ascending&#39;, &#39;descending&#39;]</li>
             <li><code>batch_id</code>: retrieve a given subset of scores (-1 to retrieve all). Default: 0</li>
-            <li><code>batch_size</code>: the number of document scores retrieved per batch. Default: 10000</li>
+            <li><code>batch_size</code>: the number of document scores retrieved per batch. Default: 10000<ul>
+            <li><code>subset_document_id</code>: apply prediction to a subset of document_id. </li>
+            </ul>
+            </li>
             </ul>
             
                     </section>
@@ -6333,6 +6358,27 @@
                                                                 <div class="json-inner-schema">
                                                                     
                                                                 </div>
+                                                            </dd>
+                                                            <dt data-property-name="subset_document_id">
+                                                                <span class="json-property-name">subset_document_id:</span>
+                                                                
+                                                                <span class="json-property-type">integer[]</span>
+                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                
+                                                            </dt>
+                                                            <dd>
+                                                                
+                                                                <div class="json-inner-schema">
+                                                                    
+                                                                                    <section class="json-schema-array-items">
+                                                                                        
+                                                                                        <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
+                                                                                        <span class="json-property-range" title="Value limits"></span>
+                                                                                        
+                                                                                        <div class="json-inner-schema">
+                                                                                            
+                                                                                        </div>
+                                                                                    </section>                </div>
                                                             </dd>
                                                     </dl>
                                                 </section>
