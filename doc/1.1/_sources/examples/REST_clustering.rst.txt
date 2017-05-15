@@ -1,0 +1,396 @@
+
+
+.. _sphx_glr_examples_REST_clustering.py:
+
+
+Clustering Example [REST API]
+-----------------------------
+
+Cluster documents into clusters
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    0. Load the example dataset
+     GET http://localhost:5001/api/v0/example-dataset/treclegal09_2k_subset
+
+    1.a Load dataset and initalize feature extraction
+     POST http://localhost:5001/api/v0/feature-extraction
+       => received ['id']
+       => dsid = 99b1581a1e1c43f4
+
+    1.b Run feature extraction
+     POST http://localhost:5001/api/v0/feature-extraction/99b1581a1e1c43f4
+
+    1.d. check the parameters of the extracted features
+     GET http://localhost:5001/api/v0/feature-extraction/99b1581a1e1c43f4
+         - analyzer: word
+         - binary: False
+         - chunk_size: 5000
+         - data_dir: /home/ubuntu/freediscovery_shared/treclegal09_2k_subset/data/jobRun_4/XML_EXPORT_CONTENT/text_9
+         - max_df: 1.0
+         - min_df: 0.0
+         - n_features: 100001
+         - n_jobs: 1
+         - n_samples: 2465
+         - n_samples_processed: 2465
+         - ngram_range: [1, 1]
+         - norm: l2
+         - parse_email_headers: False
+         - stop_words: None
+         - sublinear_tf: True
+         - use_hashing: False
+         - use_idf: False
+
+    2. Calculate LSI
+    POST http://localhost:5001/api/v0/lsi/
+      => LSI model id = 6a1d95a7169743e7
+      => SVD decomposition with 300 dimensions explaining 90.00 % variabilty of the data
+
+    3.a. Document clustering (LSI + K-means)
+     POST http://localhost:5001/api/v0/clustering/k-mean/
+         => model id = 16ddb7c06c574e58
+
+    3.b. Computing cluster labels
+     GET http://localhost:5001/api/v0/clustering/k-mean/16ddb7c06c574e58
+        .. computed in 1.1s
+       cluster_id                       cluster_label  cluster_similarity  cluster_size  n_documents
+    0           0              rewrite address server               1.000            56           56
+    1           1                     fri conf normal               0.252           131          131
+    2           2                    ect normal enron               0.080           931          931
+    3           3                      wed normal oct               0.291           152          152
+    4           4  ricafrente ricafrente_david eb3325               0.344           103          103
+    5           5        teneo test enron_development               0.213           232          232
+    6           6                      thu load shall               0.213           180          180
+    7           7              energy shall agreement               0.254           150          150
+    8           8      recipients administrative test               0.183           253          253
+    9           9                    tenet normal tue               0.204           277          277
+
+    4.a. Document clustering (LSI + Birch clustering)
+     POST http://localhost:5001/api/v0/clustering/birch/
+         => model id = 240953db73364d50
+
+    4.b. Computing cluster labels
+     GET http://localhost:5001/api/v0/clustering/birch/240953db73364d50
+        .. computed in 2.0s
+                                                 children  cluster_depth  cluster_id                          cluster_label  cluster_similarity  cluster_size  n_documents
+    0                   [1, 3, 8, 10, 27, 36, 46, 53, 68]              0           0                        normal test ect               0.071          2465         2465
+    1                                                 [2]              1           1                 rewrite address server               0.744            76           76
+    2                                                  []              2           2                 rewrite address server               0.744            76           76
+    3                                        [4, 5, 6, 7]              1           3                      issues alias cone               0.186           162          162
+    4                                                  []              2           4          issues enron_development cone               0.310            69           69
+    5                                                  []              2           5                      memo marcelo mail               0.492            20           20
+    6                                                  []              2           6             alias clearinghouse canada               0.340            31           31
+    7                                                  []              2           7                confirmation court plan               0.330            42           42
+    8                                                 [9]              1           8                     san diego expenses               0.511             9            9
+    9                                                  []              2           9                     san diego expenses               0.511             9            9
+    10  [11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 2...              1          10                 shall transaction test               0.144           513          513
+    11                                                 []              2          11                       foreign tax isda               0.376            45           45
+    12                                                 []              2          12                party transaction shall               0.329            87           87
+    13                                                 []              2          13  enron_development confirmation period               0.391            45           45
+    14                                                 []              2          14                place approved changing               0.524            11           11
+    15                                                 []              2          15                 fam products singapore               0.325            20           20
+    16                                                 []              2          16                    lagrasta jones tana               0.461             5            5
+    17                                                 []              2          17                       shall lessee ena               0.507            41           41
+    18                                                 []              2          18                    jones services tana               0.302            37           37
+    19                                                 []              2          19                         meter rate new               0.367            32           32
+    20                                                 []              2          20              market transmission power               0.720             5            5
+    21                                                 []              2          21                    test bruno gaillard               0.342            29           29
+    22                                                 []              2          22                       teneo normal fri               0.532            46           46
+    23                                                 []              2          23                        load meet teneo               0.499            24           24
+    24                                                 []              2          24         test administrative recipients               0.381            54           54
+    25                                                 []              2          25            hpl transportation contract               0.499            11           11
+    26                                                 []              2          26                       tva state letter               0.316            21           21
+    27                   [28, 29, 30, 31, 32, 33, 34, 35]              1          27    shackleton enron_development normal               0.174           222          222
+    28                                                 []              2          28                  flynn smud conference               0.428            20           20
+    29                                                 []              2          29                       mtg bailey today               0.388            39           39
+    ..                                                ...            ...         ...                                    ...                 ...           ...          ...
+    58                                                 []              2          58                          mtg tenet mon               0.370            29           29
+    59                                                 []              2          59                          thu tenet oct               0.370            46           46
+    60                                                 []              2          60                        meet wed murray               0.399            35           35
+    61                                                 []              2          61                          tue tenet oct               0.395            30           30
+    62                                                 []              2          62                     stress wed hotmail               0.473            10           10
+    63                                                 []              2          63                          thu nov tenet               0.502            24           24
+    64                                                 []              2          64                        eb3325 meet tue               0.424            40           40
+    65                                                 []              2          65                          tenet tue oct               0.353            44           44
+    66                                                 []              2          66                   wed conference tenet               0.433            30           30
+    67                                                 []              2          67                       mon tenet normal               0.422            36           36
+    68  [69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 8...              1          68                   teneo migration team               0.117           434          434
+    69                                                 []              2          69                        party fund know               0.408            17           17
+    70                                                 []              2          70                  attorney subject week               0.374            32           32
+    71                                                 []              2          71                  commodity edwards rfp               0.276            36           36
+    72                                                 []              2          72             letter midamerican milbank               0.332            35           35
+    73                                                 []              2          73                      nemec gallup site               0.372            25           25
+    74                                                 []              2          74                 outlook migration team               0.350            36           36
+    75                                                 []              2          75                        nemec pcb sweet               0.268            35           35
+    76                                                 []              2          76                 teneo taylor_mark test               0.390            17           17
+    77                                                 []              2          77                        teneo time mail               0.416             8            8
+    78                                                 []              2          78       sampling bockius americancentury               0.316            33           33
+    79                                                 []              2          79         tiger guaranty shackleton_sara               0.465             9            9
+    80                                                 []              2          80              teneo test administrative               0.356            31           31
+    81                                                 []              2          81                       bump shonnie doc               0.441            15           15
+    82                                                 []              2          82          teneo account shackleton_sara               0.369            16           16
+    83                                                 []              2          83            teneo shackleton_sara draft               0.268            34           34
+    84                                                 []              2          84      transactions shackleton_sara peak               0.385             8            8
+    85                                                 []              2          85                    sutton team outlook               0.568             5            5
+    86                                                 []              2          86               deseret etringer counsel               0.566             7            7
+    87                                                 []              2          87                 team migration outlook               0.484            35           35
+
+    [88 rows x 7 columns]
+
+    4.a. Optimal sampling (LSI + Birch clustering)
+     GET http://localhost:5001/api/v0/clustering/birch/240953db73364d50
+        .. computed in 0.1s
+        cluster_id  cluster_similarity  cluster_size                                          documents
+    0           12               0.329            87  [{'document_id': 165649, 'similarity': 0.80657...
+    1            2               0.744            76  [{'document_id': 5041, 'similarity': 0.9907506...
+    2            4               0.310            69  [{'document_id': 256, 'similarity': 0.64946031...
+    3           57               0.322            67  [{'document_id': 2822400, 'similarity': 0.5188...
+    4           39               0.415            63  [{'document_id': 609961, 'similarity': 0.85121...
+    5           48               0.367            63  [{'document_id': 4422609, 'similarity': 0.6514...
+    6           24               0.381            54  [{'document_id': 154449, 'similarity': 0.73380...
+    7           49               0.350            52  [{'document_id': 2968729, 'similarity': 0.5014...
+    8           54               0.353            50  [{'document_id': 25921, 'similarity': 0.639997...
+    9           52               0.421            47  [{'document_id': 3802500, 'similarity': 0.6204...
+    10          22               0.532            46  [{'document_id': 314721, 'similarity': 0.67849...
+    11          38               0.331            46  [{'document_id': 81225, 'similarity': 0.625556...
+    12          59               0.370            46  [{'document_id': 2598544, 'similarity': 0.6672...
+    13          11               0.376            45  [{'document_id': 4624, 'similarity': 0.6843455...
+    14          13               0.391            45  [{'document_id': 53361, 'similarity': 0.625186...
+    15          43               0.314            45  [{'document_id': 2611456, 'similarity': 0.6223...
+    16          55               0.365            45  [{'document_id': 4700224, 'similarity': 0.6448...
+    17          65               0.353            44  [{'document_id': 2679769, 'similarity': 0.5789...
+    18           7               0.330            42  [{'document_id': 1234321, 'similarity': 0.5909...
+    19          17               0.507            41  [{'document_id': 1567504, 'similarity': 0.8007...
+    20          64               0.424            40  [{'document_id': 2686321, 'similarity': 0.6221...
+    21          29               0.388            39  [{'document_id': 4596736, 'similarity': 0.6551...
+    22          18               0.302            37  [{'document_id': 255025, 'similarity': 0.51581...
+    23          67               0.422            36  [{'document_id': 3097600, 'similarity': 0.6720...
+    24          71               0.276            36  [{'document_id': 456976, 'similarity': 0.48172...
+    25          74               0.350            36  [{'document_id': 5336100, 'similarity': 0.6468...
+    26          60               0.399            35  [{'document_id': 2732409, 'similarity': 0.5457...
+    27          72               0.332            35  [{'document_id': 1406596, 'similarity': 0.6076...
+    28          75               0.268            35  [{'document_id': 753424, 'similarity': 0.45526...
+    29          87               0.484            35  [{'document_id': 5846724, 'similarity': 0.7121...
+    30          34               0.330            34  [{'document_id': 425104, 'similarity': 0.56411...
+    31          41               0.328            34  [{'document_id': 3204100, 'similarity': 0.5785...
+    32          83               0.268            34  [{'document_id': 4734976, 'similarity': 0.3662...
+    33          35               0.455            33  [{'document_id': 13456, 'similarity': 0.627039...
+    34          78               0.316            33  [{'document_id': 906304, 'similarity': 0.55539...
+    35          19               0.367            32  [{'document_id': 514089, 'similarity': 0.59340...
+    36          56               0.362            32  [{'document_id': 3164841, 'similarity': 0.5908...
+    37          70               0.374            32  [{'document_id': 36481, 'similarity': 0.616158...
+    38           6               0.340            31  [{'document_id': 1155625, 'similarity': 0.4750...
+    39          80               0.356            31  [{'document_id': 3478225, 'similarity': 0.7375...
+    40          47               0.386            30  [{'document_id': 1764, 'similarity': 0.5325763...
+    41          61               0.395            30  [{'document_id': 3171961, 'similarity': 0.7762...
+    42          66               0.433            30  [{'document_id': 1792921, 'similarity': 0.5466...
+    43          21               0.342            29  [{'document_id': 362404, 'similarity': 0.70536...
+    44          50               0.388            29  [{'document_id': 756900, 'similarity': 0.66301...
+    45          58               0.370            29  [{'document_id': 1817104, 'similarity': 0.6305...
+    46          30               0.399            28  [{'document_id': 44944, 'similarity': 0.525846...
+    47          33               0.358            27  [{'document_id': 543169, 'similarity': 0.70912...
+    48          44               0.440            27  [{'document_id': 3290596, 'similarity': 0.7512...
+    49          73               0.372            25  [{'document_id': 1517824, 'similarity': 0.4998...
+    50          23               0.499            24  [{'document_id': 844561, 'similarity': 0.60284...
+    51          63               0.502            24  [{'document_id': 3587236, 'similarity': 0.7986...
+    52          32               0.421            22  [{'document_id': 64516, 'similarity': 0.630802...
+    53          37               0.375            22  [{'document_id': 1069156, 'similarity': 0.5802...
+    54          26               0.316            21  [{'document_id': 343396, 'similarity': 0.50315...
+    55           5               0.492            20  [{'document_id': 4900, 'similarity': 0.7215624...
+    56          15               0.325            20  [{'document_id': 96100, 'similarity': 0.484014...
+    57          28               0.428            20  [{'document_id': 10201, 'similarity': 0.692976...
+
+    5. Delete the extracted features
+     DELETE http://localhost:5001/api/v0/feature-extraction/99b1581a1e1c43f4
+
+
+
+
+|
+
+
+.. code-block:: python
+
+
+    import os.path
+    import pandas as pd
+    from time import time
+    import requests
+
+    pd.options.display.float_format = '{:,.3f}'.format
+
+
+    dataset_name = "treclegal09_2k_subset"     # see list of available datasets
+
+    BASE_URL = "http://localhost:5001/api/v0"  # FreeDiscovery server URL
+
+    print(" 0. Load the example dataset")
+    url = BASE_URL + '/example-dataset/{}'.format(dataset_name)
+    print(" GET", url)
+    input_ds = requests.get(url).json()
+
+    # To use a custom dataset, simply specify the following variables
+    data_dir = input_ds['metadata']['data_dir']
+    dataset_definition = [{'document_id': row['document_id'],
+                           'file_path': os.path.join(data_dir, row['file_path'])}
+                          for row in input_ds['dataset']]
+
+    # # 1. Feature extraction (non hashed)
+
+    print("\n1.a Load dataset and initalize feature extraction")
+    url = BASE_URL + '/feature-extraction'
+    print(" POST", url)
+    fe_opts = {  # 'min_df': 4, 'max_df': 0.75  # filter out (too)/(un)frequent words
+               }
+    res = requests.post(url, json=fe_opts).json()
+
+    dsid = res['id']
+    print("   => received {}".format(list(res.keys())))
+    print("   => dsid = {}".format(dsid))
+
+
+    print("\n1.b Run feature extraction")
+    # progress status is available for the hashed version only
+    url = BASE_URL+'/feature-extraction/{}'.format(dsid)
+    print(" POST", url)
+    res = requests.post(url, json={'dataset_definition': dataset_definition})
+
+    print("\n1.d. check the parameters of the extracted features")
+    url = BASE_URL + '/feature-extraction/{}'.format(dsid)
+    print(' GET', url)
+    res = requests.get(url).json()
+
+    print('\n'.join(['     - {}: {}'.format(key, val) for key, val in res.items()
+                     if "filenames" not in key]))
+
+    print("\n2. Calculate LSI")
+
+    url = BASE_URL + '/lsi/'
+    print("POST", url)
+
+    n_components = 300
+    res = requests.post(url,
+                        json={'n_components': n_components,
+                              'parent_id': dsid
+                              }).json()
+
+    lsi_id = res['id']
+    print('  => LSI model id = {}'.format(lsi_id))
+    print(('  => SVD decomposition with {} dimensions '
+           'explaining {:.2f} % variabilty of the data')
+          .format(n_components, res['explained_variance']*100))
+
+    # # 3. Document Clustering (LSI + K-Means)
+
+    print("\n3.a. Document clustering (LSI + K-means)")
+
+    url = BASE_URL + '/clustering/k-mean/'
+    print(" POST", url)
+    t0 = time()
+    res = requests.post(url,
+                        json={'parent_id': lsi_id,
+                              'n_clusters': 10,
+                              }).json()
+
+    mid = res['id']
+    print("     => model id = {}".format(mid))
+
+    print("\n3.b. Computing cluster labels")
+    url = BASE_URL + '/clustering/k-mean/{}'.format(mid)
+    print(" GET", url)
+    res = requests.get(url,
+                       json={'n_top_words': 3
+                             }).json()
+    t1 = time()
+
+
+    data = res['data']
+    for row in data:
+        row['n_documents'] = len(row.pop('documents'))
+
+    print('    .. computed in {:.1f}s'.format(t1 - t0))
+    print(pd.DataFrame(data))
+
+
+    # # 4. Document Clustering (LSI + Birch Clustering)
+
+    print("\n4.a. Document clustering (LSI + Birch clustering)")
+
+    url = BASE_URL + '/clustering/birch/'
+    print(" POST", url)
+    t0 = time()
+    res = requests.post(url,
+                        json={'parent_id': lsi_id,
+                              'n_clusters': -1,
+                              'min_similarity': 0.7,
+                              'branching_factor': 20,
+                              'max_tree_depth': 2,
+                              }).json()
+
+    mid = res['id']
+    print("     => model id = {}".format(mid))
+
+    print("\n4.b. Computing cluster labels")
+    url = BASE_URL + '/clustering/birch/{}'.format(mid)
+    print(" GET", url)
+    res = requests.get(url,
+                       json={'n_top_words': 3
+                             }).json()
+    t1 = time()
+
+    print('    .. computed in {:.1f}s'.format(t1 - t0))
+    data = res['data']
+    for row in data:
+        row['n_documents'] = len(row.pop('documents'))
+
+    print(pd.DataFrame(data))
+
+    # # 4. Optimal sampling (LSI + Birch Clustering)
+
+    print("\n4.a. Optimal sampling (LSI + Birch clustering)")
+
+    t0 = time()
+    url = BASE_URL + '/clustering/birch/{}'.format(mid)
+    print(" GET", url)
+    res = requests.get(url,
+                       json={'return_optimal_sampling': True,
+                             'sampling_min_coverage': 0.9
+                             }).json()
+    t1 = time()
+    print('    .. computed in {:.1f}s'.format(t1 - t0))
+    data = res['data']
+
+    print(pd.DataFrame(data))
+
+    # 4. Cleaning
+    print("\n5. Delete the extracted features")
+    url = BASE_URL + '/feature-extraction/{}'.format(dsid)
+    print(" DELETE", url)
+    requests.delete(url)
+
+**Total running time of the script:** ( 0 minutes  13.650 seconds)
+
+
+
+.. container:: sphx-glr-footer
+
+
+  .. container:: sphx-glr-download
+
+     :download:`Download Python source code: REST_clustering.py <REST_clustering.py>`
+
+
+
+  .. container:: sphx-glr-download
+
+     :download:`Download Jupyter notebook: REST_clustering.ipynb <REST_clustering.ipynb>`
+
+.. rst-class:: sphx-glr-signature
+
+    `Generated by Sphinx-Gallery <http://sphinx-gallery.readthedocs.io>`_

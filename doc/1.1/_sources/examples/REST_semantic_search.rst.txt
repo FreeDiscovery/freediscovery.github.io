@@ -1,0 +1,227 @@
+
+
+.. _sphx_glr_examples_REST_semantic_search.py:
+
+
+Semantic Search Example [REST API]
+----------------------------------
+
+An example of Semantic Search
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    0. Load the test dataset
+     GET http://localhost:5001/api/v0/example-dataset/treclegal09_2k_subset
+
+    1.a Load dataset and initalize feature extraction
+     POST http://localhost:5001/api/v0/feature-extraction
+       => received ['id']
+       => dsid = 58c3253351d34d00
+
+    1.b Start feature extraction
+     POST http://localhost:5001/api/v0/feature-extraction/58c3253351d34d00
+
+    2. Calculate LSI
+    POST http://localhost:5001/api/v0/lsi/
+      => LSI model id = 797926f75e44437f
+      => SVD decomposition with 100 dimensions explaining 76.42 % variabilty of the data
+
+    3.a. Perform the semantic search
+     POST http://localhost:5001/api/v0/search/
+                 score
+    document_id       
+    4528384      0.444
+    21316        0.400
+    2152089      0.378
+    4116841      0.362
+    1682209      0.342
+    776161       0.342
+    1454436      0.337
+    1572516      0.333
+    1550025      0.331
+    3545689      0.328
+    648025       0.325
+    649636       0.324
+    774400       0.320
+    68644        0.320
+    777924       0.319
+    1684804      0.317
+    1976836      0.316
+    69169        0.315
+    4923961      0.314
+    202500       0.313
+    4363921      0.310
+    6724         0.308
+    8836         0.301
+    4393216      0.300
+    4532641      0.300
+    2856100      0.297
+    102400       0.295
+    674041       0.294
+    6889         0.293
+    1274641      0.293
+    ...            ...
+    906304      -0.222
+    122500      -0.222
+    2566404     -0.225
+    304704      -0.227
+    1763584     -0.227
+    950625      -0.232
+    383161      -0.234
+    386884      -0.234
+    1311025     -0.235
+    952576      -0.236
+    114921      -0.245
+    3844        -0.247
+    4301476     -0.247
+    144400      -0.250
+    5541316     -0.250
+    142884      -0.250
+    5531904     -0.250
+    3196944     -0.257
+    1038361     -0.261
+    614656      -0.262
+    1510441     -0.262
+    8464        -0.262
+    4389025     -0.262
+    8649        -0.263
+    1040400     -0.265
+    495616      -0.272
+    5143824     -0.272
+    385641      -0.276
+    2268036     -0.282
+    2271049     -0.307
+
+    [2465 rows x 1 columns]
+    0.44369388893
+
+    4. Delete the extracted features
+     DELETE http://localhost:5001/api/v0/feature-extraction/58c3253351d34d00
+
+
+
+
+|
+
+
+.. code-block:: python
+
+
+    from __future__ import print_function
+
+    import os.path
+    import requests
+    import pandas as pd
+
+    pd.options.display.float_format = '{:,.3f}'.format
+    pd.options.display.expand_frame_repr = False
+
+    dataset_name = "treclegal09_2k_subset"     # see list of available datasets
+
+    BASE_URL = "http://localhost:5001/api/v0"  # FreeDiscovery server URL
+
+    if __name__ == '__main__':
+
+        print(" 0. Load the test dataset")
+        url = BASE_URL + '/example-dataset/{}'.format(dataset_name)
+        print(" GET", url)
+        input_ds = requests.get(url).json()
+
+        # create a custom dataset definition for ingestion
+        data_dir = input_ds['metadata']['data_dir']
+        dataset_definition = [{'document_id': row['document_id'],
+                               'file_path': os.path.join(data_dir, row['file_path'])}
+                              for row in input_ds['dataset']]
+
+        # 1. Feature extraction
+
+        print("\n1.a Load dataset and initalize feature extraction")
+        url = BASE_URL + '/feature-extraction'
+        print(" POST", url)
+        res = requests.post(url).json()
+
+        dsid = res['id']
+        print("   => received {}".format(list(res.keys())))
+        print("   => dsid = {}".format(dsid))
+
+        print("\n1.b Start feature extraction")
+
+        url = BASE_URL+'/feature-extraction/{}'.format(dsid)
+        print(" POST", url)
+        requests.post(url, json={'dataset_definition': dataset_definition})
+
+        # 3. Document categorization with LSI (used for Nearest Neighbors method)
+
+        print("\n2. Calculate LSI")
+
+        url = BASE_URL + '/lsi/'
+        print("POST", url)
+
+        n_components = 100
+        res = requests.post(url,
+                            json={'n_components': n_components,
+                                  'parent_id': dsid
+                                  }).json()
+
+        lsi_id = res['id']
+        print('  => LSI model id = {}'.format(lsi_id))
+        print('  => SVD decomposition with {} dimensions explaining {:.2f} % variabilty of the data'.format(
+                                n_components, res['explained_variance']*100))
+
+
+        # 3. Semantic search
+
+        print("\n3.a. Perform the semantic search")
+
+
+        query = """There are some conflicts with the draft date, so we will probably need to
+                    have it on a different date."""
+
+        url = BASE_URL + '/search/'
+        print(" POST", url)
+
+        res = requests.post(url,
+                            json={'parent_id': lsi_id,
+                                  'query': query
+                                  }).json()
+
+        data = res['data']
+
+        df = pd.DataFrame(data).set_index('document_id')
+        print(df)
+
+        print(df.score.max())
+
+
+        # 4. Cleaning
+        print("\n4. Delete the extracted features")
+        url = BASE_URL + '/feature-extraction/{}'.format(dsid)
+        print(" DELETE", url)
+        requests.delete(url)
+
+**Total running time of the script:** ( 0 minutes  4.634 seconds)
+
+
+
+.. container:: sphx-glr-footer
+
+
+  .. container:: sphx-glr-download
+
+     :download:`Download Python source code: REST_semantic_search.py <REST_semantic_search.py>`
+
+
+
+  .. container:: sphx-glr-download
+
+     :download:`Download Jupyter notebook: REST_semantic_search.ipynb <REST_semantic_search.ipynb>`
+
+.. rst-class:: sphx-glr-signature
+
+    `Generated by Sphinx-Gallery <http://sphinx-gallery.readthedocs.io>`_
