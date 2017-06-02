@@ -1943,7 +1943,7 @@
                                 <tbody>
                                         <tr>
                                             <td>
-                                                mid
+                                                method
                                             <td></td>
                                             <td>path</td>
                                             <td>
@@ -1957,7 +1957,7 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                method
+                                                mid
                                             <td></td>
                                             <td>path</td>
                                             <td>
@@ -2108,7 +2108,7 @@
                                 <tbody>
                                         <tr>
                                             <td>
-                                                mid
+                                                method
                                             <td></td>
                                             <td>path</td>
                                             <td>
@@ -2122,7 +2122,7 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                method
+                                                mid
                                             <td></td>
                                             <td>path</td>
                                             <td>
@@ -4203,6 +4203,7 @@
             <li><code>data_dir</code>: [optional] relative path to the directory with the input files. Either <code>data_dir</code> or <code>dataset_definition</code> must be provided.</li>
             <li><code>dataset_definition</code>: [optional] a list of dictionaries <code>[{&#39;file_path&#39;: &lt;str&gt;, &#39;content&#39;: &lt;str&gt;, &#39;document_id&#39;: &lt;int&gt;, &#39;rendition_id&#39;: &lt;int&gt;}, ...]</code> where <code>document_id</code> and <code>rendition_id</code> are optional, while either <code>file_path</code> or <code>content</code> field must be provided. </li>
             <li><code>vectorize</code>: [optional] this option can be used to ingest the dataset_definition in batches (optionally with document content), then make one final call to vectorize all sent documents (bool, default: True)</li>
+            <li><code>document_id_generator</code>: [optional] if the <code>document_id</code> is not provided, this specifies how it is generated. If <code>indexed_file_path</code> the <code>document_id</code> is given by the index of the sorted <code>file_path</code>, otherwise if <code>infer_file_path</code> the <code>document_id</code> is inferred from the <code>file_path</code> strings, removing all non digit characters. In this second case, the <code>file_path</code> must contain a unique numeric ID (default: <code>indexed_file_path</code>)</li>
             </ul>
             
                     </section>
@@ -4308,6 +4309,20 @@
                                                                                                     </section>
                                                                                         </div>
                                                                                     </section>                </div>
+                                                            </dd>
+                                                            <dt data-property-name="document_id_generator">
+                                                                <span class="json-property-name">document_id_generator:</span>
+                                                                
+                                                                <span class="json-property-type">string</span>
+                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                
+                                                                        <span class="json-property-default-value">indexed_file_path</span>
+                                                            </dt>
+                                                            <dd>
+                                                                
+                                                                <div class="json-inner-schema">
+                                                                    
+                                                                </div>
                                                             </dd>
                                                             <dt data-property-name="vectorize">
                                                                 <span class="json-property-name">vectorize:</span>
