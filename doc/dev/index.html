@@ -232,7 +232,7 @@
 <p>Save the returned <code class="docutils literal"><span class="pre">id</span></code> for later use with <code class="docutils literal"><span class="pre">export</span> <span class="pre">FD_CAT_ID=&lt;returned-id&gt;</span></code>.</p>
 <p>Predictions for the other documents in the dataset can then be retrieved with,</p>
 <div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">X</span> <span class="n">GET</span> <span class="o">-</span><span class="n">H</span> <span class="s1">&#39;Content-Type: application/json&#39;</span> <span class="o">-</span><span class="n">d</span> <span class="s2">&quot;{</span>
-   \<span class="s2">&quot;max_results</span><span class="se">\&quot;</span><span class="s2">: 10, </span><span class="se">\&quot;</span><span class="s2">max_result_categories</span><span class="se">\&quot;</span><span class="s2">: 2</span>
+   \<span class="s2">&quot;max_results</span><span class="se">\&quot;</span><span class="s2">: 10, </span><span class="se">\&quot;</span><span class="s2">max_result_categories</span><span class="se">\&quot;</span><span class="s2">: 2, </span><span class="se">\&quot;</span><span class="s2">sort_by</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">sci.space</span><span class="se">\&quot;</span>
  <span class="p">}</span><span class="s2">&quot;  http://localhost:5001/api/v0/categorization/$</span><span class="si">{FD_CAT_ID}</span><span class="s2">/predict</span>
 </pre></div>
 </div>
