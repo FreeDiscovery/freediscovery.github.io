@@ -147,30 +147,127 @@
             
   <div class="section" id="freediscovery">
 <h1>FreeDiscovery<a class="headerlink" href="#freediscovery" title="Permalink to this headline">¶</a></h1>
+<a class="reference external image-reference" href="https://pypi.python.org/pypi/freediscovery"><img alt="https://img.shields.io/pypi/v/freediscovery.svg" src="https://img.shields.io/pypi/v/freediscovery.svg" /></a>
 <a class="reference external image-reference" href="https://travis-ci.org/FreeDiscovery/FreeDiscovery"><img alt="https://travis-ci.org/FreeDiscovery/FreeDiscovery.svg?branch=master" src="https://travis-ci.org/FreeDiscovery/FreeDiscovery.svg?branch=master" /></a>
 <a class="reference external image-reference" href="https://ci.appveyor.com/project/FreeDiscovery/freediscovery/branch/master"><img alt="https://ci.appveyor.com/api/projects/status/w5kjscmqlrlehp5t/branch/master?svg=true" src="https://ci.appveyor.com/api/projects/status/w5kjscmqlrlehp5t/branch/master?svg=true" /></a>
 <a class="reference external image-reference" href="https://codecov.io/gh/FreeDiscovery/FreeDiscovery"><img alt="https://codecov.io/gh/FreeDiscovery/FreeDiscovery/branch/master/graph/badge.svg" src="https://codecov.io/gh/FreeDiscovery/FreeDiscovery/branch/master/graph/badge.svg" /></a>
-<p>Open Source Software for E-Discovery and Information Retrieval</p>
-<p>FreeDiscovery is built on top of existing machine learning libraries (scikit-learn) and provides REST web services for information retrieval applications. It aims to benefit existing e-discovery platforms with a focus on text categorization, semantic search, document clustering, duplicates detection and e-mail threading.</p>
-<p>In addition, FreeDiscovery can be used as Python package and aims to expose a scikit-learn compatible API.</p>
+<p>Open Source e-Discovery and Information Retrieval Engine</p>
+<p>FreeDiscovery is built on top of existing machine learning libraries (scikit-learn) and provides a REST API for information retrieval applications. It aims to benefit existing e-Discovery and information retrieval platforms with a focus on text categorization, semantic search, document clustering, duplicates detection and e-mail threading.</p>
+<p>In addition, FreeDiscovery can be used as Python package and exposes several estimators with a scikit-learn compatible API.</p>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
-<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">freediscovery</span>
+<p>FreeDiscovery requires <strong>Python 3.5+</strong> and can be installed with <a class="reference external" href="https://conda.io/">conda</a>: <code class="docutils literal"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-c</span> <span class="pre">conda-forge</span> <span class="pre">freediscovery</span></code></p>
+<p>Alternatively, to install with pip,</p>
+<ol class="arabic simple">
+<li>Install scipy and numpy</li>
+<li>Run <code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">freediscovery[all]</span></code></li>
+</ol>
+</div>
+<div class="section" id="running-the-server">
+<h2>Running the server<a class="headerlink" href="#running-the-server" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">freediscovery</span> <span class="pre">run</span></code></li>
+<li>to check that the server started successfully, <code class="docutils literal"><span class="pre">curl</span> <span class="pre">-X</span> <span class="pre">GET</span> <span class="pre">http://localhost:5001/</span></code></li>
+</ul>
+</div>
+<div class="section" id="quick-start">
+<h2>Quick start<a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Install FreeDiscovery and start the server (see above)</li>
+<li>Download the 20_newsgroup dataset: <code class="docutils literal"><span class="pre">freediscovery</span> <span class="pre">download</span> <span class="pre">20_newsgroups</span></code></li>
+</ol>
+<div class="section" id="data-ingestion">
+<h3>1. Data ingestion<a class="headerlink" href="#data-ingestion" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Create a new vectorized dataset with <code class="docutils literal"><span class="pre">curl</span> <span class="pre">-X</span> <span class="pre">POST</span> <span class="pre">http://localhost:5001/api/v0/feature-extraction</span></code> and save the returned hexadecimal <code class="docutils literal"><span class="pre">id</span></code> for later use with <code class="docutils literal"><span class="pre">export</span> <span class="pre">FD_DATASET_ID=&lt;returned-id&gt;</span></code>.</p>
+</li>
+<li><p class="first">Ingest the dataset,</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="o">-</span><span class="n">H</span> <span class="s1">&#39;Content-Type: application/json&#39;</span> <span class="o">-</span><span class="n">d</span> <span class="s1">&#39;{</span>
+   <span class="s2">&quot;data_dir&quot;</span><span class="p">:</span> <span class="s2">&quot;./20_newsgroups/&quot;</span>
+<span class="p">}</span><span class="s1">&#39;  http://localhost:5001/api/v0/feature-extraction/$</span><span class="si">{FD_DATASET_ID}</span>
 </pre></div>
 </div>
-<p><strong>Note:</strong> FreeDiscovery can also be installed with <cite>pip install freediscovery</cite>, however this requires manually installing the dependencies (see the documentation for more details).</p>
-<p>We would very much appreciate feedback on the existing functionality. Feel free to open new issues on Github or send any comments to the mailing list <a class="reference external" href="https://groups.google.com/forum/#!forum/freediscovery-ml">https://groups.google.com/forum/#!forum/freediscovery-ml</a> at <a class="reference external" href="mailto:freediscovery-ml&#37;&#52;&#48;googlegroups&#46;com">freediscovery-ml<span>&#64;</span>googlegroups<span>&#46;</span>com</a>.</p>
+</li>
+<li><p class="first">Get the mapping between <code class="docutils literal"><span class="pre">file_path</span></code> of individial files and their <code class="docutils literal"><span class="pre">document_id</span></code>:</p>
+<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">-X</span> <span class="pre">POST</span> <span class="pre">http://localhost:5001/api/v0/feature-extraction/${FD_DATASET_ID}/id-mapping</span> <span class="pre">&gt;</span> <span class="pre">./fd_id_mapping.txt</span></code></p>
+<p>and save the results.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="latent-semantic-indexing-lsi">
+<h3>2. Latent Semantic Indexing (LSI)<a class="headerlink" href="#latent-semantic-indexing-lsi" title="Permalink to this headline">¶</a></h3>
+<p>The creation of an LSI index is necessary for clustering, nearest neighbor classification, semantic search and near-duplicates detection,</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="o">-</span><span class="n">H</span> <span class="s1">&#39;Content-Type: application/json&#39;</span> <span class="o">-</span><span class="n">d</span> <span class="s2">&quot;{</span>
+   \<span class="s2">&quot;parent_id</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">$</span><span class="si">{FD_DATASET_ID}</span><span class="se">\&quot;</span>
+<span class="p">}</span><span class="s2">&quot;  http://localhost:5001/api/v0/lsi/</span>
+</pre></div>
+</div>
+<p>Save the returned <code class="docutils literal"><span class="pre">id</span></code> for later use with <code class="docutils literal"><span class="pre">export</span> <span class="pre">FD_LSI_ID=&lt;returned-id&gt;</span></code>.</p>
+</div>
+<div class="section" id="semantic-search">
+<h3>3. Semantic search<a class="headerlink" href="#semantic-search" title="Permalink to this headline">¶</a></h3>
+<p>Search in the semantic space can be performed with,</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="o">-</span><span class="n">H</span> <span class="s1">&#39;Content-Type: application/json&#39;</span> <span class="o">-</span><span class="n">d</span> <span class="s2">&quot;{</span>
+   \<span class="s2">&quot;parent_id</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">$</span><span class="si">{FD_LSI_ID}</span><span class="se">\&quot;</span><span class="s2">,</span>
+   \<span class="s2">&quot;query</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Jupyter moon</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">max_results</span><span class="se">\&quot;</span><span class="s2">: 10</span>
+ <span class="p">}</span><span class="s2">&quot;  http://localhost:5001/api/v0/search/</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="categorization">
+<h3>4. Categorization<a class="headerlink" href="#categorization" title="Permalink to this headline">¶</a></h3>
+<p>Create a categorization model,</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="o">-</span><span class="n">H</span> <span class="s1">&#39;Content-Type: application/json&#39;</span> <span class="o">-</span><span class="n">d</span> <span class="s2">&quot;{</span>
+   \<span class="s2">&quot;parent_id</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">$</span><span class="si">{FD_DATASET_ID}</span><span class="se">\&quot;</span><span class="s2">,</span>
+   \<span class="s2">&quot;method</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">LogisticRegression</span><span class="se">\&quot;</span><span class="s2">,</span>
+   \<span class="s2">&quot;data</span><span class="se">\&quot;</span><span class="s2">: [{</span><span class="se">\&quot;</span><span class="s2">document_id</span><span class="se">\&quot;</span><span class="s2">: 14000, </span><span class="se">\&quot;</span><span class="s2">category</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">sci.space</span><span class="se">\&quot;</span><span class="s2">},</span>
+              <span class="p">{</span>\<span class="s2">&quot;document_id</span><span class="se">\&quot;</span><span class="s2">: 14003, </span><span class="se">\&quot;</span><span class="s2">category</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">sci.space</span><span class="se">\&quot;</span><span class="s2">},</span>
+              <span class="p">{</span>\<span class="s2">&quot;document_id</span><span class="se">\&quot;</span><span class="s2">: 18780, </span><span class="se">\&quot;</span><span class="s2">category</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">talk.politics.misc</span><span class="se">\&quot;</span><span class="s2">},</span>
+              <span class="p">{</span>\<span class="s2">&quot;document_id</span><span class="se">\&quot;</span><span class="s2">: 18784, </span><span class="se">\&quot;</span><span class="s2">category</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">talk.politics.misc</span><span class="se">\&quot;</span><span class="s2">}</span>
+              <span class="p">],</span>
+   \<span class="s2">&quot;training_scores</span><span class="se">\&quot;</span><span class="s2">: true</span>
+ <span class="p">}</span><span class="s2">&quot;  http://localhost:5001/api/v0/categorization/</span>
+</pre></div>
+</div>
+<p>Save the returned <code class="docutils literal"><span class="pre">id</span></code> for later use with <code class="docutils literal"><span class="pre">export</span> <span class="pre">FD_CAT_ID=&lt;returned-id&gt;</span></code>.</p>
+<p>Predictions for the other documents in the dataset can then be retrieved with,</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">X</span> <span class="n">GET</span> <span class="o">-</span><span class="n">H</span> <span class="s1">&#39;Content-Type: application/json&#39;</span> <span class="o">-</span><span class="n">d</span> <span class="s2">&quot;{</span>
+   \<span class="s2">&quot;max_results</span><span class="se">\&quot;</span><span class="s2">: 10, </span><span class="se">\&quot;</span><span class="s2">max_result_categories</span><span class="se">\&quot;</span><span class="s2">: 2</span>
+ <span class="p">}</span><span class="s2">&quot;  http://localhost:5001/api/v0/categorization/$</span><span class="si">{FD_CAT_ID}</span><span class="s2">/predict</span>
+</pre></div>
+</div>
+<p>The correspondence of these results with ground truth categories can be checked in <code class="docutils literal"><span class="pre">fd_id_mapping.txt</span></code>.</p>
+</div>
+<div class="section" id="hierarchical-clustering">
+<h3>5. Hierarchical clustering<a class="headerlink" href="#hierarchical-clustering" title="Permalink to this headline">¶</a></h3>
+<p>Create a Birch hierarchical clustering model,</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="o">-</span><span class="n">H</span> <span class="s1">&#39;Content-Type: application/json&#39;</span> <span class="o">-</span><span class="n">d</span> <span class="s2">&quot;{</span>
+   \<span class="s2">&quot;parent_id</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">$</span><span class="si">{FD_LSI_ID}</span><span class="se">\&quot;</span><span class="s2">,</span>
+   \<span class="s2">&quot;min_similarity</span><span class="se">\&quot;</span><span class="s2">: 0.7, </span><span class="se">\&quot;</span><span class="s2">max_tree_depth</span><span class="se">\&quot;</span><span class="s2">: 2</span>
+ <span class="p">}</span><span class="s2">&quot;  http://localhost:5001/api/v0/clustering/birch/</span>
+</pre></div>
+</div>
+<p>Save the returned <code class="docutils literal"><span class="pre">id</span></code> for later use with <code class="docutils literal"><span class="pre">export</span> <span class="pre">FD_BIRCH_ID=&lt;returned-id&gt;</span></code>.</p>
+<p>Finally retrieve the computed hierarchical clusters,</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span>curl -X GET http://localhost:5001/api/v0/clustering/birch/${FD_BIRCH_ID}
+</pre></div>
+</div>
+<p>See <a class="reference external" href="http://freediscovery.io/doc/stable/examples/">http://freediscovery.io/doc/stable/examples/</a> for more complete examples.</p>
+<p>We would very much appreciate feedback on the existing functionality. Feel free to open new issues on Github or send any comments to the mailing list <a class="reference external" href="https://groups.google.com/forum/#!forum/freediscovery-ml">https://groups.google.com/forum/#!forum/freediscovery-ml</a>.</p>
+</div>
+</div>
+<div class="section" id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
 <p>For more information see the documentation and API Reference,</p>
-<blockquote>
-<div><ul class="simple">
+<ul class="simple">
 <li>development version [<code class="docutils literal"><span class="pre">master</span></code> branch | documentation <a class="reference external" href="http://freediscovery.io/doc/dev/">http://freediscovery.io/doc/dev/</a> ].</li>
-<li>stable version 1.1 [<code class="docutils literal"><span class="pre">1.1.X</span></code> branch | documentation <a class="reference external" href="http://freediscovery.io/doc/stable/">http://freediscovery.io/doc/stable/</a> ].</li>
+<li>stable version 1.1.1 [<code class="docutils literal"><span class="pre">1.1.X</span></code> branch | documentation <a class="reference external" href="http://freediscovery.io/doc/stable/">http://freediscovery.io/doc/stable/</a> ].</li>
 </ul>
-</div></blockquote>
+</div>
+<div class="section" id="licence">
+<h2>Licence<a class="headerlink" href="#licence" title="Permalink to this headline">¶</a></h2>
 <p>FreeDiscovery is released under the 3-clause BSD licence.</p>
 <a class="reference external image-reference" href="http://www.grossmanlabs.com/"><img alt="https://freediscovery.github.io/static/grossmanlabs-old-logo-small.gif" src="https://freediscovery.github.io/static/grossmanlabs-old-logo-small.gif" /></a>
-<div class="section" id="contents">
-<h3>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h3>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="installation_instructions.html">Installation Instructions</a><ul>
@@ -223,7 +320,6 @@
 </ul>
 </li>
 </ul>
-</div>
 </div>
 </div>
 </div>
