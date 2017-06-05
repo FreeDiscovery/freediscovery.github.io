@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Command line interface &mdash; FreeDiscovery 1.1.0 documentation</title>
+  <title>Command line interface &mdash; FreeDiscovery 1.1.2 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="FreeDiscovery 1.1.0 documentation" href="index.html"/>
+    <link rel="top" title="FreeDiscovery 1.1.2 documentation" href="index.html"/>
         <link rel="next" title="Examples" href="examples/index.html"/>
         <link rel="prev" title="freediscovery.exceptions.OptionalDependencyMissing" href="generated/freediscovery.exceptions.OptionalDependencyMissing.html"/> 
 
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                1.1.0
+                1.1.2
               </div>
             
           
@@ -93,6 +93,7 @@
 <li class="toctree-l1"><a class="reference internal" href="python_api.html">Python API Reference</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Command line interface</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#freediscovery">freediscovery</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#freediscovery-download">freediscovery download</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#freediscovery-info">freediscovery info</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#freediscovery-list">freediscovery list</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#freediscovery-rm">freediscovery rm</a></li>
@@ -161,7 +162,7 @@
 <p>Installing the FreeDiscovery Python packages also makes available a <cite>freediscovery</cite> CLI command which can be used to start the server and to manage trained models.</p>
 <div class="section" id="freediscovery">
 <h2>freediscovery<a class="headerlink" href="#freediscovery" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">usage: freediscovery [-h] {run,info,list,show,rm} ...</span>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">usage: freediscovery [-h] {run,info,list,show,rm,download} ...</span>
 </pre></div>
 </div>
 <dl class="option">
@@ -170,6 +171,32 @@
 <dd><p>show this help message and exit</p>
 </dd></dl>
 
+<div class="section" id="freediscovery-download">
+<h3>freediscovery download<a class="headerlink" href="#freediscovery-download" title="Permalink to this headline">¶</a></h3>
+<p>Download a document dataset</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">usage: freediscovery download [-h] [-o OUTPUT]</span>
+<span class="go">                                  {treclegal09_2k_subset,treclegal09_20k_subset,treclegal09_37k_subset,legal09int,fedora_ml_3k_subset,20_newsgroups_3categories,20_newsgroups_micro,20_newsgroups}</span>
+</pre></div>
+</div>
+<dl class="option">
+<dt id="cmdoption-freediscovery-download-arg-name">
+<code class="descname">name</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-freediscovery-download-arg-name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The dataset name</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-freediscovery-download-h">
+<code class="descname">-h</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--help</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-freediscovery-download-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>show this help message and exit</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-freediscovery-download-o">
+<code class="descname">-o</code><code class="descclassname"> &lt;output&gt;</code><code class="descclassname">, </code><code class="descname">--output</code><code class="descclassname"> &lt;output&gt;</code><a class="headerlink" href="#cmdoption-freediscovery-download-o" title="Permalink to this definition">¶</a></dt>
+<dd><p>Folder where to save the output folder</p>
+</dd></dl>
+
+</div>
 <div class="section" id="freediscovery-info">
 <h3>freediscovery info<a class="headerlink" href="#freediscovery-info" title="Permalink to this headline">¶</a></h3>
 <p>Return debug information about the FreeDiscovery install.</p>
@@ -249,9 +276,8 @@
 <h3>freediscovery run<a class="headerlink" href="#freediscovery-run" title="Permalink to this headline">¶</a></h3>
 <p>The command used to start the server.</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">usage: freediscovery run [-h] [-c CACHE_DIR] [-y] [--debug]</span>
-<span class="go">                             [--hostname HOSTNAME] [-p PORT]</span>
-<span class="go">                             [-s {auto,flask,gunicorn}] [--log-file LOG_FILE]</span>
-<span class="go">                             [-n N]</span>
+<span class="go">                             [--hostname HOSTNAME] [-p PORT] [-s {flask,gunicorn}]</span>
+<span class="go">                             [--log-file LOG_FILE] [-n N]</span>
 </pre></div>
 </div>
 <dl class="option">
@@ -292,8 +318,8 @@
 
 <dl class="option">
 <dt id="cmdoption-freediscovery-run-s">
-<code class="descname">-s</code><code class="descclassname"> {auto,flask,gunicorn}</code><code class="descclassname">, </code><code class="descname">--server</code><code class="descclassname"> {auto,flask,gunicorn}</code><a class="headerlink" href="#cmdoption-freediscovery-run-s" title="Permalink to this definition">¶</a></dt>
-<dd><p>The server used to run freediscovery. &#8220;flask&#8221; is the server built-in in flask suitable for developpement. When server=&#8221;auto&#8221;, gunicorn is used if installed otherwise the &#8220;flask&#8221; server is used as a fallback.</p>
+<code class="descname">-s</code><code class="descclassname"> {flask,gunicorn}</code><code class="descclassname">, </code><code class="descname">--server</code><code class="descclassname"> {flask,gunicorn}</code><a class="headerlink" href="#cmdoption-freediscovery-run-s" title="Permalink to this definition">¶</a></dt>
+<dd><p>The server used to run freediscovery. &#8220;flask&#8221; is the server built-in in flask suitable for developpement.</p>
 </dd></dl>
 
 <dl class="option">
@@ -357,7 +383,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016 - 2017, Grossman Labs LLC.
-      Last updated on May 15, 2017.
+      Last updated on Jun 05, 2017.
 
     </p>
   </div>
@@ -379,7 +405,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.1.0',
+            VERSION:'1.1.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

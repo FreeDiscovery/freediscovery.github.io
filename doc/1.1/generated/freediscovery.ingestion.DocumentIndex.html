@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>freediscovery.ingestion.DocumentIndex &mdash; FreeDiscovery 1.1.0 documentation</title>
+  <title>freediscovery.ingestion.DocumentIndex &mdash; FreeDiscovery 1.1.2 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="FreeDiscovery 1.1.0 documentation" href="../index.html"/>
+    <link rel="top" title="FreeDiscovery 1.1.2 documentation" href="../index.html"/>
         <link rel="up" title="Python API Reference" href="../python_api.html"/>
         <link rel="next" title="freediscovery.text.FeatureVectorizer" href="freediscovery.text.FeatureVectorizer.html"/>
         <link rel="prev" title="freediscovery.datasets.load_dataset" href="freediscovery.datasets.load_dataset.html"/> 
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                1.1.0
+                1.1.2
               </div>
             
           
@@ -170,10 +170,10 @@
 <h1>freediscovery.ingestion.DocumentIndex<a class="headerlink" href="#freediscovery-ingestion-documentindex" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="freediscovery.ingestion.DocumentIndex">
-<em class="property">class </em><code class="descclassname">freediscovery.ingestion.</code><code class="descname">DocumentIndex</code><span class="sig-paren">(</span><em>data_dir</em>, <em>data</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/debaaa0/freediscovery/ingestion.py#L53"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.ingestion.DocumentIndex" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">freediscovery.ingestion.</code><code class="descname">DocumentIndex</code><span class="sig-paren">(</span><em>data_dir</em>, <em>data</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/02c6f20/freediscovery/ingestion.py#L94"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.ingestion.DocumentIndex" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="method">
 <dt id="freediscovery.ingestion.DocumentIndex.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>data_dir</em>, <em>data</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/debaaa0/freediscovery/ingestion.py#L54"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.ingestion.DocumentIndex.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>data_dir</em>, <em>data</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/02c6f20/freediscovery/ingestion.py#L95"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.ingestion.DocumentIndex.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods</p>
@@ -205,7 +205,7 @@
 </table>
 <dl class="classmethod">
 <dt id="freediscovery.ingestion.DocumentIndex.from_folder">
-<em class="property">classmethod </em><code class="descname">from_folder</code><span class="sig-paren">(</span><em>data_dir</em>, <em>file_pattern=None</em>, <em>dir_pattern=None</em>, <em>internal_id_offset=0</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/debaaa0/freediscovery/ingestion.py#L352"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.ingestion.DocumentIndex.from_folder" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">from_folder</code><span class="sig-paren">(</span><em>data_dir</em>, <em>file_pattern=None</em>, <em>dir_pattern=None</em>, <em>internal_id_offset=0</em>, <em>document_id_generator='indexed_file_path'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/02c6f20/freediscovery/ingestion.py#L392"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.ingestion.DocumentIndex.from_folder" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a DocumentIndex from files in data_dir</p>
 <dl class="docutils">
 <dt>data_dir</dt>
@@ -226,7 +226,7 @@ default: None</dd>
 
 <dl class="classmethod">
 <dt id="freediscovery.ingestion.DocumentIndex.from_list">
-<em class="property">classmethod </em><code class="descname">from_list</code><span class="sig-paren">(</span><em>metadata</em>, <em>data_dir=None</em>, <em>internal_id_offset=0</em>, <em>dsid_dir=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/debaaa0/freediscovery/ingestion.py#L260"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.ingestion.DocumentIndex.from_list" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">from_list</code><span class="sig-paren">(</span><em>metadata</em>, <em>data_dir=None</em>, <em>internal_id_offset=0</em>, <em>dsid_dir=None</em>, <em>document_id_generator='indexed_file_path'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/02c6f20/freediscovery/ingestion.py#L301"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.ingestion.DocumentIndex.from_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a DocumentIndex from a list of dictionaries, for instance</p>
 <div class="code javascript highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="n">document_id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
@@ -263,7 +263,7 @@ in this directory</dd>
 
 <dl class="method">
 <dt id="freediscovery.ingestion.DocumentIndex.render_dict">
-<code class="descname">render_dict</code><span class="sig-paren">(</span><em>res=None</em>, <em>return_file_path=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/debaaa0/freediscovery/ingestion.py#L164"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.ingestion.DocumentIndex.render_dict" title="Permalink to this definition">¶</a></dt>
+<code class="descname">render_dict</code><span class="sig-paren">(</span><em>res=None</em>, <em>return_file_path=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/02c6f20/freediscovery/ingestion.py#L205"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.ingestion.DocumentIndex.render_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Render a pandas dataframe as a list of dicts</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -285,7 +285,7 @@ the &#8216;internal_id&#8217; key</li>
 
 <dl class="method">
 <dt id="freediscovery.ingestion.DocumentIndex.render_list">
-<code class="descname">render_list</code><span class="sig-paren">(</span><em>res=None</em>, <em>return_file_path=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/debaaa0/freediscovery/ingestion.py#L208"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.ingestion.DocumentIndex.render_list" title="Permalink to this definition">¶</a></dt>
+<code class="descname">render_list</code><span class="sig-paren">(</span><em>res=None</em>, <em>return_file_path=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/02c6f20/freediscovery/ingestion.py#L249"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.ingestion.DocumentIndex.render_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Render a pandas dataframe as a dict of lists</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -307,7 +307,7 @@ the &#8216;internal_id&#8217; key</li>
 
 <dl class="method">
 <dt id="freediscovery.ingestion.DocumentIndex.search">
-<code class="descname">search</code><span class="sig-paren">(</span><em>query</em>, <em>strict=True</em>, <em>drop=True</em>, <em>return_file_path=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/debaaa0/freediscovery/ingestion.py#L90"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.ingestion.DocumentIndex.search" title="Permalink to this definition">¶</a></dt>
+<code class="descname">search</code><span class="sig-paren">(</span><em>query</em>, <em>strict=True</em>, <em>drop=True</em>, <em>return_file_path=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/02c6f20/freediscovery/ingestion.py#L131"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.ingestion.DocumentIndex.search" title="Permalink to this definition">¶</a></dt>
 <dd><p>Search the filenames given by some user query</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -357,7 +357,7 @@ and &#8220;rendition_id&#8221;</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016 - 2017, Grossman Labs LLC.
-      Last updated on May 15, 2017.
+      Last updated on Jun 05, 2017.
 
     </p>
   </div>
@@ -379,7 +379,7 @@ and &#8220;rendition_id&#8221;</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.1.0',
+            VERSION:'1.1.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
