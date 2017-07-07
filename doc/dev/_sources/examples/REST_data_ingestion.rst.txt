@@ -22,13 +22,13 @@ An example illustrating the data ingestion in FreeDiscovery
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received ['id']
-       => dsid = 9ddacc25b9824fe0
+       => dsid = b6706d05a0a1465d
 
     1.b Start feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/9ddacc25b9824fe0
+     POST http://localhost:5001/api/v0/feature-extraction/b6706d05a0a1465d
 
     2.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/9ddacc25b9824fe0
+     GET http://localhost:5001/api/v0/feature-extraction/b6706d05a0a1465d
          - analyzer: word
          - binary: False
          - chunk_size: 5000
@@ -42,7 +42,7 @@ An example illustrating the data ingestion in FreeDiscovery
          - ngram_range: [1, 1]
          - norm: l2
          - parse_email_headers: False
-         - stop_words: None
+         - stop_words: english
          - sublinear_tf: True
          - use_hashing: True
          - use_idf: False
@@ -50,7 +50,7 @@ An example illustrating the data ingestion in FreeDiscovery
     3. Examine the id mapping
 
 
-     GET http://localhost:5001/api/v0/feature-extraction/9ddacc25b9824fe0/id-mapping
+     GET http://localhost:5001/api/v0/feature-extraction/b6706d05a0a1465d/id-mapping
        DATA {"data": [{"internal_id": 0}, {"internal_id": 1}, {"internal_id": 2}]}
      Response:
        {
@@ -74,7 +74,7 @@ An example illustrating the data ingestion in FreeDiscovery
     }
 
     5.a Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/9ddacc25b9824fe0
+     DELETE http://localhost:5001/api/v0/feature-extraction/b6706d05a0a1465d
 
 
 
@@ -156,7 +156,7 @@ An example illustrating the data ingestion in FreeDiscovery
         print(" DELETE", url)
         requests.delete(url)
 
-**Total running time of the script:** ( 0 minutes  3.048 seconds)
+**Total running time of the script:** ( 0 minutes  2.461 seconds)
 
 
 
