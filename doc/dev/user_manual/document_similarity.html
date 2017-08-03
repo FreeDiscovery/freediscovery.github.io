@@ -38,7 +38,7 @@
     <link rel="top" title="FreeDiscovery 1.2.1 documentation" href="../index.html"/>
         <link rel="up" title="User Manual" href="index.html"/>
         <link rel="next" title="Scaling Benchmarks" href="scaling_benchmarks.html"/>
-        <link rel="prev" title="Data ingestion" href="data_ingestion.html"/> 
+        <link rel="prev" title="User Manual" href="index.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -89,17 +89,11 @@
             
             
                 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../installation_instructions.html">Installation Instructions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../rest_api.html">REST API reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../python_api.html">Python API Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../cli.html">Command line interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../engine/index.html">FreeDiscovery Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python/index.html">Python package</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">User Manual</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="data_ingestion.html">Data ingestion</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Document similarity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scaling_benchmarks.html">Scaling Benchmarks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docker.html">Docker setup</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment options</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
@@ -158,7 +152,7 @@
             
   <div class="section" id="document-similarity">
 <h1>Document similarity<a class="headerlink" href="#document-similarity" title="Permalink to this headline">¶</a></h1>
-<p>A number of algorithms in FreeDiscovery require computing similarity between documents, including Nearest Neighbors categorization, search and clustering. Four metrics (<code class="docutils literal"><span class="pre">cosine</span></code>, <code class="docutils literal"><span class="pre">jaccard</span></code>, <code class="docutils literal"><span class="pre">cosine_norm</span></code>, <code class="docutils literal"><span class="pre">jaccard_norm</span></code>) are supported to compute the document similarity scores, specified by the <cite>nn_metric</cite> or <cite>metric</cite> input parameters. To illustrate the difference between these metrics on a more practical example, we can consider two documents,</p>
+<p>A number of algorithms in FreeDiscovery require computing similarity between documents, including Nearest Neighbors categorization, search and clustering. FreeDiscovery supports the two following metrics (<code class="docutils literal"><span class="pre">cosine</span></code>, <code class="docutils literal"><span class="pre">jaccard</span></code>) to compute the document similarity scores, specified by the <cite>metric</cite> input parameters. To illustrate the difference between these metrics on a more practical example, we can consider two documents,</p>
 <ul class="simple">
 <li>document <code class="docutils literal"><span class="pre">A</span></code> consisting of words <code class="docutils literal"><span class="pre">&quot;legal</span> <span class="pre">documents</span> <span class="pre">prodedure</span> <span class="pre">case&quot;</span></code></li>
 <li>document <code class="docutils literal"><span class="pre">B</span></code> consisting of words <code class="docutils literal"><span class="pre">&quot;legal</span> <span class="pre">documents&quot;</span></code></li>
@@ -173,9 +167,6 @@
 <img alt="../_images/cosine_similarity_scaling.svg" src="../_images/cosine_similarity_scaling.svg" /><p>For positive vectors, the results are in the <code class="docutils literal"><span class="pre">[0,</span> <span class="pre">1]</span></code> range, or in general in the <code class="docutils literal"><span class="pre">[-1/3,</span> <span class="pre">1]</span></code> range. <code class="docutils literal"><span class="pre">jaccard_similarity(A,</span> <span class="pre">B)</span> <span class="pre">=</span> <span class="pre">0.54</span></code>.
 <strong>Note:</strong> the exact jaccard similarity in this case is <code class="docutils literal"><span class="pre">0.5</span></code>.</p>
 </li>
-<li><p class="first"><code class="docutils literal"><span class="pre">cosine-positive</span></code> is the equal to
-.. math:: max(S_cosine, 0)</p>
-</li>
 </ul>
 </div>
 
@@ -189,7 +180,7 @@
         <a href="scaling_benchmarks.html" class="btn btn-neutral float-right" title="Scaling Benchmarks" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="data_ingestion.html" class="btn btn-neutral" title="Data ingestion" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral" title="User Manual" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

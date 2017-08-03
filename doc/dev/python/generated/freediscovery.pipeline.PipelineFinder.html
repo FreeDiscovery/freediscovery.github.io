@@ -1,0 +1,412 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>freediscovery.pipeline.PipelineFinder &mdash; FreeDiscovery 1.2.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="FreeDiscovery 1.2.1 documentation" href="../../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> FreeDiscovery
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.2.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../engine/index.html">FreeDiscovery Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Python package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_manual/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../whats_new.html">Release history</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">FreeDiscovery</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+    <li>freediscovery.pipeline.PipelineFinder</li>
+    <li class="wy-breadcrumbs-aside">
+      
+          
+          
+            <a href="https://github.com/FreeDiscovery/FreeDiscovery/blob/master/doc/python/generated/freediscovery.pipeline.PipelineFinder.rst" class="fa fa-github"> Edit on GitHub</a>
+          
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="freediscovery-pipeline-pipelinefinder">
+<h1>freediscovery.pipeline.PipelineFinder<a class="headerlink" href="#freediscovery-pipeline-pipelinefinder" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="freediscovery.pipeline.PipelineFinder">
+<em class="property">class </em><code class="descclassname">freediscovery.pipeline.</code><code class="descname">PipelineFinder</code><span class="sig-paren">(</span><em>mid=None</em>, <em>cache_dir='/tmp/'</em>, <em>steps=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/b5789b5/freediscovery/pipeline.py#L42"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.pipeline.PipelineFinder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Walk through the hierarchy of existing models
+and find the processing pipeline that terminate with the
+model having the given uid</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>uid</strong> (<em>str</em>) &#8211; a unique model id</li>
+<li><strong>cache_dir</strong> (<em>str</em>) &#8211; folder where models are saved</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>result</strong> &#8211; the prior processing pipeline with as keys the processing step type
+and as values the model ids</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">OrderedDict</p>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="freediscovery.pipeline.PipelineFinder.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>mid=None</em>, <em>cache_dir='/tmp/'</em>, <em>steps=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/b5789b5/freediscovery/pipeline.py#L61"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.pipeline.PipelineFinder.__init__" title="freediscovery.pipeline.PipelineFinder.__init__"><code class="xref py py-obj docutils literal"><span class="pre">__init__</span></code></a>([mid,&nbsp;cache_dir,&nbsp;steps])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#freediscovery.pipeline.PipelineFinder.by_id" title="freediscovery.pipeline.PipelineFinder.by_id"><code class="xref py py-obj docutils literal"><span class="pre">by_id</span></code></a>(mid[,&nbsp;cache_dir])</td>
+<td>Find a pipeline by id</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.pipeline.PipelineFinder.clear" title="freediscovery.pipeline.PipelineFinder.clear"><code class="xref py py-obj docutils literal"><span class="pre">clear</span></code></a>(()&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Remove&nbsp;all&nbsp;items&nbsp;from&nbsp;od.)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#freediscovery.pipeline.PipelineFinder.copy" title="freediscovery.pipeline.PipelineFinder.copy"><code class="xref py py-obj docutils literal"><span class="pre">copy</span></code></a>(()&nbsp;-&gt;&nbsp;a&nbsp;shallow&nbsp;copy&nbsp;of&nbsp;od)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.pipeline.PipelineFinder.fromkeys" title="freediscovery.pipeline.PipelineFinder.fromkeys"><code class="xref py py-obj docutils literal"><span class="pre">fromkeys</span></code></a>((S[,&nbsp;...)</td>
+<td>If not specified, the value defaults to None.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#freediscovery.pipeline.PipelineFinder.get" title="freediscovery.pipeline.PipelineFinder.get"><code class="xref py py-obj docutils literal"><span class="pre">get</span></code></a>((k[,d])&nbsp;-&gt;&nbsp;D[k]&nbsp;if&nbsp;k&nbsp;in&nbsp;D,&nbsp;...)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.pipeline.PipelineFinder.get_path" title="freediscovery.pipeline.PipelineFinder.get_path"><code class="xref py py-obj docutils literal"><span class="pre">get_path</span></code></a>([mid,&nbsp;absolute])</td>
+<td>Find the path to the model specified by mid</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">items</span></code></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">keys</span></code></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#freediscovery.pipeline.PipelineFinder.move_to_end" title="freediscovery.pipeline.PipelineFinder.move_to_end"><code class="xref py py-obj docutils literal"><span class="pre">move_to_end</span></code></a></td>
+<td>Move an existing element to the end (or beginning if last==False).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.pipeline.PipelineFinder.pop" title="freediscovery.pipeline.PipelineFinder.pop"><code class="xref py py-obj docutils literal"><span class="pre">pop</span></code></a>((k[,d])&nbsp;-&gt;&nbsp;v,&nbsp;...)</td>
+<td>value.  If key is not found, d is returned if given, otherwise KeyError</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#freediscovery.pipeline.PipelineFinder.popitem" title="freediscovery.pipeline.PipelineFinder.popitem"><code class="xref py py-obj docutils literal"><span class="pre">popitem</span></code></a>(()&nbsp;-&gt;&nbsp;(k,&nbsp;v),&nbsp;...)</td>
+<td>Pairs are returned in LIFO order if last is true or FIFO order if false.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.pipeline.PipelineFinder.setdefault" title="freediscovery.pipeline.PipelineFinder.setdefault"><code class="xref py py-obj docutils literal"><span class="pre">setdefault</span></code></a>((k[,d])&nbsp;-&gt;&nbsp;od.get(k,d),&nbsp;...)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">update</span></code></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">values</span></code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.pipeline.PipelineFinder.data" title="freediscovery.pipeline.PipelineFinder.data"><code class="xref py py-obj docutils literal"><span class="pre">data</span></code></a></td>
+<td>Load the data provided by the last node of the pipeline</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#freediscovery.pipeline.PipelineFinder.parent" title="freediscovery.pipeline.PipelineFinder.parent"><code class="xref py py-obj docutils literal"><span class="pre">parent</span></code></a></td>
+<td>Make a new pipeline without the latest node</td>
+</tr>
+</tbody>
+</table>
+<dl class="classmethod">
+<dt id="freediscovery.pipeline.PipelineFinder.by_id">
+<em class="property">classmethod </em><code class="descname">by_id</code><span class="sig-paren">(</span><em>mid</em>, <em>cache_dir='/tmp/'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/b5789b5/freediscovery/pipeline.py#L82"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.by_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find a pipeline by id</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>mid</strong> (<em>str</em>) &#8211; a unique model id</li>
+<li><strong>cache_dir</strong> (<em>str</em>) &#8211; folder where models are saved</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>result</strong> &#8211; the prior processing pipeline with as keys the processing step type
+and as values the model ids</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">OrderedDict</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.pipeline.PipelineFinder.clear">
+<code class="descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; None.  Remove all items from od.<a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.clear" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.pipeline.PipelineFinder.copy">
+<code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; a shallow copy of od<a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.copy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="freediscovery.pipeline.PipelineFinder.data">
+<code class="descname">data</code><a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load the data provided by the last node of the pipeline</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.pipeline.PipelineFinder.fromkeys">
+<code class="descname">fromkeys</code><span class="sig-paren">(</span><em>S</em><span class="optional">[</span>, <em>v</em><span class="optional">]</span><span class="sig-paren">)</span> &rarr; New ordered dictionary with keys from S.<a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.fromkeys" title="Permalink to this definition">¶</a></dt>
+<dd><p>If not specified, the value defaults to None.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.pipeline.PipelineFinder.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>k</em><span class="optional">[</span>, <em>d</em><span class="optional">]</span><span class="sig-paren">)</span> &rarr; D[k] if k in D, else d.  d defaults to None.<a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.pipeline.PipelineFinder.get_path">
+<code class="descname">get_path</code><span class="sig-paren">(</span><em>mid=None</em>, <em>absolute=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/b5789b5/freediscovery/pipeline.py#L168"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.get_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the path to the model specified by mid</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.pipeline.PipelineFinder.move_to_end">
+<code class="descname">move_to_end</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.move_to_end" title="Permalink to this definition">¶</a></dt>
+<dd><p>Move an existing element to the end (or beginning if last==False).</p>
+<p>Raises KeyError if the element does not exist.
+When last=True, acts like a fast version of self[key]=self.pop(key).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="freediscovery.pipeline.PipelineFinder.parent">
+<code class="descname">parent</code><a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.parent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a new pipeline without the latest node</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.pipeline.PipelineFinder.pop">
+<code class="descname">pop</code><span class="sig-paren">(</span><em>k</em><span class="optional">[</span>, <em>d</em><span class="optional">]</span><span class="sig-paren">)</span> &rarr; v, remove specified key and return the corresponding<a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.pop" title="Permalink to this definition">¶</a></dt>
+<dd><p>value.  If key is not found, d is returned if given, otherwise KeyError
+is raised.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.pipeline.PipelineFinder.popitem">
+<code class="descname">popitem</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; (k, v), return and remove a (key, value) pair.<a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.popitem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pairs are returned in LIFO order if last is true or FIFO order if false.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.pipeline.PipelineFinder.setdefault">
+<code class="descname">setdefault</code><span class="sig-paren">(</span><em>k</em><span class="optional">[</span>, <em>d</em><span class="optional">]</span><span class="sig-paren">)</span> &rarr; od.get(k,d), also set od[k]=d if k not in od<a class="headerlink" href="#freediscovery.pipeline.PipelineFinder.setdefault" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 - 2017, Grossman Labs LLC.
+      Last updated on Aug 03, 2017.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.2.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+ 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-91765795-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
