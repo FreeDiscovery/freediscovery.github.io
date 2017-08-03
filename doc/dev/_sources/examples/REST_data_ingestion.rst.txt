@@ -22,13 +22,13 @@ An example illustrating the data ingestion in FreeDiscovery
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received ['id']
-       => dsid = 70376f65b39f4b71
+       => dsid = faa7df32ee4444c0
 
     1.b Start feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/70376f65b39f4b71
+     POST http://localhost:5001/api/v0/feature-extraction/faa7df32ee4444c0
 
     2.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/70376f65b39f4b71
+     GET http://localhost:5001/api/v0/feature-extraction/faa7df32ee4444c0
          - analyzer: word
          - binary: False
          - chunk_size: 5000
@@ -51,7 +51,7 @@ An example illustrating the data ingestion in FreeDiscovery
     3. Examine the id mapping
 
 
-     GET http://localhost:5001/api/v0/feature-extraction/70376f65b39f4b71/id-mapping
+     GET http://localhost:5001/api/v0/feature-extraction/faa7df32ee4444c0/id-mapping
        DATA {"data": [{"internal_id": 0}, {"internal_id": 1}, {"internal_id": 2}]}
      Response:
        {
@@ -75,7 +75,7 @@ An example illustrating the data ingestion in FreeDiscovery
     }
 
     5.a Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/70376f65b39f4b71
+     DELETE http://localhost:5001/api/v0/feature-extraction/faa7df32ee4444c0
 
 
 
@@ -157,7 +157,7 @@ An example illustrating the data ingestion in FreeDiscovery
         print(" DELETE", url)
         requests.delete(url)
 
-**Total running time of the script:** ( 0 minutes  2.404 seconds)
+**Total running time of the script:** ( 0 minutes  2.441 seconds)
 
 
 

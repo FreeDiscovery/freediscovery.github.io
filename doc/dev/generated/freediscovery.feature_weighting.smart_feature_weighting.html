@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>freediscovery.cluster.utils._binary_linkage2clusters &mdash; FreeDiscovery 1.2.1 documentation</title>
+  <title>freediscovery.feature_weighting.smart_feature_weighting &mdash; FreeDiscovery 1.2.1 documentation</title>
   
 
   
@@ -37,8 +37,8 @@
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="FreeDiscovery 1.2.1 documentation" href="../index.html"/>
         <link rel="up" title="Python API Reference" href="../python_api.html"/>
-        <link rel="next" title="freediscovery.cluster.utils._merge_clusters" href="freediscovery.cluster.utils._merge_clusters.html"/>
-        <link rel="prev" title="freediscovery.cluster._DendrogramChildren" href="freediscovery.cluster._DendrogramChildren.html"/> 
+        <link rel="next" title="freediscovery.categorization.NearestNeighborRanker" href="freediscovery.categorization.NearestNeighborRanker.html"/>
+        <link rel="prev" title="freediscovery.ingestion.DocumentIndex" href="freediscovery.ingestion.DocumentIndex.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -93,23 +93,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../rest_api.html">REST API reference</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../python_api.html">Python API Reference</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../python_api.html#datasets">Datasets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../python_api.html#feature-extraction">Feature extraction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../python_api.html#document-categorization">Document categorization</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../python_api.html#document-clustering">Document clustering</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="freediscovery.cluster._ClusteringWrapper.html">freediscovery.cluster._ClusteringWrapper</a></li>
-<li class="toctree-l3"><a class="reference internal" href="freediscovery.cluster.ClusterLabels.html">freediscovery.cluster.ClusterLabels</a></li>
-<li class="toctree-l3"><a class="reference internal" href="freediscovery.cluster._DendrogramChildren.html">freediscovery.cluster._DendrogramChildren</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">freediscovery.cluster.utils._binary_linkage2clusters</a></li>
-<li class="toctree-l3"><a class="reference internal" href="freediscovery.cluster.utils._merge_clusters.html">freediscovery.cluster.utils._merge_clusters</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../python_api.html#feature-extraction">Feature extraction</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">freediscovery.feature_weighting.smart_feature_weighting</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#document-categorization">Document categorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#document-clustering">Document clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python_api.html#duplicates-detection">Duplicates detection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../python_api.html#email-threading">Email threading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python_api.html#semantic-search">Semantic search</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../python_api.html#tools">Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python_api.html#io">IO</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python_api.html#metrics">Metrics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../python_api.html#exceptions">Exceptions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../cli.html">Command line interface</a></li>
@@ -153,12 +146,12 @@
       
         <li><a href="../python_api.html">Python API Reference</a> &raquo;</li>
       
-    <li>freediscovery.cluster.utils._binary_linkage2clusters</li>
+    <li>freediscovery.feature_weighting.smart_feature_weighting</li>
     <li class="wy-breadcrumbs-aside">
       
           
           
-            <a href="https://github.com/FreeDiscovery/FreeDiscovery/blob/master/doc/generated/freediscovery.cluster.utils._binary_linkage2clusters.rst" class="fa fa-github"> Edit on GitHub</a>
+            <a href="https://github.com/FreeDiscovery/FreeDiscovery/blob/master/doc/generated/freediscovery.feature_weighting.smart_feature_weighting.rst" class="fa fa-github"> Edit on GitHub</a>
           
         
       
@@ -169,31 +162,40 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="freediscovery-cluster-utils-binary-linkage2clusters">
-<h1>freediscovery.cluster.utils._binary_linkage2clusters<a class="headerlink" href="#freediscovery-cluster-utils-binary-linkage2clusters" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="freediscovery-feature-weighting-smart-feature-weighting">
+<h1>freediscovery.feature_weighting.smart_feature_weighting<a class="headerlink" href="#freediscovery-feature-weighting-smart-feature-weighting" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
-<dt id="freediscovery.cluster.utils._binary_linkage2clusters">
-<code class="descclassname">freediscovery.cluster.utils.</code><code class="descname">_binary_linkage2clusters</code><span class="sig-paren">(</span><em>linkage</em>, <em>n_samples</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/7a5c121/freediscovery/cluster/utils.py#L12"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.utils._binary_linkage2clusters" title="Permalink to this definition">¶</a></dt>
-<dd><p>Given a list of elements of size n_sample and a linkage matrix
-linking some of those samples, compute the cluster_id of each element</p>
+<dt id="freediscovery.feature_weighting.smart_feature_weighting">
+<code class="descclassname">freediscovery.feature_weighting.</code><code class="descname">smart_feature_weighting</code><span class="sig-paren">(</span><em>tf</em>, <em>scheme</em>, <em>idf=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/863d4e2/freediscovery/feature_weighting.py#L47"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.feature_weighting.smart_feature_weighting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Weight a vector space model following the SMART notation.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>linkage</strong> (<em>array</em><em> (</em><em>n_pairs</em><em>, </em><em>2</em><em>)</em><em></em>) &#8211; arrays indicating binary links between elements</li>
-<li><strong>n_samples</strong> (<em>int</em>) &#8211; total number of elements</li>
+<li><strong>df</strong> (<em>sparse csr array</em>) &#8211; the term frequency matrix (n_documents, n_features)</li>
+<li><strong>scheme</strong> (<em>str</em>) &#8211; the SMART notation for document, term weighting and normalization.
+In the form [nlabL][ntp][ncb] , see
+<a class="reference external" href="https://en.wikipedia.org/wiki/SMART_Information_Retrieval_System">https://en.wikipedia.org/wiki/SMART_Information_Retrieval_System</a>
+Currently only the subset [nlab][nt][ac] is implemented.</li>
+<li><strong>idf</strong> (<em>sparse csr array</em><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; precomputed inverse document frequency matrix (n_documents, n_features).
+If not provided, and scheme=&#8217;<em>t</em>&#8216;, it will be recomputed.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>labels</strong></p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>X</strong> &#8211; the weighted term frequency matrix</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">array (n_samples)</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">sparse csr array</p>
 </td>
 </tr>
 </tbody>
 </table>
+<p class="rubric">References</p>
+<ol class="arabic simple">
+<li>Manning, Christopher D.; Raghavan, Prabhakar; Schütze, Hinrich (2008),
+<a class="reference external" href="https://nlp.stanford.edu/IR-book/html/htmledition/document-and-query-weighting-schemes-1.html">&#8220;Document and query weighting schemes&#8221;</a></li>
+</ol>
 </dd></dl>
 
 </div>
@@ -205,10 +207,10 @@ linking some of those samples, compute the cluster_id of each element</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="freediscovery.cluster.utils._merge_clusters.html" class="btn btn-neutral float-right" title="freediscovery.cluster.utils._merge_clusters" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="freediscovery.categorization.NearestNeighborRanker.html" class="btn btn-neutral float-right" title="freediscovery.categorization.NearestNeighborRanker" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="freediscovery.cluster._DendrogramChildren.html" class="btn btn-neutral" title="freediscovery.cluster._DendrogramChildren" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="freediscovery.ingestion.DocumentIndex.html" class="btn btn-neutral" title="freediscovery.ingestion.DocumentIndex" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -218,7 +220,7 @@ linking some of those samples, compute the cluster_id of each element</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016 - 2017, Grossman Labs LLC.
-      Last updated on Aug 01, 2017.
+      Last updated on Aug 03, 2017.
 
     </p>
   </div>
