@@ -10,6 +10,235 @@ An example to illustrate binary categorizaiton with FreeDiscovery
 
 
 
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    0. Load the example dataset
+     GET http://localhost:5001/api/v0/example-dataset/treclegal09_2k_subset
+
+    1.a Load dataset and initalize feature extraction
+     POST http://localhost:5001/api/v0/feature-extraction
+       => received ['id']
+       => dsid = 6db42de7d0c44a63
+
+    1.b Start feature extraction (in the background)
+     POST http://localhost:5001/api/v0/feature-extraction/6db42de7d0c44a63
+
+    1.c Monitor feature extraction progress
+     GET http://localhost:5001/api/v0/feature-extraction/6db42de7d0c44a63
+
+    1.d. check the parameters of the extracted features
+     GET http://localhost:5001/api/v0/feature-extraction/6db42de7d0c44a63
+         - analyzer: word
+         - binary: False
+         - chunk_size: 5000
+         - data_dir: /home/ubuntu/freediscovery_shared/treclegal09_2k_subset/data/jobRun_4/XML_EXPORT_CONTENT/text_9
+         - max_df: 1.0
+         - min_df: 0.0
+         - n_features: 100001
+         - n_jobs: 1
+         - n_samples: 2465
+         - n_samples_processed: 2465
+         - ngram_range: [1, 1]
+         - norm: l2
+         - parse_email_headers: False
+         - preprocess: []
+         - stop_words: english
+         - sublinear_tf: False
+         - use_hashing: False
+         - use_idf: False
+
+    2. Calculate LSI
+    POST http://localhost:5001/api/v0/lsi/
+      => LSI model id = 3221d9d724804607
+      => SVD decomposition with 100 dimensions explaining 69.79 % variabilty of the data
+
+    3.a. Train the categorization model
+       category
+    negative    63
+    positive     5
+    Name: document_id, dtype: int64 positive, 0 negative files
+    ================================================================================ 
+                LinearSVC   
+     ================================================================================
+     POST http://localhost:5001/api/v0/categorization/
+     Training...
+         => model id = 4d3e35461e194767
+        => Training scores: MAP = 0.815, ROC-AUC = 0.900, recall @20%: 0.800 
+
+    3.b. Check the parameters used in the categorization model
+     GET http://localhost:5001/api/v0/categorization/4d3e35461e194767
+         - method: LinearSVC
+         - options: {'C': 1.0, 'class_weight': None, 'dual': True, 'fit_intercept': True, 'intercept_scaling': 1, 'loss': 'squared_hinge', 'max_iter': 1000, 'multi_class': 'ovr', 'penalty': 'l2', 'random_state': None, 'tol': 0.0001, 'verbose': 0}
+
+    3.c Categorize the complete dataset with this model
+     GET http://localhost:5001/api/v0/categorization/4d3e35461e194767/predict
+                 category  score
+    document_id                 
+    568516       negative  0.778
+    3717184      negative  0.762
+    454276       negative  0.762
+    5171076      negative  0.760
+    3568321      negative  0.759
+    1803649      negative  0.754
+    1252161      negative  0.753
+    5166529      negative  0.752
+    573049       negative  0.752
+    885481       negative  0.751
+    877969       negative  0.751
+    3286969      negative  0.750
+    274576       negative  0.750
+    118336       negative  0.750
+    5239521      negative  0.749
+    3709476      negative  0.749
+    319225       negative  0.749
+    4941729      negative  0.749
+    119716       negative  0.749
+    4507129      negative  0.749
+    4713241      negative  0.748
+    2845969      negative  0.748
+    4981824      negative  0.748
+    4708900      negative  0.748
+    320356       negative  0.748
+    4831204      negative  0.748
+    4359744      negative  0.747
+    318096       negative  0.747
+    1190281      negative  0.746
+    1254400      negative  0.746
+    ...               ...    ...
+    4652649      negative  0.631
+    36481        negative  0.631
+    38025        negative  0.631
+    199809       negative  0.630
+    90000        negative  0.630
+    4857616      negative  0.630
+    268324       negative  0.630
+    270400       negative  0.630
+    80656        negative  0.630
+    5022081      negative  0.630
+    4968441      negative  0.630
+    88804        negative  0.630
+    1170724      negative  0.630
+    79524        negative  0.630
+    3073009      negative  0.629
+    350464       negative  0.628
+    984064       negative  0.627
+    221841       negative  0.627
+    846400       negative  0.621
+    3240000      negative  0.620
+    3222025      negative  0.620
+    1046529      negative  0.620
+    316969       negative  0.619
+    822649       negative  0.619
+    850084       negative  0.575
+    833569       negative  0.567
+    3422500      negative  0.552
+    819025       negative  0.549
+    3182656      negative  0.519
+    3323329      negative  0.501
+
+    [2397 rows x 2 columns]
+
+    3.d Compute the categorization scores
+     GET http://localhost:5001/api/v0/metrics/categorization
+        => Test scores: MAP = 0.982, ROC-AUC = 1.000, recall @20%: 1.000 
+    ================================================================================ 
+                NearestNeighbor  + LSI 
+     ================================================================================
+     POST http://localhost:5001/api/v0/categorization/
+     Training...
+         => model id = 6603e690ba114d08
+        => Training scores: MAP = 1.000, ROC-AUC = 1.000, recall @20%: 1.000 
+
+    3.b. Check the parameters used in the categorization model
+     GET http://localhost:5001/api/v0/categorization/6603e690ba114d08
+         - method: NearestNeighbor
+         - options: {'algorithm': 'brute', 'leaf_size': 30, 'n_jobs': 1, 'radius': None}
+
+    3.c Categorize the complete dataset with this model
+     GET http://localhost:5001/api/v0/categorization/6603e690ba114d08/predict
+                 category  nearest_document_id  score
+    document_id                                      
+    37249        negative               150544  1.000
+    3617604      negative              1218816  1.000
+    465124       negative               150544  1.000
+    4950625      negative                75625  1.000
+    354025       negative               150544  1.000
+    432964       negative               150544  1.000
+    1214404      negative              1218816  1.000
+    1210000      negative              1218816  1.000
+    73984        negative                75625  1.000
+    861184       negative               150544  1.000
+    1203409      negative               150544  1.000
+    3625216      negative              1218816  1.000
+    851929       negative               150544  1.000
+    75076        negative               150544  1.000
+    531441       negative               150544  1.000
+    541696       negative               150544  1.000
+    1245456      negative               150544  1.000
+    868624       negative               150544  1.000
+    205209       negative               150544  1.000
+    54756        negative                75625  1.000
+    1297321      negative               150544  1.000
+    678976       negative               150544  1.000
+    881721       negative               150544  1.000
+    4813636      negative                75625  1.000
+    925444       negative               150544  1.000
+    1279161      negative               150544  1.000
+    230400       negative               150544  1.000
+    1256641      negative               150544  1.000
+    164836       negative               150544  1.000
+    1067089      negative               150544  1.000
+    ...               ...                  ...    ...
+    5776         negative              1263376  0.086
+    4338889      negative              1263376  0.086
+    5184         negative              1263376  0.086
+    4624         negative              1263376  0.086
+    4322241      negative              1263376  0.086
+    4318084      negative               456976  0.086
+    4334724      negative               456976  0.086
+    4489         negative               456976  0.086
+    599076       negative              1846881  0.083
+    1800964      negative              1846881  0.083
+    300304       negative                 6561  0.083
+    363609       negative               335241  0.082
+    544644       positive               844561  0.082
+    490000       negative                   81  0.074
+    504100       negative              6007401  0.068
+    682276       negative                 1024  0.067
+    1582564      negative                 1024  0.067
+    1530169      negative              2788900  0.061
+    627264       negative              2788900  0.061
+    1532644      negative              2788900  0.059
+    628849       negative              2788900  0.059
+    609961       negative              2788900  0.058
+    1500625      negative              2788900  0.058
+    1503076      negative              2788900  0.056
+    611524       negative              2788900  0.056
+    361201       positive              3207681  0.051
+    546121       positive              3207681  0.051
+    524176       positive               844561  0.046
+    519841       negative              2560000  0.045
+    543169       positive               844561  0.043
+
+    [2397 rows x 3 columns]
+
+    3.d Compute the categorization scores
+     GET http://localhost:5001/api/v0/metrics/categorization
+        => Test scores: MAP = 0.287, ROC-AUC = 0.667, recall @20%: 0.571 
+
+    5.a Delete the extracted features (and LSI decomposition)
+     DELETE http://localhost:5001/api/v0/feature-extraction/6db42de7d0c44a63
+
+
+
+
+|
+
+
 .. code-block:: python
 
 
@@ -182,7 +411,7 @@ An example to illustrate binary categorizaiton with FreeDiscovery
         print(" DELETE", url)
         requests.delete(url)
 
-**Total running time of the script:** ( 0 minutes  0.000 seconds)
+**Total running time of the script:** ( 0 minutes  10.015 seconds)
 
 
 
@@ -201,4 +430,4 @@ An example to illustrate binary categorizaiton with FreeDiscovery
 
 .. rst-class:: sphx-glr-signature
 
-    `Generated by Sphinx-Gallery <http://sphinx-gallery.readthedocs.io>`_
+    `Generated by Sphinx-Gallery <https://sphinx-gallery.readthedocs.io>`_
