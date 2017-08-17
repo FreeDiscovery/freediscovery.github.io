@@ -182,14 +182,14 @@
 <span class="mf">1.</span><span class="n">a</span> <span class="n">Load</span> <span class="n">dataset</span> <span class="ow">and</span> <span class="n">initalize</span> <span class="n">feature</span> <span class="n">extraction</span>
  <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span>
    <span class="o">=&gt;</span> <span class="n">received</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
-   <span class="o">=&gt;</span> <span class="n">dsid</span> <span class="o">=</span> <span class="n">b2bd2f236e224d10</span>
+   <span class="o">=&gt;</span> <span class="n">dsid</span> <span class="o">=</span> <span class="mi">8</span><span class="n">baf2bc7eb7246e8</span>
 
 <span class="mf">1.</span><span class="n">b</span> <span class="n">Start</span> <span class="n">feature</span> <span class="n">extraction</span>
- <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="n">b2bd2f236e224d10</span>
+ <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="mi">8</span><span class="n">baf2bc7eb7246e8</span>
 
 <span class="mf">2.</span> <span class="n">Calculate</span> <span class="n">LSI</span>
 <span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">lsi</span><span class="o">/</span>
-  <span class="o">=&gt;</span> <span class="n">LSI</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="mi">35</span><span class="n">f641c14a7a4b6c</span>
+  <span class="o">=&gt;</span> <span class="n">LSI</span> <span class="n">model</span> <span class="nb">id</span> <span class="o">=</span> <span class="mi">09</span><span class="n">b9b1d32fc743a1</span>
   <span class="o">=&gt;</span> <span class="n">SVD</span> <span class="n">decomposition</span> <span class="k">with</span> <span class="mi">100</span> <span class="n">dimensions</span> <span class="n">explaining</span> <span class="mf">69.79</span> <span class="o">%</span> <span class="n">variabilty</span> <span class="n">of</span> <span class="n">the</span> <span class="n">data</span>
 
 <span class="mf">3.</span><span class="n">a</span><span class="o">.</span> <span class="n">Perform</span> <span class="n">the</span> <span class="n">semantic</span> <span class="n">search</span>
@@ -262,7 +262,7 @@
 <span class="mf">0.584964279258</span>
 
 <span class="mf">4.</span> <span class="n">Delete</span> <span class="n">the</span> <span class="n">extracted</span> <span class="n">features</span>
- <span class="n">DELETE</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="n">b2bd2f236e224d10</span>
+ <span class="n">DELETE</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">feature</span><span class="o">-</span><span class="n">extraction</span><span class="o">/</span><span class="mi">8</span><span class="n">baf2bc7eb7246e8</span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -361,7 +361,7 @@
     <span class="n">requests</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  3.909 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  4.119 seconds)</p>
 <div class="sphx-glr-footer container">
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../../_downloads/semantic_search_example.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">semantic_search_example.py</span></code></a></div>
@@ -391,7 +391,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016 - 2017, Grossman Labs LLC.
-      Last updated on Aug 08, 2017.
+      Last updated on Aug 17, 2017.
 
     </p>
   </div>

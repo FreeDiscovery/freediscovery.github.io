@@ -92,7 +92,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../engine/index.html">FreeDiscovery Engine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../python/index.html">Python package</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">User Manual</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Document similarity</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Document similarity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tf-idf-weighting-schemes">1. TF-IDF weighting schemes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-of-term-weighting">2. Example of term weighting</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="scaling_benchmarks.html">Scaling Benchmarks</a></li>
 </ul>
 </li>
@@ -152,7 +156,51 @@
             
   <div class="section" id="document-similarity">
 <h1>Document similarity<a class="headerlink" href="#document-similarity" title="Permalink to this headline">¶</a></h1>
-<p>A number of algorithms in FreeDiscovery require computing similarity between documents, including Nearest Neighbors categorization, search and clustering. FreeDiscovery supports the two following metrics (<code class="docutils literal"><span class="pre">cosine</span></code>, <code class="docutils literal"><span class="pre">jaccard</span></code>) to compute the document similarity scores, specified by the <cite>metric</cite> input parameters. To illustrate the difference between these metrics on a more practical example, we can consider two documents,</p>
+<p>A number of algorithms in FreeDiscovery require computing similarity between documents, including Nearest Neighbors categorization, search and clustering.</p>
+<div class="section" id="tf-idf-weighting-schemes">
+<h2>1. TF-IDF weighting schemes<a class="headerlink" href="#tf-idf-weighting-schemes" title="Permalink to this headline">¶</a></h2>
+<p>FreeDiscovery supports a large range of TF-IDF weighting schemes via the <cite>weighting=&#8221;xxx&#8221;</cite> parameter, that follows the <a class="reference external" href="https://en.wikipedia.org/wiki/SMART_Information_Retrieval_System">SMART Information Retrieval System</a> notation,</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="43%" />
+<col width="23%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Term frequency</td>
+<td>Document frequency</td>
+<td>Normalization</td>
+</tr>
+<tr class="row-even"><td><strong>n</strong> (natural): <span class="math">\({{\text{tf}}_{t,d}}\)</span></td>
+<td><strong>n</strong> (no): 1</td>
+<td><strong>n</strong> (none): 1</td>
+</tr>
+<tr class="row-odd"><td><strong>l</strong> (logarithm): <span class="math">\(1+log({\displaystyle {\text{tf}}_{t,d}})\)</span></td>
+<td><strong>t</strong> (idf): <span class="math">\(log{\displaystyle {\tfrac {N}{df_{t}}}}\)</span></td>
+<td><strong>c</strong> (cosine):  <span class="math">\({\displaystyle ||V_{\textbf{d}}||_2 = {\sqrt {w_{1}^{2}+...+w_{M}^{2}}}}\)</span></td>
+</tr>
+<tr class="row-even"><td><strong>a</strong> (augmented): <span class="math">\(0.5 + {\displaystyle {\tfrac {0.5\times {\text{tf}}_{t,d}}{{\text{max(tf}}_{t,d})}}}\)</span></td>
+<td><strong>p</strong> (prob idf): <span class="math">\({\displaystyle {\text{log}}{\tfrac {N-df_{t}}{df_{t}}}}\)</span></td>
+<td><p class="first"><strong>p</strong> (pivoted cosine):</p>
+<p class="last"><span class="math">\({\displaystyle (1 - \alpha) \textbf{avg} \left( ||V_{\textbf{d}}||_2 \right)  + \alpha  ||V_{\textbf{d}}||_2}\)</span></p>
+</td>
+</tr>
+<tr class="row-odd"><td><strong>b</strong> (boolean): <span class="math">\({\displaystyle {\begin{cases}1,&amp;{\text{if tf}}_{t,d}&gt;0\\0,&amp;{\text{otherwise}}\end{cases}}}\)</span></td>
+<td>&nbsp;</td>
+<td><p class="first"><strong>u</strong> (pivoted unique):</p>
+<p class="last"><span class="math">\({\displaystyle (1 - \alpha) \textbf{avg} \left( u_{\textbf{d}} \right)+ \alpha  u_{\textbf{d}}}\)</span></p>
+</td>
+</tr>
+<tr class="row-even"><td><strong>L</strong> (log average): <span class="math">\({\displaystyle {\tfrac {1+{\text{log}}({\text{tf}}_{t,d})}{1+{\text{log}}({\text{avg}}_{t\epsilon d}({\text{tf}}_{t,d}))}}}\)</span></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="example-of-term-weighting">
+<h2>2. Example of term weighting<a class="headerlink" href="#example-of-term-weighting" title="Permalink to this headline">¶</a></h2>
+<p>To illustrate the difference between these metrics on a more practical example, we can consider two documents,</p>
 <ul class="simple">
 <li>document <code class="docutils literal"><span class="pre">A</span></code> consisting of words <code class="docutils literal"><span class="pre">&quot;legal</span> <span class="pre">documents</span> <span class="pre">prodedure</span> <span class="pre">case&quot;</span></code></li>
 <li>document <code class="docutils literal"><span class="pre">B</span></code> consisting of words <code class="docutils literal"><span class="pre">&quot;legal</span> <span class="pre">documents&quot;</span></code></li>
@@ -168,6 +216,7 @@
 <strong>Note:</strong> the exact jaccard similarity in this case is <code class="docutils literal"><span class="pre">0.5</span></code>.</p>
 </li>
 </ul>
+</div>
 </div>
 
 
@@ -190,7 +239,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016 - 2017, Grossman Labs LLC.
-      Last updated on Aug 08, 2017.
+      Last updated on Aug 17, 2017.
 
     </p>
   </div>
