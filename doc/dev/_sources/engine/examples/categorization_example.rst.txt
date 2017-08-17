@@ -22,16 +22,16 @@ An example to illustrate binary categorizaiton with FreeDiscovery
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received ['id']
-       => dsid = 02a01d092c9c4f9d
+       => dsid = 4f7e4ec7a1a54bf3
 
     1.b Start feature extraction (in the background)
-     POST http://localhost:5001/api/v0/feature-extraction/02a01d092c9c4f9d
+     POST http://localhost:5001/api/v0/feature-extraction/4f7e4ec7a1a54bf3
 
     1.c Monitor feature extraction progress
-     GET http://localhost:5001/api/v0/feature-extraction/02a01d092c9c4f9d
+     GET http://localhost:5001/api/v0/feature-extraction/4f7e4ec7a1a54bf3
 
     1.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/02a01d092c9c4f9d
+     GET http://localhost:5001/api/v0/feature-extraction/4f7e4ec7a1a54bf3
          - analyzer: word
          - chunk_size: 5000
          - data_dir: /home/ubuntu/freediscovery_shared/treclegal09_2k_subset/data/jobRun_4/XML_EXPORT_CONTENT/text_9
@@ -51,7 +51,7 @@ An example to illustrate binary categorizaiton with FreeDiscovery
 
     2. Calculate LSI
     POST http://localhost:5001/api/v0/lsi/
-      => LSI model id = b71914feaa6c4f56
+      => LSI model id = 9c1fa44fc43342b9
       => SVD decomposition with 100 dimensions explaining 69.79 % variabilty of the data
 
     3.a. Train the categorization model
@@ -64,16 +64,16 @@ An example to illustrate binary categorizaiton with FreeDiscovery
      ================================================================================
      POST http://localhost:5001/api/v0/categorization/
      Training...
-         => model id = 5bb7f3bd393d4ce9
+         => model id = b70296ef0ef7448a
         => Training scores: MAP = 0.815, ROC-AUC = 0.900, recall @20%: 0.800 
 
     3.b. Check the parameters used in the categorization model
-     GET http://localhost:5001/api/v0/categorization/5bb7f3bd393d4ce9
+     GET http://localhost:5001/api/v0/categorization/b70296ef0ef7448a
          - method: LinearSVC
          - options: {'C': 1.0, 'class_weight': None, 'dual': True, 'fit_intercept': True, 'intercept_scaling': 1, 'loss': 'squared_hinge', 'max_iter': 1000, 'multi_class': 'ovr', 'penalty': 'l2', 'random_state': None, 'tol': 0.0001, 'verbose': 0}
 
     3.c Categorize the complete dataset with this model
-     GET http://localhost:5001/api/v0/categorization/5bb7f3bd393d4ce9/predict
+     GET http://localhost:5001/api/v0/categorization/b70296ef0ef7448a/predict
                  category  score
     document_id                 
     568516       negative  0.778
@@ -90,7 +90,7 @@ An example to illustrate binary categorizaiton with FreeDiscovery
     3286969      negative  0.750
     274576       negative  0.750
     118336       negative  0.750
-    5239521      negative  0.750
+    5239521      negative  0.749
     3709476      negative  0.749
     319225       negative  0.749
     4941729      negative  0.749
@@ -148,16 +148,16 @@ An example to illustrate binary categorizaiton with FreeDiscovery
      ================================================================================
      POST http://localhost:5001/api/v0/categorization/
      Training...
-         => model id = 21793cda4e6b43a4
+         => model id = 2610bdf01bda4a2a
         => Training scores: MAP = 1.000, ROC-AUC = 1.000, recall @20%: 1.000 
 
     3.b. Check the parameters used in the categorization model
-     GET http://localhost:5001/api/v0/categorization/21793cda4e6b43a4
+     GET http://localhost:5001/api/v0/categorization/2610bdf01bda4a2a
          - method: NearestNeighbor
          - options: {'algorithm': 'brute', 'leaf_size': 30, 'n_jobs': 1, 'radius': None}
 
     3.c Categorize the complete dataset with this model
-     GET http://localhost:5001/api/v0/categorization/21793cda4e6b43a4/predict
+     GET http://localhost:5001/api/v0/categorization/2610bdf01bda4a2a/predict
                  category  nearest_document_id  score
     document_id                                      
     37249        negative               150544  1.000
@@ -229,7 +229,7 @@ An example to illustrate binary categorizaiton with FreeDiscovery
         => Test scores: MAP = 0.287, ROC-AUC = 0.667, recall @20%: 0.571 
 
     5.a Delete the extracted features (and LSI decomposition)
-     DELETE http://localhost:5001/api/v0/feature-extraction/02a01d092c9c4f9d
+     DELETE http://localhost:5001/api/v0/feature-extraction/4f7e4ec7a1a54bf3
 
 
 
@@ -409,7 +409,7 @@ An example to illustrate binary categorizaiton with FreeDiscovery
         print(" DELETE", url)
         requests.delete(url)
 
-**Total running time of the script:** ( 0 minutes  9.945 seconds)
+**Total running time of the script:** ( 0 minutes  9.457 seconds)
 
 
 

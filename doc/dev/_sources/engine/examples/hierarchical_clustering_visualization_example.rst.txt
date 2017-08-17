@@ -166,13 +166,13 @@ Visualize hierarchical clusters
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received ['id']
-       => dsid = 2c09961bf8df4da3
+       => dsid = 6c758d6e06ca42a4
 
     1.b Run feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/2c09961bf8df4da3
+     POST http://localhost:5001/api/v0/feature-extraction/6c758d6e06ca42a4
 
     1.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/2c09961bf8df4da3
+     GET http://localhost:5001/api/v0/feature-extraction/6c758d6e06ca42a4
          - analyzer: word
          - chunk_size: 5000
          - data_dir: /home/ubuntu/freediscovery_shared/20_newsgroups_3categories
@@ -192,15 +192,15 @@ Visualize hierarchical clusters
 
     2. Calculate LSI
     POST http://localhost:5001/api/v0/lsi/
-      => LSI model id = c75f77955e8e4d64
+      => LSI model id = 60154cdc9cb9466f
       => SVD decomposition with 100 dimensions explaining 22.26 % variabilty of the data
 
     3.a. Document clustering (LSI + Birch clustering)
      POST http://localhost:5001/api/v0/clustering/birch/
-         => model id = 17cdee86c0224b3c
+         => model id = 3edd2e22268a4ea7
 
     4.b. Computing cluster labels
-     GET http://localhost:5001/api/v0/clustering/birch/17cdee86c0224b3c
+     GET http://localhost:5001/api/v0/clustering/birch/3edd2e22268a4ea7
         .. computed in 1.0s
                                                  children  cluster_depth  cluster_id                  cluster_label  cluster_similarity  cluster_size                                          documents
     0   [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14...              0           0                edu thanks know               0.108          1967  [{'document_id': 225, 'similarity': 0.11136850...
@@ -210,28 +210,28 @@ Visualize hierarchical clusters
     4                                                  []              1           4                  ftp data site               0.498            45  [{'document_id': 196, 'similarity': 0.63168856...
     5                                                  []              1           5       points algorithm problem               0.253           208  [{'document_id': 144, 'similarity': 0.31973796...
     6                                                  []              1           6         screen windows display               0.325           118  [{'document_id': 5329, 'similarity': 0.1170009...
-    7                                                  []              1           7                game year lopez               0.361            93  [{'document_id': 169, 'similarity': 0.44509086...
+    7                                                  []              1           7       jewish mattingly kingman               0.353            66  [{'document_id': 16129, 'similarity': 0.327495...
     8                                                  []              1           8         radiosity anybody help               0.337            77  [{'document_id': 361, 'similarity': 0.13379389...
     9                                                  []              1           9           amiga aspects format               0.492            38  [{'document_id': 441, 'similarity': 0.58264766...
     10                                                 []              1          10          tiff software library               0.307           136  [{'document_id': 6889, 'similarity': 0.1279159...
-    11                                                 []              1          11           new uniforms stadium               0.300           124  [{'document_id': 961, 'similarity': 0.46294582...
+    11                                                 []              1          11                game year lopez               0.361            93  [{'document_id': 169, 'similarity': 0.44509086...
     12                                                 []              1          12              list mailing ball               0.294           129  [{'document_id': 17689, 'similarity': 0.097539...
     13                                                 []              1          13                   bit jays edu               0.300           108  [{'document_id': 3969, 'similarity': 0.4519637...
     14                                                 []              1          14             braves card driver               0.440            56  [{'document_id': 40401, 'similarity': 0.441856...
-    15                                                 []              1          15       jewish mattingly kingman               0.353            66  [{'document_id': 16129, 'similarity': 0.327495...
+    15                                                 []              1          15           new uniforms stadium               0.300           124  [{'document_id': 961, 'similarity': 0.46294582...
     16                                                 []              1          16                 sox thanks red               0.392            52  [{'document_id': 15876, 'similarity': 0.630474...
     17                                                 []              1          17                 mode games vga               0.228           189  [{'document_id': 0, 'similarity': 0.2483949485...
     18                                                 []              1          18             version jpeg ariel               0.352            45  [{'document_id': 53824, 'similarity': 0.463246...
     19                                                 []              1          19               does know thanks               0.278           141  [{'document_id': 2401, 'similarity': 0.3866424...
 
     5. Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/2c09961bf8df4da3
+     DELETE http://localhost:5001/api/v0/feature-extraction/6c758d6e06ca42a4
 
 
 .. image:: cluster_hierarchy.png
 
 
-**Total running time of the script:** ( 0 minutes  5.727 seconds)
+**Total running time of the script:** ( 0 minutes  6.161 seconds)
 
 
 
