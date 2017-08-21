@@ -1,0 +1,253 @@
+
+
+.. _sphx_glr_engine_examples_hierarchical_clustering_visualization_example.py:
+
+
+Hierarchical Clustering Example
+-------------------------------
+
+Visualize hierarchical clusters
+
+
+
+.. code-block:: python
+
+
+    import os.path
+    import pandas as pd
+    from time import time
+    import requests
+    from graphviz import Digraph
+
+
+    dataset_name = "20_newsgroups_3categories"     # see list of available datasets
+
+    BASE_URL = "http://localhost:5001/api/v0"  # FreeDiscovery server URL
+
+    print(" 0. Load the example dataset")
+    url = BASE_URL + '/example-dataset/{}'.format(dataset_name)
+    print(" GET", url)
+    input_ds = requests.get(url).json()
+
+    # To use a custom dataset, simply specify the following variables
+    data_dir = input_ds['metadata']['data_dir']
+    dataset_definition = [{'document_id': row['document_id'],
+                           'file_path': os.path.join(data_dir, row['file_path'])}
+                          for row in input_ds['dataset']]
+
+    # # 1. Feature extraction (non hashed)
+
+    print("\n1.a Load dataset and initalize feature extraction")
+    url = BASE_URL + '/feature-extraction'
+    print(" POST", url)
+    fe_opts = {'max_df': 0.6,  # filter out (too)/(un)frequent words
+               'weighting': "ntc",
+               }
+    res = requests.post(url, json=fe_opts).json()
+
+    dsid = res['id']
+    print("   => received {}".format(list(res.keys())))
+    print("   => dsid = {}".format(dsid))
+
+
+    print("\n1.b Run feature extraction")
+    # progress status is available for the hashed version only
+    url = BASE_URL+'/feature-extraction/{}'.format(dsid)
+    print(" POST", url)
+    res = requests.post(url, json={'dataset_definition': dataset_definition})
+
+    print("\n1.d. check the parameters of the extracted features")
+    url = BASE_URL + '/feature-extraction/{}'.format(dsid)
+    print(' GET', url)
+    res = requests.get(url).json()
+
+    print('\n'.join(['     - {}: {}'.format(key, val) for key, val in res.items()
+                     if "filenames" not in key]))
+
+    print("\n2. Calculate LSI")
+
+    url = BASE_URL + '/lsi/'
+    print("POST", url)
+
+    n_components = 100
+    res = requests.post(url,
+                        json={'n_components': n_components,
+                              'parent_id': dsid
+                              }).json()
+
+    lsi_id = res['id']
+    print('  => LSI model id = {}'.format(lsi_id))
+    print(('  => SVD decomposition with {} dimensions '
+           'explaining {:.2f} % variabilty of the data')
+          .format(n_components, res['explained_variance']*100))
+
+
+
+    # # 3. Document Clustering (LSI + Birch Clustering)
+
+    print("\n3.a. Document clustering (LSI + Birch clustering)")
+
+    url = BASE_URL + '/clustering/birch/'
+    print(" POST", url)
+    t0 = time()
+    res = requests.post(url,
+                        json={'parent_id': lsi_id,
+                              'n_clusters': -1,
+                              'min_similarity': 0.55,
+                              #'max_tree_depth': 3,
+                              }).json()
+
+    mid = res['id']
+    print("     => model id = {}".format(mid))
+
+    print("\n4.b. Computing cluster labels")
+    url = BASE_URL + '/clustering/birch/{}'.format(mid)
+    print(" GET", url)
+    res = requests.get(url,
+                       json={'n_top_words': 3
+                             }).json()
+    t1 = time()
+
+    print('    .. computed in {:.1f}s'.format(t1 - t0))
+    data = res['data']
+
+    print(pd.DataFrame(data))
+
+    # 5. Cleaning
+    print("\n5. Delete the extracted features")
+    url = BASE_URL + '/feature-extraction/{}'.format(dsid)
+    print(" DELETE", url)
+    requests.delete(url)
+
+    # 3. Hierarchical cluster visualization
+
+    ch = Digraph('cluster_hierarchy',
+                 node_attr={'shape': 'record'},
+                 format='png')
+
+    ch.graph_attr['rankdir'] = 'LR'
+    ch.graph_attr['dpi'] = "200"
+
+    for row in data:
+        ch.node('cluster_{}'.format(row['cluster_id']),
+                '{{<f0>{}| {{<f1> id={:03}  |<f2> N={} |<f3> sim={:.2f} }}}}'
+                .format(row['cluster_label'],
+                        row['cluster_id'],
+                        row['cluster_size'],
+                        row['cluster_similarity']))
+
+
+    def create_hc_links(node, ch, data):
+        for child_id in node['children']:
+            ch.edge('cluster_{}:f2'.format(node['cluster_id']),
+                    'cluster_{}:f0'.format(child_id))
+            create_hc_links(data[child_id], ch, data)
+
+
+    create_hc_links(data[0], ch, data)
+
+    tmp_dir = os.path.join('..', '..', 'doc', 'engine', 'examples')
+    if os.path.exists(tmp_dir):
+        ch.render('cluster_hierarchy', directory=tmp_dir, cleanup=True)
+    else:
+        ch.view()
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    0. Load the example dataset
+     GET http://localhost:5001/api/v0/example-dataset/20_newsgroups_3categories
+
+    1.a Load dataset and initalize feature extraction
+     POST http://localhost:5001/api/v0/feature-extraction
+       => received ['id']
+       => dsid = 3dce07deb5824a51
+
+    1.b Run feature extraction
+     POST http://localhost:5001/api/v0/feature-extraction/3dce07deb5824a51
+
+    1.d. check the parameters of the extracted features
+     GET http://localhost:5001/api/v0/feature-extraction/3dce07deb5824a51
+         - analyzer: word
+         - chunk_size: 5000
+         - data_dir: /home/ubuntu/freediscovery_shared/20_newsgroups_3categories
+         - max_df: 0.6
+         - min_df: 0.0
+         - n_features: 100001
+         - n_jobs: 1
+         - n_samples: 1967
+         - n_samples_processed: 1967
+         - ngram_range: [1, 1]
+         - norm_alpha: 0.75
+         - parse_email_headers: False
+         - preprocess: []
+         - stop_words: english
+         - use_hashing: False
+         - weighting: ntc
+
+    2. Calculate LSI
+    POST http://localhost:5001/api/v0/lsi/
+      => LSI model id = c064226670e44f49
+      => SVD decomposition with 100 dimensions explaining 22.26 % variabilty of the data
+
+    3.a. Document clustering (LSI + Birch clustering)
+     POST http://localhost:5001/api/v0/clustering/birch/
+         => model id = b5f6d5a68f3540ac
+
+    4.b. Computing cluster labels
+     GET http://localhost:5001/api/v0/clustering/birch/b5f6d5a68f3540ac
+        .. computed in 1.1s
+                                                 children  cluster_depth  cluster_id                  cluster_label  cluster_similarity  cluster_size                                          documents
+    0   [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14...              0           0                edu thanks know               0.108          1967  [{'document_id': 225, 'similarity': 0.11136850...
+    1                                                  []              1           1             comp image article               0.288           143  [{'document_id': 225, 'similarity': 0.21640175...
+    2                                                  []              1           2          format phillies files               0.337            93  [{'document_id': 121, 'similarity': 0.37184011...
+    3                                                  []              1           3  computer information siggraph               0.397           106  [{'document_id': 100, 'similarity': 0.00270706...
+    4                                                  []              1           4                  ftp data site               0.498            45  [{'document_id': 196, 'similarity': 0.63168856...
+    5                                                  []              1           5       points algorithm problem               0.253           208  [{'document_id': 144, 'similarity': 0.31973796...
+    6                                                  []              1           6         screen windows display               0.325           118  [{'document_id': 5329, 'similarity': 0.1170009...
+    7                                                  []              1           7       jewish mattingly kingman               0.353            66  [{'document_id': 16129, 'similarity': 0.327495...
+    8                                                  []              1           8                 sox thanks red               0.392            52  [{'document_id': 15876, 'similarity': 0.630474...
+    9                                                  []              1           9           amiga aspects format               0.492            38  [{'document_id': 441, 'similarity': 0.58264766...
+    10                                                 []              1          10          tiff software library               0.307           136  [{'document_id': 6889, 'similarity': 0.1279159...
+    11                                                 []              1          11                game year lopez               0.361            93  [{'document_id': 169, 'similarity': 0.44509086...
+    12                                                 []              1          12              list mailing ball               0.294           129  [{'document_id': 17689, 'similarity': 0.097539...
+    13                                                 []              1          13                   bit jays edu               0.300           108  [{'document_id': 3969, 'similarity': 0.4519637...
+    14                                                 []              1          14         radiosity anybody help               0.337            77  [{'document_id': 361, 'similarity': 0.13379389...
+    15                                                 []              1          15           new uniforms stadium               0.300           124  [{'document_id': 961, 'similarity': 0.46294582...
+    16                                                 []              1          16             braves card driver               0.440            56  [{'document_id': 40401, 'similarity': 0.441856...
+    17                                                 []              1          17                 mode games vga               0.228           189  [{'document_id': 0, 'similarity': 0.2483949485...
+    18                                                 []              1          18             version jpeg ariel               0.352            45  [{'document_id': 53824, 'similarity': 0.463246...
+    19                                                 []              1          19               does know thanks               0.278           141  [{'document_id': 2401, 'similarity': 0.3866424...
+
+    5. Delete the extracted features
+     DELETE http://localhost:5001/api/v0/feature-extraction/3dce07deb5824a51
+
+
+.. image:: cluster_hierarchy.png
+
+
+**Total running time of the script:** ( 0 minutes  5.520 seconds)
+
+
+
+.. container:: sphx-glr-footer
+
+
+  .. container:: sphx-glr-download
+
+     :download:`Download Python source code: hierarchical_clustering_visualization_example.py <hierarchical_clustering_visualization_example.py>`
+
+
+
+  .. container:: sphx-glr-download
+
+     :download:`Download Jupyter notebook: hierarchical_clustering_visualization_example.ipynb <hierarchical_clustering_visualization_example.ipynb>`
+
+.. rst-class:: sphx-glr-signature
+
+    `Generated by Sphinx-Gallery <https://sphinx-gallery.readthedocs.io>`_

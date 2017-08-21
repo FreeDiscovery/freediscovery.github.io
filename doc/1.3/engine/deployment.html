@@ -1,0 +1,288 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Deployment options &mdash; FreeDiscovery 1.3.0rc1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="FreeDiscovery 1.3.0rc1 documentation" href="../index.html"/>
+        <link rel="up" title="FreeDiscovery Engine" href="index.html"/>
+        <link rel="next" title="Docker setup" href="docker.html"/>
+        <link rel="prev" title="Data ingestion" href="data_ingestion.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> FreeDiscovery
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.3.0rc1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">FreeDiscovery Engine</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#running-the-server">Running the server</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#contents">Contents</a><ul class="current">
+<li class="toctree-l3"><a class="reference external" href="../openapi-docs/index.html#http://">API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation_instructions.html">Installation Instructions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quickstart.html">Quick start</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/index.html">Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli.html">Command line interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_ingestion.html">Data ingestion</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Deployment options</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#development-server">1. Development server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#docker-deployment-on-aws">2. Docker deployment on AWS</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="docker.html">Docker setup</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../python/index.html">Python package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_manual/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats_new.html">Release history</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">FreeDiscovery</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+        <li><a href="index.html">FreeDiscovery Engine</a> &raquo;</li>
+      
+    <li>Deployment options</li>
+    <li class="wy-breadcrumbs-aside">
+      
+          
+          
+            <a href="https://github.com/FreeDiscovery/FreeDiscovery/blob/master/doc/engine/deployment.md" class="fa fa-github"> Edit on GitHub</a>
+          
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="deployment-options">
+<span id="deployment-options"></span><h1>Deployment options<a class="headerlink" href="#deployment-options" title="Permalink to this headline">¶</a></h1>
+<p><img alt="FreeDiscovery deployment" src="../_images/FreeDiscovery_infra.png" /></p>
+<div class="section" id="development-server">
+<span id="development-server"></span><h2>1. Development server<a class="headerlink" href="#development-server" title="Permalink to this headline">¶</a></h2>
+<p>The options used to start the FreeDiscovery server are defined in <code class="docutils literal"><span class="pre">scripts/run_api.py</span></code>. By default, the options <code class="docutils literal"><span class="pre">processes=1,</span> <span class="pre">threaded=True</span></code> are used, which allows to run on all platforms, but disables parallel processing in FreeDiscovery.</p>
+<p>On Linux, Mac or when running in a Docker container (including on Windows), a more efficient approach is to set <code class="docutils literal"><span class="pre">processes=4,</span> <span class="pre">threaded=False</span></code> (e.g. to run on 4 CPU cores), before starting the server (or before building the Docker container), which would allow parallel hashed feature extraction and cross validations.</p>
+</div>
+<div class="section" id="docker-deployment-on-aws">
+<span id="docker-deployment-on-aws"></span><h2>2. Docker deployment on AWS<a class="headerlink" href="#docker-deployment-on-aws" title="Permalink to this headline">¶</a></h2>
+<p>This section illustrates how to run a FreeDiscovery Docker images on AWS EC2 without using the EC2 container service, however it can be extended to that purpose. Here we manually create an AMI instance and install docker, but <a class="reference external" href="https://docs.docker.com/machine/drivers/aws/"><code class="docutils literal"><span class="pre">docker-machine</span></code> with <code class="docutils literal"><span class="pre">amazonec2</span></code> driver</a> can also be used to simplify the setup phase.</p>
+<ol>
+<li><p class="first">Choose an AMI (e.g. Amazon Linux AMI) and create an instance with sufficient resources (at least 16GB RAM, 4 CPU cores, twice the RAM size in free disk space, <code class="docutils literal"><span class="pre">m4.xlarge</span></code> or preferably <code class="docutils literal"><span class="pre">c4.2xlarge</span></code> to process TREC legal 700,000 document collection)</p>
+<ul class="simple">
+<li>port 5001 is used by default in FreeDiscovery and must be open to incoming connections.</li>
+</ul>
+</li>
+<li><p class="first">Install Docker in the instance (cf. for instance the <a class="reference external" href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/docker-basics.html#install_docker">&#8220;Docker Basics&#8221; AWS EC2 guide</a>)</p>
+</li>
+<li><p class="first">A prebuild Docker image of FreeDiscovery can be downloaded with,</p>
+<ul class="simple">
+<li>[only once] <code class="docutils literal"><span class="pre">docker</span> <span class="pre">login</span></code>  # using your <a class="reference external" href="https://hub.docker.com">hub.docker.com</a> credentials</li>
+<li>[only once, optional] requesting permission to access the <code class="docutils literal"><span class="pre">freediscovery/freediscovery</span></code> image for your <code class="docutils literal"><span class="pre">userid</span></code></li>
+<li><code class="docutils literal"><span class="pre">docker</span> <span class="pre">pull</span> <span class="pre">freediscovery/freediscovery:&lt;tag&gt;</span></code> # where <code class="docutils literal"><span class="pre">&lt;tag&gt;</span></code> is one of the stable tags on <a class="reference external" href="http://github.com/FreeDiscovery/FreeDiscovery">github.com/FreeDiscovery/FreeDiscovery</a>.</li>
+</ul>
+</li>
+<li><p class="first">Create or choose a folder where the data to process will be copied and that can be used to store temporary files.</p>
+</li>
+<li><p class="first">Run Docker and mount the above folder under <code class="docutils literal"><span class="pre">/freediscovery_shared</span></code> inside the container,</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">t</span> <span class="o">-</span><span class="n">i</span> <span class="o">-</span><span class="n">v</span> <span class="o">/&lt;</span><span class="n">shared_folder</span><span class="o">&gt;</span><span class="p">:</span><span class="o">/</span><span class="n">freediscovery_shared</span> <span class="o">-</span><span class="n">p</span> <span class="mi">5001</span><span class="p">:</span><span class="mi">5001</span> <span class="n">freediscovery</span><span class="o">/</span><span class="n">freediscovery</span>
+<span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">t</span> <span class="o">-</span><span class="n">i</span> <span class="o">-</span><span class="n">v</span> <span class="o">/&lt;</span><span class="n">shared_folder</span><span class="o">&gt;</span><span class="p">:</span><span class="o">/</span><span class="n">freediscovery_shared</span> <span class="o">-</span><span class="n">p</span> <span class="mi">5001</span><span class="p">:</span><span class="mi">5001</span> <span class="n">freediscovery</span><span class="o">/</span><span class="n">freediscovery</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="docker.html" class="btn btn-neutral float-right" title="Docker setup" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="data_ingestion.html" class="btn btn-neutral" title="Data ingestion" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 - 2017, Grossman Labs LLC.
+      Last updated on Aug 21, 2017.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.3.0rc1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+ 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-91765795-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
