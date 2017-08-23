@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>freediscovery.categorization.NearestNeighborRanker &mdash; FreeDiscovery 1.3.dev0 documentation</title>
+  <title>freediscovery.categorization.NearestNeighborRanker &mdash; FreeDiscovery 1.3.0rc1 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="FreeDiscovery 1.3.dev0 documentation" href="../../index.html"/>
+    <link rel="top" title="FreeDiscovery 1.3.0rc1 documentation" href="../../index.html"/>
         <link rel="up" title="API Reference" href="../api.html"/>
         <link rel="next" title="freediscovery.cluster.ClusterLabels" href="freediscovery.cluster.ClusterLabels.html"/>
         <link rel="prev" title="freediscovery.feature_weighting.SmartTfidfTransformer" href="freediscovery.feature_weighting.SmartTfidfTransformer.html"/> 
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                1.3.dev0
+                1.3.0rc1
               </div>
             
           
@@ -91,21 +91,21 @@
                 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../engine/index.html">FreeDiscovery Engine</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Python package</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="../index.html#installation">Installation</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="../api.html">API Reference</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="../api.html#datasets">Datasets</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../api.html#feature-extraction">Feature extraction</a></li>
-<li class="toctree-l4 current"><a class="reference internal" href="../api.html#document-categorization">Document categorization</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../api.html#document-clustering">Document clustering</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../api.html#duplicates-detection">Duplicates detection</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../api.html#semantic-search">Semantic search</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../api.html#io">IO</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../api.html#metrics">Metrics</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../api.html">API Reference</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../api.html#datasets">Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#feature-extraction">Feature extraction</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../api.html#document-categorization">Document categorization</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">freediscovery.categorization.NearestNeighborRanker</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../examples/index.html">Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#document-clustering">Document clustering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#duplicates-detection">Duplicates detection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#semantic-search">Semantic search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#io">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#metrics">Metrics</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/index.html">Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../user_manual/index.html">User Manual</a></li>
@@ -169,7 +169,7 @@
 <h1>freediscovery.categorization.NearestNeighborRanker<a class="headerlink" href="#freediscovery-categorization-nearestneighborranker" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="freediscovery.categorization.NearestNeighborRanker">
-<em class="property">class </em><code class="descclassname">freediscovery.categorization.</code><code class="descname">NearestNeighborRanker</code><span class="sig-paren">(</span><em>radius=1.0</em>, <em>algorithm='brute'</em>, <em>leaf_size=30</em>, <em>n_jobs=1</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/8b69bf2/freediscovery/neighbors.py#L73"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.categorization.NearestNeighborRanker" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">freediscovery.categorization.</code><code class="descname">NearestNeighborRanker</code><span class="sig-paren">(</span><em>radius=1.0</em>, <em>algorithm='brute'</em>, <em>leaf_size=30</em>, <em>n_jobs=1</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/c4c3446/freediscovery/neighbors.py#L73"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.categorization.NearestNeighborRanker" title="Permalink to this definition">¶</a></dt>
 <dd><p>A nearest neighbor ranker.</p>
 <p>The distance is returned in terms of cosine_similarity</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -207,7 +207,7 @@ than from a negative one, it will be considered negative with a very low score)<
 </table>
 <dl class="method">
 <dt id="freediscovery.categorization.NearestNeighborRanker.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>radius=1.0</em>, <em>algorithm='brute'</em>, <em>leaf_size=30</em>, <em>n_jobs=1</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/8b69bf2/freediscovery/neighbors.py#L114"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.categorization.NearestNeighborRanker.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>radius=1.0</em>, <em>algorithm='brute'</em>, <em>leaf_size=30</em>, <em>n_jobs=1</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/c4c3446/freediscovery/neighbors.py#L114"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.categorization.NearestNeighborRanker.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods</p>
@@ -239,7 +239,7 @@ than from a negative one, it will be considered negative with a very low score)<
 </table>
 <dl class="method">
 <dt id="freediscovery.categorization.NearestNeighborRanker.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/8b69bf2/freediscovery/neighbors.py#L123"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.categorization.NearestNeighborRanker.fit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/c4c3446/freediscovery/neighbors.py#L123"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.categorization.NearestNeighborRanker.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fit the model using X as training data
 :param X: Training data, shape [n_samples, n_features],
 :type X: {array-like, sparse matrix, BallTree, KDTree}</p>
@@ -247,7 +247,7 @@ than from a negative one, it will be considered negative with a very low score)<
 
 <dl class="method">
 <dt id="freediscovery.categorization.NearestNeighborRanker.get_params">
-<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/8b69bf2/freediscovery/../../miniconda3/envs/testenv/lib/python3.6/site-packages/sklearn/base.py#L212"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.categorization.NearestNeighborRanker.get_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/c4c3446/freediscovery/../../miniconda3/envs/testenv/lib/python3.6/site-packages/sklearn/base.py#L212"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.categorization.NearestNeighborRanker.get_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get parameters for this estimator.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -266,7 +266,7 @@ contained subobjects that are estimators.</td>
 
 <dl class="method">
 <dt id="freediscovery.categorization.NearestNeighborRanker.kneighbors">
-<code class="descname">kneighbors</code><span class="sig-paren">(</span><em>X=None</em>, <em>batch_size=5000</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/8b69bf2/freediscovery/neighbors.py#L157"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.categorization.NearestNeighborRanker.kneighbors" title="Permalink to this definition">¶</a></dt>
+<code class="descname">kneighbors</code><span class="sig-paren">(</span><em>X=None</em>, <em>batch_size=5000</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/c4c3446/freediscovery/neighbors.py#L157"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.categorization.NearestNeighborRanker.kneighbors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Finds the K-neighbors of a point.
 Returns indices of and distances to the neighbors of each point.
 :param X: the input array
@@ -290,7 +290,7 @@ Returns indices of and distances to the neighbors of each point.
 
 <dl class="method">
 <dt id="freediscovery.categorization.NearestNeighborRanker.score">
-<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/8b69bf2/freediscovery/base.py#L26"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.categorization.NearestNeighborRanker.score" title="Permalink to this definition">¶</a></dt>
+<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/c4c3446/freediscovery/base.py#L26"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.categorization.NearestNeighborRanker.score" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the ROC score of the prediction.
 Best possible score is 1.0 and the worst in 0.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -316,7 +316,7 @@ Best possible score is 1.0 and the worst in 0.</p>
 
 <dl class="method">
 <dt id="freediscovery.categorization.NearestNeighborRanker.set_params">
-<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/8b69bf2/freediscovery/../../miniconda3/envs/testenv/lib/python3.6/site-packages/sklearn/base.py#L249"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.categorization.NearestNeighborRanker.set_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/c4c3446/freediscovery/../../miniconda3/envs/testenv/lib/python3.6/site-packages/sklearn/base.py#L249"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.categorization.NearestNeighborRanker.set_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the parameters of this estimator.</p>
 <p>The method works on simple estimators as well as on nested objects
 (such as pipelines). The latter have parameters of the form
@@ -358,7 +358,7 @@ component of a nested object.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016 - 2017, Grossman Labs LLC.
-      Last updated on Aug 21, 2017.
+      Last updated on Aug 23, 2017.
 
     </p>
   </div>
@@ -380,7 +380,7 @@ component of a nested object.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.3.dev0',
+            VERSION:'1.3.0rc1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
