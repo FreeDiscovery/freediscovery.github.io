@@ -22,13 +22,13 @@ An example illustrating the data ingestion in FreeDiscovery
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received ['id']
-       => dsid = a0faaf97a90c471b
+       => dsid = a2bc009e76264d62
 
     1.b Start feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/a0faaf97a90c471b
+     POST http://localhost:5001/api/v0/feature-extraction/a2bc009e76264d62
 
     2.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/a0faaf97a90c471b
+     GET http://localhost:5001/api/v0/feature-extraction/a2bc009e76264d62
          - analyzer: word
          - chunk_size: 5000
          - data_dir: /home/ubuntu/freediscovery_shared/treclegal09_2k_subset/data/jobRun_4/XML_EXPORT_CONTENT/text_9
@@ -49,7 +49,7 @@ An example illustrating the data ingestion in FreeDiscovery
     3. Examine the id mapping
 
 
-     GET http://localhost:5001/api/v0/feature-extraction/a0faaf97a90c471b/id-mapping
+     GET http://localhost:5001/api/v0/feature-extraction/a2bc009e76264d62/id-mapping
        DATA {"data": [{"internal_id": 0}, {"internal_id": 1}, {"internal_id": 2}]}
      Response:
        {
@@ -73,7 +73,7 @@ An example illustrating the data ingestion in FreeDiscovery
     }
 
     5.a Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/a0faaf97a90c471b
+     DELETE http://localhost:5001/api/v0/feature-extraction/a2bc009e76264d62
 
 
 
@@ -155,7 +155,7 @@ An example illustrating the data ingestion in FreeDiscovery
         print(" DELETE", url)
         requests.delete(url)
 
-**Total running time of the script:** ( 0 minutes  2.171 seconds)
+**Total running time of the script:** ( 0 minutes  2.079 seconds)
 
 
 

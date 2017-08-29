@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>freediscovery.dupdet.SimhashDuplicates &mdash; FreeDiscovery 1.3.0rc1 documentation</title>
+  <title>freediscovery.near_duplicates.SimhashNearDuplicates &mdash; FreeDiscovery 1.3.0rc1 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="search" title="Search" href="../../search.html"/>
     <link rel="top" title="FreeDiscovery 1.3.0rc1 documentation" href="../../index.html"/>
         <link rel="up" title="API Reference" href="../api.html"/>
-        <link rel="next" title="freediscovery.dupdet.IMatchDuplicates" href="freediscovery.dupdet.IMatchDuplicates.html"/>
+        <link rel="next" title="freediscovery.near_duplicates.IMatchNearDuplicates" href="freediscovery.near_duplicates.IMatchNearDuplicates.html"/>
         <link rel="prev" title="freediscovery.cluster.ClusterLabels" href="freediscovery.cluster.ClusterLabels.html"/> 
 
   
@@ -97,8 +97,8 @@
 <li class="toctree-l3"><a class="reference internal" href="../api.html#document-categorization">Document categorization</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../api.html#document-clustering">Document clustering</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="../api.html#duplicates-detection">Duplicates detection</a><ul class="current">
-<li class="toctree-l4 current"><a class="current reference internal" href="#">freediscovery.dupdet.SimhashDuplicates</a></li>
-<li class="toctree-l4"><a class="reference internal" href="freediscovery.dupdet.IMatchDuplicates.html">freediscovery.dupdet.IMatchDuplicates</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">freediscovery.near_duplicates.SimhashNearDuplicates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="freediscovery.near_duplicates.IMatchNearDuplicates.html">freediscovery.near_duplicates.IMatchNearDuplicates</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../api.html#semantic-search">Semantic search</a></li>
@@ -150,12 +150,12 @@
       
         <li><a href="../api.html">API Reference</a> &raquo;</li>
       
-    <li>freediscovery.dupdet.SimhashDuplicates</li>
+    <li>freediscovery.near_duplicates.SimhashNearDuplicates</li>
     <li class="wy-breadcrumbs-aside">
       
           
           
-            <a href="https://github.com/FreeDiscovery/FreeDiscovery/blob/master/doc/python/generated/freediscovery.dupdet.SimhashDuplicates.rst" class="fa fa-github"> Edit on GitHub</a>
+            <a href="https://github.com/FreeDiscovery/FreeDiscovery/blob/master/doc/python/generated/freediscovery.near_duplicates.SimhashNearDuplicates.rst" class="fa fa-github"> Edit on GitHub</a>
           
         
       
@@ -166,11 +166,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="freediscovery-dupdet-simhashduplicates">
-<h1>freediscovery.dupdet.SimhashDuplicates<a class="headerlink" href="#freediscovery-dupdet-simhashduplicates" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="freediscovery-near-duplicates-simhashnearduplicates">
+<h1>freediscovery.near_duplicates.SimhashNearDuplicates<a class="headerlink" href="#freediscovery-near-duplicates-simhashnearduplicates" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
-<dt id="freediscovery.dupdet.SimhashDuplicates">
-<em class="property">class </em><code class="descclassname">freediscovery.dupdet.</code><code class="descname">SimhashDuplicates</code><span class="sig-paren">(</span><em>hash_func='murmurhash3_int_u32'</em>, <em>hash_func_nbytes=32</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/b3956d0/freediscovery/dupdet/simhash.py#L8"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.dupdet.SimhashDuplicates" title="Permalink to this definition">¶</a></dt>
+<dt id="freediscovery.near_duplicates.SimhashNearDuplicates">
+<em class="property">class </em><code class="descclassname">freediscovery.near_duplicates.</code><code class="descname">SimhashNearDuplicates</code><span class="sig-paren">(</span><em>hash_func='murmurhash3_int_u32'</em>, <em>hash_func_nbytes=32</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/028cc20/freediscovery/near_duplicates/simhash.py#L8"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.near_duplicates.SimhashNearDuplicates" title="Permalink to this definition">¶</a></dt>
 <dd><p>Near duplicates detection using the simhash algorithm.</p>
 <p>A classical near-duplicates detection involves comparing all pairs of
 samples in the collection. For a collection of size <code class="docutils literal"><span class="pre">N</span></code>, this is
@@ -209,8 +209,8 @@ on Theory of computing (pp. 380-388). ACM.</cite></td></tr>
 </tbody>
 </table>
 <dl class="method">
-<dt id="freediscovery.dupdet.SimhashDuplicates.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>hash_func='murmurhash3_int_u32'</em>, <em>hash_func_nbytes=32</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/b3956d0/freediscovery/dupdet/simhash.py#L39"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.dupdet.SimhashDuplicates.__init__" title="Permalink to this definition">¶</a></dt>
+<dt id="freediscovery.near_duplicates.SimhashNearDuplicates.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>hash_func='murmurhash3_int_u32'</em>, <em>hash_func_nbytes=32</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/028cc20/freediscovery/near_duplicates/simhash.py#L39"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.near_duplicates.SimhashNearDuplicates.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods</p>
@@ -220,10 +220,10 @@ on Theory of computing (pp. 380-388). ACM.</cite></td></tr>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.dupdet.SimhashDuplicates.__init__" title="freediscovery.dupdet.SimhashDuplicates.__init__"><code class="xref py py-obj docutils literal"><span class="pre">__init__</span></code></a>([hash_func,&nbsp;hash_func_nbytes])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.near_duplicates.SimhashNearDuplicates.__init__" title="freediscovery.near_duplicates.SimhashNearDuplicates.__init__"><code class="xref py py-obj docutils literal"><span class="pre">__init__</span></code></a>([hash_func,&nbsp;hash_func_nbytes])</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#freediscovery.dupdet.SimhashDuplicates.fit" title="freediscovery.dupdet.SimhashDuplicates.fit"><code class="xref py py-obj docutils literal"><span class="pre">fit</span></code></a>(X[,&nbsp;y])</td>
+<tr class="row-even"><td><a class="reference internal" href="#freediscovery.near_duplicates.SimhashNearDuplicates.fit" title="freediscovery.near_duplicates.SimhashNearDuplicates.fit"><code class="xref py py-obj docutils literal"><span class="pre">fit</span></code></a>(X[,&nbsp;y])</td>
 <td><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -234,23 +234,23 @@ on Theory of computing (pp. 380-388). ACM.</cite></td></tr>
 </table>
 </td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.dupdet.SimhashDuplicates.get_index_by_hash" title="freediscovery.dupdet.SimhashDuplicates.get_index_by_hash"><code class="xref py py-obj docutils literal"><span class="pre">get_index_by_hash</span></code></a>(shash)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.near_duplicates.SimhashNearDuplicates.get_index_by_hash" title="freediscovery.near_duplicates.SimhashNearDuplicates.get_index_by_hash"><code class="xref py py-obj docutils literal"><span class="pre">get_index_by_hash</span></code></a>(shash)</td>
 <td>Get document index by hash</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#freediscovery.dupdet.SimhashDuplicates.get_params" title="freediscovery.dupdet.SimhashDuplicates.get_params"><code class="xref py py-obj docutils literal"><span class="pre">get_params</span></code></a>([deep])</td>
+<tr class="row-even"><td><a class="reference internal" href="#freediscovery.near_duplicates.SimhashNearDuplicates.get_params" title="freediscovery.near_duplicates.SimhashNearDuplicates.get_params"><code class="xref py py-obj docutils literal"><span class="pre">get_params</span></code></a>([deep])</td>
 <td>Get parameters for this estimator.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.dupdet.SimhashDuplicates.query" title="freediscovery.dupdet.SimhashDuplicates.query"><code class="xref py py-obj docutils literal"><span class="pre">query</span></code></a>([distance,&nbsp;blocks])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.near_duplicates.SimhashNearDuplicates.query" title="freediscovery.near_duplicates.SimhashNearDuplicates.query"><code class="xref py py-obj docutils literal"><span class="pre">query</span></code></a>([distance,&nbsp;blocks])</td>
 <td>Find all the nearests neighbours for the dataset</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#freediscovery.dupdet.SimhashDuplicates.set_params" title="freediscovery.dupdet.SimhashDuplicates.set_params"><code class="xref py py-obj docutils literal"><span class="pre">set_params</span></code></a>(\*\*params)</td>
+<tr class="row-even"><td><a class="reference internal" href="#freediscovery.near_duplicates.SimhashNearDuplicates.set_params" title="freediscovery.near_duplicates.SimhashNearDuplicates.set_params"><code class="xref py py-obj docutils literal"><span class="pre">set_params</span></code></a>(\*\*params)</td>
 <td>Set the parameters of this estimator.</td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
-<dt id="freediscovery.dupdet.SimhashDuplicates.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/b3956d0/freediscovery/dupdet/simhash.py#L59"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.dupdet.SimhashDuplicates.fit" title="Permalink to this definition">¶</a></dt>
+<dt id="freediscovery.near_duplicates.SimhashNearDuplicates.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/028cc20/freediscovery/near_duplicates/simhash.py#L59"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.near_duplicates.SimhashNearDuplicates.fit" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -267,8 +267,8 @@ corresponds to a single data point.</td>
 </dd></dl>
 
 <dl class="method">
-<dt id="freediscovery.dupdet.SimhashDuplicates.get_index_by_hash">
-<code class="descname">get_index_by_hash</code><span class="sig-paren">(</span><em>shash</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/b3956d0/freediscovery/dupdet/simhash.py#L97"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.dupdet.SimhashDuplicates.get_index_by_hash" title="Permalink to this definition">¶</a></dt>
+<dt id="freediscovery.near_duplicates.SimhashNearDuplicates.get_index_by_hash">
+<code class="descname">get_index_by_hash</code><span class="sig-paren">(</span><em>shash</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/028cc20/freediscovery/near_duplicates/simhash.py#L97"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.near_duplicates.SimhashNearDuplicates.get_index_by_hash" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get document index by hash</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -285,8 +285,8 @@ corresponds to a single data point.</td>
 </dd></dl>
 
 <dl class="method">
-<dt id="freediscovery.dupdet.SimhashDuplicates.get_params">
-<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/b3956d0/freediscovery/../../miniconda3/envs/testenv/lib/python3.6/site-packages/sklearn/base.py#L212"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.dupdet.SimhashDuplicates.get_params" title="Permalink to this definition">¶</a></dt>
+<dt id="freediscovery.near_duplicates.SimhashNearDuplicates.get_params">
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/028cc20/freediscovery/../../miniconda3/envs/testenv/lib/python3.6/site-packages/sklearn/base.py#L212"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.near_duplicates.SimhashNearDuplicates.get_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get parameters for this estimator.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -304,8 +304,8 @@ contained subobjects that are estimators.</td>
 </dd></dl>
 
 <dl class="method">
-<dt id="freediscovery.dupdet.SimhashDuplicates.query">
-<code class="descname">query</code><span class="sig-paren">(</span><em>distance=2</em>, <em>blocks='auto'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/b3956d0/freediscovery/dupdet/simhash.py#L112"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.dupdet.SimhashDuplicates.query" title="Permalink to this definition">¶</a></dt>
+<dt id="freediscovery.near_duplicates.SimhashNearDuplicates.query">
+<code class="descname">query</code><span class="sig-paren">(</span><em>distance=2</em>, <em>blocks='auto'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/028cc20/freediscovery/near_duplicates/simhash.py#L112"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.near_duplicates.SimhashNearDuplicates.query" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find all the nearests neighbours for the dataset</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -333,8 +333,8 @@ are grouped by in cluster_id</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="freediscovery.dupdet.SimhashDuplicates.set_params">
-<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/b3956d0/freediscovery/../../miniconda3/envs/testenv/lib/python3.6/site-packages/sklearn/base.py#L249"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.dupdet.SimhashDuplicates.set_params" title="Permalink to this definition">¶</a></dt>
+<dt id="freediscovery.near_duplicates.SimhashNearDuplicates.set_params">
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/028cc20/freediscovery/../../miniconda3/envs/testenv/lib/python3.6/site-packages/sklearn/base.py#L249"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.near_duplicates.SimhashNearDuplicates.set_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the parameters of this estimator.</p>
 <p>The method works on simple estimators as well as on nested objects
 (such as pipelines). The latter have parameters of the form
@@ -363,7 +363,7 @@ component of a nested object.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="freediscovery.dupdet.IMatchDuplicates.html" class="btn btn-neutral float-right" title="freediscovery.dupdet.IMatchDuplicates" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="freediscovery.near_duplicates.IMatchNearDuplicates.html" class="btn btn-neutral float-right" title="freediscovery.near_duplicates.IMatchNearDuplicates" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="freediscovery.cluster.ClusterLabels.html" class="btn btn-neutral" title="freediscovery.cluster.ClusterLabels" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -376,7 +376,7 @@ component of a nested object.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016 - 2017, Grossman Labs LLC.
-      Last updated on Aug 23, 2017.
+      Last updated on Aug 29, 2017.
 
     </p>
   </div>

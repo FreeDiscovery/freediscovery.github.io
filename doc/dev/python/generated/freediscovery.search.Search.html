@@ -38,7 +38,7 @@
     <link rel="top" title="FreeDiscovery 1.3.0rc1 documentation" href="../../index.html"/>
         <link rel="up" title="API Reference" href="../api.html"/>
         <link rel="next" title="freediscovery.io.parse_smart_tokens" href="freediscovery.io.parse_smart_tokens.html"/>
-        <link rel="prev" title="freediscovery.dupdet.IMatchDuplicates" href="freediscovery.dupdet.IMatchDuplicates.html"/> 
+        <link rel="prev" title="freediscovery.near_duplicates.IMatchNearDuplicates" href="freediscovery.near_duplicates.IMatchNearDuplicates.html"/> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -169,7 +169,7 @@
 <h1>freediscovery.search.Search<a class="headerlink" href="#freediscovery-search-search" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="freediscovery.search.Search">
-<em class="property">class </em><code class="descclassname">freediscovery.search.</code><code class="descname">Search</code><span class="sig-paren">(</span><em>vectorizer</em>, <em>tfidf</em>, <em>lsi=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/b3956d0/freediscovery/search.py#L82"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.search.Search" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">freediscovery.search.</code><code class="descname">Search</code><span class="sig-paren">(</span><em>vectorizer</em>, <em>tfidf</em>, <em>lsi=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/028cc20/freediscovery/search.py#L6"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.search.Search" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform (semantic) search in a document collection</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -177,6 +177,8 @@
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>vectorizer</strong> (<em>{TfidfVectorizer</em><em>, </em><em>HashingVectorizer}</em>) &#8211; the (fitted) vectorizer that was used on the document collection</li>
+<li><strong>tfidf</strong> (<em>SmartTfidfTransfomer</em>) &#8211; the (fitted) IDF transformer used to weight and normalize the
+bag of word features</li>
 <li><strong>lsi</strong> (<em>TruncatedSVD</em>) &#8211; (optional) an LSI model fitted on the vectorised document-term matrix
 If provided this corresponds to a semantic search, default=None</li>
 </ul>
@@ -186,7 +188,7 @@ If provided this corresponds to a semantic search, default=None</li>
 </table>
 <dl class="method">
 <dt id="freediscovery.search.Search.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>vectorizer</em>, <em>tfidf</em>, <em>lsi=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/b3956d0/freediscovery/search.py#L93"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.search.Search.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>vectorizer</em>, <em>tfidf</em>, <em>lsi=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/028cc20/freediscovery/search.py#L20"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.search.Search.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods</p>
@@ -212,7 +214,7 @@ If provided this corresponds to a semantic search, default=None</li>
 </table>
 <dl class="method">
 <dt id="freediscovery.search.Search.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/b3956d0/freediscovery/search.py#L99"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.search.Search.fit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/028cc20/freediscovery/search.py#L26"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.search.Search.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fit using a document term matrix (optionally in the LSI space)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -227,7 +229,7 @@ dense documents / lsi terms array (if lsi was provided)</td>
 
 <dl class="method">
 <dt id="freediscovery.search.Search.search">
-<code class="descname">search</code><span class="sig-paren">(</span><em>text</em>, <em>metric='cosine'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/b3956d0/freediscovery/search.py#L111"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.search.Search.search" title="Permalink to this definition">¶</a></dt>
+<code class="descname">search</code><span class="sig-paren">(</span><em>text</em>, <em>metric='cosine'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/028cc20/freediscovery/search.py#L38"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.search.Search.search" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform the search operation</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -245,7 +247,7 @@ dense documents / lsi terms array (if lsi was provided)</td>
 
 <dl class="method">
 <dt id="freediscovery.search.Search.search_id">
-<code class="descname">search_id</code><span class="sig-paren">(</span><em>internal_id</em>, <em>metric='cosine'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/b3956d0/freediscovery/search.py#L144"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.search.Search.search_id" title="Permalink to this definition">¶</a></dt>
+<code class="descname">search_id</code><span class="sig-paren">(</span><em>internal_id</em>, <em>metric='cosine'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/028cc20/freediscovery/search.py#L71"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.search.Search.search_id" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform the search operation</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -275,7 +277,7 @@ dense documents / lsi terms array (if lsi was provided)</td>
         <a href="freediscovery.io.parse_smart_tokens.html" class="btn btn-neutral float-right" title="freediscovery.io.parse_smart_tokens" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="freediscovery.dupdet.IMatchDuplicates.html" class="btn btn-neutral" title="freediscovery.dupdet.IMatchDuplicates" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="freediscovery.near_duplicates.IMatchNearDuplicates.html" class="btn btn-neutral" title="freediscovery.near_duplicates.IMatchNearDuplicates" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -285,7 +287,7 @@ dense documents / lsi terms array (if lsi was provided)</td>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016 - 2017, Grossman Labs LLC.
-      Last updated on Aug 23, 2017.
+      Last updated on Aug 29, 2017.
 
     </p>
   </div>
