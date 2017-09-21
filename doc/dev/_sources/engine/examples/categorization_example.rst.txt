@@ -22,16 +22,16 @@ An example to illustrate binary categorizaiton with FreeDiscovery
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received ['id']
-       => dsid = 1ef64978d5564468
+       => dsid = 937dfe25079647af
 
     1.b Start feature extraction (in the background)
-     POST http://localhost:5001/api/v0/feature-extraction/1ef64978d5564468
+     POST http://localhost:5001/api/v0/feature-extraction/937dfe25079647af
 
     1.c Monitor feature extraction progress
-     GET http://localhost:5001/api/v0/feature-extraction/1ef64978d5564468
+     GET http://localhost:5001/api/v0/feature-extraction/937dfe25079647af
 
     1.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/1ef64978d5564468
+     GET http://localhost:5001/api/v0/feature-extraction/937dfe25079647af
          - analyzer: word
          - chunk_size: 5000
          - data_dir: /home/ubuntu/freediscovery_shared/treclegal09_2k_subset/data/jobRun_4/XML_EXPORT_CONTENT/text_9
@@ -51,7 +51,7 @@ An example to illustrate binary categorizaiton with FreeDiscovery
 
     2. Calculate LSI
     POST http://localhost:5001/api/v0/lsi/
-      => LSI model id = 6ccd517a211141ce
+      => LSI model id = 875202cde1a14023
       => SVD decomposition with 100 dimensions explaining 69.79 % variabilty of the data
 
     3.a. Train the categorization model
@@ -64,16 +64,16 @@ An example to illustrate binary categorizaiton with FreeDiscovery
      ================================================================================
      POST http://localhost:5001/api/v0/categorization/
      Training...
-         => model id = 6223140975fe44eb
+         => model id = 8b46decdfa234997
         => Training scores: MAP = 0.815, ROC-AUC = 0.900, recall @20%: 0.800 
 
     3.b. Check the parameters used in the categorization model
-     GET http://localhost:5001/api/v0/categorization/6223140975fe44eb
+     GET http://localhost:5001/api/v0/categorization/8b46decdfa234997
          - method: LinearSVC
          - options: {'C': 1.0, 'class_weight': None, 'dual': True, 'fit_intercept': True, 'intercept_scaling': 1, 'loss': 'squared_hinge', 'max_iter': 1000, 'multi_class': 'ovr', 'penalty': 'l2', 'random_state': None, 'tol': 0.0001, 'verbose': 0}
 
     3.c Categorize the complete dataset with this model
-     GET http://localhost:5001/api/v0/categorization/6223140975fe44eb/predict
+     GET http://localhost:5001/api/v0/categorization/8b46decdfa234997/predict
                  category  score
     document_id                 
     568516       negative  0.778
@@ -148,16 +148,16 @@ An example to illustrate binary categorizaiton with FreeDiscovery
      ================================================================================
      POST http://localhost:5001/api/v0/categorization/
      Training...
-         => model id = 75de9166d80f4dcd
+         => model id = 79f619f7cf024f6f
         => Training scores: MAP = 1.000, ROC-AUC = 1.000, recall @20%: 1.000 
 
     3.b. Check the parameters used in the categorization model
-     GET http://localhost:5001/api/v0/categorization/75de9166d80f4dcd
+     GET http://localhost:5001/api/v0/categorization/79f619f7cf024f6f
          - method: NearestNeighbor
          - options: {'algorithm': 'brute', 'leaf_size': 30, 'n_jobs': 1, 'radius': None}
 
     3.c Categorize the complete dataset with this model
-     GET http://localhost:5001/api/v0/categorization/75de9166d80f4dcd/predict
+     GET http://localhost:5001/api/v0/categorization/79f619f7cf024f6f/predict
                  category  nearest_document_id  score
     document_id                                      
     37249        negative               150544  1.000
@@ -229,7 +229,7 @@ An example to illustrate binary categorizaiton with FreeDiscovery
         => Test scores: MAP = 0.287, ROC-AUC = 0.667, recall @20%: 0.571 
 
     5.a Delete the extracted features (and LSI decomposition)
-     DELETE http://localhost:5001/api/v0/feature-extraction/1ef64978d5564468
+     DELETE http://localhost:5001/api/v0/feature-extraction/937dfe25079647af
 
 
 
@@ -409,7 +409,7 @@ An example to illustrate binary categorizaiton with FreeDiscovery
         print(" DELETE", url)
         requests.delete(url)
 
-**Total running time of the script:** ( 0 minutes  13.589 seconds)
+**Total running time of the script:** ( 0 minutes  9.904 seconds)
 
 
 
