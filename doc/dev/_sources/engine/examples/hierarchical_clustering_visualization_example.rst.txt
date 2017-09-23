@@ -166,13 +166,13 @@ Visualize hierarchical clusters
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received ['id']
-       => dsid = e338df6e0ddd4dda
+       => dsid = 0dd6f79707304016
 
     1.b Run feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/e338df6e0ddd4dda
+     POST http://localhost:5001/api/v0/feature-extraction/0dd6f79707304016
 
     1.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/e338df6e0ddd4dda
+     GET http://localhost:5001/api/v0/feature-extraction/0dd6f79707304016
          - analyzer: word
          - chunk_size: 5000
          - data_dir: /home/ubuntu/freediscovery_shared/20_newsgroups_3categories
@@ -192,15 +192,15 @@ Visualize hierarchical clusters
 
     2. Calculate LSI
     POST http://localhost:5001/api/v0/lsi/
-      => LSI model id = 23464b1162ca499e
+      => LSI model id = ce38506f98984665
       => SVD decomposition with 100 dimensions explaining 22.26 % variabilty of the data
 
     3.a. Document clustering (LSI + Birch clustering)
      POST http://localhost:5001/api/v0/clustering/birch/
-         => model id = 89b535b489b84932
+         => model id = 814bbf4e52a94570
 
     4.b. Computing cluster labels
-     GET http://localhost:5001/api/v0/clustering/birch/89b535b489b84932
+     GET http://localhost:5001/api/v0/clustering/birch/814bbf4e52a94570
         .. computed in 1.1s
                                                  children  cluster_depth  cluster_id                  cluster_label  cluster_similarity  cluster_size                                          documents
     0   [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14...              0           0                edu thanks know               0.108          1967  [{'document_id': 225, 'similarity': 0.11136850...
@@ -225,13 +225,13 @@ Visualize hierarchical clusters
     19                                                 []              1          19               does know thanks               0.278           141  [{'document_id': 2401, 'similarity': 0.3866424...
 
     5. Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/e338df6e0ddd4dda
+     DELETE http://localhost:5001/api/v0/feature-extraction/0dd6f79707304016
 
 
 .. image:: cluster_hierarchy.png
 
 
-**Total running time of the script:** ( 0 minutes  5.487 seconds)
+**Total running time of the script:** ( 0 minutes  5.407 seconds)
 
 
 
