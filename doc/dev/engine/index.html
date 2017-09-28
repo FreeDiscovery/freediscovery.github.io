@@ -89,14 +89,16 @@
             
                 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">FreeDiscovery Engine</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="overview.html">FreeDiscovery overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation_instructions.html">Installation Instructions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html">Quick start</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/index.html">Examples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cli.html">Command line interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_ingestion.html">Data ingestion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment options</a></li>
-<li class="toctree-l2"><a class="reference external" href="../openapi-docs/index.html#http://">API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#contents">Contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="overview.html">FreeDiscovery overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quickstart.html">Quick start</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/index.html">Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_ingestion.html">Data ingestion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli.html">Command line interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deployment.html">Deployment options</a></li>
+<li class="toctree-l3"><a class="reference external" href="../openapi-docs/index.html#http://">API</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../python/index.html">Python package</a></li>
@@ -155,27 +157,25 @@
             
   <div class="section" id="freediscovery-engine">
 <h1>FreeDiscovery Engine<a class="headerlink" href="#freediscovery-engine" title="Permalink to this headline">¶</a></h1>
-<p><strong>Installation</strong></p>
-<p>FreeDiscovery requires <strong>Python 3.5+</strong> and can be installed with <a class="reference external" href="https://conda.io/">conda</a>,</p>
-<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">config</span> <span class="o">--</span><span class="n">append</span> <span class="n">channels</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
-<span class="n">conda</span> <span class="n">install</span> <span class="n">freediscovery</span>
+<p>FreeDiscovery requires <strong>Python 3.5+</strong> and can be installed with</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">freediscovery</span><span class="p">[</span><span class="n">engine</span><span class="p">]</span>
 </pre></div>
 </div>
-<p><strong>Running the server</strong></p>
-<ul class="simple">
-<li><code class="docutils literal"><span class="pre">freediscovery</span> <span class="pre">run</span></code></li>
-<li>to check that the server started successfully, <code class="docutils literal"><span class="pre">curl</span> <span class="pre">-X</span> <span class="pre">GET</span> <span class="pre">http://localhost:5001/</span></code></li>
-</ul>
+<p>or alternatively with <a class="reference external" href="https://conda.io/">conda</a>,</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">freediscovery</span>
+</pre></div>
+</div>
+<p>The server can be started with</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">freediscovery</span> <span class="n">run</span>
+</pre></div>
+</div>
+<p>to check that the server is successfully runnining, open <code class="docutils literal"><span class="pre">http://localhost:5001/</span></code>.</p>
+<div class="section" id="contents">
+<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="overview.html">FreeDiscovery overview</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="overview.html#which-algorithms-work-in-the-lsi-space">Which algorithms work in the LSI space?</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="installation_instructions.html">Installation Instructions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="installation_instructions.html#downloading-freediscovery">1. Downloading FreeDiscovery</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation_instructions.html#installing-the-dependencies">2. Installing the Dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation_instructions.html#starting-the-freediscovery-server">3. Starting the FreeDiscovery Server</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick start</a><ul>
@@ -189,14 +189,14 @@
 <li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a><ul>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="cli.html">Command line interface</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="cli.html#freediscovery">freediscovery</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="data_ingestion.html">Data ingestion</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="data_ingestion.html#format-of-processed-files">Format of processed files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data_ingestion.html#document-indexing">Document indexing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data_ingestion.html#example-datasets">Example datasets</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command line interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cli.html#freediscovery">freediscovery</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment options</a><ul>
@@ -205,6 +205,7 @@
 </li>
 <li class="toctree-l1"><a class="reference external" href="../openapi-docs/index.html#http://">API</a></li>
 </ul>
+</div>
 </div>
 </div>
 
