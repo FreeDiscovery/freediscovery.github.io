@@ -22,14 +22,14 @@ An example of Semantic Search
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received ['id']
-       => dsid = 7e5c3633ccc14a1a
+       => dsid = 2d39292d51df400b
 
     1.b Start feature extraction
-     POST http://localhost:5001/api/v0/feature-extraction/7e5c3633ccc14a1a
+     POST http://localhost:5001/api/v0/feature-extraction/2d39292d51df400b
 
     2. Calculate LSI
     POST http://localhost:5001/api/v0/lsi/
-      => LSI model id = d73d91ab3f894976
+      => LSI model id = 3287cef58f544d90
       => SVD decomposition with 100 dimensions explaining 69.79 % variabilty of the data
 
     3.a. Perform the semantic search
@@ -102,7 +102,7 @@ An example of Semantic Search
     0.584964279258
 
     4. Delete the extracted features
-     DELETE http://localhost:5001/api/v0/feature-extraction/7e5c3633ccc14a1a
+     DELETE http://localhost:5001/api/v0/feature-extraction/2d39292d51df400b
 
 
 
@@ -205,7 +205,7 @@ An example of Semantic Search
         print(" DELETE", url)
         requests.delete(url)
 
-**Total running time of the script:** ( 0 minutes  3.419 seconds)
+**Total running time of the script:** ( 0 minutes  3.343 seconds)
 
 
 
