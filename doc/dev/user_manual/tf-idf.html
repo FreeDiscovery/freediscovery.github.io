@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Document similarity &mdash; FreeDiscovery 1.3.0rc1 documentation</title>
+  <title>Feature extraction &mdash; FreeDiscovery 1.3.0rc1 documentation</title>
   
 
   
@@ -92,9 +92,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../engine/index.html">FreeDiscovery Engine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../python/index.html">Python package</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">User Manual</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Document similarity</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Feature extraction</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#tf-idf-weighting-schemes">1. TF-IDF weighting schemes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#example-of-term-weighting">2. Example of term weighting</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="scaling_benchmarks.html">Scaling Benchmarks</a></li>
@@ -138,7 +137,7 @@
       
         <li><a href="index.html">User Manual</a> &raquo;</li>
       
-    <li>Document similarity</li>
+    <li>Feature extraction</li>
     <li class="wy-breadcrumbs-aside">
       
           
@@ -154,15 +153,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="document-similarity">
-<h1>Document similarity<a class="headerlink" href="#document-similarity" title="Permalink to this headline">¶</a></h1>
-<p>A number of algorithms in FreeDiscovery require computing similarity between documents, including Nearest Neighbors categorization, search and clustering.</p>
+  <div class="section" id="feature-extraction">
+<h1>Feature extraction<a class="headerlink" href="#feature-extraction" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="tf-idf-weighting-schemes">
 <h2>1. TF-IDF weighting schemes<a class="headerlink" href="#tf-idf-weighting-schemes" title="Permalink to this headline">¶</a></h2>
-<p>FreeDiscovery supports a large range of TF-IDF weighting schemes via the <cite>weighting=&#8221;xxxx&#8221;</cite> parameter, that follows the <a class="reference external" href="https://en.wikipedia.org/wiki/SMART_Information_Retrieval_System">SMART Information Retrieval System</a> notation,</p>
+<p>FreeDiscovery supports a large range of TF-IDF weighting schemes in <a class="reference internal" href="../python/generated/freediscovery.feature_weighting.SmartTfidfTransformer.html#freediscovery.feature_weighting.SmartTfidfTransformer" title="freediscovery.feature_weighting.SmartTfidfTransformer"><code class="xref py py-class docutils literal"><span class="pre">SmartTfidfTransformer</span></code></a> via the <code class="docutils literal"><span class="pre">weighting=&quot;xxxx&quot;</span></code> parameter, that follows the <a class="reference external" href="https://en.wikipedia.org/wiki/SMART_Information_Retrieval_System">SMART Information Retrieval System</a> notation,</p>
 <blockquote>
 <div><img alt="../_images/tf_idf_weighting.svg" src="../_images/tf_idf_weighting.svg" /></div></blockquote>
-<p>the different options are descibed in more detail below,</p>
+<p>The different options are descibed in more detail in the table below,</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="46%" />
@@ -198,18 +196,17 @@
 </tr>
 </tbody>
 </table>
-<p>when pivoted normalization is enabled i.e. <code class="docutils literal"><span class="pre">weighting='???p'</span></code>, for each document it&#8217;s norm <span class="math">\(V_{\textbf{d}}\)</span> is replaced by,</p>
+<p>When pivoted normalization is enabled i.e. <code class="docutils literal"><span class="pre">weighting='???p'</span></code>, for each document it&#8217;s norm <span class="math">\(V_{\textbf{d}}\)</span> is replaced by,</p>
 <div class="math">
 \[{\displaystyle (1 - \alpha) \textbf{avg} \left( V_{\textbf{d}}\right)  + \alpha  V_{\textbf{d}}}\]</div>
 <p>where <code class="docutils literal"><span class="pre">alpha</span></code> is a user defined parameter, such as <span class="math">\(\alpha \in [0, 1]\)</span>.</p>
-</div>
-<div class="section" id="example-of-term-weighting">
-<h2>2. Example of term weighting<a class="headerlink" href="#example-of-term-weighting" title="Permalink to this headline">¶</a></h2>
-<p>To illustrate the difference between these metrics on a more practical example, we can consider two documents,</p>
+<div class="topic">
+<p class="topic-title first">References:</p>
 <ul class="simple">
-<li>document <code class="docutils literal"><span class="pre">A</span></code> consisting of words <code class="docutils literal"><span class="pre">&quot;legal</span> <span class="pre">documents</span> <span class="pre">prodedure</span> <span class="pre">case&quot;</span></code></li>
-<li>document <code class="docutils literal"><span class="pre">B</span></code> consisting of words <code class="docutils literal"><span class="pre">&quot;legal</span> <span class="pre">documents&quot;</span></code></li>
+<li>C.D. Manning, P. Raghavan, H. Schütze.  <a class="reference external" href="https://nlp.stanford.edu/IR-book/html/htmledition/document-and-query-weighting-schemes-1.html">&#8220;Document and query weighting schemes&#8221;</a> , 2008.</li>
+<li>A. Singhal, C. Buckley, and M. Mitra. <a class="reference external" href="https://ecommons.cornell.edu/bitstream/handle/1813/7217/95-1560.pdf?sequence=1">&#8220;Pivoted document length normalization.&#8221;</a> 1996</li>
 </ul>
+</div>
 </div>
 </div>
 
@@ -233,7 +230,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016 - 2017, Grossman Labs LLC.
-      Last updated on Sep 23, 2017.
+      Last updated on Sep 28, 2017.
 
     </p>
   </div>
