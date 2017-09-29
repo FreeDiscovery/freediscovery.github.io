@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>API Reference &mdash; FreeDiscovery 1.3.0rc1 documentation</title>
+  <title>API &mdash; FreeDiscovery 1.3.0rc1 documentation</title>
   
 
   
@@ -36,9 +36,9 @@
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="FreeDiscovery 1.3.0rc1 documentation" href="../index.html"/>
-        <link rel="up" title="Python package" href="index.html"/>
+        <link rel="up" title="FreeDiscovery Core" href="index.html"/>
         <link rel="next" title="freediscovery.datasets.load_dataset" href="generated/freediscovery.datasets.load_dataset.html"/>
-        <link rel="prev" title="Python package" href="index.html"/> 
+        <link rel="prev" title="FreeDiscovery Core" href="index.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -88,24 +88,47 @@
           
             
             
-                <ul class="current">
+                <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../engine/index.html">FreeDiscovery Engine</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Python package</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="index.html#installation">Installation</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">API Reference</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#datasets">Datasets</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#feature-extraction">Feature extraction</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#document-categorization">Document categorization</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#document-clustering">Document clustering</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#duplicates-detection">Duplicates detection</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#semantic-search">Semantic search</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#io">IO</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#metrics">Metrics</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">FreeDiscovery Core</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#datasets">Datasets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/freediscovery.datasets.load_dataset.html">freediscovery.datasets.load_dataset</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="examples/index.html">Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#feature-extraction">Feature extraction</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/freediscovery.feature_weighting.SmartTfidfTransformer.html">freediscovery.feature_weighting.SmartTfidfTransformer</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#document-categorization">Document categorization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/freediscovery.neighbors.NearestNeighborRanker.html">freediscovery.neighbors.NearestNeighborRanker</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#document-clustering">Document clustering</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/freediscovery.cluster.ClusterLabels.html">freediscovery.cluster.ClusterLabels</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#duplicates-detection">Duplicates detection</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/freediscovery.near_duplicates.SimhashNearDuplicates.html">freediscovery.near_duplicates.SimhashNearDuplicates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/freediscovery.near_duplicates.IMatchNearDuplicates.html">freediscovery.near_duplicates.IMatchNearDuplicates</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#semantic-search">Semantic search</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/freediscovery.search.Search.html">freediscovery.search.Search</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#io">IO</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/freediscovery.io.parse_smart_tokens.html">freediscovery.io.parse_smart_tokens</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#metrics">Metrics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/freediscovery.metrics.recall_at_k_score.html">freediscovery.metrics.recall_at_k_score</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples/index.html">Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../user_manual/index.html">User Manual</a></li>
@@ -145,9 +168,9 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
       
-        <li><a href="index.html">Python package</a> &raquo;</li>
+        <li><a href="index.html">FreeDiscovery Core</a> &raquo;</li>
       
-    <li>API Reference</li>
+    <li>API</li>
     <li class="wy-breadcrumbs-aside">
       
           
@@ -163,8 +186,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="api-reference">
-<h1>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="api">
+<h1>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
 <p>This is the API reference for the FreeDiscovery Python package</p>
 <div class="section" id="datasets">
 <h2>Datasets<a class="headerlink" href="#datasets" title="Permalink to this headline">¶</a></h2>
@@ -176,9 +199,6 @@
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="generated/freediscovery.datasets.load_dataset.html#freediscovery.datasets.load_dataset" title="freediscovery.datasets.load_dataset"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.datasets.load_dataset</span></code></a>([name,&nbsp;...])</td>
 <td>Download a benchmark dataset.</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="generated/freediscovery.ingestion.DocumentIndex.html#freediscovery.ingestion.DocumentIndex" title="freediscovery.ingestion.DocumentIndex"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.ingestion.DocumentIndex</span></code></a>(...)</td>
-<td></td>
 </tr>
 </tbody>
 </table>
@@ -192,7 +212,7 @@
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="generated/freediscovery.feature_weighting.SmartTfidfTransformer.html#freediscovery.feature_weighting.SmartTfidfTransformer" title="freediscovery.feature_weighting.SmartTfidfTransformer"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.feature_weighting.SmartTfidfTransformer</span></code></a>([...])</td>
-<td></td>
+<td>TF-IDF feature weighting using the SMART IR notation</td>
 </tr>
 </tbody>
 </table>
@@ -205,7 +225,7 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="generated/freediscovery.categorization.NearestNeighborRanker.html#freediscovery.categorization.NearestNeighborRanker" title="freediscovery.categorization.NearestNeighborRanker"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.categorization.NearestNeighborRanker</span></code></a>([...])</td>
+<tr class="row-odd"><td><a class="reference internal" href="generated/freediscovery.neighbors.NearestNeighborRanker.html#freediscovery.neighbors.NearestNeighborRanker" title="freediscovery.neighbors.NearestNeighborRanker"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.neighbors.NearestNeighborRanker</span></code></a>([...])</td>
 <td>A nearest neighbor ranker.</td>
 </tr>
 </tbody>
@@ -233,11 +253,11 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="generated/freediscovery.dupdet.SimhashDuplicates.html#freediscovery.dupdet.SimhashDuplicates" title="freediscovery.dupdet.SimhashDuplicates"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.dupdet.SimhashDuplicates</span></code></a>([...])</td>
-<td>Find near duplicates using simhash-py</td>
+<tr class="row-odd"><td><a class="reference internal" href="generated/freediscovery.near_duplicates.SimhashNearDuplicates.html#freediscovery.near_duplicates.SimhashNearDuplicates" title="freediscovery.near_duplicates.SimhashNearDuplicates"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.near_duplicates.SimhashNearDuplicates</span></code></a>([...])</td>
+<td>Near duplicates detection using the simhash algorithm.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="generated/freediscovery.dupdet.IMatchDuplicates.html#freediscovery.dupdet.IMatchDuplicates" title="freediscovery.dupdet.IMatchDuplicates"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.dupdet.IMatchDuplicates</span></code></a>([...])</td>
-<td>Find near duplicates using the randomized I-match backend</td>
+<tr class="row-even"><td><a class="reference internal" href="generated/freediscovery.near_duplicates.IMatchNearDuplicates.html#freediscovery.near_duplicates.IMatchNearDuplicates" title="freediscovery.near_duplicates.IMatchNearDuplicates"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.near_duplicates.IMatchNearDuplicates</span></code></a>([...])</td>
+<td>Near duplicates detection using the randomized I-Match algorithm.</td>
 </tr>
 </tbody>
 </table>
@@ -282,12 +302,6 @@
 <tr class="row-odd"><td><a class="reference internal" href="generated/freediscovery.metrics.recall_at_k_score.html#freediscovery.metrics.recall_at_k_score" title="freediscovery.metrics.recall_at_k_score"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.metrics.recall_at_k_score</span></code></a>(...)</td>
 <td>Recall after retrieving k documents from the collections</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="generated/freediscovery.metrics.ratio_duplicates_score.html#freediscovery.metrics.ratio_duplicates_score" title="freediscovery.metrics.ratio_duplicates_score"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.metrics.ratio_duplicates_score</span></code></a>(x,&nbsp;y)</td>
-<td>Given cluster labels x and y, compute the relative error between the number of duplicates in x vs the one in y.</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="generated/freediscovery.metrics.f1_same_duplicates_score.html#freediscovery.metrics.f1_same_duplicates_score" title="freediscovery.metrics.f1_same_duplicates_score"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.metrics.f1_same_duplicates_score</span></code></a>(x,&nbsp;y)</td>
-<td>Given cluster labels x and y, compute the f1 score</td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -303,7 +317,7 @@
         <a href="generated/freediscovery.datasets.load_dataset.html" class="btn btn-neutral float-right" title="freediscovery.datasets.load_dataset" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral" title="Python package" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral" title="FreeDiscovery Core" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -313,7 +327,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016 - 2017, Grossman Labs LLC.
-      Last updated on Aug 21, 2017.
+      Last updated on Sep 29, 2017.
 
     </p>
   </div>

@@ -36,9 +36,9 @@
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
     <link rel="top" title="FreeDiscovery 1.3.0rc1 documentation" href="../../index.html"/>
-        <link rel="up" title="API Reference" href="../api.html"/>
-        <link rel="next" title="freediscovery.categorization.NearestNeighborRanker" href="freediscovery.categorization.NearestNeighborRanker.html"/>
-        <link rel="prev" title="freediscovery.ingestion.DocumentIndex" href="freediscovery.ingestion.DocumentIndex.html"/> 
+        <link rel="up" title="API" href="../api.html"/>
+        <link rel="next" title="freediscovery.neighbors.NearestNeighborRanker" href="freediscovery.neighbors.NearestNeighborRanker.html"/>
+        <link rel="prev" title="freediscovery.datasets.load_dataset" href="freediscovery.datasets.load_dataset.html"/> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -88,24 +88,25 @@
           
             
             
-                <ul class="current">
+                <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../engine/index.html">FreeDiscovery Engine</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Python package</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="../index.html#installation">Installation</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="../api.html">API Reference</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="../api.html#datasets">Datasets</a></li>
-<li class="toctree-l4 current"><a class="reference internal" href="../api.html#feature-extraction">Feature extraction</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../api.html#document-categorization">Document categorization</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../api.html#document-clustering">Document clustering</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../api.html#duplicates-detection">Duplicates detection</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../api.html#semantic-search">Semantic search</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../api.html#io">IO</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../api.html#metrics">Metrics</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">FreeDiscovery Core</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../api.html">API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../api.html#datasets">Datasets</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../api.html#feature-extraction">Feature extraction</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">freediscovery.feature_weighting.SmartTfidfTransformer</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../examples/index.html">Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#document-categorization">Document categorization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#document-clustering">Document clustering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#duplicates-detection">Duplicates detection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#semantic-search">Semantic search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#io">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#metrics">Metrics</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/index.html">Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../user_manual/index.html">User Manual</a></li>
@@ -145,9 +146,9 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../../index.html">Docs</a> &raquo;</li>
       
-        <li><a href="../index.html">Python package</a> &raquo;</li>
+        <li><a href="../index.html">FreeDiscovery Core</a> &raquo;</li>
       
-        <li><a href="../api.html">API Reference</a> &raquo;</li>
+        <li><a href="../api.html">API</a> &raquo;</li>
       
     <li>freediscovery.feature_weighting.SmartTfidfTransformer</li>
     <li class="wy-breadcrumbs-aside">
@@ -169,25 +170,29 @@
 <h1>freediscovery.feature_weighting.SmartTfidfTransformer<a class="headerlink" href="#freediscovery-feature-weighting-smarttfidftransformer" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="freediscovery.feature_weighting.SmartTfidfTransformer">
-<em class="property">class </em><code class="descclassname">freediscovery.feature_weighting.</code><code class="descname">SmartTfidfTransformer</code><span class="sig-paren">(</span><em>weighting='nnc'</em>, <em>norm_alpha=0.75</em>, <em>norm_pivot=None</em>, <em>compute_df=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/b165117/freediscovery/feature_weighting.py#L63"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.feature_weighting.SmartTfidfTransformer" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="freediscovery.feature_weighting.SmartTfidfTransformer.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>weighting='nnc'</em>, <em>norm_alpha=0.75</em>, <em>norm_pivot=None</em>, <em>compute_df=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/b165117/freediscovery/feature_weighting.py#L64"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.feature_weighting.SmartTfidfTransformer.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Apply TF-IDF feature weighting using the SMART notation with a scikit-learn
-compatible transformer.</p>
+<em class="property">class </em><code class="descclassname">freediscovery.feature_weighting.</code><code class="descname">SmartTfidfTransformer</code><span class="sig-paren">(</span><em>weighting='nnc'</em>, <em>norm_alpha=0.75</em>, <em>norm_pivot=None</em>, <em>compute_df=False</em>, <em>copy=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/2936bce/freediscovery/feature_weighting.py#L63"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.feature_weighting.SmartTfidfTransformer" title="Permalink to this definition">¶</a></dt>
+<dd><p>TF-IDF feature weighting using the SMART IR notation</p>
+<p>This class is similar to
+<a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfTransformer.html#sklearn.feature_extraction.text.TfidfTransformer" title="(in scikit-learn v0.19.0)"><code class="xref py py-class docutils literal"><span class="pre">TfidfTransformer</span></code></a> but supports
+a larger number of TF-IDF weighting schemes. It is expected to run this
+transformer on the output of
+<a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html#sklearn.feature_extraction.text.CountVectorizer" title="(in scikit-learn v0.19.0)"><code class="xref py py-class docutils literal"><span class="pre">CountVectorizer</span></code></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>weighting</strong> (<em>str</em><em>, </em><em>default='nnc'</em>) &#8211; the SMART notation for document, term weighting and normalization.
-In the form [nlabL][ntp][ncb] , see
-<a class="reference external" href="https://en.wikipedia.org/wiki/SMART_Information_Retrieval_System">https://en.wikipedia.org/wiki/SMART_Information_Retrieval_System</a></li>
-<li><strong>norm_alpha</strong> (<em>float</em><em>, </em><em>default=0.75</em>) &#8211; the alpha parameter in the pivoted normalization</li>
+In the form <code class="docutils literal"><span class="pre">[nlabL][ntspd][ncb]</span></code>, see the <a class="reference internal" href="../../user_manual/feature_weighing.html#tfidf-section"><span class="std std-ref">TF-IDF schemes</span></a>
+section.</li>
+<li><strong>norm_alpha</strong> (<em>float</em><em>, </em><em>default=0.75</em>) &#8211; the α parameter in the pivoted normalization</li>
 <li><strong>norm_pivot</strong> (<em>float</em><em>, </em><em>default=None</em>) &#8211; the pivot value used for the normalization. If not provided, and
-weighting=&#8217;???p&#8217;, it is computed as the mean of the norm(tf*idf).</li>
-<li><strong>compute_df</strong> (<em>bool</em><em>, </em><em>default=False</em>) &#8211; compute the document frequenc (<cite>df_</cite> attribute) even when it&#8217;s not
+<code class="docutils literal"><span class="pre">weighting='???p'</span></code>, it is computed as the mean of the
+<code class="docutils literal"><span class="pre">norm(tf*idf)</span></code>.</li>
+<li><strong>compute_df</strong> (<em>bool</em><em>, </em><em>default=False</em>) &#8211; compute the document frequenc (<code class="docutils literal"><span class="pre">df_</span></code> attribute) even when it&#8217;s not
 explicitly required by the weighting scheme.</li>
+<li><strong>copy</strong> (<em>boolean</em><em>, </em><em>default=True</em>) &#8211; Whether to copy the input array and operate on the copy or perform
+in-place operations in fit and transform.</li>
 </ul>
 </td>
 </tr>
@@ -197,50 +202,21 @@ explicitly required by the weighting scheme.</li>
 <table class="docutils citation" frame="void" id="manning2008" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[Manning2008]</td><td><cite>Manning, Christopher D.; Raghavan, Prabhakar; Schütze, Hinrich (2008),
-`&#8221;Document and query weighting schemes&#8221;</cite>
-&lt;<a class="reference external" href="https://nlp.stanford.edu/IR-book/html/htmledition/document-and-query-weighting-schemes-1.html">https://nlp.stanford.edu/IR-book/html/htmledition/document-and-query-weighting-schemes-1.html</a>&gt;`_</td></tr>
+<tr><td class="label">[Manning2008]</td><td>C.D. Manning, P. Raghavan, H. Schütze,
+<a class="reference external" href="https://nlp.stanford.edu/IR-book/html/htmledition/document-and-query-weighting-schemes-1.html">&#8220;Document and query weighting schemes&#8221;</a> ,
+2008</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="singhal1996" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[Singhal1996]</td><td><cite>Singhal, Amit, Chris Buckley, and Manclar Mitra. &#8220;Pivoted document length normalization.&#8221;
-ACM Press, 1996</cite></td></tr>
-</tbody>
-</table>
-</dd></dl>
-
-<p class="rubric">Methods</p>
-<table border="1" class="longtable docutils">
-<colgroup>
-<col width="10%" />
-<col width="90%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.feature_weighting.SmartTfidfTransformer.__init__" title="freediscovery.feature_weighting.SmartTfidfTransformer.__init__"><code class="xref py py-obj docutils literal"><span class="pre">__init__</span></code></a>([weighting,&nbsp;norm_alpha,&nbsp;...])</td>
-<td>Apply TF-IDF feature weighting using the SMART notation with a scikit-learn compatible transformer.</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#freediscovery.feature_weighting.SmartTfidfTransformer.fit" title="freediscovery.feature_weighting.SmartTfidfTransformer.fit"><code class="xref py py-obj docutils literal"><span class="pre">fit</span></code></a>(X[,&nbsp;y])</td>
-<td>Learn the document lenght and document frequency vector (if necessary).</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.feature_weighting.SmartTfidfTransformer.fit_transform" title="freediscovery.feature_weighting.SmartTfidfTransformer.fit_transform"><code class="xref py py-obj docutils literal"><span class="pre">fit_transform</span></code></a>(X[,&nbsp;y])</td>
-<td>Apply document term weighting and normalization on text features</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#freediscovery.feature_weighting.SmartTfidfTransformer.get_params" title="freediscovery.feature_weighting.SmartTfidfTransformer.get_params"><code class="xref py py-obj docutils literal"><span class="pre">get_params</span></code></a>([deep])</td>
-<td>Get parameters for this estimator.</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="#freediscovery.feature_weighting.SmartTfidfTransformer.set_params" title="freediscovery.feature_weighting.SmartTfidfTransformer.set_params"><code class="xref py py-obj docutils literal"><span class="pre">set_params</span></code></a>(\*\*params)</td>
-<td>Set the parameters of this estimator.</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#freediscovery.feature_weighting.SmartTfidfTransformer.transform" title="freediscovery.feature_weighting.SmartTfidfTransformer.transform"><code class="xref py py-obj docutils literal"><span class="pre">transform</span></code></a>(X[,&nbsp;y])</td>
-<td>Apply document term weighting and normalization on text features</td>
-</tr>
+<tr><td class="label">[Singhal1996]</td><td>A. Singhal, C. Buckley, and M. Mitra.
+<a class="reference external" href="https://ecommons.cornell.edu/bitstream/handle/1813/7217/95-1560.pdf?sequence=1">&#8220;Pivoted document length normalization.&#8221;</a> , 1996</td></tr>
 </tbody>
 </table>
 <dl class="method">
 <dt id="freediscovery.feature_weighting.SmartTfidfTransformer.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/b165117/freediscovery/feature_weighting.py#L102"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.feature_weighting.SmartTfidfTransformer.fit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/2936bce/freediscovery/feature_weighting.py#L115"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.feature_weighting.SmartTfidfTransformer.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Learn the document lenght and document frequency vector
 (if necessary).</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -255,18 +231,13 @@ ACM Press, 1996</cite></td></tr>
 
 <dl class="method">
 <dt id="freediscovery.feature_weighting.SmartTfidfTransformer.fit_transform">
-<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/b165117/freediscovery/feature_weighting.py#L139"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.feature_weighting.SmartTfidfTransformer.fit_transform" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/2936bce/freediscovery/feature_weighting.py#L152"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.feature_weighting.SmartTfidfTransformer.fit_transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Apply document term weighting and normalization on text features</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>X</strong> (<em>sparse matrix</em><em>, </em><em></em><em>[</em><em>n_samples</em><em>, </em><em>n_features</em><em>]</em><em></em>) &#8211; a matrix of term/token counts</li>
-<li><strong>copy</strong> (<em>boolean</em><em>, </em><em>default True</em>) &#8211; Whether to copy X and operate on the copy or perform in-place
-operations.</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>X</strong> (<em>sparse matrix</em><em>, </em><em></em><em>[</em><em>n_samples</em><em>, </em><em>n_features</em><em>]</em><em></em>) &#8211; a matrix of term/token counts</td>
 </tr>
 </tbody>
 </table>
@@ -274,7 +245,7 @@ operations.</li>
 
 <dl class="method">
 <dt id="freediscovery.feature_weighting.SmartTfidfTransformer.get_params">
-<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/b165117/freediscovery/../../miniconda3/envs/testenv/lib/python3.6/site-packages/sklearn/base.py#L212"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.feature_weighting.SmartTfidfTransformer.get_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/2936bce/freediscovery/../../miniconda3/envs/testenv/lib/python3.6/site-packages/sklearn/base.py#L212"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.feature_weighting.SmartTfidfTransformer.get_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get parameters for this estimator.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -293,7 +264,7 @@ contained subobjects that are estimators.</td>
 
 <dl class="method">
 <dt id="freediscovery.feature_weighting.SmartTfidfTransformer.set_params">
-<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/b165117/freediscovery/../../miniconda3/envs/testenv/lib/python3.6/site-packages/sklearn/base.py#L249"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.feature_weighting.SmartTfidfTransformer.set_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/2936bce/freediscovery/../../miniconda3/envs/testenv/lib/python3.6/site-packages/sklearn/base.py#L249"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.feature_weighting.SmartTfidfTransformer.set_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the parameters of this estimator.</p>
 <p>The method works on simple estimators as well as on nested objects
 (such as pipelines). The latter have parameters of the form
@@ -313,7 +284,7 @@ component of a nested object.</p>
 
 <dl class="method">
 <dt id="freediscovery.feature_weighting.SmartTfidfTransformer.transform">
-<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/b165117/freediscovery/feature_weighting.py#L181"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.feature_weighting.SmartTfidfTransformer.transform" title="Permalink to this definition">¶</a></dt>
+<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/2936bce/freediscovery/feature_weighting.py#L191"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.feature_weighting.SmartTfidfTransformer.transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Apply document term weighting and normalization on text features</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -341,10 +312,10 @@ operations.</li>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="freediscovery.categorization.NearestNeighborRanker.html" class="btn btn-neutral float-right" title="freediscovery.categorization.NearestNeighborRanker" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="freediscovery.neighbors.NearestNeighborRanker.html" class="btn btn-neutral float-right" title="freediscovery.neighbors.NearestNeighborRanker" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="freediscovery.ingestion.DocumentIndex.html" class="btn btn-neutral" title="freediscovery.ingestion.DocumentIndex" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="freediscovery.datasets.load_dataset.html" class="btn btn-neutral" title="freediscovery.datasets.load_dataset" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -354,7 +325,7 @@ operations.</li>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016 - 2017, Grossman Labs LLC.
-      Last updated on Aug 21, 2017.
+      Last updated on Sep 29, 2017.
 
     </p>
   </div>

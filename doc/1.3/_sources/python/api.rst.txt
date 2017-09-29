@@ -1,5 +1,5 @@
-API Reference
-=============
+API
+===
 
 This is the API reference for the FreeDiscovery Python package
 
@@ -8,12 +8,10 @@ This is the API reference for the FreeDiscovery Python package
 Datasets
 --------
 
-
 .. autosummary::
     :toctree: ./generated/
 
     freediscovery.datasets.load_dataset
-    freediscovery.ingestion.DocumentIndex
 
 
 Feature extraction
@@ -21,7 +19,7 @@ Feature extraction
 
 .. autosummary::
     :toctree: ./generated/
-
+    :template: autosummary/base.rst
     
     freediscovery.feature_weighting.SmartTfidfTransformer
 
@@ -30,14 +28,16 @@ Document categorization
 -----------------------
 .. autosummary::
     :toctree: ./generated/
+    :template: autosummary/base.rst
 
-    freediscovery.categorization.NearestNeighborRanker
+    freediscovery.neighbors.NearestNeighborRanker
 
 Document clustering
 --------------------
 
 .. autosummary::
     :toctree: ./generated/
+    :template: autosummary/base.rst
 
     freediscovery.cluster.ClusterLabels
 
@@ -46,15 +46,17 @@ Duplicates detection
 
 .. autosummary::
     :toctree: ./generated/
+    :template: autosummary/base.rst
 
-    freediscovery.dupdet.SimhashDuplicates
-    freediscovery.dupdet.IMatchDuplicates
+    freediscovery.near_duplicates.SimhashNearDuplicates
+    freediscovery.near_duplicates.IMatchNearDuplicates
 
     
 Semantic search
 ---------------
 .. autosummary::
     :toctree: ./generated/
+    :template: autosummary/base.rst
 
     freediscovery.search.Search
 
@@ -64,6 +66,7 @@ IO
 
 .. autosummary::
     :toctree: ./generated/
+    :template: autosummary/base.rst
 
     freediscovery.io.parse_smart_tokens
 
@@ -76,5 +79,3 @@ This module aims to extend `sklearn.metrics <http://scikit-learn.org/stable/modu
     :toctree: ./generated/
 
     freediscovery.metrics.recall_at_k_score
-    freediscovery.metrics.ratio_duplicates_score
-    freediscovery.metrics.f1_same_duplicates_score
