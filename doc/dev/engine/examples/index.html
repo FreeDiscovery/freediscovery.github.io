@@ -37,7 +37,7 @@
         <link rel="search" title="Search" href="../../search.html"/>
     <link rel="top" title="FreeDiscovery 1.3.0rc1 documentation" href="../../index.html"/>
         <link rel="up" title="FreeDiscovery Engine" href="../index.html"/>
-        <link rel="next" title="Email threading Example" href="email_threading_example.html"/>
+        <link rel="next" title="Email threading" href="email_threading.html"/>
         <link rel="prev" title="Quick start" href="../quickstart.html"/> 
 
   
@@ -88,30 +88,28 @@
           
             
             
-                <ul class="current">
+                <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">FreeDiscovery Engine</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="../index.html#contents">Contents</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="../overview.html">FreeDiscovery overview</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../quickstart.html">Quick start</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Examples</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="email_threading_example.html">Email threading Example</a></li>
-<li class="toctree-l4"><a class="reference internal" href="data_ingestion_example.html">Data Ingestion Example</a></li>
-<li class="toctree-l4"><a class="reference internal" href="semantic_search_example.html">Semantic Search Example</a></li>
-<li class="toctree-l4"><a class="reference internal" href="hierarchical_clustering_visualization_example.html">Hierarchical Clustering Example</a></li>
-<li class="toctree-l4"><a class="reference internal" href="clustering_example.html">Clustering Example</a></li>
-<li class="toctree-l4"><a class="reference internal" href="duplicate_detection_example.html">Duplicate Detection Example</a></li>
-<li class="toctree-l4"><a class="reference internal" href="categorization_example.html">Categorization Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html">FreeDiscovery overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html">Quick start</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="email_threading.html">Email threading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_ingestion.html">Data Ingestion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="semantic_search.html">Semantic Search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hierarchical_clustering_visualization.html">Hierarchical Clustering Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cluster.html">Clustering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="duplicate_detection.html">Duplicate Detection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="categorization.html">Categorization</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../data_ingestion.html">Data ingestion</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../cli.html">Command line interface</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../deployment.html">Deployment options</a></li>
-<li class="toctree-l3"><a class="reference external" href="../openapi-docs/index.html#http://">API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_ingestion.html">Data ingestion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cli.html">Command line interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment.html">Deployment options</a></li>
+<li class="toctree-l2"><a class="reference external" href="../openapi-docs/index.html#http://">API</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Python package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">FreeDiscovery Core</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../user_manual/index.html">User Manual</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../whats_new.html">Release history</a></li>
@@ -170,57 +168,61 @@
   <div class="section" id="examples">
 <h1>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h1>
 <p>These Python scripts illustrate the use of the FreeDiscovery REST API
-on a subset of the TREC 2009 legal collection. See the README for the
-quick start instructions that use <cite>curl</cite>.</p>
+on a subset of the TREC 2009 legal collection. See <a class="reference external" href="../quickstart.html">the
+quick start instructions</a> for other examples using
+<code class="docutils literal"><span class="pre">curl</span></code>.</p>
 <p>These examples can be run with the following steps,</p>
 <ol class="arabic">
-<li><p class="first">Start the FreeDiscovery server (see &#8220;Installation instruction&#8221; section of the documentation)</p>
+<li><p class="first">Start the FreeDiscovery server</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>freediscovery run
+</pre></div>
+</div>
 </li>
 <li><p class="first">Run the examples with Python, e.g.</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>python examples/fd_engine/categorization_example.py
+<div class="highlight-bash"><div class="highlight"><pre><span></span>python examples/engine/categorization_example.py
 </pre></div>
 </div>
 </li>
 </ol>
-<div class="sphx-glr-thumbcontainer" tooltip="Thread a email collection "><div class="figure" id="id1">
-<img alt="../../_images/sphx_glr_email_threading_example_thumb.png" src="../../_images/sphx_glr_email_threading_example_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="email_threading_example.html#sphx-glr-engine-examples-email-threading-example-py"><span class="std std-ref">Email threading Example</span></a></span></p>
+<div class="sphx-glr-thumbcontainer" tooltip="An example illustrating the use of email threading algorithm on the fedora mailing list. "><div class="figure" id="id1">
+<img alt="../../_images/sphx_glr_email_threading_thumb.png" src="../../_images/sphx_glr_email_threading_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="email_threading.html#sphx-glr-engine-examples-email-threading-py"><span class="std std-ref">Email threading</span></a></span></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
 <div class="sphx-glr-thumbcontainer" tooltip="An example illustrating the data ingestion in FreeDiscovery "><div class="figure" id="id2">
-<img alt="../../_images/sphx_glr_data_ingestion_example_thumb.png" src="../../_images/sphx_glr_data_ingestion_example_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="data_ingestion_example.html#sphx-glr-engine-examples-data-ingestion-example-py"><span class="std std-ref">Data Ingestion Example</span></a></span></p>
+<img alt="../../_images/sphx_glr_data_ingestion_thumb.png" src="../../_images/sphx_glr_data_ingestion_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="data_ingestion.html#sphx-glr-engine-examples-data-ingestion-py"><span class="std std-ref">Data Ingestion</span></a></span></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
 <div class="sphx-glr-thumbcontainer" tooltip="An example of Semantic Search "><div class="figure" id="id3">
-<img alt="../../_images/sphx_glr_semantic_search_example_thumb.png" src="../../_images/sphx_glr_semantic_search_example_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="semantic_search_example.html#sphx-glr-engine-examples-semantic-search-example-py"><span class="std std-ref">Semantic Search Example</span></a></span></p>
+<img alt="../../_images/sphx_glr_semantic_search_thumb.png" src="../../_images/sphx_glr_semantic_search_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="semantic_search.html#sphx-glr-engine-examples-semantic-search-py"><span class="std std-ref">Semantic Search</span></a></span></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
 <div class="sphx-glr-thumbcontainer" tooltip="Visualize hierarchical clusters "><div class="figure" id="id4">
-<img alt="../../_images/sphx_glr_hierarchical_clustering_visualization_example_thumb.png" src="../../_images/sphx_glr_hierarchical_clustering_visualization_example_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="hierarchical_clustering_visualization_example.html#sphx-glr-engine-examples-hierarchical-clustering-visualization-example-py"><span class="std std-ref">Hierarchical Clustering Example</span></a></span></p>
+<img alt="../../_images/sphx_glr_hierarchical_clustering_visualization_thumb.png" src="../../_images/sphx_glr_hierarchical_clustering_visualization_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="hierarchical_clustering_visualization.html#sphx-glr-engine-examples-hierarchical-clustering-visualization-py"><span class="std std-ref">Hierarchical Clustering Example</span></a></span></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
 <div class="sphx-glr-thumbcontainer" tooltip="Cluster documents into clusters "><div class="figure" id="id5">
-<img alt="../../_images/sphx_glr_clustering_example_thumb.png" src="../../_images/sphx_glr_clustering_example_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="clustering_example.html#sphx-glr-engine-examples-clustering-example-py"><span class="std std-ref">Clustering Example</span></a></span></p>
+<img alt="../../_images/sphx_glr_cluster_thumb.png" src="../../_images/sphx_glr_cluster_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="cluster.html#sphx-glr-engine-examples-cluster-py"><span class="std std-ref">Clustering</span></a></span></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
 <div class="sphx-glr-thumbcontainer" tooltip="Find near-duplicates in a text collection "><div class="figure" id="id6">
-<img alt="../../_images/sphx_glr_duplicate_detection_example_thumb.png" src="../../_images/sphx_glr_duplicate_detection_example_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="duplicate_detection_example.html#sphx-glr-engine-examples-duplicate-detection-example-py"><span class="std std-ref">Duplicate Detection Example</span></a></span></p>
+<img alt="../../_images/sphx_glr_duplicate_detection_thumb.png" src="../../_images/sphx_glr_duplicate_detection_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="duplicate_detection.html#sphx-glr-engine-examples-duplicate-detection-py"><span class="std std-ref">Duplicate Detection</span></a></span></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
 <div class="sphx-glr-thumbcontainer" tooltip="An example to illustrate binary categorizaiton with FreeDiscovery "><div class="figure" id="id7">
-<img alt="../../_images/sphx_glr_categorization_example_thumb.png" src="../../_images/sphx_glr_categorization_example_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="categorization_example.html#sphx-glr-engine-examples-categorization-example-py"><span class="std std-ref">Categorization Example</span></a></span></p>
+<img alt="../../_images/sphx_glr_categorization_thumb.png" src="../../_images/sphx_glr_categorization_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="categorization.html#sphx-glr-engine-examples-categorization-py"><span class="std std-ref">Categorization</span></a></span></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
@@ -240,7 +242,7 @@ quick start instructions that use <cite>curl</cite>.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="email_threading_example.html" class="btn btn-neutral float-right" title="Email threading Example" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="email_threading.html" class="btn btn-neutral float-right" title="Email threading" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../quickstart.html" class="btn btn-neutral" title="Quick start" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -253,7 +255,7 @@ quick start instructions that use <cite>curl</cite>.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016 - 2017, Grossman Labs LLC.
-      Last updated on Sep 28, 2017.
+      Last updated on Sep 29, 2017.
 
     </p>
   </div>

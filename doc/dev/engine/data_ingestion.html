@@ -38,7 +38,7 @@
     <link rel="top" title="FreeDiscovery 1.3.0rc1 documentation" href="../index.html"/>
         <link rel="up" title="FreeDiscovery Engine" href="index.html"/>
         <link rel="next" title="Command line interface" href="cli.html"/>
-        <link rel="prev" title="Categorization Example" href="examples/categorization_example.html"/> 
+        <link rel="prev" title="Categorization" href="examples/categorization.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -88,26 +88,24 @@
           
             
             
-                <ul class="current">
+                <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">FreeDiscovery Engine</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="index.html#contents">Contents</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="overview.html">FreeDiscovery overview</a></li>
-<li class="toctree-l3"><a class="reference internal" href="quickstart.html">Quick start</a></li>
-<li class="toctree-l3"><a class="reference internal" href="examples/index.html">Examples</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Data ingestion</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#format-of-processed-files">Format of processed files</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#document-indexing">Document indexing</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#example-datasets">Example datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html">FreeDiscovery overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html">Quick start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/index.html">Examples</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Data ingestion</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#format-of-processed-files">Format of processed files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#document-indexing">Document indexing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-datasets">Example datasets</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="cli.html">Command line interface</a></li>
-<li class="toctree-l3"><a class="reference internal" href="deployment.html">Deployment options</a></li>
-<li class="toctree-l3"><a class="reference external" href="../openapi-docs/index.html#http://">API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli.html">Command line interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment options</a></li>
+<li class="toctree-l2"><a class="reference external" href="../openapi-docs/index.html#http://">API</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../python/index.html">Python package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python/index.html">FreeDiscovery Core</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../user_manual/index.html">User Manual</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../whats_new.html">Release history</a></li>
@@ -184,13 +182,12 @@
 <li><code class="docutils literal"><span class="pre">document_id</span></code> together with a <code class="docutils literal"><span class="pre">rendition_id</span></code>, where the latter is also provided in the <code class="docutils literal"><span class="pre">POST</span> <span class="pre">/api/v0/feature-extraction/&lt;dataset-id&gt;</span></code> processing step</li>
 </ul>
 </div></blockquote>
-<dl class="docutils">
-<dt>To use a field (or a group of fields) as a index, it must be unique, meaning that duplicates are not supported. The only field that is unique by construction is <code class="docutils literal"><span class="pre">internal_id</span></code>, all the rest being user provided. Additional information regarding data ingestion and indexing can be found in the <a class="reference external" href="../examples/REST_data_ingestion.html">REST_data_ingestion</a> example. The mapping between different index fields is provided by</dt>
-<dd><ul class="first last simple">
+<p>To use a field (or a group of fields) as a index, it must be unique, meaning that duplicates are not supported. The only field that is unique by construction is <code class="docutils literal"><span class="pre">internal_id</span></code>, all the rest being user provided. Additional information regarding data ingestion and indexing can be found in the <a class="reference external" href="../examples/REST_data_ingestion.html">REST_data_ingestion</a> example. The mapping between different index fields is provided by</p>
+<blockquote>
+<div><ul class="simple">
 <li><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/api/v0/feature-extraction/&lt;id&gt;/id-mapping/nested</span></code></li>
 </ul>
-</dd>
-</dl>
+</div></blockquote>
 <p>The training of the categorization model also uses a similar mechanism to identify training set documents.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -203,7 +200,7 @@
 <div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">GET</span> <span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v0</span><span class="o">/</span><span class="n">dataset</span><span class="o">/&lt;</span><span class="n">dataset</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span>
 </pre></div>
 </div>
-<p>These datasets are in particular used in <cite>the examples &lt;../examples/index.html&gt;</cite> and contain the ground truth classification labels.</p>
+<p>These datasets are in particular used in <a class="reference external" href="../examples/index.html">the examples</a> and contain the ground truth classification labels.</p>
 </div>
 </div>
 
@@ -217,7 +214,7 @@
         <a href="cli.html" class="btn btn-neutral float-right" title="Command line interface" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="examples/categorization_example.html" class="btn btn-neutral" title="Categorization Example" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="examples/categorization.html" class="btn btn-neutral" title="Categorization" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -227,7 +224,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016 - 2017, Grossman Labs LLC.
-      Last updated on Sep 28, 2017.
+      Last updated on Sep 29, 2017.
 
     </p>
   </div>
