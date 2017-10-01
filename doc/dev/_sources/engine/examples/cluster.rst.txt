@@ -88,7 +88,7 @@ Cluster documents into clusters
 
     POST http://localhost:5001/api/v0/feature-extraction
        => received ['id']
-       => dsid = 2168c043206f4aa6
+       => dsid = 2c421b62f2924ed4
 
 
 1.b Run feature extraction
@@ -111,7 +111,7 @@ Cluster documents into clusters
 
  Out::
 
-    POST http://localhost:5001/api/v0/feature-extraction/2168c043206f4aa6
+    POST http://localhost:5001/api/v0/feature-extraction/2c421b62f2924ed4
 
 
 2. Calculate LSI
@@ -146,7 +146,7 @@ Cluster documents into clusters
  Out::
 
     POST http://localhost:5001/api/v0/lsi/
-      => LSI model id = bd86f16b216d48a2
+      => LSI model id = 4746531046f74668
       => SVD decomposition with 300 dimensions explaining 87.16 % variabilty of the data
 
 
@@ -181,7 +181,7 @@ Cluster documents into clusters
 
     3.a. Document clustering (LSI + K-means)
      POST http://localhost:5001/api/v0/clustering/k-mean/
-         => model id = ebf0a8a38a33449e
+         => model id = e559600f88d1478c
 
 
 3.b. Computing cluster labels
@@ -215,19 +215,19 @@ Cluster documents into clusters
 
  Out::
 
-    GET http://localhost:5001/api/v0/clustering/k-mean/ebf0a8a38a33449e
-        .. computed in 1.2s
+    GET http://localhost:5001/api/v0/clustering/k-mean/e559600f88d1478c
+        .. computed in 1.1s
        cluster_id                   cluster_label  cluster_similarity  cluster_size  n_documents
-    0           0                     ect hou thu               0.191           293          293
-    1           1          rewrite address server               1.000            56           56
-    2           2    normal enron_development tue               0.260           157          157
-    3           3  test administrative recipients               0.272           186          186
-    4           4          outlook migration team               0.280           151          151
-    5           5              normal meeting fri               0.136           350          350
-    6           6                mon tenet normal               0.261           186          186
-    7           7                   thu enron doc               0.084           811          811
-    8           8                  wed nov normal               0.324           110          110
-    9           9           tue shackleton normal               0.260           165          165
+    0           0             office normal shall               0.111           556          556
+    1           1            sanders lunch normal               0.296           142          142
+    2           2          outlook migration team               0.307           132          132
+    3           3           thu normal ricafrente               0.181           344          344
+    4           4          rewrite address server               1.000            56           56
+    5           5  test recipients administrative               0.379           108          108
+    6           6                 normal kean fri               0.248           171          171
+    7           7                enron normal wed               0.091           709          709
+    8           8                  tue normal oct               0.251           190          190
+    9           9                   ect hou party               0.625            57           57
 
 
 4. Document Clustering (LSI + Birch Clustering)
@@ -264,7 +264,7 @@ Cluster documents into clusters
 
     4.a. Document clustering (LSI + Birch clustering)
      POST http://localhost:5001/api/v0/clustering/birch/
-         => model id = 22f2789145ce4da7
+         => model id = f2983b351d2e4eb2
 
 
 4.b. Computing cluster labels
@@ -296,7 +296,7 @@ Cluster documents into clusters
 
  Out::
 
-    GET http://localhost:5001/api/v0/clustering/birch/22f2789145ce4da7
+    GET http://localhost:5001/api/v0/clustering/birch/f2983b351d2e4eb2
         .. computed in 1.9s
                                                  children  cluster_depth  cluster_id                        cluster_label  cluster_similarity  cluster_size  n_documents
     0   [1, 3, 13, 25, 27, 30, 43, 45, 47, 51, 53, 63,...              0           0                      normal test ect               0.074          2465         2465
@@ -392,7 +392,7 @@ Cluster documents into clusters
 
  Out::
 
-    GET http://localhost:5001/api/v0/clustering/birch/22f2789145ce4da7
+    GET http://localhost:5001/api/v0/clustering/birch/f2983b351d2e4eb2
         .. computed in 0.1s
         cluster_id  cluster_similarity  cluster_size                                          documents
     0           15               0.531           114  [{'document_id': 5041, 'similarity': 0.9245882...
@@ -472,7 +472,7 @@ Cluster documents into clusters
 
 
 
-**Total running time of the script:** ( 0 minutes  9.623 seconds)
+**Total running time of the script:** ( 0 minutes  9.466 seconds)
 
 
 
