@@ -93,7 +93,7 @@ Find near-duplicates in a text collection
     1.a Load dataset and initalize feature extraction
      POST http://localhost:5001/api/v0/feature-extraction
        => received ['id']
-       => dsid = 9a3319a18e7e4a56
+       => dsid = 46fd3b91fd414c5e
 
 
 1.b Run feature extraction
@@ -125,10 +125,10 @@ Find near-duplicates in a text collection
 
  Out::
 
-    POST http://localhost:5001/api/v0/feature-extraction/9a3319a18e7e4a56
+    POST http://localhost:5001/api/v0/feature-extraction/46fd3b91fd414c5e
 
     1.d. check the parameters of the extracted features
-     GET http://localhost:5001/api/v0/feature-extraction/9a3319a18e7e4a56
+     GET http://localhost:5001/api/v0/feature-extraction/46fd3b91fd414c5e
          - analyzer: word
          - chunk_size: 5000
          - data_dir: /home/ubuntu/freediscovery_shared/treclegal09_2k_subset/data/jobRun_4/XML_EXPORT_CONTENT/text_9
@@ -221,8 +221,8 @@ Find near-duplicates in a text collection
  Out::
 
     POST http://localhost:5001/api/v0/clustering/dbscan/
-         => model id = ba3dd06d17184d82
-     GET http://localhost:5001/api/v0/clustering/dbscan/ba3dd06d17184d82
+         => model id = ecdf78ce0c6241ee
+     GET http://localhost:5001/api/v0/clustering/dbscan/ecdf78ce0c6241ee
         .. computed in 6.0s
     Found 233 duplicates / 2465
 
@@ -272,11 +272,11 @@ Find near-duplicates in a text collection
  Out::
 
     POST http://localhost:5001/api/v0/duplicate-detection/
-         => model id = 7efe161d62b147be
+         => model id = e703d266d6e04357
         .. computed in 0.0s
-     GET http://localhost:5001/api/v0/duplicate-detection/7efe161d62b147be
+     GET http://localhost:5001/api/v0/duplicate-detection/e703d266d6e04357
         .. computed in 3.5s
-    Found 561 duplicates / 2465
+    Found 557 duplicates / 2465
 
 
 3. Duplicate detection by Simhash
@@ -326,9 +326,9 @@ Find near-duplicates in a text collection
  Out::
 
     POST http://localhost:5001/api/v0/duplicate-detection/
-         => model id = c7e5d3fe8c8b4909
+         => model id = e7c4919c92e2422f
         .. computed in 0.5s
-     GET http://localhost:5001/api/v0/duplicate-detection/c7e5d3fe8c8b4909
+     GET http://localhost:5001/api/v0/duplicate-detection/e7c4919c92e2422f
         .. computed in 0.8s
     Found 475 duplicates / 2465
 
@@ -348,7 +348,7 @@ Find near-duplicates in a text collection
 
 
 
-**Total running time of the script:** ( 0 minutes  13.638 seconds)
+**Total running time of the script:** ( 0 minutes  13.579 seconds)
 
 
 
