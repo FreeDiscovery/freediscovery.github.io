@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>freediscovery.cluster.ClusterLabels &mdash; FreeDiscovery 1.3.0rc1 documentation</title>
+  <title>freediscovery.cluster.birch_hierarchy_wrapper &mdash; FreeDiscovery 1.3.0rc1 documentation</title>
   
 
   
@@ -37,8 +37,8 @@
         <link rel="search" title="Search" href="../../search.html"/>
     <link rel="top" title="FreeDiscovery 1.3.0rc1 documentation" href="../../index.html"/>
         <link rel="up" title="API" href="../api.html"/>
-        <link rel="next" title="freediscovery.near_duplicates.SimhashNearDuplicates" href="freediscovery.near_duplicates.SimhashNearDuplicates.html"/>
-        <link rel="prev" title="freediscovery.cluster.birch_hierarchy_wrapper" href="freediscovery.cluster.birch_hierarchy_wrapper.html"/> 
+        <link rel="next" title="freediscovery.cluster.ClusterLabels" href="freediscovery.cluster.ClusterLabels.html"/>
+        <link rel="prev" title="freediscovery.cluster.BirchSubcluster" href="freediscovery.cluster.BirchSubcluster.html"/> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -99,8 +99,8 @@
 <li class="toctree-l3 current"><a class="reference internal" href="../api.html#clustering">Clustering</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="freediscovery.cluster.Birch.html">freediscovery.cluster.Birch</a></li>
 <li class="toctree-l4"><a class="reference internal" href="freediscovery.cluster.BirchSubcluster.html">freediscovery.cluster.BirchSubcluster</a></li>
-<li class="toctree-l4"><a class="reference internal" href="freediscovery.cluster.birch_hierarchy_wrapper.html">freediscovery.cluster.birch_hierarchy_wrapper</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">freediscovery.cluster.ClusterLabels</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">freediscovery.cluster.birch_hierarchy_wrapper</a></li>
+<li class="toctree-l4"><a class="reference internal" href="freediscovery.cluster.ClusterLabels.html">freediscovery.cluster.ClusterLabels</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../api.html#near-duplicates-detection">Near Duplicates detection</a></li>
@@ -153,12 +153,12 @@
       
         <li><a href="../api.html">API</a> &raquo;</li>
       
-    <li>freediscovery.cluster.ClusterLabels</li>
+    <li>freediscovery.cluster.birch_hierarchy_wrapper</li>
     <li class="wy-breadcrumbs-aside">
       
           
           
-            <a href="https://github.com/FreeDiscovery/FreeDiscovery/blob/master/doc/python/generated/freediscovery.cluster.ClusterLabels.rst" class="fa fa-github"> Edit on GitHub</a>
+            <a href="https://github.com/FreeDiscovery/FreeDiscovery/blob/master/doc/python/generated/freediscovery.cluster.birch_hierarchy_wrapper.rst" class="fa fa-github"> Edit on GitHub</a>
           
         
       
@@ -169,50 +169,52 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="freediscovery-cluster-clusterlabels">
-<h1>freediscovery.cluster.ClusterLabels<a class="headerlink" href="#freediscovery-cluster-clusterlabels" title="Permalink to this headline">¶</a></h1>
-<dl class="class">
-<dt id="freediscovery.cluster.ClusterLabels">
-<em class="property">class </em><code class="descclassname">freediscovery.cluster.</code><code class="descname">ClusterLabels</code><span class="sig-paren">(</span><em>vect</em>, <em>model</em>, <em>lsi=None</em>, <em>method='centroid-frequency'</em>, <em>n_top_words=6</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/4a0b866/freediscovery/cluster/base.py#L44"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.ClusterLabels" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate the cluster labels.</p>
+  <div class="section" id="freediscovery-cluster-birch-hierarchy-wrapper">
+<h1>freediscovery.cluster.birch_hierarchy_wrapper<a class="headerlink" href="#freediscovery-cluster-birch-hierarchy-wrapper" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="freediscovery.cluster.birch_hierarchy_wrapper">
+<code class="descclassname">freediscovery.cluster.</code><code class="descname">birch_hierarchy_wrapper</code><span class="sig-paren">(</span><em>birch</em>, <em>container=&lt;class 'freediscovery.cluster.hierarchy.BirchSubcluster'&gt;</em>, <em>validate=True</em>, <em>compute_document_id=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/4a0b866/freediscovery/cluster/hierarchy.py#L175"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.birch_hierarchy_wrapper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrap BIRCH cluster hierarchy with a container class</p>
+<p>This class as inpu</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>vect</strong> (<em>VectorizerMixin object</em>) &#8211; a scikit-learn&#8217;s text vectorizer</li>
-<li><strong>model</strong> (<em>ClusterMixin object</em>) &#8211; the cluster object</li>
-<li><strong>lsi_components</strong> (<em>TruncatedSVD object</em><em> or </em><em>None</em>) &#8211; LSA object if it was used for clustering</li>
-<li><strong>method</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default='centroid-frequency'</em>) &#8211; the method used to compute the centroid labels
-Only &#8216;centroid-frequency&#8217; is supported at the moment.</li>
-<li><strong>n_top_words</strong> (<em>int</em><em>, </em><em>default=10</em>) &#8211; keep only most relevant n_top_words words</li>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>birch</strong> (<a class="reference internal" href="freediscovery.cluster.Birch.html#freediscovery.cluster.Birch" title="freediscovery.cluster.Birch"><em>freediscovery.cluster.Birch</em></a>) &#8211; a trained Birch clustering</li>
+<li><strong>container</strong> (<a class="reference internal" href="freediscovery.cluster.BirchSubcluster.html#freediscovery.cluster.BirchSubcluster" title="freediscovery.cluster.BirchSubcluster"><em>freediscovery.cluster.BirchSubcluster</em></a><em>, </em><em>default=BirchSubcluster</em>) &#8211; a subclass of <a class="reference internal" href="freediscovery.cluster.BirchSubcluster.html#freediscovery.cluster.BirchSubcluster" title="freediscovery.cluster.BirchSubcluster"><code class="xref py py-class docutils literal"><span class="pre">BirchSubcluster</span></code></a>
+that will be used to wrap each BIRCH subcluster</li>
+<li><strong>validate</strong> (<em>bool</em><em>, </em><em>default=True</em>) &#8211; check the consistency of the constructed hierarchical tree
+(this may carry some overhead)</li>
+<li><strong>compute_document_id</strong> (<em>bool</em><em>, </em><em>default=True</em>) &#8211; compute the document/sample ids belonging to each subcluster</li>
 </ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
+<li><strong>htree</strong> (<em>BirchSubcluster</em>) &#8211; a container containing the data from the BIRCH cluster hierarchy</li>
+<li><strong>n_subclusters</strong> (<em>int</em>) &#8211; the total number of subclusters</li>
+</ul>
+</p>
 </td>
 </tr>
 </tbody>
 </table>
-<dl class="method">
-<dt id="freediscovery.cluster.ClusterLabels.predict">
-<code class="descname">predict</code><span class="sig-paren">(</span><em>centroids=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/4a0b866/freediscovery/cluster/base.py#L87"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.ClusterLabels.predict" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute the cluster labels</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>centroids</strong> (<em>list</em><em>, </em><em>default=None</em>) &#8211; if not None, ignore clustering given by the clustering model and
-compute labels for the given cluster centroids</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>cluster_labels</strong></td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array [n_samples]</td>
-</tr>
-</tbody>
-</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">in FreeDiscovery BIRCH if primairly used to cluster documents. As a
+result the variables/methods containing the term &#8220;document&#8221;
+have the same meaning as &#8220;sample&#8221; in the general scikit-learn context.</p>
+</div>
 </dd></dl>
 
-</dd></dl>
-
-<div style='clear:both'></div></div>
+<div class="section" id="examples-using-freediscovery-cluster-birch-hierarchy-wrapper">
+<h2>Examples using <code class="docutils literal"><span class="pre">freediscovery.cluster.birch_hierarchy_wrapper</span></code><a class="headerlink" href="#examples-using-freediscovery-cluster-birch-hierarchy-wrapper" title="Permalink to this headline">¶</a></h2>
+<div class="sphx-glr-thumbcontainer" tooltip="Exploring BIRCH cluster hierarchy ================================="><div class="figure" id="id1">
+<img alt="../../_images/sphx_glr_birch_cluster_hierarchy_thumb.png" src="../../_images/sphx_glr_birch_cluster_hierarchy_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../examples/birch_cluster_hierarchy.html#sphx-glr-python-examples-birch-cluster-hierarchy-py"><span class="std std-ref">Exploring BIRCH cluster hierarchy</span></a></span></p>
+</div>
+</div><div style='clear:both'></div></div>
+</div>
 
 
            </div>
@@ -221,10 +223,10 @@ compute labels for the given cluster centroids</td>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="freediscovery.near_duplicates.SimhashNearDuplicates.html" class="btn btn-neutral float-right" title="freediscovery.near_duplicates.SimhashNearDuplicates" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="freediscovery.cluster.ClusterLabels.html" class="btn btn-neutral float-right" title="freediscovery.cluster.ClusterLabels" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="freediscovery.cluster.birch_hierarchy_wrapper.html" class="btn btn-neutral" title="freediscovery.cluster.birch_hierarchy_wrapper" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="freediscovery.cluster.BirchSubcluster.html" class="btn btn-neutral" title="freediscovery.cluster.BirchSubcluster" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

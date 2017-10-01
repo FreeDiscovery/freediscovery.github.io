@@ -1,0 +1,475 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Exploring BIRCH cluster hierarchy &mdash; FreeDiscovery 1.3.0rc1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="FreeDiscovery 1.3.0rc1 documentation" href="../../index.html"/>
+        <link rel="up" title="Examples" href="index.html"/>
+        <link rel="next" title="Categorization Interpretation Example" href="categorization_interpretation.html"/>
+        <link rel="prev" title="Examples" href="index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> FreeDiscovery
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.3.0rc1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../engine/index.html">FreeDiscovery Engine</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">FreeDiscovery Core</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api.html">API</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Examples</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Exploring BIRCH cluster hierarchy</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#building-the-cluster-hierarchy">Building the cluster hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualizing-the-hierarchy">Visualizing the hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#custom-calculations-in-the-hierarchy">Custom calculations in the hierarchy</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="categorization_interpretation.html">Categorization Interpretation Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="optimize_tfidf.html">Optimizing TF-IDF schemes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_manual/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../whats_new.html">Release history</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">FreeDiscovery</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+        <li><a href="../index.html">FreeDiscovery Core</a> &raquo;</li>
+      
+        <li><a href="index.html">Examples</a> &raquo;</li>
+      
+    <li>Exploring BIRCH cluster hierarchy</li>
+    <li class="wy-breadcrumbs-aside">
+      
+          
+          
+            <a href="https://github.com/FreeDiscovery/FreeDiscovery/blob/master/doc/python/examples/birch_cluster_hierarchy.rst" class="fa fa-github"> Edit on GitHub</a>
+          
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="exploring-birch-cluster-hierarchy">
+<span id="exploring-birch-example"></span><span id="sphx-glr-python-examples-birch-cluster-hierarchy-py"></span><h1>Exploring BIRCH cluster hierarchy<a class="headerlink" href="#exploring-birch-cluster-hierarchy" title="Permalink to this headline">¶</a></h1>
+<p>An example illustrating how to explore the cluster hierarchy
+computed by the BIRCH algorithm.</p>
+<p>In this example, we use a
+<a class="reference internal" href="../../user_manual/clustering.html#birch-section"><span class="std std-ref">patched verson</span></a> of <a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.Birch.html#sklearn.cluster.Birch" title="(in scikit-learn v0.19.0)"><code class="xref py py-class docutils literal"><span class="pre">sklearn.cluster.Birch</span></code></a>
+that allows to store the id of samples belonging to each subcluster.
+This modified version is available from <a class="reference internal" href="../generated/freediscovery.cluster.Birch.html#freediscovery.cluster.Birch" title="freediscovery.cluster.Birch"><code class="xref py py-class docutils literal"><span class="pre">freediscovery.cluster.Birch</span></code></a>.</p>
+<div class="section" id="building-the-cluster-hierarchy">
+<h2>Building the cluster hierarchy<a class="headerlink" href="#building-the-cluster-hierarchy" title="Permalink to this headline">¶</a></h2>
+<p>We start by computing BIRCH clustering on some random structured data,</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_blobs</span>
+<span class="kn">from</span> <span class="nn">freediscovery.cluster</span> <span class="kn">import</span> <span class="n">Birch</span><span class="p">,</span> <span class="n">birch_hierarchy_wrapper</span>
+
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_blobs</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">rng</span><span class="p">)</span>
+
+<span class="n">cluster_model</span> <span class="o">=</span> <span class="n">Birch</span><span class="p">(</span><span class="n">threshold</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">branching_factor</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+                      <span class="n">compute_sample_indices</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">cluster_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Next we wrap each subcluster in the cluster hierarchy
+(<code class="docutils literal"><span class="pre">cluster_model.root_</span></code>) with the
+<a class="reference internal" href="../generated/freediscovery.cluster.BirchSubcluster.html#freediscovery.cluster.BirchSubcluster" title="freediscovery.cluster.BirchSubcluster"><code class="xref py py-class docutils literal"><span class="pre">BirchSubcluster</span></code></a> class
+that allows easier manipulation of the hierarchical tree.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">htree</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">birch_hierarchy_wrapper</span><span class="p">(</span><span class="n">cluster_model</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Total number of subclusters:&#39;</span><span class="p">,</span> <span class="n">htree</span><span class="o">.</span><span class="n">tree_size</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Total</span> <span class="n">number</span> <span class="n">of</span> <span class="n">subclusters</span><span class="p">:</span> <span class="mi">78</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="visualizing-the-hierarchy">
+<h2>Visualizing the hierarchy<a class="headerlink" href="#visualizing-the-hierarchy" title="Permalink to this headline">¶</a></h2>
+<p>We can now visualize the cluster hierarchy,</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">htree</span><span class="o">.</span><span class="n">display_tree</span><span class="p">()</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">0</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">7</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">1000</span>
+<span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">1</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">3</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">37</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">2</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">19</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">3</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">3</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">4</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">15</span>
+<span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">5</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">10</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">127</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">6</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">16</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">7</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">18</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">8</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">7</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">9</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">16</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">10</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">14</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">11</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">16</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">12</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">14</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">13</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">7</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">14</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">10</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">15</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">9</span>
+<span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">16</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">17</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">230</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">17</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">9</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">18</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">19</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">19</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">14</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">20</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">6</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">21</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">19</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">22</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">19</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">23</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">18</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">24</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">20</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">25</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">13</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">26</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">14</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">27</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">9</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">28</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">20</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">29</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">11</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">30</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">13</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">31</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">13</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">32</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">8</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">33</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">5</span>
+<span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">34</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">3</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">34</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">35</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">17</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">36</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">4</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">37</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">13</span>
+<span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">38</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">7</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">103</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">39</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">22</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">40</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">22</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">41</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">12</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">42</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">9</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">43</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">14</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">44</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">15</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">45</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">9</span>
+<span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">46</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">12</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">172</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">47</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">19</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">48</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">9</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">49</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">13</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">50</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">16</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">51</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">18</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">52</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">10</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">53</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">17</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">54</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">11</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">55</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">12</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">56</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">19</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">57</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">17</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">58</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">11</span>
+<span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">59</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">18</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">297</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">60</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">21</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">61</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">22</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">62</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">18</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">63</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">17</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">64</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">17</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">65</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">20</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">66</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">20</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">67</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">13</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">68</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">10</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">69</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">12</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">70</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">21</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">71</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">14</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">72</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">22</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">73</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">13</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">74</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">11</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">75</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">23</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">76</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">7</span>
+<span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">77</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">16</span>
+</pre></div>
+</div>
+<p>We have a hierarchy 2 levels deep, with 197 sub-clusters and a total
+of 1000 samples.</p>
+<p>For instance, let&#8217;s consider the subcluster with  <code class="docutils literal"><span class="pre">cluster_id=12</span></code>.
+We can access it by id with the flattened representation of the hierarchy,</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">sc</span> <span class="o">=</span> <span class="n">htree</span><span class="o">.</span><span class="n">flatten</span><span class="p">()[</span><span class="mi">12</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">sc</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">BirchSubcluster</span> <span class="mi">2</span><span class="n">ab58d05ef68</span><span class="p">:</span> <span class="s2">&quot;{&#39;document_id&#39;: [41, 342, 395, 453, 455, 465, 542, 662, 677, 692, 714, 743, 790, 919], &#39;cluster_id&#39;: 12, &#39;document_id_accumulated&#39;: [41, 342, 395, 453, 455, 465, 542, 662, 677, 692, 714, 743, 790, 919], &#39;cluster_size&#39;: 14}&quot;</span><span class="o">&gt;</span>
+  <span class="o">*</span> <span class="n">parent</span><span class="p">:</span> <span class="n">BirchSubcluster</span><span class="p">[</span><span class="n">subcluster_id</span><span class="o">=</span><span class="mi">5</span><span class="p">]</span>
+  <span class="o">*</span> <span class="n">children</span><span class="p">:</span> <span class="p">[]</span>
+</pre></div>
+</div>
+<p>Each subcluster is a dictionary linked inside the hierarchy via the
+<cite>parent</cite> / <cite>children</cite> attributes
+(cf documentation of <a class="reference internal" href="../generated/freediscovery.cluster.BirchSubcluster.html#freediscovery.cluster.BirchSubcluster" title="freediscovery.cluster.BirchSubcluster"><code class="xref py py-class docutils literal"><span class="pre">BirchSubcluster</span></code></a>).
+The ids of the samples contained in a subcluster are stored under the
+<code class="docutils literal"><span class="pre">document_id_accumulated</span></code> key. We can perform any calculations with the
+samples in a given cluster by indexing the original dataset <cite>X</cite>,</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;cluster_id&#39;</span><span class="p">,</span> <span class="n">sc</span><span class="p">[</span><span class="s1">&#39;cluster_id&#39;</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;document_id_accumulated&#39;</span><span class="p">,</span> <span class="n">sc</span><span class="p">[</span><span class="s1">&#39;document_id_accumulated&#39;</span><span class="p">])</span>
+<span class="n">sc_centroid</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">sc</span><span class="p">[</span><span class="s1">&#39;document_id_accumulated&#39;</span><span class="p">],</span> <span class="p">:]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">sc_centroid</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">cluster_id</span> <span class="mi">12</span>
+<span class="n">document_id_accumulated</span> <span class="p">[</span><span class="mi">41</span><span class="p">,</span> <span class="mi">342</span><span class="p">,</span> <span class="mi">395</span><span class="p">,</span> <span class="mi">453</span><span class="p">,</span> <span class="mi">455</span><span class="p">,</span> <span class="mi">465</span><span class="p">,</span> <span class="mi">542</span><span class="p">,</span> <span class="mi">662</span><span class="p">,</span> <span class="mi">677</span><span class="p">,</span> <span class="mi">692</span><span class="p">,</span> <span class="mi">714</span><span class="p">,</span> <span class="mi">743</span><span class="p">,</span> <span class="mi">790</span><span class="p">,</span> <span class="mi">919</span><span class="p">]</span>
+<span class="p">[</span> <span class="mf">2.08591055</span> <span class="o">-</span><span class="mf">6.91986674</span> <span class="o">-</span><span class="mf">5.78779193</span> <span class="o">-</span><span class="mf">2.87338484</span>  <span class="mf">0.02985612</span>  <span class="mf">5.67168299</span>
+ <span class="o">-</span><span class="mf">6.44911835</span> <span class="o">-</span><span class="mf">0.40653423</span>  <span class="mf">1.25584291</span> <span class="o">-</span><span class="mf">9.56265353</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>For instance, we can select only subclusters that are one level deep
+(this includes <code class="docutils literal"><span class="pre">cluster_id=12</span></code>) and compute their centroids,</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">htree_depth_1</span> <span class="o">=</span> <span class="p">[</span><span class="n">sc</span> <span class="k">for</span> <span class="n">sc</span> <span class="ow">in</span> <span class="n">htree</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="k">if</span> <span class="n">sc</span><span class="o">.</span><span class="n">current_depth</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">sc</span> <span class="ow">in</span> <span class="n">htree_depth_1</span><span class="p">:</span>
+    <span class="n">sc</span><span class="p">[</span><span class="s1">&#39;centroid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">sc</span><span class="p">[</span><span class="s1">&#39;document_id_accumulated&#39;</span><span class="p">],</span> <span class="p">:]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Centroid for :</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">htree_depth_1</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">htree_depth_1</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;centroid&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Centroid</span> <span class="k">for</span> <span class="p">:</span>
+
+<span class="o">&lt;</span><span class="n">BirchSubcluster</span> <span class="mi">2</span><span class="n">ab58d05ed00</span><span class="p">:</span> <span class="s2">&quot;{&#39;document_id&#39;: [], &#39;cluster_id&#39;: 5, &#39;document_id_accumulated&#39;: [22, 117, 594, 125, 126, 220, 746, 283, 550, 310, 391, 501, 799, 871, 986, 997, 52, 114, 316, 324, 693, 380, 398, 724, 440, 452, 578, 602, 640, 793, 838, 854, 907, 941, 157, 245, 266, 493, 660, 921, 991, 123, 147, 149, 583, 188, 252, 221, 343, 406, 417, 434, 528, 535, 691, 782, 998, 165, 267, 172, 338, 415, 431, 447, 476, 508, 551, 586, 730, 768, 887, 33, 54, 189, 230, 251, 413, 271, 335, 377, 388, 494, 596, 683, 756, 866, 956, 41, 342, 395, 453, 455, 465, 542, 662, 677, 692, 714, 743, 790, 919, 272, 438, 689, 937, 701, 767, 826, 78, 215, 253, 317, 449, 791, 873, 906, 930, 948, 69, 148, 173, 442, 588, 612, 638, 700, 977], &#39;cluster_size&#39;: 127, &#39;centroid&#39;: array([ 2.255717  , -7.21147066, -4.63967053, -2.78657388, -0.31125198,</span><span class="se">\n</span><span class="s2">        6.09142225, -5.99938522,  0.24892034,  2.13639146, -9.33508525])}&quot;</span><span class="o">&gt;</span>
+  <span class="o">*</span> <span class="n">parent</span><span class="p">:</span> <span class="n">BirchSubcluster</span><span class="p">[</span><span class="n">subcluster_id</span><span class="o">=</span><span class="mi">0</span><span class="p">]</span>
+  <span class="o">*</span> <span class="n">children</span><span class="p">:</span> <span class="p">[</span><span class="n">BirchSubcluster</span><span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">6</span><span class="p">],</span> <span class="n">BirchSubcluster</span><span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">7</span><span class="p">],</span> <span class="n">BirchSubcluster</span><span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">8</span><span class="p">],</span> <span class="n">BirchSubcluster</span><span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">9</span><span class="p">],</span> <span class="n">BirchSubcluster</span><span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">10</span><span class="p">],</span> <span class="n">BirchSubcluster</span><span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">11</span><span class="p">],</span> <span class="n">BirchSubcluster</span><span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">12</span><span class="p">],</span> <span class="n">BirchSubcluster</span><span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">13</span><span class="p">],</span> <span class="n">BirchSubcluster</span><span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">14</span><span class="p">],</span> <span class="n">BirchSubcluster</span><span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">15</span><span class="p">]]</span>
+
+<span class="p">[</span> <span class="mf">2.255717</span>   <span class="o">-</span><span class="mf">7.21147066</span> <span class="o">-</span><span class="mf">4.63967053</span> <span class="o">-</span><span class="mf">2.78657388</span> <span class="o">-</span><span class="mf">0.31125198</span>  <span class="mf">6.09142225</span>
+ <span class="o">-</span><span class="mf">5.99938522</span>  <span class="mf">0.24892034</span>  <span class="mf">2.13639146</span> <span class="o">-</span><span class="mf">9.33508525</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="custom-calculations-in-the-hierarchy">
+<h2>Custom calculations in the hierarchy<a class="headerlink" href="#custom-calculations-in-the-hierarchy" title="Permalink to this headline">¶</a></h2>
+<p>While for a number of computations, it is sufficient to iterate through
+a flattened tree, sometimes the output of the calculation need to account
+for data from any number of other subclusters in the tree (e.g. all the
+children). In this case we can subclass
+<a class="reference internal" href="../generated/freediscovery.cluster.BirchSubcluster.html#freediscovery.cluster.BirchSubcluster" title="freediscovery.cluster.BirchSubcluster"><code class="xref py py-class docutils literal"><span class="pre">BirchSubcluster</span></code></a> to add out custom recursive
+function. Here we will add a function that for any subcluster computes the
+the maximum depth of the tree spanned by its children subclusters,</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">freediscovery.cluster</span> <span class="kn">import</span> <span class="n">BirchSubcluster</span>
+
+
+<span class="k">class</span> <span class="nc">NewBirchSubcluster</span><span class="p">(</span><span class="n">BirchSubcluster</span><span class="p">):</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">max_tree_depth</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="nb">max</span><span class="p">(</span><span class="n">sc</span><span class="o">.</span><span class="n">max_tree_depth</span> <span class="k">for</span> <span class="n">sc</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>by re-wrapping the cluster hierarchy with this container, we get,</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">htree_new</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">birch_hierarchy_wrapper</span><span class="p">(</span><span class="n">cluster_model</span><span class="p">,</span>
+                                       <span class="n">container</span><span class="o">=</span><span class="n">NewBirchSubcluster</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Tree depth from the root node:&#39;</span><span class="p">,</span> <span class="n">htree_new</span><span class="o">.</span><span class="n">max_tree_depth</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Tree depth from cluster_id=12:&#39;</span><span class="p">,</span> <span class="n">htree_new</span><span class="o">.</span><span class="n">flatten</span><span class="p">()[</span><span class="mi">12</span><span class="p">]</span><span class="o">.</span><span class="n">max_tree_depth</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Tree</span> <span class="n">depth</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">root</span> <span class="n">node</span><span class="p">:</span> <span class="mi">2</span>
+<span class="n">Tree</span> <span class="n">depth</span> <span class="kn">from</span> <span class="nn">cluster_id</span><span class="o">=</span><span class="mi">12</span><span class="p">:</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  0.274 seconds)</p>
+<div class="sphx-glr-footer container">
+<div class="sphx-glr-download container">
+<a class="reference download internal" href="../../_downloads/birch_cluster_hierarchy.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">birch_cluster_hierarchy.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<a class="reference download internal" href="../../_downloads/birch_cluster_hierarchy.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">birch_cluster_hierarchy.ipynb</span></code></a></div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="categorization_interpretation.html" class="btn btn-neutral float-right" title="Categorization Interpretation Example" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Examples" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 - 2017, Grossman Labs LLC.
+      Last updated on Oct 01, 2017.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.3.0rc1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+ 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-91765795-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>

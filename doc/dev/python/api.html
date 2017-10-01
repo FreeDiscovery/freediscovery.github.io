@@ -101,15 +101,18 @@
 <li class="toctree-l4"><a class="reference internal" href="generated/freediscovery.feature_weighting.SmartTfidfTransformer.html">freediscovery.feature_weighting.SmartTfidfTransformer</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#document-categorization">Document categorization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#categorization">Categorization</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="generated/freediscovery.neighbors.NearestNeighborRanker.html">freediscovery.neighbors.NearestNeighborRanker</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#document-clustering">Document clustering</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#clustering">Clustering</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/freediscovery.cluster.Birch.html">freediscovery.cluster.Birch</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/freediscovery.cluster.BirchSubcluster.html">freediscovery.cluster.BirchSubcluster</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/freediscovery.cluster.birch_hierarchy_wrapper.html">freediscovery.cluster.birch_hierarchy_wrapper</a></li>
 <li class="toctree-l4"><a class="reference internal" href="generated/freediscovery.cluster.ClusterLabels.html">freediscovery.cluster.ClusterLabels</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#duplicates-detection">Duplicates detection</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#near-duplicates-detection">Near Duplicates detection</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="generated/freediscovery.near_duplicates.SimhashNearDuplicates.html">freediscovery.near_duplicates.SimhashNearDuplicates</a></li>
 <li class="toctree-l4"><a class="reference internal" href="generated/freediscovery.near_duplicates.IMatchNearDuplicates.html">freediscovery.near_duplicates.IMatchNearDuplicates</a></li>
 </ul>
@@ -217,8 +220,8 @@
 </tbody>
 </table>
 </div>
-<div class="section" id="document-categorization">
-<h2>Document categorization<a class="headerlink" href="#document-categorization" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="categorization">
+<h2>Categorization<a class="headerlink" href="#categorization" title="Permalink to this headline">¶</a></h2>
 <table border="1" class="longtable docutils">
 <colgroup>
 <col width="10%" />
@@ -231,22 +234,31 @@
 </tbody>
 </table>
 </div>
-<div class="section" id="document-clustering">
-<h2>Document clustering<a class="headerlink" href="#document-clustering" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="clustering">
+<h2>Clustering<a class="headerlink" href="#clustering" title="Permalink to this headline">¶</a></h2>
 <table border="1" class="longtable docutils">
 <colgroup>
 <col width="10%" />
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="generated/freediscovery.cluster.ClusterLabels.html#freediscovery.cluster.ClusterLabels" title="freediscovery.cluster.ClusterLabels"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.cluster.ClusterLabels</span></code></a>(vect,&nbsp;model)</td>
+<tr class="row-odd"><td><a class="reference internal" href="generated/freediscovery.cluster.Birch.html#freediscovery.cluster.Birch" title="freediscovery.cluster.Birch"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.cluster.Birch</span></code></a>([threshold,&nbsp;...])</td>
+<td>Non online version of the Birch clustering algorithm</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="generated/freediscovery.cluster.BirchSubcluster.html#freediscovery.cluster.BirchSubcluster" title="freediscovery.cluster.BirchSubcluster"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.cluster.BirchSubcluster</span></code></a>(\*\*args)</td>
+<td>A container class for BIRCH cluster hierarchy</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="generated/freediscovery.cluster.birch_hierarchy_wrapper.html#freediscovery.cluster.birch_hierarchy_wrapper" title="freediscovery.cluster.birch_hierarchy_wrapper"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.cluster.birch_hierarchy_wrapper</span></code></a>(birch)</td>
+<td>Wrap BIRCH cluster hierarchy with a container class</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="generated/freediscovery.cluster.ClusterLabels.html#freediscovery.cluster.ClusterLabels" title="freediscovery.cluster.ClusterLabels"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.cluster.ClusterLabels</span></code></a>(vect,&nbsp;model)</td>
 <td>Calculate the cluster labels.</td>
 </tr>
 </tbody>
 </table>
 </div>
-<div class="section" id="duplicates-detection">
-<h2>Duplicates detection<a class="headerlink" href="#duplicates-detection" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="near-duplicates-detection">
+<h2>Near Duplicates detection<a class="headerlink" href="#near-duplicates-detection" title="Permalink to this headline">¶</a></h2>
 <table border="1" class="longtable docutils">
 <colgroup>
 <col width="10%" />
@@ -271,7 +283,7 @@
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="generated/freediscovery.search.Search.html#freediscovery.search.Search" title="freediscovery.search.Search"><code class="xref py py-obj docutils literal"><span class="pre">freediscovery.search.Search</span></code></a>(vectorizer,&nbsp;tfidf)</td>
-<td>Perform (semantic) search in a document collection</td>
+<td>(Semantic) search in a document collection</td>
 </tr>
 </tbody>
 </table>
@@ -327,7 +339,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016 - 2017, Grossman Labs LLC.
-      Last updated on Sep 30, 2017.
+      Last updated on Oct 01, 2017.
 
     </p>
   </div>

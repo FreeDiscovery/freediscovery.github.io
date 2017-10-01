@@ -1,0 +1,343 @@
+
+
+.. _sphx_glr_python_examples_birch_cluster_hierarchy.py:
+
+
+.. _exploring_birch_example:
+
+Exploring BIRCH cluster hierarchy
+=================================
+
+An example illustrating how to explore the cluster hierarchy
+computed by the BIRCH algorithm.
+
+In this example, we use a
+:ref:`patched verson <birch_section>` of :class:`sklearn.cluster.Birch`
+that allows to store the id of samples belonging to each subcluster.
+This modified version is available from :class:`freediscovery.cluster.Birch`.
+
+Building the cluster hierarchy
+------------------------------
+
+We start by computing BIRCH clustering on some random structured data,
+
+
+
+.. code-block:: python
+
+
+    import numpy as np
+    from sklearn.datasets import make_blobs
+    from freediscovery.cluster import Birch, birch_hierarchy_wrapper
+
+    rng = np.random.RandomState(42)
+
+    X, y = make_blobs(n_samples=1000, n_features=10, random_state=rng)
+
+    cluster_model = Birch(threshold=0.9, branching_factor=20,
+                          compute_sample_indices=True)
+    cluster_model.fit(X)
+
+
+
+
+
+
+
+Next we wrap each subcluster in the cluster hierarchy
+(``cluster_model.root_``) with the
+:class:`~freediscovery.cluster.BirchSubcluster` class
+that allows easier manipulation of the hierarchical tree.
+
+
+
+.. code-block:: python
+
+
+    htree, _ = birch_hierarchy_wrapper(cluster_model)
+    print('Total number of subclusters:', htree.tree_size)
+
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    Total number of subclusters: 78
+
+
+Visualizing the hierarchy
+-------------------------
+We can now visualize the cluster hierarchy,
+
+
+
+.. code-block:: python
+
+
+    htree.display_tree()
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    [cluster_id=0] N_children: 7 N_samples: 1000
+    > [cluster_id=1] N_children: 3 N_samples: 37
+    > > [cluster_id=2] N_children: 0 N_samples: 19
+    > > [cluster_id=3] N_children: 0 N_samples: 3
+    > > [cluster_id=4] N_children: 0 N_samples: 15
+    > [cluster_id=5] N_children: 10 N_samples: 127
+    > > [cluster_id=6] N_children: 0 N_samples: 16
+    > > [cluster_id=7] N_children: 0 N_samples: 18
+    > > [cluster_id=8] N_children: 0 N_samples: 7
+    > > [cluster_id=9] N_children: 0 N_samples: 16
+    > > [cluster_id=10] N_children: 0 N_samples: 14
+    > > [cluster_id=11] N_children: 0 N_samples: 16
+    > > [cluster_id=12] N_children: 0 N_samples: 14
+    > > [cluster_id=13] N_children: 0 N_samples: 7
+    > > [cluster_id=14] N_children: 0 N_samples: 10
+    > > [cluster_id=15] N_children: 0 N_samples: 9
+    > [cluster_id=16] N_children: 17 N_samples: 230
+    > > [cluster_id=17] N_children: 0 N_samples: 9
+    > > [cluster_id=18] N_children: 0 N_samples: 19
+    > > [cluster_id=19] N_children: 0 N_samples: 14
+    > > [cluster_id=20] N_children: 0 N_samples: 6
+    > > [cluster_id=21] N_children: 0 N_samples: 19
+    > > [cluster_id=22] N_children: 0 N_samples: 19
+    > > [cluster_id=23] N_children: 0 N_samples: 18
+    > > [cluster_id=24] N_children: 0 N_samples: 20
+    > > [cluster_id=25] N_children: 0 N_samples: 13
+    > > [cluster_id=26] N_children: 0 N_samples: 14
+    > > [cluster_id=27] N_children: 0 N_samples: 9
+    > > [cluster_id=28] N_children: 0 N_samples: 20
+    > > [cluster_id=29] N_children: 0 N_samples: 11
+    > > [cluster_id=30] N_children: 0 N_samples: 13
+    > > [cluster_id=31] N_children: 0 N_samples: 13
+    > > [cluster_id=32] N_children: 0 N_samples: 8
+    > > [cluster_id=33] N_children: 0 N_samples: 5
+    > [cluster_id=34] N_children: 3 N_samples: 34
+    > > [cluster_id=35] N_children: 0 N_samples: 17
+    > > [cluster_id=36] N_children: 0 N_samples: 4
+    > > [cluster_id=37] N_children: 0 N_samples: 13
+    > [cluster_id=38] N_children: 7 N_samples: 103
+    > > [cluster_id=39] N_children: 0 N_samples: 22
+    > > [cluster_id=40] N_children: 0 N_samples: 22
+    > > [cluster_id=41] N_children: 0 N_samples: 12
+    > > [cluster_id=42] N_children: 0 N_samples: 9
+    > > [cluster_id=43] N_children: 0 N_samples: 14
+    > > [cluster_id=44] N_children: 0 N_samples: 15
+    > > [cluster_id=45] N_children: 0 N_samples: 9
+    > [cluster_id=46] N_children: 12 N_samples: 172
+    > > [cluster_id=47] N_children: 0 N_samples: 19
+    > > [cluster_id=48] N_children: 0 N_samples: 9
+    > > [cluster_id=49] N_children: 0 N_samples: 13
+    > > [cluster_id=50] N_children: 0 N_samples: 16
+    > > [cluster_id=51] N_children: 0 N_samples: 18
+    > > [cluster_id=52] N_children: 0 N_samples: 10
+    > > [cluster_id=53] N_children: 0 N_samples: 17
+    > > [cluster_id=54] N_children: 0 N_samples: 11
+    > > [cluster_id=55] N_children: 0 N_samples: 12
+    > > [cluster_id=56] N_children: 0 N_samples: 19
+    > > [cluster_id=57] N_children: 0 N_samples: 17
+    > > [cluster_id=58] N_children: 0 N_samples: 11
+    > [cluster_id=59] N_children: 18 N_samples: 297
+    > > [cluster_id=60] N_children: 0 N_samples: 21
+    > > [cluster_id=61] N_children: 0 N_samples: 22
+    > > [cluster_id=62] N_children: 0 N_samples: 18
+    > > [cluster_id=63] N_children: 0 N_samples: 17
+    > > [cluster_id=64] N_children: 0 N_samples: 17
+    > > [cluster_id=65] N_children: 0 N_samples: 20
+    > > [cluster_id=66] N_children: 0 N_samples: 20
+    > > [cluster_id=67] N_children: 0 N_samples: 13
+    > > [cluster_id=68] N_children: 0 N_samples: 10
+    > > [cluster_id=69] N_children: 0 N_samples: 12
+    > > [cluster_id=70] N_children: 0 N_samples: 21
+    > > [cluster_id=71] N_children: 0 N_samples: 14
+    > > [cluster_id=72] N_children: 0 N_samples: 22
+    > > [cluster_id=73] N_children: 0 N_samples: 13
+    > > [cluster_id=74] N_children: 0 N_samples: 11
+    > > [cluster_id=75] N_children: 0 N_samples: 23
+    > > [cluster_id=76] N_children: 0 N_samples: 7
+    > > [cluster_id=77] N_children: 0 N_samples: 16
+
+
+We have a hierarchy 2 levels deep, with 197 sub-clusters and a total
+of 1000 samples.
+
+For instance, let's consider the subcluster with  ``cluster_id=12``.
+We can access it by id with the flattened representation of the hierarchy,
+
+
+
+.. code-block:: python
+
+
+    sc = htree.flatten()[12]
+    print(sc)
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    <BirchSubcluster 2ab58d05ef68: "{'document_id': [41, 342, 395, 453, 455, 465, 542, 662, 677, 692, 714, 743, 790, 919], 'cluster_id': 12, 'document_id_accumulated': [41, 342, 395, 453, 455, 465, 542, 662, 677, 692, 714, 743, 790, 919], 'cluster_size': 14}">
+      * parent: BirchSubcluster[subcluster_id=5]
+      * children: []
+
+
+Each subcluster is a dictionary linked inside the hierarchy via the
+`parent` / `children` attributes
+(cf documentation of :class:`~freediscovery.cluster.BirchSubcluster`).
+The ids of the samples contained in a subcluster are stored under the
+``document_id_accumulated`` key. We can perform any calculations with the
+samples in a given cluster by indexing the original dataset `X`,
+
+
+
+.. code-block:: python
+
+
+    print('cluster_id', sc['cluster_id'])
+    print('document_id_accumulated', sc['document_id_accumulated'])
+    sc_centroid = X[sc['document_id_accumulated'], :].mean(axis=0)
+    print(sc_centroid)
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    cluster_id 12
+    document_id_accumulated [41, 342, 395, 453, 455, 465, 542, 662, 677, 692, 714, 743, 790, 919]
+    [ 2.08591055 -6.91986674 -5.78779193 -2.87338484  0.02985612  5.67168299
+     -6.44911835 -0.40653423  1.25584291 -9.56265353]
+
+
+For instance, we can select only subclusters that are one level deep
+(this includes ``cluster_id=12``) and compute their centroids,
+
+
+
+.. code-block:: python
+
+
+    htree_depth_1 = [sc for sc in htree.flatten() if sc.current_depth == 1]
+
+    for sc in htree_depth_1:
+        sc['centroid'] = X[sc['document_id_accumulated'], :].mean(axis=0)
+
+    print('Centroid for :\n', htree_depth_1[1])
+    print(htree_depth_1[1]['centroid'])
+
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    Centroid for :
+ 
+    <BirchSubcluster 2ab58d05ed00: "{'document_id': [], 'cluster_id': 5, 'document_id_accumulated': [22, 117, 594, 125, 126, 220, 746, 283, 550, 310, 391, 501, 799, 871, 986, 997, 52, 114, 316, 324, 693, 380, 398, 724, 440, 452, 578, 602, 640, 793, 838, 854, 907, 941, 157, 245, 266, 493, 660, 921, 991, 123, 147, 149, 583, 188, 252, 221, 343, 406, 417, 434, 528, 535, 691, 782, 998, 165, 267, 172, 338, 415, 431, 447, 476, 508, 551, 586, 730, 768, 887, 33, 54, 189, 230, 251, 413, 271, 335, 377, 388, 494, 596, 683, 756, 866, 956, 41, 342, 395, 453, 455, 465, 542, 662, 677, 692, 714, 743, 790, 919, 272, 438, 689, 937, 701, 767, 826, 78, 215, 253, 317, 449, 791, 873, 906, 930, 948, 69, 148, 173, 442, 588, 612, 638, 700, 977], 'cluster_size': 127, 'centroid': array([ 2.255717  , -7.21147066, -4.63967053, -2.78657388, -0.31125198,\n        6.09142225, -5.99938522,  0.24892034,  2.13639146, -9.33508525])}">
+      * parent: BirchSubcluster[subcluster_id=0]
+      * children: [BirchSubcluster[cluster_id=6], BirchSubcluster[cluster_id=7], BirchSubcluster[cluster_id=8], BirchSubcluster[cluster_id=9], BirchSubcluster[cluster_id=10], BirchSubcluster[cluster_id=11], BirchSubcluster[cluster_id=12], BirchSubcluster[cluster_id=13], BirchSubcluster[cluster_id=14], BirchSubcluster[cluster_id=15]]
+
+    [ 2.255717   -7.21147066 -4.63967053 -2.78657388 -0.31125198  6.09142225
+     -5.99938522  0.24892034  2.13639146 -9.33508525]
+
+
+Custom calculations in the hierarchy
+------------------------------------
+
+While for a number of computations, it is sufficient to iterate through
+a flattened tree, sometimes the output of the calculation need to account
+for data from any number of other subclusters in the tree (e.g. all the
+children). In this case we can subclass
+:class:`~freediscovery.cluster.BirchSubcluster` to add out custom recursive
+function. Here we will add a function that for any subcluster computes the
+the maximum depth of the tree spanned by its children subclusters,
+
+
+
+.. code-block:: python
+
+
+    from freediscovery.cluster import BirchSubcluster
+
+
+    class NewBirchSubcluster(BirchSubcluster):
+
+        @property
+        def max_tree_depth(self):
+            if self.children:
+                return 1 + max(sc.max_tree_depth for sc in self.children)
+            else:
+                return 0
+
+
+
+
+
+
+
+
+by re-wrapping the cluster hierarchy with this container, we get,
+
+
+
+.. code-block:: python
+
+
+    htree_new, _ = birch_hierarchy_wrapper(cluster_model,
+                                           container=NewBirchSubcluster)
+
+    print('Tree depth from the root node:', htree_new.max_tree_depth)
+
+    print('Tree depth from cluster_id=12:', htree_new.flatten()[12].max_tree_depth)
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    Tree depth from the root node: 2
+    Tree depth from cluster_id=12: 0
+
+
+**Total running time of the script:** ( 0 minutes  0.274 seconds)
+
+
+
+.. container:: sphx-glr-footer
+
+
+  .. container:: sphx-glr-download
+
+     :download:`Download Python source code: birch_cluster_hierarchy.py <birch_cluster_hierarchy.py>`
+
+
+
+  .. container:: sphx-glr-download
+
+     :download:`Download Jupyter notebook: birch_cluster_hierarchy.ipynb <birch_cluster_hierarchy.ipynb>`
+
+.. rst-class:: sphx-glr-signature
+
+    `Generated by Sphinx-Gallery <https://sphinx-gallery.readthedocs.io>`_
