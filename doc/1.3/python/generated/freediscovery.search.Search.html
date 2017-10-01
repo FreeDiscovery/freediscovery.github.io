@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>freediscovery.search.Search &mdash; FreeDiscovery 1.3.0rc1 documentation</title>
+  <title>freediscovery.search.Search &mdash; FreeDiscovery 1.3.0 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="FreeDiscovery 1.3.0rc1 documentation" href="../../index.html"/>
+    <link rel="top" title="FreeDiscovery 1.3.0 documentation" href="../../index.html"/>
         <link rel="up" title="API" href="../api.html"/>
         <link rel="next" title="freediscovery.io.parse_smart_tokens" href="freediscovery.io.parse_smart_tokens.html"/>
         <link rel="prev" title="freediscovery.near_duplicates.IMatchNearDuplicates" href="freediscovery.near_duplicates.IMatchNearDuplicates.html"/> 
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                1.3.0rc1
+                1.3.0
               </div>
             
           
@@ -95,9 +95,9 @@
 <li class="toctree-l2 current"><a class="reference internal" href="../api.html">API</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../api.html#datasets">Datasets</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../api.html#feature-extraction">Feature extraction</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api.html#document-categorization">Document categorization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api.html#document-clustering">Document clustering</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api.html#duplicates-detection">Duplicates detection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#categorization">Categorization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#clustering">Clustering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#near-duplicates-detection">Near Duplicates detection</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="../api.html#semantic-search">Semantic search</a><ul class="current">
 <li class="toctree-l4 current"><a class="current reference internal" href="#">freediscovery.search.Search</a></li>
 </ul>
@@ -170,16 +170,17 @@
 <h1>freediscovery.search.Search<a class="headerlink" href="#freediscovery-search-search" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="freediscovery.search.Search">
-<em class="property">class </em><code class="descclassname">freediscovery.search.</code><code class="descname">Search</code><span class="sig-paren">(</span><em>vectorizer</em>, <em>tfidf</em>, <em>lsi=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/d3e9b4c/freediscovery/search.py#L6"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.search.Search" title="Permalink to this definition">¶</a></dt>
-<dd><p>Perform (semantic) search in a document collection</p>
+<em class="property">class </em><code class="descclassname">freediscovery.search.</code><code class="descname">Search</code><span class="sig-paren">(</span><em>vectorizer</em>, <em>tfidf</em>, <em>lsi=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/e5f3823/freediscovery/search.py#L8"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.search.Search" title="Permalink to this definition">¶</a></dt>
+<dd><p>(Semantic) search in a document collection</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>vectorizer</strong> (<em>{TfidfVectorizer</em><em>, </em><em>HashingVectorizer}</em>) &#8211; the (fitted) vectorizer that was used on the document collection</li>
-<li><strong>tfidf</strong> (<em>SmartTfidfTransfomer</em>) &#8211; the (fitted) IDF transformer used to weight and normalize the
-bag of word features</li>
+<li><strong>vectorizer</strong> (<em>{CountVectorizer</em><em>, </em><em>HashingVectorizer}</em>) &#8211; the (fitted) vectorizer that was used extract tokens from the
+document collection</li>
+<li><strong>tfidf</strong> (<em>{TfidfTransformer</em><em>, </em><em>SmartTfidfTransfomer}</em>) &#8211; the (fitted) IDF transformer used to weight and normalize the
+bag of word/n-gram features</li>
 <li><strong>lsi</strong> (<em>TruncatedSVD</em>) &#8211; (optional) an LSI model fitted on the vectorised document-term matrix
 If provided this corresponds to a semantic search, default=None</li>
 </ul>
@@ -189,7 +190,7 @@ If provided this corresponds to a semantic search, default=None</li>
 </table>
 <dl class="method">
 <dt id="freediscovery.search.Search.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/d3e9b4c/freediscovery/search.py#L26"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.search.Search.fit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/e5f3823/freediscovery/search.py#L29"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.search.Search.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fit using a document term matrix (optionally in the LSI space)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -204,7 +205,7 @@ dense documents / lsi terms array (if lsi was provided)</td>
 
 <dl class="method">
 <dt id="freediscovery.search.Search.search">
-<code class="descname">search</code><span class="sig-paren">(</span><em>text</em>, <em>metric='cosine'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/d3e9b4c/freediscovery/search.py#L38"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.search.Search.search" title="Permalink to this definition">¶</a></dt>
+<code class="descname">search</code><span class="sig-paren">(</span><em>text</em>, <em>metric='cosine'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/e5f3823/freediscovery/search.py#L41"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.search.Search.search" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform the search operation</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -222,7 +223,7 @@ dense documents / lsi terms array (if lsi was provided)</td>
 
 <dl class="method">
 <dt id="freediscovery.search.Search.search_id">
-<code class="descname">search_id</code><span class="sig-paren">(</span><em>internal_id</em>, <em>metric='cosine'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/d3e9b4c/freediscovery/search.py#L71"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.search.Search.search_id" title="Permalink to this definition">¶</a></dt>
+<code class="descname">search_id</code><span class="sig-paren">(</span><em>internal_id</em>, <em>metric='cosine'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/e5f3823/freediscovery/search.py#L74"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.search.Search.search_id" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform the search operation</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -262,7 +263,7 @@ dense documents / lsi terms array (if lsi was provided)</td>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016 - 2017, Grossman Labs LLC.
-      Last updated on Sep 29, 2017.
+      Last updated on Oct 01, 2017.
 
     </p>
   </div>
@@ -284,7 +285,7 @@ dense documents / lsi terms array (if lsi was provided)</td>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.3.0rc1',
+            VERSION:'1.3.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

@@ -1,0 +1,507 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>freediscovery.cluster.BirchSubcluster &mdash; FreeDiscovery 1.3.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="FreeDiscovery 1.3.0 documentation" href="../../index.html"/>
+        <link rel="up" title="API" href="../api.html"/>
+        <link rel="next" title="freediscovery.cluster.birch_hierarchy_wrapper" href="freediscovery.cluster.birch_hierarchy_wrapper.html"/>
+        <link rel="prev" title="freediscovery.cluster.Birch" href="freediscovery.cluster.Birch.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> FreeDiscovery
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.3.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../engine/index.html">FreeDiscovery Engine</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">FreeDiscovery Core</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../api.html">API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../api.html#datasets">Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#feature-extraction">Feature extraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#categorization">Categorization</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../api.html#clustering">Clustering</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="freediscovery.cluster.Birch.html">freediscovery.cluster.Birch</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">freediscovery.cluster.BirchSubcluster</a></li>
+<li class="toctree-l4"><a class="reference internal" href="freediscovery.cluster.birch_hierarchy_wrapper.html">freediscovery.cluster.birch_hierarchy_wrapper</a></li>
+<li class="toctree-l4"><a class="reference internal" href="freediscovery.cluster.ClusterLabels.html">freediscovery.cluster.ClusterLabels</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#near-duplicates-detection">Near Duplicates detection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#semantic-search">Semantic search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#io">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#metrics">Metrics</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/index.html">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_manual/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../whats_new.html">Release history</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">FreeDiscovery</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+        <li><a href="../index.html">FreeDiscovery Core</a> &raquo;</li>
+      
+        <li><a href="../api.html">API</a> &raquo;</li>
+      
+    <li>freediscovery.cluster.BirchSubcluster</li>
+    <li class="wy-breadcrumbs-aside">
+      
+          
+          
+            <a href="https://github.com/FreeDiscovery/FreeDiscovery/blob/master/doc/python/generated/freediscovery.cluster.BirchSubcluster.rst" class="fa fa-github"> Edit on GitHub</a>
+          
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="freediscovery-cluster-birchsubcluster">
+<h1>freediscovery.cluster.BirchSubcluster<a class="headerlink" href="#freediscovery-cluster-birchsubcluster" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="freediscovery.cluster.BirchSubcluster">
+<em class="property">class </em><code class="descclassname">freediscovery.cluster.</code><code class="descname">BirchSubcluster</code><span class="sig-paren">(</span><em>**args</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/e5f3823/freediscovery/cluster/hierarchy.py#L13"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.BirchSubcluster" title="Permalink to this definition">¶</a></dt>
+<dd><p>A container class for BIRCH cluster hierarchy</p>
+<p>This is a dict like container, that is used to store each subcluster in
+the cluster hierarchy computed by <a class="reference internal" href="freediscovery.cluster.Birch.html#freediscovery.cluster.Birch" title="freediscovery.cluster.Birch"><code class="xref py py-class docutils literal"><span class="pre">freediscovery.cluster.Birch</span></code></a>. A
+given subcluster links to the parent / children subclusters in the
+hierarchy with the following attributes,</p>
+<blockquote>
+<div><ul class="simple">
+<li><cite>parent</cite> : <a class="reference internal" href="#freediscovery.cluster.BirchSubcluster" title="freediscovery.cluster.BirchSubcluster"><code class="xref py py-class docutils literal"><span class="pre">BirchSubcluster</span></code></a>, the parent
+container</li>
+<li><cite>children</cite> : <code class="docutils literal"><span class="pre">list</span></code> of <a class="reference internal" href="#freediscovery.cluster.BirchSubcluster" title="freediscovery.cluster.BirchSubcluster"><code class="xref py py-class docutils literal"><span class="pre">BirchSubcluster</span></code></a>,
+contains the children subclusters</li>
+</ul>
+</div></blockquote>
+<p>Each subcluster stores the following dictionary keys,</p>
+<blockquote>
+<div><ul class="simple">
+<li><cite>document_id</cite> : <code class="docutils literal"><span class="pre">list</span></code>, a list of document / sample ids contained
+in this subcluster (excluding its children).</li>
+<li><cite>document_id_accumulated</cite>:  a list of document / sample ids
+contained in this subcluster and its children. Only available when
+this class was build using <a class="reference internal" href="freediscovery.cluster.birch_hierarchy_wrapper.html#freediscovery.cluster.birch_hierarchy_wrapper" title="freediscovery.cluster.birch_hierarchy_wrapper"><code class="xref py py-func docutils literal"><span class="pre">birch_hierarchy_wrapper()</span></code></a> with
+the <code class="docutils literal"><span class="pre">compute_document_id=True</span></code> parameter.  It can be re-computed
+with the <code class="docutils literal"><span class="pre">document_id_accumulated</span></code> class property.</li>
+<li><cite>cluster_size</cite>: int, the number of samples contained in this
+subcluster and its children. This corresponds to the length of
+the <code class="docutils literal"><span class="pre">document_id_accumulated</span></code> property.  Only available when
+this class was build using <a class="reference internal" href="freediscovery.cluster.birch_hierarchy_wrapper.html#freediscovery.cluster.birch_hierarchy_wrapper" title="freediscovery.cluster.birch_hierarchy_wrapper"><code class="xref py py-func docutils literal"><span class="pre">birch_hierarchy_wrapper()</span></code></a> with
+the <code class="docutils literal"><span class="pre">compute_document_id=True</span></code> parameter.</li>
+</ul>
+</div></blockquote>
+<p>other keys may be user-computed as necessary.</p>
+<p>See <a class="reference internal" href="../../user_manual/clustering.html#exploring-hierarchical-tree-section"><span class="std std-ref">User Manual</span></a> for
+more details.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>This class descends from
+<code class="xref py py-class docutils literal"><span class="pre">freediscovery.externals.jwzthreading.Container</span></code>
+originally used to represent e-mail threads obtained with the JWZ
+algorithm in
+<a class="reference external" href="https://github.com/FreeDiscovery/jwzthreading">jwzthreading</a>,
+though it is general enough to represent other hierarchical
+stuctures, such as BIRCH cluster hierarchy.</p>
+<p class="last">In FreeDiscovery this class is primarily used for documents. As a
+result the variables/methods containing the term &#8220;document&#8221;
+have the same meaning as &#8220;sample&#8221; in the general scikit-learn context.</p>
+</div>
+<dl class="method">
+<dt id="freediscovery.cluster.BirchSubcluster.add_child">
+<code class="descname">add_child</code><span class="sig-paren">(</span><em>child</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/e5f3823/freediscovery/externals/jwzthreading.py#L78"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.BirchSubcluster.add_child" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a child to the container</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>child</strong> (<em>Container</em>) &#8211; Child to add.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.cluster.BirchSubcluster.clear">
+<code class="descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; None.  Remove all items from D.<a class="headerlink" href="#freediscovery.cluster.BirchSubcluster.clear" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.cluster.BirchSubcluster.copy">
+<code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; a shallow copy of D<a class="headerlink" href="#freediscovery.cluster.BirchSubcluster.copy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="freediscovery.cluster.BirchSubcluster.current_depth">
+<code class="descname">current_depth</code><a class="headerlink" href="#freediscovery.cluster.BirchSubcluster.current_depth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the depth in the hierarchy of the current container</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.cluster.BirchSubcluster.display_tree">
+<code class="descname">display_tree</code><span class="sig-paren">(</span><em>max_depth=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/e5f3823/freediscovery/cluster/hierarchy.py#L89"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.BirchSubcluster.display_tree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print the content of hierarchical tree below this subcluster</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="freediscovery.cluster.BirchSubcluster.document_count">
+<code class="descname">document_count</code><a class="headerlink" href="#freediscovery.cluster.BirchSubcluster.document_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Count of all documents in the children subclusters</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="freediscovery.cluster.BirchSubcluster.document_id_accumulated">
+<code class="descname">document_id_accumulated</code><a class="headerlink" href="#freediscovery.cluster.BirchSubcluster.document_id_accumulated" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns  list of document / sample ids contained
+in this subcluster or any of its children.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.cluster.BirchSubcluster.flatten">
+<code class="descname">flatten</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/e5f3823/freediscovery/externals/jwzthreading.py#L150"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.BirchSubcluster.flatten" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a flatten version of the hierarchical tree</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>list</strong> &#8211; a flat list of containers</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Containers</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.cluster.BirchSubcluster.fromkeys">
+<code class="descname">fromkeys</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#freediscovery.cluster.BirchSubcluster.fromkeys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a new dict with keys from iterable and values equal to value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.cluster.BirchSubcluster.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>k</em><span class="optional">[</span>, <em>d</em><span class="optional">]</span><span class="sig-paren">)</span> &rarr; D[k] if k in D, else d.  d defaults to None.<a class="headerlink" href="#freediscovery.cluster.BirchSubcluster.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.cluster.BirchSubcluster.has_descendant">
+<code class="descname">has_descendant</code><span class="sig-paren">(</span><em>ctr</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/e5f3823/freediscovery/externals/jwzthreading.py#L102"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.BirchSubcluster.has_descendant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if <cite>ctr</cite> is a descendant of this container.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ctr</strong> (<em>Container</em>) &#8211; possible descendant container.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">True if <cite>ctr</cite> is a descendant of <cite>self</cite>, else False.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="freediscovery.cluster.BirchSubcluster.is_dummy">
+<code class="descname">is_dummy</code><a class="headerlink" href="#freediscovery.cluster.BirchSubcluster.is_dummy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the container has some content.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.cluster.BirchSubcluster.items">
+<code class="descname">items</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; a set-like object providing a view on D's items<a class="headerlink" href="#freediscovery.cluster.BirchSubcluster.items" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.cluster.BirchSubcluster.keys">
+<code class="descname">keys</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; a set-like object providing a view on D's keys<a class="headerlink" href="#freediscovery.cluster.BirchSubcluster.keys" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.cluster.BirchSubcluster.limit_depth">
+<code class="descname">limit_depth</code><span class="sig-paren">(</span><em>max_depth=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/e5f3823/freediscovery/cluster/hierarchy.py#L75"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.BirchSubcluster.limit_depth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Truncate the tree to the provided maximum depth</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>max_depth</strong> (<em>int</em>) &#8211; hierarchy depth to which truncate the tree</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.cluster.BirchSubcluster.pop">
+<code class="descname">pop</code><span class="sig-paren">(</span><em>k</em><span class="optional">[</span>, <em>d</em><span class="optional">]</span><span class="sig-paren">)</span> &rarr; v, remove specified key and return the corresponding value.<a class="headerlink" href="#freediscovery.cluster.BirchSubcluster.pop" title="Permalink to this definition">¶</a></dt>
+<dd><p>If key is not found, d is returned if given, otherwise KeyError is raised</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.cluster.BirchSubcluster.popitem">
+<code class="descname">popitem</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; (k, v), remove and return some (key, value) pair as a<a class="headerlink" href="#freediscovery.cluster.BirchSubcluster.popitem" title="Permalink to this definition">¶</a></dt>
+<dd><p>2-tuple; but raise KeyError if D is empty.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.cluster.BirchSubcluster.remove_child">
+<code class="descname">remove_child</code><span class="sig-paren">(</span><em>child</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/FreeDiscovery/FreeDiscovery/blob/e5f3823/freediscovery/externals/jwzthreading.py#L91"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#freediscovery.cluster.BirchSubcluster.remove_child" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove a child from the container</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>child</strong> (<em>Container</em>) &#8211; Child to remove.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="freediscovery.cluster.BirchSubcluster.root">
+<code class="descname">root</code><a class="headerlink" href="#freediscovery.cluster.BirchSubcluster.root" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the root container</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>Containe</strong></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">the top most level container</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.cluster.BirchSubcluster.setdefault">
+<code class="descname">setdefault</code><span class="sig-paren">(</span><em>k</em><span class="optional">[</span>, <em>d</em><span class="optional">]</span><span class="sig-paren">)</span> &rarr; D.get(k,d), also set D[k]=d if k not in D<a class="headerlink" href="#freediscovery.cluster.BirchSubcluster.setdefault" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="freediscovery.cluster.BirchSubcluster.tree_size">
+<code class="descname">tree_size</code><a class="headerlink" href="#freediscovery.cluster.BirchSubcluster.tree_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recursively count the number of children containers.
+The current container is also included in the count.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.cluster.BirchSubcluster.update">
+<code class="descname">update</code><span class="sig-paren">(</span><span class="optional">[</span><em>E</em>, <span class="optional">]</span><em>**F</em><span class="sig-paren">)</span> &rarr; None.  Update D from dict/iterable E and F.<a class="headerlink" href="#freediscovery.cluster.BirchSubcluster.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>If E is present and has a .keys() method, then does:  for k in E: D[k] = E[k]
+If E is present and lacks a .keys() method, then does:  for k, v in E: D[k] = v
+In either case, this is followed by: for k in F:  D[k] = F[k]</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="freediscovery.cluster.BirchSubcluster.values">
+<code class="descname">values</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; an object providing a view on D's values<a class="headerlink" href="#freediscovery.cluster.BirchSubcluster.values" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<div class="section" id="examples-using-freediscovery-cluster-birchsubcluster">
+<h2>Examples using <code class="docutils literal"><span class="pre">freediscovery.cluster.BirchSubcluster</span></code><a class="headerlink" href="#examples-using-freediscovery-cluster-birchsubcluster" title="Permalink to this headline">¶</a></h2>
+<div class="sphx-glr-thumbcontainer" tooltip="Exploring BIRCH cluster hierarchy ================================="><div class="figure" id="id1">
+<img alt="../../_images/sphx_glr_birch_cluster_hierarchy_thumb.png" src="../../_images/sphx_glr_birch_cluster_hierarchy_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../examples/birch_cluster_hierarchy.html#sphx-glr-python-examples-birch-cluster-hierarchy-py"><span class="std std-ref">Exploring BIRCH cluster hierarchy</span></a></span></p>
+</div>
+</div><div style='clear:both'></div></div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="freediscovery.cluster.birch_hierarchy_wrapper.html" class="btn btn-neutral float-right" title="freediscovery.cluster.birch_hierarchy_wrapper" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="freediscovery.cluster.Birch.html" class="btn btn-neutral" title="freediscovery.cluster.Birch" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 - 2017, Grossman Labs LLC.
+      Last updated on Oct 01, 2017.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.3.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+ 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-91765795-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
