@@ -96,7 +96,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Feature extraction</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#tf-idf-schemes">TF-IDF schemes</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#smart-tf-idf-schemes">SMART TF-IDF schemes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#pivoted-normalization">Pivoted normalization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pivoted-document-length-normalization">Pivoted document length normalization</a></li>
 </ul>
 </li>
 </ul>
@@ -206,8 +206,8 @@
 </tbody>
 </table>
 </div>
-<div class="section" id="pivoted-normalization">
-<h3>Pivoted normalization<a class="headerlink" href="#pivoted-normalization" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="pivoted-document-length-normalization">
+<h3>Pivoted document length normalization<a class="headerlink" href="#pivoted-document-length-normalization" title="Permalink to this headline">¶</a></h3>
 <p>In addition to standard TF-IDF normalizations above, pivoted normalization was proposed by Singal et al. as a way to avoid over-penalising long documents. It can be enabled with the <code class="docutils literal"><span class="pre">weighting='???p'</span></code> parameter. For each document the normalization term <span class="math">\(V_{\textbf{d}}\)</span> is replaced by,</p>
 <div class="math">
 \[{\displaystyle (1 - \alpha) \textbf{avg} \left( V_{\textbf{d}}\right)  + \alpha  V_{\textbf{d}}}\]</div>
