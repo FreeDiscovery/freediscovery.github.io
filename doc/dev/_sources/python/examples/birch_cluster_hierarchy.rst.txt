@@ -34,6 +34,7 @@ We start by computing BIRCH clustering on some random structured data,
 
     X, y = make_blobs(n_samples=1000, n_features=10, random_state=rng)
 
+
     cluster_model = Birch(threshold=0.9, branching_factor=20,
                           compute_sample_indices=True)
     cluster_model.fit(X)
@@ -168,7 +169,7 @@ We can now visualize the cluster hierarchy,
     > > [cluster_id=77] N_children: 0 N_samples: 16
 
 
-We have a hierarchy 2 levels deep, with 197 sub-clusters and a total
+We have a hierarchy 2 levels deep, with 78 sub-clusters and a total
 of 1000 samples.
 
 For instance, let's consider the subcluster with  ``cluster_id=12``.
@@ -190,7 +191,7 @@ We can access it by id with the flattened representation of the hierarchy,
 
  Out::
 
-    <BirchSubcluster 2ab58d05ef68: "{'document_id': [41, 342, 395, 453, 455, 465, 542, 662, 677, 692, 714, 743, 790, 919], 'cluster_id': 12, 'document_id_accumulated': [41, 342, 395, 453, 455, 465, 542, 662, 677, 692, 714, 743, 790, 919], 'cluster_size': 14}">
+    <BirchSubcluster 2af8c0bf5eb8: "{'document_id': [41, 342, 395, 453, 455, 465, 542, 662, 677, 692, 714, 743, 790, 919], 'cluster_id': 12, 'document_id_accumulated': [41, 342, 395, 453, 455, 465, 542, 662, 677, 692, 714, 743, 790, 919], 'cluster_size': 14}">
       * parent: BirchSubcluster[subcluster_id=5]
       * children: []
 
@@ -239,8 +240,7 @@ For instance, we can select only subclusters that are one level deep
     for sc in htree_depth_1:
         sc['centroid'] = X[sc['document_id_accumulated'], :].mean(axis=0)
 
-    print('Centroid for :\n', htree_depth_1[1])
-    print(htree_depth_1[1]['centroid'])
+    print('Centroid for cluster_id=12:\n', htree.flatten()[12])
 
 
 
@@ -251,14 +251,11 @@ For instance, we can select only subclusters that are one level deep
 
  Out::
 
-    Centroid for :
+    Centroid for cluster_id=12:
  
-    <BirchSubcluster 2ab58d05ed00: "{'document_id': [], 'cluster_id': 5, 'document_id_accumulated': [22, 117, 594, 125, 126, 220, 746, 283, 550, 310, 391, 501, 799, 871, 986, 997, 52, 114, 316, 324, 693, 380, 398, 724, 440, 452, 578, 602, 640, 793, 838, 854, 907, 941, 157, 245, 266, 493, 660, 921, 991, 123, 147, 149, 583, 188, 252, 221, 343, 406, 417, 434, 528, 535, 691, 782, 998, 165, 267, 172, 338, 415, 431, 447, 476, 508, 551, 586, 730, 768, 887, 33, 54, 189, 230, 251, 413, 271, 335, 377, 388, 494, 596, 683, 756, 866, 956, 41, 342, 395, 453, 455, 465, 542, 662, 677, 692, 714, 743, 790, 919, 272, 438, 689, 937, 701, 767, 826, 78, 215, 253, 317, 449, 791, 873, 906, 930, 948, 69, 148, 173, 442, 588, 612, 638, 700, 977], 'cluster_size': 127, 'centroid': array([ 2.255717  , -7.21147066, -4.63967053, -2.78657388, -0.31125198,\n        6.09142225, -5.99938522,  0.24892034,  2.13639146, -9.33508525])}">
-      * parent: BirchSubcluster[subcluster_id=0]
-      * children: [BirchSubcluster[cluster_id=6], BirchSubcluster[cluster_id=7], BirchSubcluster[cluster_id=8], BirchSubcluster[cluster_id=9], BirchSubcluster[cluster_id=10], BirchSubcluster[cluster_id=11], BirchSubcluster[cluster_id=12], BirchSubcluster[cluster_id=13], BirchSubcluster[cluster_id=14], BirchSubcluster[cluster_id=15]]
-
-    [ 2.255717   -7.21147066 -4.63967053 -2.78657388 -0.31125198  6.09142225
-     -5.99938522  0.24892034  2.13639146 -9.33508525]
+    <BirchSubcluster 2af8c0bf5eb8: "{'document_id': [41, 342, 395, 453, 455, 465, 542, 662, 677, 692, 714, 743, 790, 919], 'cluster_id': 12, 'document_id_accumulated': [41, 342, 395, 453, 455, 465, 542, 662, 677, 692, 714, 743, 790, 919], 'cluster_size': 14}">
+      * parent: BirchSubcluster[subcluster_id=5]
+      * children: []
 
 
 Custom calculations in the hierarchy
@@ -321,7 +318,7 @@ by re-wrapping the cluster hierarchy with this container, we get,
     Tree depth from cluster_id=12: 0
 
 
-**Total running time of the script:** ( 0 minutes  0.274 seconds)
+**Total running time of the script:** ( 0 minutes  0.267 seconds)
 
 
 

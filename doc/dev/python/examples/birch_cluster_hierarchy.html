@@ -182,6 +182,7 @@ This modified version is available from <a class="reference internal" href="../g
 
 <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_blobs</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">rng</span><span class="p">)</span>
 
+
 <span class="n">cluster_model</span> <span class="o">=</span> <span class="n">Birch</span><span class="p">(</span><span class="n">threshold</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">branching_factor</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
                       <span class="n">compute_sample_indices</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="n">cluster_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
@@ -287,7 +288,7 @@ that allows easier manipulation of the hierarchical tree.</p>
 <span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">77</span><span class="p">]</span> <span class="n">N_children</span><span class="p">:</span> <span class="mi">0</span> <span class="n">N_samples</span><span class="p">:</span> <span class="mi">16</span>
 </pre></div>
 </div>
-<p>We have a hierarchy 2 levels deep, with 197 sub-clusters and a total
+<p>We have a hierarchy 2 levels deep, with 78 sub-clusters and a total
 of 1000 samples.</p>
 <p>For instance, let&#8217;s consider the subcluster with  <code class="docutils literal"><span class="pre">cluster_id=12</span></code>.
 We can access it by id with the flattened representation of the hierarchy,</p>
@@ -296,7 +297,7 @@ We can access it by id with the flattened representation of the hierarchy,</p>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">BirchSubcluster</span> <span class="mi">2</span><span class="n">ab58d05ef68</span><span class="p">:</span> <span class="s2">&quot;{&#39;document_id&#39;: [41, 342, 395, 453, 455, 465, 542, 662, 677, 692, 714, 743, 790, 919], &#39;cluster_id&#39;: 12, &#39;document_id_accumulated&#39;: [41, 342, 395, 453, 455, 465, 542, 662, 677, 692, 714, 743, 790, 919], &#39;cluster_size&#39;: 14}&quot;</span><span class="o">&gt;</span>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">BirchSubcluster</span> <span class="mi">2</span><span class="n">af8c0bf5eb8</span><span class="p">:</span> <span class="s2">&quot;{&#39;document_id&#39;: [41, 342, 395, 453, 455, 465, 542, 662, 677, 692, 714, 743, 790, 919], &#39;cluster_id&#39;: 12, &#39;document_id_accumulated&#39;: [41, 342, 395, 453, 455, 465, 542, 662, 677, 692, 714, 743, 790, 919], &#39;cluster_size&#39;: 14}&quot;</span><span class="o">&gt;</span>
   <span class="o">*</span> <span class="n">parent</span><span class="p">:</span> <span class="n">BirchSubcluster</span><span class="p">[</span><span class="n">subcluster_id</span><span class="o">=</span><span class="mi">5</span><span class="p">]</span>
   <span class="o">*</span> <span class="n">children</span><span class="p">:</span> <span class="p">[]</span>
 </pre></div>
@@ -327,19 +328,15 @@ samples in a given cluster by indexing the original dataset <cite>X</cite>,</p>
 <span class="k">for</span> <span class="n">sc</span> <span class="ow">in</span> <span class="n">htree_depth_1</span><span class="p">:</span>
     <span class="n">sc</span><span class="p">[</span><span class="s1">&#39;centroid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">sc</span><span class="p">[</span><span class="s1">&#39;document_id_accumulated&#39;</span><span class="p">],</span> <span class="p">:]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Centroid for :</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">htree_depth_1</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="k">print</span><span class="p">(</span><span class="n">htree_depth_1</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;centroid&#39;</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Centroid for cluster_id=12:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">htree</span><span class="o">.</span><span class="n">flatten</span><span class="p">()[</span><span class="mi">12</span><span class="p">])</span>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Centroid</span> <span class="k">for</span> <span class="p">:</span>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Centroid</span> <span class="k">for</span> <span class="n">cluster_id</span><span class="o">=</span><span class="mi">12</span><span class="p">:</span>
 
-<span class="o">&lt;</span><span class="n">BirchSubcluster</span> <span class="mi">2</span><span class="n">ab58d05ed00</span><span class="p">:</span> <span class="s2">&quot;{&#39;document_id&#39;: [], &#39;cluster_id&#39;: 5, &#39;document_id_accumulated&#39;: [22, 117, 594, 125, 126, 220, 746, 283, 550, 310, 391, 501, 799, 871, 986, 997, 52, 114, 316, 324, 693, 380, 398, 724, 440, 452, 578, 602, 640, 793, 838, 854, 907, 941, 157, 245, 266, 493, 660, 921, 991, 123, 147, 149, 583, 188, 252, 221, 343, 406, 417, 434, 528, 535, 691, 782, 998, 165, 267, 172, 338, 415, 431, 447, 476, 508, 551, 586, 730, 768, 887, 33, 54, 189, 230, 251, 413, 271, 335, 377, 388, 494, 596, 683, 756, 866, 956, 41, 342, 395, 453, 455, 465, 542, 662, 677, 692, 714, 743, 790, 919, 272, 438, 689, 937, 701, 767, 826, 78, 215, 253, 317, 449, 791, 873, 906, 930, 948, 69, 148, 173, 442, 588, 612, 638, 700, 977], &#39;cluster_size&#39;: 127, &#39;centroid&#39;: array([ 2.255717  , -7.21147066, -4.63967053, -2.78657388, -0.31125198,</span><span class="se">\n</span><span class="s2">        6.09142225, -5.99938522,  0.24892034,  2.13639146, -9.33508525])}&quot;</span><span class="o">&gt;</span>
-  <span class="o">*</span> <span class="n">parent</span><span class="p">:</span> <span class="n">BirchSubcluster</span><span class="p">[</span><span class="n">subcluster_id</span><span class="o">=</span><span class="mi">0</span><span class="p">]</span>
-  <span class="o">*</span> <span class="n">children</span><span class="p">:</span> <span class="p">[</span><span class="n">BirchSubcluster</span><span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">6</span><span class="p">],</span> <span class="n">BirchSubcluster</span><span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">7</span><span class="p">],</span> <span class="n">BirchSubcluster</span><span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">8</span><span class="p">],</span> <span class="n">BirchSubcluster</span><span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">9</span><span class="p">],</span> <span class="n">BirchSubcluster</span><span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">10</span><span class="p">],</span> <span class="n">BirchSubcluster</span><span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">11</span><span class="p">],</span> <span class="n">BirchSubcluster</span><span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">12</span><span class="p">],</span> <span class="n">BirchSubcluster</span><span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">13</span><span class="p">],</span> <span class="n">BirchSubcluster</span><span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">14</span><span class="p">],</span> <span class="n">BirchSubcluster</span><span class="p">[</span><span class="n">cluster_id</span><span class="o">=</span><span class="mi">15</span><span class="p">]]</span>
-
-<span class="p">[</span> <span class="mf">2.255717</span>   <span class="o">-</span><span class="mf">7.21147066</span> <span class="o">-</span><span class="mf">4.63967053</span> <span class="o">-</span><span class="mf">2.78657388</span> <span class="o">-</span><span class="mf">0.31125198</span>  <span class="mf">6.09142225</span>
- <span class="o">-</span><span class="mf">5.99938522</span>  <span class="mf">0.24892034</span>  <span class="mf">2.13639146</span> <span class="o">-</span><span class="mf">9.33508525</span><span class="p">]</span>
+<span class="o">&lt;</span><span class="n">BirchSubcluster</span> <span class="mi">2</span><span class="n">af8c0bf5eb8</span><span class="p">:</span> <span class="s2">&quot;{&#39;document_id&#39;: [41, 342, 395, 453, 455, 465, 542, 662, 677, 692, 714, 743, 790, 919], &#39;cluster_id&#39;: 12, &#39;document_id_accumulated&#39;: [41, 342, 395, 453, 455, 465, 542, 662, 677, 692, 714, 743, 790, 919], &#39;cluster_size&#39;: 14}&quot;</span><span class="o">&gt;</span>
+  <span class="o">*</span> <span class="n">parent</span><span class="p">:</span> <span class="n">BirchSubcluster</span><span class="p">[</span><span class="n">subcluster_id</span><span class="o">=</span><span class="mi">5</span><span class="p">]</span>
+  <span class="o">*</span> <span class="n">children</span><span class="p">:</span> <span class="p">[]</span>
 </pre></div>
 </div>
 </div>
@@ -379,7 +376,7 @@ the maximum depth of the tree spanned by its children subclusters,</p>
 <span class="n">Tree</span> <span class="n">depth</span> <span class="kn">from</span> <span class="nn">cluster_id</span><span class="o">=</span><span class="mi">12</span><span class="p">:</span> <span class="mi">0</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  0.274 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  0.267 seconds)</p>
 <div class="sphx-glr-footer container">
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../../_downloads/birch_cluster_hierarchy.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">birch_cluster_hierarchy.py</span></code></a></div>
