@@ -172,7 +172,7 @@ We can now visualize the cluster hierarchy,
 We have a hierarchy 2 levels deep, with 78 sub-clusters and a total
 of 1000 samples.
 
-For instance, let's consider the subcluster with  ``cluster_id=12``.
+For instance, let's consider the subcluster with  ``cluster_id=34``.
 We can access it by id with the flattened representation of the hierarchy,
 
 
@@ -180,7 +180,7 @@ We can access it by id with the flattened representation of the hierarchy,
 .. code-block:: python
 
 
-    sc = htree.flatten()[12]
+    sc = htree.flatten()[34]
     print(sc)
 
 
@@ -191,9 +191,9 @@ We can access it by id with the flattened representation of the hierarchy,
 
  Out::
 
-    <BirchSubcluster 2af8c0bf5eb8: "{'document_id': [41, 342, 395, 453, 455, 465, 542, 662, 677, 692, 714, 743, 790, 919], 'cluster_id': 12, 'document_id_accumulated': [41, 342, 395, 453, 455, 465, 542, 662, 677, 692, 714, 743, 790, 919], 'cluster_size': 14}">
-      * parent: BirchSubcluster[subcluster_id=5]
-      * children: []
+    <BirchSubcluster 2af83cf18728: "{'document_id': [], 'cluster_id': 34, 'document_id_accumulated': [46, 134, 136, 156, 195, 217, 219, 348, 423, 579, 963, 713, 879, 911, 912, 925, 939, 5, 521, 961, 975, 20, 722, 459, 759, 783, 829, 785, 834, 882, 928, 943, 978, 982], 'cluster_size': 34}">
+      * parent: BirchSubcluster[subcluster_id=0]
+      * children: [BirchSubcluster[cluster_id=35], BirchSubcluster[cluster_id=36], BirchSubcluster[cluster_id=37]]
 
 
 Each subcluster is a dictionary linked inside the hierarchy via the
@@ -221,14 +221,14 @@ samples in a given cluster by indexing the original dataset `X`,
 
  Out::
 
-    cluster_id 12
-    document_id_accumulated [41, 342, 395, 453, 455, 465, 542, 662, 677, 692, 714, 743, 790, 919]
-    [ 2.08591055 -6.91986674 -5.78779193 -2.87338484  0.02985612  5.67168299
-     -6.44911835 -0.40653423  1.25584291 -9.56265353]
+    cluster_id 34
+    document_id_accumulated [46, 134, 136, 156, 195, 217, 219, 348, 423, 579, 963, 713, 879, 911, 912, 925, 939, 5, 521, 961, 975, 20, 722, 459, 759, 783, 829, 785, 834, 882, 928, 943, 978, 982]
+    [ 1.28769333 -6.89092161 -4.06263732 -2.3882217  -0.58254266  5.00808135
+     -6.66734732  0.42977283  2.16344421 -9.97065391]
 
 
 For instance, we can select only subclusters that are one level deep
-(this includes ``cluster_id=12``) and compute their centroids,
+(this includes ``cluster_id=34``) and compute their centroids,
 
 
 
@@ -240,7 +240,7 @@ For instance, we can select only subclusters that are one level deep
     for sc in htree_depth_1:
         sc['centroid'] = X[sc['document_id_accumulated'], :].mean(axis=0)
 
-    print('Centroid for cluster_id=12:\n', htree.flatten()[12])
+    print('Centroid for cluster_id=34:\n', htree.flatten()[34]['centroid'])
 
 
 
@@ -251,11 +251,9 @@ For instance, we can select only subclusters that are one level deep
 
  Out::
 
-    Centroid for cluster_id=12:
- 
-    <BirchSubcluster 2af8c0bf5eb8: "{'document_id': [41, 342, 395, 453, 455, 465, 542, 662, 677, 692, 714, 743, 790, 919], 'cluster_id': 12, 'document_id_accumulated': [41, 342, 395, 453, 455, 465, 542, 662, 677, 692, 714, 743, 790, 919], 'cluster_size': 14}">
-      * parent: BirchSubcluster[subcluster_id=5]
-      * children: []
+    Centroid for cluster_id=34:
+     [ 1.28769333 -6.89092161 -4.06263732 -2.3882217  -0.58254266  5.00808135
+     -6.66734732  0.42977283  2.16344421 -9.97065391]
 
 
 Custom calculations in the hierarchy
@@ -305,7 +303,7 @@ by re-wrapping the cluster hierarchy with this container, we get,
 
     print('Tree depth from the root node:', htree_new.max_tree_depth)
 
-    print('Tree depth from cluster_id=12:', htree_new.flatten()[12].max_tree_depth)
+    print('Tree depth from cluster_id=34:', htree_new.flatten()[34].max_tree_depth)
 
 
 
@@ -315,10 +313,10 @@ by re-wrapping the cluster hierarchy with this container, we get,
  Out::
 
     Tree depth from the root node: 2
-    Tree depth from cluster_id=12: 0
+    Tree depth from cluster_id=34: 1
 
 
-**Total running time of the script:** ( 0 minutes  0.267 seconds)
+**Total running time of the script:** ( 0 minutes  0.261 seconds)
 
 
 
