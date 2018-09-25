@@ -88,7 +88,7 @@ Cluster documents into clusters
 
     POST http://localhost:5001/api/v0/feature-extraction
        => received ['id']
-       => dsid = 297bfc5437634a5f
+       => dsid = 1def25afbca24847
 
 
 1.b Run feature extraction
@@ -111,7 +111,7 @@ Cluster documents into clusters
 
  Out::
 
-    POST http://localhost:5001/api/v0/feature-extraction/297bfc5437634a5f
+    POST http://localhost:5001/api/v0/feature-extraction/1def25afbca24847
 
 
 2. Calculate LSI
@@ -146,7 +146,7 @@ Cluster documents into clusters
  Out::
 
     POST http://localhost:5001/api/v0/lsi/
-      => LSI model id = e27027eaeed941ab
+      => LSI model id = 09714c22cdf6467e
       => SVD decomposition with 300 dimensions explaining 87.16 % variabilty of the data
 
 
@@ -181,7 +181,7 @@ Cluster documents into clusters
 
     3.a. Document clustering (LSI + K-means)
      POST http://localhost:5001/api/v0/clustering/k-mean/
-         => model id = cb1a498974fc4c42
+         => model id = de98cfe277d54dd2
 
 
 3.b. Computing cluster labels
@@ -215,19 +215,19 @@ Cluster documents into clusters
 
  Out::
 
-    GET http://localhost:5001/api/v0/clustering/k-mean/cb1a498974fc4c42
-        .. computed in 1.2s
-       cluster_id                   cluster_label  cluster_similarity  cluster_size  n_documents
-    0           0           enron bailey services               0.131           319          319
-    1           1                oct normal tenet               0.185           307          307
-    2           2  test administrative recipients               0.267           192          192
-    3           3                 mon normal sent               0.087           834          834
-    4           4                thu jones normal               0.246           184          184
-    5           5                 eb3325 meet wed               0.345           122          122
-    6           6       ect hou enron_development               0.377           120          120
-    7           7          rewrite address server               1.000            56           56
-    8           8          outlook team migration               0.322           152          152
-    9           9           normal customer sager               0.227           179          179
+    GET http://localhost:5001/api/v0/clustering/k-mean/de98cfe277d54dd2
+        .. computed in 1.4s
+       cluster_id                       cluster_label  cluster_similarity  cluster_size  n_documents
+    0           0  ricafrente ricafrente_david normal               0.327           151          151
+    1           1              outlook migration team               0.377           103          103
+    2           2                    ect hou operator               0.639            55           55
+    3           3              rewrite address server               1.000            56           56
+    4           4                   enron shults deal               0.199           164          164
+    5           5           teneo test administrative               0.090           883          883
+    6           6                     test normal fri               0.237           213          213
+    7           7                   tenet normal test               0.252           243          243
+    8           8                    tana party jones               0.120           469          469
+    9           9                   clair test normal               0.271           128          128
 
 
 4. Document Clustering (LSI + Birch Clustering)
@@ -264,7 +264,7 @@ Cluster documents into clusters
 
     4.a. Document clustering (LSI + Birch clustering)
      POST http://localhost:5001/api/v0/clustering/birch/
-         => model id = 050bc10ebcfc4b69
+         => model id = f4d1784ac3bd4158
 
 
 4.b. Computing cluster labels
@@ -296,15 +296,15 @@ Cluster documents into clusters
 
  Out::
 
-    GET http://localhost:5001/api/v0/clustering/birch/050bc10ebcfc4b69
-        .. computed in 2.0s
+    GET http://localhost:5001/api/v0/clustering/birch/f4d1784ac3bd4158
+        .. computed in 1.9s
                                                  children  cluster_depth  cluster_id                        cluster_label  cluster_similarity  cluster_size  n_documents
     0   [1, 2, 12, 24, 25, 28, 41, 42, 43, 47, 48, 58,...              0           0                      normal test ect               0.074          2465         2465
     1                                                  []              1           1                    deal aquilla muni               0.684            17           17
     2                       [3, 4, 5, 6, 7, 8, 9, 10, 11]              1           2       test shackleton administrative               0.187           258          258
     3                                                  []              2           3                    rate group public               0.255            36           36
-    4                                                  []              2           4               shackleton load normal               0.396            47           47
-    5                                                  []              2           5               calo shackleton dinner               0.673            16           16
+    4                                                  []              2           4               calo shackleton dinner               0.673            16           16
+    5                                                  []              2           5               shackleton load normal               0.396            47           47
     6                                                  []              2           6             deseret etringer counsel               0.537            22           22
     7                                                  []              2           7             sample financial trading               0.395            18           18
     8                                                  []              2           8                      jones tana load               0.404            32           32
@@ -315,30 +315,30 @@ Cluster documents into clusters
     13                                                 []              2          13        issues cone enron_development               0.470            26           26
     14                                                 []              2          14                       ect hou london               0.380            39           39
     15                                                 []              2          15               rewrite address server               0.531           114          114
-    16                                                 []              2          16                      memo week clair               0.337            24           24
-    17                                                 []              2          17          attorney confirmation south               0.446            11           11
-    18                                                 []              2          18                 ena transaction kean               0.394            43           43
+    16                                                 []              2          16          attorney confirmation south               0.446            11           11
+    17                                                 []              2          17                 ena transaction kean               0.394            43           43
+    18                                                 []              2          18                      memo week clair               0.337            24           24
     19                                                 []              2          19                   tiger bailey sekse               0.487            14           14
     20                                                 []              2          20                  test bruno gaillard               0.563            15           15
-    21                                                 []              2          21                      meet load teneo               0.535            13           13
-    22                                                 []              2          22                    normal test teneo               0.445            46           46
+    21                                                 []              2          21                    normal test teneo               0.445            46           46
+    22                                                 []              2          22                      meet load teneo               0.535            13           13
     23                                                 []              2          23                      load teneo test               0.494            27           27
     24                                                 []              1          24             amoco jefferson sorenson               0.556            15           15
     25                                           [26, 27]              1          25                   sanders normal nov               0.481            63           63
     26                                                 []              2          26                   sanders normal nov               0.493            54           54
     27                                                 []              2          27               sanders fri conference               0.578             9            9
     28   [29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40]              1          28                   normal subject wed               0.120           481          481
-    29                                                 []              2          29                  lessee lessor nemec               0.337            50           50
+    29                                                 []              2          29                    south simons kean               0.296            41           41
     ..                                                ...            ...         ...                                  ...                 ...           ...          ...
     57                                                 []              2          57                        wed nov tenet               0.390            38           38
     58                                           [59, 60]              1          58                        tue tenet thu               0.290           107          107
     59                                                 []              2          59                     thu tenet normal               0.325            68           68
     60                                                 []              2          60                        tue oct tenet               0.471            39           39
     61  [62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 7...              1          61       enron_development teneo normal               0.102           687          687
-    62                                                 []              2          62  enron_development advice catalytica               0.337            77           77
-    63                                                 []              2          63               ruppert operator exxon               0.355            52           52
+    62                                                 []              2          62            products weather internet               0.387            22           22
+    63                                                 []              2          63  enron_development advice catalytica               0.337            77           77
     64                                                 []              2          64                      teneo test date               0.352            47           47
-    65                                                 []              2          65            products weather internet               0.387            22           22
+    65                                                 []              2          65               ruppert operator exxon               0.355            52           52
     66                                                 []              2          66        enron_development gdr hagerty               0.394            32           32
     67                                                 []              2          67           trade inflation investment               0.414            18           18
     68                                                 []              2          68                   bump doc agreement               0.356            45           45
@@ -392,29 +392,29 @@ Cluster documents into clusters
 
  Out::
 
-    GET http://localhost:5001/api/v0/clustering/birch/050bc10ebcfc4b69
+    GET http://localhost:5001/api/v0/clustering/birch/f4d1784ac3bd4158
         .. computed in 0.1s
         cluster_id  cluster_similarity  cluster_size                                          documents
     0           15               0.531           114  [{'document_id': 5041, 'similarity': 0.9245882...
-    1           62               0.337            77  [{'document_id': 33124, 'similarity': 0.594356...
+    1           63               0.337            77  [{'document_id': 33124, 'similarity': 0.594356...
     2           39               0.309            76  [{'document_id': 2735716, 'similarity': 0.5962...
     3           59               0.325            68  [{'document_id': 3587236, 'similarity': 0.6634...
     4           37               0.325            60  [{'document_id': 2402500, 'similarity': 0.6318...
     5           11               0.446            57  [{'document_id': 855625, 'similarity': 0.88858...
     6           26               0.493            54  [{'document_id': 3802500, 'similarity': 0.5989...
     7           55               0.345            54  [{'document_id': 3171961, 'similarity': 0.6304...
-    8           63               0.355            52  [{'document_id': 1664100, 'similarity': 0.6798...
-    9           29               0.337            50  [{'document_id': 714025, 'similarity': 0.62037...
+    8           65               0.355            52  [{'document_id': 1664100, 'similarity': 0.6798...
+    9           31               0.337            50  [{'document_id': 714025, 'similarity': 0.62037...
     10          33               0.336            50  [{'document_id': 4990756, 'similarity': 0.5743...
     11          78               0.308            48  [{'document_id': 1119364, 'similarity': 0.5790...
-    12           4               0.396            47  [{'document_id': 61504, 'similarity': 0.640083...
+    12           5               0.396            47  [{'document_id': 61504, 'similarity': 0.640083...
     13          64               0.352            47  [{'document_id': 2149156, 'similarity': 0.7265...
-    14          22               0.445            46  [{'document_id': 358801, 'similarity': 0.66319...
+    14          21               0.445            46  [{'document_id': 358801, 'similarity': 0.66319...
     15          81               0.459            46  [{'document_id': 5527201, 'similarity': 0.6800...
     16          68               0.356            45  [{'document_id': 300304, 'similarity': 0.64720...
-    17          18               0.394            43  [{'document_id': 79524, 'similarity': 0.603813...
+    17          17               0.394            43  [{'document_id': 79524, 'similarity': 0.603813...
     18          74               0.413            42  [{'document_id': 2992900, 'similarity': 0.6323...
-    19          31               0.296            41  [{'document_id': 2809, 'similarity': 0.4766740...
+    19          29               0.296            41  [{'document_id': 2809, 'similarity': 0.4766740...
     20          14               0.380            39  [{'document_id': 4422609, 'similarity': 0.7943...
     21          60               0.471            39  [{'document_id': 1893376, 'similarity': 0.7655...
     22          30               0.366            38  [{'document_id': 627264, 'similarity': 0.73297...
@@ -440,15 +440,15 @@ Cluster documents into clusters
     42          69               0.366            27  [{'document_id': 1032256, 'similarity': 0.5915...
     43          13               0.470            26  [{'document_id': 289, 'similarity': 0.85353300...
     44          77               0.374            26  [{'document_id': 5788836, 'similarity': 0.6740...
-    45          16               0.337            24  [{'document_id': 16900, 'similarity': 0.457269...
+    45          18               0.337            24  [{'document_id': 16900, 'similarity': 0.457269...
     46          50               0.372            24  [{'document_id': 4494400, 'similarity': 0.6840...
     47          86               0.360            24  [{'document_id': 4622500, 'similarity': 0.4755...
     48          34               0.368            23  [{'document_id': 874225, 'similarity': 0.48114...
     49          52               0.384            23  [{'document_id': 2524921, 'similarity': 0.6179...
     50           6               0.537            22  [{'document_id': 17689, 'similarity': 0.804906...
-    51          65               0.387            22  [{'document_id': 1129969, 'similarity': 0.6836...
+    51          62               0.387            22  [{'document_id': 1129969, 'similarity': 0.6836...
     52          47               0.498            21  [{'document_id': 3118756, 'similarity': 0.7570...
-    53          49               0.489            21  [{'document_id': 2307361, 'similarity': 0.7566...
+    53          56               0.489            21  [{'document_id': 2307361, 'similarity': 0.7566...
     54          72               0.344            21  [{'document_id': 4652649, 'similarity': 0.5300...
     55          80               0.444            21  [{'document_id': 652864, 'similarity': 0.69850...
     56          79               0.359            20  [{'document_id': 142884, 'similarity': 0.59510...
@@ -472,7 +472,7 @@ Cluster documents into clusters
 
 
 
-**Total running time of the script:** ( 0 minutes  9.580 seconds)
+**Total running time of the script:** ( 0 minutes  12.181 seconds)
 
 
 
