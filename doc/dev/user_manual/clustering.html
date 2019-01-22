@@ -161,18 +161,18 @@
             
   <div class="section" id="clustering">
 <span id="clustering-section"></span><h1>Clustering<a class="headerlink" href="#clustering" title="Permalink to this headline">¶</a></h1>
-<p>For a general introduction to clustering please refer to the <a class="reference external" href="http://scikit-learn.org/stable/modules/clustering.html#clustering" title="(in scikit-learn v0.19.2)"><span class="xref std std-ref">scikit-learn documentation</span></a>.</p>
+<p>For a general introduction to clustering please refer to the <a class="reference external" href="https://scikit-learn.org/stable/modules/clustering.html#clustering" title="(in scikit-learn v0.20.2)"><span class="xref std std-ref">scikit-learn documentation</span></a>.</p>
 <p>In this section, we only consider algorithms that are suitable for clustering of textual data and that
 have <a class="reference external" href="http://hdbscan.readthedocs.io/en/latest/performance_and_scalability.html">a good scalabilty</a>.
-In particular, we consider the <a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.MiniBatchKMeans.html#sklearn.cluster.MiniBatchKMeans" title="(in scikit-learn v0.19.2)"><code class="xref py py-class docutils literal"><span class="pre">sklearn.cluster.MiniBatchKMeans</span></code></a> for non hierarchical clustering and
-<a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.Birch.html#sklearn.cluster.Birch" title="(in scikit-learn v0.19.2)"><code class="xref py py-class docutils literal"><span class="pre">sklearn.cluster.Birch</span></code></a> for hierarchical clustering.</p>
+In particular, we consider the <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.cluster.MiniBatchKMeans.html#sklearn.cluster.MiniBatchKMeans" title="(in scikit-learn v0.20.2)"><code class="xref py py-class docutils literal"><span class="pre">sklearn.cluster.MiniBatchKMeans</span></code></a> for non hierarchical clustering and
+<a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.cluster.Birch.html#sklearn.cluster.Birch" title="(in scikit-learn v0.20.2)"><code class="xref py py-class docutils literal"><span class="pre">sklearn.cluster.Birch</span></code></a> for hierarchical clustering.</p>
 <div class="section" id="birch">
 <span id="birch-section"></span><h2>Birch<a class="headerlink" href="#birch" title="Permalink to this headline">¶</a></h2>
 <p>Scikit-learn implements an online version of the BIRCH algorithm where the cluster hierarchy can be
-iteratively constructed by processing the dataset in batches (cf <a class="reference external" href="http://scikit-learn.org/stable/modules/clustering.html#birch" title="(in scikit-learn v0.19.2)"><span class="xref std std-ref">scikit-learn&#8217;s User Guide</span></a>).
+iteratively constructed by processing the dataset in batches (cf <a class="reference external" href="https://scikit-learn.org/stable/modules/clustering.html#birch" title="(in scikit-learn v0.20.2)"><span class="xref std std-ref">scikit-learn&#8217;s User Guide</span></a>).
 This is advantageous with respect to
 the memory usage, however it makes more difficult to analyse the computed hierarchical tree.</p>
-<p>FreeDiscovery includes a slightly modified version of <a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.Birch.html#sklearn.cluster.Birch" title="(in scikit-learn v0.19.2)"><code class="xref py py-class docutils literal"><span class="pre">sklearn.cluster.Birch</span></code></a>
+<p>FreeDiscovery includes a slightly modified version of <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.cluster.Birch.html#sklearn.cluster.Birch" title="(in scikit-learn v0.20.2)"><code class="xref py py-class docutils literal"><span class="pre">sklearn.cluster.Birch</span></code></a>
 that allows to store the indices of samples belonging to each subcluster
 in the hierarchy, as proposed in <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/8808">scikit-learn/scikit-learn#8808</a>.
 As a result, <a class="reference internal" href="../python/generated/freediscovery.cluster.Birch.html#freediscovery.cluster.Birch" title="freediscovery.cluster.Birch"><code class="xref py py-class docutils literal"><span class="pre">freediscovery.cluster.Birch</span></code></a> does not allow online learning, however it,</p>
@@ -262,7 +262,7 @@ exploration of the BIRCH hierarchical tree. This can be acchieved with,</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016 - 2017, Grossman Labs LLC.
-      Last updated on Sep 25, 2018.
+      Last updated on Jan 22, 2019.
 
     </p>
   </div>
