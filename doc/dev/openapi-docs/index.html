@@ -3390,6 +3390,41 @@
                                                                                                                 
                                                                                                             </div>
                                                                                                         </dd>
+                                                                                                        <dt data-property-name="column_ids">
+                                                                                                            <span class="json-property-name">column_ids:</span>
+                                                                                                            
+                                                                                                            <span class="json-property-type">integer[]</span>
+                                                                                                            <span class="json-property-range" title="Value limits"></span>
+                                                                                                            
+                                                                                                        </dt>
+                                                                                                        <dd>
+                                                                                                            
+                                                                                                            <div class="json-inner-schema">
+                                                                                                                
+                                                                                                                                <section class="json-schema-array-items">
+                                                                                                                                    
+                                                                                                                                    <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
+                                                                                                                                    <span class="json-property-range" title="Value limits"></span>
+                                                                                                                                    
+                                                                                                                                    <div class="json-inner-schema">
+                                                                                                                                        
+                                                                                                                                    </div>
+                                                                                                                                </section>                </div>
+                                                                                                        </dd>
+                                                                                                        <dt data-property-name="column_separator">
+                                                                                                            <span class="json-property-name">column_separator:</span>
+                                                                                                            
+                                                                                                            <span class="json-property-type">string</span>
+                                                                                                            <span class="json-property-range" title="Value limits"></span>
+                                                                                                            
+                                                                                                                    <span class="json-property-default-value">,</span>
+                                                                                                        </dt>
+                                                                                                        <dd>
+                                                                                                            
+                                                                                                            <div class="json-inner-schema">
+                                                                                                                
+                                                                                                            </div>
+                                                                                                        </dd>
                                                                                                         <dt data-property-name="data_dir">
                                                                                                             <span class="json-property-name">data_dir:</span>
                                                                                                             
@@ -3684,6 +3719,8 @@
             <li><code>preprocess</code>: a list of pre-processing steps to apply before vectorization. A subset of [&#39;emails_ignore_header&#39;], default: [].</li>
             <li><code>id</code>: (optional) custom dataset id. Can only contain letters, numbers, &quot;_&quot; or &quot;-&quot;. It must also be between 2 and 50 characters long.</li>
             <li><code>overwrite</code>: if a custom dataset id was provided, and it already exists, overwrite it. Default: false</li>
+            <li><code>column_ids</code> : list of ints. If provided the input dataset is expected to be CSV, and the columns with the provided ids are selected. Documents can only be provided using <code>dataset_definition</code> parameter that must contain a single file path</li>
+            <li><code>column_separator</code>: str, character used to delimit columns. Only used if <code>column_ids</code> is provided. Default: &#39;,&#39;</li>
             </ul>
             
                     </section>
@@ -3721,6 +3758,41 @@
                                                                 <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
                                                                 <span class="json-property-range" title="Value limits"></span>
                                                                 
+                                                            </dt>
+                                                            <dd>
+                                                                
+                                                                <div class="json-inner-schema">
+                                                                    
+                                                                </div>
+                                                            </dd>
+                                                            <dt data-property-name="column_ids">
+                                                                <span class="json-property-name">column_ids:</span>
+                                                                
+                                                                <span class="json-property-type">integer[]</span>
+                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                
+                                                            </dt>
+                                                            <dd>
+                                                                
+                                                                <div class="json-inner-schema">
+                                                                    
+                                                                                    <section class="json-schema-array-items">
+                                                                                        
+                                                                                        <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
+                                                                                        <span class="json-property-range" title="Value limits"></span>
+                                                                                        
+                                                                                        <div class="json-inner-schema">
+                                                                                            
+                                                                                        </div>
+                                                                                    </section>                </div>
+                                                            </dd>
+                                                            <dt data-property-name="column_separator">
+                                                                <span class="json-property-name">column_separator:</span>
+                                                                
+                                                                <span class="json-property-type">string</span>
+                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                
+                                                                        <span class="json-property-default-value">,</span>
                                                             </dt>
                                                             <dd>
                                                                 
